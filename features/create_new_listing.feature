@@ -17,3 +17,9 @@ Feature: create new research listing
 		And I press "Submit Listing"
 		Then I should go to the Show page for the listing whose title is "RAD Lab Research Assistant"
 		
+	Scenario: Submit listing with requirements
+		When I fill in the form with title "Uber RAD Lab Research Assistant"
+		And I fill in the textbox called "tags" with "Java-proficient"
+		And I add a class "CS70" with grade "A"
+		And I press "Submit Listing"
+		Then I should go to the Show page for the listing whose title is "Uber RAD Lab Research Assistant"
