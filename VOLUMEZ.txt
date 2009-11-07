@@ -1,0 +1,14 @@
+RESERVATION     r-9d4c8ff5      681986940202    default
+INSTANCE        i-3da83a55      ami-093edd60    ec2-174-129-122-92.compute-1.amazonaws.com      domU-12-31-38-00-9C-A7.compute-1.internal       running cs194   0               m1.small        2009-11-07T20:34:34+0000        us-east-1a      aki-a71cf9ce    ari-a51cf9cc            monitoring-disabled 174.129.122.92      10.252.163.85
+ec2 ip: 174.129.122.92
+
+VOLUME  vol-93758bfa    1               us-east-1a      creating        2009-11-07T20:36:25+0000
+
+ATTACHMENT      vol-93758bfa    i-3da83a55      /dev/sdh        attaching       2009-11-07T20:43:14+0000
+
+ec2-attach-volume -d /dev/sdh -i i-3da83a55 vol-93758bfa
+
+ec2din i-3da83a55
+
+ROOT PW: research
+db name: myapp_production
