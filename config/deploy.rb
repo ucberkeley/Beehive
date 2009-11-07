@@ -15,7 +15,8 @@ role :db,  "#{machine_name}", :primary => true
 set :use_sudo, false
 set :user, "root"
 
-ssh_options[:keys] = File.join(ENV["HOME"], "/id_rsa-cs194")
+#ssh_options[:keys] = File.join(ENV["HOME"], "/id_rsa-cs194")
+ssh_options[:keys] = "id_rsa-cs194"
 
 namespace :deploy do
   %w(start stop restart).each do |action| 
