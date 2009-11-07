@@ -1,0 +1,18 @@
+<p>
+  <b>Url:</b>
+  <%=h @picture.url %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @picture.user %>
+</p>
+
+<p>
+  <b>Job:</b>
+  <%=h @picture.job %>
+</p>
+
+
+<%= link_to 'Edit', edit_picture_path(@picture) %> |
+<%= link_to 'Back', pictures_path %>

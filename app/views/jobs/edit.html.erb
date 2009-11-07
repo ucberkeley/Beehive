@@ -1,0 +1,44 @@
+<h1>Editing job</h1>
+
+<% form_for(@job) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :desc %><br />
+    <%= f.text_area :desc %>
+  </p>
+  <p>
+    <%= f.label :category_id %><br />
+    <%= f.text_field :category_id %>
+  </p>
+  <p>
+    <%= f.label :exp_date %><br />
+    <%= f.datetime_select :exp_date %>
+  </p>
+  <p>
+    <%= f.label :num_positions %><br />
+    <%= f.text_field :num_positions %>
+  </p>
+  <p>
+    <%= f.label :paid %><br />
+    <%= f.check_box :paid %>
+  </p>
+  <p>
+    <%= f.label :credit %><br />
+    <%= f.check_box :credit %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @job %> |
+<%= link_to 'Back', jobs_path %>

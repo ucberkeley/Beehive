@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  title: MyString
+  desc: MyText
+  category: 
+  exp_date: 2009-11-07 11:45:46
+  num_positions: 1
+  paid: false
+  credit: false
+
+two:
+  user: 
+  title: MyString
+  desc: MyText
+  category: 
+  exp_date: 2009-11-07 11:45:46
+  num_positions: 1
+  paid: false
+  credit: false

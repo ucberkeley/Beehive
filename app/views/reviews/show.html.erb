@@ -1,0 +1,18 @@
+<p>
+  <b>User:</b>
+  <%=h @review.user %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @review.body %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%=h @review.rating %>
+</p>
+
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

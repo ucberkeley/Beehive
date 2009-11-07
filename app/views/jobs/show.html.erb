@@ -1,0 +1,43 @@
+<p>
+  <b>User:</b>
+  <%=h @job.user %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @job.title %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%=h @job.desc %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h @job.category_id %>
+</p>
+
+<p>
+  <b>Exp date:</b>
+  <%=h @job.exp_date %>
+</p>
+
+<p>
+  <b>Num positions:</b>
+  <%=h @job.num_positions %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%=h @job.paid %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%=h @job.credit %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>
