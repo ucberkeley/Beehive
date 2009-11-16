@@ -1,0 +1,193 @@
+html, body { 
+	background-color: #fff; 
+	color: #333; 
+	height: 100%;
+	width: 100%;
+}
+
+* html #container {
+	height: 100%;
+	width: 100%;
+}
+
+body, p, ol, ul, td {
+  font-family: tahoma, arial, helvetica, sans-serif;
+  font-size:   12px;
+  margin: auto;
+  width: 100%;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/**Layout**/
+
+#everything{
+	height: 100%;
+	width: 100%;
+	margin-bottom: -80px;
+}
+
+body > #everything {
+	height: auto;
+	min-height: 100%;
+}
+
+#header{
+	background-color: #353d41;
+	height: 89px;
+	width: 100%;
+}
+
+#header_image{
+	color: white;
+	margin: auto;
+	height: 89px;
+	width: 1000px;
+	background: url("../images/header_bg.gif") no-repeat;
+}
+
+
+#searchbar{
+	position: relative;
+	text-align: right;
+	right: 0px;
+	bottom: 0px;
+}
+
+#loginbar{
+	text-align: right;
+	right: 0px;
+	top: 10px;
+	height: 30px;
+}
+
+#side{
+	position: relative;
+	float: right;
+	right: 2em;
+}
+
+#header_tabs{
+	background: #a7d787;
+	min-width: 1000px;
+	height: 17px;
+}
+
+#tabs{
+	width: 1000px;
+	height: 17
+	px;
+	background: url("../images/header_stripe.gif") no-repeat;
+	margin: auto;
+}
+
+.tab {
+	display: inline;
+	width: 100px;
+	height: 30px;
+}
+
+.tab img:hover{
+	background: #333333;
+}
+
+.divider {
+	display: inline;
+	width: 3px;
+	height: 30px;
+	background: url('../images/tab_divider.png');
+}
+
+#shadowdown{
+	background: url('../images/trans_down.png');
+	background-repeat: x-repeat;
+	height: 13px;
+	min-width: 1099px;
+}
+
+#content{	
+	padding: 50px;
+	padding-top: 30px;
+	/*position: relative;
+	top: -159px;*/
+}
+
+#contentcenter{
+	width: 900px;
+	margin: auto;
+}
+
+#footer{
+	display: none;
+	position: relative;
+	bottom: 0px;
+	overflow: hidden;	
+}
+
+#footer_inside{
+	
+	width: 2000px;
+	height: 80px;
+	background: url("../images/footer.png");
+
+}
+
+/**HOME**/
+
+#find_box{
+
+}
+
+#list_box{
+
+}
+
+#rate_box{
+
+}
+/**Links**/
+
+a { 
+	color: #6ac0cf; 
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+	
+
+/**Error Formatting**/
+
+.fieldWithErrors {
+  color: red;
+}
+
+#errorExplanation {
+  color: red;
+}
+
+/*#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}*/
+
