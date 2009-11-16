@@ -1,6 +1,24 @@
-Welcome to Research Match! Blah blah blah...
+<center>Welcome to Research Match! We're here to help match you to your perfect research position. Click below to get started!
 <br>
 <br><br>
-<center>
-<img src="../images/home_display.png" border="0">
+
+<table id="Table_01" width="898" height="203" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="3">
+			<img src="images/research_match_display_01.png" width="898" height="144" alt=""></td>
+			<div id="browse_listings_menu">
+				<%= select_tag "department_select", options_for_select(["Electrical Engr/Comp Science"]) %>
+			</div>
+	</tr>
+	<tr>
+		<td>
+			<img src="images/research_match_display_02.png" width="308" height="59" alt=""></td>
+		<td>
+			<%= link_to image_tag("../images/research_match_display_03.png", :border=>0), :controller => "jobs", :action => 'new'%>
+		</td>
+		<td>
+			<%= link_to image_tag("../images/research_match_display_04.png", :border=>0), :controller => "reviews", :action => 'index'%>
+		</td>
+	</tr>
+</table>
 </center>

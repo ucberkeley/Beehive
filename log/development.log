@@ -1125,3 +1125,1013 @@ Rendering jobs/new
   [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
 Rendered users/_user_bar (35.0ms)
 Completed in 2052ms (View: 2030, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:07:19) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (63.0ms)
+Completed in 158ms (View: 124, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:08:00) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (64.0ms)
+Completed in 162ms (View: 127, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:08:23) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (66.0ms)
+Completed in 654ms (View: 533, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:09:04) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (58.0ms)
+Completed in 140ms (View: 113, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:09:18) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (70.0ms)
+Completed in 158ms (View: 122, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:09:26) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (81.0ms)
+Completed in 175ms (View: 141, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:09:49) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (71.0ms)
+Completed in 179ms (View: 137, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:10:22) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+ERROR: compiling _run_erb_app47views47users47_user_bar46html46erb_locals_object_user_bar RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat "  <div id=\"user-bar-greeting\">"; @output_buffer.concat(( link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' ).to_s); @output_buffer.concat "</div>\n"
+                                                                                                                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat "  <div id=\"user-bar-greeting\">"; @output_buffer.concat(( link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' ).to_s); @output_buffer.concat "</div>\n"
+                                                                                                                                                            ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: unterminated string meets end of file
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected $end, expecting ')'
+Function body:           def _run_erb_app47views47users47_user_bar46html46erb_locals_object_user_bar(local_assigns)
+            old_output_buffer = output_buffer;object = local_assigns[:object];user_bar = local_assigns[:user_bar];;@output_buffer = '';  __in_erb_template=true ;  if logged_in? 
+@output_buffer.concat "  <div id=\"user-bar-greeting\">Logged in as "; @output_buffer.concat(( link_to_current_user :content_method => :login ).to_s); @output_buffer.concat "</div>\n"
+@output_buffer.concat "  <div id=\"user-bar-action\"  >("; @output_buffer.concat(( link_to "Log out", logout_path, { :title => "Log out" }    ).to_s); @output_buffer.concat ")</div>\n"
+ else 
+@output_buffer.concat "  <div id=\"user-bar-greeting\">"; @output_buffer.concat(( link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' ).to_s); @output_buffer.concat "</div>\n"
+@output_buffer.concat "  <div id=\"user-bar-action\"  >"; @output_buffer.concat(( link_to "Log in",  login_path,  { :title => "Log in" } ).to_s); @output_buffer.concat " /\n"
+@output_buffer.concat "                               "; @output_buffer.concat(( link_to "Sign up", signup_path, { :title => "Create an account" } ).to_s); @output_buffer.concat "</div>\n"
+ end 
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable_partial.rb:20:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:26:in `benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:26:in `benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable_partial.rb:19:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable_partial.rb:44:in `render_partial'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/partials.rb:184:in `render_partial'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:262:in `render'
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/layouts/application.html.erb:18:in `_run_erb_app47views47layouts47application46html46erb'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:34:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:34:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:301:in `with_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:30:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:347:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:947:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:135:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:135:in `custom'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:179:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:179:in `respond'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:173:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:173:in `respond'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/mime_responds.rb:107:in `respond_to'
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/controllers/jobs_controller.rb:29:in `new'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1327:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1327:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat "  <div id=\"user-bar-greeting\">"; @output_buffer.concat(( link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' ).to_s); @output_buffer.concat "</div>\n"
+                                                                                                                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat "  <div id=\"user-bar-greeting\">"; @output_buffer.concat(( link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' ).to_s); @output_buffer.concat "</div>\n"
+                                                                                                                                                            ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: unterminated string meets end of file
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/_user_bar.html.erb:5: syntax error, unexpected $end, expecting ')') on line #5 of app/views/users/_user_bar.html.erb:
+2:   <div id="user-bar-greeting">Logged in as <%= link_to_current_user :content_method => :login %></div>
+3:   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+4: <% else -%>
+5:   <div id="user-bar-greeting"><%= link_to_login_with_IP 'Oops! You're not logged in yet.', :style => 'border: none;' %></div>
+6:   <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> /
+7:                                <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
+8: <% end -%>
+
+    app/views/users/_user_bar.html.erb:5:in `compile!'
+    app/views/layouts/application.html.erb:18
+    app/controllers/jobs_controller.rb:29:in `new'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (190.0ms)
+Rendered rescues/_request_and_response (8.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:10:55) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (82.0ms)
+Completed in 170ms (View: 139, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:11:37) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (92.0ms)
+Completed in 155ms (View: 133, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 01:12:01) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (75.0ms)
+Completed in 300ms (View: 259, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 01:12:14) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (65.0ms)
+Completed in 84ms (View: 78, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:28:18) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (6022.0ms)
+Completed in 6162ms (View: 6160, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:29:28) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (5.0ms)
+Completed in 31ms (View: 28, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:30:32) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (7.0ms)
+Completed in 21ms (View: 18, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:30:45) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (6.0ms)
+Completed in 27ms (View: 23, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:30:57) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:39:53) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 85ms (View: 82, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:54:15) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-11-16 11:54:16) [GET]
+
+ActionController::RoutingError (No route matches "/images/research_match_display_01.gif" with {:method=>:get}):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-11-16 11:54:16) [GET]
+
+ActionController::RoutingError (No route matches "/images/research_match_display_02.gif" with {:method=>:get}):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-11-16 11:54:16) [GET]
+
+ActionController::RoutingError (No route matches "/images/research_match_display_03.gif" with {:method=>:get}):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:55:56) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 15ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:57:10) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 6, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:57:11) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 11:57:29) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 11ms (View: 8, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:06:22) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 9ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:06:35) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:06:39) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 11ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:07:06) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:07:19) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 12ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:07:41) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:07:59) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 17ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:06) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 15ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:19) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 13, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:26) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:33) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:38) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:08:44) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:09:50) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 13, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:12:09) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 23ms (View: 20, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 12:12:13) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 808ms (View: 731, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-16 12:12:16) [GET]
+  [4;36;1mReview Load (1.0ms)[0m   [0;1mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 50ms (View: 31, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:14:58) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 15, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:05) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 11ms (View: 8, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:13) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 26ms (View: 21, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:27) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 24, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:41) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 25ms (View: 20, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:46) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 26ms (View: 19, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:16:54) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 23ms (View: 18, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:17:03) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 23ms (View: 18, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:17:13) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 20ms (View: 15, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:18:03) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+ERROR: compiling _run_erb_app47views47dashboard47index46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:10: syntax error, unexpected $undefined, expecting ']'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag "department_select", options_for_select(["Electrical Engr/Comp Sci) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                          ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t\t</div>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:12: unknown regexp options - tr
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:12: syntax error, unexpected $undefined
+@output_buffer.concat "\t</tr>\n"
+                               ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:13: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t<tr>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:13: syntax error, unexpected $undefined
+@output_buffer.concat "\t<tr>\n"
+                              ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:14: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t<td>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:14: syntax error, unexpected $undefined
+@output_buffer.concat "\t\t<td>\n"
+                                ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:15: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+                                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:26: syntax error, unexpected kENSURE, expecting ')'
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:28: syntax error, unexpected kEND, expecting ')'
+Function body:           def _run_erb_app47views47dashboard47index46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "Welcome to Research Match! Blah blah blah...\n"
+@output_buffer.concat "<br>\n"
+@output_buffer.concat "<br><br>\n"
+@output_buffer.concat "<center>\n"
+@output_buffer.concat "<table id=\"Table_01\" width=\"898\" height=\"203\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td colspan=\"3\">\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_01.png\" width=\"898\" height=\"144\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t\t<div id=\"browse_listings_menu\">\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag "department_select", options_for_select(["Electrical Engr/Comp Sci) ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t</div>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_03.png", :border=>0), :controller => "jobs", :action => 'new').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_04.png", :border=>0), :controller => "reviews", :action => 'index').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "</table>\n"
+@output_buffer.concat "</center>\n"
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:28:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:10: syntax error, unexpected $undefined, expecting ']'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag "department_select", options_for_select(["Electrical Engr/Comp Sci) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                          ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t\t</div>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:12: unknown regexp options - tr
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:12: syntax error, unexpected $undefined
+@output_buffer.concat "\t</tr>\n"
+                               ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:13: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t<tr>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:13: syntax error, unexpected $undefined
+@output_buffer.concat "\t<tr>\n"
+                              ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:14: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t<td>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:14: syntax error, unexpected $undefined
+@output_buffer.concat "\t\t<td>\n"
+                                ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:15: syntax error, unexpected $undefined, expecting ')'
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:15: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+                                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:26: syntax error, unexpected kENSURE, expecting ')'
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:28: syntax error, unexpected kEND, expecting ')') on line #10 of app/views/dashboard/index.html.erb:
+7: 		<td colspan="3">
+8: 			<img src="images/research_match_display_01.png" width="898" height="144" alt=""></td>
+9: 			<div id="browse_listings_menu">
+10: 				<%= select_tag "department_select", options_for_select(["Electrical Engr/Comp Sci) %>
+11: 			</div>
+12: 	</tr>
+13: 	<tr>
+
+    app/views/dashboard/index.html.erb:28:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (141.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:18:10) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 23ms (View: 20, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:18:48) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 13ms (View: 9, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:18:59) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 19ms (View: 16, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:19:11) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 26, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:20:00) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 12ms (View: 9, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:20:19) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 14, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:20:25) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (3.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 32ms (View: 27, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:20:25) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 25ms (View: 20, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:20:33) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 26, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:21:18) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 12ms (View: 9, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:21:39) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 17ms (View: 14, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:21:53) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 13, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:07) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 13, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:19) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 15, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:22) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 29ms (View: 26, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:29) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 19ms (View: 15, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:33) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 14, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:22:51) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 17ms (View: 14, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:23:02) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 24ms (View: 21, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:23:07) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 97ms (View: 93, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:23:24) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 31ms (View: 26, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 12:23:39) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 53ms (View: 33, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-16 12:23:41) [GET]
+  [4;35;1mReview Load (1.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 34ms (View: 16, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:27:47) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 16ms (View: 11, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:27:51) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 28ms (View: 18, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:28:04) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 22ms (View: 18, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:28:58) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 15, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:29:15) [GET]
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 100ms (View: 96, DB: 0) | 200 OK [http://localhost/]

@@ -55,10 +55,11 @@ body > #everything {
 	position: relative;
 	text-align: right;
 	right: 0px;
-	bottom: 0px;
+	top: 20px;
 }
 
 #loginbar{
+	position: relative;
 	text-align: right;
 	right: 0px;
 	top: 10px;
@@ -138,17 +139,49 @@ body > #everything {
 
 /**HOME**/
 
-#find_box{
+#browse_listings_menu{
+	position: relative;
+	left: -275px;
+	top: 180px;
+	width: 200px;
+	height: 30px;
+	text-align: left;
+}
+
+#home_display{
+	width: 898px;
+	height: 203px;
+}
+
+#display_up{
+	width: 898px;
+	height: 144px;
+	background: url("../images/research_match_display_01.png");
+}
+
+#display_left{
+	position: relative;
+	left: -295px;
+	width: 308px;
+	height: 59px;
+	background: url("../images/research_match_display_02.png");
+}
+
+#display_mid{
+	position: relative;
+	margin-left: 308px;
+	width: 254px;
+	height: 59px;
+	background: url("../images/research_match_display_03.png");
 
 }
 
-#list_box{
-
+#display_right{
+	width: 336px;
+	height: 59px;
+	background: url("../images/research_match_display_04.png");
 }
 
-#rate_box{
-
-}
 /**Links**/
 
 a { 
