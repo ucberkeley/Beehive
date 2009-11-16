@@ -3,6 +3,5 @@
   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
 <% else -%>
   <div id="user-bar-greeting">Oops, you're not logged in yet!
-  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> /
-                               <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
+  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> / <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
 <% end -%>

@@ -2135,3 +2135,1563 @@ Rendering dashboard/index
 Rendered users/_user_bar (2.0ms)
 Rendered users/_search_bar (0.0ms)
 Completed in 100ms (View: 96, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 12:30:05) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 38ms (View: 23, DB: 0) | 200 OK [http://localhost/jobs/new]
+  [4;36;1mSQL (2.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091107192416)
+Migrating to CreateCategories (20091107192909)
+Migrating to CreateReviews (20091107193238)
+Migrating to CreateJobs (20091107194546)
+Migrating to CreatePictures (20091107194626)
+Migrating to CreateFaculties (20091107194831)
+Migrating to CreateDepartments (20091116203348)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCREATE TABLE "departments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091116203348')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("categories")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("categories_jobs")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("departments")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("faculties")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("jobs")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("pictures")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("reviews")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mDepartment Create (3.0ms)[0m   [0;1mINSERT INTO "departments" ("name", "updated_at", "id", "created_at") VALUES('Electrical Engr/Comp Sci', '2009-11-16 20:35:39', 1, '2009-11-16 20:35:39')[0m
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:38:47) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (3.0ms)
+Rendered users/_search_bar (2.0ms)
+Completed in 58ms (View: 47, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:39:00) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 43ms (View: 29, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:42:13) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+ERROR: compiling _run_erb_app47views47dashboard47index46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ',', expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name)),  { :onchange => "this.form.submit();"} ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                 ^
+Function body:           def _run_erb_app47views47dashboard47index46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<center>Welcome to Research Match! We're here to help match you to your perfect research position. Click below to get started!\n"
+@output_buffer.concat "<br>\n"
+@output_buffer.concat "<br><br>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<table id=\"Table_01\" width=\"898\" height=\"203\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td colspan=\"3\">\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_01.png\" width=\"898\" height=\"144\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t\t<div id=\"browse_listings_menu\">\n"
+@output_buffer.concat "\t\t\t";  form_for :job, :url => { :action => "show" } do |f| ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name)),  { :onchange => "this.form.submit();"} ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( submit_tag "Go" ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t";  end ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t</div>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_03.png", :border=>0), :controller => "jobs", :action => 'new').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_04.png", :border=>0), :controller => "reviews", :action => 'index').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "</table>\n"
+@output_buffer.concat "</center>\n"
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:31:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ',', expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name)),  { :onchange => "this.form.submit();"} ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                 ^) on line #11 of app/views/dashboard/index.html.erb:
+8: 			<img src="images/research_match_display_01.png" width="898" height="144" alt=""></td>
+9: 			<div id="browse_listings_menu">
+10: 			<% form_for :job, :url => { :action => "show" } do |f| %>
+11: 				<%= select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name)),  { :onchange => "this.form.submit();"} %>
+12: 				<%= submit_tag "Go" %>
+13: 			<% end %>
+14: 			</div>
+
+    app/views/dashboard/index.html.erb:31:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (69.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:42:31) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 34ms (View: 24, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#show (for 127.0.0.1 at 2009-11-16 12:42:40) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActionController::UnknownAction (No action responded to show. Actions: index):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#show (for 127.0.0.1 at 2009-11-16 12:42:45) [POST]
+  Parameters: {"department_select"=>"View All Departments", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActionController::UnknownAction (No action responded to show. Actions: index):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#show (for 127.0.0.1 at 2009-11-16 12:43:21) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActionController::UnknownAction (No action responded to show. Actions: index):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:43:45) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 21, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#show (for 127.0.0.1 at 2009-11-16 12:43:48) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Job without an ID):
+  app/controllers/jobs_controller.rb:16:in `show'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (75.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:43:57) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 45ms (View: 31, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-11-16 12:43:59) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mJob Create (2.0ms)[0m   [0;1mINSERT INTO "jobs" ("updated_at", "title", "credit", "paid", "desc", "category_id", "user_id", "exp_date", "num_positions", "created_at") VALUES('2009-11-16 20:43:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2009-11-16 20:43:59')[0m
+Redirected to http://localhost:3000/jobs/1
+Completed in 188ms (DB: 2) | 302 Found [http://localhost/jobs]
+
+
+Processing JobsController#show (for 127.0.0.1 at 2009-11-16 12:43:59) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" WHERE ("jobs"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering jobs/show
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 72ms (View: 46, DB: 1) | 200 OK [http://localhost/jobs/1]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:44:12) [GET]
+  [4;36;1mJob Load (2.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 93ms (View: 75, DB: 2) | 200 OK [http://localhost/jobs]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:44:28) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+ERROR: compiling _run_erb_app47views47dashboard47index46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:10: odd number list for Hash
+@output_buffer.concat "\t\t\t";  form_for :job, :url => { jobs_path } do |f| ; @output_buffer.concat "\n"
+                                                                     ^
+Function body:           def _run_erb_app47views47dashboard47index46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<center>Welcome to Research Match! We're here to help match you to your perfect research position. Click below to get started!\n"
+@output_buffer.concat "<br>\n"
+@output_buffer.concat "<br><br>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<table id=\"Table_01\" width=\"898\" height=\"203\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td colspan=\"3\">\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_01.png\" width=\"898\" height=\"144\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t\t<div id=\"browse_listings_menu\">\n"
+@output_buffer.concat "\t\t\t";  form_for :job, :url => { jobs_path } do |f| ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( submit_tag "Go" ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t";  end ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t</div>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_03.png", :border=>0), :controller => "jobs", :action => 'new').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_04.png", :border=>0), :controller => "reviews", :action => 'index').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "</table>\n"
+@output_buffer.concat "</center>\n"
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:31:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:10: odd number list for Hash
+@output_buffer.concat "\t\t\t";  form_for :job, :url => { jobs_path } do |f| ; @output_buffer.concat "\n"
+                                                                     ^) on line #10 of app/views/dashboard/index.html.erb:
+7: 		<td colspan="3">
+8: 			<img src="images/research_match_display_01.png" width="898" height="144" alt=""></td>
+9: 			<div id="browse_listings_menu">
+10: 			<% form_for :job, :url => { jobs_path } do |f| %>
+11: 				<%= select_tag(:department_select, "<option>View All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+12: 				<%= submit_tag "Go" %>
+13: 			<% end %>
+
+    app/views/dashboard/index.html.erb:31:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (89.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:44:44) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 43ms (View: 30, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-11-16 12:44:48) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Create (1.0ms)[0m   [0mINSERT INTO "jobs" ("updated_at", "title", "credit", "paid", "desc", "category_id", "user_id", "exp_date", "num_positions", "created_at") VALUES('2009-11-16 20:44:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2009-11-16 20:44:48')[0m
+Redirected to http://localhost:3000/jobs/2
+Completed in 147ms (DB: 1) | 302 Found [http://localhost/jobs]
+
+
+Processing JobsController#show (for 127.0.0.1 at 2009-11-16 12:44:48) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering jobs/show
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 50ms (View: 21, DB: 1) | 200 OK [http://localhost/jobs/2]
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-11-16 12:44:54) [POST]
+  Parameters: {"department_select"=>"View All Departments", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Create (1.0ms)[0m   [0mINSERT INTO "jobs" ("updated_at", "title", "credit", "paid", "desc", "category_id", "user_id", "exp_date", "num_positions", "created_at") VALUES('2009-11-16 20:44:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2009-11-16 20:44:54')[0m
+Redirected to http://localhost:3000/jobs/3
+Completed in 150ms (DB: 1) | 302 Found [http://localhost/jobs]
+
+
+Processing JobsController#show (for 127.0.0.1 at 2009-11-16 12:44:54) [GET]
+  Parameters: {"id"=>"3"}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering jobs/show
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 42ms (View: 18, DB: 1) | 200 OK [http://localhost/jobs/3]
+
+
+Processing JobsController#create (for 127.0.0.1 at 2009-11-16 12:44:57) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Create (2.0ms)[0m   [0mINSERT INTO "jobs" ("updated_at", "title", "credit", "paid", "desc", "category_id", "user_id", "exp_date", "num_positions", "created_at") VALUES('2009-11-16 20:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2009-11-16 20:44:57')[0m
+Redirected to http://localhost:3000/jobs/4
+Completed in 158ms (DB: 2) | 302 Found [http://localhost/jobs]
+
+
+Processing JobsController#show (for 127.0.0.1 at 2009-11-16 12:44:57) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 4) [0m
+Rendering template within layouts/application
+Rendering jobs/show
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 50ms (View: 22, DB: 1) | 200 OK [http://localhost/jobs/4]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:45:00) [GET]
+  [4;35;1mJob Load (2.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 116ms (View: 25, DB: 2) | 200 OK [http://localhost/jobs]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:48:08) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 32ms (View: 18, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:48:11) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Load (3.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+ERROR: compiling _run_erb_app47views47jobs47list46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:5: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:6: syntax error, unexpected '<'
+    <th>Title</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:7: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:8: syntax error, unexpected '<'
+    <th>Category</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:9: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:10: syntax error, unexpected '<'
+    <th>Num positions</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:10: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+    <th>Num positions</th>
+                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:11: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:12: syntax error, unexpected '<'
+    <th>Credit</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:13: unknown regexp options - tr
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:15: syntax error, unexpected '<'
+<% @jobs.each do |job| ).to_s); @output_buffer.concat "\n"
+ ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:15: syntax error, unexpected kDO, expecting ')'
+<% @jobs.each do |job| ).to_s); @output_buffer.concat "\n"
+                ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:35: syntax error, unexpected kENSURE, expecting $end
+Function body:           def _run_erb_app47views47jobs47list46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<h1>Listing jobs for "; @output_buffer.concat(( Department.find(@department).name</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Desc</th>
+    <th>Category</th>
+    <th>Exp date</th>
+    <th>Num positions</th>
+    <th>Paid</th>
+    <th>Credit</th>
+  </tr>
+
+<% @jobs.each do |job| ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "  <tr>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.user ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.title ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.desc ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.category_id ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.exp_date ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.num_positions ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.paid ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat((h job.credit ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat(( link_to 'Show', job ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat(( link_to 'Edit', edit_job_path(job) ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "    <td>"; @output_buffer.concat(( link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete ).to_s); @output_buffer.concat "</td>\n"
+@output_buffer.concat "  </tr>\n"
+ end ; @output_buffer.concat "\n"
+@output_buffer.concat "</table>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<br />\n"
+@output_buffer.concat "\n"
+@output_buffer.concat(( link_to 'New job', new_job_path ).to_s); @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:35:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:5: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:6: syntax error, unexpected '<'
+    <th>Title</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:7: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:8: syntax error, unexpected '<'
+    <th>Category</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:9: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:10: syntax error, unexpected '<'
+    <th>Num positions</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:10: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+    <th>Num positions</th>
+                     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:11: unknown regexp options - th
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:12: syntax error, unexpected '<'
+    <th>Credit</th>
+     ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:13: unknown regexp options - tr
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:15: syntax error, unexpected '<'
+<% @jobs.each do |job| ).to_s); @output_buffer.concat "\n"
+ ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:15: syntax error, unexpected kDO, expecting ')'
+<% @jobs.each do |job| ).to_s); @output_buffer.concat "\n"
+                ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/jobs/list.html.erb:35: syntax error, unexpected kENSURE, expecting $end) on line #5 of app/views/jobs/list.html.erb:
+2: 
+3: <table>
+4:   <tr>
+5:     <th>User</th>
+6:     <th>Title</th>
+7:     <th>Desc</th>
+8:     <th>Category</th>
+
+    app/views/jobs/list.html.erb:35:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (90.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:48:20) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mJob Load (5.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 83ms (View: 61, DB: 6) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#destroy (for 127.0.0.1 at 2009-11-16 12:48:25) [DELETE]
+  Parameters: {"authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg=", "id"=>"1"}
+  [4;36;1mJob Load (0.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 1) [0m
+  [4;35;1mCategory Load (0.0ms)[0m   [0mSELECT * FROM "categories" INNER JOIN "categories_jobs" ON "categories".id = "categories_jobs".category_id WHERE ("categories_jobs".job_id = 1 ) [0m
+  [4;36;1mJob Destroy (2.0ms)[0m   [0;1mDELETE FROM "jobs" WHERE "id" = 1[0m
+Redirected to http://localhost:3000/jobs
+Completed in 221ms (DB: 2) | 302 Found [http://localhost/jobs/1]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:48:26) [GET]
+  [4;35;1mJob Load (3.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 57ms (View: 32, DB: 3) | 200 OK [http://localhost/jobs]
+
+
+Processing JobsController#destroy (for 127.0.0.1 at 2009-11-16 12:48:29) [DELETE]
+  Parameters: {"authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg=", "id"=>"2"}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 2) [0m
+  [4;35;1mCategory Load (0.0ms)[0m   [0mSELECT * FROM "categories" INNER JOIN "categories_jobs" ON "categories".id = "categories_jobs".category_id WHERE ("categories_jobs".job_id = 2 ) [0m
+  [4;36;1mJob Destroy (2.0ms)[0m   [0;1mDELETE FROM "jobs" WHERE "id" = 2[0m
+Redirected to http://localhost:3000/jobs
+Completed in 170ms (DB: 3) | 302 Found [http://localhost/jobs/2]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:48:29) [GET]
+  [4;35;1mJob Load (2.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 54ms (View: 31, DB: 2) | 200 OK [http://localhost/jobs]
+
+
+Processing JobsController#destroy (for 127.0.0.1 at 2009-11-16 12:48:32) [DELETE]
+  Parameters: {"authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg=", "id"=>"3"}
+  [4;36;1mJob Load (2.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 3) [0m
+  [4;35;1mCategory Load (0.0ms)[0m   [0mSELECT * FROM "categories" INNER JOIN "categories_jobs" ON "categories".id = "categories_jobs".category_id WHERE ("categories_jobs".job_id = 3 ) [0m
+  [4;36;1mJob Destroy (3.0ms)[0m   [0;1mDELETE FROM "jobs" WHERE "id" = 3[0m
+Redirected to http://localhost:3000/jobs
+Completed in 216ms (DB: 5) | 302 Found [http://localhost/jobs/3]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:48:32) [GET]
+  [4;35;1mJob Load (2.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 57ms (View: 33, DB: 2) | 200 OK [http://localhost/jobs]
+
+
+Processing JobsController#destroy (for 127.0.0.1 at 2009-11-16 12:48:35) [DELETE]
+  Parameters: {"authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg=", "id"=>"4"}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" WHERE ("jobs"."id" = 4) [0m
+  [4;35;1mCategory Load (1.0ms)[0m   [0mSELECT * FROM "categories" INNER JOIN "categories_jobs" ON "categories".id = "categories_jobs".category_id WHERE ("categories_jobs".job_id = 4 ) [0m
+  [4;36;1mJob Destroy (1.0ms)[0m   [0;1mDELETE FROM "jobs" WHERE "id" = 4[0m
+Redirected to http://localhost:3000/jobs
+Completed in 179ms (DB: 3) | 302 Found [http://localhost/jobs/4]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:48:35) [GET]
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 40ms (View: 16, DB: 1) | 200 OK [http://localhost/jobs]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-16 12:51:48) [GET]
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 16, DB: 1) | 200 OK [http://localhost/jobs]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:51:51) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 32ms (View: 18, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:51:54) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 32ms (View: 18, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:52:35) [GET]
+  [4;35;1mDepartment Load (2.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 22ms (View: 12, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:52:45) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 42ms (View: 25, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:53:10) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (8.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 40ms (View: 28, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:53:14) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 35ms (View: 19, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:53:16) [GET]
+  [4;35;1mDepartment Load (2.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 34ms (View: 19, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:53:21) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 36ms (View: 20, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-16 12:53:47) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 39ms (View: 36, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-16 12:53:55) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 95ms (View: 23, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-16 12:54:41) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 12, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-16 12:55:31) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 42ms (View: 13, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:55:39) [GET]
+  [4;35;1mDepartment Load (2.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 33ms (View: 19, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:56:47) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 19, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:56:51) [POST]
+  Parameters: {"department_select"=>"View All Departments", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+  [4;36;1mDepartment Load (0.0ms)[0m   [0;1mSELECT * FROM "departments" WHERE ("departments"."id" = 0) [0m
+
+ActionView::TemplateError (Couldn't find Department with ID=View All Departments) on line #1 of app/views/jobs/list.html.erb:
+1: <h1>Listing jobs for <%= Department.find(@department).name %></h1>
+2: 
+3: <table>
+4:   <tr>
+
+    app/views/jobs/list.html.erb:1
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (169.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 12:59:02) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 24ms (View: 13, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:59:05) [POST]
+  Parameters: {"department_select"=>"View All Departments", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (156.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:59:08) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (74.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:59:19) [POST]
+  Parameters: {"commit"=>"Go", "department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (165.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:59:36) [POST]
+  Parameters: {"department_select"=>"View All Departments", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (55.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 12:59:38) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (142.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:01:57) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 19, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:01:59) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (54.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:02:01) [POST]
+  Parameters: {"department_select"=>"--UC Berkeley--", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (131.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+WARNING: Can't mass-assign these protected attributes: id
+  [4;36;1mDepartment Create (2.0ms)[0m   [0;1mINSERT INTO "departments" ("name", "updated_at", "created_at") VALUES('All Departments', '2009-11-16 21:04:32', '2009-11-16 21:04:32')[0m
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:04:46) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 31ms (View: 19, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:04:54) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (151.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:04:57) [POST]
+  Parameters: {"department_select"=>"2", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (73.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 0) [0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 2) [0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" WHERE ("departments"."id" = 2) [0m
+  [4;35;1mDepartment Destroy (2.0ms)[0m   [0mDELETE FROM "departments" WHERE "id" = 2[0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:07:58) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+ERROR: compiling _run_erb_app47views47dashboard47index46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected tINTEGER, expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                   ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ',', expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                                                              ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ')', expecting kEND
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                                                                                                              ^
+Function body:           def _run_erb_app47views47dashboard47index46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<center>Welcome to Research Match! We're here to help match you to your perfect research position. Click below to get started!\n"
+@output_buffer.concat "<br>\n"
+@output_buffer.concat "<br><br>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<table id=\"Table_01\" width=\"898\" height=\"203\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td colspan=\"3\">\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_01.png\" width=\"898\" height=\"144\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t\t<div id=\"browse_listings_menu\">\n"
+@output_buffer.concat "\t\t\t";  form_for :job, :url => { :controller => "jobs", :action => "list" } do |f| ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( submit_tag "Go" ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t";  end ; @output_buffer.concat "\n"
+@output_buffer.concat "\t\t\t</div>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "\t<tr>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t<img src=\"images/research_match_display_02.png\" width=\"308\" height=\"59\" alt=\"\"></td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_03.png", :border=>0), :controller => "jobs", :action => 'new').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t\t<td>\n"
+@output_buffer.concat "\t\t\t"; @output_buffer.concat(( link_to image_tag("../images/research_match_display_04.png", :border=>0), :controller => "reviews", :action => 'index').to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\t\t</td>\n"
+@output_buffer.concat "\t</tr>\n"
+@output_buffer.concat "</table>\n"
+@output_buffer.concat "</center>\n"
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:31:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected tINTEGER, expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                   ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ',', expecting ')'
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                                                              ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/dashboard/index.html.erb:11: syntax error, unexpected ')', expecting kEND
+@output_buffer.concat "\t\t\t\t"; @output_buffer.concat(( select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) ).to_s); @output_buffer.concat "\n"
+                                                                                                                                                                                                                                                                                              ^) on line #11 of app/views/dashboard/index.html.erb:
+8: 			<img src="images/research_match_display_01.png" width="898" height="144" alt=""></td>
+9: 			<div id="browse_listings_menu">
+10: 			<% form_for :job, :url => { :controller => "jobs", :action => "list" } do |f| %>
+11: 				<%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value="0">All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+12: 				<%= submit_tag "Go" %>
+13: 			<% end %>
+14: 			</div>
+
+    app/views/dashboard/index.html.erb:31:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (64.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:09:04) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 36ms (View: 25, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:09:10) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (76.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:09:14) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (73.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:10:07) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 21ms (View: 11, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:09) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 38ms (View: 21, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:12) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (73.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:21) [POST]
+  Parameters: {"commit"=>"Go", "department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+
+ActiveRecord::RecordNotFound (Couldn't find Department without an ID):
+  app/controllers/jobs_controller.rb:19:in `list'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (72.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:29) [POST]
+  Parameters: {"commit"=>"Go", "department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 12, DB: 2) | 200 OK [http://localhost/jobs/list]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 13:10:46) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 39ms (View: 25, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:49) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Load (2.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 31ms (View: 13, DB: 2) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:51) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 13, DB: 2) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:10:59) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 13, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:11:02) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 41ms (View: 13, DB: 2) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 13:11:04) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 444ms (View: 425, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-16 13:11:07) [GET]
+  [4;35;1mReview Load (1.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 27, DB: 1) | 200 OK [http://localhost/reviews]

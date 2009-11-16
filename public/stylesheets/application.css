@@ -50,6 +50,12 @@ body > #everything {
 	background: url("../images/header_bg.gif") no-repeat;
 }
 
+#header_image a { 
+display: block; 
+height: 100%; 
+width: 100%; 
+}
+
 
 #searchbar{
 	position: relative;
@@ -70,6 +76,11 @@ body > #everything {
 	position: relative;
 	float: right;
 	right: 2em;
+	top: -89px;
+}
+
+#side a{
+	display: inline;
 }
 
 #header_tabs{
@@ -185,7 +196,7 @@ body > #everything {
 /**Links**/
 
 a { 
-	color: #6ac0cf; 
+	color: #abe68b; 
 	text-decoration: none;
 }
 a:hover {
