@@ -1,6 +1,11 @@
-<h1>Listing jobs for <%= @department %></h1>
-
-<table>
+  <div id="menu_bar">
+	  <%= link_to image_tag("../images/menu_bar_01.png", :border=>0), :controller => "jobs", :action => 'index'%>
+	  <%= link_to image_tag("../images/menu_bar_02.png", :border=>0), :controller => "jobs", :action => 'new'%>
+	  <%= link_to image_tag("../images/menu_bar_03.png", :border=>0), :controller => "reviews", :action => 'index'%>
+  </div>
+  
+  <h1>Listing jobs for <%= @department %></h1>
+  <table>
   <tr>
     <th>User</th>
     <th>Title</th>
@@ -29,6 +34,7 @@
 <% end %>
 </table>
 
+<%= link_to 'New job', new_job_path %>
 <br />
 
-<%= link_to 'New job', new_job_path %>
+

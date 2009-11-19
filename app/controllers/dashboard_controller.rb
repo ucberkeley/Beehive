@@ -3,6 +3,5 @@ class DashboardController < ApplicationController
   
   def index
 	@departments = Department.all
-	@user = current_user
   end
 end

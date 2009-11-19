@@ -1,6 +1,6 @@
 <% if logged_in? -%>
   <div id="user-bar-greeting">
-	Logged in as <%= link_to @user.login, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)
+	Logged in as <%= link_to @user.email, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)
 	<br><%= link_to "Dashboard", :controller=>"dashboard" %> | <%= link_to "Settings", edit_user_url(@user) %>
   </div>
 

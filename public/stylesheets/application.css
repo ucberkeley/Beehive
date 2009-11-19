@@ -97,21 +97,8 @@ width: 100%;
 	margin: auto;
 }
 
-.tab {
-	display: inline;
-	width: 100px;
-	height: 30px;
-}
-
-.tab img:hover{
-	background: #333333;
-}
-
-.divider {
-	display: inline;
-	width: 3px;
-	height: 30px;
-	background: url('../images/tab_divider.png');
+#menu_bar{
+	text-align: center;
 }
 
 #shadowdown{
@@ -192,6 +179,9 @@ width: 100%;
 	height: 59px;
 	background: url("../images/research_match_display_04.png");
 }
+
+/**BROWSE**/
+
 
 /**Links**/
 
