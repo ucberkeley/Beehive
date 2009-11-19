@@ -3695,3 +3695,1100 @@ Rendering reviews/index
 Rendered users/_user_bar (1.0ms)
 Rendered users/_search_bar (0.0ms)
 Completed in 42ms (View: 27, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 13:11:43) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 21ms (View: 7, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 14:35:01) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;36;1mJob Load (0.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (10.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 10, DB: 0) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 14:35:05) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mJob Load (0.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 100ms (View: 0, DB: 0) | 200 OK [http://localhost/jobs/list]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 14:35:08) [GET]
+  [4;36;1mDepartment Load (0.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 20ms (View: 10, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 14:35:22) [POST]
+  Parameters: {"department_select"=>"1", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;36;1mJob Load (0.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 10, DB: 0) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-16 14:36:11) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 40ms (View: 20, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-16 14:36:16) [GET]
+  [4;35;1mReview Load (0.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 20ms (View: 10, DB: 0) | 200 OK [http://localhost/reviews]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-16 14:44:29) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"9s+Hz0kv1uov8VcS8hQzD/xXVTe+z1WO47HZoKruJXg="}
+  [4;36;1mJob Load (0.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 20ms (View: 0, DB: 0) | 200 OK [http://localhost/jobs/list]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-16 14:44:31) [GET]
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 100ms (View: 90, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:12:11) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (8.0ms)
+Rendered users/_search_bar (6.0ms)
+Completed in 6132ms (View: 6116, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:12:18) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 53ms (View: 15, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-18 18:12:23) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk="}
+  [4;36;1mJob Load (1.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 114ms (View: 37, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:12:25) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 30ms (View: 17, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-18 18:12:29) [GET]
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 775ms (View: 756, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:12:34) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 31ms (View: 17, DB: 2) | 200 OK [http://localhost/]
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091107192416)
+Migrating to CreateCategories (20091107192909)
+Migrating to CreateReviews (20091107193238)
+Migrating to CreateJobs (20091107194546)
+Migrating to CreatePictures (20091107194626)
+Migrating to CreateFaculties (20091107194831)
+Migrating to CreateDepartments (20091116203348)
+Migrating to CreateCourses (20091119022216)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mCREATE TABLE "courses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091119022216')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("categories")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("categories_jobs")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("courses")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("departments")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("faculties")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mPRAGMA index_list("jobs")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("pictures")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("reviews")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:24:53) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 54ms (View: 44, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:24:56) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 31ms (View: 17, DB: 1) | 200 OK [http://localhost/home]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:29:50) [GET]
+
+NameError (undefined local variable or method `logged_in' for #<HomeController:0x83357b8>):
+  app/controllers/home_controller.rb:9:in `redirect_if_logged_in'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (58.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:30:22) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 21ms (View: 11, DB: 2) | 200 OK [http://localhost/home]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:30:25) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 133ms (View: 31, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2009-11-18 18:30:33) [POST]
+  Parameters: {"user"=>{"password_confirmation"=>"sol1loque", "password"=>"sol1loque", "login"=>"amber", "email"=>"amberfeng@gmail.com"}, "commit"=>"Sign up", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk="}
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."login" = 'amber') LIMIT 1[0m
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'amberfeng@gmail.com') LIMIT 1[0m
+  [4;35;1mUser Create (2.0ms)[0m   [0mINSERT INTO "users" ("name", "salt", "updated_at", "activated_at", "crypted_password", "remember_token_expires_at", "activation_code", "remember_token", "login", "email", "created_at") VALUES('', '447ea6b39384401c004886cf19d0aafbbf8df40c', '2009-11-19 02:30:33', NULL, '64134c0121dd95ae489d070600f97f44fc8babdf', NULL, 'e2659d163620befb13340376574b267d9f3d6382', NULL, 'amber', 'amberfeng@gmail.com', '2009-11-19 02:30:33')[0m
+Redirected to http://localhost:3000/
+Completed in 388ms (DB: 2) | 302 Found [http://localhost/users]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:30:33) [GET]
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 45ms (View: 24, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:31:48) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 27ms (View: 24, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-11-18 18:31:55) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk=", "login"=>"amber", "password"=>"sol1loque"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE (login = 'amber' and activated_at IS NOT NULL) LIMIT 1[0m
+Failed login for 'amber' from 127.0.0.1 at Thu Nov 19 02:31:55 UTC 2009
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 36ms (View: 8, DB: 1) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" [0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" [0m
+  [4;35;1mUser Destroy (1.0ms)[0m   [0mDELETE FROM "users" WHERE "id" = 1[0m
+  [4;36;1mUser Load (2.0ms)[0m   [0;1mSELECT * FROM "users" [0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:34:05) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 110ms (View: 82, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:35:14) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 38ms (View: 12, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:35:14) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 48ms (View: 10, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:35:14) [GET]
+  [4;35;1mDepartment Load (2.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 47ms (View: 10, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:35:14) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 10ms (View: 8 | 200 OK [http://localhost/login]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:35:14) [GET]
+
+NoMethodError (undefined method `logged_in' for #<DashboardController:0x81f2964>):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (138.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:35:41) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (2.0ms)
+Completed in 59ms (View: 47, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:35:44) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 29ms (View: 25, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:35:45) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 75ms (View: 25, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2009-11-18 18:35:57) [POST]
+  Parameters: {"user"=>{"password_confirmation"=>"sol1loque", "password"=>"sol1loque", "login"=>"amber", "email"=>"amber@gmail.com"}, "commit"=>"Sign up", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk="}
+  [4;35;1mUser Create (2.0ms)[0m   [0mINSERT INTO "users" ("name", "salt", "updated_at", "activated_at", "crypted_password", "remember_token_expires_at", "activation_code", "remember_token", "login", "email", "created_at") VALUES('', 'ac889306a24d3a72be390bcd946dda971db06076', '2009-11-19 02:35:57', '2009-11-19 02:35:57', '76292d165435103a8ba26463a8c2f07505184538', NULL, '1696f64f5c7f63264b84dafe528a31436abaf190', NULL, 'amber', 'amber@gmail.com', '2009-11-19 02:35:57')[0m
+  [4;36;1mUser Load (0.0ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."login" = 'amber' AND "users".id <> 2) LIMIT 1[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email" = 'amber@gmail.com' AND "users".id <> 2) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 634ms (DB: 2) | 302 Found [http://localhost/users]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:35:58) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 34ms (View: 18, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:36:01) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 17ms (View: 13, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-11-18 18:36:05) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk=", "login"=>"amber", "password"=>"sol1loque"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE (login = 'amber' and activated_at IS NOT NULL) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 46ms (DB: 1) | 302 Found [http://localhost/session]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:36:05) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as [:redirect_if_logged_in] rendered_or_redirected.
+Completed in 43ms (DB: 1) | 302 Found [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:36:06) [GET]
+
+NoMethodError (undefined method `logged_in' for #<DashboardController:0x8338e40>):
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (98.0ms)
+Rendered rescues/_request_and_response (4.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:36:11) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (0.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (8.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 121ms (View: 59, DB: 1) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:39:08) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 66ms (View: 29, DB: 2) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:39:21) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (0.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 151ms (View: 105, DB: 1) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:39:30) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 81ms (View: 35, DB: 2) | 200 OK [http://localhost/dashboard]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-18 18:39:45) [POST]
+  Parameters: {"department_select"=>"0", "authenticity_token"=>"ONPNRrxZJ2gZetocPagbtoxPrdvJSbI4W/vkc/5CCMk="}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendered users/_user_bar (41.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 173ms (View: 144, DB: 2) | 200 OK [http://localhost/jobs/list]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:39:47) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (0.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 68ms (View: 21, DB: 1) | 200 OK [http://localhost/dashboard]
+
+
+Processing UsersController#show (for 127.0.0.1 at 2009-11-18 18:40:09) [GET]
+  Parameters: {"id"=>"2"}
+Rendering template within layouts/application
+Rendering users/show
+
+ActionView::TemplateError (edit_user_url failed to generate from {:controller=>"users", :action=>"edit", :id=>nil}, expected: {:controller=>"users", :action=>"edit"}, diff: {:id=>nil}) on line #2 of app/views/users/show.html.erb:
+1: 
+2: <%= link_to 'Edit', edit_user_path(@user) %> |
+3: <%= link_to 'Back', users_path %>
+
+    (eval):16:in `edit_user_path'
+    app/views/users/show.html.erb:2
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (171.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:41:01) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+
+ActionView::TemplateError (undefined local variable or method `dashboard_url' for #<ActionView::Base:0x82c58c8>) on line #2 of app/views/users/_user_bar.html.erb:
+1: <% if logged_in? -%>
+2:   <div id="user-bar-greeting">Logged in as <%= link_to dashboard_url %></div>
+3:   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+4: <% else -%>
+5:   <div id="user-bar-greeting">Oops, you're not logged in yet!
+
+    app/views/users/_user_bar.html.erb:2
+    app/views/layouts/application.html.erb:19
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (162.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:02) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+
+ActionView::TemplateError (undefined local variable or method `dashboard_url' for #<ActionView::Base:0x82a09b0>) on line #2 of app/views/users/_user_bar.html.erb:
+1: <% if logged_in? -%>
+2:   <div id="user-bar-greeting">Logged in as <%= link_to dashboard_url %></div>
+3:   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+4: <% else -%>
+5:   <div id="user-bar-greeting">Oops, you're not logged in yet!
+
+    app/views/users/_user_bar.html.erb:2
+    app/views/layouts/application.html.erb:19
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (158.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:05) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+
+ActionView::TemplateError (undefined local variable or method `dashboard_url' for #<ActionView::Base:0x8292054>) on line #2 of app/views/users/_user_bar.html.erb:
+1: <% if logged_in? -%>
+2:   <div id="user-bar-greeting">Logged in as <%= link_to dashboard_url %></div>
+3:   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+4: <% else -%>
+5:   <div id="user-bar-greeting">Oops, you're not logged in yet!
+
+    app/views/users/_user_bar.html.erb:2
+    app/views/layouts/application.html.erb:19
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (161.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:16) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;35;1mUser Load (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendered users/_user_bar (38.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 52ms (View: 49, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:19) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendered users/_user_bar (36.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 59ms (View: 53, DB: 1) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:21) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendered users/_user_bar (37.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 53ms (View: 48, DB: 1) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:40) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+
+ActionView::TemplateError (wrong number of arguments (1 for 0)) on line #2 of app/views/users/_user_bar.html.erb:
+1: <% if logged_in? -%>
+2:   <div id="user-bar-greeting">Logged in as <%= link_to current_user.login :controller=>"dashboard" %></div>
+3:   <div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div>
+4: <% else -%>
+5:   <div id="user-bar-greeting">Oops, you're not logged in yet!
+
+    app/views/users/_user_bar.html.erb:2
+    app/views/layouts/application.html.erb:19
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (122.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 18:41:47) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendered users/_user_bar (49.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 68ms (View: 63, DB: 1) | 200 OK [http://localhost/login]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:41:50) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 138ms (View: 25, DB: 1) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:42:39) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (8.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 63ms (View: 25, DB: 2) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:44:15) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (10.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 137ms (View: 99, DB: 2) | 200 OK [http://localhost/dashboard]
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2009-11-18 18:44:19) [GET]
+  Parameters: {"id"=>"2"}
+Rendering template within layouts/application
+Rendering users/edit
+
+ActionView::TemplateError (Called id for nil, which would mistakenly be 4 -- if you really wanted the id of nil, use object_id) on line #3 of app/views/users/edit.html.erb:
+1: <h1>Editing user</h1>
+2: 
+3: <% form_for(@user) do |f| %>
+4:   <%= f.error_messages %>
+5: 
+6:   <p>
+
+    app/views/users/edit.html.erb:3
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (169.0ms)
+Rendered rescues/_request_and_response (1.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2009-11-18 18:45:34) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering users/edit
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 43ms (View: 12, DB: 1) | 200 OK [http://localhost/users/2/edit]
+
+
+Processing UsersController#index (for 127.0.0.1 at 2009-11-18 18:45:39) [GET]
+Rendering template within layouts/application
+Rendering users/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #7 of app/views/users/index.html.erb:
+4:   <tr>
+5:   </tr>
+6: 
+7: <% @users.each do |user| %>
+8:   <tr>
+9:     <td><%= link_to 'Show', user %></td>
+10:     <td><%= link_to 'Edit', edit_user_path(user) %></td>
+
+    app/views/users/index.html.erb:7
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (90.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2009-11-18 18:45:41) [GET]
+  Parameters: {"id"=>"2"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+Rendering template within layouts/application
+Rendering users/edit
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 54ms (View: 18, DB: 1) | 200 OK [http://localhost/users/2/edit]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 18:46:24) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) LIMIT 1[0m
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (3.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 56ms (View: 19, DB: 2) | 200 OK [http://localhost/dashboard]
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2009-11-18 18:46:30) [GET]
+Redirected to http://localhost:3000/
+Completed in 25ms (DB: 0) | 302 Found [http://localhost/logout]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:46:38) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 22ms (View: 11, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-18 18:47:23) [GET]
+  [4;35;1mReview Load (1.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 44ms (View: 26, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 18:47:26) [GET]
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 22ms (View: 11, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:52:53) [GET]
+Rendering template within layouts/application
+Rendering users/new
+ERROR: compiling _run_erb_app47views47users47new46html46erb RAISED compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat(( submit_tag 'I'll fill in the rest later, sign me up now!' ).to_s); @output_buffer.concat "\n"
+                                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+@output_buffer.concat(( submit_tag 'I'll fill in the rest later, sign me up now!' ).to_s); @output_buffer.concat "\n"
+                                                                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: unterminated string meets end of file
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected $end, expecting ')'
+Function body:           def _run_erb_app47views47users47new46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<h1>Sign up as a new user</h1>\n"
+ @user.password = @user.password_confirmation = nil ; @output_buffer.concat "\n"
+@output_buffer.concat "\n"
+@output_buffer.concat(( error_messages_for :user ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "\n"
+ form_for :user, :url => users_path do |f| 
+@output_buffer.concat "<p>"; @output_buffer.concat(( label_tag 'login' ).to_s); @output_buffer.concat "<br/>\n"
+@output_buffer.concat(( f.text_field :login ).to_s); @output_buffer.concat "</p>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<p>"; @output_buffer.concat(( label_tag 'name' ).to_s); @output_buffer.concat "<br/>\n"
+@output_buffer.concat(( f.text_field :name ).to_s); @output_buffer.concat "</p>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<p>"; @output_buffer.concat(( label_tag 'email' ).to_s); @output_buffer.concat "<br/>\n"
+@output_buffer.concat(( f.text_field :email ).to_s); @output_buffer.concat "</p>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<p>"; @output_buffer.concat(( label_tag 'password' ).to_s); @output_buffer.concat "<br/>\n"
+@output_buffer.concat(( f.password_field :password ).to_s); @output_buffer.concat "</p>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<p>"; @output_buffer.concat(( label_tag 'password_confirmation', 'Confirm Password' ).to_s); @output_buffer.concat "<br/>\n"
+@output_buffer.concat(( f.password_field :password_confirmation ).to_s); @output_buffer.concat "</p>\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "<p>\n"
+@output_buffer.concat(( submit_tag 'I'll fill in the rest later, sign me up now!' ).to_s); @output_buffer.concat "\n"
+@output_buffer.concat "Note: The rest of this information is optional, but may increase your chances of landing a research position\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "\n"
+@output_buffer.concat "</p>\n"
+ end 
+@output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23:in `compile!'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:61:in `compile'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/renderable.rb:28:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/template.rb:199:in `render_template'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:260:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:343:in `_render_with_layout'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_view/base.rb:257:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1246:in `render_for_file'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:941:in `render_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:51:in `render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1322:in `default_render'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:1328:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:617:in `call_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:10:in `realtime'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-2.3.3/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/flash.rb:146:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:527:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/filters.rb:606:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:391:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/base.rb:386:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/routing/route_set.rb:434:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:88:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:111:in `_call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:82:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:9:in `cache'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/query_cache.rb:28:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-2.3.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/head.rb:9:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/methodoverride.rb:24:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/params_parser.rb:15:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/session/cookie_store.rb:93:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/reloader.rb:29:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/failsafe.rb:26:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/lock.rb:11:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-2.3.3/lib/action_controller/dispatcher.rb:106:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/static.rb:31:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:46:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/urlmap.rb:40:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/rails/rack/log_tailer.rb:17:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/content_length.rb:13:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:46:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+c:/ruby/lib/ruby/gems/1.8/gems/rack-1.0.0/lib/rack/handler/webrick.rb:13:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/commands/server.rb:111
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting ')'
+@output_buffer.concat(( submit_tag 'I'll fill in the rest later, sign me up now!' ).to_s); @output_buffer.concat "\n"
+                                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting kDO or '{' or '('
+@output_buffer.concat(( submit_tag 'I'll fill in the rest later, sign me up now!' ).to_s); @output_buffer.concat "\n"
+                                                                        ^
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: unterminated string meets end of file
+C:/Users/Amber/Documents/My School Stuff/Fall 2009/CS194/research-cs194/research/app/views/users/new.html.erb:23: syntax error, unexpected $end, expecting ')') on line #23 of app/views/users/new.html.erb:
+20: <%= f.password_field :password_confirmation %></p>
+21: 
+22: <p>
+23: <%= submit_tag 'I'll fill in the rest later, sign me up now!' %>
+24: Note: The rest of this information is optional, but may increase your chances of landing a research position
+25: 
+26: 
+
+    app/views/users/new.html.erb:23:in `compile!'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    c:/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    c:/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (136.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:53:03) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 53ms (View: 24, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:53:19) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 141ms (View: 109, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:54:07) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 52ms (View: 24, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 18:54:31) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 142ms (View: 105, DB: 0) | 200 OK [http://localhost/signup]
+  [4;35;1mUser Load (2.0ms)[0m   [0mSELECT * FROM "users" [0m
+  [4;36;1mUser Destroy (2.0ms)[0m   [0;1mDELETE FROM "users" WHERE "id" = 2[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" [0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" [0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" [0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-18 20:11:03) [GET]
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 46ms (View: 19, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2009-11-18 20:11:39) [POST]
+  Parameters: {"user"=>{"name"=>"Amber Feng", "password_confirmation"=>"sol1loque", "password"=>"sol1loque", "email"=>"amber.feng@gmail.com"}, "commit"=>"I'll fill in the rest later, sign me up now!", "authenticity_token"=>"pmoIm4QgvFcKQ7PbGnFajtrwFv8GMALhjq3vw7q60/c="}
+  [4;35;1mUser Create (1.0ms)[0m   [0mINSERT INTO "users" ("name", "salt", "updated_at", "activated_at", "crypted_password", "remember_token_expires_at", "activation_code", "remember_token", "login", "email", "created_at") VALUES('Amber Feng', 'bb5508745007205000fbb1567d50dcc2b50d9b85', '2009-11-19 04:11:39', '2009-11-19 04:11:39', '16aec4fd7dffc7cc3bf87805428fb030d32aa3d7', NULL, '63c6cf2c8d4eab0e79353f842e5246b0983d9059', NULL, NULL, 'amber.feng@gmail.com', '2009-11-19 04:11:39')[0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."email" = 'amber.feng@gmail.com' AND "users".id <> 3) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 189ms (DB: 2) | 302 Found [http://localhost/users]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 20:11:40) [GET]
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 26ms (View: 14, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-18 20:11:44) [GET]
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 13, DB: 0) | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-11-18 20:11:54) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"pmoIm4QgvFcKQ7PbGnFajtrwFv8GMALhjq3vw7q60/c=", "login"=>"amber.feng@gmail.com", "password"=>"sol1loque"}
+Failed login for '' from 127.0.0.1 at Thu Nov 19 04:11:54 UTC 2009
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 12, DB: 0) | 200 OK [http://localhost/session]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-11-18 20:12:43) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"pmoIm4QgvFcKQ7PbGnFajtrwFv8GMALhjq3vw7q60/c=", "login"=>"amber.feng@gmail.com", "password"=>"sol1loque"}
+Failed login for '' from 127.0.0.1 at Thu Nov 19 04:12:43 UTC 2009
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 39ms (View: 14, DB: 0) | 200 OK [http://localhost/session]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2009-11-18 20:12:49) [POST]
+  Parameters: {"commit"=>"Log in", "authenticity_token"=>"pmoIm4QgvFcKQ7PbGnFajtrwFv8GMALhjq3vw7q60/c=", "password"=>"sol1loque", "email"=>"amber.feng@gmail.com"}
+  [4;36;1mUser Load (2.0ms)[0m   [0;1mSELECT * FROM "users" WHERE (email = 'amber.feng@gmail.com' and activated_at IS NOT NULL) LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 43ms (DB: 2) | 302 Found [http://localhost/session]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-18 20:12:50) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) LIMIT 1[0m
+Redirected to http://localhost:3000/dashboard
+Filter chain halted as [:redirect_if_logged_in] rendered_or_redirected.
+Completed in 37ms (DB: 1) | 302 Found [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 20:12:50) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) LIMIT 1[0m
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 50ms (View: 14, DB: 1) | 200 OK [http://localhost/dashboard]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-18 20:13:12) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) LIMIT 1[0m
+  [4;35;1mDepartment Load (0.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 80ms (View: 36, DB: 1) | 200 OK [http://localhost/dashboard]

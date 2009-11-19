@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-
+	@user.activate!
     success = @user && @user.save
 
     if success && @user.errors.empty?
@@ -38,6 +38,10 @@ class UsersController < ApplicationController
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default('/')
     end
+  end
+  
+  def edit
+	@user = current_user
   end
 
 end
