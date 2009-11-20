@@ -17,10 +17,19 @@ namespace :solr do
 
     rescue Errno::ECONNREFUSED #not responding
       Dir.chdir(SOLR_PATH) do
-        pid = fork do
-          #STDERR.close
-          exec "java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=#{SOLR_DATA_PATH} -Djetty.logs=#{SOLR_LOGS_PATH} -Djetty.port=#{SOLR_PORT} -jar start.jar"
-        end
+		pid = -1
+		begin
+		1/0
+			pid = fork do
+			#STDERR.close
+			exec "java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=#{SOLR_DATA_PATH} -Djetty.logs=#{SOLR_LOGS_PATH} -Djetty.port=#{SOLR_PORT} -jar start.jar"
+			end
+		rescue
+			puts "ZOMG"
+			javathing = IO.popen "start \"Solr server\" java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=#{SOLR_DATA_PATH} -Djetty.logs=#{SOLR_LOGS_PATH} -Djetty.port=#{SOLR_PORT} -jar start.jar"
+			pidthing = IO.popen "tasklist /FI \"IMAGENAME eq JAVA.EXE\" /FO LIST | findstr PID:"
+			pid = pidthing.gets.chomp.scan(/\d+/)[0]
+		end
         sleep(5)
         File.open("#{SOLR_PIDS_PATH}/#{ENV['RAILS_ENV']}_pid", "w"){ |f| f << pid}
         puts "#{ENV['RAILS_ENV']} Solr started successfully on #{SOLR_PORT}, pid: #{pid}."
@@ -31,12 +40,16 @@ namespace :solr do
   desc 'Stops Solr. Specify the environment by using: RAILS_ENV=your_env. Defaults to development if none.'
   task :stop do
     require "#{File.dirname(__FILE__)}/../../config/solr_environment.rb"
-    fork do
+    #fork do
       file_path = "#{SOLR_PIDS_PATH}/#{ENV['RAILS_ENV']}_pid"
       if File.exists?(file_path)
         File.open(file_path, "r") do |f| 
           pid = f.readline
-          Process.kill('TERM', pid.to_i)
+          begin
+			Process.kill('TERM', pid.to_i)
+			rescue
+				IO.popen "taskkill /pid #{pid}"
+			end
         end
         File.unlink(file_path)
         Rake::Task["solr:destroy_index"].invoke if ENV['RAILS_ENV'] == 'test'
@@ -44,7 +57,7 @@ namespace :solr do
       else
         puts "PID file not found at #{file_path}. Either Solr is not running or no PID file was written."
       end
-    end
+    #end
   end
   
   desc 'Remove Solr index'
