@@ -6248,3 +6248,279 @@ Rendering jobs/new
 Rendered users/_user_bar (9.0ms)
 Rendered users/_search_bar (0.0ms)
 Completed in 100ms (View: 50, DB: 1) | 200 OK [http://localhost/jobs/new]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-21 15:21:41) [GET]
+  Parameters: {"action"=>"index", "controller"=>"home"}
+  [4;36;1mDepartment Load (2.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 5782ms (View: 110, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-21 15:22:58) [POST]
+  Parameters: {"department_select"=>"1", "action"=>"list", "authenticity_token"=>"Lo380RoQ/LyXhtPB/55IEpCCqmAHCwkyfK6Y/KNNPRo=", "controller"=>"jobs"}
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;36;1mJob Load (0.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 87ms (View: 19, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:23:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 916ms (View: 898, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-21 15:23:10) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reviews"}
+  [4;35;1mReview Load (1.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 37ms (View: 23, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-21 15:23:11) [GET]
+  Parameters: {"action"=>"index", "controller"=>"jobs"}
+  [4;36;1mJob Load (2.0ms)[0m   [0;1mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 35ms (View: 18, DB: 2) | 200 OK [http://localhost/jobs]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:23:13) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 48ms (View: 29, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-21 15:23:18) [GET]
+  Parameters: {"action"=>"index", "controller"=>"jobs"}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 35ms (View: 14, DB: 1) | 200 OK [http://localhost/jobs]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-21 15:23:20) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reviews"}
+  [4;36;1mReview Load (1.0ms)[0m   [0;1mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 35ms (View: 16, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:23:21) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Rendering template within layouts/application
+Rendering jobs/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 44ms (View: 27, DB: 0) | 200 OK [http://localhost/jobs/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:27:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/jobs/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:27:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 18ms (View: 15, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:27:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/jobs/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:27:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 14ms (View: 10, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing JobsController#index (for 127.0.0.1 at 2009-11-21 15:27:16) [GET]
+  Parameters: {"action"=>"index", "controller"=>"jobs"}
+  [4;35;1mJob Load (0.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 28ms (View: 10, DB: 0) | 200 OK [http://localhost/jobs]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-21 15:27:18) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reviews"}
+  [4;36;1mReview Load (1.0ms)[0m   [0;1mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 17ms (View: 6, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing JobsController#new (for 127.0.0.1 at 2009-11-21 15:27:21) [GET]
+  Parameters: {"action"=>"new", "controller"=>"jobs"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/jobs/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:27:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 12ms (View: 9, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing ReviewsController#index (for 127.0.0.1 at 2009-11-21 15:30:53) [GET]
+  Parameters: {"action"=>"index", "controller"=>"reviews"}
+  [4;35;1mReview Load (1.0ms)[0m   [0mSELECT * FROM "reviews" [0m
+Rendering template within layouts/application
+Rendering reviews/index
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 17ms (View: 6, DB: 1) | 200 OK [http://localhost/reviews]
+
+
+Processing ReviewsController#new (for 127.0.0.1 at 2009-11-21 15:30:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"reviews"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 4ms (DB: 0) | 302 Found [http://localhost/reviews/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:30:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 16ms (View: 12, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:31:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 7, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:31:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 16ms (View: 11, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 15:31:29) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.name) on line #1 of app/views/dashboard/index.html.erb:
+1: Welcome, <%= current_user.name %>!
+2: <br>
+3: <br><br>
+4: Quick Links: 
+
+    app/views/dashboard/index.html.erb:1
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (84.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 15:34:45) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+  [4;35;1mDepartment Load (1.0ms)[0m   [0mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering dashboard/index
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.name) on line #1 of app/views/dashboard/index.html.erb:
+1: Welcome, <%= current_user.name %>!
+2: <br>
+3: <br><br>
+4: Quick Links: 
+
+    app/views/dashboard/index.html.erb:1
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (64.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 15:35:00) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/dashboard]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 15:35:01) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 7, DB: 0) | 200 OK [http://localhost/session/new]

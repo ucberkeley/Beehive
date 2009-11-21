@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_filter :logged_in?
+  before_filter :login_required
   
   def index
 	@departments = Department.all
