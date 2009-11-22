@@ -1,5 +1,5 @@
 <h1>Listing jobs</h1>
-
+<%= stylesheet_link_tag "job" %>
 <br>
 
 <div id="search_bar">
@@ -10,6 +10,12 @@
 </div>
 
 <br>
+
+
+  <%= render :partial => "job", :collection => @jobs %>
+
+
+<% if false %>
 
 <table>
   <tr>
@@ -23,6 +29,7 @@
     <th>Credit</th>
   </tr>
 
+  
 <% @jobs.each do |job| %>
   <tr>
     <td><%=h job.user %></td>
@@ -37,8 +44,11 @@
     <td><%= link_to 'Edit', edit_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+  
 <% end %>
 </table>
+
+<% end %>
 
 <br />
 

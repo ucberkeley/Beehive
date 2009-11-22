@@ -1,0 +1,19 @@
+.job
+{
+}
+
+.job_image_col
+{
+	width: 0;
+}
+
+.job_title
+{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.job_desc
+{
+	vertical-align: text-top;
+}
