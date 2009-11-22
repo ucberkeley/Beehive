@@ -6,9 +6,9 @@
 
 <% form_for :user, :url => users_path do |f| -%>
 
-<p>User type: <br />
-   <%= f.radio_button :is_faculty, false %>Student or GSI <br />
-   <%= f.radio_button :is_faculty, true %>Faculty <br /><br />
+<p><%= label_tag :is_faculty, "User type" %>:<br />
+   <%= f.radio_button :is_faculty, false %><%= label(:user, :is_faculty_false, "Student or GSI") %><br />
+   <%= f.radio_button :is_faculty, true %><%= label(:user, :is_faculty_true, "Faculty") %><br /><br />
    </p>
 
 <p><%= label_tag 'email' %> (must be a valid Berkeley or LBL email address!):<br/>  
