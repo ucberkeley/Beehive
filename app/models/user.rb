@@ -68,9 +68,10 @@ class User < ActiveRecord::Base
   #end
 
   def email=(value)
-    write_attribute :email, (value ? value.downcase : nil)
+  puts "\n\n\n\nEMAIL IZ #{self.email}\n\n\n\n"
+    write_attribute :email, (value && !value.empty? ? value.downcase : self.email)
   end
-
+  
   protected
     
 
@@ -81,12 +82,10 @@ class User < ActiveRecord::Base
 
 	def faculty_email; self.email; end
 	def faculty_email=(value); self.email=value; end
-  
+
 	def handle_faculty
-	puts "\n\n\n\n#{name}\n\n\n\n"
-		if is_faculty
-		puts "\n\n\n\n\HAILOLS\n\n\n\n"
-			self.email = faculty_email
+		if self.is_faculty != "false"
+			self.email = self.faculty_email
 		end
 	end
 	

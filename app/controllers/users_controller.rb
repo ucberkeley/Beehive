@@ -10,9 +10,6 @@ class UsersController < ApplicationController
  
   def create
     logout_keeping_session!
-	if(params[:is_faculty]) then
-		params[:user][:email] = params[:user][:faculty_email]
-	end
     @user = User.new(params[:user])
 	@user.activate!
     success = @user && @user.save
