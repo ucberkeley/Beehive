@@ -28,9 +28,7 @@
 
 <div id='faculty_emails' style="display: none;">
 Faculty Member (Who are you?): <br />
-<% if @user.is_faculty %>
-	<%= f.select :email, %w(validemail@berkeley.edu invalidemail@someaddress.erasdf.com validemail@lbl.gov) %>
-<% end %>
+<%= f.select :faculty_email, %w(validemail@berkeley.edu invalidemail@someaddress.erasdf.com validemail@lbl.gov), :options => {:value => ""} %>
 </div>
 
 <p>Full Name:<br/>

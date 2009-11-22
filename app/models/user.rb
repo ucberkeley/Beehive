@@ -26,13 +26,13 @@ class User < ActiveRecord::Base
   #validates_format_of		:email,	   :with =>
 
   before_create :make_activation_code 
-
+  before_validation :handle_faculty
+  
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation
-
-
+  attr_accessible :email, :name, :password, :password_confirmation, :faculty_email
+  
   # Activates the user in the database.
   def activate!
     @activated = true
@@ -79,5 +79,15 @@ class User < ActiveRecord::Base
       self.activation_code = self.class.make_token
     end
 
-
+	def faculty_email; self.email; end
+	def faculty_email=(value); self.email=value; end
+  
+	def handle_faculty
+	puts "\n\n\n\n#{name}\n\n\n\n"
+		if is_faculty
+		puts "\n\n\n\n\HAILOLS\n\n\n\n"
+			self.email = faculty_email
+		end
+	end
+	
 end
