@@ -1,4 +1,6 @@
 <h1>Sign Up</h1>
+<%= stylesheet_link_tag "user" %>
+
 <% @user.password = @user.password_confirmation = nil %>
 
 <%= image_tag "../images/new_user_steps_01.png", :border=>0 %>
@@ -24,9 +26,11 @@
 <%= f.text_field :email %></p>
 </div>
 
-<div id='faculty_emails'; style="display: none;">
+<div id='faculty_emails' style="display: none;">
 Faculty Member (Who are you?): <br />
-<%= f.select :email, %w(validemail@berkeley.edu invalidemail@someaddress.erasdf.com validemail@lbl.gov) %>
+<% if @user.is_faculty %>
+	<%= f.select :email, %w(validemail@berkeley.edu invalidemail@someaddress.erasdf.com validemail@lbl.gov) %>
+<% end %>
 </div>
 
 <p>Full Name:<br/>
