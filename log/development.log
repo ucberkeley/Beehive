@@ -6624,3 +6624,293 @@ Rendering users/new
 Rendered users/_user_bar (1.0ms)
 Rendered users/_search_bar (0.0ms)
 Completed in 758ms (View: 15, DB: 4) | 200 OK [http://localhost/users]
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091107192416)
+Migrating to CreateCategories (20091107192909)
+Migrating to CreateReviews (20091107193238)
+Migrating to CreateJobs (20091107194546)
+Migrating to CreatePictures (20091107194626)
+Migrating to CreateFaculties (20091107194831)
+Migrating to CreateDepartments (20091116203348)
+Migrating to CreateCourses (20091119022216)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("categories")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("categories_jobs")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("courses")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mPRAGMA index_list("departments")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("faculties")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("jobs")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("pictures")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("reviews")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20091107192416)
+Migrating to CreateCategories (20091107192909)
+Migrating to CreateReviews (20091107193238)
+Migrating to CreateJobs (20091107194546)
+Migrating to CreatePictures (20091107194626)
+Migrating to CreateFaculties (20091107194831)
+Migrating to CreateDepartments (20091116203348)
+Migrating to CreateCourses (20091119022216)
+Migrating to AddIsFacultyToUsers (20091121171900)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (2.0ms)[0m   [0mALTER TABLE "users" ADD "is_faculty" boolean DEFAULT 'f'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091121171900')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("categories")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("categories_jobs")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mPRAGMA index_list("courses")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("departments")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("faculties")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("jobs")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mPRAGMA index_list("pictures")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("reviews")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-21 17:23:51) [GET]
+  Parameters: {"action"=>"index", "controller"=>"home"}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (3.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 52ms (View: 40, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 17:23:59) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 3ms (DB: 0) | 302 Found [http://localhost/dashboard]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 17:24:00) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 25ms (View: 21, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 17:24:02) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 4ms (DB: 0) | 302 Found [http://localhost/dashboard]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 17:24:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 10ms (View: 7, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:24:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 58ms (View: 17, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:28:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+
+ActionView::TemplateError (wrong number of arguments (2 for 3)) on line #9 of app/views/users/new.html.erb:
+6: 
+7: <% form_for :user, :url => users_path do |f| -%>
+8: 
+9: <p><%= radio_button :is_faculty, false %>
+10:    <%= radio_button :is_faculty, false %></p>
+11: 
+12: <p><%= label_tag 'email' %> (must be a Berkeley.edu address!)<br/>  
+
+    app/views/users/new.html.erb:9:in `radio_button'
+    app/views/users/new.html.erb:9
+    app/views/users/new.html.erb:7
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (67.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:29:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 131ms (View: 26, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:29:48) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 60ms (View: 29, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:29:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 55ms (View: 26, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:30:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 6204ms (View: 12, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:31:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 55ms (View: 21, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:31:17) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 43ms (View: 18, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:34:20) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 42ms (View: 18, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:34:47) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 57ms (View: 26, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:35:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 56ms (View: 26, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2009-11-21 17:35:35) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/application
+Rendering users/new
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 131ms (View: 26, DB: 0) | 200 OK [http://localhost/signup]
+
+
+Processing DashboardController#index (for 127.0.0.1 at 2009-11-21 17:42:50) [GET]
+  Parameters: {"action"=>"index", "controller"=>"dashboard"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/dashboard]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-21 17:42:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/application
+Rendering sessions/new
+Rendered users/_user_bar (2.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 36ms (View: 33, DB: 0) | 200 OK [http://localhost/session/new]
+
+
+Processing HomeController#index (for 127.0.0.1 at 2009-11-21 17:42:55) [GET]
+  Parameters: {"action"=>"index", "controller"=>"home"}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" [0m
+Rendering template within layouts/application
+Rendering home/index
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 33ms (View: 23, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-21 17:43:00) [POST]
+  Parameters: {"department_select"=>"0", "action"=>"list", "authenticity_token"=>"8B2p4zvG0QfTCbXgLNTDods7IyxO9TXlO7ldKFc0DmM=", "controller"=>"jobs"}
+  [4;35;1mJob Load (1.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (0.0ms)
+Rendered users/_search_bar (1.0ms)
+Completed in 104ms (View: 51, DB: 1) | 200 OK [http://localhost/jobs/list]
+
+
+Processing JobsController#list (for 127.0.0.1 at 2009-11-21 17:43:04) [POST]
+  Parameters: {"department_select"=>"1", "action"=>"list", "authenticity_token"=>"8B2p4zvG0QfTCbXgLNTDods7IyxO9TXlO7ldKFc0DmM=", "controller"=>"jobs"}
+  [4;36;1mDepartment Load (1.0ms)[0m   [0;1mSELECT * FROM "departments" WHERE ("departments"."id" = 1) [0m
+  [4;35;1mJob Load (0.0ms)[0m   [0mSELECT * FROM "jobs" [0m
+Rendering template within layouts/application
+Rendering jobs/list
+Rendered users/_user_bar (1.0ms)
+Rendered users/_search_bar (0.0ms)
+Completed in 40ms (View: 12, DB: 1) | 200 OK [http://localhost/jobs/list]

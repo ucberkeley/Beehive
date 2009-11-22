@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+  
+  # Check that the email address is @*.berkeley.edu or @*.lbl.gov
+  #validates_format_of		:email,	   :with =>
 
   before_create :make_activation_code 
 
