@@ -1,0 +1,36 @@
+<%= render :partial => "dashboard/menu_bar" %>
+  
+  <h1>Listing jobs for <%= @department %></h1>
+  <table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Desc</th>
+    <th>Category</th>
+    <th>Exp date</th>
+    <th>Num positions</th>
+    <th>Paid</th>
+    <th>Credit</th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <td><%=h job.user %></td>
+    <td><%=h job.title %></td>
+    <td><%=h job.desc %></td>
+    <td><%=h job.category_id %></td>
+    <td><%=h job.exp_date %></td>
+    <td><%=h job.num_positions %></td>
+    <td><%=h job.paid %></td>
+    <td><%=h job.credit %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Edit', edit_job_path(job) %></td>
+    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New job', new_job_path %>
+<br />
+
+
