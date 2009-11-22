@@ -7,14 +7,27 @@
 <% form_for :user, :url => users_path do |f| -%>
 
 <p>User type:<br />
-   <%= f.radio_button :is_faculty, false, :checked => true %>
+   <%= f.radio_button :is_faculty, false, :checked => true, :onclick => 
+		"Effect.SlideDown('email_field', { duration: 1.0 });
+		 Effect.SlideUp('faculty_emails', { duration: 1.0 });
+		 Effect.SlideDown('step2', { duration: 1.0 });" %>
    <%= f.label :is_faculty, 'Student or GSI' %><br />
-   <%= f.radio_button :is_faculty, true %>
+   <%= f.radio_button :is_faculty, true, :onclick =>
+   		"Effect.SlideUp('email_field', { duration: 1.0 });
+		 Effect.SlideDown('faculty_emails', { duration: 1.0 });
+		 Effect.SlideUp('step2', { duration: 1.0 });" %>
    <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
    </p>
 
+<div id='email_field'>
 <p><%= label_tag 'email' %> (must be a valid Berkeley or LBL email address!):<br/>  
 <%= f.text_field :email %></p>
+</div>
+
+<div id='faculty_emails'; style="display: none;">
+Faculty Member (Who are you?): <br />
+<%= f.select :email, %w(validemail@berkeley.edu invalidemail@someaddress.erasdf.com validemail@lbl.gov) %>
+</div>
 
 <p>Full Name:<br/>
 <%= f.text_field :name %></p>
@@ -26,15 +39,23 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %>:<br/>
 <%= f.password_field :password_confirmation %></p>
 
+
+<div id="step2">
+
 <br/><br/>
 <%= submit_tag 'I\'ll fill in the rest later, sign me up now!' %>
 <br/><br/>Note: The rest of this information is optional, but may increase your chances of landing a research position. Don't worry though, you can always fill it in later in Settings.
 
 <br>
 <br>
+
 <%= image_tag "../images/new_user_steps_02.png", :border=>0 %>
 
 <br>
 //tagging stuff!
+</div>
+
+<br />
+<%= submit_tag 'Submit' %>
 
 <% end -%>
