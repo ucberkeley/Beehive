@@ -1,5 +1,16 @@
 <h1>Listing jobs</h1>
 
+<br>
+
+<div id="search_bar">
+	<% form_for :search_terms, :url => {:controller => :jobs, :action => :search} do |f| %>
+		<%= f.text_field :query %>
+		<%= f.submit "Search" %>
+	<% end %>
+</div>
+
+<br>
+
 <table>
   <tr>
     <th>User</th>

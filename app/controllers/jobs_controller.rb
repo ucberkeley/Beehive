@@ -26,6 +26,14 @@ class JobsController < ApplicationController
 	
   end
   
+  def search
+	@jobs = []
+	respond_to do |format|
+		format.html { render :action => :index }
+		format.xml { render :xml => @jobs }
+	end
+  end
+  
   # GET /jobs/1
   # GET /jobs/1.xml
   def show
