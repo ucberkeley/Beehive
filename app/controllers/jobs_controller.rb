@@ -16,6 +16,12 @@ class JobsController < ApplicationController
   
   def list
 	d_id = params[:department_select]
+	
+	query = params[:search_terms][:query]
+	if(query && !query.empty?)
+		@jobs = Job.find_by_solr(query).results
+else
+	
 	if(d_id == "0")
 		@department = "All Departments"
 		@jobs = Job.all
@@ -24,11 +30,13 @@ class JobsController < ApplicationController
 		@jobs = Job.all
 	end
 	
+end #end params[:query]
+
 	respond_to do |format|
 		format.html { render :action => :index }
 		format.xml { render :xml => @jobs }
 	end
-	
+		
   end
     
   # GET /jobs/1
@@ -61,6 +69,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
+	params[:job][:user] = current_user
     @job = Job.new(params[:job])
 
     respond_to do |format|
