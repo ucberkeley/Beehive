@@ -17,6 +17,7 @@ class JobsController < ApplicationController
   def list
 	d_id = params[:department_select]
 	
+	params[:search_terms] ||= {}
 	query = params[:search_terms][:query]
 	if(query && !query.empty?)
 		@jobs = Job.find_by_solr(query).results
