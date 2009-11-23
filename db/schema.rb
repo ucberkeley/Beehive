@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091123013549) do
+ActiveRecord::Schema.define(:version => 20091123101143) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,20 @@ ActiveRecord::Schema.define(:version => 20091123013549) do
     t.string   "name"
     t.string   "email"
     t.string   "department"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_inactive", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "desc"
+    t.integer  "category_id"
+    t.datetime "exp_date"
+    t.integer  "num_positions"
+    t.boolean  "paid"
+    t.boolean  "credit"
+    t.integer  "activation_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new
+	@all_faculty = Faculty.find(:all)
+	@faculty_names = []
+	@all_faculty.each do |faculty|
+	  @faculty_names << faculty.name
+	end
   end
  
   def create
