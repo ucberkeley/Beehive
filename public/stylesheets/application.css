@@ -26,9 +26,9 @@ pre {
 /**Layout**/
 
 #everything{
-	height: 100%;
+	min-height: 100%;
+	position: relative;
 	width: 100%;
-	margin-bottom: -80px;
 }
 
 body > #everything {
@@ -111,6 +111,7 @@ width: 100%;
 	padding: 50px;
 	margin-top: 20px;
 	padding-top: 30px;
+	padding-bottom: 40px;
 	/*position: relative;
 	top: -159px;*/
 }
@@ -121,9 +122,9 @@ width: 100%;
 }
 
 #footer{
-	
-	position: relative;
-	margin-bottom: 0px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	overflow: hidden;	
 }
 
