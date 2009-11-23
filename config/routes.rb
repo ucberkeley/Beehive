@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :sponsors
-
   map.resources :pictures
 
   map.resources :jobs
