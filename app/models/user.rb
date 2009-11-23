@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :reviews
   has_one :picture
+  has_many :courses, :through => :enrollments
 
   #validates_presence_of     :login
   #validates_length_of       :login,    :within => 3..40
