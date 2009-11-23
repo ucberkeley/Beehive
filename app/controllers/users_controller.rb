@@ -6,17 +6,23 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new
-	@all_faculty = Faculty.find(:all)
-	@faculty_names = []
-	@all_faculty.each do |faculty|
-	  @faculty_names << faculty.name
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
 	end
   end
  
   def create
     logout_keeping_session!
-	
-	params[:user][:faculty_email] = Faculty.find(:conditions => [ "name = ?", params[:user][:faculty_email] ]).email
+
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
+	end
+
+	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_email] ]).email
     @user = User.new(params[:user])
 	
     success = @user && @user.save
@@ -53,6 +59,7 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
+
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

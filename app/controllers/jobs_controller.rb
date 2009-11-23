@@ -55,7 +55,13 @@ end #end params[:query]
   # GET /jobs/new.xml
   def new
     @job = Job.new
-
+	
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
+    end
+	
     respond_to do |format|
       format.html { render :action => :modify }
       format.xml  { render :xml => @job }
@@ -66,6 +72,12 @@ end #end params[:query]
   def edit
     @job = Job.find(params[:id])
 	
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
+    end
+	
 	respond_to do |format|
 		format.html { render :action => :modify }
 		format.xml { render :xml => @job }
@@ -75,8 +87,16 @@ end #end params[:query]
   # POST /jobs
   # POST /jobs.xml
   def create
+    #params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)
+	
 	params[:job][:user] = current_user
     @job = Job.new(params[:job])
+
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
+    end
 	
 	#params[:job][:user] = current_user
 	#params[:job][:activation_code] = rand(99999) + 100000 # Generates a random 7 digit number.
@@ -85,6 +105,10 @@ end #end params[:query]
     respond_to do |format|
       if @job.save
         flash[:notice] = 'Job was successfully created.'
+		
+		# Send an e-mail to the faculty member(s) involved.
+		# Not implemented yet.
+		
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
@@ -97,8 +121,15 @@ end #end params[:query]
   # PUT /jobs/1
   # PUT /jobs/1.xml
   def update
+	#params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
     @job = Job.find(params[:id])
 
+    @all_faculty = Faculty.find(:all)
+    @faculty_names = []
+    @all_faculty.each do |faculty|
+      @faculty_names << faculty.name
+    end
+	
     respond_to do |format|
       if @job.update_attributes(params[:job])
         flash[:notice] = 'Job was successfully updated.'

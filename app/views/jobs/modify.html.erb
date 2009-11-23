@@ -32,6 +32,17 @@
     <%= f.check_box :credit %>
   </p>
   <p>
+    Faculty Member Sponsorship: <br />
+    <%
+	#f.select :sponsorships, @faculty_names, :options => {:value => ""} 
+	%>
+	<select>
+		<% @faculty_names.each do |faculty| %>
+			<option><%= faculty %></option>
+		<% end%>
+	</select>
+  </p>
+  <p>
     <%= f.submit (@editing ? 'Update' : 'Create') %>
   </p>
 <% end %>
