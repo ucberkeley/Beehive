@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   
   # Check that the email address is @*.berkeley.edu or @*.lbl.gov
-  validates_format_of		:email,	   :with => /([^@]+@(?:.+\.)?(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "The specified email is not a Berkeley or LBL address."
+  validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "The specified email is not a Berkeley or LBL address."
 
   before_create :make_activation_code 
   before_validation :handle_email
@@ -108,7 +108,8 @@ class User < ActiveRecord::Base
 	# etc. to an enumerable object courses
 	def handle_courses
 		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
-		course_array = course_names.split(',')
+		course_array = []
+		course_array = course_names.split(',') if ! course_names.nil?
 		puts course_array
 		course_array.each do |item|
 			self.courses << Course.find_by_name(item.upcase.strip)

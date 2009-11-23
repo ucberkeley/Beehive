@@ -39,30 +39,6 @@ describe User do
     end.should_not change(User, :count)
   end
 
-  describe 'allows legitimate logins:' do
-    ['123', '1234567890_234567890_234567890_234567890',
-     'hello.-_there@funnychar.com'].each do |login_str|
-      it "'#{login_str}'" do
-        lambda do
-          u = create_user(:login => login_str)
-          u.errors.on(:login).should     be_nil
-        end.should change(User, :count).by(1)
-      end
-    end
-  end
-  describe 'disallows illegitimate logins:' do
-    ['12', '1234567890_234567890_234567890_234567890_', "tab\t", "newline\n",
-     "Iñtërnâtiônàlizætiøn hasn't happened to ruby 1.8 yet",
-     'semicolon;', 'quote"', 'tick\'', 'backtick`', 'percent%', 'plus+', 'space '].each do |login_str|
-      it "'#{login_str}'" do
-        lambda do
-          u = create_user(:login => login_str)
-          u.errors.on(:login).should_not be_nil
-        end.should_not change(User, :count)
-      end
-    end
-  end
-
   it 'requires password' do
     lambda do
       u = create_user(:password => nil)
@@ -85,10 +61,7 @@ describe User do
   end
 
   describe 'allows legitimate emails:' do
-    ['foo@bar.com', 'foo@newskool-tld.museum', 'foo@twoletter-tld.de', 'foo@nonexistant-tld.qq',
-     'r@a.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail.com',
-     'hello.-_there@funnychar.com', 'uucp%addr@gmail.com', 'hello+routing-str@gmail.com',
-     'domain@can.haz.many.sub.doma.in', 'student.name@university.edu'
+    ['foo@berkeley.edu', 'foo@newskool-tld.lbl.gov', 'foo@calmail.berkeley.edu', 'foo@cory.eecs.berkeley.edu'
     ].each do |email_str|
       it "'#{email_str}'" do
         lambda do
@@ -99,7 +72,8 @@ describe User do
     end
   end
   describe 'disallows illegitimate emails' do
-    ['!!@nobadchars.com', 'foo@no-rep-dots..com', 'foo@badtld.xxx', 'foo@toolongtld.abcdefg',
+    ['!!@nobadchars.com', 'foo@no-rep-dots..com', 'failberkeley.edu', 'my@badberkeley.edu', 'foo@foilbl.gov', 
+	 'foo@badtld.xxx', 'foo@toolongtld.abcdefg',
      'Iñtërnâtiônàlizætiøn@hasnt.happened.to.email', 'need.domain.and.tld@de', "tab\t", "newline\n",
      'r@.wk', '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail2.com',
      # these are technically allowed but not seen in practice:
@@ -115,7 +89,7 @@ describe User do
   end
 
   describe 'allows legitimate names:' do
-    ['Andre The Giant (7\'4", 520 lb.) -- has a posse',
+    ['Andrew Andrews',
      '', '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
     ].each do |name_str|
       it "'#{name_str}'" do
