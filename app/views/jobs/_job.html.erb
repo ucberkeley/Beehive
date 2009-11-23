@@ -1,11 +1,20 @@
 <div id="job#{job.id}" class="job">
 	<table>
 		<tr>
-			<td class="job_image_col" rowspan=2><img src='http://www.eecs.berkeley.edu/Faculty/NewPhotos/Homepage/patterson.lg.jpg'></img></td>
+			<td class="job_image_col" rowspan=3><img src='http://www.eecs.berkeley.edu/Faculty/NewPhotos/Homepage/patterson.lg.jpg'></img></td>
 			<td><div class="job_title"><%= job.title %></div></td>
 		</tr>
 		<tr>
 			<td nowrap><div class="job_desc"><%= job.desc %></div></td>
+		</tr>
+		<tr>
+			<td nowrap><div class="job_sponsors">
+				Sponsors:<br>
+				<ul><% job.faculties.each do |f| %>
+					<li><%= f.name %></li>
+				<% end %>
+				</ul>
+			</div></td>
 		</tr>
 	</table>
 </div><br>
