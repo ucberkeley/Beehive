@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :reviews
   has_one :picture
+  
+  has_many :enrollments
   has_many :courses, :through => :enrollments
 
   #validates_presence_of     :login
@@ -28,13 +30,15 @@ class User < ActiveRecord::Base
 
   before_create :make_activation_code 
   before_validation :handle_email
+  before_validation :handle_courses
   
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty
-  attr_reader :faculty_email; attr_writer :faculty_email;  
-  attr_reader :student_email; attr_writer :student_email;
+  attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names
+  attr_reader :faculty_email; attr_writer :faculty_email  
+  attr_reader :student_email; attr_writer :student_email
+  attr_reader :course_names; attr_writer :course_names
   
   # Activates the user in the database.
   def activate!
@@ -74,6 +78,17 @@ class User < ActiveRecord::Base
     write_attribute :email, (value && !value.empty? ? value.downcase : self.email)
   end
   
+  
+  # Returns a string containing the course names taken by user @user
+  # e.g. "CS162,CS61A"
+  def course_list_of_user
+  	course_list = ''
+  	courses.each do |course|
+  		course_list << course.name + ','
+  	end
+  	course_list[0..(course_list.length - 2)].upcase
+  end
+
   protected
     
 
@@ -88,5 +103,18 @@ class User < ActiveRecord::Base
 	def handle_email
 		self.email = (self.is_faculty ? self.faculty_email : self.student_email)
 	end
+	
+	# Parses the textbox list of courses from "CS162,CS61A,EE123"
+	# etc. to an enumerable object courses
+	def handle_courses
+		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
+		course_array = course_names.split(',')
+		puts course_array
+		course_array.each do |item|
+			self.courses << Course.find_by_name(item.upcase.strip)
+		end
+	end
+	
+
 	
 end
