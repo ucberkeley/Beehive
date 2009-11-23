@@ -15,6 +15,8 @@ class UsersController < ApplicationController
  
   def create
     logout_keeping_session!
+	
+	params[:user][:faculty_email] = Faculty.find(:conditions => [ "name = ?", params[:user][:faculty_email] ]).email
     @user = User.new(params[:user])
 	
     success = @user && @user.save
