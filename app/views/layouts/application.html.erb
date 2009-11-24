@@ -13,7 +13,13 @@
 <div id="everything">
 	<div id="header">
 		<div id="header_image">
-			<%= link_to "", :controller=>:dashboard %>
+		
+			<% if logged_in? %>
+				<%= link_to "", :controller => :dashboard %>
+			<% else %>
+				<%= link_to "", :controller => :home %>
+			<% end %>
+			
 			<div id="side">
 				<div id="loginbar">
 					<%= render :partial => "users/user_bar" %>
@@ -31,6 +37,12 @@
 	<div id="shadowdown"></div>
 	
 	<div id="content">
+		
+		<% if !(flash[:notice].nil? || flash[:notice] == '') %>
+			<div id="flash_notice">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
 		
 		<div id="contentcenter">
 			<%= yield %>
