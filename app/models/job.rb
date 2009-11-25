@@ -10,4 +10,8 @@ class Job < ActiveRecord::Base
   
   validates_presence_of :title, :desc, :exp_date
   
+  def self.find_recently_added(n)
+	Job.find(:all, :order => "created_at DESC", :limit=>n)
+  end
+  
 end

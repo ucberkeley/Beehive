@@ -3,5 +3,6 @@ class DashboardController < ApplicationController
   
   def index
 	@departments = Department.all
+	@recently_added_jobs = Job.find_recently_added(5)
   end
 end

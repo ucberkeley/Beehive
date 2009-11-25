@@ -3,8 +3,7 @@
 Welcome, <%= current_user.name %>!
 <br>
 <br><br>
-Quick Links: 
-<br>View Listings
-
-<br> <%= link_to "Post a job", :controller => "jobs", :action => 'new'%>
-<br> <%= link_to "Browse Reviews", :controller => "jobs", :action => 'new'%>
+<h2>Recently Added Projects</h2>
+<% for job in @recently_added_jobs %>
+<%= link_to job.title, @job %>
+<% end %>
