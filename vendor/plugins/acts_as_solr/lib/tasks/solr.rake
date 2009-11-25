@@ -26,7 +26,7 @@ namespace :solr do
 			end
 		rescue
 			puts "ZOMG"
-			puts "start \"Solr server\" java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=#{SOLR_DATA_PATH} -Djetty.logs=#{SOLR_LOGS_PATH} -Djetty.port=#{SOLR_PORT} -jar start.jar"
+			puts "start \"Solr server\" java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=\"#{SOLR_DATA_PATH}\" -Djetty.logs=\"#{SOLR_LOGS_PATH}\" -Djetty.port=#{SOLR_PORT} -jar start.jar"
 			javathing = IO.popen "start \"Solr server\" java #{SOLR_JVM_OPTIONS} -Dsolr.data.dir=#{SOLR_DATA_PATH} -Djetty.logs=#{SOLR_LOGS_PATH} -Djetty.port=#{SOLR_PORT} -jar start.jar"
 			pidthing = IO.popen "tasklist /FI \"IMAGENAME eq JAVA.EXE\" /FO LIST | findstr PID:"
 			pid = pidthing.gets.chomp.scan(/\d+/)[0]
