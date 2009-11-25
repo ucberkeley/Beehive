@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   
   has_many :jobs
+  has_many :job_inactives
   has_many :reviews
   has_one :picture
   

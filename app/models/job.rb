@@ -8,4 +8,6 @@ class Job < ActiveRecord::Base
   
   acts_as_solr :fields => [:title, :desc]
   
+  validates_presence_of :title, :desc, :exp_date
+  
 end
