@@ -30,16 +30,24 @@ class User < ActiveRecord::Base
   validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "The specified email is not a Berkeley or LBL address."
 
   before_create :make_activation_code 
+  
+  # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
+  # email address to the user (depending on whether the user is a student or gsi or a faculty) 
+  # and handle the courses for the user.
   before_validation :handle_email
+  before_validation :handle_name
   before_validation :handle_courses
   
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names
+  attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names, 
+	:student_name, :faculty_name
   attr_reader :faculty_email; attr_writer :faculty_email  
   attr_reader :student_email; attr_writer :student_email
   attr_reader :course_names; attr_writer :course_names
+  attr_reader :student_name; attr_writer :student_name
+  attr_reader :faculty_name; attr_writer :faculty_name
   
   # Activates the user in the database.
   def activate!
@@ -100,9 +108,16 @@ class User < ActiveRecord::Base
 
 	# Dynamically assign the value of :email, based on whether this user
 	# is marked as faculty or not. This should occur as a before_validation
-	# since we want to save a value for :email, not :faculty_ or :student_email.
+	# since we want to save a value for :email, not :faculty_email or :student_email.
 	def handle_email
 		self.email = (self.is_faculty ? self.faculty_email : self.student_email)
+	end
+	
+	# Dynamically assign the value of :name, based on whether this user
+	# is marked as faculty or not. This should occur as a before_validation
+	# since we want to save a value for :name, not :faculty_name or :student_name.
+	def handle_name
+		self.name = is_faculty ? faculty_name : student_name
 	end
 	
 	# Parses the textbox list of courses from "CS162,CS61A,EE123"

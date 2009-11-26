@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new
-    @all_faculty = Faculty.find(:all)
+    
+	# set up list of faculty names
+	@all_faculty = Faculty.find(:all)
     @faculty_names = []
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
@@ -16,14 +18,18 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
 
+	# set up list of faculty names
     @all_faculty = Faculty.find(:all)
     @faculty_names = []
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
 	end
 
-	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_email] ]).email
-    @user = User.new(params[:user])
+	# Assign the faculty email parameter based on the faculty name chosen from the select dropdown.
+	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email
+    
+	
+	@user = User.new(params[:user])
 	
     success = @user && @user.save
 

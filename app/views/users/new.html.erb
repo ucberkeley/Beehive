@@ -11,29 +11,32 @@
 <p>User type:<br />
    <%= f.radio_button :is_faculty, false, :checked => true, :onclick => 
 		"Effect.SlideDown('email_field', { duration: 1.0 });
+	     Effect.SlideDown('full_name_field', { duration: 1.0 });
 		 Effect.SlideUp('faculty_emails', { duration: 1.0 });
 		 Effect.SlideDown('step2', { duration: 1.0 });" %>
    <%= f.label :is_faculty, 'Student or GSI' %><br />
    <%= f.radio_button :is_faculty, true, :onclick =>
    		"Effect.SlideUp('email_field', { duration: 1.0 });
+		 Effect.SlideUp('full_name_field', { duration: 1.0 });
 		 Effect.SlideDown('faculty_emails', { duration: 1.0 });
 		 Effect.SlideUp('step2', { duration: 1.0 });" %>
    <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
    </p>
 
-<div id='email_field'>
+<div id="email_field">
 <p><%= label_tag 'student_email' %> (must be a valid Berkeley or LBL email address!):<br/>  
 <%= f.text_field :student_email %></p>
 </div>
 
-<div id='faculty_emails' style="display: none;">
+<div id="faculty_emails" style="display: none;">
 Faculty Member (Who are you?): <br />
-<%= f.select :faculty_email, @faculty_names, :options => {:value => ""} %>
+<%= f.select :faculty_name, @faculty_names, :options => {:value => ""} %>
 </div>
 
+<div id="full_name_field">
 <p>Full Name:<br/>
-<%= f.text_field :name %></p>
-
+<%= f.text_field :student_name %></p>
+</div>
 
 <p><%= label_tag 'password' %>:<br/>
 <%= f.password_field :password %></p>
