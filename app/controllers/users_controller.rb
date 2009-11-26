@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
   auto_complete_for :course, :name
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
 
   # render new.rhtml
   def new

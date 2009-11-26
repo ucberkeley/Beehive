@@ -1,4 +1,4 @@
-<h1>New job</h1>
+<h1>New job!</h1>
 
 <% form_for(@job) do |f| %>
   <%= f.error_messages %>
@@ -32,15 +32,7 @@
     <%= f.check_box :credit %>
   </p>
   <p>
-    Faculty Member Sponsorship: <br />
-    <%
-	#f.select :sponsorships, @faculty_names, :options => {:value => ""} 
-	%>
-	<select>
-		<% @faculty_names.each do |faculty| %>
-			<option><%= faculty %></option>
-		<% end%>
-	</select>
+    <%= f.select :department_id, [["All Departments",0]] << Department.all.collect {|c| [c.name, c.id]} %>
   </p>
   <p>
     <%= f.submit 'Create' %>
