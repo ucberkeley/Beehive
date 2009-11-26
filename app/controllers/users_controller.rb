@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   # include AuthenticatedSystem    --- ^ did this.
   
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
   auto_complete_for :course, :name
 
   # render new.rhtml
