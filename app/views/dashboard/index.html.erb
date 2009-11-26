@@ -3,13 +3,21 @@
 Welcome, <%= current_user.name %>!
 <br>
 <br><br>
-<h2>Your Watched Projects</h2>
-//list of projects you're watching
-
-<h2>SmartMatch Results</h2>
-//smartmatch algorithm spits out jobs
-
-<h2>Recently Added Projects</h2>
-<% for job in @recently_added_jobs %>
-<%= link_to job.title, job %>
-<% end %>
+<div id="dashboard_container">
+	<div id="dashboard_container_watched">
+		<h2>Your Watched Projects</h2>
+		//list of projects you're watching
+	</div>
+	<div id="dashboard_container_smartmatch">
+		<h2>SmartMatch Results</h2>
+		//smartmatch algorithm spits out jobs
+	</div>
+</div>
+<div id="dashboard_container">
+	<div id="dashboard_container_long">
+		<h2>Recently Added Projects</h2>
+		<% for job in @recently_added_jobs %>
+		<%= link_to job.title, job %>
+		<% end %>
+	</div>
+</div>

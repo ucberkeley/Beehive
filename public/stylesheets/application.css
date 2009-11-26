@@ -206,7 +206,33 @@ width: 100%;
 	background: url("../images/research_department_speechbubble_02.png");
 	z-index: 10;
 }
-/**BROWSE**/
+
+/**Dashboard**/
+
+#dashboard_container{
+	width: 900px;
+}
+
+#dashboard_container_smartmatch{
+	width: 55%;
+	padding: 15px;
+	margin-bottom: 15px;
+	background: #E5FEB4;
+}
+
+#dashboard_container_watched{
+	float:right;
+	width: 35%;
+	padding: 15px;
+	margin-bottom: 15px;
+	background: #E5FEB4;
+}
+
+#dashboard_container_long{
+	padding: 15px;
+	margin-bottom: 15px;
+	background: #E5FEB4;
+}
 
 
 /**Links**/
