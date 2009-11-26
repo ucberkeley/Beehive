@@ -1,3 +1,5 @@
+
+
 function menu_bar_init(){
 	//Menu Bar Button Hover
 	$("menu_bar_01").observe('mouseout', function() {
@@ -21,3 +23,6 @@ function menu_bar_init(){
 	  this.src = "../images/menu_bar_03.png";
 	});
 }
+
+
+

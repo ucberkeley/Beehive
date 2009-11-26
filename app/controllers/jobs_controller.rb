@@ -7,7 +7,7 @@ class JobsController < ApplicationController
   
   def index
     @jobs = Job.all
-
+	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @jobs }
@@ -21,17 +21,17 @@ class JobsController < ApplicationController
 	query = params[:search_terms][:query]
 	if(query && !query.empty?)
 		@jobs = Job.find_by_solr(query).results
-else
-	
-	if(d_id == "0")
-		@department = "All Departments"
-		@jobs = Job.all
 	else
-		@department = Department.find(d_id).name
-		@jobs = Job.all
-	end
 	
-end #end params[:query]
+		if(d_id == "0")
+			@department = "All Departments"
+			@jobs = Job.all
+		else
+			@department = Department.find(d_id).name
+			@jobs = Job.all
+		end
+	
+	end #end params[:query]
 
 	respond_to do |format|
 		format.html { render :action => :index }
