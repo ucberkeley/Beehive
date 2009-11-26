@@ -59,7 +59,8 @@ module AutoCompleteMacrosHelper
     function =  "var #{field_id}_auto_completer = new Ajax.Autocompleter("
     function << "'#{field_id}', "
     function << "'" + (options[:update] || "#{field_id}_auto_complete") + "', "
-    function << "'#{url_for(options[:url])}'"
+    function << "'#{url_for(options[:url])}' "
+
     
     js_options = {}
     js_options[:tokens] = array_or_string_for_javascript(options[:tokens]) if options[:tokens]
@@ -75,7 +76,8 @@ module AutoCompleteMacrosHelper
       js_options[v] = options[k] if options[k]
     end
 
-    function << (', ' + options_for_javascript(js_options) + ')')
+    #function << (', ' + options_for_javascript(js_options) + ')')
+	function << ", {tokens: ','})"
 
     javascript_tag(function)
   end
