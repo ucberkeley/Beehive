@@ -30,7 +30,7 @@
 
 <div id="faculty_emails" style="display: none;">
 Faculty Member (Who are you?): <br />
-<%= f.select :faculty_name, @faculty_names, :options => {:value => ""} %>
+<%= f.select :faculty_name, @faculty_names %>
 </div>
 
 <div id="full_name_field">
@@ -56,14 +56,11 @@ Faculty Member (Who are you?): <br />
 
 <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
 
-<br />Testing autocomplete field: 
+<br />
+<p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
 <%= text_field_with_auto_complete :course, :name %>
+</p>
 <br />
-
-<br />
-Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-<%= f.text_area :course_names, :col => 30, :rows => 5 %>
-<br>
 
 //tagging stuff!
 </div>

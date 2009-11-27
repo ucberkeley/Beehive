@@ -120,13 +120,13 @@ class User < ActiveRecord::Base
 		self.name = is_faculty ? faculty_name : student_name
 	end
 	
+
 	# Parses the textbox list of courses from "CS162,CS61A,EE123"
 	# etc. to an enumerable object courses
 	def handle_courses
 		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
 		course_array = []
-		course_array = course_names.split(',') if ! course_names.nil?
-		puts course_array
+		course_array = course_names.split(',').uniq if ! course_names.nil?
 		course_array.each do |item|
 			self.courses << Course.find_by_name(item.upcase.strip)
 		end

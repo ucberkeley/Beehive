@@ -30,7 +30,12 @@ class UsersController < ApplicationController
 
 	# Assign the faculty email parameter based on the faculty name chosen from the select dropdown.
 	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email
-    
+	params[:user][:course_names] = params[:course][:name]
+	
+	puts "\n\n\n\nLAWL\n\n\n\n\n"
+	puts params[:course][:name]
+	puts "\n\n\n"
+	puts "done"
 	
 	@user = User.new(params[:user])
 	
