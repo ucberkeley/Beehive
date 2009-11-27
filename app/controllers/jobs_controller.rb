@@ -20,8 +20,9 @@ class JobsController < ApplicationController
 	params[:search_terms] ||= {}
 	query = params[:search_terms][:query]
 	if(query && !query.empty?)
-		@jobs = Job.find_by_solr(query).results
+		@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
 	else
+		flash[:notice] = 'Your query was invalid and could not return any results.'
 	end #end params[:query]
 
 	respond_to do |format|
