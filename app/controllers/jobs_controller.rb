@@ -54,12 +54,6 @@ class JobsController < ApplicationController
       @faculty_names << faculty.name
     end
 	
-	@editing = false
-	
-    respond_to do |format|
-      format.html { render :action => :modify }
-      format.xml  { render :xml => @job }
-    end
   end
 
   # GET /jobs/1/edit
@@ -71,13 +65,7 @@ class JobsController < ApplicationController
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
     end
-	
-	@editing = true
-	
-	respond_to do |format|
-		format.html { render :action => :modify }
-		format.xml { render :xml => @job }
-	end
+
   end
 
   # POST /jobs
