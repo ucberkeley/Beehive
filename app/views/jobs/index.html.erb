@@ -18,6 +18,3 @@
 <br>
 
   <%= render :partial => "job", :collection => @jobs %>
-
-  
-  select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Select Person'})

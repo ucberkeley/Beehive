@@ -62,6 +62,8 @@ class JobsController < ApplicationController
       @faculty_names << faculty.name
     end
 	
+	@editing = false
+	
     respond_to do |format|
       format.html { render :action => :modify }
       format.xml  { render :xml => @job }
@@ -77,6 +79,8 @@ class JobsController < ApplicationController
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
     end
+	
+	@editing = true
 	
 	respond_to do |format|
 		format.html { render :action => :modify }
