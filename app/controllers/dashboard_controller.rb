@@ -3,6 +3,6 @@ class DashboardController < ApplicationController
   
   def index
 	@departments = Department.all
-	@recently_added_jobs = Job.find_recently_added(5)
+	@recently_added_jobs = Job.find(:all, :conditions => [ "active = ?", true], :order => "created_at DESC", :limit => 5 )
   end
 end
