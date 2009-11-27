@@ -134,16 +134,18 @@ class JobsController < ApplicationController
   end
   
   def activate
-    # /jobs/activate?id=xxx
-	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:id], false ])
-	if @job
-	  @job.active = true
-	  @job.save
-	  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
-	  format.html { redirect_to(@job) }
-	else
-	  flash[:notice] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
-	  format.html { redirect_to(jobs_url) }
+    # /jobs/activate/job_id?a=xxx
+	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:a], false ])
+	respond_to do |format|
+		if @job
+		  @job.active = true
+		  @job.save
+		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
+		  format.html { redirect_to(@job) }
+		else
+		  flash[:notice] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
+		  format.html { redirect_to(jobs_url) }
+		end
 	end
   end
 end
