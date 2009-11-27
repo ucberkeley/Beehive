@@ -1,5 +1,3 @@
-<div id="fade" class="LB-black-overlay" onclick="if (!is_modal) HideLightBox(); return false;"></div> 
-
 <div id="menu_bar">
 	  <%= link_to image_tag("../images/menu_bar_fade_01.png", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
 	  <%= link_to image_tag("../images/menu_bar_fade_02.png", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
@@ -9,7 +7,7 @@
 		<div id="department_speech_top"></div>
 		<div id="department_speech_bot">
 			<% form_for :job, :url => { :controller => "jobs", :action => "index" } do |f| %>
-				<%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+				<%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(Department.all, :id, :name),  { :onchange => "this.form.submit();"}) %>
 			<% end %>
 		</div>
 </div>

@@ -23,14 +23,6 @@ class JobsController < ApplicationController
 		@jobs = Job.find_by_solr(query).results
 	else
 	
-		if(d_id == "0")
-			@department = "All Departments"
-			@jobs = Job.all
-		else
-			@department = Department.find(d_id).name
-			@jobs = Job.all
-		end
-	
 	end #end params[:query]
 
 	respond_to do |format|
@@ -91,23 +83,19 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    #params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)
 	
 	params[:job][:user] = current_user
     @job = Job.new(params[:job])
-
-    @all_faculty = Faculty.find(:all)
-    @faculty_names = []
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-    end
 	
 	#params[:job][:user] = current_user
 	#params[:job][:activation_code] = rand(99999) + 100000 # Generates a random 7 digit number.
     #@job = JobInactive.new(params[:job])
 
+	@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
+	
     respond_to do |format|
       if @job.save
+		#@sponsorship.save
         flash[:notice] = 'Job was successfully created.'
 		
 		# Send an e-mail to the faculty member(s) involved.

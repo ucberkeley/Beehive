@@ -4,17 +4,33 @@
 <%= stylesheet_link_tag "job" %>
 <br>
 
-<div id="search_bar">
+<div id="browse_search_bar">
 	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
 		<%= f.text_field :query, {:value=>"keyword query"} %>
 		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]} %>
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
 		Paid? <%= f.check_box :paid %>
 		Credit? <%= f.check_box :credit %>
-		<%= f.submit "Search" %>
+		<%= f.submit "Filter Results" %>
 	<% end %>
 </div>
 
 <br>
 
+<div id="browse_results">
+  <div id="browse_header">
+	<div class="job_padding_wrapper">
+	<table id="browse_header_table">
+	<tr>
+		
+		<td class="job_table_left">Title/Description</td>
+		<td class="job_credit">Paid?</td>
+		<td class="job_credit">Credit?</td>
+		<td class="job_extra"></td>
+		</div>
+	</tr>
+	</table>
+	</div>
+  </div>
   <%= render :partial => "job", :collection => @jobs %>
+</div>

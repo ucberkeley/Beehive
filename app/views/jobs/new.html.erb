@@ -32,7 +32,7 @@
     <%= f.check_box :credit %>
   </p>
   <p>
-    <%= f.select :department_id, [["All Departments",0]] << Department.all.collect {|c| [c.name, c.id]} %>
+    <%= select_tag :department_id, [["All Departments",0]] << Department.all.collect {|c| [c.name, c.id]} %>
   </p>
   <p>
     <%= f.submit 'Create' %>

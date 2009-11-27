@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :desc %><br />
-    <%= f.text_area :desc %>
+    <%= f.text_area :desc, {:rows=>5}%>
   </p>
   <p>
     <%= f.label :category_id %><br />
@@ -35,7 +35,7 @@
     <%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %>
   </p>
   <p>
-    <% #f.select :sponsorship, :faculty_name, Faculty.all.collect {|c| [c.name, c.id]} %>
+    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name) %>
   </p>
   <p>
     <%= f.submit (@editing ? 'Update' : 'Create') %>
