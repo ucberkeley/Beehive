@@ -1,6 +1,11 @@
 <p>
-  <b>User:</b>
-  <%=h @job.user %>
+  <b>Submitted By:</b>
+  <%=h @job.user.name %>
+</p>
+
+<p>
+  <b>Sponsor:</b>
+  <% @job.faculties.each { |c| %> <%= c.name %> <% } %>
 </p>
 
 <p>
@@ -24,24 +29,20 @@
 </p>
 
 <p>
-  <b>Num positions:</b>
+  <b>Number of Positions:</b>
   <%=h @job.num_positions %>
 </p>
 
 <p>
   <b>Paid:</b>
-  <%=h @job.paid %>
+  <% if @job.paid %> Option Available <% else %> No <% end %>
 </p>
 
 <p>
   <b>Credit:</b>
-  <%=h @job.credit %>
+  <% if @job.credit %> Option Available <% else %> No <% end %>
 </p>
 
-<p>
-  <b>Sponsor:</b>
-  <%=h @job.faculties.name %>
-</p>
 <%= debug(@job) %>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
