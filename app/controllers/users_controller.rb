@@ -73,10 +73,12 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-
+	
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+	    puts "****************************"
+		puts params[:user][:name].to_s
         flash[:notice] = 'user was successfully updated.'
         format.html { redirect_to :controller => :dashboard }
         format.xml  { head :ok }
