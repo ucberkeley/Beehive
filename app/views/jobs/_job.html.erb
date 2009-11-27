@@ -3,8 +3,8 @@
 		<table class="job_table">
 			<tr>
 				<td class="job_table_left">
-					<div class="job_title"><%= job.title %></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>)</div>
-					<div class="job_desc"><%= job.desc %></div>
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>)</div>
+					<div class="job_desc"><%= truncate(job.desc, 100, "...") %></div>
 				</td>
 				<td class="job_credit">
 					<div class="job_attr"><%= job.paid ? "Option for Pay" : "No Pay" %></span>
