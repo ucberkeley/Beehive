@@ -118,7 +118,9 @@ class User < ActiveRecord::Base
 	# is marked as faculty or not. This should occur as a before_validation
 	# since we want to save a value for :name, not :faculty_name or :student_name.
 	def handle_name
-		self.name = is_faculty ? faculty_name : student_name
+		if self.name.nil? || self.name == ""
+			self.name = is_faculty ? faculty_name : student_name
+		end
 	end
 	
 
