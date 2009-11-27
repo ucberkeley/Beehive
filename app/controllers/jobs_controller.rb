@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show, :list ]
   
   def index
-    @jobs = Job.all
+    @jobs = Job.find(:all, :conditions => [ "active = ?", true ])
 	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,6 @@ class JobsController < ApplicationController
 	if(query && !query.empty?)
 		@jobs = Job.find_by_solr(query).results
 	else
-	
 	end #end params[:query]
 
 	respond_to do |format|
@@ -73,21 +72,21 @@ class JobsController < ApplicationController
   def create
 	
 	params[:job][:user] = current_user
-    @job = Job.new(params[:job])
-	
-	#params[:job][:user] = current_user
-	#params[:job][:activation_code] = rand(99999) + 100000 # Generates a random 7 digit number.
-    #@job = JobInactive.new(params[:job])
-
+	params[:job][:activation_code] = (rand(99999) + 100000)*100000000000 + Time.now.to_i # Generates a random 7 digit number and appends the result the current UNIX time to that number.
+	params[:job][:active] = false
+	sponsorships = []
+	@job = Job.new(params[:job])
 	@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
+	@job.sponsorships = sponsorships << @sponsorship
 	
     respond_to do |format|
       if @job.save
 		#@sponsorship.save
-        flash[:notice] = 'Job was successfully created.'
+        flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
 		
 		# Send an e-mail to the faculty member(s) involved.
-		# Not implemented yet.
+		
+		#FacultyMailer.deliver_faculty_confirmer(found_faculty.email, found_faculty.name, params[:job][:title], params[:job][:desc], params[:job][:activation_code])
 		
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -132,5 +131,19 @@ class JobsController < ApplicationController
       format.html { redirect_to(jobs_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def activate
+    # /jobs/activate?id=xxx
+	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:id], false ])
+	if @job
+	  @job.active = true
+	  @job.save
+	  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
+	  format.html { redirect_to(@job) }
+	else
+	  flash[:notice] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
+	  format.html { redirect_to(jobs_url) }
+	end
   end
 end

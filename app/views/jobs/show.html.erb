@@ -38,6 +38,11 @@
   <%=h @job.credit %>
 </p>
 
+<p>
+  <b>Sponsor:</b>
+  <%=h @job.faculties.name %>
+</p>
+
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
