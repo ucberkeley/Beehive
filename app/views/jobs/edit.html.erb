@@ -37,7 +37,7 @@
     <%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %>
   </p>
   <p>
-    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name) %>
+    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id) %>
   </p>
   <p>
     <%= f.submit ('Update') %>

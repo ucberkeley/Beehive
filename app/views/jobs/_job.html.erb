@@ -7,10 +7,10 @@
 					<div class="job_desc"><%= truncate(job.desc, 100, "...") %></div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.paid ? "Option for Pay" : "No Pay" %></span>
+					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></span>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.credit ? "Option for Credit" : "No Credit" %></span>
+					<div class="job_attr"><%= job.credit ? "<b>Credit</b>" : "No Credit" %></span>
 				</td>
 				<td class="job_extra"></td>
 			</tr>
