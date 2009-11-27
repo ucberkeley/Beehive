@@ -1,7 +1,18 @@
+<%
+@browse = false
+@newjob = false
+@readreviews = false
+if controller.controller_name == 'jobs'
+	@browse = true if controller.action_name == 'index'
+	@newjob = true if controller.action_name == 'new'
+elsif controller.controller_name == 'reviews'
+	@readreviews = true if controller.action_name == 'index'
+end
+%>
 <div id="menu_bar">
-	  <%= link_to image_tag("../images/menu_bar_fade_01.png", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
-	  <%= link_to image_tag("../images/menu_bar_fade_02.png", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
-	  <%= link_to image_tag("../images/menu_bar_fade_03.png", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
+	  <%= link_to image_tag("../images/menu_bar" + (@browse ? "" : "_fade") + "_01.png", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
+	  <%= link_to image_tag("../images/menu_bar" + (@newjob ? "" : "_fade") + "_02.png", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
+	  <%= link_to image_tag("../images/menu_bar" + (@readreviews ? "" : "_fade") + "_03.png", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
   </div>
   <div id="department_speech">
 		<div id="department_speech_top"></div>
@@ -12,9 +23,11 @@
 		</div>
 </div>
 
-<script type="text/JavaScript">
-<!--
-menu_bar_init();
-//-->
-</script>
+<%= 
+
+"<script type='text/JavaScript'><!--menu_bar_one();//--></script>" unless @browse
+"<script type='text/JavaScript'><!--menu_bar_two();//--></script>" unless @newjob
+"<script type='text/JavaScript'><!--menu_bar_three();//--></script>" unless @readreviews
+
+%>
 	  

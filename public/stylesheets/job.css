@@ -1,19 +1,55 @@
-.job
-{
-}
-
-.job_image_col
-{
-	width: 0;
-}
-
-.job_title
-{
+.job_title{
 	font-weight: bold;
-	text-transform: uppercase;
 }
 
-.job_desc
-{
-	vertical-align: text-top;
+.job_table {
+	border: 0px;
+	width: 100%;
+}
+
+.job_table_left {
+	width: 40%;
+}
+.job_odd {
+	background: #F0FFD2;
+	width: 100%;
+
+}
+
+.job_even {
+	background: white;	
+	width: 100%;
+
+}
+
+.job_padding_wrapper{
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.job_credit {
+	text-align: center;
+	width: 10%;
+}
+
+#browse_results{
+	border-right: 1px solid #C1C1C1;
+	border-left: 1px solid #C1C1C1;
+	width: 100%;
+}
+
+#browse_search_bar{
+	text-align: center;
+}
+
+#browse_header{
+	font-weight: bold;
+	background: #798493;
+	width: 100%;
+	height: 40px;
+}
+
+#browse_header_table{
+	height: 40px;
+	width: 100%;
 }
