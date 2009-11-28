@@ -19,7 +19,7 @@
   </p>
   <p>
     <%= f.label :exp_date %><br />
-    <%= f.datetime_select :exp_date %>
+    <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.
   </p>
   <p>
     <%= f.label :num_positions %><br />
@@ -34,14 +34,16 @@
     <%= f.check_box :credit %>
   </p>
   <p>
+    <%= f.label :department %>
     <%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %>
   </p>
   <p>
+    <%= f.label :faculty_sponsor %>
     <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id) %>
   </p>
   <p>
     <%= f.submit ('Update') %>
   </p>
 <% end %>
-
+<br />
 <%= link_to 'Back', jobs_path %>

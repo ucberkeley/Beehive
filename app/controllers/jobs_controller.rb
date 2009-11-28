@@ -176,6 +176,7 @@ class JobsController < ApplicationController
   def activate
     # /jobs/activate/job_id?a=xxx
 	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:a], false ])
+	
 	respond_to do |format|
 		if @job
 		  @job.active = true

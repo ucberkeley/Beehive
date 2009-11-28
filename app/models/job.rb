@@ -16,6 +16,16 @@ class Job < ActiveRecord::Base
   
   validates_presence_of :title, :desc, :exp_date, :num_positions, :department
   
+  # Validates that expiration dates are no earlier than right now.
+  validates_each :exp_date do |record, attr, value|
+	record.errors.add attr, 'Expiration date cannot be earlier than right now.' if value < Time.now
+  end
+  
+  validates_length_of :title, :within => 10..200
+  validates_numericality_of :num_positions
+  
+  
+  
   attr_accessor :category_names
   
   def self.find_recently_added(n)

@@ -23,6 +23,12 @@ pre {
   font-size: 11px;
 }
 
+strong {
+  background-color: #eee;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /**Layout**/
 
 #everything{
