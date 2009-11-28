@@ -18,15 +18,19 @@ class Job < ActiveRecord::Base
   
   # Validates that expiration dates are no earlier than right now.
   validates_each :exp_date do |record, attr, value|
-	record.errors.add attr, 'Expiration date cannot be earlier than right now.' if value < Time.now
+	record.errors.add attr, 'Expiration date cannot be earlier than right now.' if value < Time.now - 1.hour
   end
   
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions
   
   
-  
   attr_accessor :category_names
+  
+  # If true, handle_categories doesn't do anything. The purpose of this is so that in activating a job, 
+  # categories data isn't lost.
+  @skip_handle_categories = false
+  attr_accessor :skip_handle_categories
   
   def self.find_recently_added(n)
 	Job.find(:all, :order => "created_at DESC", :limit=>n)
@@ -47,11 +51,13 @@ class Job < ActiveRecord::Base
   	# Parses the textbox list of category names from "Signal Processing, Robotics"
 	# etc. to an enumerable object categories
 	def handle_categories
-		self.categories = []  # eliminates any previous categories_jobs so as to avoid duplicates
-		category_array = []
-		category_array = category_names.split(',').uniq if ! category_names.nil?
-		category_array.each do |item|
-			self.categories << Category.find_or_create_by_name(item.downcase.strip)
+		unless skip_handle_categories
+			self.categories = []  # eliminates any previous categories_jobs so as to avoid duplicates
+			category_array = []
+			category_array = category_names.split(',').uniq if ! category_names.nil?
+			category_array.each do |item|
+				self.categories << Category.find_or_create_by_name(item.downcase.strip)
+			end
 		end
 	end
   

@@ -137,7 +137,7 @@ class JobsController < ApplicationController
 
   # PUT /jobs/1
   # PUT /jobs/1.xml
-  def update
+  def update	
 	#params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
     @job = Job.find(params[:id])
 
@@ -174,8 +174,12 @@ class JobsController < ApplicationController
   end
   
   def activate
+	
+  
     # /jobs/activate/job_id?a=xxx
 	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:a], false ])
+	
+	@job.skip_handle_categories = true
 	
 	respond_to do |format|
 		if @job
@@ -189,5 +193,7 @@ class JobsController < ApplicationController
 		  format.html { redirect_to(jobs_url) }
 		end
 	end
+	
+	@job.skip_handle_categories = false
   end
 end
