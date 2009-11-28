@@ -107,14 +107,14 @@ class JobsController < ApplicationController
 	sponsorships = []
 	params[:job][:activation_code] = 100
 	@job = Job.new(params[:job])
-	@job.save
-	@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
-	@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
-	@job.sponsorships = sponsorships << @sponsorship
 	
     respond_to do |format|
       if @job.save
 		#@sponsorship.save
+		@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
+		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
+		@job.sponsorships = sponsorships << @sponsorship
+		@job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
 		
 		# Send an e-mail to the faculty member(s) involved.
