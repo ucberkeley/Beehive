@@ -39,7 +39,7 @@
   </p>
   <p>
     <%= f.label :faculty_sponsor %>
-    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id) %>
+    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id), :value => @job.faculties.first.id %>
   </p>
   <p>
     <%= f.submit ('Update') %>

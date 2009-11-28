@@ -39,7 +39,7 @@
   </p>
   <p>
     <%= f.label :faculty_sponsor %>
-    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name) %>
+    <%= select_tag :faculty_name, options_from_collection_for_select([Faculty.new(:name => "--------", :id => "0")].concat(Faculty.all), :id, :name) %>
   </p>
   <p>
     <%= f.submit ('Create') %>

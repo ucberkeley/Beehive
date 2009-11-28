@@ -23,6 +23,7 @@ class Job < ActiveRecord::Base
   
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions
+  validate :validate_sponsorships
   
   
   attr_accessor :category_names
@@ -60,5 +61,9 @@ class Job < ActiveRecord::Base
 			end
 		end
 	end
-  
+	
+	def validate_sponsorships
+	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
+	end
+	
 end

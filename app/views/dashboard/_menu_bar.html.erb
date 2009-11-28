@@ -10,9 +10,9 @@ elsif controller.controller_name == 'reviews'
 end
 %>
 <div id="menu_bar">
-	  <%= link_to image_tag("../images/menu_bar" + (@browse ? "" : "_fade") + "_01.png", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
-	  <%= link_to image_tag("../images/menu_bar" + (@newjob ? "" : "_fade") + "_02.png", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
-	  <%= link_to image_tag("../images/menu_bar" + (@readreviews ? "" : "_fade") + "_03.png", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
+	  <%= link_to image_tag("../images/menu_bar" + (@browse ? "" : "_fade") + "_01.png", :alt => "Browse Listings", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
+	  <%= link_to image_tag("../images/menu_bar" + (@newjob ? "" : "_fade") + "_02.png", :alt => "Post a Job", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
+	  <%= link_to image_tag("../images/menu_bar" + (@readreviews ? "" : "_fade") + "_03.png", :alt => "Read Reviews", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
   </div>
   <div id="department_speech">
 		<div id="department_speech_top"></div>
