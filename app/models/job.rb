@@ -9,7 +9,7 @@ class Job < ActiveRecord::Base
   
   acts_as_solr :fields => [:title, :desc]
   
-  validates_presence_of :title, :desc, :exp_date
+  validates_presence_of :title, :desc, :exp_date, :num_positions, :department
   
   def self.find_recently_added(n)
 	Job.find(:all, :order => "created_at DESC", :limit=>n)

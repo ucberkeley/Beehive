@@ -134,7 +134,8 @@ width: 100%;
 }
 
 #flash_notice{
-	color: #91d57c;
+	/* color: #91d57c; */
+	color: #339900;
 	background: #f9ffea;
 	border: 1px solid #F0FFD2;
 	padding:10px;
@@ -239,11 +240,16 @@ width: 100%;
 }
 
 
+/**Userbar**/
+#loginbar a {
+	color: #abe68b;
+}
 
 /**Links**/
 
 a { 
-	color: #abe68b; 
+	/* color: #abe68b; */
+	color: #339900;
 	text-decoration: none;
 }
 a:hover {

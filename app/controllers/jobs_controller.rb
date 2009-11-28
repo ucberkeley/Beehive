@@ -2,6 +2,9 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name]
+  auto_complete_for :category, :name
+  
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
   
@@ -103,7 +106,9 @@ class JobsController < ApplicationController
   # POST /jobs.xml
   def create
 	params[:job][:user] = current_user
+	params[:job][:category_id] = Category.find_or_create_by_name(params[:category][:name].id)
 	params[:job][:active] = false
+	
 	sponsorships = []
 	params[:job][:activation_code] = 100
 	@job = Job.new(params[:job])

@@ -14,8 +14,8 @@
     <%= f.text_area :desc, {:rows=>5}%>
   </p>
   <p>
-    <%= f.label :category_id %><br />
-    <%= f.text_field :category_id %>
+    <%= f.label :category_name %><br />
+    <%= text_field_with_auto_complete :category, :name %>
   </p>
   <p>
     <%= f.label :exp_date %><br />
