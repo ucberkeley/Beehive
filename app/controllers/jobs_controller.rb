@@ -6,7 +6,10 @@ class JobsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show, :list ]
   
   def index
-    @jobs = Job.find(:all, :conditions => [ "active = ?", true ])
+    @search_query = "keyword (leave blank to view all)"
+    # Commenting out active condition for testing purposes (because activation hasn't been implemented)
+    #@jobs = Job.find(:all, :conditions => [ "active = ?", true ])
+	@jobs = Job.find(:all, :order=> "created_at DESC")
 	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
@@ -15,16 +18,35 @@ class JobsController < ApplicationController
   end
   
   def list
+	@search_query = "keyword (leave blank to view all)"
 	d_id = params[:department_select]
 	
 	params[:search_terms] ||= {}
 	query = params[:search_terms][:query]
-	if(query && !query.empty?)
-		@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
-	else
-		flash[:notice] = 'Your query was invalid and could not return any results.'
-	end #end params[:query]
+	department = params[:search_terms][:department_select].to_i
+	faculty = params[:search_terms][:faculty_select].to_i
+	paid = params[:search_terms][:paid].to_i
+	credit = params[:search_terms][:credit].to_i
 
+	query = "" if (query == @search_query)
+	
+	if(query && !query.empty?)
+		#Commenting out active condition for testing purposes (because activation hasn't been implemented)
+		#@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
+		puts "found something"
+		@jobs = Job.find_by_solr(query).results
+		
+	else
+		#flash[:notice] = 'Your query was invalid and could not return any results.'
+		@jobs = Job.find(:all, :order=>"created_at DESC")
+	end #end params[:query]
+	
+
+	@jobs = @jobs.select {|j| j.department_id.to_i == department } if department != 0
+	@jobs = @jobs.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
+	@jobs = @jobs.select {|j| j.paid } if paid != 0
+	@jobs = @jobs.select {|j| j.credit } if credit != 0
+	
 	respond_to do |format|
 		format.html { render :action => :index }
 		format.xml { render :xml => @jobs }

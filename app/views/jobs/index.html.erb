@@ -6,7 +6,7 @@
 
 <div id="browse_search_bar">
 	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
-		<%= f.text_field :query, {:value=>""} %>
+		<%= f.text_field :query, {:value=>@search_query} %>
 		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]} %>
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
 		Paid? <%= f.check_box :paid %>
