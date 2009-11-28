@@ -1,0 +1,5 @@
+= acts_as_taggable_on_steroids
+
+This plugin has been moved to github:
+
+  ruby script/plugin install http://github.com/jviney/acts_as_taggable_on_steroids
