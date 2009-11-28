@@ -7,6 +7,17 @@ class JobsController < ApplicationController
   
   def index
     @search_query = "keyword (leave blank to view all)"
+	#@search_query = params[:search_terms][:query]
+	#@department = params[:search_terms][:department]
+	#@faculty = params[:search_terms][:faculty]
+	#@paid = params[:search_terms][:paid]
+	#@credit = params[:search_terms][:credit]
+	
+	#@department ||= 0
+	#@faculty ||= 0
+	#@paid ||= 0
+	#@credit ||= 0
+	
     # Commenting out active condition for testing purposes (because activation hasn't been implemented)
     #@jobs = Job.find(:all, :conditions => [ "active = ?", true ])
 	@jobs = Job.find(:all, :order=> "created_at DESC")
@@ -28,9 +39,7 @@ class JobsController < ApplicationController
 	paid = params[:search_terms][:paid].to_i
 	credit = params[:search_terms][:credit].to_i
 
-	query = "" if (query == @search_query)
-	
-	if(query && !query.empty?)
+	if(query && !query.empty? && (query != @search_query))
 		#Commenting out active condition for testing purposes (because activation hasn't been implemented)
 		#@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
 		puts "found something"
@@ -48,7 +57,7 @@ class JobsController < ApplicationController
 	@jobs = @jobs.select {|j| j.credit } if credit != 0
 	
 	respond_to do |format|
-		format.html { render :action => :index }
+		format.html { render :action => :index, :query => query, :department => department, :faculty => faculty, :paid => paid, :credit => credit }
 		format.xml { render :xml => @jobs }
 	end
 		

@@ -6,10 +6,10 @@
 
 <div id="browse_search_bar">
 	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
-		<%= f.text_field :query, {:value=>@search_query} %>
-		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]} %>
+		<%= f.text_field :query, {:onfocus=>"textChange('search_terms_query', '" + @search_query + "');", :onblur=>"textChange('search_terms_query', '" + @search_query + "');", :value => @search_query} %>
+		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]}, {:selected => @department} %>
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
-		Paid? <%= f.check_box :paid %>
+		Paid? <%= f.check_box :paid, {:value => @department}%>
 		Credit? <%= f.check_box :credit %>
 		<%= f.submit "Filter Results" %>
 	<% end %>

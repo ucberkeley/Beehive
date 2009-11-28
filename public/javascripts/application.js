@@ -1,3 +1,17 @@
+function textChange(elementID, defaultText)
+{
+   var element = $(elementID)
+
+   if(element.value == defaultText)
+   {
+      element.value = "";
+   }
+   else if(element.value == "")
+   {
+      element.value = defaultText;
+   }
+}
+
 function menu_bar_one(){
 	//Menu Bar Button Hover
 	$("menu_bar_01").src = "../images/menu_bar_fade_01.png";
