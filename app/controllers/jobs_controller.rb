@@ -102,12 +102,13 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-	
 	params[:job][:user] = current_user
 	params[:job][:active] = false
 	sponsorships = []
+	params[:job][:activation_code] = 100
 	@job = Job.new(params[:job])
-	@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 7 digit number.
+	@job.save
+	@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
 	@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
 	@job.sponsorships = sponsorships << @sponsorship
 	
