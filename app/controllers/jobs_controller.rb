@@ -21,9 +21,7 @@ class JobsController < ApplicationController
 	#@paid ||= 0
 	#@credit ||= 0
 	
-    # Commenting out active condition for testing purposes (because activation hasn't been implemented)
-    #@jobs = Job.find(:all, :conditions => [ "active = ?", true ])
-	@jobs = Job.find(:all, :order=> "created_at DESC")
+    @jobs = Job.find(:all, :conditions => [ "active = ?", true ], :order => "created_at DESC")
 	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
@@ -43,10 +41,8 @@ class JobsController < ApplicationController
 	credit = params[:search_terms][:credit].to_i
 
 	if(query && !query.empty? && (query != @search_query))
-		#Commenting out active condition for testing purposes (because activation hasn't been implemented)
-		#@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
+		@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
 		puts "found something"
-		@jobs = Job.find_by_solr(query).results
 		
 	else
 		#flash[:notice] = 'Your query was invalid and could not return any results.'
@@ -178,6 +174,7 @@ class JobsController < ApplicationController
 		if @job
 		  @job.active = true
 		  @job.save
+		  
 		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
 		  format.html { redirect_to(@job) }
 		else

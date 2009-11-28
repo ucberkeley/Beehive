@@ -43,6 +43,10 @@
   <% if @job.credit %> Option Available <% else %> No <% end %>
 </p>
 
+<br /><br />=== Debug ===<br /><br />
+
+<a href="<%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %>"><%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %></a>
+
 <%= debug(@job) %>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
