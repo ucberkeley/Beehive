@@ -134,14 +134,14 @@ width: 100%;
 }
 
 #flash_notice{
-	color: green;
-	border: 1px solid green;
-	padding:15px;
+	color: #91d57c;
+	background: #f9ffea;
+	border: 1px solid #F0FFD2;
+	padding:10px;
 	margin: auto;
 	margin-bottom: 20px;
-	font-weight: bold;
 	text-align: center;
-	width: 750px;
+	width: 500px;
 }
 
 /**HOME**/
