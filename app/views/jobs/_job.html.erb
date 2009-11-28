@@ -4,7 +4,17 @@
 			<tr>
 				<td class="job_table_left">
 					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>)</div>
-					<div class="job_desc"><strong><%=h job.category_list_of_job %> </strong><%= truncate(job.desc, 100, "...") %></div>
+					<% job_categories = job.categories %>
+					<% if !job_categories.empty? %>
+						<div class="job_category">
+						<strong>Tags: 
+							<% for c in job_categories %>
+								<%=h c.name %>
+							<% end %>
+						</strong></div>
+					<% end %>
+					
+					<div class="job_desc"><%= truncate(job.desc, 100, "...") %> <%= link_to "(read more)", job %></div>
 				</td>
 				<td class="job_credit">
 					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></span>
@@ -12,6 +22,10 @@
 				<td class="job_credit">
 					<div class="job_attr"><%= job.credit ? "<b>Credit</b>" : "No Credit" %></span>
 				</td>
+				<td class="job_credit">
+					<div class="job_attr"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span>
+				</td>
+
 				<td class="job_extra"></td>
 			</tr>
 		</table>

@@ -23,12 +23,6 @@ pre {
   font-size: 11px;
 }
 
-strong {
-  background-color: #eee;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 /**Layout**/
 
 #everything{
@@ -246,16 +240,14 @@ width: 100%;
 }
 
 
-/**Userbar**/
-#loginbar a {
+/**Links**/
+#header a {
 	color: #abe68b;
 }
 
-/**Links**/
-
 a { 
+	color: #53ae26; 
 	/* color: #abe68b; */
-	color: #339900;
 	text-decoration: none;
 }
 a:hover {

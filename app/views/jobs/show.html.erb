@@ -1,30 +1,26 @@
+<h2> <%=h @job.title %> </h2>
 <p>
   <b>Submitted By:</b>
   <%=h @job.user.name %>
 </p>
 
 <p>
-  <b>Sponsor:</b>
+  <b>Faculty Sponsor:</b>
   <% @job.faculties.each { |c| %> <%= c.name %> <% } %>
 </p>
 
 <p>
-  <b>Title:</b>
-  <%=h @job.title %>
-</p>
-
-<p>
-  <b>Desc:</b>
+  <b>Description:</b>
   <%=h @job.desc %>
 </p>
 
 <p>
-  <b>Category(ies):</b>
+  <b>Tag(s):</b>
   <%=h @job.category_list_of_job %>
 </p>
 
 <p>
-  <b>Exp date:</b>
+  <b>Position Expiration Date:</b>
   <%=h @job.exp_date %>
 </p>
 
@@ -47,7 +43,7 @@
 
 <a href="<%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %>"><%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %></a>
 
-<%= debug(@job) %>
+<% #debug(@job) %>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>

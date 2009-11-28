@@ -22,8 +22,8 @@
     <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.
   </p>
   <p>
-    <%= f.label :num_positions %><br />
-    <%= f.text_field :num_positions %>
+    <%= f.label :num_positions %> (0 for no limit)<br />
+    <%= f.text_field :num_positions, {:value=> 0} %>
   </p>
   <p>
     <%= f.label :paid %><br />

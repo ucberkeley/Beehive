@@ -1,3 +1,8 @@
+strong {
+  background-color: #eee;
+  font-weight: none;
+}
+
 .job_title{
 	font-weight: bold;
 }

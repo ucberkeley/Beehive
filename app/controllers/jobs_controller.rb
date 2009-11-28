@@ -41,12 +41,11 @@ class JobsController < ApplicationController
 	credit = params[:search_terms][:credit].to_i
 
 	if(query && !query.empty? && (query != @search_query))
-		@jobs = Job.find_by_solr(query).results.select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
-		puts "found something"
+		@jobs = Job.find_by_solr(query).results.select { |c| c.active == true }.sort {|a,b| a.created_at <=> b.created_at} # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
 		
 	else
 		#flash[:notice] = 'Your query was invalid and could not return any results.'
-		@jobs = Job.find(:all, :order=>"created_at DESC")
+		@jobs = Job.find(:all, :order=>"created_at DESC", :conditions=> {:active => true})
 	end #end params[:query]
 	
 
@@ -56,7 +55,7 @@ class JobsController < ApplicationController
 	@jobs = @jobs.select {|j| j.credit } if credit != 0
 	
 	respond_to do |format|
-		format.html { render :action => :index, :query => query, :department => department, :faculty => faculty, :paid => paid, :credit => credit }
+		format.html { render :action => :index }
 		format.xml { render :xml => @jobs }
 	end
 		
@@ -177,18 +176,21 @@ class JobsController < ApplicationController
   end
   
   def activate
-	
-  
     # /jobs/activate/job_id?a=xxx
 	@job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:a], false ])
 	
-	@job.skip_handle_categories = true
+	
+	if @job != nil
+		@job.skip_handle_categories = true
+		@job.active = true
+		saved = @job.save
+	else
+		saved = false
+	end
 	
 	respond_to do |format|
-		if @job
-		  @job.active = true
-		  @job.save
-
+		if saved
+		  @job.skip_handle_categories = false
 		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
 		  format.html { redirect_to(@job) }
 		else
@@ -197,6 +199,5 @@ class JobsController < ApplicationController
 		end
 	end
 	
-	@job.skip_handle_categories = false
   end
 end
