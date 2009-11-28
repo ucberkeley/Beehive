@@ -22,6 +22,15 @@ class Job < ActiveRecord::Base
 	Job.find(:all, :order => "created_at DESC", :limit=>n)
   end
   
+  # Returns a string containing the category names taken by job @job
+  # e.g. "robotics,signal processing"
+  def category_list_of_job
+  	category_list = ''
+  	categories.each do |item|
+  		category_list << item.name + ','
+  	end
+  	category_list[0..(category_list.length - 2)].downcase
+  end
   
   protected
   

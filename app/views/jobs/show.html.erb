@@ -20,9 +20,7 @@
 
 <p>
   <b>Category(ies):</b>
-  <% @job.categories.each do |item| %>
-	<%=h item.name + ", " %>
-  <% end %>
+  <%=h @job.category_list_of_job %>
 </p>
 
 <p>
