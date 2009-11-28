@@ -102,7 +102,9 @@ class JobsController < ApplicationController
   # POST /jobs.xml
   def create
 	params[:job][:user] = current_user
-	params[:job][:category_id] = Category.find_or_create_by_name(params[:category][:name].id)
+	#params[:job][:category_id] = Category.find_or_create_by_name(params[:category][:name].id)
+	params[:job][:category_names] = params[:category][:name]
+		# = Category.find_or_create_by_name(params[:category][:name])
 	params[:job][:active] = false
 	
 	sponsorships = []
@@ -117,6 +119,9 @@ class JobsController < ApplicationController
 		@job.sponsorships = sponsorships << @sponsorship
 		@job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+        flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
+		flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
+		flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
 		
 		# Send an e-mail to the faculty member(s) involved.
 		
@@ -137,6 +142,8 @@ class JobsController < ApplicationController
 	#params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
     @job = Job.find(params[:id])
 
+	params[:job][:category_names] = params[:category][:name]
+	
     @all_faculty = Faculty.find(:all)
     @faculty_names = []
     @all_faculty.each do |faculty|
@@ -174,7 +181,7 @@ class JobsController < ApplicationController
 		if @job
 		  @job.active = true
 		  @job.save
-		  
+
 		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
 		  format.html { redirect_to(@job) }
 		else
