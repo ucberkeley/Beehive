@@ -104,10 +104,10 @@ class JobsController < ApplicationController
   def create
 	
 	params[:job][:user] = current_user
-	params[:job][:activation_code] = (rand(99999) + 100000)*100000000000 + Time.now.to_i # Generates a random 7 digit number and appends the result the current UNIX time to that number.
 	params[:job][:active] = false
 	sponsorships = []
 	@job = Job.new(params[:job])
+	@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 7 digit number.
 	@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => @job)
 	@job.sponsorships = sponsorships << @sponsorship
 	
