@@ -8,11 +8,14 @@
 					<% if !job_categories.empty? %>
 						<div class="job_category">
 						Tags:
-						<strong>
-							<% job.tag_list.each do |tag| %>
-								<span class="tag"><%=h tag %></span>
+							<% if job.tag_list.empty? %>
+								(none)
+							<% else %>
+								<% job.tag_list.each do |tag| %>
+									<span class="tag"><%=h tag %></span>
+								<% end %>
 							<% end %>
-						</strong></div>
+						</div>
 					<% end %>
 					
 					<div class="job_desc"><%= truncate(job.desc, 100, "...") %> <%= link_to "(read more)", job %></div>

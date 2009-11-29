@@ -1,6 +1,8 @@
-strong {
-  background-color: #eee;
-  font-weight: none;
+span.tag {
+	background-color: #eeeeee;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 0px;
 }
 
 .job_title{
