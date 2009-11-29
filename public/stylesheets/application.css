@@ -276,6 +276,48 @@ width: 100%;
 	background: url("../images/trans_down_small.png") repeat-x top left;
 }
 
+/*jobs*/
+
+span.tag {
+	background-color: #eaeaea;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-right: 0px;
+}
+
+.job_title{
+	font-weight: bold;
+}
+
+.job_table {
+	border: 0px;
+	width: 100%;
+}
+
+.job_table_left {
+	width: 50%;
+}
+.job_odd, .job_even {
+	width: 100%;
+	border-bottom: 1px solid #abe68b;
+}
+
+.job_padding_wrapper{
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.job_credit {
+	text-align: center;
+	width: 10%;
+}
+
+#browse_header_table{
+	height: 40px;
+	width: 100%;
+	font-weight: bold;
+}
+
 
 /**Links**/
 #header a {

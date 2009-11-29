@@ -1,31 +1,17 @@
-span.tag {
-	background-color: #eaeaea;
-	font-weight: bold;
-	margin-left: 10px;
-	margin-right: 0px;
-}
-
-.job_title{
-	font-weight: bold;
-}
-
-.job_table {
-	border: 0px;
-	width: 100%;
-}
-
 .job_table_left {
 	width: 40%;
 }
 .job_odd {
 	background: #F0FFD2;
 	width: 100%;
+	border-bottom: none;
 
 }
 
 .job_even {
 	background: white;	
 	width: 100%;
+	border-bottom: none;
 
 }
 

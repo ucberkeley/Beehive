@@ -12,7 +12,7 @@
 	<div id="dashboard_wrapper_smartmatch">
 		<div id="dashboard_container_smartmatch">
 			<h2>SmartMatch Results</h2>
-			//smartmatch algorithm spits out jobs
+			Hey <%= @user.name %>, we've matched your interests and skill set to these projects for you.
 		</div>
 		<div id="dashboard_shadow_smartmatch"></div>
 	</div>
@@ -21,9 +21,18 @@
 	<div id="dashboard_wrapper_long">
 		<div id="dashboard_container_long">
 			<h2>Recently Added Projects</h2>
-			<% for job in @recently_added_jobs %>
-				<div id="job_listing"><%= link_to job.title, job %></div>
-			<% end %>
+			<table id="browse_header_table">
+				<tr>
+					
+					<td class="job_table_left">Title/Description</td>
+					<td class="job_credit">Paid?</td>
+					<td class="job_credit">Credit?</td>
+					<td class="job_credit"># Positions</td>
+					<td class="job_extra"></td>
+					</div>
+				</tr>
+			</table>
+			<%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 		</div>
 		<div id="dashboard_shadow_long"></div>
 	</div>

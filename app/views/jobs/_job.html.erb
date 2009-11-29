@@ -5,17 +5,17 @@
 				<td class="job_table_left">
 					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
 					<% if logged_in? && job.user_id == current_user.id %>
-						<%= link_to "[edit]", :action => :edit, :id => job.id %>
+						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
 					<% end %>
 					</div>
-					<% job_categories = job.categories %>
-					<% if !job_categories.empty? %>
+					<% job_tags = job.tag_list %>
+					<% if !job_tags.empty? %>
 						<div class="job_category">
 						Tags:
-							<% if job.tag_list.empty? %>
+							<% if job_tags.empty? %>
 								(none)
 							<% else %>
-								<% job.tag_list.each do |tag| %>
+								<% job_tags.each do |tag| %>
 									<span class="tag"><%=h tag %></span>
 								<% end %>
 							<% end %>
@@ -25,7 +25,7 @@
 					<div class="job_desc">
 					<span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 100, "...") %></span> 
 					<% if job.desc.length > 100 %>
-						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:action=>:job_read_more, :id=>job.id} %> <%= link_to_remote "[read less]", :update=>"job_desc_#{job.id}", :url => {:action=>:job_read_less, :id=>job.id} %>
+						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> <%= link_to_remote "[read less]", :update=>"job_desc_#{job.id}", :url => {:controller=>:jobs, :action=>:job_read_less, :id=>job.id} %>
 					<% end %>
 					
 					
