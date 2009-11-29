@@ -5,6 +5,7 @@
 
 <div id="browse_search_bar">
 	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
+	<%= image_tag("search_icon.png") %>
 		<%= f.text_field :query, {:onfocus=>"textChange('search_terms_query', '" + @search_query + "');", :onblur=>"textChange('search_terms_query', '" + @search_query + "');", :value => @search_query} %>
 		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]}, {:selected => @department} %>
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
