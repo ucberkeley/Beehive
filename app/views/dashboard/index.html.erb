@@ -4,20 +4,29 @@ Welcome, <%= current_user.name %>!
 <br>
 <br><br>
 <div id="dashboard_container">
-	<div id="dashboard_container_watched">
-		<h2>Your Watched Projects</h2>
-		//list of projects you're watching
+	<div id="dashboard_wrapper_watched">
+		<div id="dashboard_container_watched">
+			<h2>Your Watched Projects</h2>
+			//list of projects you're watching
+		</div>
+		<div id="dashboard_shadow_watched"></div>
 	</div>
-	<div id="dashboard_container_smartmatch">
-		<h2>SmartMatch Results</h2>
-		//smartmatch algorithm spits out jobs
+	<div id="dashboard_wrapper_smartmatch">
+		<div id="dashboard_container_smartmatch">
+			<h2>SmartMatch Results</h2>
+			//smartmatch algorithm spits out jobs
+		</div>
+		<div id="dashboard_shadow_smartmatch"></div>
 	</div>
 </div>
 <div id="dashboard_container">
-	<div id="dashboard_container_long">
-		<h2>Recently Added Projects</h2>
-		<% for job in @recently_added_jobs %>
-		<%= link_to job.title, job %>
-		<% end %>
+	<div id="dashboard_wrapper_long">
+		<div id="dashboard_container_long">
+			<h2>Recently Added Projects</h2>
+			<% for job in @recently_added_jobs %>
+				<div id="job_listing"><%= link_to job.title, job %></div>
+			<% end %>
+		</div>
+		<div id="dashboard_shadow_long"></div>
 	</div>
 </div>
