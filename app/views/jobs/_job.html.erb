@@ -18,7 +18,13 @@
 						</div>
 					<% end %>
 					
-					<div class="job_desc"><%= truncate(job.desc, 100, "...") %> <%= link_to "(read more)", job %></div>
+					<div class="job_desc">
+					<%= truncate(job.desc, 100, "...") %> <%= link_to "(read more)", job %>
+					<% if logged_in? && job.user_id == current_user.id %>
+						<%= link_to "(edit)", :action => :edit, :id => job.id %>
+					<% end %>
+					
+					</div>
 				</td>
 				<td class="job_credit">
 					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></span>

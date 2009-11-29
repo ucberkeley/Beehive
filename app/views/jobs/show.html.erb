@@ -20,6 +20,11 @@
 </p>
 
 <p>
+  <b>Tag(s):</b>
+  <%=h @job.tag_list %>
+</p>
+
+<p>
   <b>Position Expiration Date:</b>
   <%=h @job.exp_date %>
 </p>
@@ -31,12 +36,12 @@
 
 <p>
   <b>Paid:</b>
-  <% if @job.paid %> Option Available <% else %> No <% end %>
+  <% if @job.paid %> Yes <% else %> No <% end %>
 </p>
 
 <p>
   <b>Credit:</b>
-  <% if @job.credit %> Option Available <% else %> No <% end %>
+  <% if @job.credit %> Yes <% else %> No <% end %>
 </p>
 
 <br /><br />=== Debug ===<br /><br />
