@@ -7,15 +7,17 @@
 			<h2>Your Watched Projects</h2>
 			<!-- //list of projects you're watching -->
 			Currently you are not watching any projects.
+			<br />
 		</div>
 		<div id="dashboard_shadow_watched"></div>
 	</div>
 	<div id="dashboard_wrapper_smartmatch">
 		<div id="dashboard_container_smartmatch">
 			<h2>SmartMatch Results</h2>
-			Hey <%= @user.name %>, we've automatically matched your interests and skill set to these research openings.
-			<br>
-			Found <%= @relevant_jobs.length %> jobs.<br>
+			<%= @user.name %>, we've automatically matched your interests and skill set to the
+			following <%= @relevant_jobs.length %> research
+			opening<% if @relevant_jobs.length > 1 %>s<% end %>:
+			<br /><br />
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>
 		<div id="dashboard_shadow_smartmatch"></div>
