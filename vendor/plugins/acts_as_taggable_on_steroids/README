@@ -1,4 +1,3 @@
-<<<<<<< .mine
 = acts_as_taggable_on_steroids
 
 If you find this plugin useful, please consider a donation to show your support!
@@ -150,9 +149,3 @@ used to tag any objects. Defaults to false.
 === Other
 
 Problems, comments, and suggestions all welcome. jonathan.viney@gmail.com  
-=======
-= acts_as_taggable_on_steroids
-
-This plugin has been moved to github:
-
-  ruby script/plugin install http://github.com/jviney/acts_as_taggable_on_steroids>>>>>>> .r121

@@ -7,10 +7,10 @@
 					<% job_categories = job.categories %>
 					<% if !job_categories.empty? %>
 						<div class="job_category">
-						<strong>Tags: 
-							
+						Tags:
+						<strong>
 							<% job.tag_list.each do |tag| %>
-								<%=h tag %>
+								<span class="tag"><%=h tag %></span>
 							<% end %>
 						</strong></div>
 					<% end %>

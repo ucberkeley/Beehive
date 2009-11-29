@@ -1,4 +1,3 @@
-<<<<<<< .mine
 good:
   name: Very good
   
@@ -13,23 +12,3 @@ question:
   
 animal:
   name: Crazy animal
-=======
-good:
-  id: 1
-  name: Very good
-  
-bad:
-  id: 2
-  name: Bad
-  
-nature:
-  id: 3
-  name: Nature
-  
-question:
-  id: 4
-  name: Question
-  
-animal:
-  id: 5
-  name: Crazy animal>>>>>>> .r121
