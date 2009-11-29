@@ -26,7 +26,11 @@
 
 <p>
   <b>Tag(s):</b>
-  <%=h @job.tag_list %>
+  <% if @job.active %>
+	<%=h @job.tag_list %>
+  <% else %>
+    (Tags will be generated once job is activated)
+  <% end %>	
 </p>
 
 <p>

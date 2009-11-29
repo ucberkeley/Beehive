@@ -10,9 +10,10 @@ class Job < ActiveRecord::Base
   has_many :courses, :through => :coursereqs
   
   # Before carrying out validations and creating the actual object, 
-  # handle the name of the category(ies) so as to deal with associations
-  # properly.
+  # handle the name of the category(ies) and the required courses so 
+  # as to deal with associations properly.
   before_validation :handle_categories
+  before_validation :handle_courses
   
   acts_as_taggable
   acts_as_solr :fields => [:title, :desc, :tag_list]
@@ -73,6 +74,17 @@ class Job < ActiveRecord::Base
 			category_array.each do |item|
 				self.categories << Category.find_or_create_by_name(item.downcase.strip)
 			end
+		end
+	end
+	
+	# Parses the textbox list of courses from "CS162,CS61A,EE123"
+	# etc. to an enumerable object courses
+	def handle_courses
+		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
+		course_array = []
+		course_array = course_names.split(',').uniq if ! course_names.nil?
+		course_array.each do |item|
+			self.courses << Course.find_or_create_by_name(item.upcase.strip)
 		end
 	end
 	

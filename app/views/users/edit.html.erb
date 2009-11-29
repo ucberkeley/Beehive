@@ -7,7 +7,7 @@
 <%= f.text_field :name %></p>
 <br />
 <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-<%= text_field_with_auto_complete :course, :name, :value => @user.course_list_of_user %>
+<%= text_field_with_auto_complete :course, :name, :value => @user.course_list_of_user, :autocomplete => "off" %>
 
 </p>
 

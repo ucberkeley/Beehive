@@ -15,11 +15,11 @@
   </p>
   <p>
     Category(ies)<br />
-    <%= text_field_with_auto_complete :category, :name, :value => @job.category_list_of_job %>
+    <%= text_field_with_auto_complete :category, :name, :value => @job.category_list_of_job, :autocomplete => "off" %>
   </p>
   <p>
 	<%= f.label :required_courses %><br />
-	<%= text_field_with_auto_complete :course, :name, :value => @job.course_list_of_job %>
+	<%= text_field_with_auto_complete :course, :name, :value => @job.course_list_of_job, :autocomplete => "off" %>
   
   </p>
   <p>
