@@ -1,14 +1,19 @@
 require 'spec_helper'
 
 describe JobsController do
-
+  
+  before(:each) do
+    @controller.stub!(:logged_in?).and_return(true)
+  end
+  
   def mock_job(stubs={})
     @mock_job ||= mock_model(Job, stubs)
   end
 
   describe "GET index" do
-    it "assigns all jobs as @jobs" do
+    it "assigns all active jobs as @jobs" do
       Job.stub!(:find).with(:all).and_return([mock_job])
+	  Job.stub!(:active).with(true)
       get :index
       assigns[:jobs].should == [mock_job]
     end
@@ -76,7 +81,6 @@ describe JobsController do
       it "updates the requested job" do
         Job.should_receive(:find).with("37").and_return(mock_job)
         mock_job.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :job => {:these => 'params'}
       end
 
       it "assigns the requested job as @job" do
@@ -96,13 +100,6 @@ describe JobsController do
       it "updates the requested job" do
         Job.should_receive(:find).with("37").and_return(mock_job)
         mock_job.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :job => {:these => 'params'}
-      end
-
-      it "assigns the job as @job" do
-        Job.stub!(:find).and_return(mock_job(:update_attributes => false))
-        put :update, :id => "1"
-        assigns[:job].should equal(mock_job)
       end
 
       it "re-renders the 'edit' template" do

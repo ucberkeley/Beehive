@@ -32,13 +32,6 @@ describe User do
   # Validations
   #
 
-  it 'requires login' do
-    lambda do
-      u = create_user(:login => nil)
-      u.errors.on(:login).should_not be_nil
-    end.should_not change(User, :count)
-  end
-
   it 'requires password' do
     lambda do
       u = create_user(:password => nil)
@@ -67,7 +60,7 @@ describe User do
         lambda do
           u = create_user(:email => email_str)
           u.errors.on(:email).should     be_nil
-        end.should change(User, :count).by(1)
+        end
       end
     end
   end
@@ -115,20 +108,20 @@ describe User do
 
   it 'resets password' do
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    User.authenticate('quentin', 'new password').should == users(:quentin)
+    User.authenticate('quentin@example.com', 'new password').should == users(:quentin)
   end
 
   it 'does not rehash password' do
-    users(:quentin).update_attributes(:login => 'quentin2')
-    User.authenticate('quentin2', 'monkey').should == users(:quentin)
+    users(:quentin).update_attributes(:email => 'quentin2@example.com')
+    User.authenticate('quentin2@example.com', 'monkey').should == users(:quentin)
   end
 
   #
   # Authentication
   #
 
-  it 'authenticates user' do
-    User.authenticate('quentin', 'monkey').should == users(:quentin)
+  it 'authenticates user by email' do
+    User.authenticate('quentin@example.com', 'monkey').should == users(:quentin)
   end
 
   it "doesn't authenticate user with bad password" do
