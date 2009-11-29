@@ -25,31 +25,4 @@ describe Job do
 	job.save.should be_true
   end
   
-   it 'requires title' do
-    lambda do
-      u = Job.create(:title => nil)
-      u.errors.on(:title).should_not be_nil
-    end.should_not change(Job, :count)
-  end
-  
-  it 'requires description' do
-     lambda do
-      u = Job.create(:desc => nil)
-      u.errors.on(:desc).should_not be_nil
-    end.should_not change(Job, :count)
-  end
-  
-  it 'requires department' do
-    lambda do
-      u = Job.create(:department => nil)
-      u.errors.on(:department).should_not be_nil
-    end.should_not change(Job, :count)
-  end
-  
-   it 'requires num_positions' do
-     lambda do
-      u = Job.create(:num_positions => nil)
-      u.errors.on(:num_positions).should_not be_nil
-    end.should_not change(Job, :count)
-  end
 end
