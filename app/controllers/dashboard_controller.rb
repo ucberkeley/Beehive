@@ -12,7 +12,6 @@ class DashboardController < ApplicationController
   
   def smartmatches_for(my)
 	query = my.course_list_of_user.gsub ",", " "
-	puts "\n\n\n\n#{query.as_OR_query}\n\n\n"
 	Job.find_by_solr(query.as_OR_query).results
   end
   
