@@ -114,11 +114,6 @@ class JobsController < ApplicationController
 	end
 	@job = Job.new(params[:job])
 	
-	# Populates the tag_list of the job.
-	tags_string = ""
-	tags_string << @job.category_list_of_job 
-	@job.tag_list = tags_string
-	
     respond_to do |format|
       if @job.save
 		#@sponsorship.save
@@ -195,6 +190,12 @@ class JobsController < ApplicationController
 	
 	
 	if @job != nil
+	
+		# Populates the tag_list of the job.
+		tags_string = ""
+		tags_string << @job.category_list_of_job 
+		@job.tag_list = tags_string
+		
 		@job.skip_handle_categories = true
 		@job.active = true
 		saved = @job.save
