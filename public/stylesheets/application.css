@@ -23,6 +23,11 @@ pre {
   font-size: 11px;
 }
 
+h2 {
+  color: #5b7f72;
+  margin-top: 0px;
+}
+
 /**Layout**/
 
 #everything{
@@ -220,7 +225,7 @@ width: 100%;
 
 /*smartmatch*/
 #dashboard_wrapper_smartmatch{
-	width: 55%;
+	width: 60%;
 	margin-bottom: 15px;
 	border-left: 1px solid #f5f5f5;
 	border-right: 1px solid #f5f5f5;
@@ -239,7 +244,7 @@ width: 100%;
 /*watched*/
 #dashboard_wrapper_watched{
 	float:right;
-	width: 35%;
+	width: 37.5%;
 	margin-bottom: 15px;
 	border-left: 1px solid #f5f5f5;
 	border-right: 1px solid #f5f5f5;

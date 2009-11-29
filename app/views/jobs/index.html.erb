@@ -1,6 +1,5 @@
 <%= render :partial => "dashboard/menu_bar" %>
 
-<h1>Listing jobs</h1>
 <%= stylesheet_link_tag "job" %>
 <br>
 
@@ -17,21 +16,24 @@
 
 <br>
 
-<div id="browse_results">
-  <div id="browse_header">
-	<div class="job_padding_wrapper">
-	<table id="browse_header_table">
-	<tr>
-		
-		<td class="job_table_left">Title/Description</td>
-		<td class="job_credit">Paid?</td>
-		<td class="job_credit">Credit?</td>
-		<td class="job_credit"># Positions</td>
-		<td class="job_extra"></td>
+<div id="browse_results_wrapper">
+	<div id="browse_results">
+	  <div id="browse_header">
+		<div class="job_padding_wrapper">
+		<table id="browse_header_table">
+		<tr>
+			
+			<td class="job_table_left">Title/Description</td>
+			<td class="job_credit">Paid?</td>
+			<td class="job_credit">Credit?</td>
+			<td class="job_credit"># Positions</td>
+			<td class="job_extra"></td>
+			</div>
+		</tr>
+		</table>
 		</div>
-	</tr>
-	</table>
+	  </div>
+	  <%= render :partial => "job", :collection => @jobs %>
 	</div>
-  </div>
-  <%= render :partial => "job", :collection => @jobs %>
+	<div id="browse_results_shadow"></div>
 </div>

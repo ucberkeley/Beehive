@@ -105,8 +105,10 @@ class JobsController < ApplicationController
 		# = Category.find_or_create_by_name(params[:category][:name])
 	params[:job][:active] = false
 	
-	sponsorships = []
+	
 	params[:job][:activation_code] = 100
+	
+	sponsorships = []
 	if params[:faculty_name] != ""
 		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
 		params[:job][:sponsorships] = sponsorships << @sponsorship
@@ -153,6 +155,12 @@ class JobsController < ApplicationController
     end
 	
 	populate_tag_list
+	
+	sponsorships = []
+	if params[:faculty_name] != @job.faculties.first.id
+		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
+		params[:job][:sponsorships] = sponsorships << @sponsorship
+	end
 	
     respond_to do |format|
       if @job.update_attributes(params[:job])
