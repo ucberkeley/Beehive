@@ -70,10 +70,6 @@ class Job < ActiveRecord::Base
 		results.sort do |a,b|
 			a.solr_score <=> b.solr_score
 		end
-		puts "\n#{query}\n"
-		results.each do |r|
-			puts "\n\n#{r.title}: #{r.solr_score}"
-		end
 		results
 	end
   
