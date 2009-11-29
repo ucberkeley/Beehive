@@ -5,6 +5,9 @@ class JobsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name]
   auto_complete_for :category, :name
   
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
+  auto_complete_for :course, :name
+  
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
   
@@ -100,9 +103,13 @@ class JobsController < ApplicationController
   # POST /jobs.xml
   def create
 	params[:job][:user] = current_user
-	#params[:job][:category_id] = Category.find_or_create_by_name(params[:category][:name].id)
+	
+	# Handles the text_field_with_auto_complete for categories.
 	params[:job][:category_names] = params[:category][:name]
-		# = Category.find_or_create_by_name(params[:category][:name])
+	
+	# Handles the text_field_with_auto_complete for required courses.
+	params[:job][:course_names] = params[:course][:name]
+
 	params[:job][:active] = false
 	
 	
@@ -145,8 +152,6 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
 	
-	# Handles the text_field_with_auto_complete for categories.
-	params[:job][:category_names] = params[:category][:name]
 	
     @all_faculty = Faculty.find(:all)
     @faculty_names = []
@@ -159,6 +164,13 @@ class JobsController < ApplicationController
 		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
 		params[:job][:sponsorships] = sponsorships << @sponsorship
 	end
+	
+	# Handles the text_field_with_auto_complete for categories.
+	params[:job][:category_names] = params[:category][:name]
+	
+	# Handles the text_field_with_auto_complete for required courses.
+	params[:job][:course_names] = params[:course][:name]
+
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])

@@ -29,6 +29,8 @@ class UsersController < ApplicationController
 
 	# Assign the faculty email parameter based on the faculty name chosen from the select dropdown.
 	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email
+	
+	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name]
 
 	@user = User.new(params[:user])
@@ -67,6 +69,8 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
+	
+	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name]
 
     respond_to do |format|

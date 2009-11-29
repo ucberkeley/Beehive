@@ -98,6 +98,7 @@ class User < ActiveRecord::Base
   	course_list[0..(course_list.length - 2)].upcase
   end
 
+  
   protected
     
 
@@ -130,7 +131,7 @@ class User < ActiveRecord::Base
 		course_array = []
 		course_array = course_names.split(',').uniq if ! course_names.nil?
 		course_array.each do |item|
-			self.courses << Course.find_by_name(item.upcase.strip)
+			self.courses << Course.find_or_create_by_name(item.upcase.strip)
 		end
 	end
 	
