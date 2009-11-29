@@ -12,7 +12,7 @@ class JobsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show, :list ]
   
   def index
-    @search_query = "keyword (leave blank to view all)"
+    @search_query = "Keyword (leave blank to view all)"
 	#@search_query = params[:search_terms][:query]
 	#@department = params[:search_terms][:department]
 	#@faculty = params[:search_terms][:faculty]
@@ -33,7 +33,7 @@ class JobsController < ApplicationController
   end
   
   def list
-	@search_query = "keyword (leave blank to view all)"
+	@search_query = "Keyword (leave blank to view all)"
 	d_id = params[:department_select]
 	
 	params[:search_terms] ||= {}
