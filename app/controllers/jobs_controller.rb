@@ -244,17 +244,11 @@ class JobsController < ApplicationController
   
   protected
   
+  # Populates the tag_list of the job.
   def populate_tag_list
-  
-	# Debug code
-	puts "\n\n\n\n\n LAWL \n"
-	puts @job.paid
-	puts "\n done \n "
-	
-  
-	# Populates the tag_list of the job.
 	tags_string = ""
 	tags_string << @job.category_list_of_job 
+	tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
 	tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
 	tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
 	@job.tag_list = tags_string
