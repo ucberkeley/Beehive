@@ -1,3 +1,10 @@
+<<<<<<< .mine
+jonathan:
+  name: Jonathan
+  
+sam:
+  name: Sam
+=======
 jonathan:
   id: 1
   name: Jonathan
@@ -5,3 +12,4 @@ jonathan:
 sam:
   id: 2
   name: Sam
+>>>>>>> .r121

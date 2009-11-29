@@ -1,7 +1,14 @@
+<<<<<<< .mine
+ruby:
+  name: Ruby
+  
+rails:
+  name: Rails
+=======
 ruby:
   id: 1
   name: Ruby
   
 rails:
   id: 2
-  name: Rails
+  name: Rails>>>>>>> .r121

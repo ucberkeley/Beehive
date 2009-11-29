@@ -13,6 +13,7 @@ class Job < ActiveRecord::Base
   before_validation :handle_categories
   
   acts_as_solr :fields => [:title, :desc]
+  acts_as_taggable
   
   validates_presence_of :title, :desc, :exp_date, :num_positions, :department
   

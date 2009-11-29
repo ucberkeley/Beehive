@@ -1,3 +1,32 @@
+<<<<<<< .mine
+jonathan_sky:
+  user: jonathan
+  text: The sky is particularly blue today
+  
+jonathan_grass:
+  user: jonathan
+  text: The grass seems very green
+  
+jonathan_rain:
+  user: jonathan
+  text: Why does the rain fall?
+  
+jonathan_cloudy:
+  user: jonathan
+  text: Is it cloudy?
+
+jonathan_still_cloudy:
+  user: jonathan
+  text: Is it still cloudy?
+
+sam_ground:
+  user: sam
+  text: The ground is looking too brown
+  
+sam_flowers:
+  user: sam
+  text: Why are the flowers dead?
+=======
 jonathan_sky:
   id: 1
   user_id: 1
@@ -31,4 +60,4 @@ sam_ground:
 sam_flowers:
   id: 7
   user_id: 2
-  text: Why are the flowers dead?
+  text: Why are the flowers dead?>>>>>>> .r121

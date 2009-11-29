@@ -9,7 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< .mine
+ActiveRecord::Schema.define(:version => 20091129000032) do
+=======
 ActiveRecord::Schema.define(:version => 20091128234237) do
+>>>>>>> .r121
 
   create_table "categories", :force => true do |t|
     t.string   "name"

@@ -8,8 +8,9 @@
 					<% if !job_categories.empty? %>
 						<div class="job_category">
 						<strong>Tags: 
-							<% for c in job_categories %>
-								<%=h c.name %>
+							
+							<% job.tag_list.each do |tag| %>
+								<%=h tag %>
 							<% end %>
 						</strong></div>
 					<% end %>
