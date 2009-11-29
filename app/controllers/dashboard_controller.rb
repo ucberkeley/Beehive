@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
   
   def smartmatches_for(my)
 	query = my.course_list_of_user.gsub ",", " "
-	Job.find_by_solr(query.as_OR_query).results
+	Job.find_by_solr_by_relevance(query)
   end
   
 end
