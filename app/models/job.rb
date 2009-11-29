@@ -12,8 +12,8 @@ class Job < ActiveRecord::Base
   # properly.
   before_validation :handle_categories
   
-  acts_as_solr :fields => [:title, :desc]
   acts_as_taggable
+  acts_as_solr :fields => [:title, :desc, :tag_list]
   
   validates_presence_of :title, :desc, :exp_date, :num_positions, :department
   
