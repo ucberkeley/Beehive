@@ -47,7 +47,6 @@ class JobsController < ApplicationController
 		#flash[:notice] = 'Your query was invalid and could not return any results.'
 		@jobs = Job.find(:all, :order=>"created_at DESC", :conditions=> {:active => true})
 	end #end params[:query]
-	
 
 	@jobs = @jobs.select {|j| j.department_id.to_i == department } if department != 0
 	@jobs = @jobs.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
@@ -166,6 +165,7 @@ class JobsController < ApplicationController
       end
     end
   end
+  
 
   # DELETE /jobs/1
   # DELETE /jobs/1.xml
@@ -208,6 +208,19 @@ class JobsController < ApplicationController
 	
   end
   
+  def job_read_more
+	job = Job.find(params[:id])
+	render :text=> job.desc
+  end
+  
+  def job_read_less
+	job = Job.find(params[:id])
+	desc = job.desc.first(100)
+	desc = desc << "..." if job.desc.length > 100
+	render :text=>  desc
+  end
+  
+ 
   
   protected
   
@@ -226,4 +239,6 @@ class JobsController < ApplicationController
 	tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
 	@job.tag_list = tags_string
   end
+  
+  
 end
