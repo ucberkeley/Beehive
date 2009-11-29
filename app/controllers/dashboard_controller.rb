@@ -4,5 +4,16 @@ class DashboardController < ApplicationController
   def index
 	@departments = Department.all
 	@recently_added_jobs = Job.find(:all, :conditions => [ "active = ?", true], :order => "created_at DESC", :limit => 5 )
+	@relevant_jobs = smartmatches_for current_user
+	
   end
+  
+  protected
+  
+  def smartmatches_for(my)
+	query = my.course_list_of_user.gsub ",", " "
+	puts "\n\n\n\n#{query.as_OR_query}\n\n\n"
+	Job.find_by_solr(query.as_OR_query).results
+  end
+  
 end

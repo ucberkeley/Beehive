@@ -13,6 +13,9 @@
 		<div id="dashboard_container_smartmatch">
 			<h2>SmartMatch Results</h2>
 			Hey <%= @user.name %>, we've automatically matched your interests and skill set to these research openings.
+			<br>
+			Found <%= @relevant_jobs.length %> jobs.<br>
+			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>
 		<div id="dashboard_shadow_smartmatch"></div>
 	</div>
