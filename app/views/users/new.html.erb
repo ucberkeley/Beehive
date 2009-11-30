@@ -69,7 +69,14 @@ Faculty Member (Who are you?): <br />
 </p>
 <br />
 
-//tagging stuff!
+<br />
+<p>
+Programming languages in which you are proficient: <br />
+<%= text_field_with_auto_complete :proglang, :name, :value => @user.proglang_list_of_user, :autocomplete => "off" %>
+</p>
+<br />
+
+<!-- //tagging stuff! -->
 </div>
 
 <br />

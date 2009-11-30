@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :courses, :through => :enrollments
   has_many :interests
   has_many :categories, :through => :interests
+  has_many :proficiencies
+  has_many :proglangs, :through => :proficiencies
 
   #validates_presence_of     :login
   #validates_length_of       :login,    :within => 3..40
@@ -40,15 +42,17 @@ class User < ActiveRecord::Base
   before_validation :handle_name
   before_validation :handle_courses
   before_validation :handle_categories
+  before_validation :handle_proglangs
   
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names, 
-	:category_names, :student_name, :faculty_name
+	:category_names, :student_name, :faculty_name, :proglang_names
   attr_reader :faculty_email; attr_writer :faculty_email  
   attr_reader :student_email; attr_writer :student_email
   attr_reader :course_names; attr_writer :course_names
+  attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
   attr_reader :student_name; attr_writer :student_name
   attr_reader :faculty_name; attr_writer :faculty_name
@@ -112,6 +116,16 @@ class User < ActiveRecord::Base
   	category_list[0..(category_list.length - 2)].downcase
   end
   
+  # Returns a string containing the proglang names taken by user @user
+  # e.g. "java,c++,ruby"
+  def proglang_list_of_user
+  	proglang_list = ''
+  	proglangs.each do |pl|
+  		proglang_list << pl.name + ','
+  	end
+  	proglang_list[0..(proglang_list.length - 2)].downcase
+  end  
+  
   protected
     
 
@@ -151,13 +165,24 @@ class User < ActiveRecord::Base
 	# Parses the textbox list of categories from "signal processing,robotics"
 	# etc. to an enumerable object categories
 	def handle_categories
-		self.categories = []  # eliminates any previous enrollments so as to avoid duplicates
+		self.categories = []  # eliminates any previous interests so as to avoid duplicates
 		category_array = []
 		category_array = category_names.split(',').uniq if ! category_names.nil?
 		category_array.each do |cat|
 			self.categories << Category.find_or_create_by_name(cat.downcase.strip)
 		end
 	end
+	
+	# Parses the textbox list of proglangs from "c++,python"
+	# etc. to an enumerable object proglangs
+	def handle_proglangs
+		self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
+		proglang_array = []
+		proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
+		proglang_array.each do |pl|
+			self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
+		end
+	end	
 
 	
 end

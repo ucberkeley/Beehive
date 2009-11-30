@@ -12,6 +12,10 @@
 <p>
 Interests (Categories): <br />
 <%= text_field_with_auto_complete :category, :name, :value => @user.category_list_of_user, :autocomplete => "off" %>
+</p><br />
+<p>
+Programming languages in which you are proficient: <br />
+<%= text_field_with_auto_complete :proglang, :name, :value => @user.proglang_list_of_user, :autocomplete => "off" %>
 </p>
 
   <p>
