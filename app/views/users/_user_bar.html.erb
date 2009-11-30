@@ -1,10 +1,10 @@
 <% if logged_in? -%>
   <div id="user-bar-greeting">
 	Logged in as <%= link_to @user.email, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)
-	<br><%= link_to "Dashboard", :controller=>"dashboard" %> | <%= link_to "Edit Your Profile", edit_user_url(@user) %>
+	<br><b><%= link_to "Dashboard", :controller=>"dashboard" %></b> | <%= link_to "Edit Your Profile", edit_user_url(@user) %>
   </div>
 
 <% else -%>
-  <div id="user-bar-greeting">Oops, you're not logged in yet!
+  <div id="user-bar-greeting">Log in to access our listings or sign up for a free account.
   <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> / <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
 <% end -%>

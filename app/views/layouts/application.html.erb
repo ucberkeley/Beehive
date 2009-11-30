@@ -13,12 +13,7 @@
 <div id="everything">
 	<div id="header">
 		<div id="header_image">
-		
-			<% if logged_in? %>
-				<%= link_to "", :controller => :dashboard %>
-			<% else %>
-				<%= link_to "", :controller => :home %>
-			<% end %>
+			<%= link_to "", :controller => :home %>
 			
 			<div id="side">
 				<div id="loginbar">
