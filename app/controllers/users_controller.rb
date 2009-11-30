@@ -2,9 +2,10 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   # include AuthenticatedSystem    --- ^ did this.
   
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name, :auto_complete_for_category_name]
   auto_complete_for :course, :name
-
+  auto_complete_for :category, :name
+  
   # render new.rhtml
   def new
     @user = User.new
@@ -32,6 +33,9 @@ class UsersController < ApplicationController
 	
 	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name]
+	
+	# Handles the text_field_with_auto_complete for categories.
+	params[:user][:category_names] = params[:category][:name]	
 
 	@user = User.new(params[:user])
 	
@@ -72,6 +76,9 @@ class UsersController < ApplicationController
 	
 	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name]
+	
+	# Handles the text_field_with_auto_complete for categories.
+	params[:user][:category_names] = params[:category][:name]	
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

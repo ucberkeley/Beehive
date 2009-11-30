@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   
   has_many :enrollments
   has_many :courses, :through => :enrollments
+  has_many :interests
+  has_many :categories, :through => :interests
 
   #validates_presence_of     :login
   #validates_length_of       :login,    :within => 3..40
@@ -37,15 +39,17 @@ class User < ActiveRecord::Base
   before_validation :handle_email
   before_validation :handle_name
   before_validation :handle_courses
+  before_validation :handle_categories
   
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names, 
-	:student_name, :faculty_name
+	:category_names, :student_name, :faculty_name
   attr_reader :faculty_email; attr_writer :faculty_email  
   attr_reader :student_email; attr_writer :student_email
   attr_reader :course_names; attr_writer :course_names
+  attr_reader :category_names; attr_writer :category_names
   attr_reader :student_name; attr_writer :student_name
   attr_reader :faculty_name; attr_writer :faculty_name
   
@@ -98,6 +102,15 @@ class User < ActiveRecord::Base
   	course_list[0..(course_list.length - 2)].upcase
   end
 
+  # Returns a string containing the category names taken by user @user
+  # e.g. "signal processing,robotics,algorithms"
+  def category_list_of_user
+  	category_list = ''
+  	categories.each do |cat|
+  		category_list << cat.name + ','
+  	end
+  	category_list[0..(category_list.length - 2)].downcase
+  end
   
   protected
     
@@ -135,6 +148,16 @@ class User < ActiveRecord::Base
 		end
 	end
 	
+	# Parses the textbox list of categories from "signal processing,robotics"
+	# etc. to an enumerable object categories
+	def handle_categories
+		self.categories = []  # eliminates any previous enrollments so as to avoid duplicates
+		category_array = []
+		category_array = category_names.split(',').uniq if ! category_names.nil?
+		category_array.each do |cat|
+			self.categories << Category.find_or_create_by_name(cat.downcase.strip)
+		end
+	end
 
 	
 end
