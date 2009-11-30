@@ -33,7 +33,7 @@ describe Job do
 				lambda do
 					j = create_job(:title => title_str)
 					j.errors.on(:title).should be_nil
-				end.should change(Job, :count)
+				end.should change(Job, :count).by(1)
 			end
 		end
 	end
@@ -51,6 +51,39 @@ describe Job do
 	end
   end
   
+  describe "exp_date of the job" do
+	describe 'allows exp_date during or after right now' do
+		[Time.now, Time.now + 1.second, Time.now + 1.day, Time.now + 1.year].each do |e|
+			it "'#{e}'" do
+				lambda do
+					j = create_job(:exp_date => e)
+					j.errors.on(:exp_date).should be_nil
+				end.should change(Job, :count).by(1)
+			end
+		end
+	end
+	
+  
+    describe 'disallows exp_date before (right now - 1.hour)' do
+		[Time.now - 1.day, Time.now - 1.month, Time.now - 1.year].each do |e|
+			it "'#{e}'" do
+				lambda do
+					j = create_job(:exp_date => e)
+					j.errors.on(:exp_date).should_not be_nil
+				end.should_not change(Job, :count)
+			end
+		end
+	end
+  end
+  
+  describe "job description" do
+	it "should not be blank" do
+		lambda do
+			j = create_job(:desc => '')
+			j.errors.on(:desc).should_not be_nil
+		end.should_not change(Job, :count)
+	end
+  end
 
   
   protected
