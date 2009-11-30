@@ -151,8 +151,6 @@ class JobsController < ApplicationController
   def update	
 	#params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
     @job = Job.find(params[:id])
-
-	
 	
     @all_faculty = Faculty.find(:all)
     @faculty_names = []

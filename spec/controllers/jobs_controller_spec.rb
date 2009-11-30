@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JobsController do
+describe JobsController, :type => :controller do
   
   before(:each) do
     @controller.stub!(:login_required).and_return(true)
@@ -46,13 +46,13 @@ describe JobsController do
 
     describe "with valid params" do
       it "assigns a newly created job as @job" do
-        Job.stub!(:new).with({'these' => 'params'}).and_return(mock_job(:save => true))
+        Job.stub!(:new).and_return(mock_job(:save => true))
         post :create, :job => {:these => 'params'}
         assigns[:job].should equal(mock_job)
       end
 
       it "redirects to the created job" do
-        Job.stub!(:new).with({'these' => 'params'}).and_return(mock_job(:save => true))
+        Job.stub!(:new).and_return(mock_job(:save => true))
         post :create, :job => {:these => 'params'}
         response.should redirect_to(job_url(mock_job))
       end
@@ -82,6 +82,7 @@ describe JobsController do
     describe "with valid params" do
       it "updates the requested job" do
         Job.should_receive(:find).with("37").and_return(mock_job)
+		put :update, :id => "37"
         mock_job.should_receive(:update_attributes).with({'these' => 'params'})
       end
 
