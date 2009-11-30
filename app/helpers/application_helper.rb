@@ -8,7 +8,9 @@ module ApplicationHelper
 	
 	module SmartMatch
 	  def smartmatches_for(my)
-		query = my.course_list_of_user.gsub ",", " "
+		courses = my.course_list_of_user.gsub ",", " "
+		cats = my.category_list_of_user.gsub ",", " "
+		query = "#{cats} #{courses}"
 		Job.find_by_solr_by_relevance(query)
 	  end
 	end
