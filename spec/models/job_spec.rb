@@ -33,7 +33,7 @@ describe Job do
 				lambda do
 					j = create_job(:title => title_str)
 					j.errors.on(:title).should be_nil
-				end.should_not change(Job, :count)
+				end.should change(Job, :count)
 			end
 		end
 	end
@@ -56,7 +56,8 @@ describe Job do
   protected
   def create_job(options = {})
     record = Job.new({ :title => 'SampleJobTitle', :desc => 'descriptiongoeshere', 
-		:exp_date => Time.now + 5.hours, :num_positions => 0, :department_id => 1 }.merge(options))
+		:exp_date => Time.now + 5.hours, :num_positions => 0, 
+				:department => Department.find_or_create_by_name(:name => "EECS") }.merge(options))
 	record.sponsorships = record.sponsorships << Sponsorship.create({:faculty_id => 1, :job_id => 1})
     record.save
     record
