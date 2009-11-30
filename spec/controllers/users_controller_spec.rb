@@ -14,11 +14,11 @@ describe UsersController, :type => :controller do
     end.should change(User, :count).by(1)
   end
 
-  it 'signs up user with activation code' do
-    create_user
-    assigns(:user).reload
-    assigns(:user).activation_code.should_not be_nil
-  end
+  #it 'signs up user with activation code' do
+  #  create_user
+  #  assigns(:user).reload
+  #  assigns(:user).activation_code.should_not be_nil
+  #end
   
   it 'requires password on signup' do
     lambda do
@@ -73,7 +73,7 @@ describe UsersController, :type => :controller do
   #end
   
   def create_user(options = {})
-    post :create, :user => { :name => 'quire', :email => 'quire@example.com',
+    post :create, :user => { :name => 'quire', :email => 'quire@berkeley.edu',
       :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
   end
 end
