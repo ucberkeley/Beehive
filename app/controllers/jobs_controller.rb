@@ -2,10 +2,8 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name]
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, :auto_complete_for_course_name]
   auto_complete_for :category, :name
-  
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name]
   auto_complete_for :course, :name
   
   # Ensures that only logged-in users can create, edit, or delete jobs
