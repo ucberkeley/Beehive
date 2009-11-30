@@ -206,13 +206,12 @@ class JobsController < ApplicationController
 	
 	
 	if @job != nil
-	
 		populate_tag_list
 		
 		@job.skip_handle_categories = true
 		@job.active = true
 		saved = @job.save
-	else
+	else 
 		saved = false
 	end
 	

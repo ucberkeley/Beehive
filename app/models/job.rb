@@ -66,7 +66,12 @@ class Job < ActiveRecord::Base
 	# by solr_score. Note that this method returns the actual results,
 	# not a SearchResults object like find_by_solr does.
 	def self.find_by_solr_by_relevance(query)
-		results = (self.find_by_solr query, :operator => :or, :scores => true).results
+		solr_search = self.find_by_solr query, :operator => :or, :scores => true
+		if solr_search
+			results = solr_search.results
+		else 
+			results = []
+		end
 		results.sort do |a,b|
 			a.solr_score <=> b.solr_score
 		end

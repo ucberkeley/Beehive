@@ -57,6 +57,9 @@ describe JobsController do
         post :create, :job => {}
         response.should redirect_to(job_url(mock_job))
       end
+	  
+	  it "should create new faculty sponsorship"
+	  
     end
 
     describe "with invalid params" do
@@ -94,6 +97,8 @@ describe JobsController do
         put :update, :id => "1"
         response.should redirect_to(job_url(mock_job))
       end
+	  
+	  it "should modify sponsorships when faculty member is changed"
     end
 
     describe "with invalid params" do
@@ -123,6 +128,22 @@ describe JobsController do
       delete :destroy, :id => "1"
       response.should redirect_to(jobs_url)
     end
+  end
+  
+  describe "searching function" do
+	# (for all of these: and render index)
+	it "should return all active jobs if there are no search parameters"
+	it "should return jobs that matches keyword query"
+	it "should return jobs that match department query"
+	it "should return jobs that match faculty query"
+	it "should return jobs that match paid query"
+	it "should return jobs that match credit query"
+  end
+  
+  describe "activating jobs" do
+	it "should activate job with a correct activation code and unactivated job"
+	it "should not activate job with an incorrect activation code"
+	it "should not activate job when job is already activated"
   end
 
 end
