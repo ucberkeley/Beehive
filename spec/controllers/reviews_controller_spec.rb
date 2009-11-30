@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe ReviewsController do
 
+  before(:each) do
+	@controller.stub!(:login_required).and_return(true)
+  end
+  
   def mock_review(stubs={})
     @mock_review ||= mock_model(Review, stubs)
   end
