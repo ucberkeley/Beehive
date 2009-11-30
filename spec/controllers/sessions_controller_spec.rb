@@ -76,7 +76,7 @@ describe SessionsController do
       login_as :quentin
     end
     it 'logs out keeping session'   do controller.should_receive(:logout_keeping_session!); do_create end
-    it 'flashes an error'           do do_create; flash[:error].should =~ /Couldn't log you in as 'quentin'/ end
+    it 'flashes an error'           do do_create; flash[:error].should =~ /Couldn't log you in as 'quentin@berkeley.edu'/ end
     it 'renders the log in page'    do do_create; response.should render_template('new')  end
     it "doesn't log me in"          do do_create; controller.send(:logged_in?).should == false end
     it "doesn't send password back" do 
@@ -104,8 +104,8 @@ describe SessionsController do
     it "should route the new sessions action correctly" do
       route_for(:controller => 'sessions', :action => 'new').should == "/login"
     end
-    it "should route the create sessions correctly" do
-      route_for(:controller => 'sessions', :action => 'create').should == "/session"
+    it "should route the show sessions correctly" do
+      route_for(:controller => 'sessions', :action => 'show').should == "/session"
     end
     it "should route the destroy sessions action correctly" do
       route_for(:controller => 'sessions', :action => 'destroy').should == "/logout"
