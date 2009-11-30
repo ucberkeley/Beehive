@@ -105,11 +105,20 @@ class JobsController < ApplicationController
   def create
 	params[:job][:user] = current_user
 	
+	category_names_valid = false
+	courses_names_valid = false
+	if params[:category]
+		category_names_valid = true if params[:category][:name]
+	end
+	if params[:category]
+		courses_names_valid = true if params[:course][:name]
+	end
+	
 	# Handles the text_field_with_auto_complete for categories.
-	params[:job][:category_names] = params[:category][:name]
+	params[:job][:category_names] = params[:category][:name] if category_names_valid
 	
 	# Handles the text_field_with_auto_complete for required courses.
-	params[:job][:course_names] = params[:course][:name]
+	params[:job][:course_names] = params[:course][:name] if courses_names_valid
 
 	params[:job][:active] = false
 	
@@ -117,7 +126,7 @@ class JobsController < ApplicationController
 	params[:job][:activation_code] = 100
 	
 	sponsorships = []
-	if params[:faculty_name] != ""
+	if params[:faculty_name] != "" && params[:faculty_name]
 		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
 		params[:job][:sponsorships] = sponsorships << @sponsorship
 	end

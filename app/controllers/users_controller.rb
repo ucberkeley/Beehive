@@ -27,12 +27,21 @@ class UsersController < ApplicationController
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
 	end
-
+	
+	faculty_valid = false
+	courses_valid = false
+	if params[:user]
+		faculty_valid = true if params[:user][:faculty_email]
+	end
+	if params[:course]
+		courses_valid = true if params[:course][:name]
+	end
+	
 	# Assign the faculty email parameter based on the faculty name chosen from the select dropdown.
-	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email
+	params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email if faculty_valid
 	
 	# Handles the text_field_with_auto_complete for courses.
-	params[:user][:course_names] = params[:course][:name]
+	params[:user][:course_names] = params[:course][:name] if courses_valid
 	
 	# Handles the text_field_with_auto_complete for categories.
 	params[:user][:category_names] = params[:category][:name]	
@@ -46,7 +55,7 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin."
       render :action => 'new'
     end
   end

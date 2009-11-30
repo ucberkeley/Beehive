@@ -23,7 +23,6 @@ describe "/jobs/edit.html.erb" do
       with_tag('input#job_user[name=?]', "job[user]")
       with_tag('input#job_title[name=?]', "job[title]")
       with_tag('textarea#job_desc[name=?]', "job[desc]")
-      with_tag('input#job_category[name=?]', "job[category]")
       with_tag('input#job_num_positions[name=?]', "job[num_positions]")
       with_tag('input#job_paid[name=?]', "job[paid]")
       with_tag('input#job_credit[name=?]', "job[credit]")
