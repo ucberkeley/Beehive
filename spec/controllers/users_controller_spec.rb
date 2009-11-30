@@ -14,9 +14,6 @@ describe UsersController, :type => :controller do
     end.should change(User, :count).by(1)
   end
 
-  
-
-
   it 'signs up user with activation code' do
     create_user
     assigns(:user).reload
