@@ -4,10 +4,14 @@ describe Category do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :job_id => 1
+      :job => Job.find_or_create_by_name(:id => 1)
     }
   end
 
+  #
+  # Validation
+  #
+  
   it "should create a new instance given valid attributes" do
     Category.create!(@valid_attributes)
   end
