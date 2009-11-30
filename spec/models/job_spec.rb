@@ -11,7 +11,7 @@ describe Job do
       :num_positions => 1,
       :paid => false,
       :credit => false,
-	  :department => 1
+	  :department_id => 1
     }
   end
   
@@ -21,7 +21,8 @@ describe Job do
 
   it "should create a new instance given valid attributes" do
     job = Job.create(@valid_attributes)
-	job.sponsorships.stub!(size).and_return(1)
+	job.sponsorships.stub!(:size).and_return(1)
+	puts job.errors
 	job.save.should be_true
   end
   

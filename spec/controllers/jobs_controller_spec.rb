@@ -3,7 +3,7 @@ require 'spec_helper'
 describe JobsController do
   
   before(:each) do
-    @controller.stub!(:logged_in?).and_return(true)
+    @controller.stub!(:login_required).and_return(true)
   end
   
   def mock_job(stubs={})
@@ -13,7 +13,6 @@ describe JobsController do
   describe "GET index" do
     it "assigns all active jobs as @jobs" do
       Job.stub!(:find).with(:all).and_return([mock_job])
-	  Job.stub!(:active).with(true)
       get :index
       assigns[:jobs].should == [mock_job]
     end
@@ -21,7 +20,7 @@ describe JobsController do
 
   describe "GET show" do
     it "assigns the requested job as @job" do
-      Job.stub!(:find).with("37").and_return(mock_job)
+      Job.stub!(:find).and_return(mock_job)
       get :show, :id => "37"
       assigns[:job].should equal(mock_job)
     end
@@ -53,8 +52,8 @@ describe JobsController do
       end
 
       it "redirects to the created job" do
-        Job.stub!(:new).and_return(mock_job(:save => true))
-        post :create, :job => {}
+        Job.stub!(:new).with({'these' => 'params'}).and_return(mock_job(:save => true))
+        post :create, :job => {:these => 'params'}
         response.should redirect_to(job_url(mock_job))
       end
 	  

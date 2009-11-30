@@ -83,7 +83,7 @@ describe User do
 
   describe 'allows legitimate names:' do
     ['Andrew Andrews',
-     '', '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
+      '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890',
     ].each do |name_str|
       it "'#{name_str}'" do
         lambda do
@@ -108,12 +108,12 @@ describe User do
 
   it 'resets password' do
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    User.authenticate('quentin@example.com', 'new password').should == users(:quentin)
+    User.authenticate('quentin@berkeley.edu', 'new password').should == users(:quentin)
   end
 
   it 'does not rehash password' do
-    users(:quentin).update_attributes(:email => 'quentin2@example.com')
-    User.authenticate('quentin2@example.com', 'monkey').should == users(:quentin)
+    users(:quentin).update_attributes(:email => 'quentin2@berkeley.edu')
+    User.authenticate('quentin2@berkeley.edu', 'monkey').should == users(:quentin)
   end
 
   #
@@ -121,11 +121,11 @@ describe User do
   #
 
   it 'authenticates user by email' do
-    User.authenticate('quentin@example.com', 'monkey').should == users(:quentin)
+    User.authenticate('quentin@berkeley.edu', 'monkey').should == users(:quentin)
   end
 
   it "doesn't authenticate user with bad password" do
-    User.authenticate('quentin', 'invalid_password').should be_nil
+    User.authenticate('quentin@berkeley.edu', 'invalid_password').should be_nil
   end
 
  if REST_AUTH_SITE_KEY.blank?
@@ -193,7 +193,7 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record = User.new({ :name => 'quire', :email => 'quire@berkeley.edu', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
     record.save
     record
   end
