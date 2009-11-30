@@ -4,7 +4,7 @@ describe Category do
   before(:each) do
     @valid_attributes = {
       :name => "value for name",
-      :job => Job.find_or_create_by_name(:id => 1)
+      :job_id => 1
     }
   end
 
