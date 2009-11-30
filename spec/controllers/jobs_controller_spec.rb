@@ -138,12 +138,21 @@ describe JobsController, :type => :controller do
 	it "should return jobs that match faculty query"
 	it "should return jobs that match paid query"
 	it "should return jobs that match credit query"
+	it "should not return jobs that don't match any of the queries"
   end
   
   describe "activating jobs" do
 	it "should activate job with a correct activation code and unactivated job"
 	it "should not activate job with an incorrect activation code"
 	it "should not activate job when job is already activated"
+  end
+  
+  describe "smartmatching" do
+	it "should return jobs that match course requirements"
+	it "should return jobs that match programming language requirements"
+	it "should return jobs that match interests/tags"
+	it "should return jobs in relevance order"
+	it "should not return jobs that dont match course, programming language, or interest fields"
   end
 
 end
