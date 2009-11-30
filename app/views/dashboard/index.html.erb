@@ -15,8 +15,8 @@
 		<div id="dashboard_container_smartmatch">
 			<h2>SmartMatch Results</h2>
 			<%= @user.name %>, we've automatically matched your interests and skill set to the
-			following <%= @relevant_jobs.length %> research
-			opening<% if @relevant_jobs.length > 1 %>s<% end %>:
+			following <b><%= @relevant_jobs.length %> research
+			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
 			<br /><br />
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>

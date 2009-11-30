@@ -2,9 +2,11 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, :auto_complete_for_course_name]
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, 
+		:auto_complete_for_course_name, :auto_complete_for_proglang_name]
   auto_complete_for :category, :name
   auto_complete_for :course, :name
+  auto_complete_for :proglang, :name
   
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
@@ -104,20 +106,28 @@ class JobsController < ApplicationController
 	params[:job][:user] = current_user
 	
 	category_names_valid = false
-	courses_names_valid = false
+	course_names_valid = false
+	proglang_names_valid = false
 	if params[:category]
 		category_names_valid = true if params[:category][:name]
 	end
 	if params[:category]
-		courses_names_valid = true if params[:course][:name]
+		course_names_valid = true if params[:course][:name]
 	end
-	
+	if params[:category]
+		proglang_names_valid = true if params[:proglang][:name]
+	end
+		
 	# Handles the text_field_with_auto_complete for categories.
 	params[:job][:category_names] = params[:category][:name] if category_names_valid
 	
 	# Handles the text_field_with_auto_complete for required courses.
-	params[:job][:course_names] = params[:course][:name] if courses_names_valid
-
+	params[:job][:course_names] = params[:course][:name] if course_names_valid
+	
+	# Handles the text_field_with_auto_complete for desired proglangs.
+	params[:job][:proglang_names] = params[:proglang][:name] if proglang_names_valid
+	
+	
 	params[:job][:active] = false
 	
 	
@@ -176,7 +186,9 @@ class JobsController < ApplicationController
 	
 	# Handles the text_field_with_auto_complete for required courses.
 	params[:job][:course_names] = params[:course][:name]
-
+	
+	# Handles the text_field_with_auto_complete for desired proglangs.
+	params[:job][:proglang_names] = params[:proglang][:name]
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
@@ -213,7 +225,7 @@ class JobsController < ApplicationController
 	if @job != nil
 		populate_tag_list
 		
-		@job.skip_handle_categories = true
+		@job.skip_handlers = true
 		@job.active = true
 		saved = @job.save
 	else 
@@ -222,7 +234,7 @@ class JobsController < ApplicationController
 	
 	respond_to do |format|
 		if saved
-		  @job.skip_handle_categories = false
+		  @job.skip_handlers = false
 		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
 		  format.html { redirect_to(@job) }
 		else
@@ -254,6 +266,7 @@ class JobsController < ApplicationController
 	tags_string = ""
 	tags_string << @job.category_list_of_job 
 	tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
+	tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
 	tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
 	tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
 	@job.tag_list = tags_string

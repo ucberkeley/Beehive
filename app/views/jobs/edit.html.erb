@@ -20,8 +20,11 @@
   <p>
 	<%= f.label :required_courses %><br />
 	<%= text_field_with_auto_complete :course, :name, :value => @job.course_list_of_job, :autocomplete => "off" %>
-  
   </p>
+  <p>
+	Desired programming languages:<br />
+	<%= text_field_with_auto_complete :proglang, :name, :value => @job.proglang_list_of_job, :autocomplete => "off" %>
+  </p>  
   <p>
     <%= f.label :exp_date %><br />
     <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.

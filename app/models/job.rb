@@ -8,12 +8,15 @@ class Job < ActiveRecord::Base
   has_many :faculties, :through => :sponsorships
   has_many :coursereqs
   has_many :courses, :through => :coursereqs
+  has_many :proglangreqs
+  has_many :proglangs, :through => :proglangreqs
   
   # Before carrying out validations and creating the actual object, 
-  # handle the name of the category(ies) and the required courses so 
-  # as to deal with associations properly.
+  # handle the name of the category(ies), the required courses, and the 
+  # desired proglangs so as to deal with associations properly.
   before_validation :handle_categories
   before_validation :handle_courses
+  before_validation :handle_proglangs
   
   acts_as_taggable
   acts_as_solr :fields => [:title, :desc, :tag_list]
@@ -32,11 +35,12 @@ class Job < ActiveRecord::Base
   
   attr_accessor :category_names
   attr_accessor :course_names
+  attr_accessor :proglang_names
   
-  # If true, handle_categories doesn't do anything. The purpose of this is so that in activating a job, 
-  # categories data isn't lost.
-  @skip_handle_categories = false
-  attr_accessor :skip_handle_categories
+  # If true, handle_categories, handle_courses, and handle_proglangs don't do anything. 
+  # The purpose of this is so that in activating a job, these data aren't lost.
+  @skip_handlers = false
+  attr_accessor :skip_handlers
   
   def self.find_recently_added(n)
 	Job.find(:all, :order => "created_at DESC", :limit=>n)
@@ -62,28 +66,39 @@ class Job < ActiveRecord::Base
   	course_list[0..(course_list.length - 2)].upcase
   end
   
-	# Performs an OR search for all terms in 'query', then sorts results
-	# by solr_score. Note that this method returns the actual results,
-	# not a SearchResults object like find_by_solr does.
-	def self.find_by_solr_by_relevance(query)
-		solr_search = self.find_by_solr query, :operator => :or, :scores => true
-		if solr_search
-			results = solr_search.results
-		else 
-			results = []
-		end
-		results.sort do |a,b|
-			a.solr_score <=> b.solr_score
-		end
-		results
+  # Returns a string containing the 'desired proglang' names taken by job @job
+  # e.g. "java,scheme,c++"
+  def proglang_list_of_job
+  	proglang_list = ''
+  	proglangs.each do |pl|
+  		proglang_list << pl.name + ','
+  	end
+  	proglang_list[0..(proglang_list.length - 2)].downcase
+  end  
+  
+  
+  # Performs an OR search for all terms in 'query', then sorts results
+  # by solr_score. Note that this method returns the actual results,
+  # not a SearchResults object like find_by_solr does.
+  def self.find_by_solr_by_relevance(query)
+	solr_search = self.find_by_solr query, :operator => :or, :scores => true
+	if solr_search
+		results = solr_search.results
+	else 
+		results = []
 	end
+	results.sort do |a,b|
+		a.solr_score <=> b.solr_score
+	end
+	results
+  end
   
   protected
   
   	# Parses the textbox list of category names from "Signal Processing, Robotics"
 	# etc. to an enumerable object categories
 	def handle_categories
-		unless skip_handle_categories
+		unless skip_handlers
 			self.categories = []  # eliminates any previous categories_jobs so as to avoid duplicates
 			category_array = []
 			category_array = category_names.split(',').uniq if ! category_names.nil?
@@ -96,13 +111,28 @@ class Job < ActiveRecord::Base
 	# Parses the textbox list of courses from "CS162,CS61A,EE123"
 	# etc. to an enumerable object courses
 	def handle_courses
-		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
-		course_array = []
-		course_array = course_names.split(',').uniq if ! course_names.nil?
-		course_array.each do |item|
-			self.courses << Course.find_or_create_by_name(item.upcase.strip)
+		unless skip_handlers
+			self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
+			course_array = []
+			course_array = course_names.split(',').uniq if ! course_names.nil?
+			course_array.each do |item|
+				self.courses << Course.find_or_create_by_name(item.upcase.strip)
+			end
 		end
 	end
+	
+	# Parses the textbox list of proglangs from "java,c,scheme"
+	# etc. to an enumerable object proglangs
+	def handle_proglangs
+		unless skip_handlers
+			self.proglangs = []  # eliminates any previous enrollments so as to avoid duplicates
+			proglang_array = []
+			proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
+			proglang_array.each do |pl|
+				self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
+			end
+		end
+	end	
 	
 	def validate_sponsorships
 	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
