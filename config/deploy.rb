@@ -1,5 +1,5 @@
 # Replace with the HTTP (NOT HTTPS) read-only URL of your Google Code SVN.
-set :repository, "http://research-cs194.googlecode.com/svn/trunk/"
+set :repository, "http://research-cs194.googlecode.com/svn/trunk/research"
 
 # Directory for deployment on the production (remote) machine.
 set :deploy_to, "/mnt/app"
