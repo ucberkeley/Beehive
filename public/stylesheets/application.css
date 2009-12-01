@@ -224,15 +224,25 @@ width: 100%;
 	width: 900px;
 }
 
+#dashboard_container:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+
 /*smartmatch*/
 #dashboard_wrapper_smartmatch{
 	width: 60%;
+	height: 100%;
 	margin-bottom: 15px;
 	border-left: 1px solid #f5f5f5;
 	border-right: 1px solid #f5f5f5;
 }
 
 #dashboard_container_smartmatch{
+	height: 100%;
 	padding: 15px;
 	background: #E5FEB4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
@@ -245,6 +255,7 @@ width: 100%;
 /*watched*/
 #dashboard_wrapper_watched{
 	float:right;
+	clear: both;
 	width: 37.5%;
 	margin-bottom: 15px;
 	border-left: 1px solid #f5f5f5;
