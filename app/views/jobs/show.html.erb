@@ -5,14 +5,16 @@
 <h2> <%=h @job.title %> </h2>
 <p>
   posted by <b><%=h @job.user.name %></b> &nbsp; 	
+	<b>
 	<% if logged_in? && @job.user_id == current_user.id %>
 		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %>
-	<% end %>  
+	<% end %>&nbsp;
 	<% if @job.users.include?(current_user) %>
 		<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
 	<% else %>
 		<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
 	<% end %>
+	</b>
 </p>
 <br />
 <p>
