@@ -28,7 +28,7 @@
 		<td id="job_clear_table_field"><%= text_field_with_auto_complete :proglang, :name, :autocomplete => "off" %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :exp_date %></td>
+		<td id="job_clear_table_label"><%= f.label :exp_date, 'Expiration Time of this Listing' %></td>
 		<td id="job_clear_table_field"><%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.</td>
 	  </tr>
 	  <tr>
