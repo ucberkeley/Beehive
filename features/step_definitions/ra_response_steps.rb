@@ -30,7 +30,7 @@ end
 # Tags
 #
 
-Then "the page should contain '$text'" do |_, text|
+Then "the page should contain '$text'$fail" do |_, text|
   response.should have_text(/#{text}/)
 end
 
@@ -42,6 +42,7 @@ Then "$actor should see a <$container> containing a $attributes" do |_, containe
       case tag
       when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
       when "password"  then with_tag "input[type='password']"; with_tag("label", label)
+	  when "select"  then with_tag "input[type='select']"; with_tag("label", label)
       when "submit"    then with_tag "input[type='submit'][value='#{label}']"
       else with_tag tag, label
       end
