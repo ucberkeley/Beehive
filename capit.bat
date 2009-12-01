@@ -10,6 +10,10 @@ if not %errorlevel%==0 goto :help
 
 goto :end
 
+:notify
+msg %username% "hi"
+goto :next
+
 :deploy
 echo Deploying...
 call cap deploy
@@ -22,12 +26,17 @@ goto :next
 
 :start_solr
 echo Starting solr...
-call cap invoke COMMAND="cd /mnt/app/current;rake solr:stop;nohup rake solr:start > /dev/null 2>&1 &"
+call cap invoke COMMAND="cd /mnt/app/current;rake solr:stop RAILS_ENV=production;nohup rake solr:start RAILS_ENV=production > /dev/null 2>&1 &"
 goto :next
 
 :migrate
 echo Migrating...
 call cap deploy:migrate
+goto :next
+
+:reindex
+echo Reindexing solr (remember, it needs to be started first!)...
+call cap invoke COMMAND="cd /mnt/app/current;rake solr:reindex RAILS_ENV=production"
 goto :next
 
 :do_everything
@@ -47,12 +56,12 @@ echo.
 echo Runs multiple cap commands in a row.
 echo Syntax: %~n0 [command1 [THEN command2 [THEN command3 ... ] ] ]
 echo.
-echo Supported commands: deploy, update, start_solr, migrate, do_everything
+echo Supported commands: deploy, update, start_solr, migrate, do_everything, notify
 echo do_everything = update then migrate then start_solr then deploy
+echo notify gives you a nice notify. Use it like '%~n0 update then notify'
 echo.
 goto :end
 
 :end
 echo.
-rem msg %username% "Finished capping."
 endlocal
