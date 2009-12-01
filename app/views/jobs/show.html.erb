@@ -1,27 +1,47 @@
+<%= stylesheet_link_tag "job" %>
+
+<div id="job_show_main">
 <h2> <%=h @job.title %> </h2>
 <p>
-  <b>Submitted By:</b>
-  <%=h @job.user.name %>
+  posted by <b><%=h @job.user.name %></b> &nbsp; 					
+	<% if @job.users.include?(current_user) %>
+		<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+	<% else %>
+		<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+	<% end %>
 </p>
-
+<br />
 <p>
   <b>Faculty Sponsor:</b>
-  <% @job.faculties.each { |c| %> <%= c.name %> <% } %>
+  <% @job.faculties.each do |f| %> 
+	<%= f.name %> <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %>" target="_blank">
+		<img src="http://eecs.berkeley.edu/favicon.ico" /></a>
+  <% end %> 
 </p>
 
 <p>
   <b>Description:</b>
-  <%=h @job.desc %>
+  <p id="description"><%=h @job.desc %></p>
 </p>
 
 <p>
-  <b>Category(ies):</b>
-  <%=h @job.category_list_of_job %>
+  <b>
+	Categor<%=h ((@job.category_list_of_job.length == 1) ? "y" : "ies") %>:
+  </b>
+  <% if ! @job.category_list_of_job.empty? %>
+	<%=h @job.category_list_of_job %>
+  <% else %>
+    (none)
+  <% end %>
 </p>
 
 <p>
   <b>Required courses:</b>
-  <%=h @job.course_list_of_job %>
+  <% if ! @job.course_list_of_job.empty? %>
+	<%=h @job.course_list_of_job %>
+  <% else %>
+    (none)
+  <% end %>
 </p>
 
 <p>
@@ -30,9 +50,11 @@
 </p>
 
 <p>
-  <b>Tag(s):</b>
+  <b>Tags:</b>
   <% if @job.active %>
-	<%=h @job.tag_list %>
+	<% @job.tag_list.each do |tag| %>
+		<span class="tag"><%=h tag %></span>
+	<% end %>
   <% else %>
     (Tags will be generated once job is activated)
   <% end %>	
@@ -58,7 +80,10 @@
   <% if @job.credit %> Yes <% else %> No <% end %>
 </p>
 
-<br /><br />=== Debug ===<br /><br />
+<br /><br />
+<!-- === Debug === -->
+= Activation Link =
+<br /><br />
 
 <a href="<%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %>"><%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %></a>
 
@@ -66,3 +91,4 @@
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
+</div>
