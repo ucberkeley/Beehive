@@ -1,9 +1,13 @@
 <%= stylesheet_link_tag "job" %>
 
 <div id="job_show_main">
+<%= link_to "< back to dashboard", :controller => :dashboard %><br /><br /><br />
 <h2> <%=h @job.title %> </h2>
 <p>
-  posted by <b><%=h @job.user.name %></b> &nbsp; 					
+  posted by <b><%=h @job.user.name %></b> &nbsp; 	
+	<% if logged_in? && @job.user_id == current_user.id %>
+		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %>
+	<% end %>  
 	<% if @job.users.include?(current_user) %>
 		<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
 	<% else %>
@@ -15,7 +19,7 @@
   <b>Faculty Sponsor:</b>
   <% @job.faculties.each do |f| %> 
 	<%= f.name %> <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %>" target="_blank">
-		<img src="http://eecs.berkeley.edu/favicon.ico" /></a>
+		<%= image_tag("eecs_icon.gif") %></a>
   <% end %> 
 </p>
 
@@ -46,7 +50,11 @@
 
 <p>
   <b>Desired programming languages: </b>
-  <%=h @job.proglang_list_of_job %>
+  <% if ! @job.proglang_list_of_job.empty? %>
+	<%=h @job.proglang_list_of_job %>
+  <% else %>
+    (none)
+  <% end %>
 </p>
 
 <p>
@@ -89,6 +97,4 @@
 
 <% #debug(@job) %>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
 </div>
