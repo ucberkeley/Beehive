@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 	params[:user][:category_names] = params[:category][:name]	
 
 	# Handles the text_field_with_auto_complete for proglangs.
-	params[:user][:proglang_names] = params[:prolang][:name]		
+	params[:user][:proglang_names] = params[:proglang][:name]		
 	
 	@user = User.new(params[:user])
 	
