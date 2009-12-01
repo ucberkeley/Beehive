@@ -330,6 +330,23 @@ span.tag {
 	font-weight: bold;
 }
 
+.job_clear_table {
+	font-family: tahoma, arial, helvetica, sans-serif;
+	font-size: 12px;
+	color: #333;
+	border:0px;
+}
+.job_clear_table td {
+	text-align:left;
+	width:auto;
+	padding:5px;
+}
+#job_clear_table_label {
+	width:150px;
+}
+#job_clear_table_field {
+	width:350px;
+}
 
 /**Links**/
 #header a {
