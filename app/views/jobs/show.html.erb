@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "job" %>
 
 <div id="job_show_main">
-<%= link_to "< back to dashboard", :controller => :dashboard %><br /><br /><br />
+<%= link_to "< back to listings", :controller => :jobs, :action => :index %><br /><br /><br />
 <h2> <%=h @job.title %> </h2>
 <p>
   posted by <b><%=h @job.user.name %></b> &nbsp; 	
