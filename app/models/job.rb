@@ -4,6 +4,8 @@ class Job < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :pictures
   
+  has_many :watches
+  has_many :users, :through => :watches
   has_many :sponsorships
   has_many :faculties, :through => :sponsorships
   has_many :coursereqs

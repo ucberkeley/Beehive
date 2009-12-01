@@ -7,6 +7,11 @@
 					<% if logged_in? && job.user_id == current_user.id %>
 						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
 					<% end %>
+					<% if job.users.include?(current_user) %>
+						<%= link_to "[unwatch]", :controller=>:jobs, :action => :unwatch, :id => job.id %>
+					<% else %>
+						<%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
+					<% end %>
 					</div>
 					<% job_tags = job.tag_list %>
 					<% if !job_tags.empty? %>

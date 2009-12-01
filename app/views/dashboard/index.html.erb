@@ -6,7 +6,11 @@
 		<div id="dashboard_container_watched">
 			<h2>Your Watched Projects</h2>
 			<!-- //list of projects you're watching -->
-			Currently you are not watching any projects.
+			<% if @watched_jobs.empty? %>
+				You are not watching any projects.
+			<% else %>
+				<%= render :partial => "jobs/job", :collection => @watched_jobs %>
+			<% end %>
 			<br />
 		</div>
 		<div id="dashboard_shadow_watched"></div>
