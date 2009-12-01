@@ -279,7 +279,7 @@ class JobsController < ApplicationController
 	
 	respond_to do |format|
 		if watch.destroy
-		  flash[:notice] = 'Job is now un-watched. You can find a list of your watched jobs on the dashboard.'
+		  flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
 		  format.html { redirect_to(:controller=>:dashboard) }
 		else
 		  flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
