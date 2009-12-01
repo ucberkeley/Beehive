@@ -5,7 +5,7 @@ require 'active_record'
 
 namespace :solr do
 
-  desc 'Starts Solr on a 'nix machine. WILL NOT WORK IN WINDOWS. Options accepted: RAILS_ENV=your_env, PORT=XX. Defaults to development if none.'
+  desc 'Starts Solr on a nix machine. WILL NOT WORK IN WINDOWS. Options accepted: RAILS_ENV=your_env, PORT=XX. Defaults to development if none.'
   task :start do
     require "#{File.dirname(__FILE__)}/../../config/solr_environment.rb"
     begin
