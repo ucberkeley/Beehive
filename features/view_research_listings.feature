@@ -6,8 +6,8 @@ Feature: view research listings
 	
 	Scenario: View listings
 		Given I am on the home page
-		When I select "3" from "department_select"
-		Then I should see a list of listings
+		When I select EECS from "department_select"
+		Then I should see "Title/Description"
 		
 	Scenario: View individual listing		
 		Given I am logged in as "user"

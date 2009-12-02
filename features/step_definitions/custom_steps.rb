@@ -71,6 +71,26 @@ Then /^I should go to the Reviews page for professor "([^\"]*)"$/ do |arg1|
   pending
 end
 
+Then /^I should see a form called "([^\"]*)"$/ do |arg1|
+  pending
+end
+
+When /^I fill in the form with title "([^\"]*)"$/ do |arg1|
+  pending
+end
+
+Then /^I should go to the Show page for the listing whose title is "([^\"]*)"$/ do |arg1|
+  pending
+end
+
+When /^I select EECS from "([^\"]*)"$/ do |arg1|
+  pending 
+end
+
+When /^I fill in the textbox called "([^\"]*)" with "([^\"]*)"$/ do |arg1, arg2|
+  pending
+end
+
 When /^I add a class "([^\"]*)" with grade "([^\"]*)"$/ do |arg1, arg2|
   pending
 end

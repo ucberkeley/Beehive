@@ -18,4 +18,4 @@ Feature: sign up for an account
 	Scenario: Anonymous user can't post research listings
 		Given I am an anonymous user
 		And I visit /jobs/new
-		Then I should be redirected to /session/new
+		Then I should be visiting /session/new
