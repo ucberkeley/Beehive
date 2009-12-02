@@ -137,6 +137,9 @@ width: 100%;
 }
 
 #footer_inside{
+	/* hide the footer for now */
+	display: none;
+
 	color: gray;
 	text-align: center;
 	height: 40px;
