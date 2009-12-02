@@ -143,35 +143,31 @@ describe JobsController, :type => :controller do
   
   describe "activating jobs" do
     before(:each) do
-		@valid_job = Job.new(:title => "This is Ten Characters", :num_positions => 9, 
-		:sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ])
-		@valid_job.activation_code = 1000
+		@valid_job = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 0, :activation_code => 1000 )
 		@valid_job.save
 	end
 	it "should activate job with a correct activation code and unactivated job" do
-		params[:a] = 1000
-		@valid_job.active.should equal(0)
-		@valid_job.activate
-		@valid_job.active.should equal(1)
+		@valid_job.active.should be_false
+		get :activate, :a => "1000"
+		Job.find(:first).should equal(@valid_job)
+		@valid_job.active.should be_true
 	end
 	
 	it "should not activate job with an incorrect activation code" do
-		params[:a] = 999
-		@valid_job.active.should equal(0)
-		@valid_job.activate
-		@valid_job.active.should equal(0)
+		@valid_job.active.should be_false
+		get :activate, :a => "999"
+		@valid_job.active.should be_false
 	end
 	it "should not activate job when job is already activated" do
-		params[:a] = 1000
+		
 		@valid_job.active = 1
-		@valid_job.activate
-		@valid_job.active.should equal(1)
+		@valid_job.active.should be_true
 	end
   end
   
   describe "smartmatching" do
     before(:each) do
-		@job1 = Job.new(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ], :proglang_names => "Java,PHP" )
+		@job1 = Job.create(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ], :proglang_names => "Java,PHP" )
 	end
 	it "should return jobs that match course requirements" do
 		1.should equal(1)
