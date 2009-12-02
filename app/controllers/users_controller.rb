@@ -39,12 +39,6 @@ class UsersController < ApplicationController
 		courses_valid = true if params[:course][:name]
 	end
 	
-	# Assign the faculty email parameter based on the faculty name chosen from the select dropdown.
-	if faculty_valid
-		params[:user][:faculty_email] = Faculty.find(:first, :conditions => [ "name = ?", params[:user][:faculty_name] ]).email
-		params[:user][:student_email] = params[:user][:faculty_email]
-	end
-	
 	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name] if courses_valid
 	
