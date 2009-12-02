@@ -9,7 +9,7 @@
 			<% if @watched_jobs.empty? %>
 				You are not watching any projects.
 			<% else %>
-				<%= render :partial => "jobs/job", :collection => @watched_jobs %>
+				<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
 			<% end %>
 			<br />
 		</div>
