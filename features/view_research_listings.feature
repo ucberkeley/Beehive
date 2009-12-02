@@ -6,20 +6,18 @@ Feature: view research listings
 	
 	Scenario: View listings
 		Given I am on the home page
-		And I press "Browse"
+		When I select "3" from "department_select"
 		Then I should see a list of listings
 		
-	Scenario: View individual listing
-		Given I am on the listings page
-		And I press "Details" for the first listing in the list
-		Then I should go to the Show page for that listing
+	Scenario: View individual listing		
+		Given I am logged in as "user"
+		And I visit /jobs
+		And I follow "job"
+		Then I should see "Faculty Sponsor"
 
-	Scenario: Search for listings by class
-		Given I am on the listings search page
-		And I press "Classes"
-		Then I should see the "Search by class" form
+	Scenario: Search for listings 
+		Given I visit /jobs
+		And I fill in "job" for "search_terms_query"
+		And I press "Filter Results"
+		Then I should see "job"
 		
-	Scenario: Search for listings by tag
-		Given I am on the listings search page
-		And I press "Tags"
-		Then I should see the "Search by tags" form
