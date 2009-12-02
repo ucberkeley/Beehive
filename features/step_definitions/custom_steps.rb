@@ -61,6 +61,12 @@ Given /^there is a "([^\"]*)" named "([^\"]*)"$/ do |type, name|
 	klass.find(:first, :conditions => ["name = ?", name]) || klass.create({:name => name})
 end
 
+Given /^there is a "([^\"]*)" with attributes (.+)$/ do |type, attribs|
+	klass = Kernel.const_get(type)
+	atts = attribs.to_hash_from_story
+	klass.find(:first, :conditions => ["name = ?", atts[:name]]) || klass.create(atts)
+end
+
 #
 # Pending
 #
