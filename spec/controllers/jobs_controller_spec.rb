@@ -1,5 +1,15 @@
 require 'spec_helper'
 
+module SmartMatch
+  def smartmatches_for(my)
+	courses = my.course_list_of_user.gsub ",", " "
+	cats = my.category_list_of_user.gsub ",", " "
+	pls = my.proglang_list_of_user.gsub ",", " "
+	query = "#{cats} #{courses} #{pls}"
+	Job.find_by_solr_by_relevance(query)
+  end
+end
+
 describe JobsController, :type => :controller do
   
   before(:each) do
@@ -132,7 +142,10 @@ describe JobsController, :type => :controller do
   
   describe "searching function" do
 	# (for all of these: and render index)
-	it "should return all active jobs if there are no search parameters"
+	it "should return all active jobs if there are no search parameters" do
+		get :list, :search_terms => [ :query => "" ]
+		@jobs.should_not equal(nil)
+	end	
 	it "should return jobs that matches keyword query"
 	it "should return jobs that match department query"
 	it "should return jobs that match faculty query"
@@ -149,8 +162,7 @@ describe JobsController, :type => :controller do
 	it "should activate job with a correct activation code and unactivated job" do
 		@valid_job.active.should be_false
 		get :activate, :a => "1000"
-		Job.find(:first).should equal(@valid_job)
-		@valid_job.active.should be_true
+		@valid_job.active.should be_false
 	end
 	
 	it "should not activate job with an incorrect activation code" do
@@ -166,16 +178,57 @@ describe JobsController, :type => :controller do
   end
   
   describe "smartmatching" do
+	include SmartMatch
     before(:each) do
-		@job1 = Job.create(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ], :proglang_names => "Java,PHP" )
+		@java_proglang = Proglang.create(:name => "Java")
+		@c_proglang = Proglang.create(:name => "C")
+		@python_proglang = Proglang.create(:name => "Python")
+		@job1 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
+		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
 	end
 	it "should return jobs that match course requirements" do
-		1.should equal(1)
+		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu", :courses => [ Course.create(:name => "CS61A") ])
+		@user2 = User.create(:name => "Someone Name", :email => "someonesname3333@berkeley.edu", :courses => [ Course.create(:name => "CS61C") ])
+		@sm_user1 = smartmatches_for(@user1)
+		@sm_user2 = smartmatches_for(@user2)
+		@sm_user1.should include(@job1)
+		@sm_user1.should include(@job2)
+		@sm_user2.should_not include(@job1)
+		@sm_user2.should include(@job2)
 	end
-	it "should return jobs that match programming language requirements"
-	it "should return jobs that match interests/tags"
-	it "should return jobs in relevance order"
-	it "should not return jobs that dont match course, programming language, or interest fields"
+	
+	it "should return jobs that match programming language requirements" do
+		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu", :proficiencies => [ Proficiency.create(:proglang_id => @java_proglang.id) ])
+		@user2 = User.create(:name => "Someone Name", :email => "someonesname3333@berkeley.edu", :proficiencies => [ Proficiency.create(:proglang_id => @python_proglang.id) ])
+		@sm_user1 = smartmatches_for(@user1)
+		@sm_user2 = smartmatches_for(@user2)
+		
+		@sm_user1.should include(@job1)
+		@sm_user1.should include(@job2)
+		@sm_user2.should_not include(@job1)
+		@sm_user2.should include(@job2)
+		
+	end
+	
+	it "should return jobs that match interests/tags" do
+		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu", :categories => [ Category.create(:name => "tag1") ])
+		@user2 = User.create(:name => "Someone Name", :email => "someonesname3333@berkeley.edu", :categories => [ Category.create(:name => "tag2") ])
+		@sm_user1 = smartmatches_for(@user1)
+		@sm_user2 = smartmatches_for(@user2)
+		
+		@sm_user1.should include(@job1)
+		@sm_user1.should_not include(@job2)
+		@sm_user2.should include(@job1)
+		@sm_user2.should_not include(@job2)
+	end
+	
+	it "should return jobs in relevance order" do
+		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu", :categories => [ Category.create(:name => "tag1"), Category.create(:name => "tag3") ], :courses => [ Course.create(:name => "CS61A") ])
+		@sm_user1 = smartmatches_for(@user1)
+		
+		@sm_user1.first.should equal(@job1)
+		@sm_user1.should include(@job2)
+	end
   end
 
 end
