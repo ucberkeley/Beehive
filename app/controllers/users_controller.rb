@@ -32,21 +32,30 @@ class UsersController < ApplicationController
 	
 	faculty_valid = false
 	courses_valid = false
+	category_valid = false
+	proglang_valid = false
 	if params[:user]
 		faculty_valid = true if params[:user][:is_faculty]
 	end
 	if params[:course]
 		courses_valid = true if params[:course][:name]
 	end
+	if params[:category]
+		category_valid = true if params[:category][:name]
+	end
+	if params[:proglang]
+		proglang_valid = true if params[:proglang][:name]
+	end
+	
 	
 	# Handles the text_field_with_auto_complete for courses.
 	params[:user][:course_names] = params[:course][:name] if courses_valid
 	
 	# Handles the text_field_with_auto_complete for categories.
-	params[:user][:category_names] = params[:category][:name]	
+	params[:user][:category_names] = params[:category][:name] if category_valid
 
 	# Handles the text_field_with_auto_complete for proglangs.
-	params[:user][:proglang_names] = params[:proglang][:name]		
+	params[:user][:proglang_names] = params[:proglang][:name] if proglang_valid	
 	
 	@user = User.new(params[:user])
 	
