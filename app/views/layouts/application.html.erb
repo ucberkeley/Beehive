@@ -32,7 +32,11 @@
 	<div id="shadowdown"></div>
 	
 	<div id="content">
-		
+		<% if !(flash[:error].nil? || flash[:error] == '') %>
+			<div id="flash_error">
+				<%= flash[:error] %>
+			</div>
+		<% end %>
 		<% if !(flash[:notice].nil? || flash[:notice] == '') %>
 			<div id="flash_notice">
 				<%= flash[:notice] %>
