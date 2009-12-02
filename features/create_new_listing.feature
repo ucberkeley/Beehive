@@ -9,15 +9,14 @@ Feature: create new research listing
 		And I visit /jobs/new
 		
 	Scenario: Logged in user is on create-a-listing page
-		Then the page should contain 'New job'
+		Then I should see "New Job"
 		And I should see a <form> containing a textfield: title, textfield: desc, textfield: Category(ies), textfield: "Required courses", textfield: "Desired programming languages"
 		
 	Scenario: Submit a listing
 		When I fill in the following:
-			| Title				|	Rad Lab Research Assistant	|
 			| Desc				|	Write tricky while loops	|
 			| Exp date			|	3000-1-1					|
-			| sponsor	|	Armando Fox					|
+			| Faculty sponsor	|	Armando Fox					|
 		And I press "Create"
 		Then I should go to the Show page for the listing whose title is "RAD Lab Research Assistant"
 		
