@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
 	# is marked as faculty or not. This should occur as a before_validation
 	# since we want to save a value for :email, not :faculty_email or :student_email.
 	def handle_email
-		self.email = (self.is_faculty ? self.faculty_email : self.student_email)
+		self.email = (self.is_faculty ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
 	end
 	
 	# Dynamically assign the value of :name, based on whether this user
