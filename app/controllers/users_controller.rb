@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     logout_keeping_session!
 
 	# set up list of faculty names
-    @all_faculty = Faculty.find(:all)
+    @all_faculty = Faculty.find(:all, :order => :id)
     @faculty_names = []
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
