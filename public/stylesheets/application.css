@@ -206,6 +206,14 @@ width: 100%;
 	background: url("../images/research_match_display_04.png");
 }
 
+#login_box{
+	background: #E5FEB4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
+	border: 1px solid #F0FFD2;
+	text-align: center;
+	margin: auto;
+	width: 300px;
+}
+
 /**Menu**/
 
 #department_speech{
