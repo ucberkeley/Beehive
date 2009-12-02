@@ -111,10 +111,10 @@ class JobsController < ApplicationController
 	if params[:category]
 		category_names_valid = true if params[:category][:name]
 	end
-	if params[:category]
+	if params[:course]
 		course_names_valid = true if params[:course][:name]
 	end
-	if params[:category]
+	if params[:proglang]
 		proglang_names_valid = true if params[:proglang][:name]
 	end
 		
@@ -185,15 +185,27 @@ class JobsController < ApplicationController
 		end
 	end
 	
+	category_names_valid = false
+	course_names_valid = false
+	proglang_names_valid = false
+	if params[:category]
+		category_names_valid = true if params[:category][:name]
+	end
+	if params[:course]
+		course_names_valid = true if params[:course][:name]
+	end
+	if params[:proglang]
+		proglang_names_valid = true if params[:proglang][:name]
+	end
 	
 	# Handles the text_field_with_auto_complete for categories.
-	params[:job][:category_names] = params[:category][:name]
+	params[:job][:category_names] = params[:category][:name] if category_names_valid
 	
 	# Handles the text_field_with_auto_complete for required courses.
-	params[:job][:course_names] = params[:course][:name]
+	params[:job][:course_names] = params[:course][:name] if course_names_valid
 	
 	# Handles the text_field_with_auto_complete for desired proglangs.
-	params[:job][:proglang_names] = params[:proglang][:name]
+	params[:job][:proglang_names] = params[:proglang][:name] if proglang_names_valid
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
