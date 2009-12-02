@@ -127,6 +127,9 @@ width: 100%;
 }
 
 #footer{
+	/* hide the footer for now */
+	display: none;
+	
 	position: absolute;
 	bottom: 0;
 	width: 100%;
