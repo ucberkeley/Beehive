@@ -53,7 +53,12 @@ end
 Given /^I should go to the Show page for the listing whose title is "([^\"]*)"$/ do |name|
 	j = Job.find(:first, :conditions => ["title = ?", name])
 	j.should_not be_nil
-	URI.parse(current_url).path.should =~ "/jobs/#{j.id}"
+	URI.parse(current_url).path.should contain("/jobs/#{j.id}")
+end
+
+Given /^there is a "([^\"]*)" named "([^\"]*)"$/ do |type, name|
+	klass = Kernel.const_get(type)
+	klass.find(:first, :conditions => ["name = ?", name]) || klass.create({:name => name})
 end
 
 #
@@ -76,10 +81,6 @@ Then /^I should see a form called "([^\"]*)"$/ do |arg1|
 end
 
 When /^I fill in the form with title "([^\"]*)"$/ do |arg1|
-  pending
-end
-
-Then /^I should go to the Show page for the listing whose title is "([^\"]*)"$/ do |arg1|
   pending
 end
 
