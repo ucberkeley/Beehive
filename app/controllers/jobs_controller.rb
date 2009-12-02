@@ -176,9 +176,11 @@ class JobsController < ApplicationController
     end
 	
 	sponsorships = []
-	if params[:faculty_name] != @job.faculties.first.id
-		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
-		params[:job][:sponsorships] = sponsorships << @sponsorship
+	if @job.faculties
+		if params[:faculty_name] != @job.faculties.first.id 
+			@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
+			params[:job][:sponsorships] = sponsorships << @sponsorship
+		end
 	end
 	
 	# Handles the text_field_with_auto_complete for categories.

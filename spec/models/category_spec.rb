@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Category do
   before(:each) do
     @valid_attributes = {
-      :name => "value for name",
-      :job_id => 1
+      :name => "value for name"
     }
   end
 

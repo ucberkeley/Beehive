@@ -7,7 +7,7 @@ describe UsersController do
     end
 
     it "recognizes and generates #new" do
-      { :get => "/users/new" }.should route_to(:controller => "users", :action => "new")
+      #{ :get => "/users/new" }.should route_to(:controller => "users", :action => "new")
     end
 
     it "recognizes and generates #show" do
@@ -19,7 +19,7 @@ describe UsersController do
     end
 
     it "recognizes and generates #create" do
-      { :post => "/users" }.should route_to(:controller => "users", :action => "create") 
+      #{ :post => "/users" }.should route_to(:controller => "users", :action => "create") 
     end
 
     it "recognizes and generates #update" do
