@@ -76,6 +76,12 @@ Programming languages in which you are proficient: <br />
 </p>
 <br />
 
+<% if params[:user] && params[:user][:is_faculty] %>
+<script type="text/javascript">
+	document.getElementById("user_is_faculty_true").onclick();
+</script>
+<% end %>
+
 <!-- //tagging stuff! -->
 </div>
 
