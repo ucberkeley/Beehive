@@ -49,6 +49,16 @@ Then "puts response" do
 	puts response.body
 end
 
+
+Given /^I should go to the Show page for the listing whose title is "([^\"]*)"$/ do |name|
+	j = Job.find(:first, :conditions => ["title = ?", name])
+	j.should_not be_nil
+	URI.parse(current_url).path.should =~ "/jobs/#{j.id}"
+end
+
+#
+# Pending
+#
 Given /^there is a review for "([^\"]*)" from "([^\"]*)" with score 5$/ do |arg1, arg2|
   pending
 end
@@ -58,22 +68,6 @@ Then /^I should see a menu with choices "([^\"]*)"$/ do |arg1|
 end
 
 Then /^I should go to the Reviews page for professor "([^\"]*)"$/ do |arg1|
-  pending
-end
-
-Then /^I should see a form called "([^\"]*)"$/ do |arg1|
-  pending
-end
-
-When /^I fill in the form with title "([^\"]*)"$/ do |arg1|
-  pending
-end
-
-Then /^I should go to the Show page for the listing whose title is "([^\"]*)"$/ do |arg1|
-  pending
-end
-
-When /^I fill in the textbox called "([^\"]*)" with "([^\"]*)"$/ do |arg1, arg2|
   pending
 end
 

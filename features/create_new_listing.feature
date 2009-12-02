@@ -10,19 +10,20 @@ Feature: create new research listing
 		
 	Scenario: Logged in user is on create-a-listing page
 		Then I should see "New Job"
-		And I should see a <form> containing a textfield: title, textfield: desc, textfield: Category(ies), textfield: "Required courses", textfield: "Desired programming languages"
+		And I should see a <form> containing a textfield: "Job Title", textfield: "Job Description", textfield: "Category(ies)", textfield: "Required courses", textfield: "Desired Programming Languages"
 		
 	Scenario: Submit a listing
 		When I fill in the following:
-			| Desc				|	Write tricky while loops	|
-			| Exp date			|	3000-1-1					|
-			| Faculty sponsor	|	Armando Fox					|
+			| Job Title			|	RAD Lab Research Assistant	|
+			| Job Description	|	Write tricky while loops	|
+		And I select "2014-1-1" as the "Expiration Time of this Listing" date and time
+		And I select "armando fox" from "faculty_name"
 		And I press "Create"
 		Then I should go to the Show page for the listing whose title is "RAD Lab Research Assistant"
 		
 	Scenario: Submit listing with requirements
-		When I fill in the form with title "Uber RAD Lab Research Assistant"
-		And I fill in the textbox called "tags" with "Java-proficient"
-		And I add a class "CS70" with grade "A"
-		And I press "Submit Listing"
+		When I fill in the following:
+			|	Job Title		|	Uber RAD Lab Research Assistant	|
+			|	Job Description	|	Write super tricky for loops	|
+		And I press "Create"
 		Then I should go to the Show page for the listing whose title is "Uber RAD Lab Research Assistant"
