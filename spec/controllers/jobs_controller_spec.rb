@@ -143,7 +143,8 @@ describe JobsController, :type => :controller do
   
   describe "activating jobs" do
     before(:each) do
-		@valid_job = Job.new(:title => "This is Ten Characters", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ])
+		@valid_job = Job.new(:title => "This is Ten Characters", :num_positions => 9, 
+		:sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ])
 		@valid_job.activation_code = 1000
 		@valid_job.save
 	end
@@ -170,7 +171,7 @@ describe JobsController, :type => :controller do
   
   describe "smartmatching" do
     before(:each) do
-		@job1 = Job.new(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil ], :proglang_names => "Java,PHP" )
+		@job1 = Job.new(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ], :proglang_names => "Java,PHP" )
 	end
 	it "should return jobs that match course requirements" do
 		1.should equal(1)
