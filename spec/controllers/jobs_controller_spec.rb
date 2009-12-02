@@ -142,13 +142,39 @@ describe JobsController, :type => :controller do
   end
   
   describe "activating jobs" do
-	it "should activate job with a correct activation code and unactivated job"
-	it "should not activate job with an incorrect activation code"
-	it "should not activate job when job is already activated"
+    before(:each) do
+		@valid_job = Job.new(:title => "This is Ten Characters", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil) ])
+		@valid_job.activation_code = 1000
+		@valid_job.save
+	end
+	it "should activate job with a correct activation code and unactivated job" do
+		params[:a] = 1000
+		@valid_job.active.should equal(0)
+		@valid_job.activate
+		@valid_job.active.should equal(1)
+	end
+	
+	it "should not activate job with an incorrect activation code" do
+		params[:a] = 999
+		@valid_job.active.should equal(0)
+		@valid_job.activate
+		@valid_job.active.should equal(0)
+	end
+	it "should not activate job when job is already activated" do
+		params[:a] = 1000
+		@valid_job.active = 1
+		@valid_job.activate
+		@valid_job.active.should equal(1)
+	end
   end
   
   describe "smartmatching" do
-	it "should return jobs that match course requirements"
+    before(:each) do
+		@job1 = Job.new(:title => "Valid Job Number One", :num_positions => 9, :sponsorships => [ Sponsorship.new(:faculty => Faculty.find(:first), :job => nil ], :proglang_names => "Java,PHP" )
+	end
+	it "should return jobs that match course requirements" do
+		1.should equal(1)
+	end
 	it "should return jobs that match programming language requirements"
 	it "should return jobs that match interests/tags"
 	it "should return jobs in relevance order"
