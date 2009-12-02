@@ -187,8 +187,10 @@ describe JobsController, :type => :controller do
 		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
 	end
 	it "should return jobs that match course requirements" do
-		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu", :courses => [ Course.create(:name => "CS61A") ])
-		@user2 = User.create(:name => "Someone Name", :email => "someonesname3333@berkeley.edu", :courses => [ Course.create(:name => "CS61C") ])
+		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu")
+		@user1.courses = [ Course.create(:name => "CS61A") ]
+		@user2 = User.create(:name => "Someone Name", :email => "someonesname3333@berkeley.edu")
+		@user2.courses = [ Course.create(:name => "CS61C") ]
 		@sm_user1 = smartmatches_for(@user1)
 		@sm_user2 = smartmatches_for(@user2)
 		@sm_user1.should include(@job1)
