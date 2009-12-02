@@ -373,14 +373,17 @@ span.tag {
 }
 
 /**Links**/
-#header a {
-	color: #abe68b;
-}
-
 a { 
-	color: #50a025; 
+	color: #71c146; 
 	text-decoration: none;
 }
+
+#header a {
+	/* color: #abe68b; */
+	color: #71c146;
+}
+
+
 a:hover {
 	text-decoration: underline;
 }
