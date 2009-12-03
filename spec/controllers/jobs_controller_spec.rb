@@ -26,6 +26,8 @@ describe JobsController, :type => :controller do
 	@mock_job.stub!(:paid).and_return(false)
 	@mock_job.stub!(:credit).and_return(false)
 	@mock_job.stub!(:tag_list=).and_return("")
+	@mock_job.stub!(:activation_code=).and_return(0)
+	@mock_job.stub!(:sponsorships).and_return([])
 	return @mock_job
   end
 
@@ -66,13 +68,13 @@ describe JobsController, :type => :controller do
     describe "with valid params" do
       it "assigns a newly created job as @job" do
         Job.stub!(:new).and_return(mock_job(:save => true))
-        post :create, :job => {:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ]}
+        post :create, :job => {:params=>"these"}
         assigns[:job].should equal(mock_job)
       end
 
       it "redirects to the created job" do
         Job.stub!(:new).and_return(mock_job(:save => true))
-        post :create, :job => @job_attr
+        post :create, :job => {:params=>"these"}
         response.should redirect_to(job_url(mock_job))
       end
 	  
@@ -100,10 +102,10 @@ describe JobsController, :type => :controller do
 
     describe "with valid params" do
       it "updates the requested job" do
-        Job.should_receive(:find).with("37").and_return(mock_job(:save=>true))
+        Job.should_receive(:find).and_return(mock_job(:update_attributes => true, :save=>true))
+		mock_job.should_receive(:update_attributes)
 		put :update, :id => "37"
-        mock_job.should_receive(:update_attributes)
-      end
+    end
 
       it "assigns the requested job as @job" do
         Job.stub!(:find).and_return(mock_job(:update_attributes => true, :save=> true))
@@ -123,8 +125,9 @@ describe JobsController, :type => :controller do
     describe "with invalid params" do
       it "updates the requested job" do
         Job.should_receive(:find).and_return(mock_job(:update_attributes => false))
+		mock_job.should_receive(:update_attributes)
 		put :update, :id=> "37"
-        mock_job.should_receive(:update_attributes)
+        
       end
 
       it "re-renders the 'edit' template" do
