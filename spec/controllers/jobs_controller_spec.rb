@@ -155,17 +155,39 @@ describe JobsController, :type => :controller do
   
   describe "searching function" do
 	# (for all of these: and render index)
+	before(:each) do
+		Faculty.create(:name => "Testing Faculty", :email => "testingfaculty@berkeley.edu")
+		Faculty.create(:name => "Testing Faculty Two", :email => "testingfaculty@berkeley.edu")
+		@java_proglang = Proglang.create(:name => "Java")
+		@c_proglang = Proglang.create(:name => "C")
+		@python_proglang = Proglang.create(:name => "Python")
+		@first_faculty = Faculty.find(:first)
+		@job1 = Job.create(:title => "This is Ten Characters Hello", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :paid => true, :credit => false, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
+		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => @first_faculty, :job => nil) ], :exp_date => Time.now+100, :active => 1, :paid => false, :credit => true, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
+	end
 	it "should return all active jobs if there are no search parameters" do
 		get :list, :search_terms => {:query => ""}
 		assigns[:jobs].should_not be_nil
 	end	
-	it "should return jobs that matches keyword query"
-		
-	it "should return jobs that match department query"
-	it "should return jobs that match faculty query"
-	it "should return jobs that match paid query"
-	it "should return jobs that match credit query"
-	it "should not return jobs that don't match any of the queries"
+	it "should return jobs that matches keyword query" do
+		get :list, :search_terms => {:query => "Hello"}
+		assigns[:jobs].should include(@job1)
+	end
+	it "should return jobs that match faculty query" do
+		get :list, :search_terms => {:faculty_select => @first_faculty.id}
+		assigns[:jobs].should include(@job1)
+		assigns[:jobs].should include(@job2)
+	end
+	it "should return jobs that match paid query" do
+		get :list, :search_terms => {:paid => 1}
+		assigns[:jobs].should include(@job1)
+		assigns[:jobs].should_not include(@job2)
+	end
+	it "should return jobs that match credit query" do
+		get :list, :search_terms => {:credit => 1}
+		assigns[:jobs].should include(@job2)
+		assigns[:jobs].should_not include(@job1)
+	end
   end
   
   describe "activating jobs" do
