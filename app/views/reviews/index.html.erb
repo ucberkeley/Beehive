@@ -35,8 +35,13 @@
 		
 	</td>
     <td><%= link_to 'Show', review %></td>
-    <td><%= link_to 'Edit', edit_review_path(review) %></td>
-    <td><%= link_to 'Destroy', review, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+	
+	<% if logged_in? && review.user == current_user %>
+		<%= link_to 'Edit', edit_review_path(review) %></td>
+		<td><%= link_to 'Delete', review, :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+	</td>
   </tr>
 <% end %>
 </table>

@@ -11,6 +11,10 @@ class JobsController < ApplicationController
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
   
+  # Ensures that only the user who created a job -- and no other users -- can edit it 
+  before_filter :correct_user_access, :except => [ :index, :new, :create, :show, :list ]
+  
+  
   def index
     @search_query = "Keyword (leave blank to view all)"
 	#@search_query = params[:search_terms][:query]
@@ -308,16 +312,23 @@ class JobsController < ApplicationController
   
   protected
   
-  # Populates the tag_list of the job.
-  def populate_tag_list
-	tags_string = ""
-	tags_string << @job.category_list_of_job 
-	tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
-	tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
-	tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
-	tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
-	@job.tag_list = tags_string
-  end
+	  # Populates the tag_list of the job.
+	  def populate_tag_list
+		tags_string = ""
+		tags_string << @job.category_list_of_job 
+		tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
+		tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
+		tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
+		tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
+		@job.tag_list = tags_string
+	  end
   
-  
+  private
+	
+	def correct_user_access
+		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
+			flash[:notice] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+			redirect_to :controller => 'jobs', :action => :index
+		end
+	end
 end
