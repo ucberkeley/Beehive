@@ -4,8 +4,8 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= f.label :faculty_name %><br />
+    <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :name, :name, @review.faculty.name) %>
   </p>
   <p>
     <%= f.label :body %><br />

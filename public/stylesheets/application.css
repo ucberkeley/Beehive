@@ -16,6 +16,7 @@ body, p, ol, ul, td {
   color: #333;
   margin: auto;
   width: 100%;
+  cursor: default;
 }
 
 pre {
@@ -218,6 +219,10 @@ width: 100%;
 	text-align: center;
 	margin: auto;
 	width: 300px;
+}
+
+.left_margin {
+	margin-left: 40px;
 }
 
 /**Menu**/

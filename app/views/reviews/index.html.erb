@@ -5,13 +5,23 @@
 <table>
   <tr>
     <th>User</th>
+	<th>Faculty</th>
     <th>Body</th>
     <th>Rating</th>
   </tr>
 
 <% @reviews.each do |review| %>
   <tr>
-    <td><%=h review.user %></td>
+    <td>
+		<% if review.user != nil %> 
+			<%=h review.user.name  %>
+		<% end %>
+	</td>
+	<td>
+		<% if review.faculty != nil %>
+			<%=h review.faculty.name %>
+		<% end %>
+	</td>
     <td><%=h review.body %></td>
     <td><%=h review.rating %></td>
     <td><%= link_to 'Show', review %></td>

@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :faculty_name %><br />
-    <%= select_tag :faculty_name, options_from_collection_for_select([Faculty.new(:name => "(Please choose a faculty member)", :id => "0")].concat(Faculty.all), :id, :name) %>
+    <%= select_tag :faculty_name, options_from_collection_for_select([Faculty.new(:name => "(Please choose a faculty member)", :id => "0")].concat(Faculty.all), :name, :name) %>
   </p>
   <p>
     <%= f.label :review_body %><br />

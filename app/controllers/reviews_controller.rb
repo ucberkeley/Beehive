@@ -44,6 +44,12 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.xml
   def create
+	# First, handle the params not explicitly assigned
+	# in the 'new' view's form.
+
+	params[:review][:user] = current_user
+
+	handle_faculty		# this line must come before the one following it!
     @review = Review.new(params[:review])
 
     respond_to do |format|
@@ -62,7 +68,8 @@ class ReviewsController < ApplicationController
   # PUT /reviews/1.xml
   def update
     @review = Review.find(params[:id])
-
+	handle_faculty
+	
     respond_to do |format|
       if @review.update_attributes(params[:review])
         flash[:notice] = 'Review was successfully updated.'
@@ -86,4 +93,13 @@ class ReviewsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # extra handlers used in more than one CRUD method
+  protected
+	def handle_faculty
+		if params[:faculty_name]
+			params[:review][:faculty] = Faculty.find_by_name(params[:faculty_name])
+		end
+	end
+  
 end

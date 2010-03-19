@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_one :picture
   
+  has_many :reviews
   has_many :watches
   has_many :enrollments
   has_many :courses, :through => :enrollments
