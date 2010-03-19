@@ -13,7 +13,11 @@
   </p>
   <p>
     <%= f.label :rating %><br />
-    <%= f.text_field :rating %>
+    
+	<%= f.radio_button :rating, 3 %><%= image_tag("thumbsup.gif") %>&nbsp;
+	<%= f.radio_button :rating, 2 %><%= image_tag("neutral.gif") %>&nbsp;
+	<%= f.radio_button :rating, 1 %><%= image_tag("thumbsdown.gif") %>&nbsp;
+	
   </p>
   <p>
     <%= f.submit 'Update' %>

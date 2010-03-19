@@ -23,7 +23,15 @@
 		<% end %>
 	</td>
     <td><%=h review.body %></td>
-    <td><%=h review.rating %></td>
+    <td>
+		<% if review.rating > 2 %>
+			<%= image_tag("thumbsup.gif") %>
+		<% elsif review.rating == 2 %>
+			<%= image_tag("neutral.gif") %>
+		<% elsif review.rating == 1 %>
+			<%= image_tag("thumbsdown.gif") %>
+		<% end %>
+	</td>
     <td><%= link_to 'Show', review %></td>
     <td><%= link_to 'Edit', edit_review_path(review) %></td>
     <td><%= link_to 'Destroy', review, :confirm => 'Are you sure?', :method => :delete %></td>
