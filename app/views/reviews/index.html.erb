@@ -23,7 +23,7 @@
 		<% end %>
 	</td>
     <td><%=h review.body %></td>
-    <td>
+    <td align="center">
 		<% if review.rating > 2 %>
 			<%= image_tag("thumbsup.gif") %>
 		<% elsif review.rating == 2 %>
@@ -31,6 +31,8 @@
 		<% elsif review.rating == 1 %>
 			<%= image_tag("thumbsdown.gif") %>
 		<% end %>
+		
+		
 	</td>
     <td><%= link_to 'Show', review %></td>
     <td><%= link_to 'Edit', edit_review_path(review) %></td>
