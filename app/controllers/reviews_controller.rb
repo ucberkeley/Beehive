@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show ]
   
   # Ensures that only the user who created a review -- and no other users -- can edit it 
-  before_filter :correct_user_access, :except => [ :index, :new, :create, :show, :list, :watch ]
+  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
   def index
     @reviews = Review.all
@@ -105,6 +105,7 @@ class ReviewsController < ApplicationController
 		end
 	end
 	
+  private
 	def correct_user_access
 		if (Review.find(params[:id]) == nil || current_user != Review.find(params[:id]).user)
 			flash[:notice] = "Unauthorized access denied. Do not pass Go. Do not collect $200."

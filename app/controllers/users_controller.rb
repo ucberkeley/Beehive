@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   auto_complete_for :category, :name
   auto_complete_for :proglang, :name
   
+  # Ensures that only this user -- and no other users -- can edit his/her profile
+  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
+  
+  
   # render new.rhtml
   def new
     @user = User.new
@@ -114,5 +118,14 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  private
+	
+	def correct_user_access
+		if (User.find_by_id(params[:id]) == nil || current_user != User.find_by_id(params[:id]))
+			flash[:notice] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+			redirect_to :controller => 'dashboard', :action => :index
+		end
+	end
 
 end

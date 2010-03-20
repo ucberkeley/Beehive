@@ -12,7 +12,7 @@ class JobsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show, :list ]
   
   # Ensures that only the user who created a job -- and no other users -- can edit it 
-  before_filter :correct_user_access, :except => [ :index, :new, :create, :show, :list, :watch ]
+  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
   
   def index
@@ -328,7 +328,7 @@ class JobsController < ApplicationController
 	def correct_user_access
 		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
 			flash[:notice] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
-			redirect_to :controller => 'jobs', :action => :index
+			redirect_to :controller => 'dashboard', :action => :index
 		end
 	end
 end
