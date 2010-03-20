@@ -4,14 +4,28 @@
 <div id="dashboard_container">
 	<div id="dashboard_wrapper_watched">
 		<div id="dashboard_container_watched">
-			<h2>Your Watched Projects</h2>
-			<!-- //list of projects you're watching -->
-			<% if @watched_jobs.empty? %>
-				You are not watching any projects.
-			<% else %>
-				<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
+		
+			<% if current_user.is_faculty %>
+				<h2>Your Projects</h2>
+				
+				
+			<% elsif ! current_user.is_faculty %>
+			
+				<h2>Your Watched Projects</h2>
+				<!-- //list of projects you're watching -->
+				<% if @watched_jobs.empty? %>
+					You are not watching any projects.
+				<% else %>
+					<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
+				<% end %>
+				<br />
+			
 			<% end %>
-			<br />
+		
+
+			
+			
+			
 		</div>
 		<div id="dashboard_shadow_watched"></div>
 	</div>
@@ -31,8 +45,8 @@
 	</div>
 </div>
 <div id="dashboard_container">
-	<div id="dashboard_wrapper_long">
-		<div id="dashboard_container_long">
+	<div class="dashboard_wrapper_long">
+		<div class="dashboard_container_long">
 			<h2>Recently Added Projects</h2>
 			<table id="browse_header_table">
 				<tr>
@@ -47,6 +61,6 @@
 			</table>
 			<%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 		</div>
-		<div id="dashboard_shadow_long"></div>
+		<div class="dashboard_shadow_long"></div>
 	</div>
 </div>

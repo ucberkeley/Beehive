@@ -302,17 +302,17 @@ visibility: hidden;
 }
 
 /*long*/
-#dashboard_wrapper_long{
+.dashboard_wrapper_long{
 	margin-bottom: 15px;
 	border-left: 1px solid #f5f5f5;
 	border-right: 1px solid #f5f5f5;
 }
-#dashboard_container_long{
+.dashboard_container_long{
 	padding: 15px;
 	background: #E5FEB4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
 
-#dashboard_shadow_long{
+.dashboard_shadow_long{
 	height: 7px;
 	background: url("../images/trans_down_small.png") repeat-x top left;
 }

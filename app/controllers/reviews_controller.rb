@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show ]
   
   # Ensures that only the user who created a review -- and no other users -- can edit it 
-  before_filter :correct_user_access, :except => [ :index, :new, :create, :show, :list ]
+  before_filter :correct_user_access, :except => [ :index, :new, :create, :show, :list, :watch ]
   
   def index
     @reviews = Review.all
