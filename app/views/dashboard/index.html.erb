@@ -8,6 +8,12 @@
 			<% if current_user.is_faculty %>
 				<h2>Your Projects</h2>
 				
+				<% if @your_jobs.empty? %>
+					You have not created any jobs. Why not <%= link_to 'post a job', :controller => :jobs, :action => :new %> right now?
+				
+				<% else %>
+					<%= render :partial => "jobs/your_job", :collection => @your_jobs %>
+				<% end %>
 				
 			<% elsif ! current_user.is_faculty %>
 			
@@ -16,7 +22,7 @@
 				<% if @watched_jobs.empty? %>
 					You are not watching any projects.
 				<% else %>
-					<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
+					<%= render :partial => "jobs/watched_job", :collection => @your_jobs %>
 				<% end %>
 				<br />
 			

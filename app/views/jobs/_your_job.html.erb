@@ -1,0 +1,19 @@
+<% job = your_job %>
+<div id="your_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
+	<div class="job_padding_wrapper">
+		<table class="job_table">
+			<tr>
+				<td class="job_table_left">
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
+					<% if logged_in? && job.user_id == current_user.id %>
+						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
+						<%= link_to "[delete]", :controller=>:jobs, :action => :destroy, :id => job.id %>
+					<% end %>
+					</div>
+					
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
