@@ -169,7 +169,7 @@ width: 100%;
 }
 
 div.vertlist {
-	margin-left: 30px; 
+	padding-left: 30px; 
 	line-height: 20px;
 }
 
@@ -264,6 +264,10 @@ display: block;
 height: 0;
 clear: both;
 visibility: hidden;
+}
+
+h2#dashboard_header {
+	padding-left: 15px;
 }
 
 /*smartmatch*/
