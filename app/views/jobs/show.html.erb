@@ -4,18 +4,22 @@
 <%= link_to "&lt; back to listings", :controller => :jobs, :action => :index %><br /><br /><br />
 <h2> <%=h @job.title %> </h2>
 <p>
-  posted by <b><%=h @job.user.name %></b> &nbsp; 	
+  posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
 	<b>
 	<% if logged_in? && @job.user_id == current_user.id %>
 		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %>
 	<% end %>&nbsp;
-	<% if @job.users.include?(current_user) %>
-		<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
-	<% else %>
-		<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+	
+	<% if current_user != nil && !current_user.is_faculty %>
+		<% if @job.users.include?(current_user) %>
+			<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+		<% else %>
+			<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+		<% end %>
 	<% end %>
 	</b>
 </p>
+
 <br />
 <p>
   <b>Faculty Sponsor:</b>
@@ -91,6 +95,18 @@
 </p>
 
 <br /><br />
+<h2>Discussion</h2>
+<p>
+	currently watched by 
+	<div class="vertlist">
+	<% @job.users.each do |usr| %>
+		<%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
+		<%= usr.name == current_user.name ? " (you)" : "" %><br />
+	<% end %>
+	</div>
+</p>
+
+<br /><br /><br /><br />
 <!-- === Debug === -->
 = Activation Link =
 <br /><br />

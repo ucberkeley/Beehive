@@ -1,3 +1,4 @@
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<h2><%= User.find_by_id(params[:id]).name %></h2>
+<p>
+<%= User.find_by_id(params[:id]).is_faculty ? "Faculty" : "Student" %>
+</p>

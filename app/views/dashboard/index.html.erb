@@ -22,7 +22,7 @@
 				<% if @watched_jobs.empty? %>
 					You are not watching any projects.
 				<% else %>
-					<%= render :partial => "jobs/watched_job", :collection => @your_jobs %>
+					<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
 				<% end %>
 				<br />
 			
@@ -40,7 +40,7 @@
 			<h2>SmartMatch Results</h2>
 			<%= @user.name %>, we've automatically matched your interests and skill set to the
 			following <b><%= @relevant_jobs.length %> research
-			opening<% if @relevant_jobs.length > 1 %>(s)<% end %>:</b>
+			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
 			<br /><br />
 			<% if @relevant_jobs.empty? %>
 			 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?

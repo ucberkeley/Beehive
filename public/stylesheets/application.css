@@ -168,6 +168,11 @@ width: 100%;
 	width: 500px;
 }
 
+div.vertlist {
+	margin-left: 30px; 
+	line-height: 20px;
+}
+
 /**HOME**/
 
 #browse_listings_menu{
