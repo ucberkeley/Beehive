@@ -48,9 +48,9 @@ class JobsController < ApplicationController
 	credit = params[:search_terms][:credit].to_i
 
 	if(query && !query.empty? && (query != @search_query))
-		@jobs = Job.find_by_solr_by_relevance(query).select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
-		@jobs = @jobs.sort {|a,b| a.created_at <=> b.created_at} if false
-		
+		#@jobs = Job.find_by_solr_by_relevance(query).select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
+        @jobs = find_jobs(query)
+		#@jobs = @jobs.sort {|a,b| a.created_at <=> b.created_at}		
 	else
 		#flash[:notice] = 'Your query was invalid and could not return any results.'
 		@jobs = Job.find(:all, :order=>"created_at DESC", :conditions=> {:active => true})

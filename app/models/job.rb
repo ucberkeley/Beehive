@@ -21,7 +21,7 @@ class Job < ActiveRecord::Base
   before_validation :handle_proglangs
   
   acts_as_taggable
-  acts_as_solr :fields => [:title, :desc, :tag_list]
+  acts_as_indexed :fields => [:title, :desc, :tag_list]
   
   validates_presence_of :title, :desc, :exp_date, :num_positions, :department
   
@@ -78,24 +78,7 @@ class Job < ActiveRecord::Base
   	proglang_list[0..(proglang_list.length - 2)].downcase
   end  
   
-  
-  # Performs an OR search for all terms in 'query', then sorts results
-  # by solr_score. Note that this method returns the actual results,
-  # not a SearchResults object like find_by_solr does.
-  def self.find_by_solr_by_relevance(query)
-	solr_search = self.find_by_solr query, :operator => :or, :scores => true
-	if solr_search
-		results = solr_search.results
-	else 
-		results = []
-	end
-	results.sort do |a,b|
-		a.solr_score <=> b.solr_score
-	end
-	results
-  end
-  
-  protected
+    protected
   
   	# Parses the textbox list of category names from "Signal Processing, Robotics"
 	# etc. to an enumerable object categories

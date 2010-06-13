@@ -6,16 +6,30 @@ module ApplicationHelper
 		end
 	end
 	
-	module SmartMatch
-	  def smartmatches_for(my)
+	module Search
+	  def smartmatches_for(my) # matches for a user
 		courses = my.course_list_of_user.gsub ",", " "
 		cats = my.category_list_of_user.gsub ",", " "
 		pls = my.proglang_list_of_user.gsub ",", " "
 		query = "#{cats} #{courses} #{pls}"
-		Job.find_by_solr_by_relevance(query)
+		#Job.find_by_solr_by_relevance(query)
+        find_jobs(query)
 	  end
-	end
 
+      # This is the main search handler.
+      # It should be the ONLY interface between search queries and jobs;
+      # hopefully this will make the choice of search engine transparent
+      # to our app.
+      #
+      # Currently uses the simple acts_as_index
+      #   (http://douglasfshearer.com/blog/rails-plugin-acts_as_indexed)
+      #
+      def find_jobs(query)
+        #results = Job.find(:all, :conditions => {:active => true }) # TODO: exclude expired jobs too
+        results = Job.find_with_index(query)
+      end
+      
+	end
 end
 
 class String
@@ -23,5 +37,5 @@ class String
 end
 
 class ApplicationController
-	include ApplicationHelper::SmartMatch
+	include ApplicationHelper::Search
 end
