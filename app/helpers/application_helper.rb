@@ -26,7 +26,7 @@ module ApplicationHelper
       #
       def find_jobs(query)
         #results = Job.find(:all, :conditions => {:active => true }) # TODO: exclude expired jobs too
-        results = Job.find_with_index(query)
+        results = Job.find_with_index(query, {:conditions => {:active=>true}})
       end
       
 	end
