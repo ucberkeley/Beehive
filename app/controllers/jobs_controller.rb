@@ -85,10 +85,7 @@ class JobsController < ApplicationController
     @job = Job.new
 	
     @all_faculty = Faculty.find(:all)
-    @faculty_names = []
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-    end
+    @faculty_names = @all_faculty.map {|f| f.name }
 	
   end
 
@@ -98,9 +95,7 @@ class JobsController < ApplicationController
 	
     @all_faculty = Faculty.find(:all)
     @faculty_names = []
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-    end
+    @faculty_names = @all_faculty.map {|f| f.name }
 
   end
 
@@ -130,7 +125,7 @@ class JobsController < ApplicationController
     		@job.sponsorships.each { |c| c.job = @job }
     		@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
     		@job.save
-            flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
+        flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
     		flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
     		flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
 		
@@ -153,10 +148,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 	
     @all_faculty = Faculty.find(:all)
-    @faculty_names = []
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-    end
+    @faculty_names = @all_faculty.map {|f| f.name }
 	
 	  sponsorships = []
   	if @job.faculties
@@ -175,8 +167,8 @@ class JobsController < ApplicationController
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
-	  	populate_tag_list
-		@job.save
+	  	  populate_tag_list
+		    @job.save
         flash[:notice] = 'Job was successfully updated.'
         format.html { redirect_to(@job) }
         format.xml  { head :ok }

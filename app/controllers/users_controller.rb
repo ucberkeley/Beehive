@@ -18,11 +18,8 @@ class UsersController < ApplicationController
     
 	  # set up list of faculty names
 	  @all_faculty = Faculty.find(:all)
-    @faculty_names = []
-    
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-	  end
+    @faculty_names = @all_faculty.map {|f| f.name }
+
   end
  
   def create
@@ -30,11 +27,7 @@ class UsersController < ApplicationController
     
 	  # set up list of faculty names
     @all_faculty = Faculty.find(:all, :order => :id)
-    @faculty_names = []
-    
-    @all_faculty.each do |faculty|
-      @faculty_names << faculty.name
-	  end
+    @faculty_names = @all_faculty.map {|f| f.name }
 	  
   	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
   	params[:user][:course_names] = params[:course][:name]
@@ -87,16 +80,16 @@ class UsersController < ApplicationController
   	# Handles the text_field_with_auto_complete for proglangs.
   	params[:user][:proglang_names] = params[:proglang][:name]		
 
-      respond_to do |format|
-        if @user.update_attributes(params[:user])
-          flash[:notice] = 'User was successfully updated.'
-          format.html { redirect_to :controller => :dashboard }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'User was successfully updated.'
+        format.html { redirect_to :controller => :dashboard }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
+    end
   end
   
   private

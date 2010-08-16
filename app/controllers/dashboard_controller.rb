@@ -6,15 +6,9 @@ class DashboardController < ApplicationController
   	@recently_added_jobs = Job.find(:all, :conditions => [ "active = ?", true], :order => "created_at DESC", :limit => 5 )
   	@relevant_jobs = smartmatches_for(current_user)[0..3]
 	
-  	@watched_jobs = []
-  	for w in current_user.watches
-  		@watched_jobs << w.job
-  	end
+  	@watched_jobs = current_user.watches.map{|w| w.job }
 	
-  	@your_jobs = []
-  	for j in Job.find(:all, :conditions => [ "user_id = ?", current_user.id ])
-  		@your_jobs << j
-  	end
+  	@your_jobs = Job.find(:all, :conditions => [ "user_id = ?", current_user.id ])
 	
   end  
 end
