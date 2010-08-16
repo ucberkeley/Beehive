@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   before_filter :current_user_if_logged_in
   
   def current_user_if_logged_in
-	@user = current_user if logged_in?
+	  @user = current_user if logged_in?
   end
 end

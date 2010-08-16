@@ -16,61 +16,41 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     
-	# set up list of faculty names
-	@all_faculty = Faculty.find(:all)
+	  # set up list of faculty names
+	  @all_faculty = Faculty.find(:all)
     @faculty_names = []
+    
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
-	end
+	  end
   end
  
   def create
     logout_keeping_session!
-
-	# set up list of faculty names
+    
+	  # set up list of faculty names
     @all_faculty = Faculty.find(:all, :order => :id)
     @faculty_names = []
+    
     @all_faculty.each do |faculty|
       @faculty_names << faculty.name
-	end
+	  end
+	  
+  	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
+  	params[:user][:course_names] = params[:course][:name]
+  	params[:user][:category_names] = params[:category][:name]
+  	params[:user][:proglang_names] = params[:proglang][:name]
 	
-	faculty_valid = false
-	courses_valid = false
-	category_valid = false
-	proglang_valid = false
-	if params[:user]
-		faculty_valid = true if params[:user][:is_faculty]
-	end
-	if params[:course]
-		courses_valid = true if params[:course][:name]
-	end
-	if params[:category]
-		category_valid = true if params[:category][:name]
-	end
-	if params[:proglang]
-		proglang_valid = true if params[:proglang][:name]
-	end
-	
-	
-	# Handles the text_field_with_auto_complete for courses.
-	params[:user][:course_names] = params[:course][:name] if courses_valid
-	
-	# Handles the text_field_with_auto_complete for categories.
-	params[:user][:category_names] = params[:category][:name] if category_valid
-
-	# Handles the text_field_with_auto_complete for proglangs.
-	params[:user][:proglang_names] = params[:proglang][:name] if proglang_valid	
-	
-	@user = User.new(params[:user])
+  	@user = User.new(params[:user])
 	
     success = @user && @user.save
-
     if success && @user.errors.empty?
-	  @user.activate!
+	    @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
       redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
+      #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin."
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
       render :action => 'new'
     end
   end
@@ -98,25 +78,25 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 	
-	# Handles the text_field_with_auto_complete for courses.
-	params[:user][:course_names] = params[:course][:name]
+	  # Handles the text_field_with_auto_complete for courses.
+  	params[:user][:course_names] = params[:course][:name]
 	
-	# Handles the text_field_with_auto_complete for categories.
-	params[:user][:category_names] = params[:category][:name]	
+  	# Handles the text_field_with_auto_complete for categories.
+  	params[:user][:category_names] = params[:category][:name]	
 
-	# Handles the text_field_with_auto_complete for proglangs.
-	params[:user][:proglang_names] = params[:proglang][:name]		
+  	# Handles the text_field_with_auto_complete for proglangs.
+  	params[:user][:proglang_names] = params[:proglang][:name]		
 
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to :controller => :dashboard }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @user.update_attributes(params[:user])
+          flash[:notice] = 'User was successfully updated.'
+          format.html { redirect_to :controller => :dashboard }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       end
-    end
   end
   
   private

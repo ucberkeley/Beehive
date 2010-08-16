@@ -50,9 +50,9 @@ class ReviewsController < ApplicationController
 	# First, handle the params not explicitly assigned
 	# in the 'new' view's form.
 
-	params[:review][:user] = current_user
+	  params[:review][:user] = current_user
 
-	handle_faculty		# this line must come before the one following it!
+	  handle_faculty		# this line must come before the one following it!
     @review = Review.new(params[:review])
 
     respond_to do |format|
@@ -71,7 +71,7 @@ class ReviewsController < ApplicationController
   # PUT /reviews/1.xml
   def update
     @review = Review.find(params[:id])
-	handle_faculty
+	  handle_faculty
 	
     respond_to do |format|
       if @review.update_attributes(params[:review])
