@@ -38,4 +38,13 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
 end
+
+  # This is the root url for our app (like localhost:3000/)
+  # WITH trailing slash
+  $rm_root = "http://localhost:3000/"
+  
+  # Set up ActionMailer
+  ActionMailer::Base.default_url_options[:host] = $rm_root
+  ActionMailer::Base.delivery_method = :test
