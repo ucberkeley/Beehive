@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    $('#category_name').autocomplete(get_categories());
+</script>
+
 <h1>Sign Up</h1>
 <%= stylesheet_link_tag "user" %>
 
@@ -10,80 +14,81 @@
 
 <p>User type:<br />
    <%= f.radio_button :is_faculty, false, :checked => true, :onclick => 
-		"Effect.SlideDown('email_field', { duration: 1.0 });
-	     Effect.SlideDown('full_name_field', { duration: 1.0 });
-		 Effect.SlideUp('faculty_emails', { duration: 1.0 });
-		 Effect.SlideDown('step2', { duration: 1.0 });" %>
-   <%= f.label :is_faculty, 'Student or GSI' %><br />
+		"user_signup_student_fields()" %>
+   <%= f.label :is_faculty_false, 'Student or GSI' %><br />
    <%= f.radio_button :is_faculty, true, :onclick =>
-   		"Effect.SlideUp('email_field', { duration: 1.0 });
-		 Effect.SlideUp('full_name_field', { duration: 1.0 });
-		 Effect.SlideDown('faculty_emails', { duration: 1.0 });
-		 Effect.SlideUp('step2', { duration: 1.0 });" %>
+   		"user_signup_faculty_fields()" %>
    <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
    </p>
 
-<div id="email_field">
-<p><%= label_tag 'student_email' %> (must be a valid Berkeley or LBL email address!):<br/>  
-<%= f.text_field :student_email %></p>
+<!-- Student or GSI -->
+<div id="fields_student_above_password">
+
+    <div id="email_field">
+        <p><%= label_tag 'student_email' %> (must be a valid Berkeley or LBL email address!):<br/>  
+        <%= f.text_field :student_email %></p>
+    </div>
+
+    <div id="full_name_field">
+        <p>Full Name:<br/>
+        <%= f.text_field :student_name %></p>
+    </div>
 </div>
 
-<div id="faculty_emails" style="display: none;">
-Faculty Member (Who are you?): <br />
-<%= f.select :faculty_name, @faculty_names %>
+<div id="fields_faculty">
+
+    <!-- Faculty -->
+    <div id="faculty_emails">
+        Faculty Member (Who are you?): <br />
+        <%= f.select :faculty_name, @faculty_names %>
+    </div>
+
+
+    <% if params[:user] && params[:user][:is_faculty] %>
+    <script type="text/javascript">
+	    document.getElementById("user_is_faculty_true").onclick();
+    </script>
+    <% end %>
 </div>
 
-<div id="full_name_field">
-<p>Full Name:<br/>
-<%= f.text_field :student_name %></p>
+<div id="password_field">
+    <%= label_tag 'password' %>:<br/>
+    <%= f.password_field :password %>
+    <br />
+    <%= label_tag 'password_confirmation', 'Confirm Password' %>:<br/>
+    <%= f.password_field :password_confirmation %>
 </div>
 
-<p><%= label_tag 'password' %>:<br/>
-<%= f.password_field :password %></p>
+<div id="fields_student_below_password">
+    <div id="step2">
 
-<p><%= label_tag 'password_confirmation', 'Confirm Password' %>:<br/>
-<%= f.password_field :password_confirmation %></p>
+        <br/><br/>
+        <%= submit_tag 'I\'ll fill in the rest later, sign me up now!' %>
+        <br/><br/>Note: The rest of this information is optional, but may increase your chances of landing a research position. Don't worry though, you can always fill it in later in Settings.
 
+        <br>
+        <br>
 
-<div id="step2">
+        <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
 
-<br/><br/>
-<%= submit_tag 'I\'ll fill in the rest later, sign me up now!' %>
-<br/><br/>Note: The rest of this information is optional, but may increase your chances of landing a research position. Don't worry though, you can always fill it in later in Settings.
+        <br />
+        Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
+        <%= text_field_with_auto_complete :course, :name, :autocomplete => "off" %>
+        <br />
 
-<br>
-<br>
-
-<%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
-
-<br />
-<p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-<%= text_field_with_auto_complete :course, :name, :autocomplete => "off" %>
-</p>
-<br />
-
-<br />
-<p>Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
-	e.g. algorithms,security,signal processing):<br />
-<%= text_field_with_auto_complete :category, :name, :autocomplete => "off" %>
-</p>
-<br />
-
-<br />
-<p>
-Programming languages in which you are proficient: <br />
-<%= text_field_with_auto_complete :proglang, :name, :autocomplete => "off" %>
-</p>
-<br />
-
-<% if params[:user] && params[:user][:is_faculty] %>
-<script type="text/javascript">
-	document.getElementById("user_is_faculty_true").onclick();
-</script>
-<% end %>
-
-<!-- //tagging stuff! -->
+        <br />
+        Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
+	        e.g. algorithms,security,signal processing):<br />
+        <%= text_field :category, :name  %>
+        <br />
+        <br />
+        
+        Programming languages in which you are proficient: <br />
+        <%= text_field_with_auto_complete :proglang, :name, :autocomplete => "off" %>
+        <br />
+    </div>   
 </div>
+
 
 <br />
 <%= submit_tag 'Submit' %>
