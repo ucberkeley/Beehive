@@ -111,7 +111,7 @@
 = Activation Link =
 <br /><br />
 
-<a href="<%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %>"><%= root_url %>jobs/activate/<%= @job.id %>?a=<%= @job.activation_code %></a>
+<a href="<%= @job.activation_url %>"><%= @job.activation_url %></a>
 
 <% #debug(@job) %>
 

@@ -74,8 +74,10 @@ class JobsController < ApplicationController
   	params[:job][:active] = false
   	params[:job][:activation_code] = 0
 	
+
+	sponsor = Faculty.find(params[:faculty_sponsor].to_i)
 	  @job = Job.new(params[:job])
-	  @sponsorship = Sponsorship.create(:faculty => Faculty.find(params[:faculty_sponsor].to_i), :job_id => 0)
+	  @sponsorship = Sponsorship.create(:faculty => sponsor, :job_id => 0)
   	@job.sponsorships << @sponsorship
 
     respond_to do |format|
@@ -86,11 +88,11 @@ class JobsController < ApplicationController
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
     		flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
     		flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
-		
-    		#TODO: Send an e-mail to the faculty member(s) involved.
-    		found_faculty = @job.sponsorships.first.faculty
-    		FacultyMailer.deliver_faculty_confirmer(found_faculty.email, found_faculty.name, @job.id, @job.title, @job.desc, @job.activation_code)
-		
+        
+        #TODO: Send an e-mail to the faculty member(s) involved.
+        # At this point, ActionMailer should have been set up by /config/environment.rb
+        FacultyMailer.deliver_faculty_confirmer(sponsor.email, sponsor.name, @job)
+        
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else

@@ -1,12 +1,12 @@
 Dear <%= @name %>,
 
-	Someone has posted a job listing at ResearchMatch, listing you as their faculty sponsor.  For this job to be viewed on the website, we'll need your confirmation to prove it's authentic.  Here is the content of the post that was made:
-	
-	Title: <%= @job_title %>
-	Description: <%= @job_description %>
-	
-	To confirm this listing, please visit the following link:
-	
-	<%= root_url %>jobs/activate/<%= @job_id %>?a=<%= @activation_code %>
-	
-	If you believe you have received this e-mail in error, please disregard this notice.
+    Someone has posted a job listing at ResearchMatch, listing you as their faculty sponsor.  For this job to be viewed on the website, we'll need your confirmation to prove it's authentic.  Here is the content of the post that was made:
+    
+    Title: <%= @job.title %>
+    Description: <%= @job.desc %>
+    
+    To confirm this listing, please visit the following link:
+    
+        <%= @job.activation_url %>
+    
+    If you believe you have received this e-mail in error, please disregard this notice.
