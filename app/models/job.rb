@@ -48,6 +48,15 @@ class Job < ActiveRecord::Base
     Job.find(:all, :conditions => {:active => true}, :order => "created_at DESC")
   end
   
+  def self.smartmatches_for(my) # matches for a user
+	  courses = my.course_list_of_user.gsub ",", " "
+  	cats = my.category_list_of_user.gsub ",", " "
+  	pls = my.proglang_list_of_user.gsub ",", " "
+  	query = "#{cats} #{courses} #{pls}"
+  	#Job.find_by_solr_by_relevance(query)
+    self.find_jobs(query, 0, 0, 0, 0)
+  end
+  
   # This is the main search handler.
   # It should be the ONLY interface between search queries and jobs;
   # hopefully this will make the choice of search engine transparent

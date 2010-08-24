@@ -6,25 +6,9 @@ module ApplicationHelper
 			self.gsub " ", " OR "
 		end
 	end
-	
-	module Search
-	  def smartmatches_for(my) # matches for a user
-		courses = my.course_list_of_user.gsub ",", " "
-		cats = my.category_list_of_user.gsub ",", " "
-		pls = my.proglang_list_of_user.gsub ",", " "
-		query = "#{cats} #{courses} #{pls}"
-		#Job.find_by_solr_by_relevance(query)
-        find_jobs(query)
-	  end
 
-      
-	end
 end
 
 class String
 	include ApplicationHelper::QueryHelpers
-end
-
-class ApplicationController
-	include ApplicationHelper::Search
 end

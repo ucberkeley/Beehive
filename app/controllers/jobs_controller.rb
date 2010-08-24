@@ -105,19 +105,15 @@ class JobsController < ApplicationController
   def update	
 	  #params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
     @job = Job.find(params[:id])
-	
-    @all_faculty = Faculty.find(:all)
-    @faculty_names = @all_faculty.map {|f| f.name }
+    @faculty_names = Faculty.all.map {|f| f.name }
 	
 	  sponsorships = []
-  	if @job.faculties
-  		if @job.faculties.first
-  			if params[:faculty_name] != @job.faculties.first.id 
-  				@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
-  				params[:job][:sponsorships] = sponsorships << @sponsorship
-  			end
-  		end
-  	end
+  	if @job.faculties.first
+			if params[:faculty_name] != @job.faculties.first.id 
+				@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
+				params[:job][:sponsorships] = [@sponsorship]
+			end
+		end
 	
   	# Handles the text_field_with_auto_complete for categories, courses, and programming languages
   	params[:job][:category_names] = params[:category][:name] if category_names_valid
