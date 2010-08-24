@@ -49,7 +49,7 @@
 	  </tr>
 	  <tr>
 		<td id="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty Sponsor' %></td>
-		<td id="job_clear_table_field"><%= select_tag :faculty_name, options_from_collection_for_select([Faculty.new(:name => "(Please choose a sponsor)", :id => "0")].concat(Faculty.all), :id, :name) %></td>
+		<td id="job_clear_table_field"><%= select_tag :faculty_sponsor, options_from_collection_for_select(Faculty.all, :id, :name) %></td>
 	  </tr>
 	  <tr>
 		<td id="job_clear_table_label"></td>

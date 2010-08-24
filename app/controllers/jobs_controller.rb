@@ -16,18 +16,7 @@ class JobsController < ApplicationController
   
   
   def index
-	  #@search_query = params[:search_terms][:query]
-  	#@department = params[:search_terms][:department]
-  	#@faculty = params[:search_terms][:faculty]
-  	#@paid = params[:search_terms][:paid]
-  	#@credit = params[:search_terms][:credit]
-	
-  	#@department ||= 0
-  	#@faculty ||= 0
-  	#@paid ||= 0
-  	#@credit ||= 0
-	
-    @jobs = Job.find(:all, :conditions => [ "active = ?", true ], :order => "created_at DESC")
+	  @jobs = Job.active_jobs
   	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
@@ -36,29 +25,12 @@ class JobsController < ApplicationController
   end
   
   def list
-  	d_id = params[:department_select]
-	
   	params[:search_terms] ||= {}
-  	query = params[:search_terms][:query]
-  	department = params[:search_terms][:department_select].to_i
-  	faculty = params[:search_terms][:faculty_select].to_i
-  	paid = params[:search_terms][:paid].to_i
-  	credit = params[:search_terms][:credit].to_i
-
-  	if(query && !query.empty? && (query != @search_query))
-  		#@jobs = Job.find_by_solr_by_relevance(query).select { |c| c.active == true } # How to filter these results pre-query through solr?  Should actually be filtered through solr, not here.
-          @jobs = find_jobs(query)
-  		#@jobs = @jobs.sort {|a,b| a.created_at <=> b.created_at}		
-  	else
-  		#flash[:notice] = 'Your query was invalid and could not return any results.'
-  		@jobs = Job.find(:all, :order=>"created_at DESC", :conditions=> {:active => true})
-  	end #end params[:query]
-
-  	@jobs = @jobs.select {|j| j.department_id.to_i == department } if department != 0
-  	@jobs = @jobs.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
-  	@jobs = @jobs.select {|j| j.paid } if paid != 0
-  	@jobs = @jobs.select {|j| j.credit } if credit != 0
-	
+  	@jobs = Job.find_jobs(params[:search_terms][:query], 
+  		                    params[:search_terms][:department_select].to_i, 
+  		                    params[:search_terms][:faculty_select].to_i, 
+  		                    params[:search_terms][:paid].to_i, 
+  		                    params[:search_terms][:credit].to_i)	
   	respond_to do |format|
   		format.html { render :action => :index }
   		format.xml { render :xml => @jobs }
@@ -82,19 +54,11 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
 	
-    @all_faculty = Faculty.find(:all)
-    @faculty_names = @all_faculty.map {|f| f.name }
-	
   end
 
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
-	
-    @all_faculty = Faculty.find(:all)
-    @faculty_names = []
-    @faculty_names = @all_faculty.map {|f| f.name }
-
   end
 
   # POST /jobs
@@ -108,19 +72,15 @@ class JobsController < ApplicationController
   	params[:job][:proglang_names] = params[:proglang][:name] 
 	
   	params[:job][:active] = false
-  	params[:job][:activation_code] = 100
+  	params[:job][:activation_code] = 0
 	
-  	sponsorships = []
-  	if params[:faculty_name] != "" && params[:faculty_name]
-  		@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
-  		params[:job][:sponsorships] = sponsorships << @sponsorship
-  	end
-  	@job = Job.new(params[:job])
-	
+	  @job = Job.new(params[:job])
+	  @sponsorship = Sponsorship.create(:faculty => Faculty.find(params[:faculty_sponsor].to_i), :job_id => 0)
+  	@job.sponsorships << @sponsorship
+
     respond_to do |format|
       if @job.save
-		    #@sponsorship.save
-    		@job.sponsorships.each { |c| c.job = @job }
+        @job.sponsorships.each {|s| s.job_id = @job.id}
     		@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
     		@job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
@@ -128,7 +88,8 @@ class JobsController < ApplicationController
     		flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
 		
     		#TODO: Send an e-mail to the faculty member(s) involved.
-    		#FacultyMailer.deliver_faculty_confirmer(found_faculty.email, found_faculty.name, @job.id, @job.title, @job.desc, @job.activation_code)
+    		found_faculty = @job.sponsorships.first.faculty
+    		FacultyMailer.deliver_faculty_confirmer(found_faculty.email, found_faculty.name, @job.id, @job.title, @job.desc, @job.activation_code)
 		
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
