@@ -127,7 +127,19 @@ class User < ActiveRecord::Base
   		proglang_list << pl.name + ','
   	end
   	proglang_list[0..(proglang_list.length - 2)].downcase
-  end  
+  end
+  
+  # Returns an array of this user's watched jobs
+  def watched_jobs_list_of_user
+    self.watches.all.find_all do |w|
+        if not Job.exists?(w.job_id)
+            w.destroy
+            return false
+        end
+        return true
+    end
+    #@watched_jobs = current_user.watches.map{|w| w.job }
+  end
   
   protected
     

@@ -4,9 +4,9 @@ class DashboardController < ApplicationController
   def index
 	  @departments = Department.all
   	@recently_added_jobs = Job.find(:all, :conditions => [ "active = ?", true], :order => "created_at DESC", :limit => 5 )
-  	@relevant_jobs = Job.smartmatches_for(current_user)[0..3]
+  	@relevant_jobs = Job.smartmatches_for(current_user, 4)
 	
-  	@watched_jobs = current_user.watches.map{|w| w.job }
+    @watched_jobs = current_user.watched_jobs_list_of_user
 	
   	@your_jobs = Job.find(:all, :conditions => [ "user_id = ?", current_user.id ])
 	

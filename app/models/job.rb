@@ -48,13 +48,13 @@ class Job < ActiveRecord::Base
     Job.find(:all, :conditions => {:active => true}, :order => "created_at DESC")
   end
   
-  def self.smartmatches_for(my) # matches for a user
+  def self.smartmatches_for(my, limit=4) # matches for a user
 	  courses = my.course_list_of_user.gsub ",", " "
   	cats = my.category_list_of_user.gsub ",", " "
   	pls = my.proglang_list_of_user.gsub ",", " "
   	query = "#{cats} #{courses} #{pls}"
   	#Job.find_by_solr_by_relevance(query)
-    self.find_jobs(query, 0, 0, 0, 0)
+    self.find_jobs(query, 0, 0, 0, 0, limit)
   end
   
   # This is the main search handler.
@@ -65,13 +65,13 @@ class Job < ActiveRecord::Base
   # Currently uses the simple acts_as_index
   #   (http://douglasfshearer.com/blog/rails-plugin-acts_as_indexed)
   #
-  def self.find_jobs(query, department, faculty, paid, credit)
+  def self.find_jobs(query, department, faculty, paid, credit, limit=4)
     paid = from_binary(paid)
     credit = from_binary(credit)
     
     #results = Job.find(:all, :conditions => {:active => true }) # TODO: exclude expired jobs too
     jobs = Job.active_jobs
-    jobs = Job.find_with_index(query, {:conditions => {:active=>true}}) if !query.empty?
+    jobs = Job.find_with_index(query, {:limit=>limit, :conditions => {:active=>true}}) if !query.empty?
     
     jobs = jobs.select {|j| j.department_id.to_i == department } if department != 0
     jobs = jobs.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
