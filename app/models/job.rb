@@ -78,7 +78,7 @@ class Job < ActiveRecord::Base
   	proglang_list[0..(proglang_list.length - 2)].downcase
   end  
   
-    protected
+  protected
   
   	# Parses the textbox list of category names from "Signal Processing, Robotics"
 	# etc. to an enumerable object categories
