@@ -62,26 +62,54 @@ class Job < ActiveRecord::Base
   # hopefully this will make the choice of search engine transparent
   # to our app.
   #
-  # Currently uses the simple acts_as_index
+  # By default, it finds an unlimited number of active and non-expired jobs.
+  # You can also restrict by query, department, faculty, paid, credit,
+  # and set a limit of max number of results.
+  #
+  # Currently uses the simple acts_as_indexed plugin
   #   (http://douglasfshearer.com/blog/rails-plugin-acts_as_indexed)
   #
-  def self.find_jobs(query, department, faculty, paid, credit, limit=4)
+  def self.find_jobs(query="", department=0, faculty=0, paid=0, credit=0, limit=0)
     paid = from_binary(paid)
     credit = from_binary(credit)
     
-    #results = Job.find(:all, :conditions => {:active => true }) # TODO: exclude expired jobs too
-    jobs = Job.active_jobs
-    jobs = Job.find_with_index(query, {:limit=>limit, :conditions => {:active=>true}}) if !query.empty?
+#    conditions = {:active=>true}
+#    conditions.update( {:department_id => department}   ) if department != 0
+#    conditions.update( {:paid => true}                  ) if paid
+#    conditions.update( {:credit => true}                ) if credit
     
-    jobs = jobs.select {|j| j.department_id.to_i == department } if department != 0
-    jobs = jobs.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
-    jobs = jobs.select {|j| j.paid == paid} if paid
-    jobs = jobs.select {|j| j.credit == credit} if credit
-    return jobs
+#    date_conditions = {:conditions => "(exp_date > '#{Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")}')"}
+    
+    conditions = "active='t'"
+    conditions += " AND (exp_date > '#{Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")}')"
+    conditions += " AND department_id=#{department}" if department != 0
+    conditions += " AND paid"                      if paid
+    conditions += " AND credit"                    if credit
+    
+
+    # Find results matching search criteria
+    results = {}
+    find_args = {:conditions=>conditions}
+    find_args.update( {:limit=>limit} ) if limit > 0
+#    date_conditions.update( {:limit=>limit} ) if limit > 0
+    if (query and !query.empty?)
+        results = Job.with_query(query).find(:all, find_args)
+      else
+        results = Job.find(:all, find_args)
+    end
+    
+    # Filter out expired jobs, and apply result count limit, if any
+    date_conditions.update( {:limit=>limit} ) if limit > 0
+#    results = results.find(:all, date_conditions)
+    
+    # Filter by requested faculty
+    # TODO: do this in the database
+    results = results.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
+    return results
   end
    
   def self.find_recently_added(n)
-	Job.find(:all, :order => "created_at DESC", :limit=>n)
+	Job.find(:all, {:order => "created_at DESC", :limit=>n, :active=>true} )
   end
   
   # Returns a string containing the category names taken by job @job

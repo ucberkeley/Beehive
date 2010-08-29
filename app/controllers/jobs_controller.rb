@@ -16,7 +16,7 @@ class JobsController < ApplicationController
   
   
   def index
-	  @jobs = Job.active_jobs
+	  @jobs = Job.find_jobs             # finds all
   	@departments = Department.all
     respond_to do |format|
       format.html # index.html.erb
