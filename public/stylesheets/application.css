@@ -173,6 +173,25 @@ div.vertlist {
 	line-height: 20px;
 }
 
+input.wide {
+    width: 300px;
+}
+
+/**JqueryUI Style Fixes**/
+.ui-autocomplete {
+        max-width: 400px;
+		max-height: 100px;
+		overflow-y: auto;
+}
+/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+	* html .ui-autocomplete {
+		height: 100px;
+	}
+
+
+
 /**HOME**/
 
 #browse_listings_menu{
@@ -378,11 +397,13 @@ span.tag {
 	text-align:left;
 	width:auto;
 	padding:5px;
+}input.wide {
+    width: 300px;
 }
-#job_clear_table_label {
+.job_clear_table_label {
 	width:150px;
 }
-#job_clear_table_field {
+.job_clear_table_field {
 	width:350px;
 }
 

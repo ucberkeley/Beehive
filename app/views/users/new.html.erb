@@ -1,6 +1,4 @@
-<script type="text/javascript">
-    $('#category_name').autocomplete(get_categories());
-</script>
+<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
 
 <h1>Sign Up</h1>
 <%= stylesheet_link_tag "user" %>
@@ -72,20 +70,29 @@
         <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
 
         <br />
-        Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-        <%= text_field_with_auto_complete :course, :name, :autocomplete => "off" %>
-        <br />
+        
 
+        <div class="ui-widget">
+        Courses (please enter the names of your courses, separated by commas, e.g. <i>CS194, CS61A</i>):<br />
+        <%= text_field :course, :name, :class => 'wide'  %>
+        <br />
+        </div>
+
+
+        <div class="ui-widget">
         <br />
         Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
-	        e.g. algorithms,security,signal processing):<br />
-        <%= text_field :category, :name  %>
+	        e.g. <i>algorithms, security, signal processing</i>):<br />
+        <%= text_field :category, :name, :class => 'wide'  %>
         <br />
-        <br />
+        </div>
         
-        Programming languages in which you are proficient: <br />
-        <%= text_field_with_auto_complete :proglang, :name, :autocomplete => "off" %>
+        <div class="ui-widget">
         <br />
+        Programming languages in which you are proficient: <br />
+        <%= text_field :proglang, :name, :class => 'wide' %>
+        <br />
+        </div>
     </div>   
 </div>
 

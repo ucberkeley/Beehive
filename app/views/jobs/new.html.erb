@@ -1,5 +1,8 @@
 <%= render :partial => "dashboard/menu_bar" %>
 
+<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
+
+<br />
 <h1>Post a New Job</h1>
 
 <% form_for(@job) do |f| %>
@@ -8,52 +11,54 @@
   
   <table class="job_clear_table">
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :title, 'Job Title' %></td>
-		<td id="job_clear_table_field"><%= f.text_field :title %></td>
+		<td class="job_clear_table_label"><%= f.label :title, 'Job Title' %></td>
+		<td class="job_clear_table_field"><%= f.text_field :title %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :desc, 'Job Description' %></td>
-		<td id="job_clear_table_field"><%= f.text_area :desc, {:rows=>7}%></td>
+		<td class="job_clear_table_label"><%= f.label :desc, 'Job Description' %></td>
+		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>7}%></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :category, 'Category(ies)' %></td>
-		<td id="job_clear_table_field"><%= text_field_with_auto_complete :category, :name, :autocomplete => "off" %></td>
+		<td class="job_clear_table_label"><%= f.label :category, 'Category(ies)' %></td>
+		<td class="job_clear_table_field"><%= text_field :category, :name %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :course, 'Required Courses' %></td>
-		<td id="job_clear_table_field"><%= text_field_with_auto_complete :course, :name, :autocomplete => "off" %></td>
+		<div class="ui-widget">
+		    <td class="job_clear_table_label"><%= f.label :course, 'Required Courses' %></td>
+		    <td class="job_clear_table_field"><%= text_field :course, :name %></td>
+		</div>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :proglang, 'Desired Programming Languages' %></td>
-		<td id="job_clear_table_field"><%= text_field_with_auto_complete :proglang, :name, :autocomplete => "off" %></td>
+		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired Programming Languages' %></td>
+		<td class="job_clear_table_field"><%= text_field :proglang, :name %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :exp_date, 'Expiration Time of this Listing' %></td>
-		<td id="job_clear_table_field"><%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.</td>
+		<td class="job_clear_table_label"><%= f.label :exp_date, 'Expiration Time of this Listing' %></td>
+		<td class="job_clear_table_field"><%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.</td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :num_positions, 'Number of Available Positions' %> (0 for no limit)</td>
-		<td id="job_clear_table_field"><%= f.text_field :num_positions, {:value=> 0, :size=> 5} %></td>
+		<td class="job_clear_table_label"><%= f.label :num_positions, 'Number of Available Positions' %> (0 for no limit)</td>
+		<td class="job_clear_table_field"><%= f.text_field :num_positions, {:value=> 0, :size=> 5} %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :paid, 'Paid?' %></td>
-		<td id="job_clear_table_field"><%= f.check_box :paid %></td>
+		<td class="job_clear_table_label"><%= f.label :paid, 'Paid?' %></td>
+		<td class="job_clear_table_field"><%= f.check_box :paid %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :credit %></td>
-		<td id="job_clear_table_field"><%= f.check_box :credit %></td>
+		<td class="job_clear_table_label"><%= f.label :credit %></td>
+		<td class="job_clear_table_field"><%= f.check_box :credit %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :department %></td>
-		<td id="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
+		<td class="job_clear_table_label"><%= f.label :department %></td>
+		<td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty Sponsor' %></td>
-		<td id="job_clear_table_field"><%= select_tag :faculty_sponsor, options_from_collection_for_select(Faculty.all, :id, :name) %></td>
+		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty Sponsor' %></td>
+		<td class="job_clear_table_field"><%= select_tag :faculty_sponsor, options_from_collection_for_select(Faculty.all, :id, :name) %></td>
 	  </tr>
 	  <tr>
-		<td id="job_clear_table_label"></td>
-		<td id="job_clear_table_field"><%= f.submit('Create') %></td>
+		<td class="job_clear_table_label"></td>
+		<td class="job_clear_table_field"><%= f.submit('Create') %></td>
 	  </tr>
   </table>
 <% end %>

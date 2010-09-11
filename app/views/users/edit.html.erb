@@ -1,3 +1,5 @@
+<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
+
 <h1>Editing user</h1>
 
 <% form_for(@user) do |f| %>
@@ -7,15 +9,15 @@
 <%= f.text_field :name %></p>
 <br />
 <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-<%= text_field_with_auto_complete :course, :name, :value => @user.course_list_of_user, :autocomplete => "off" %>
+<%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
 </p><br />
 <p>
 Interests (Categories): <br />
-<%= text_field_with_auto_complete :category, :name, :value => @user.category_list_of_user, :autocomplete => "off" %>
+<%= text_field :category, :name, :value => @user.category_list_of_user, :class => 'wide' %>
 </p><br />
 <p>
 Programming languages in which you are proficient: <br />
-<%= text_field_with_auto_complete :proglang, :name, :value => @user.proglang_list_of_user, :autocomplete => "off" %>
+<%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'wide' %>
 </p>
 
   <p>

@@ -1,18 +1,28 @@
 ActionController::Routing::Routes.draw do |map|
+
+  # custom mappings... find out why for instance, categories/json isn't mapped to by the map.resources calls.
+
+  map.categories_json '/courses/json', :controller => 'courses', :action => 'json' 
+  map.categories_json '/categories/json', :controller => 'categories', :action => 'json'
+  map.categories_json '/proglangs/json', :controller => 'proglangs', :action => 'json' 
+
+
   map.resources :pictures
 
   map.resources :jobs
 
   map.resources :reviews
 
-  map.resources :categories
+  map.resources :categories 
+
+
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.resources :users
-
+  
   map.resource :session
 
   # The priority is based upon order of creation: first created -> highest priority.
