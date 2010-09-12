@@ -131,13 +131,16 @@ class User < ActiveRecord::Base
   
   # Returns an array of this user's watched jobs
   def watched_jobs_list_of_user
-    self.watches.all.find_all do |w|
-        if not Job.exists?(w.job_id)
+    jobs = []
+    self.watches.all.each do |w|
+        this_job = Job.find_by_id(w.job_id)
+        if this_job then
+            jobs << this_job
+        else
             w.destroy
-            return false
         end
-        return true
     end
+    jobs
     #@watched_jobs = current_user.watches.map{|w| w.job }
   end
   

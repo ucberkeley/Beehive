@@ -118,9 +118,10 @@ class JobsController < ApplicationController
 		end
 	
   	# Handles the text_field_with_auto_complete for categories, courses, and programming languages
-  	params[:job][:category_names] = params[:category][:name] if category_names_valid
-  	params[:job][:course_names] = params[:course][:name] if course_names_valid
-  	params[:job][:proglang_names] = params[:proglang][:name] if proglang_names_valid
+    # TODO: check if these are relevant anymore?
+#  	params[:job][:category_names] = params[:category][:name] if category_names_valid
+#  	params[:job][:course_names] = params[:course][:name] if course_names_valid
+#  	params[:job][:proglang_names] = params[:proglang][:name] if proglang_names_valid
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
@@ -229,6 +230,7 @@ class JobsController < ApplicationController
 		tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
 		tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
 		@job.tag_list = tags_string
+        print "\n\n\n\nPROGZ: #{@job.proglang_list_of_job}\nCOURSEZ: #{@job.course_list_of_job}\nTAGZ: #{@job.tag_list.to_s}\n\n\n\n\n"
 	end
   
   private
