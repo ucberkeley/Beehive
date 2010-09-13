@@ -384,7 +384,11 @@ span.tag {
 	text-align: center;
 	width: 10%;
 }
-
+    .job_credit span.job_numpositions {
+        
+        font-size: 12pt;
+    }
+    
 #browse_header_table{
 	height: 40px;
 	width: 100%;
