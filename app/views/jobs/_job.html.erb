@@ -3,7 +3,7 @@
 		<table class="job_table">
 			<tr>
 				<td class="job_table_left">
-					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
 					<% if logged_in? && job.user_id == current_user.id %>
 						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
 					<% end %>
@@ -15,7 +15,8 @@
 					</div>
 					<% job_tags = job.tag_list %>
 					<% if !job_tags.empty? %>
-						<div class="job_category">
+						<div class="job_tags">
+                        <%= image_tag 'tag.gif' %>
 						Tags:
 							<% if job_tags.empty? %>
 								(none)
@@ -32,21 +33,18 @@
 					<% if job.desc.length > 100 %>
 						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> <%= link_to_remote "[read less]", :update=>"job_desc_#{job.id}", :url => {:controller=>:jobs, :action=>:job_read_less, :id=>job.id} %>
 					<% end %>
-					
-					
 					</div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></span>
+					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.credit ? "<b>Credit</b>" : "No Credit" %></span>
+					<div class="job_attr"><%= job.credit ? "<b>Credit</b>" : "No Credit" %></div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span>
+					<div class="job_attr"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></div>
 				</td>
 
-				<td class="job_extra"></td>
 			</tr>
 		</table>
 	</div>

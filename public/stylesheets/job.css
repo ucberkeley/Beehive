@@ -20,6 +20,22 @@
 	padding: 3px;
 }
 
+.job_title {
+    padding-top: 4px;
+    padding-bottom: 0px;
+}
+
+.job_desc {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.job_tags {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /* margin-left: 8px; */
+}
+
 .job_credit {
 	text-align: center;
 	width: 10%;
