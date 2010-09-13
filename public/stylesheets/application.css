@@ -349,9 +349,13 @@ h2#dashboard_header {
 
 span.tag {
 	background-color: #eaeaea;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
 	font-weight: bold;
-	margin-left: 5px;
-	margin-right: 0px;
+	margin-left: 2px;
+	margin-right: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .job_title{
