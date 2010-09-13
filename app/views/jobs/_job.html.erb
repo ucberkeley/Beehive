@@ -36,13 +36,13 @@
 					</div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.paid ? "<b>Paid</b>" : "Unpaid" %></div>
+					<div class="job_attr"><%= job.paid ? image_tag('yes_check.gif') : image_tag('no_check.gif') %></div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.credit ? "<b>Credit</b>" : "No Credit" %></div>
+					<div class="job_attr"><%= job.credit ? image_tag('yes_check.gif') : image_tag('no_check.gif') %></div>
 				</td>
 				<td class="job_credit">
-					<div class="job_attr"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></div>
+					<div class="job_attr"><span class="job_numpositions"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span></div>
 				</td>
 
 			</tr>
