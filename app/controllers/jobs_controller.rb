@@ -26,11 +26,12 @@ class JobsController < ApplicationController
   
   def list
   	params[:search_terms] ||= {}
-  	@jobs = Job.find_jobs(params[:search_terms][:query], 
-  		                    params[:search_terms][:department_select].to_i, 
-  		                    params[:search_terms][:faculty_select].to_i, 
-  		                    params[:search_terms][:paid].to_i, 
-  		                    params[:search_terms][:credit].to_i)	
+  	@jobs = Job.find_jobs(params[:search_terms][:query], {
+  		                    :department => params[:search_terms][:department_select].to_i, 
+  		                    :faculty => params[:search_terms][:faculty_select].to_i, 
+  		                    :paid => params[:search_terms][:paid].to_i, 
+  		                    :credit => params[:search_terms][:credit].to_i
+                            })	
   	respond_to do |format|
   		format.html { render :action => :index }
   		format.xml { render :xml => @jobs }

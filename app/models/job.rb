@@ -53,8 +53,8 @@ class Job < ActiveRecord::Base
   	cats = my.category_list_of_user.gsub ",", " "
   	pls = my.proglang_list_of_user.gsub ",", " "
   	query = "#{cats} #{courses} #{pls}"
-    Job.find_jobs(query, 0, 0, 0, 0, limit)
-    Job.all
+    #Job.find_jobs(query, 0, 0, 0, 0, limit)
+    Job.find_jobs(query, {:limit=>limit, :exclude_expired=>true})
   end
   
   # This is the main search handler.
@@ -69,9 +69,19 @@ class Job < ActiveRecord::Base
   # Currently uses the simple acts_as_indexed plugin
   #   (http://douglasfshearer.com/blog/rails-plugin-acts_as_indexed)
   #
-  def self.find_jobs(query="", department=0, faculty=0, paid=0, credit=0, limit=0, extra_conditions={})
+#  def self.find_jobs(query="", department=0, faculty=0, paid=0, credit=0, limit=0, extra_conditions={}, extra_options={ })
+  def self.find_jobs(query="", extra_options={ })
     paid = from_binary(paid)
     credit = from_binary(credit)
+    
+    options = { :exclude_expired    => true,
+                :department         => 0,
+                :faculty            => 0,
+                :paid               => false,
+                :credit             => false,
+                :limit              => 0,
+                :conditions         => {}
+                }.update(extra_options)
 
     # Build conditions. Job must [optionally]:
     #  - be active
@@ -79,15 +89,16 @@ class Job < ActiveRecord::Base
     #  - [match requested department]
     #  - [be paid]
     #  - [be credit]
-    conditions = "active='t'"
+    conditions = ""
+    conditions += "active='t'"                       if options[:exclude_expired]
     conditions += " AND (exp_date > '#{Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")}')"
-    conditions += " AND department_id=#{department}" if department != 0
-    conditions += " AND paid"                      if paid
-    conditions += " AND credit"                    if credit    
+    conditions += " AND department_id=#{department}" if options[:department] != 0
+    conditions += " AND paid"                        if options[:paid]
+    conditions += " AND credit"                      if options[:credit]
     
-    if extra_conditions.is_a? String then
-        conditions += " AND "+extra_conditions
-    else extra_conditions.each do |key, value|
+    if options[:conditions].is_a? String then
+        conditions += " AND "+options[:conditions]
+    else options[:conditions].each do |key, value|
         conditions += " AND #{key}=#{value}"
         end
     end
@@ -96,7 +107,7 @@ class Job < ActiveRecord::Base
     # Also apply a result limit, if any
     results = {}
     find_args = {:conditions=>conditions}
-    find_args.update( {:limit=>limit} ) if limit > 0
+    find_args.update( {:limit=>options[:limit]} ) if options[:limit] > 0
     if (query and !query.empty?)
         results = Job.with_query(query).find(:all, find_args)
       else
@@ -105,7 +116,7 @@ class Job < ActiveRecord::Base
     
     # Filter by requested faculty
     # TODO: do this in the database
-    results = results.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(faculty) }  if faculty != 0
+    results = results.select {|j| j.faculties.collect{|f| f.id.to_i}.include?(options[:faculty]) }  if options[:faculty] != 0
     return results
   end
    
