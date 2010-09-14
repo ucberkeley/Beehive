@@ -35,7 +35,21 @@ $(function() {
 			        return false;
 		        }
             });
-        });           
+        });
+        
+        
+        
+        // get rid of commas on mouse leave
+        $(field_selector).focusout(function (){
+            fval = $(this).val();
+            if (fval && fval.length > 0) {
+                if (fval.substring(fval.length - 2, fval.length) === ', ') {
+                    $(this).val(fval.substring(0, fval.length - 2));
+                }
+            }
+        });
+        
+        
     }
     
     autocomplete_setup('/courses/json', '#course_name');
