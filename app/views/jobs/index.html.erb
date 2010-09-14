@@ -9,8 +9,8 @@
 		<%= f.text_field :query, :placeholder => "Search Parameters" %>
 		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]}, {:selected => @department} %>
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
-		Paid? <%= f.check_box :paid, {:value => @department}%>
-		Credit? <%= f.check_box :credit %>
+		&nbsp;&nbsp;Paid? <%= f.check_box :paid, {:value => @department}%>
+		&nbsp;&nbsp;Credit? <%= f.check_box :credit %>
 		<%= f.submit "Filter Results" %>
 	<% end %>
 </div>

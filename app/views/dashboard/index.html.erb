@@ -1,12 +1,12 @@
 <%= render :partial => "dashboard/menu_bar" %>
 
 <br><br>
-<div id="dashboard_container"><h2 id="dashboard_header">Dashboard</h2>
+<div id="dashboard_container"><h1 id="dashboard_header">Dashboard</h1>
 	<div id="dashboard_wrapper_watched">
 		<div id="dashboard_container_watched">
 		
 			<% if current_user.is_faculty %>
-				<h2>Your Projects</h2>
+				<h2>Your Postings</h2>
 				
 				<% if @your_jobs.empty? %>
 					You have not created any jobs. Why not <%= link_to 'post a job', :controller => :jobs, :action => :new %> right now?
@@ -17,10 +17,10 @@
 				
 			<% elsif ! current_user.is_faculty %>
 			
-				<h2>Your Watched Projects</h2>
-				<!-- //list of projects you're watching -->
+				<h2>Your Watched Postings</h2>
+				<!-- //list of postings you're watching -->
 				<% if @watched_jobs.empty? %>
-					You are not watching any projects.
+					You are not watching any postings.
 				<% else %>
 					<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
 				<% end %>
@@ -37,7 +37,7 @@
 	</div>
 	<div id="dashboard_wrapper_smartmatch">
 		<div id="dashboard_container_smartmatch">
-			<h2>SmartMatch Results</h2>
+			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
 			<%= @user.name %>, we've automatically matched your interests and skill set to the
 			following <b><%= @relevant_jobs.length %> research
 			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
@@ -45,6 +45,17 @@
 			<% if @relevant_jobs.empty? %>
 			 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?
 			<% end %>
+            <table id="browse_header_table">
+                <tr>
+                    
+                    <td class="job_table_left">Title/Description</td>
+                    <td class="job_credit">Paid?</td>
+                    <td class="job_credit">Credit?</td>
+                    <td class="job_credit"># Positions</td>
+                    
+                    </div>
+                </tr>
+            </table>
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>
 		<div id="dashboard_shadow_smartmatch"></div>
@@ -53,7 +64,7 @@
 <div id="dashboard_container">
 	<div class="dashboard_wrapper_long">
 		<div class="dashboard_container_long">
-			<h2>Recently Added Projects</h2>
+			<h2>Recently Added Postings</h2>
 			<table id="browse_header_table">
 				<tr>
 					
