@@ -220,6 +220,23 @@ class JobsController < ApplicationController
 	
   end
   
+  def apply
+    job = Job.find(params[:id])
+    applic = Applic.new({:user => current_user, :job => job})
+    
+    respond_to do |format|
+        if applic.save
+            flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
+            format.html { redirect_to(:controller=>:dashboard) }
+        else
+            flash[:notice] = 'Unsuccessful attempt to apply for a job. No worries, the economy is terrible these days.
+                              <br />On a serious note, please contact the site administrators if you get this message 
+                              repeatedly. Something went wrong.' 
+            format.html { redirect_to(:controller=>:dashboard) }
+        end
+    end
+  end
+  
   protected
   
 	  # Populates the tag_list of the job.

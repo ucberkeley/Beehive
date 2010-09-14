@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_one :picture
   
   has_many :reviews
+  has_many :applied_jobs, :class_name => 'Job', :through => :applics
   has_many :watches
   has_many :enrollments
   has_many :courses, :through => :enrollments

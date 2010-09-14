@@ -16,6 +16,12 @@
 		<% else %>
 			<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
 		<% end %>
+        &nbsp;
+        <% if @job.applicants.include?(current_user) %>
+			[applied!]
+		<% else %>
+			<%= link_to "[apply for this job]", :controller => :jobs, :action => :apply, :id => @job.id %>
+		<% end %>
 	<% end %>
 	</b>
 </p>

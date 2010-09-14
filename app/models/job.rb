@@ -5,6 +5,9 @@ class Job < ActiveRecord::Base
   has_many :pictures
   
   has_many :watches
+  has_many :applics
+  #has_many :applicants, :class_name => 'User', :through => :applics
+  has_many :applicants, :through => :applics, :source => :user
   has_many :users, :through => :watches
   has_many :sponsorships
   has_many :faculties, :through => :sponsorships
