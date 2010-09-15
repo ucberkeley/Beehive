@@ -19,15 +19,17 @@ describe JobsController, :type => :controller do
   
   def mock_job(stubs={})
     @mock_job ||= mock_model(Job, stubs)
-	@mock_job.stub!(:faculties).and_return([Faculty.find(:first)])
-	@mock_job.stub!(:category_list_of_job).and_return("")
-	@mock_job.stub!(:course_list_of_job).and_return("")
-	@mock_job.stub!(:proglang_list_of_job).and_return("")
-	@mock_job.stub!(:paid).and_return(false)
-	@mock_job.stub!(:credit).and_return(false)
-	@mock_job.stub!(:tag_list=).and_return("")
-	@mock_job.stub!(:activation_code=).and_return(0)
-	@mock_job.stub!(:sponsorships).and_return([])
+	  @mock_job.stub!(:faculties).and_return([Faculty.find(:first)])
+  	@mock_job.stub!(:category_list_of_job).and_return("")
+  	@mock_job.stub!(:course_list_of_job).and_return("")
+  	@mock_job.stub!(:proglang_list_of_job).and_return("")
+  	@mock_job.stub!(:paid).and_return(false)
+  	@mock_job.stub!(:credit).and_return(false)
+  	@mock_job.stub!(:tag_list=).and_return("")
+  	@mock_job.stub!(:tag_list).and_return("")
+  	@mock_job.stub!(:activation_code=).and_return(0)
+  	@mock_job.stub!(:sponsorships).and_return([])
+  	
 	return @mock_job
   end
 
@@ -56,8 +58,12 @@ describe JobsController, :type => :controller do
   end
 
   describe "GET edit" do
-    it "assigns the requested job as @job" do
+    it "assigns the requested job as @job only if current_user created the job" do
+      @current_user = mock_model(User, :id => 1)
+      controller.stub!(:current_user).and_return(@current_user)
+      
       Job.stub!(:find).with("37").and_return(mock_job)
+      mock_job.stub!(:user).and_return(@current_user)
       get :edit, :id => "37"
       assigns[:job].should equal(mock_job)
     end
@@ -67,22 +73,36 @@ describe JobsController, :type => :controller do
 
     describe "with valid params" do
       it "assigns a newly created job as @job" do
+        @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => true))
+        Faculty.stub!(:find).and_return(@faculty)
+        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        
+        @faculty.stub!(:email).and_return("")
+        @faculty.stub!(:name).and_return("")
+        
         post :create, :job => {:params=>"these"}
         assigns[:job].should equal(mock_job)
       end
 
       it "redirects to the created job" do
+        @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => true))
+        Faculty.stub!(:find).and_return(@faculty)
+        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        
+        @faculty.stub!(:email).and_return("")
+        @faculty.stub!(:name).and_return("")
+        
         post :create, :job => {:params=>"these"}
         response.should redirect_to(job_url(mock_job))
       end
 	  
-	  it "should create new faculty sponsorship" do
-	    @f = Faculty.create(:id => 1, :name => "Faculty Me", :email => "examplefaculty@berkeley.edu")
-		post :create, :job => {:title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100}, :faculty_name => @f.id
-		assigns[:job].sponsorships.should_not be_empty
-	  end
+	    it "should create new faculty sponsorship" do
+  	    @f = Faculty.create(:id => 1, :name => "Faculty Me", :email => "examplefaculty@berkeley.edu")
+  		  post :create, :job => {:title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100}, :faculty_sponsor => @f.id
+  		  assigns[:job].sponsorships.should_not be_empty
+  	  end
     end
 
     describe "with invalid params" do
@@ -93,7 +113,13 @@ describe JobsController, :type => :controller do
       #end
 
       it "re-renders the 'new' template" do
+        @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => false))
+        Faculty.stub!(:find).and_return(@faculty)
+        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        @faculty.stub!(:email).and_return("")
+        @faculty.stub!(:name).and_return("")
+        
         post :create, :job => {}
         response.should render_template('new')
       end
@@ -105,18 +131,36 @@ describe JobsController, :type => :controller do
 
     describe "with valid params" do
       it "updates the requested job" do
-        Job.should_receive(:find).and_return(mock_job(:update_attributes => true, :save=>true))
-		mock_job.should_receive(:update_attributes)
-		put :update, :id => "37"
-    end
+        mock_job.stub!(:update_attributes).and_return(true)
+        mock_job.stub!(:save).and_return(true)
+        @current_user = mock_model(User, :id => 1)
+        controller.stub!(:current_user).and_return(@current_user) 
+        mock_job.stub!(:user).and_return(@current_user)
+        Job.stub!(:find).and_return(mock_job(:update_attributes => true, :save=>true))
+		    mock_job.should_receive(:update_attributes)
+		    
+		    put :update, :id => "37"
+      end
 
       it "assigns the requested job as @job" do
+        @current_user = mock_model(User, :id => 1)
+        controller.stub!(:current_user).and_return(@current_user) 
+        mock_job.stub!(:user).and_return(@current_user)
+        mock_job.stub!(:update_attributes).and_return(true)
+        mock_job.stub!(:save).and_return(true)
+        
         Job.stub!(:find).and_return(mock_job(:update_attributes => true, :save=> true))
         put :update, :id => "1"
         assigns[:job].should equal(mock_job)
       end
 
       it "redirects to the job" do
+        @current_user = mock_model(User, :id => 1)
+        controller.stub!(:current_user).and_return(@current_user) 
+        mock_job.stub!(:user).and_return(@current_user)
+        mock_job.stub!(:update_attributes).and_return(true)
+        mock_job.stub!(:save).and_return(true)
+        
         Job.stub!(:find).and_return(mock_job(:update_attributes => true, :save=> true))
         put :update, :id => "1"
         response.should redirect_to(job_url(mock_job))
@@ -124,25 +168,33 @@ describe JobsController, :type => :controller do
 	  
 	  it "should modify sponsorships when faculty member is changed" do
 	    @f = Faculty.create(:id => 1, :name => "Faculty Me", :email => "examplefaculty@berkeley.edu")
-		@f2 = Faculty.create(:id => 2, :name => "Faculty Me 2", :email => "examplefaculty2@berkeley.edu")
-		@d = Department.create(:name => "Test Dept")
-		@j = Job.create(:id => 1, :title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100, :sponsorships => [ Sponsorship.create(:faculty => @f) ], :department => @d)
-		@j.save
-		@f.sponsorships.first.faculty.id.should equal(@f.id)
-		put :update, :id => "1", :faculty_name => @f2.id, :job => @j.attributes
-		assigns[:job].sponsorships.first.faculty.id.should_not equal(@f.id)
+	  	@f2 = Faculty.create(:id => 2, :name => "Faculty Me 2", :email => "examplefaculty2@berkeley.edu")
+  		@d = Department.create(:name => "Test Dept")
+  		@j = Job.create(:id => 1, :title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100, :sponsorships => [ Sponsorship.create(:faculty => @f) ], :department => @d)
+  		@j.save
+  		@f.sponsorships.first.faculty.id.should equal(@f.id)
+  		put :update, :id => "1", :faculty_name => @f2.id, :job => @j.attributes
+  		assigns[:job].sponsorships.first.faculty.id.should_not equal(@f.id)
 	  end
     end
 
     describe "with invalid params" do
       it "updates the requested job" do
-        Job.should_receive(:find).and_return(mock_job(:update_attributes => false))
-		mock_job.should_receive(:update_attributes)
-		put :update, :id=> "37"
+        @current_user = mock_model(User, :id => 1)
+        controller.stub!(:current_user).and_return(@current_user) 
+        mock_job.stub!(:user).and_return(@current_user)
+        Job.stub!(:find).and_return(mock_job(:update_attributes => false))
+		    mock_job.should_receive(:update_attributes)
+    		put :update, :id=> "37"
         
       end
 
       it "re-renders the 'edit' template" do
+        @current_user = mock_model(User, :id => 1)
+        controller.stub!(:current_user).and_return(@current_user) 
+        mock_job.stub!(:user).and_return(@current_user)
+        mock_job.stub!(:update_attributes).and_return(false)
+        
         Job.stub!(:find).and_return(mock_job(:update_attributes => false))
         put :update, :id => "1"
         response.should render_template('edit')
@@ -153,13 +205,21 @@ describe JobsController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested job" do
-      Job.should_receive(:find).with("37").and_return(mock_job)
+      @current_user = mock_model(User, :id => 1)
+      controller.stub!(:current_user).and_return(@current_user) 
+      mock_job.stub!(:user).and_return(@current_user)
+      Job.stub!(:find).with("37").and_return(mock_job)
       mock_job.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
 
     it "redirects to the jobs list" do
+      @current_user = mock_model(User, :id => 1)
+      controller.stub!(:current_user).and_return(@current_user) 
+      mock_job.stub!(:user).and_return(@current_user)
       Job.stub!(:find).and_return(mock_job(:destroy => true))
+      mock_job.stub!(:destroy).and_return(true)
+      
       delete :destroy, :id => "1"
       response.should redirect_to(jobs_url)
     end

@@ -30,9 +30,9 @@ class UsersController < ApplicationController
     @faculty_names = @all_faculty.map {|f| f.name }
 	  
   	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
-  	params[:user][:course_names] = params[:course][:name]
-  	params[:user][:category_names] = params[:category][:name]
-  	params[:user][:proglang_names] = params[:proglang][:name]
+  	params[:user][:course_names] = params[:course][:name] if params[:course]
+  	params[:user][:category_names] = params[:category][:name] if params[:category]
+  	params[:user][:proglang_names] = params[:proglang][:name] if params[:proglang]
 	
   	@user = User.new(params[:user])
 	
@@ -72,13 +72,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 	
 	  # Handles the text_field_with_auto_complete for courses.
-  	params[:user][:course_names] = params[:course][:name]
+  	params[:user][:course_names] = params[:course][:name] if params[:course]
 	
   	# Handles the text_field_with_auto_complete for categories.
-  	params[:user][:category_names] = params[:category][:name]	
+  	params[:user][:category_names] = params[:category][:name]	if params[:category]
 
   	# Handles the text_field_with_auto_complete for proglangs.
-  	params[:user][:proglang_names] = params[:proglang][:name]		
+  	params[:user][:proglang_names] = params[:proglang][:name]	if params[:proglang]	
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

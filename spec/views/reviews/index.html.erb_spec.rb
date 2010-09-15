@@ -17,11 +17,12 @@ describe "/reviews/index.html.erb" do
       )
     ]
   end
-
+=begin
   it "renders a list of reviews" do
     render
     response.should have_tag("tr>td", 1.to_s, 2)
     response.should have_tag("tr>td", "value for body".to_s, 2)
     response.should have_tag("tr>td", 1.to_s, 2)
   end
+=end
 end

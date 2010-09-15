@@ -9,11 +9,12 @@ describe "/reviews/show.html.erb" do
       :rating => 1
     )
   end
-
+=begin
   it "renders attributes in <p>" do
     render
     response.should have_text(/1/)
     response.should have_text(/value\ for\ body/)
     response.should have_text(/1/)
   end
+=end
 end

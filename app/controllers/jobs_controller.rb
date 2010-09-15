@@ -68,9 +68,9 @@ class JobsController < ApplicationController
 	  params[:job][:user] = current_user
 		
   	# Handles the text_field_with_auto_complete for categories, courses, and programming languages
-  	params[:job][:category_names] = params[:category][:name]
-  	params[:job][:course_names] = params[:course][:name]
-  	params[:job][:proglang_names] = params[:proglang][:name] 
+  	params[:job][:category_names] = params[:category][:name] if params[:category]
+  	params[:job][:course_names] = params[:course][:name] if params[:course]
+  	params[:job][:proglang_names] = params[:proglang][:name] if params[:proglang]
 	
   	params[:job][:active] = false
   	params[:job][:activation_code] = 0

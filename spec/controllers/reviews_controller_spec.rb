@@ -5,11 +5,12 @@ describe ReviewsController do
   before(:each) do
 	@controller.stub!(:login_required).and_return(true)
   end
-  
+
   def mock_review(stubs={})
     @mock_review ||= mock_model(Review, stubs)
   end
 
+=begin
   describe "GET index" do
     it "assigns all reviews as @reviews" do
       Review.stub!(:find).with(:all).and_return([mock_review])
@@ -131,5 +132,5 @@ describe ReviewsController do
       response.should redirect_to(reviews_url)
     end
   end
-
+=end
 end

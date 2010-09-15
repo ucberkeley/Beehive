@@ -3,7 +3,7 @@ require 'spec_helper'
 describe JobsController do
   describe "routing" do
     it "recognizes and generates #index" do
-      { :get => "/jobs" }.should route_to(:controller => "jobs", :action => "index")
+      { :get => "/jobs/list" }.should route_to(:controller => "jobs", :action => "index")
     end
 
     it "recognizes and generates #new" do
