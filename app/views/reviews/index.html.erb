@@ -1,51 +1,5 @@
 <%= render :partial => "dashboard/menu_bar" %>
 
-<h1>Listing reviews</h1>
+<h1>Coming Soon</h1>
+We're coming out with this feature soon!
 
-<table>
-  <tr>
-    <th>User</th>
-	<th>Faculty</th>
-    <th>Body</th>
-    <th>Rating</th>
-  </tr>
-
-<% @reviews.each do |review| %>
-  <tr>
-    <td>
-		<% if review.user != nil %> 
-			<%=h review.user.name  %>
-		<% end %>
-	</td>
-	<td>
-		<% if review.faculty != nil %>
-			<%=h review.faculty.name %>
-		<% end %>
-	</td>
-    <td><%=h review.body %></td>
-    <td align="center">
-		<% if review.rating > 2 %>
-			<%= image_tag("thumbsup.gif") %>
-		<% elsif review.rating == 2 %>
-			<%= image_tag("neutral.gif") %>
-		<% elsif review.rating == 1 %>
-			<%= image_tag("thumbsdown.gif") %>
-		<% end %>
-		
-		
-	</td>
-    <td><%= link_to 'Show', review %></td>
-    <td>
-	
-	<% if logged_in? && review.user == current_user %>
-		<%= link_to 'Edit', edit_review_path(review) %></td>
-		<td><%= link_to 'Delete', review, :confirm => 'Are you sure?', :method => :delete %>
-	<% end %>
-	</td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New review', new_review_path %>
