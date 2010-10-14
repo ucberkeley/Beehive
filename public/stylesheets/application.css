@@ -19,6 +19,10 @@ body, p, ol, ul, td {
   cursor: default;
 }
 
+select, input {
+  font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
