@@ -1,7 +1,8 @@
 <%= render :partial => "dashboard/menu_bar" %>
+<br />
+<h1>Research Postings</h1>
 
-<%= stylesheet_link_tag "job" %>
-<br>
+<br />
 
 <div id="browse_search_bar">
 	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
@@ -15,7 +16,7 @@
 	<% end %>
 </div>
 
-<br>
+<br />
 <% if params[:search_terms] %>
 	Your search for "<%= params[:search_terms][:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>

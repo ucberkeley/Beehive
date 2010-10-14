@@ -1,7 +1,7 @@
-<%= stylesheet_link_tag "job" %>
+<%= render :partial => "dashboard/menu_bar" %>
 
 <div id="job_show_main">
-<%= link_to "&lt; back to listings", :controller => :jobs, :action => :index %><br /><br /><br />
+<%= link_to "&#0171; back to listings", :controller => :jobs, :action => :index %><br /><br /><br />
 <h2> <%=h @job.title %> </h2>
 <p>
   posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
@@ -24,6 +24,20 @@
 		<% end %>
 	<% end %>
 	</b>
+</p>
+<br />
+<p>
+						<div class="job_tags">
+                        <%= image_tag 'tag.gif' %>
+						Tags:
+                          <% if @job.active %>
+                            <% @job.tag_list.each do |tag| %>
+                                <span class="tag"><%=h tag %></span>
+                            <% end %>
+                          <% else %>
+                            (Tags will be generated once job is activated)
+                          <% end %>	
+						</div>
 </p>
 
 <br />
@@ -67,17 +81,6 @@
   <% else %>
     (none)
   <% end %>
-</p>
-
-<p>
-  <b>Tags:</b>
-  <% if @job.active %>
-	<% @job.tag_list.each do |tag| %>
-		<span class="tag"><%=h tag %></span>
-	<% end %>
-  <% else %>
-    (Tags will be generated once job is activated)
-  <% end %>	
 </p>
 
 <p>

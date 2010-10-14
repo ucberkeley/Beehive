@@ -8,6 +8,12 @@
   
   <%= stylesheet_link_tag 'south-street/jquery-ui-1.8.4.custom' %>
   <%= stylesheet_link_tag 'application' %>
+  
+  <% c = controller.controller_name %>
+  <% if c == 'jobs' or c == 'dashboard' %>
+    <%= stylesheet_link_tag 'job' %>
+  <% end %>
+  
   <%= javascript_include_tag "application.js" %>  
   <%= javascript_include_tag "jquery-1.4.2.min.js" %>
   <%= javascript_include_tag "jquery-ui-1.8.4.custom.min.js" %>

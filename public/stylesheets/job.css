@@ -9,7 +9,7 @@
 }
 
 .job_even {
-	background: white;	
+	background: none;
 	width: 100%;
 	border-bottom: none;
 
@@ -50,9 +50,9 @@
 
 #browse_results{
 	/*c1c1c1*/
-	border-right: 1px solid #f5f5f5;
-	border-left: 1px solid #f5f5f5;
-	border-bottom: 1px solid #f5f5f5;
+	border-right: 1px solid #e2e2e2;
+	border-left: 1px solid #e2e2e2;
+	border-bottom: 1px solid #e2e2e2;
 }
 
 #browse_results_shadow{
