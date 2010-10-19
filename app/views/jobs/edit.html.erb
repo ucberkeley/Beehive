@@ -36,7 +36,7 @@
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired programming language(s)' %></td>
 		<td class="job_clear_table_field">
-            <%= text_field :proglang, :name, :class => 'wide' %>
+            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job, :class => 'wide' %>
         </td>
 	  </tr>
 	  <tr>
@@ -69,7 +69,7 @@
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>
-		<td class="job_clear_table_field"><br /><%= f.submit('Submit') %></td>
+		<td class="job_clear_table_field"><br /><%= f.submit('Update') %></td>
 	  </tr>
   </table>
   

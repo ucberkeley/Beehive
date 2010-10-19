@@ -67,7 +67,7 @@ class JobsController < ApplicationController
   def create
 	  params[:job][:user] = current_user
 		
-  	# Handles the text_field_with_auto_complete for categories, courses, and programming languages
+  	# Handles the text_fields for categories, courses, and programming languages
   	params[:job][:category_names] = params[:category][:name] if params[:category]
   	params[:job][:course_names] = params[:course][:name] if params[:course]
   	params[:job][:proglang_names] = params[:proglang][:name] if params[:proglang]
@@ -107,27 +107,30 @@ class JobsController < ApplicationController
   # PUT /jobs/1.xml
   def update	
 	  #params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
+      
+    # Handles the text_fields for categories, courses, and programming languages
+  	params[:job][:category_names] = params[:category][:name]
+  	params[:job][:course_names] = params[:course][:name]
+  	params[:job][:proglang_names] = params[:proglang][:name] 
+    
     @job = Job.find(params[:id])
     @faculty_names = Faculty.all.map {|f| f.name }
 	
-	  sponsorships = []
+	sponsorships = []
   	if @job.faculties.first
-			if params[:faculty_name] != @job.faculties.first.id 
-				@sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
-				params[:job][:sponsorships] = [@sponsorship]
-			end
-		end
+        if params[:faculty_name] != @job.faculties.first.id 
+            @sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
+            params[:job][:sponsorships] = [@sponsorship]
+        end
+    end
 	
-  	# Handles the text_field_with_auto_complete for categories, courses, and programming languages
-    # TODO: check if these are relevant anymore?
-#  	params[:job][:category_names] = params[:category][:name] if category_names_valid
-#  	params[:job][:course_names] = params[:course][:name] if course_names_valid
-#  	params[:job][:proglang_names] = params[:proglang][:name] if proglang_names_valid
+  	
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
-	  	  populate_tag_list
-		    @job.save
+        
+        populate_tag_list
+        @job.save
         flash[:notice] = 'Job was successfully updated.'
         format.html { redirect_to(@job) }
         format.xml  { head :ok }
