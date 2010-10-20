@@ -15,6 +15,16 @@
 		<td class="job_clear_table_label"><%= f.label :title, 'Job title' %></td>
 		<td class="job_clear_table_field"><%= f.text_field :title, :class => 'wide' %></td>
 	  </tr>
+      <tr>
+		<td class="job_clear_table_label"><%= f.label :department %></td>
+		<td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
+		<td class="job_clear_table_field">
+            <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id), :value => @job.faculties.first.id %>
+        </td>
+	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :desc, 'Job description' %></td>
 		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>7}%></td>
@@ -42,7 +52,7 @@
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :exp_date, 'Expiration time of this listing' %></td>
 		<td class="job_clear_table_field">
-            <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC.
+            <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC-8.
         </td>
 	  </tr>
 	  <tr>
@@ -56,16 +66,6 @@
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :credit, 'Credit (units) offered?' %></td>
 		<td class="job_clear_table_field"><%= f.check_box :credit %></td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label"><%= f.label :department %></td>
-		<td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
-		<td class="job_clear_table_field">
-            <%= select_tag :faculty_name, options_from_collection_for_select(Faculty.all, :id, :name, @job.faculties.find(:first).id), :value => @job.faculties.first.id %>
-        </td>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>

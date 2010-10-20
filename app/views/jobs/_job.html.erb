@@ -14,6 +14,14 @@
 					<% else %>
 						<%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
 					<% end %>
+                    <% if job.applicants.include?(current_user) %>
+                        [applied!]
+                    <% else %>
+                        <%= link_to "[apply for this job]", :controller => :jobs, :action => :apply, :id => job.id %>
+                    <% end %>
+                        
+                    
+                    
 					</div>
 					<% job_tags = job.tag_list %>
 					<% if !job_tags.empty? %>
