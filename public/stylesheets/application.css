@@ -133,8 +133,10 @@ width: 100%;
 }
 
 #footer{
+    padding-top: 10px;
     padding-bottom: 10px;
 	width: 100%;
+    height: 50px;
     background: #eee;
     border-top: 1px solid #ccc;
 	overflow: hidden;	
@@ -143,7 +145,7 @@ width: 100%;
 #footer_inside{
 	color: gray;
 	text-align: center;
-	height: 40px;
+	
 }
 
 #flash_error{
@@ -343,76 +345,6 @@ h2#dashboard_header {
 }
 
 
-/*jobs*/
-
-span.tag {
-	background-color: #eaeaea;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    border: 1px solid #ffffff;
-	font-weight: bold;
-	margin-left: 2px;
-	margin-right: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-
-.job_title{
-	font-weight: bold;
-}
-
-.job_table {
-	border: 0px;
-	width: 100%;
-}
-
-.job_table_left {
-	width: 50%;
-}
-.job_odd, .job_even {
-	width: 100%;
-	border-bottom: 1px solid #abe68b;
-}
-
-.job_padding_wrapper{
-	vertical-align: middle;
-	padding: 3px;
-}
-
-.job_credit {
-	text-align: center;
-	width: 10%;
-}
-    .job_credit span.job_numpositions {
-        
-        font-size: 12pt;
-    }
-    
-#browse_header_table{
-	height: 40px;
-	width: 100%;
-	font-weight: bold;
-}
-
-.job_clear_table {
-	font-family: tahoma, arial, helvetica, sans-serif;
-	font-size: 12px;
-	color: #333;
-	border:0px;
-}
-.job_clear_table td {
-	text-align:left;
-	width:auto;
-	padding:5px;
-}input.wide {
-    width: 300px;
-}
-.job_clear_table_label {
-	width:150px;
-}
-.job_clear_table_field {
-	width:350px;
-}
 
 /**Links**/
 a { 
