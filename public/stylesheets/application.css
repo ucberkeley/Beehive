@@ -133,19 +133,14 @@ width: 100%;
 }
 
 #footer{
-	/* hide the footer for now */
-	display: none;
-	
-	position: absolute;
-	bottom: 0;
+    padding-bottom: 10px;
 	width: 100%;
+    background: #eee;
+    border-top: 1px solid #ccc;
 	overflow: hidden;	
 }
 
 #footer_inside{
-	/* hide the footer for now */
-	display: none;
-
 	color: gray;
 	text-align: center;
 	height: 40px;
