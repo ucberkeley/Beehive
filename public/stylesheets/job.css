@@ -45,19 +45,19 @@
 
 
 #browse_results_wrapper{
-	
+
 }
 
 #browse_results{
-	/*c1c1c1*/
+    /* drop shadow */
+    -box-shadow: 0px 3px 10px #ccc;  
+    -moz-box-shadow: 0px 3px 10px #ccc;  
+    -webkit-box-shadow: 0px 3px 10px #ccc;  
+    
+
 	border-right: 1px solid #e2e2e2;
 	border-left: 1px solid #e2e2e2;
 	border-bottom: 1px solid #e2e2e2;
-}
-
-#browse_results_shadow{
-	height: 7px;
-	background: url("../images/trans_down_small.png") repeat-x top left;
 }
 
 #browse_search_bar{

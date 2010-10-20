@@ -3,7 +3,7 @@
 <br /><br />
 <div id="dashboard_container"><h1 id="dashboard_header">Dashboard</h1>
 	<div id="dashboard_wrapper_watched">
-		<div id="dashboard_container_watched">
+		<div id="dashboard_container_watched" class="box_shadow">
 		
 			<% if current_user.is_faculty %>
 				<h2>Your Postings</h2>
@@ -28,15 +28,10 @@
 			
 			<% end %>
 		
-
-			
-			
-			
 		</div>
-		<div id="dashboard_shadow_watched"></div>
 	</div>
 	<div id="dashboard_wrapper_smartmatch">
-		<div id="dashboard_container_smartmatch">
+		<div id="dashboard_container_smartmatch" class="box_shadow">
 			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
 			<%= @user.name %>, we've automatically matched your interests and skill set to the
 			following <b><%= @relevant_jobs.length %> research
@@ -59,10 +54,9 @@
             <% end %>
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>
-		<div id="dashboard_shadow_smartmatch"></div>
 	</div>
 </div>
-<div id="dashboard_container">
+<div id="dashboard_container" class="box_shadow">
 	<div class="dashboard_wrapper_long">
 		<div class="dashboard_container_long">
 			<h2>Recently Added Postings</h2>
@@ -78,6 +72,5 @@
 			</table>
 			<%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 		</div>
-		<div class="dashboard_shadow_long"></div>
 	</div>
 </div>
