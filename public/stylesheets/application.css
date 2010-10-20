@@ -133,6 +133,8 @@ width: 100%;
 }
 
 #footer{
+    -webkit-box-shadow: 0px -3px 10px #ccc; 
+    -moz-box-shadow: 0px -3px 10px #ccc; 
     padding-top: 10px;
     padding-bottom: 10px;
 	width: 100%;
@@ -181,7 +183,7 @@ input.wide {
 
 .box_shadow {
     /* drop shadow */
-    -box-shadow: 0px 3px 10px #ccc;  
+    box-shadow: 0px 3px 10px #ccc;  
     -moz-box-shadow: 0px 3px 10px #ccc;  
     -webkit-box-shadow: 0px 3px 10px #ccc; 
 }

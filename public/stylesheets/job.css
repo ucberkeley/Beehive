@@ -1,3 +1,7 @@
+.job_table tr.job_table_row:hover {
+    background-color: #f5ffe2; 
+}
+
 .job_table tr.job_table_row td:hover {
     /* cursor: pointer; */
 }
@@ -7,15 +11,13 @@
 }
 .job_odd {
 	background: #F0FFD2;
-	width: 100%;
-	border-bottom: none;
+	
 
 }
 
 .job_even {
 	background: none;
-	width: 100%;
-	border-bottom: none;
+	
 
 }
 
