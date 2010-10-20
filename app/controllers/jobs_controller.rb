@@ -245,7 +245,8 @@ class JobsController < ApplicationController
 	  # Populates the tag_list of the job.
 	def populate_tag_list
 		tags_string = ""
-		tags_string << @job.category_list_of_job 
+        tags_string << @job.department.name
+		tags_string << ',' + @job.category_list_of_job 
 		tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
 		tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
 		tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
