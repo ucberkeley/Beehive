@@ -15,7 +15,7 @@ class JobsController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
   
-  def index
+  def indexZ
 	  @jobs = Job.find_jobs             # finds all
   	@departments = Department.all
     respond_to do |format|
@@ -24,7 +24,7 @@ class JobsController < ApplicationController
     end
   end
   
-  def list
+  def index #list
   	params[:search_terms] ||= {}
   	@jobs = Job.find_jobs(params[:search_terms][:query], {
   		                    :department => params[:search_terms][:department_select].to_i, 
