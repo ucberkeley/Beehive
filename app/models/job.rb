@@ -45,21 +45,24 @@ class Job < ActiveRecord::Base
   attr_accessor :skip_handlers
   
   acts_as_taggable
-  acts_as_xapian :texts => [:title, :desc, :tag_list],
-    :values => [
-        [:paid,             0, "paid",          :number],
-        [:credit,           1, "credit",        :number],
-        [:exp_date,         2, "exp_date",      :date],
-        [:active,           3, "active",        :number],
-        [:updated_at,       4, "updated_at",    :date],
-        [:department_id,    5, "department_id", :number],
-        [:num_positions,    6, "num_positions", :number]
-    ]
-  #xapit do |index|
-    #index.text :title, :desc, :tag_list
-    #index.field :active, :paid, :credit
-    #index.sortable :exp_date
-  #end
+#  acts_as_xapian :texts => [:title, :desc, :tag_list],
+#    :values => [
+#        [:paid,             0, "paid",          :number],
+#        [:credit,           1, "credit",        :number],
+#        [:exp_date,         2, "exp_date",      :date],
+#        [:active,           3, "active",        :number],
+#        [:updated_at,       4, "updated_at",    :date],
+#        [:department_id,    5, "department_id", :number],
+#        [:num_positions,    6, "num_positions", :number]
+#    ]
+  xapit do |index|
+    index.text :title, :desc, :tag_list
+    index.field :active, :num_positions #, :paid, :credit
+    index.sortable :exp_date
+    index.facet :department_id, "Department"
+    index.facet :paid, "Paid"
+    index.facet :credit, "Credit"
+  end
   
   def self.active_jobs
     Job.find(:all, :conditions => {:active => true}, :order => "created_at DESC")
@@ -116,6 +119,9 @@ class Job < ActiveRecord::Base
         extra_options[attrib] = from_binary(extra_options[attrib])
     end
     
+    # Maybe we're doing a plaintext search..
+    query = query.split if query.kind_of? String
+    
     # Set up default options, and merge the extras
     options = { :exclude_expired    => true,        # return expired jobs too
                 :department         => 0,           # department ID
@@ -130,26 +136,19 @@ class Job < ActiveRecord::Base
     # ohai
     conditions = {}
     conditions[:active]     = true
-    conditions[:exp_date]   = Time.at(0)..Time.now  unless options[:exclude_expired]
+    conditions[:exp_date]   = Time.now..100.years.since  unless options[:exclude_expired]
     conditions[:paid]       = true                  if options[:paid]
     conditions[:credit]     = true                  if options[:credit]
+    conditions[:department_id] = options[:department] if options[:department] > 0
 
     # Choose an operator from the list; i.e. sanitize the operator.
     op = [:AND, :OR].detect {|o| o==options[:operator]} || :AND
     opstring = op.to_s+" "
-    
-    queryoptions = []
-    queryoptions << "active:1"                      if options[:exclude_expired]
-    queryoptions << "department:#{department}"      if options[:department] != 0
-    queryoptions << "paid:1"                        if options[:paid]
-    queryoptions << "credit:1"                      if options[:credit]
-    
-    querystring = ""
-    querystring += query.join(opstring) unless query.empty?
-    querystring += " AND (#{queryoptions.join(" AND ")})" unless queryoptions.empty?
-    
-    #jobs = Job.search(query.join(opstring), :conditions => conditions)
-    jobs = ActsAsXapian::Search.new([Job], querystring)
+
+    puts "\n\n\n\n\nquery: #{query.join(opstring)}\nextra_options: #{extra_options.inspect}\nconditions: #{conditions.inspect}\n\n\n\n"
+
+    jobs = Job.search(query.join(opstring), :conditions => conditions)
+#    jobs = ActsAsXapian::Search.new([Job], querystring)
   end
   
   def self.find_jobs_OLD(query={}, extra_options={ })
