@@ -2,10 +2,10 @@
 set :repository, "http://research-cs194.googlecode.com/svn/trunk/research"
 
 # Directory for deployment on the production (remote) machine.
-set :deploy_to, "/mnt/app"
+set :deploy_to, "/home/amber/researchmatch/"
 
-# Replace the below with the hostname of your EC2 instance.
-set :machine_name, "ec2-174-129-122-92.compute-1.amazonaws.com"
+# Replace the below with the machine name
+set :machine_name, "upe.cs.berkeley.edu"
 
 # We're using one instance for all three roles.
 role :app, "#{machine_name}"
@@ -13,25 +13,17 @@ role :web, "#{machine_name}"
 role :db,  "#{machine_name}", :primary => true
 
 set :use_sudo, false
-set :user, "root"
+set :user, "amber"
 
-#ssh_options[:keys] = File.join(ENV["HOME"], "/id_rsa-cs194")
-ssh_options[:keys] = "id_rsa-cs194"
-
-namespace :deploy do
-  %w(start stop restart).each do |action| 
-     desc "#{action} the Thin processes"  
-     task action.to_sym do
-       find_and_execute_task("thin:#{action}")
-    end
-  end 
+namespace :mod_rails do
+  desc <<-DESC
+  Restart the application altering tmp/restart.txt for mod_rails.
+  DESC
+  task :restart, :roles => :app do
+    run "touch  #{release_path}/tmp/restart.txt"
+  end
 end
 
-namespace :thin do  
-  %w(start stop restart).each do |action| 
-  desc "#{action} the app's Thin Cluster"  
-    task action.to_sym, :roles => :app do  
-      run "thin #{action} -c #{deploy_to}/current -e production -p 80 -d" 
-    end
-  end
+namespace :deploy do
+  %w(start restart).each { |name| task name, :roles => :app do mod_rails.restart end }
 end

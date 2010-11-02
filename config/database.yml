@@ -23,11 +23,12 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: myapp_production
+  database: researchmatch_production
   pool: 5
-  username: root
-  password: research
+  username: amber
+  password: r3s3archmatch
   host: localhost
 
 cucumber:
   <<: *TEST
+  
