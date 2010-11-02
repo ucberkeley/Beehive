@@ -39,6 +39,10 @@ class Job < ActiveRecord::Base
   attr_accessor :course_names
   attr_accessor :proglang_names
   
+  # Need to update database on save
+  # TODO: do this
+  #after_save :reindex
+  
   # If true, handle_categories, handle_courses, and handle_proglangs don't do anything. 
   # The purpose of this is so that in activating a job, these data aren't lost.
   @skip_handlers = false
@@ -236,6 +240,5 @@ class Job < ActiveRecord::Base
 	def validate_sponsorships
 	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
 	end
-
 	
 end
