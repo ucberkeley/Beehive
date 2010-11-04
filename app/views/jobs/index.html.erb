@@ -12,12 +12,12 @@
 		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
 		&nbsp;&nbsp;Paid? <%= f.check_box :paid, {:value => @department}%>
 		&nbsp;&nbsp;Credit? <%= f.check_box :credit %>
-		<%= f.submit "Filter Results" %>
+		<%= f.submit "Search" %>
 	<% end %>
 </div>
 
 <div id="tag_cloud">
-  Tags:<br />
+  <%= image_tag 'tag.gif' %> <b>Top Tags:</b><br />
   <% tag_cloud Job.tag_counts, %w(css1 css2 css3 css4) do |tag, css_class| %>
     <span class="tag">
         <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
@@ -26,7 +26,7 @@
 </div>
 
 <br />
-<% if params[:search_terms] %>
+<% if params[:search_terms] and not params[:search_terms].empty? %>
 	Your search for "<%= params[:search_terms][:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
 <div id="browse_results_wrapper">
