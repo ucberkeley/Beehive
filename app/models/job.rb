@@ -62,6 +62,8 @@ class Job < ActiveRecord::Base
     indexes :desc
     indexes taggings.tag.name, :as => :tag
     indexes department.name, :as => :department, :facet => true
+    indexes faculties(:id), :as => :sponsor_id
+    indexes faculties(:name), :as => :faculty
     
     has :active
     has :paid
@@ -135,6 +137,7 @@ class Job < ActiveRecord::Base
     
     ts_conditions[:paid]        = true          if extra_options[:paid]
     ts_conditions[:credit]      = true          if extra_options[:credit]
+    ts_conditions[:sponsor_id]  = extra_options[:faculty] if extra_options[:faculty] > 0
 
     if query.nil?
         Job.search :conditions => ts_conditions

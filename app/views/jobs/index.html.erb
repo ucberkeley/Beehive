@@ -5,14 +5,16 @@
 <br />
 
 <div id="browse_search_bar">
-	<% form_for :search_terms, :url => {:controller => :jobs, :action => :list} do |f| %>
-	<%= image_tag("search_icon.png") %>
-		<%= f.text_field :query, :placeholder => "Search Parameters" %>
-		<%= f.select :department_select, [["All Departments",0]] + Department.all.collect {|c| [c.name, c.id]}, {:selected => @department} %>
-		<%= f.select :faculty_select, [["All Faculty",0]] + Faculty.all.collect {|c| [c.name, c.id]} %>
-		&nbsp;&nbsp;Paid? <%= f.check_box :paid, {:value => @department}%>
-		&nbsp;&nbsp;Credit? <%= f.check_box :credit %>
-		<%= f.submit "Search" %>
+	<% form_tag(:jobs, :method => "get") do %>
+	    <%= image_tag("search_icon.png") %>
+		<%= text_field_tag :query, @query, :placeholder => "Search Parameters" %>
+		<%= label_tag :department, "Department" %>
+		<%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
+		<%= label_tag :faculty, "Faculty" %>
+		<%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
+		&nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid %>
+		&nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit %>
+		<%= submit_tag "Search" %>
 	<% end %>
 </div>
 

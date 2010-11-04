@@ -25,5 +25,6 @@ end
     #      true  |  true
     #
     def from_binary(n)
+#      puts "\n\n#{n} => #{n && n!=0}\n\n"
       n && n!=0
     end

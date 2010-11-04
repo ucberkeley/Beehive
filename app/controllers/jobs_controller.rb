@@ -14,24 +14,16 @@ class JobsController < ApplicationController
   # Ensures that only the user who created a job -- and no other users -- can edit it 
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
-  
-  def indexZ
-	  @jobs = Job.find_jobs             # finds all
-  	@departments = Department.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @jobs }
-    end
-  end
-  
   def index #list
-  	params[:search_terms] ||= {}
-  	@jobs = Job.find_jobs(params[:search_terms][:query], {
-  		                    :department => params[:search_terms][:department_select].to_i, 
-  		                    :faculty => params[:search_terms][:faculty_select].to_i, 
-  		                    :paid => params[:search_terms][:paid].to_i, 
-  		                    :credit => params[:search_terms][:credit].to_i
-                            })	
+  	@jobs = Job.find_jobs(params[:query], {
+  		                    :department => params[:department].to_i, 
+  		                    :faculty => params[:faculty].to_i, 
+  		                    :paid => params[:paid].to_i, 
+  		                    :credit => params[:credit].to_i
+                            })
+    @department_id = params[:department] ? params[:department].to_i : 0
+    @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
+    @query         = ((not params[:query].nil?) and (not params[:query].empty?)) ? params[:query] : nil
   	respond_to do |format|
   		format.html { render :action => :index }
   		format.xml { render :xml => @jobs }
