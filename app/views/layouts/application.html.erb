@@ -13,6 +13,9 @@
   <% if c == 'jobs' or c == 'dashboard' %>
     <%= stylesheet_link_tag 'job' %>
   <% end %>
+  <% if c == 'users' %>
+    <%= stylesheet_link_tag 'user' %>
+  <% end %>
   
   <%= javascript_include_tag "application.js" %>  
   <%= javascript_include_tag "jquery-1.4.2.min.js" %>

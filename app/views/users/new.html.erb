@@ -19,91 +19,95 @@
    <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
 </p>
 
-<!-- Student or GSI -->
-<div id="fields_student_above_password">
+<div id="signup_fields">
 
-    <div id="email_field">
-        <p><%= label_tag 'student_email' %> (must be a valid Berkeley or LBL email address!):<br/>  
-        <%= f.text_field :student_email %></p>
-    </div>
+    <!-- Student or GSI -->
+    <div id="fields_student_above_password">
 
-    <div id="full_name_field">
-        <p>Full Name:<br/>
-        <%= f.text_field :student_name %></p>
-    </div>
-</div>
-
-<div id="fields_faculty">
-
-    <!-- Faculty -->
-    <div id="faculty_emails">
-        Faculty Member (Who are you?): <br />
-        <%= f.select :faculty_name, @faculty_names %>
-    </div>
-
-    <div id="faculty_email">
-    Faculty E-mail Address:<br />
-    <span id="user_faculty_email"><b><i>Your <tt>@eecs.berkeley.edu</tt> e-mail address</i></b></span>
-    <br />
-    </div>
-    
-
-    <% if params[:user] && params[:user][:is_faculty] %>
-    <script type="text/javascript">
-	    document.getElementById("user_is_faculty_true").onclick();
-    </script>
-    <% end %>
-</div>
-
-<div id="password_field">
-    <%= label_tag 'password' %>:<br/>
-    <%= f.password_field :password %>
-    <br />
-    <%= label_tag 'password_confirmation', 'Confirm Password' %>:<br/>
-    <%= f.password_field :password_confirmation %>
-</div>
-
-<div id="fields_student_below_password">
-    <div id="step2">
-
-        <br/><br/>
-        <%= submit_tag 'I\'ll fill in the rest later, sign me up now!' %>
-        <br/><br/>Note: The rest of this information is optional, but may increase your chances of landing a research position. Don't worry though, you can always fill it in later in Settings.
-
-        <br>
-        <br>
-
-        <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
-
-        <br />
-        
-
-        <div class="ui-widget">
-        Courses (please enter the names of your courses, separated by commas, e.g. <i>CS194, CS61A</i>):<br />
-        <%= text_field :course, :name, :class => 'wide'  %>
-        <br />
+        <div id="email_field">
+            <p><%= label_tag 'student_email', 'Student e-mail address' %> (must be a valid Berkeley or LBL e-mail address!):<br/>  
+            <%= f.text_field :student_email %></p>
         </div>
 
+        <div id="full_name_field">
+            <p>Full Name:<br/>
+            <%= f.text_field :student_name %></p>
+        </div>
+    </div>
 
-        <div class="ui-widget">
-        <br />
-        Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
-	        e.g. <i>algorithms, security, signal processing</i>):<br />
-        <%= text_field :category, :name, :class => 'wide'  %>
+    <div id="fields_faculty">
+
+        <!-- Faculty -->
+        <div id="faculty_emails">
+            Faculty member (Who are you?): <br />
+            <%= f.select :faculty_name, @faculty_names %>
+        </div>
+
+        <div id="faculty_email">
+        Faculty e-mail address:<br />
+        <span id="user_faculty_email"><b><i>&nbsp;&nbsp;&nbsp;&nbsp;We'll contact you at your EECS e-mail address.</i></b></span>
         <br />
         </div>
-        
-        <div class="ui-widget">
         <br />
-        Programming languages in which you are proficient: <br />
-        <%= text_field :proglang, :name, :class => 'wide' %>
+
+        <% if params[:user] && params[:user][:is_faculty] %>
+        <script type="text/javascript">
+	        document.getElementById("user_is_faculty_true").onclick();
+        </script>
+        <% end %>
+    </div>
+    <div id="password_field">
+        <%= label_tag 'password' %>:<br/>
+        <%= f.password_field :password %>
         <br />
-        </div>
-    </div>   
+        <%= label_tag 'password_confirmation', 'Confirm password (enter it again)' %>:<br/>
+        <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div id="fields_student_below_password">
+        <div id="step2">
+
+            <br/><br/>
+            <%= submit_tag 'Sign Up Now' %> or <b>continue below</b>.
+            <br/><br/><br />
+            <i><b>Note:</b> The rest of this information is optional, but it may increase your chances of landing a research position. <br />
+            Don't feel obligated to fill this in right now -- you can always do so later by clicking "Edit Profile" in the top-right corner of the page.</i>
+
+            <br>
+            <br>
+
+            <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
+
+            <br />
+            
+
+            <div class="ui-widget">
+            Courses (please enter the names of your courses, separated by commas, e.g. <i>CS194, CS61A</i>):<br />
+            <%= text_field :course, :name, :class => 'wide'  %>
+            <br />
+            </div>
+
+
+            <div class="ui-widget">
+            <br />
+            Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
+	            e.g. <i>algorithms, security, signal processing</i>):<br />
+            <%= text_field :category, :name, :class => 'wide'  %>
+            <br />
+            </div>
+            
+            <div class="ui-widget">
+            <br />
+            Programming languages in which you are proficient: <br />
+            <%= text_field :proglang, :name, :class => 'wide' %>
+            <br />
+            </div>
+        </div>   
+    </div>
+
 </div>
-
 
 <br />
-<%= submit_tag 'Submit' %>
+<%= submit_tag 'Sign Up' %>
 
 <% end -%>
