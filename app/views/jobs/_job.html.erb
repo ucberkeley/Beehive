@@ -17,7 +17,7 @@
                     <% if job.applicants.include?(current_user) %>
                         [applied!]
                     <% else %>
-                        <%= link_to "[apply for this job]", :controller => :jobs, :action => :apply, :id => job.id %>
+                        <%= link_to "[apply for this job]", :controller => :jobs, :action => :goapply, :id => job.id %>
                     <% end %>
                         
                     

@@ -19,14 +19,22 @@ body, p, ol, ul, td {
   cursor: default;
 }
 
-select, input {
+select, input, textarea {
   font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
+}
+
+textarea {
+    width: 300px;
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
+}
+
+h1 {
+  padding-top: 20px;
 }
 
 h1, h2 {

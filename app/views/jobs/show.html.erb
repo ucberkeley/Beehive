@@ -1,7 +1,7 @@
 <%= render :partial => "dashboard/menu_bar" %>
 
 <div id="job_show_main">
-<%= link_to "&#0171; back to listings", :controller => :jobs, :action => :index %><br /><br /><br />
+<br /><br /><br />
 <h2> <%=h @job.title %> </h2>
 <p>
   posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
@@ -20,7 +20,7 @@
         <% if @job.applicants.include?(current_user) %>
 			[applied!]
 		<% else %>
-			<%= link_to "[apply for this job]", :controller => :jobs, :action => :apply, :id => @job.id %>
+			<%= link_to "[apply for this job]", :controller => :jobs, :action => :goapply, :id => @job.id %>
 		<% end %>
 	<% end %>
 	</b>
@@ -106,22 +106,30 @@
 <br /><br />
 <h2>Discussion</h2>
 <p>
-	currently watched by 
-	<div class="vertlist">
-	<% @job.users.each do |usr| %>
-		<%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
-		<%= usr.name == current_user.name ? " (you)" : "" %><br />
+	<% if not @job.users or @job.users.empty? %>
+	    No comments yet. <a href="#">Be the first!</a>
+    <% else %>
+	    <div>
+	    Currently watching this job:
+	    <ul>
+	    <% @job.users.each do |usr| %>
+		    <li>
+    		    <%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
+    		    <%= usr.name == current_user.name ? " (you)" : "" %>
+    		</li>    
+	    <% end %>
+        </ul>
+	    </div>
 	<% end %>
-	</div>
 </p>
-
+<br />
+<%= link_to "&#0171; back to listings", :controller => :jobs, :action => :index %>
 <br /><br /><br /><br />
 <!-- === Debug === -->
-= Activation Link =
-<br /><br />
 
-<a href="<%= @job.activation_url %>"><%= @job.activation_url %></a>
+<span style="color: #CCCCCC">Activation Link: <a href="<%= @job.activation_url %>" style="color: #CCCCCC"><%= @job.activation_url %></a></span>
+<br />
 
-<% #debug(@job) %>
+
 
 </div>

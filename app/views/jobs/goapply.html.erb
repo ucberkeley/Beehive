@@ -1,0 +1,57 @@
+<%= render :partial => "dashboard/menu_bar" %>
+
+<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
+
+
+
+
+<h1>Apply for Research Job</h1>
+
+
+  <table class="job_clear_table">
+	  <tr>
+		<td class="job_clear_table_label">Job title</td>
+		<td class="job_clear_table_field"><b><a href="<%=h url_for @job %>" target="_blank"><%= @job.title %></a></b></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label">Faculty sponsor</td>
+		<td class="job_clear_table_field">
+		    <b>
+		        <% @job.faculties.each do |f| %> 
+                	<%= f.name %> <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley EECS" target="_blank">
+            		<%= image_tag("eecs_icon.gif") %></a>
+                <% end %> 
+    		</b>
+		</td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label" style="vertical-align: top">Message to faculty sponsor</td>
+		<td class="job_clear_table_field">
+		    <%= text_area :desc, {:rows=>7}%>
+		</td>
+	  </tr>
+  </table>
+  <br />
+  <p>
+      <b><%= current_user.name %></b>, please supply your transcript and resume in PDF format below. 
+      The faculty sponsor of this job will receive your credentials along with your application.
+  </p>
+  <br />
+    
+  <table class="job_clear_table">
+  	  <tr>
+		<td class="job_clear_table_label">Unofficial Transcript</td>
+		<td class="job_clear_table_field"><i>N/A</i></td>
+	  </tr>
+  	  <tr>
+		<td class="job_clear_table_label">Resume</td>
+		<td class="job_clear_table_field"><i>N/A</i></td>
+	  </tr>
+  </table>
+  
+  <br />
+  
+  <%= submit_tag('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag 'Cancel', :onclick => "location.href='"+url_for(@job)+"'" %>
+  
+<br /><br />
+<%= link_to '&#0171; Back to Listings', jobs_path %>
