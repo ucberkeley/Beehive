@@ -17,7 +17,7 @@
    <%= f.radio_button :is_faculty, true, :onclick =>
    		"user_signup_faculty_fields()" %>
    <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
-   </p>
+</p>
 
 <!-- Student or GSI -->
 <div id="fields_student_above_password">
@@ -41,6 +41,12 @@
         <%= f.select :faculty_name, @faculty_names %>
     </div>
 
+    <div id="faculty_email">
+    Faculty E-mail Address:<br />
+    <span id="user_faculty_email"><b><i>Your <tt>@eecs.berkeley.edu</tt> e-mail address</i></b></span>
+    <br />
+    </div>
+    
 
     <% if params[:user] && params[:user][:is_faculty] %>
     <script type="text/javascript">
