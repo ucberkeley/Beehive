@@ -1,0 +1,48 @@
+Installing Sphinx / ThinkingSphinx for the first time on Rails 2
+
+1) Install Sphinx
+
+   grab source from <http://www.sphinxsearch.com/downloads/>
+   
+   sudo apt-get install mysql-server mysql-client libmysqlclient-dev libmysql-ruby1.8
+   
+   tar xzvf && cd the sphinx source
+   ./configure
+   make
+   sudo make install
+
+
+2) Install ThinkingSphinx (should be done already and in plugins folder)
+   <http://freelancing-god.github.com/ts/en/installing_sphinx.html>
+   
+   script/plugin install git://github.com/freelancing-god/thinking-sphinx.git
+
+
+3) doing it
+   Set up database.yml:   
+           development:
+          adapter: mysql
+          database: researchmatch_development
+          encoding: utf8
+          username: root    # or whatever user you set up
+          password:         # whatever you set it to
+          #socket: /var/run/mysqld/mysqld.sock
+          host: localhost
+          pool: 5
+          timeout: 5000
+          
+   Then rake ts:config (short for thinking_sphinx:configure) to make sphinx conf.
+   Be sure to NOT COMMIT the conf file or database.yml since they BOTH contain
+     your MySQL password.
+   Then:
+       rake db:create
+       rake db:migrate
+   
+   Relevant rakes:
+       rake ts:start
+       rake ts:rebuild
+       rake ts:index
+
+Helpful links:
+  http://wiki.rubyonrails.org/database-support/mysql
+
