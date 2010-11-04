@@ -16,6 +16,15 @@
 	<% end %>
 </div>
 
+<div id="tag_cloud">
+  Tags:<br />
+  <% tag_cloud Job.tag_counts, %w(css1 css2 css3 css4) do |tag, css_class| %>
+    <span class="tag">
+        <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+    </span>
+  <% end %>
+</div>
+
 <br />
 <% if params[:search_terms] %>
 	Your search for "<%= params[:search_terms][:query] %>" returned <%= @jobs.length %> results.<br /><br />

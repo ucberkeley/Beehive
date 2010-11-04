@@ -47,7 +47,15 @@
 	width: 10%;
 }
 
+#tag_cloud {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
 
+.css1 { font-size: 1.0em; }
+.css2 { font-size: 1.2em; }
+.css3 { font-size: 1.4em; }
+.css4 { font-size: 1.6em; }
 
 
 #browse_results_wrapper{
@@ -96,22 +104,24 @@ p#description {
 }
 
 
-/* from application.css */
-
-
 /*jobs*/
 
 span.tag {
 	background-color: #eaeaea;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
     border: 1px solid #ffffff;
 	font-weight: bold;
-	margin-left: 2px;
-	margin-right: 2px;
+	margin: 2px;
+	line-height: 1.8;
     padding-left: 4px;
     padding-right: 4px;
 }
+
+    span.tag a {
+        color: #333333;
+    }
 
 .job_title{
 	font-weight: bold;
