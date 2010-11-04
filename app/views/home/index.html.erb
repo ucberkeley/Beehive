@@ -28,8 +28,8 @@
 	<tr>
 		<td background="../images/research_match_display_02.png" width="308" height="59">
 			<div id="browse_listings_menu">
-				<% form_for :job, :url => { :controller => "jobs", :action => "list" } do |f| %>
-					<%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+				<% form_tag(:jobs, :method => "get") do %>
+					<%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
 				<% end %>
 			</div>
 		</td>
