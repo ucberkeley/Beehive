@@ -31,9 +31,7 @@
                         <%= image_tag 'tag.gif' %>
 						Tags:
                           <% if @job.active %>
-                            <% @job.tag_list.each do |tag| %>
-                                <span class="tag"><%=h tag %></span>
-                            <% end %>
+                            <%= render :partial => "tag", :collection => @job.tag_list %>
                           <% else %>
                             (Tags will be generated once job is activated)
                           <% end %>	

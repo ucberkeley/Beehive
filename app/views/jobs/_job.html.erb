@@ -31,12 +31,7 @@
 							<% if job_tags.empty? %>
 								(none)
 							<% else %>
-								<% job_tags.each do |tag| %>
-									<span class="tag">
-									    <%=h link_to tag, jobs_path + '?query=' + tag %>
-
-									</span>
-								<% end %>
+								<%= render :partial => "tag", :collection => job.tag_list %>
 							<% end %>
 						</div>
 					<% end %>
