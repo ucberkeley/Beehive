@@ -131,13 +131,20 @@ class Job < ActiveRecord::Base
     # Handle weird cases with bad query
     query = query.join(' ') if query.kind_of? Array
     
+    # Default options
+    options = {
+        :exclude_expired        => true,
+        :paid                   => false,
+        :credit                 => false,
+        :faculty                => 0
+        }.update(extra_options) 
     
     ts_conditions = {}
     ts_conditions[:active]      = true
     
-    ts_conditions[:paid]        = true          if extra_options[:paid]
-    ts_conditions[:credit]      = true          if extra_options[:credit]
-    ts_conditions[:sponsor_id]  = extra_options[:faculty] if extra_options[:faculty] > 0
+    ts_conditions[:paid]        = true              if options[:paid]
+    ts_conditions[:credit]      = true              if options[:credit]
+    ts_conditions[:sponsor_id]  = options[:faculty] if options[:faculty] > 0
 
     if query.nil?
         Job.search :conditions => ts_conditions
