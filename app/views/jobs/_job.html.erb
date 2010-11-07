@@ -38,12 +38,18 @@
 						</div>
 					<% end %>
 					
-					<div class="job_desc">
-					<span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 200, "...") %></span> 
-					<% if job.desc.length > 200 %>
-						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> 
+					
+					<% if controller.controller_name != 'dashboard' %>
+					
+					    <div class="job_desc">
+					    <span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 200, "...") %></span> 
+					    <% if job.desc.length > 200 %>
+						    <%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> 
+					    <% end %>
+					    </div>
+					
 					<% end %>
-					</div>
+					
 				</td>
 				<td class="job_credit">
 					<div class="job_attr"><%= job.paid ? image_tag('yes_check.gif') : image_tag('no_check.gif') %></div>
