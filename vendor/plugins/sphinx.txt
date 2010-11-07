@@ -19,7 +19,14 @@ Installing Sphinx / ThinkingSphinx for the first time on Rails 2
 
 
 3) doing it
-   Set up database.yml:   
+
+   Create the development database if it doesn't exist already:
+
+   rake db:create
+   rake db:migrate
+
+   Then, set up database.yml:   
+
            development:
           adapter: mysql
           database: researchmatch_development

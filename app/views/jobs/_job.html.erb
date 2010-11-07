@@ -39,9 +39,9 @@
 					<% end %>
 					
 					<div class="job_desc">
-					<span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 100, "...") %></span> 
-					<% if job.desc.length > 100 %>
-						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> <%= link_to_remote "[read less]", :update=>"job_desc_#{job.id}", :url => {:controller=>:jobs, :action=>:job_read_less, :id=>job.id} %>
+					<span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 200, "...") %></span> 
+					<% if job.desc.length > 200 %>
+						<%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> 
 					<% end %>
 					</div>
 				</td>

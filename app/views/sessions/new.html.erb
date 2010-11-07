@@ -1,16 +1,19 @@
-<div id="login_box">
+<div id="login_box" class="box_shadow">
 <h1>Log In</h1>
 
 <% form_tag session_path do -%>
-<p><%= label_tag 'email' %><br />
+<p><%= label_tag 'email', "E-mail Address" %><br />
 <%= text_field_tag 'email', @email %></p>
 
 <p><%= label_tag 'password' %><br/>
 <%= password_field_tag 'password', nil %></p>
-
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
-
+<br />
+<p>
+    <%= check_box_tag 'remember_me', '1', @remember_me %>
+    <%= label_tag 'remember_me', 'Remember me' %>
+</p>
+<br />
 <p><%= submit_tag 'Log in' %></p>
+<br />
 <% end -%>
 </div>

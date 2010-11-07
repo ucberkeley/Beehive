@@ -33,13 +33,22 @@
 	<div id="dashboard_wrapper_smartmatch">
 		<div id="dashboard_container_smartmatch" class="box_shadow">
 			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
+			
+
+
+			<% if @relevant_jobs.empty? %>
+			 <p>
+			    Unfortunately, we were unable to match you to any research positions.
+			 </p> 
+			 <p>
+    			 Most likely, this is caused by a lack of information regarding your coursework and interests.
+	    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?
+			 </p>
+			<% else %>
 			<%= @user.name %>, we've automatically matched your interests and skill set to the
 			following <b><%= @relevant_jobs.length %> research
 			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
-			<br /><br />
-			<% if @relevant_jobs.empty? %>
-			 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?
-			<% else %>
+						<br /><br />
             <table id="browse_header_table">
                 <tr>
                     
@@ -60,17 +69,24 @@
 	<div class="dashboard_wrapper_long">
 		<div class="dashboard_container_long">
 			<h2>Recently Added Postings</h2>
-			<table id="browse_header_table">
-				<tr>
+			
+			<% if @recently_added_jobs.empty? %>
+			No research positions were recently added. Please try again later!
+			<% else %>
+			    <table id="browse_header_table">
+				    <tr>
 					
-					<td class="job_table_left">Title/Description</td>
-					<td class="job_credit">Paid?</td>
-					<td class="job_credit">Credit?</td>
-					<td class="job_credit"># Positions</td>
-					</div>
-				</tr>
-			</table>
-			<%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
+					    <td class="job_table_left">Title/Description</td>
+					    <td class="job_credit">Paid?</td>
+					    <td class="job_credit">Credit?</td>
+					    <td class="job_credit"># Positions</td>
+					    </div>
+				    </tr>
+			    </table>
+			    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
+			<% end %>
+			
+
 		</div>
 	</div>
 </div>
