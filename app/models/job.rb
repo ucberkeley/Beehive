@@ -71,6 +71,8 @@ class Job < ActiveRecord::Base
     has :created_at
     has :updated_at
     has :exp_date
+    
+    set_property :delta => true
   end
   
   def self.active_jobs
