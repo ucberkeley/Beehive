@@ -119,6 +119,10 @@ span.tag {
     padding-right: 4px;
 }
 
+    span.tag:hover {
+        background-color: #dddddd;
+    }
+
     span.tag a {
         color: #333333;
     }

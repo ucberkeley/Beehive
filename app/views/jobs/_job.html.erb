@@ -1,7 +1,7 @@
 <div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 	<div class="job_padding_wrapper">
 		<table class="job_table">
-            <tr onclick="location.href='<%= job_path(job) %>'" class="job_table_row">
+            <tr class="job_table_row">
 				<td class="job_table_left">
 					<div class="job_title">
                     <a href="<%= job_path(job) %>" title="Click to apply for this research position!"><%= job.title %></a>
@@ -32,7 +32,10 @@
 								(none)
 							<% else %>
 								<% job_tags.each do |tag| %>
-									<span class="tag"><%=h tag %></span>
+									<span class="tag">
+									    <%=h link_to tag, jobs_path + '?query=' + tag, :options => {:query => :lolz} %>
+
+									</span>
 								<% end %>
 							<% end %>
 						</div>
