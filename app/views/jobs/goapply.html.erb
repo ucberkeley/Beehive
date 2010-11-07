@@ -5,7 +5,7 @@
 
 
 
-<h1>Apply for Research Job</h1>
+<h1>Apply for Research Position</h1>
 
 
   <table class="job_clear_table">
@@ -18,14 +18,20 @@
 		<td class="job_clear_table_field">
 		    <b>
 		        <% @job.faculties.each do |f| %> 
-                	<%= f.name %> <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley EECS" target="_blank">
-            		<%= image_tag("eecs_icon.gif") %></a>
+                	<%= f.name %> 
+                	
+                    <% if @job.department.name == 'EECS' %>
+                	    <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley EECS" target="_blank">
+                    		<%= image_tag("eecs_icon.gif") %>
+                		</a>
+            		<% end %>
+                	
                 <% end %> 
     		</b>
 		</td>
 	  </tr>
 	  <tr>
-		<td class="job_clear_table_label" style="vertical-align: top">Message to faculty sponsor</td>
+		<td class="job_clear_table_label">Message to faculty sponsor</td>
 		<td class="job_clear_table_field">
 		    <%= text_area :desc, {:rows=>7}%>
 		</td>
@@ -33,6 +39,7 @@
   </table>
   <br />
   <p>
+      <h2>Credentials</h2>
       <b><%= current_user.name %></b>, please supply your transcript and resume in PDF format below. 
       The faculty sponsor of this job will receive your credentials along with your application.
   </p>
@@ -51,7 +58,8 @@
   
   <br />
   
-  <%= submit_tag('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= submit_tag 'Cancel', :onclick => "location.href='"+url_for(@job)+"'" %>
+  <%= submit_tag('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
+  
   
 <br /><br />
 <%= link_to '&#0171; Back to Listings', jobs_path %>

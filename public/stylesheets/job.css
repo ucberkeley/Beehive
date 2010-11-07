@@ -1,5 +1,5 @@
 .job_table tr.job_table_row:hover {
-    background-color: #f5ffe2; 
+
 }
 
 .job_table tr.job_table_row td:hover {
@@ -170,6 +170,7 @@ span.tag {
 	text-align:left;
 	width:auto;
 	padding:5px;
+	vertical-align: top;
 }input.wide {
     width: 300px;
 }
