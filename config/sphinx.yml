@@ -1,0 +1,5 @@
+development:
+    morphology: stem_en
+
+production:
+    searchd_file_path: "/fill/me/in"

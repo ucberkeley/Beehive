@@ -1,6 +1,6 @@
 class AddDeltaToJob < ActiveRecord::Migration
   def self.up
-    add_column :jobs, :delta, :boolean, :default => true
+    add_column :jobs, :delta, :boolean, :default => true, :null => false
   end
 
   def self.down

@@ -87,7 +87,7 @@ class Job < ActiveRecord::Base
     #Job.find_jobs(query, {:limit=>limit, :exclude_expired=>true})
     
     
-    list_separator = ","        # string that separates items in the stored list
+    list_separator = ','        # string that separates items in the stored list
     
     query = []
     [my.course_list_of_user,
@@ -95,8 +95,8 @@ class Job < ActiveRecord::Base
      my.proglang_list_of_user].each do |list|
         query.concat list.split(list_separator)
     end
-    Job.find_jobs(query, {:operator=>:OR, :exclude_expired=>true})
-    # TODO: limit
+    
+    Job.find_jobs(query, {:match_mode=>:any, :limit=>limit})
   end
   
   # This is the main search handler.
@@ -120,8 +120,7 @@ class Job < ActiveRecord::Base
   #   - paid: if true, return jobs that have paid=true; else return paid and nonpaid
   #   - credit: if true, return jobs that have credit=true; else return credit and noncredit
   #   - limit: max. number of results, or 0 for no limit
-  #   - conditions: more raw SQL conditions. Be careful with this.
-  #   - operator: [:AND | :OR], search operator used to join query terms
+  #   - match_mode: [:any | :all | :extended], sets match mode. Default :any.
   #
   def self.find_jobs(query="*", extra_options={})
     # Sanitize some boolean options to avoid false positives.
@@ -138,65 +137,44 @@ class Job < ActiveRecord::Base
         :exclude_expired        => true,
         :paid                   => false,
         :credit                 => false,
-        :faculty                => 0
-        }.update(extra_options) 
+        :faculty                => 0,
+        :match_mode             => :any,
+        :limit                  => 0
+        }.update(extra_options)
+
+    ts_options = {
+        :match_mode     => :any
+        }
     
+    # Selectively build conditions
     ts_conditions = {}
     ts_conditions[:active]      = true
-    
+    ts_conditions[:exp_date]    = Time.now..100.years.since unless options[:exclude_expired]
     ts_conditions[:paid]        = true              if options[:paid]
     ts_conditions[:credit]      = true              if options[:credit]
-    ts_conditions[:sponsor_id]  = options[:faculty] if options[:faculty] > 0
+    ts_conditions[:sponsor_id]  = options[:faculty] if options[:faculty] > 0 and Faculty.exists?(options[:faculty])
+    
+    # Selectively build options
+    ts_options[:match_mode]     = options[:match_mode] if [:all, :any, :extended].include? options[:match_mode]
+    ts_options[:max_matches]    = options[:limit]   if options[:limit] > 0
 
+    # Do the search
     if query.nil?
-        Job.search :conditions => ts_conditions
+        Job.search nil, {:conditions => ts_conditions}.update(ts_options)
     else
-        Job.search query, :conditions => ts_conditions
+        Job.search query, {:conditions => ts_conditions}.update(ts_options)
     end
     
   end
   
   
-  
-  
-  def self.find_jobs____FUUUUUUUUUUUUUUUUUUUUU_____(query="*", extra_options={})
-    # Sanitize some boolean options to avoid false positives.
-    # This happens in situations like paid=0 => paid=true
-    [:paid, :credit].each do |attrib|
-        extra_options[attrib] = from_binary(extra_options[attrib])
-    end
-    
-    # Handle weird cases with bad query
-    query = "*" if query.nil?
-    #query = query.split if query.kind_of? String
-    query = query.join(' ') if query.kind_of? Array
-    
-    # Set up default options, and merge the extras
-    options = { :exclude_expired    => true,        # return expired jobs too
-                :department         => 0,           # department ID
-                :faculty            => 0,           # faculty ID
-                :paid               => false,       # paid?
-                :credit             => false,       # credit?
-                :limit              => 0,           # max. num results
-                :conditions         => {},          # more SQL conditions
-                :operator           => :AND,        # search operator <:AND | :OR>
-                }.update(extra_options)
-                
-    # ohai
-    conditions = {}
-    conditions[:active]     = true
-    conditions[:exp_date]   = Time.now..100.years.since  unless options[:exclude_expired]
-    conditions[:paid]       = true                  if options[:paid]
-    conditions[:credit]     = true                  if options[:credit]
-    conditions[:department_id] = options[:department] if options[:department] > 0
-
-    # Choose an operator from the list; i.e. sanitize the operator.
-    op = [:AND, :OR].detect {|o| o==options[:operator]} || :AND
-    opstring = op.to_s+" "
-
-    #jobs = Job.search(query.join(opstring), :conditions => conditions)
-    jobs = Job.search(query, :conditions => conditions)
-#    jobs = ActsAsXapian::Search.new([Job], querystring)
+  def self.query_url(options)
+    params = {}
+    params[:query]          = options[:query]               if options[:query]
+    params[:department]     = options[:department_id]       if options[:department_id] and Department.exists?(options[:department_id])
+    params[:paid]           = true                          if options[:paid]
+    params[:credit]         = true                          if options[:credit]
+    url_for(:controller => 'jobs', :only_path=>true)+"?#{params.collect { |param, value| param+'='+value }.join('&')}"
   end
    
   def self.find_recently_added(n)
