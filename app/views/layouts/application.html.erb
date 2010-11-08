@@ -44,7 +44,11 @@
 		        <li><%= link_to "Dashboard", :controller => :dashboard %></li>		    
 		        <li><%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
 		        <li><%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
-		        <li><%= link_to "Edit Profile", edit_user_url(@user) %></li>		               
+		        
+		        <% if logged_in? %>
+    		        <li><%= link_to "Edit Profile", edit_user_url(@user) %></li>		               
+		        <% end %>
+		        
 		    </ul>
 		</div>
 	</div>

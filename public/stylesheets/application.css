@@ -121,7 +121,11 @@ width: 100%;
     }
     
         #tabs ul li {
+            -moz-box-shadow: 0px 2px 5px #CCCCCC;            
+            -o-box-shadow: 0px 2px 5px #CCCCCC;            
             -webkit-box-shadow: 0px 2px 5px #CCCCCC;
+            box-shadow: 0px 2px 5px #CCCCCC;            
+            -moz-border-radius: 0px 0px 6px 6px;
             border-radius: 0px 0px 6px 6px;
             background-color: #A7D787; /*#D1F19F;*/
             padding: 10px;
