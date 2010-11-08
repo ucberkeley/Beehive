@@ -22,11 +22,11 @@
 
 <table id="Table_01" width="898" height="203" cellpadding="0" cellspacing="0">
 	<tr>
-		<td colspan="3" background="images/research_match_display_01.png" width="898" height="144">
+		<td colspan="3" background="<%= image_path "research_match_display_01.png" %>" width="898" height="144">
 		</td>
 	</tr>
 	<tr>
-		<td background="images/research_match_display_02.png" width="308" height="59">
+		<td background="<%= image_path "research_match_display_02.png" %>" width="308" height="59">
 			<div id="browse_listings_menu">
 				<% form_tag(:jobs, :method => "get") do %>
 					<%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
