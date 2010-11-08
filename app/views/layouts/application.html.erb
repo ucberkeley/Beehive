@@ -42,8 +42,8 @@
 		<div id="tabs">
 		    <ul>
 		        <li><%= link_to "Dashboard", :controller => :dashboard %></li>		    
-		        <li><%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
-		        <li><%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
+		        <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
+		        <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
 		        
 		        <% if logged_in? %>
     		        <li><%= link_to "Edit Profile", edit_user_url(@user) %></li>		               
