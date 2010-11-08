@@ -52,6 +52,13 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
+    @job.mend
+    
+    respond_to do |format|
+        format.html
+        format.xml
+    end
+    
   end
 
   # POST /jobs
@@ -70,12 +77,12 @@ class JobsController < ApplicationController
 
 	sponsor = Faculty.find(params[:faculty_sponsor].to_i)
 	  @job = Job.new(params[:job])
-	  @sponsorship = Sponsorship.create(:faculty => sponsor, :job_id => 0)
+	  @sponsorship = Sponsorship.create(:faculty => sponsor, :job_id => @job.id)
   	@job.sponsorships << @sponsorship
 
     respond_to do |format|
       if @job.save
-        @job.sponsorships.each {|s| s.job_id = @job.id}
+#        @job.sponsorships.each {|s| s.job_id = @job.id}
     		@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
     		@job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
@@ -108,13 +115,15 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @faculty_names = Faculty.all.map {|f| f.name }
 	
-	sponsorships = []
-  	if @job.faculties.first
-        if params[:faculty_name] != @job.faculties.first.id 
-            @sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
-            params[:job][:sponsorships] = [@sponsorship]
-        end
-    end
+	update_sponsorships
+	
+#	sponsorships = []
+#  	if @job.faculties.first
+#        if params[:faculty_name] != @job.faculties.first.id
+#            @sponsorship = Sponsorship.new(:faculty => Faculty.find(params[:faculty_name]), :job => nil)
+#            params[:job][:sponsorships] = [@sponsorship]
+#        end
+#    end
 	
   	
 			
@@ -241,6 +250,13 @@ class JobsController < ApplicationController
   end
   
   protected
+    # Saves sponsorship specified in the params page
+    def update_sponsorships
+        fac = Faculty.exists?(params[:faculty_name]) ? params[:faculty_name] : 0
+        sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
+        @job.sponsorships = [sponsor]
+    end
+  
   
 	  # Populates the tag_list of the job.
 	def populate_tag_list

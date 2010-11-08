@@ -39,24 +39,14 @@ class Job < ActiveRecord::Base
   attr_accessor :course_names
   attr_accessor :proglang_names
   
-  # Need to update database on save
-  # TODO: do this
-  #after_save :reindex
-  
   # If true, handle_categories, handle_courses, and handle_proglangs don't do anything. 
   # The purpose of this is so that in activating a job, these data aren't lost.
   @skip_handlers = false
   attr_accessor :skip_handlers
   
   acts_as_taggable
-#  xapit do |index|
-#    index.text :title, :desc, :tag_list
-#    index.field :active, :num_positions #, :paid, :credit
-#    index.sortable :exp_date
-#    index.facet :department_id, "Department"
-#    index.facet :paid, "Paid"
-#    index.facet :credit, "Credit"
-#  end
+
+  # ThinkingSphinx
   define_index do
     indexes :title
     indexes :desc
@@ -80,13 +70,6 @@ class Job < ActiveRecord::Base
   end
   
   def self.smartmatches_for(my, limit=4) # matches for a user
-	# courses = my.course_list_of_user.gsub ",", " "
-  	# cats = my.category_list_of_user.gsub ",", " "
-  	# pls = my.proglang_list_of_user.gsub ",", " "
-  	# query = "#{cats} #{courses} #{pls}"
-    #Job.find_jobs(query, {:limit=>limit, :exclude_expired=>true})
-    
-    
     list_separator = ','        # string that separates items in the stored list
     
     query = []
@@ -96,7 +79,10 @@ class Job < ActiveRecord::Base
         query.concat list.split(list_separator)
     end
     
-    Job.find_jobs(query, {:match_mode=>:any, :limit=>limit})
+    # magic
+    smartmatch_ranker = "@weight"
+    
+    Job.find_jobs(query, {:match_mode=>:any, :limit=>limit, :custom_rank=>smartmatch_ranker, :rank_mode=>:bm25})
   end
   
   # This is the main search handler.
@@ -108,11 +94,9 @@ class Job < ActiveRecord::Base
   # You can also restrict by query, department, faculty, paid, credit,
   # and set a limit of max number of results.
   #
-  # Currently uses Xapian/xapit
-  #   (http://github.com/ryanb/xapit#readme)
-  #   windows binaries from (http://www.flax.co.uk/xapian_binaries)
+  # Currently uses Sphinx/ThinkingSphinx
   #
-  # query: Array of search terms.
+  # query: Array or string of search terms.
   # extra_options: Hash of additional options:
   #   - exclude_expired: if true, don't include expired jobs
   #   - department: ID of department you want to search, or 0 for all depts
@@ -121,8 +105,10 @@ class Job < ActiveRecord::Base
   #   - credit: if true, return jobs that have credit=true; else return credit and noncredit
   #   - limit: max. number of results, or 0 for no limit
   #   - match_mode: [:any | :all | :extended], sets match mode. Default :any.
+  #   - tags: array of tag strings to match (searches only tags and not body, title, etc.)
+  #   - order: ARRAY of custom sorting conditions, besides @relevance. Conditions concatenated left to right.
   #
-  def self.find_jobs(query="*", extra_options={})
+  def self.find_jobs(query, extra_options={})
     # Sanitize some boolean options to avoid false positives.
     # This happens in situations like paid=0 => paid=true
     [:paid, :credit].each do |attrib|
@@ -139,11 +125,16 @@ class Job < ActiveRecord::Base
         :credit                 => false,
         :faculty                => 0,
         :match_mode             => :any,
-        :limit                  => 0
+        :limit                  => 0,
+        :tags                   => [],
+        :custom_rank            => ""
         }.update(extra_options)
 
     ts_options = {
-        :match_mode     => :any
+        :match_mode     => :any,
+        :sort_mode      => :extended,
+        :order          => "@relevance DESC, exp_date ASC",
+        :rank_mode      => :proximity_bm25
         }
     
     # Selectively build conditions
@@ -153,11 +144,18 @@ class Job < ActiveRecord::Base
     ts_conditions[:paid]        = true              if options[:paid]
     ts_conditions[:credit]      = true              if options[:credit]
     ts_conditions[:sponsor_id]  = options[:faculty] if options[:faculty] > 0 and Faculty.exists?(options[:faculty])
+    ts_conditions[:tag]         = options[:tags]    if not options[:tags].empty?
     
     # Selectively build options
     ts_options[:match_mode]     = options[:match_mode] if [:all, :any, :extended].include? options[:match_mode]
     ts_options[:max_matches]    = options[:limit]   if options[:limit] > 0
-
+    ts_options[:rank_mode]      = options[:rank_mode] if [:proximity_bm25, :bm25, :wordcount].include? options[:rank_mode]
+    
+    if options[:custom_rank] and not options[:custom_rank].empty?
+        ts_options[:sort_mode] = :expr
+        ts_options[:order]     = options[:custom_rank]
+    end
+    
     # Do the search
     if query.nil?
         Job.search nil, {:conditions => ts_conditions}.update(ts_options)
@@ -215,6 +213,15 @@ class Job < ActiveRecord::Base
   # Returns the activation url for this job
   def activation_url
     "#{$rm_root}jobs/activate/#{self.id}?a=#{self.activation_code}"
+  end
+  
+  
+  # Ensures all fields are valid
+  def mend
+    # Check for deleted/bad faculty
+    if not self.faculties.empty? and not Faculty.exists?(self.faculties.first.id)
+        self.faculties = []
+    end
   end
   
   protected
