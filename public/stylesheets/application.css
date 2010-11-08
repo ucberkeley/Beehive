@@ -152,6 +152,32 @@ width: 100%;
 	text-align: center;
 }
 
+
+/** Quick Search Bar **/
+
+#quicksearch_form {
+    margin-top: 5px;
+}
+
+#quicksearch_query {
+    background: none;
+    border: none;
+    border-bottom: 1px dashed #CCC;
+    color: #FFFFFF;
+    width: 150px;
+    text-align: left;
+}
+
+#quicksearch_button {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+
+
+
+
 #shadowdown{
 	background: url('../images/trans_down.png');
 	background-repeat: x-repeat;

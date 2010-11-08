@@ -1,1 +1,8 @@
-<%= text_field_tag 'search_bar' %>
+<% form_tag(:jobs, :method => "get", :id => "quicksearch_form") do %>
+	<%= text_field_tag :query, @query, :placeholder => "Quick search", :id => "quicksearch_query" %>
+    <%= image_submit_tag "search_icon.png", :id => "quicksearch_button" %>
+<% end %>
+
+
+
+
