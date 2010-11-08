@@ -40,6 +40,12 @@
 	</div>
 	<div id="header_tabs">
 		<div id="tabs">
+		    <ul>
+		        <li><%= link_to "Dashboard", :controller => :dashboard %></li>		    
+		        <li><%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
+		        <li><%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
+		        <li><%= link_to "Edit Profile", edit_user_url(@user) %></li>		               
+		    </ul>
 		</div>
 	</div>
 	<div id="shadowdown"></div>
@@ -55,7 +61,7 @@
 				<%= flash[:notice] %>
 			</div>
 		<% end %>
-		
+		<br />
 		<div id="contentcenter">
 			<%= yield %>
 		</div>

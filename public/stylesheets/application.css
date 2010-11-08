@@ -111,10 +111,38 @@ width: 100%;
 
 #tabs{
 	width: 1000px;
-	height: 17px;
+	height: 0px;
 	background: url("../images/header_stripe.gif") no-repeat;
 	margin: auto;
 }
+
+    #tabs ul {
+        padding-top: 25px;
+    }
+    
+        #tabs ul li {
+            -webkit-box-shadow: 0px 2px 5px #CCCCCC;
+            border-radius: 0px 0px 6px 6px;
+            background-color: #A7D787; /*#D1F19F;*/
+            padding: 10px;
+            padding-top: 9px;
+            padding-bottom: 7px;
+            margin-right: 7px;
+            font-size: 1.3em;
+            color: #666666;
+            text-shadow: 0 1px 0 #ddd;
+            display: inline;
+        }
+            
+            #tabs ul li:hover{
+                background-color: #D1F19F;
+            }
+            
+            #tabs a {
+                color: #333; 
+            }
+           
+        
 
 #menu_bar{
 	text-align: center;
@@ -143,6 +171,8 @@ width: 100%;
 #footer{
     -webkit-box-shadow: 0px -3px 10px #ccc; 
     -moz-box-shadow: 0px -3px 10px #ccc; 
+    -o-box-shadow: 0px -3px 10px #ccc; 
+    box-shadow: 0px -3px 10px #ccc; 
     padding-top: 10px;
     padding-bottom: 10px;
 	width: 100%;
