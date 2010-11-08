@@ -11,12 +11,21 @@
 <% form_for :user, :url => users_path do |f| -%>
 
 <p>User type:<br />
-   <%= f.radio_button :is_faculty, false, :checked => true, :onclick => 
-		"user_signup_student_fields()" %>
-   <%= f.label :is_faculty_false, 'Student or GSI' %><br />
-   <%= f.radio_button :is_faculty, true, :onclick =>
-   		"user_signup_faculty_fields()" %>
-   <%= f.label :is_faculty_true, 'Faculty' %><br /><br />
+    <% [
+         [User::Types::Undergrad, "user_signup_student_fields()", "Undergrad"],
+         [User::Types::Grad,      "user_signup_student_fields()", "Grad student / Postdoc"],
+         [User::Types::Faculty,   "user_signup_faculty_fields()", "Faculty"  ]
+       ].each do |type|
+     %>
+
+    <% options = {:onclick => type[1]} %>
+    <% options[:checked] = "checked" if @selected_user_type == type[0] %>
+
+    <%= f.radio_button :user_type, type[0], options %>
+    <%= f.label "user_type_#{type[0]}", type[2] %>
+    
+    <% end %>
+
 </p>
 
 <div id="signup_fields">

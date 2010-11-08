@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   
+  class Types
+      Undergrad = 0
+      Grad      = 1
+      Faculty   = 2
+  end
+  
   has_many :jobs
   has_many :reviews
   has_one :picture
@@ -35,7 +41,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   
   # Check that the email address is @*.berkeley.edu or @*.lbl.gov
-  validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "The specified email is not a Berkeley or LBL address."
+  validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
 
   before_create :make_activation_code 
   
@@ -145,6 +151,12 @@ class User < ActiveRecord::Base
     #@watched_jobs = current_user.watches.map{|w| w.job }
   end
   
+  
+  # is_faculty for backward compatibility
+  def is_faculty
+    self.user_type == User::Types::Faculty
+  end
+  
   protected
     
 
@@ -168,7 +180,6 @@ class User < ActiveRecord::Base
 			self.name = is_faculty ? faculty_name : student_name
 		end
 	end
-	
 
 	# Parses the textbox list of courses from "CS162,CS61A,EE123"
 	# etc. to an enumerable object courses

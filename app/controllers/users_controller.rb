@@ -16,18 +16,18 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     
-	  # set up list of faculty names
-	  @all_faculty = Faculty.find(:all)
+	# set up list of faculty names
+	@all_faculty = Faculty.find(:all)
     @faculty_names = @all_faculty.map {|f| f.name }
-
   end
  
   def create
     logout_keeping_session!
     
-	  # set up list of faculty names
-    @all_faculty = Faculty.find(:all, :order => :id)
-    @faculty_names = @all_faculty.map {|f| f.name }
+	@faculty_names = Faculty.all.collect { |f| f.name }
+  	@selected_user_type = params[:user][:user_type].to_i
+  	
+  	puts "\n\n\n\n\n\n#{@selected_user_type}\n\n\n\n"
 	  
   	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
   	params[:user][:course_names] = params[:course][:name] if params[:course]
@@ -37,14 +37,16 @@ class UsersController < ApplicationController
   	@user = User.new(params[:user])
 	
     success = @user && @user.save
-    if success && @user.errors.empty?
-	    @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
-      redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
-      #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
-    else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
-      render :action => 'new'
+    respond_to do |format|
+        if success && @user.errors.empty?
+	        @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
+          format.html { redirect_back_or_default('/') }
+          flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
+          #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+        else
+          flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
+          format.html { render :action => 'new' }
+        end
     end
   end
 
