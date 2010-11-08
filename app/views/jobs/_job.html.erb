@@ -31,7 +31,7 @@
 							<% if job_tags.empty? %>
 								(none)
 							<% else %>
-								<%= render :partial => "tag", :collection => job.tag_list %>
+								<%= render :partial => "jobs/tag", :collection => job.tag_list %>
 							<% end %>
 						</div>
 					<% end %>
