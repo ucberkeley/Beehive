@@ -157,12 +157,8 @@ class Job < ActiveRecord::Base
     end
     
     # Do the search
-    if query.nil?
-        Job.search nil, {:conditions => ts_conditions}.update(ts_options)
-    else
-        Job.search query, {:conditions => ts_conditions}.update(ts_options)
-    end
-    
+    results = Job.search query, {:conditions => ts_conditions}.update(ts_options)
+    results.delete_if { |item| item.nil? }
   end
   
   
