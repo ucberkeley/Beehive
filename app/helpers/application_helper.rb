@@ -1,17 +1,25 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-	include TagsHelper
-  
-	module QueryHelpers
-		def as_OR_query
-			self.gsub " ", " OR "
-		end
+	include TagsHelper 
+	
+	module NonEmpty
+	    def nonempty?
+	        not self.nil? and not self.empty?
+	    end
 	end
-    
+	
 end
 
 class String
-	include ApplicationHelper::QueryHelpers
+    include ApplicationHelper::NonEmpty
+end
+
+class Array
+    include ApplicationHelper::NonEmpty
+end
+
+class NilClass
+    include ApplicationHelper::NonEmpty
 end
 
 

@@ -26,7 +26,11 @@
 </div>
 
 <br />
-<% if params[:search_terms] and not params[:search_terms].empty? %>
+<!-- no results -->
+<% if @jobs.empty? %>
+Nothing found! Try a different search.
+<% else %> <!-- there are results -->
+<% if params[:search_terms].nonempty? %>
 	Your search for "<%= params[:search_terms][:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
 <div id="browse_results_wrapper">
@@ -49,3 +53,6 @@
 	  <%= render(:partial => "job", :collection => @jobs) %>
 	</div>
 </div>
+
+<!-- end jobs.empty? -->
+<% end %>
