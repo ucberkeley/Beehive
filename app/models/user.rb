@@ -157,6 +157,10 @@ class User < ActiveRecord::Base
     self.user_type == User::Types::Faculty
   end
   
+  def can_post?
+    [User::Types::Grad, User::Types::Faculty].include? self.user_type
+  end
+  
   protected
     
 

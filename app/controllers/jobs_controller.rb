@@ -12,6 +12,7 @@ class JobsController < ApplicationController
   before_filter :login_required, :except => [ :index, :show, :list ]
   
   # Ensures that only the user who created a job -- and no other users -- can edit it 
+  before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
   def index #list
@@ -278,4 +279,12 @@ class JobsController < ApplicationController
 			redirect_to :controller => 'dashboard', :action => :index
 		end
 	end
+	
+	def check_post_permissions
+	    if not current_user.can_post?
+	        flash[:notice] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
+	        redirect_to :controller => 'dashboard', :action => :index
+	    end
+	end
+	
 end
