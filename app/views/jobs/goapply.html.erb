@@ -7,7 +7,7 @@
 
 <h1>Apply for Research Position</h1>
 
-
+<% form_for(@applic, :url=>{:controller=>:jobs, :action=>:apply, :id=>params[:id]} ) do |f| -%>
   <table class="job_clear_table">
 	  <tr>
 		<td class="job_clear_table_label">Job title</td>
@@ -17,11 +17,11 @@
 		<td class="job_clear_table_label">Faculty sponsor</td>
 		<td class="job_clear_table_field">
 		    <b>
-		        <% @job.faculties.each do |f| %> 
-                	<%= f.name %> 
+		        <% @job.faculties.each do |fac| %> 
+                	<%= fac.name %> 
                 	
                     <% if @job.department.name == 'EECS' %>
-                	    <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley EECS" target="_blank">
+                	    <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley EECS" target="_blank">
                     		<%= image_tag("eecs_icon.gif") %>
                 		</a>
             		<% end %>
@@ -33,7 +33,7 @@
 	  <tr>
 		<td class="job_clear_table_label">Message to faculty sponsor</td>
 		<td class="job_clear_table_field">
-		    <%= text_area :desc, {:rows=>7}%>
+		    <%= f.text_area :message, {:rows=>7}%>
 		</td>
 	  </tr>
   </table>
@@ -58,8 +58,8 @@
   
   <br />
   
-  <%= submit_tag('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
-  
+  <%= f.submit('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
+  <% end -%><!-- end form -->
   
 <br /><br />
 <%= link_to '&#0171; Back to Listings', jobs_path %>

@@ -1,0 +1,12 @@
+<div id="applic_show_main">
+    <h1><%= @applic.job.title %></h1>
+    
+    <p><h3>Applicant: <%= link_to @applic.user.name, url_for(@applic.user) %></h3></p>
+    <p>Date applied: <%= @applic.created_at.getlocal %></p>
+    
+    <br />
+    <p>
+        Message from <%= @applic.user.name %>:<br />
+        <%= @applic.message %>
+    </p>
+</div>

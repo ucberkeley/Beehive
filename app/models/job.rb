@@ -220,6 +220,13 @@ class Job < ActiveRecord::Base
     end
   end
   
+  
+  # Returns true if the specified user has admin rights (can view applications,
+  # edit, etc.) for this job.
+  def allow_admin_by?(u)
+    self.user == u or self.faculties.include?(u)
+  end
+  
   protected
   
   	# Parses the textbox list of category names from "Signal Processing, Robotics"

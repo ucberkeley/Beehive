@@ -10,7 +10,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pictures
 
 #  map.connect '/jobs/list', :controller => 'jobs', :action => 'index'
-  map.resources :jobs
+  map.resources :jobs do
+    map.connect '/goapply/:id', :controller => 'jobs', :action => 'goapply'
+    map.connect '/apply/:id', :controller => 'jobs', :action => 'apply'
+  end
+
+  map.connect '/applications/:id', :controller => 'applics', :action => 'show'
 
   map.resources :reviews
 

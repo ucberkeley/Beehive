@@ -124,6 +124,19 @@
 	<% end %>
 </p>
 <br />
+
+<br />
+<h2>Applicants</h2>
+<p>
+    <% if @job.applics.empty? -%>
+    None yet...
+    <% else -%>
+        <% @job.applics.each do |a| -%>
+            <%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %>
+        <% end -%>
+    <% end -%>
+</p>
+<br />
 <%= link_to "&#0171; back to listings", :controller => :jobs, :action => :index %>
 <br /><br /><br /><br />
 <!-- === Debug === -->

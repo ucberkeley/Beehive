@@ -4,7 +4,7 @@
 		<table class="job_table">
 			<tr>
 				<td class="job_table_left">
-					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (watched by <%= job.users.length %> user<%= job.users.length > 1 ? "s" : "" %>) 
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
 					<% if logged_in? && job.user_id == current_user.id %>
 						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
 						<%= link_to "[delete]", :controller=>:jobs, :action => :destroy, :id => job.id %> 
