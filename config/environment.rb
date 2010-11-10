@@ -42,10 +42,14 @@ Rails::Initializer.run do |config|
   
 end
 
-  # This is the root url for our app (like localhost:3000/)
-  # WITH trailing slash
-  $rm_root = "http://upe.cs.berkeley.edu/research/"
-  
-  # Set up ActionMailer
-  ActionMailer::Base.default_url_options[:host] = $rm_root
-  ActionMailer::Base.delivery_method = :test # Defaults to STMP
+# This is the root url for our app (like localhost:3000/)
+# WITH trailing slash
+$rm_root = "http://upe.cs.berkeley.edu/research/"
+
+# Set up ActionMailer
+ActionMailer::Base.default_url_options[:host] = $rm_root
+ActionMailer::Base.delivery_method = :test # Defaults to STMP
+
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => "https://auth-test.berkeley.edu/cas/"
+)
