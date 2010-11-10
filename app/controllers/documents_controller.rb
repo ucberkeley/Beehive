@@ -12,16 +12,22 @@ def create
         "/dashboard")
      
     @document.user = current_user
+    
     # Process document type
     @document.set_document_type(params[:document][:document_type])
     
-    if @document.save
-        flash[:notice] = "Thanks for uploading your #{params[:document][:document_type]}! It should now show up in your profile."
+    if [Document::Types::Resume, Document::Types::Transcript].include?(@document.document_type)
+        if @document.save
+            flash[:notice] = "Thanks for uploading your #{params[:document][:document_type]}! It should now show up in your profile."
+        else
+            flash[:error] = "Oops! Something went wrong with your upload. No changes were made."
+        end
     else
-        flash[:error] = "Oops! Something went wrong with your upload. No changes were made."
+        flash[:error] = "Please select a document type to upload. We don't want to have to guess for you."
     end
 
-    redirect_back_or_default "/dashboard"
+    #redirect_back_or_default "/dashboard"
+    redirect_to url_for(:controller => 'users', :action => 'edit', :id => current_user.id)
 end
 
 def destroy
@@ -35,7 +41,7 @@ def destroy
     else
         flash[:error] = "Access violation."
     end
-    redirect_back_or_default "/dashboard"
+    redirect_to url_for(:controller => 'users', :action => 'edit', :id => current_user.id)
 end
 
 end

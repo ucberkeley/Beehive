@@ -76,12 +76,13 @@
             <%= f.hidden_field :user_id, :value => current_user.id %>
             <% [:resume, :transcript].each do |item| -%>
                 <% if current_user.send(item).nil? -%>
-                    <%= f.radio_button(:document_type, item.to_s) %>
+                    <%= f.radio_button(:document_type, item.to_s, {:checked => "checked"} ) %>
                     <%= f.label "document_type_#{item.to_s}", item.to_s.capitalize %>
                 <% end -%>
             <% end -%>
             <%= f.submit "Upload", :disable_with => "Uploading..." %>
 	    <% end -%>
+   	    <div id="upload_desc"><small>Note: We only accept PDF, Word, and plaintext uploads, up to 1 MB.</small></div>
   	    <% end -%>
 	</div>
 </div>
