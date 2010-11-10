@@ -6,45 +6,50 @@
   <%= f.error_messages %>
 
 <!-- basic info -->
-<div id="dashboard_container" class="box_shadow">
+<div class="dashboard_container box_shadow">
 <div class="dashboard_wrapper_long">
 	<div class="dashboard_container_long">
 <h2>The Basics</h2>
 <p>Full Name<br/>
 <%= f.text_field :name %></p>
 <br />
-
+<br />
 </div></div></div>
 <!-- end basic info -->
 
+<br />
+
 <!-- courses / interests / proglangs. part of the user form. -->
 <!-- #TODO: don't rip off dashboard CSS! -->
-<div id="dashboard_container" class="box_shadow">
-<div class="dashboard_wrapper_long">
-	<div class="dashboard_container_long">
-<h2>Education & Interests</h2>
-<p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-<%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
-</p><br />
-<p>
-Interests (Categories): <br />
-<%= text_field :category, :name, :value => @user.category_list_of_user, :class => 'wide' %>
-</p><br />
-<p>
-Programming languages in which you are proficient: <br />
-<%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'wide' %>
-</p>
-
+<div class="dashboard_container box_shadow">
+  <div class="dashboard_wrapper_long">
+	  <div class="dashboard_container_long">
+      <h2>Education & Interests</h2>
+      <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
+      <%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
+      </p><br />
+      <p>
+      Interests (Categories): <br />
+      <%= text_field :category, :name, :value => @user.category_list_of_user, :class => 'wide' %>
+      </p><br />
+      <p>
+      Programming languages in which you are proficient: <br />
+      <%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'wide' %>
+      </p>
+    </div>
+  </div>
+</div>
 <!-- end courses -->
-</div></div></div>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+<br />
+<p>
+  <%= f.submit 'Update' %>
+</p>
+<br />
 <% end %>
 
 <!-- attachments -->
-<div id="dashboard_container" class="box_shadow">
+<div class="dashboard_container box_shadow">
 <div class="dashboard_wrapper_long">
 	<div class="dashboard_container_long">
 	    <h2>Attachments</h2>

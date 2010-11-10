@@ -158,7 +158,7 @@ span.tag {
         font-size: 12pt;
     }
     
-#browse_header_table{
+.browse_header_table{
 	height: 40px;
 	width: 100%;
 	font-weight: bold;

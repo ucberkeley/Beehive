@@ -108,7 +108,7 @@ class ReviewsController < ApplicationController
   private
 	def correct_user_access
 		if (Review.find(params[:id]) == nil || current_user != Review.find(params[:id]).user)
-			flash[:notice] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+			flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
 			redirect_to :controller => 'reviews', :action => :index
 		end
 	end
