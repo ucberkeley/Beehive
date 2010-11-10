@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :pictures
 
-  map.connect '/jobs/list', :controller => 'jobs', :action => 'index'
+#  map.connect '/jobs/list', :controller => 'jobs', :action => 'index'
   map.resources :jobs
 
   map.resources :reviews
