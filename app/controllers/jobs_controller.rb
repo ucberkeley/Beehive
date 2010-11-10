@@ -9,7 +9,7 @@ class JobsController < ApplicationController
   auto_complete_for :proglang, :name
   
   #CalNet / CAS Authentication
-  before_filter CASClient::Frameworks::Rails::Filter
+  # before_filter CASClient::Frameworks::Rails::Filter
   
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]

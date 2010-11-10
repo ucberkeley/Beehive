@@ -50,6 +50,9 @@ $rm_root = "http://upe.cs.berkeley.edu/research/"
 ActionMailer::Base.default_url_options[:host] = $rm_root
 ActionMailer::Base.delivery_method = :test # Defaults to STMP
 
+=begin
 CASClient::Frameworks::Rails::Filter.configure(
-  :cas_base_url => "https://auth-test.berkeley.edu/cas/"
+  #:cas_base_url => "https://auth-test.berkeley.edu/cas/"
+  :cas_base_url => "https://auth.berkeley.edu/cas/"
 )
+=end
