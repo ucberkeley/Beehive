@@ -26,14 +26,16 @@ end
 
 # Finds value in find_from, and returns the corresponding item from choose_from,
 # or default (nil) if find_from does not contain the value.
-# Comparisons are done using == .
+# Comparisons are done using == and then eql? .
 #
 # Ex. find_and_choose(["apples", "oranges"], [:red, :orange], "apples")
 #        would return :red.
 #
 def find_and_choose(find_from=[], choose_from=[], value=nil, default=nil)
     find_from.each_index do |i|
-        return choose_from[i] if find_from[i] == value
+        puts "\n\nchecking #{value} == #{find_from[i]}\n"
+        return choose_from[i] if find_from[i] == value || find_from[i].eql?(value)
+        puts "\n\n\n#{value} wasn't #{find_from[i]}\n\n\n"
     end
     return default
 end

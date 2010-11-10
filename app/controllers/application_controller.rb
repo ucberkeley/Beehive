@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   #
   def redirected_because(condition=true, error_msg="Error!", redirect_url=nil)
     return false if condition == false or redirect_url.nil?
-    flash[:notice] = error_msg
+    flash[:error] = error_msg
     redirect_to redirect_url unless redirect_url.nil?
     return true
   end

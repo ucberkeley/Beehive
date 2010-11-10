@@ -285,7 +285,7 @@ class JobsController < ApplicationController
 	
 	def check_post_permissions
 	    if not current_user.can_post?
-	        flash[:notice] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
+	        flash[:error] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
 	        redirect_to :controller => 'dashboard', :action => :index
 	    end
 	end

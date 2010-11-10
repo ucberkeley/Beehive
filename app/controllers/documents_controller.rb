@@ -13,12 +13,12 @@ def create
      
     @document.user = current_user
     # Process document type
-    @document.document_type = params[:document][:document_type]
+    @document.set_document_type(params[:document][:document_type])
     
     if @document.save
-        flash[:notice] = "Thanks for the upload! It should now show up in your profile. paramsdoctype=#{params[:document][:document_type]}, doctype=#{@document.document_type}"
+        flash[:notice] = "Thanks for uploading your #{params[:document][:document_type]}! It should now show up in your profile."
     else
-        flash[:notice] = "Oops! Something went wrong with your upload. No changes were made."
+        flash[:error] = "Oops! Something went wrong with your upload. No changes were made."
     end
 
     redirect_back_or_default "/dashboard"
@@ -30,10 +30,10 @@ def destroy
         if @document.destroy
             flash[:notice] = "Removed the requested document."
         else
-            flash[:notice] = "The requested document escaped our virtual shredder. Please try again, or contact support."
+            flash[:error] = "The requested document escaped our virtual shredder. Please try again, or contact support."
         end
     else
-        flash[:notice] = "Access violation."
+        flash[:error] = "Access violation."
     end
     redirect_back_or_default "/dashboard"
 end
