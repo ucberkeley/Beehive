@@ -20,6 +20,10 @@
   <%= javascript_include_tag "application.js" %>  
   <%= javascript_include_tag "jquery-1.4.2.min.js" %>
   <%= javascript_include_tag "jquery-ui-1.8.4.custom.min.js" %>
+  
+  <%= if c == 'jobs' || c == 'users' %>
+    <%= javascript_include_tag "autocomplete_setup.js" %>
+  <% end %>
 </head> 
 <body>
 
