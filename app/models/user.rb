@@ -45,6 +45,9 @@ class User < ActiveRecord::Base
   # Check that the email address is @*.berkeley.edu or @*.lbl.gov
   validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
 
+  # Check that user type is valid
+  validates_inclusion_of    :user_type, :in => [Types::Undergrad, Types::Grad, Types::Faculty]
+
   before_create :make_activation_code 
   
   # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
@@ -219,6 +222,4 @@ class User < ActiveRecord::Base
 			self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
 		end
 	end	
-
-	
 end

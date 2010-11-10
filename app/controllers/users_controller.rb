@@ -27,14 +27,13 @@ class UsersController < ApplicationController
 	@faculty_names = Faculty.all.collect { |f| f.name }
   	@selected_user_type = params[:user][:user_type].to_i
   	
-  	puts "\n\n\n\n\n\n#{@selected_user_type}\n\n\n\n"
-	  
   	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
   	params[:user][:course_names] = params[:course][:name] if params[:course]
   	params[:user][:category_names] = params[:category][:name] if params[:category]
   	params[:user][:proglang_names] = params[:proglang][:name] if params[:proglang]
 	
   	@user = User.new(params[:user])
+  	@user.user_type = @selected_user_type
 	
     success = @user && @user.save
     respond_to do |format|
