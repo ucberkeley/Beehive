@@ -116,7 +116,7 @@
 	    <% @job.users.each do |usr| %>
 		    <li>
     		    <%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
-    		    <%= usr.name == current_user.name ? " (you)" : "" %>
+    		    <%= !current_user.nil? && usr.name == current_user.name ? " (you)" : "" %>
     		</li>    
 	    <% end %>
         </ul>
