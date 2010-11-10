@@ -105,8 +105,8 @@ width: 100%;
 
 #header_tabs{
 	background: #A7D787;
-	background: -webkit-gradient(linear, 0% 50%, 100% 50%, from(#A7D787), to(#a7d787), color-stop(.2,#D1F19F), color-stop(.8,#D1F19F));
-	background: -moz-linear-gradient(0% 50% 0deg,#A7D787, #A7D787, #D1F19F 20%,#a7d787 80%);
+	background: -webkit-gradient(linear, 0% 50%, 100% 50%, from(#A7D787), to(#a7d787), color-stop(.15,#D1F19F), color-stop(.85,#D1F19F));
+	background: -moz-linear-gradient(0% 50% 0deg,#A7D787, #A7D787, #D1F19F 15%,#a7d787 85%);
 	min-width: 1000px;
 	height: 17px;
 }
