@@ -1,5 +1,4 @@
 require "config/capistrano_database"
-require "thinking_sphinx/deploy/capistrano"
 
 # Replace with the HTTP (NOT HTTPS) read-only URL of your Google Code SVN.
 set :repository, "http://research-cs194.googlecode.com/svn/trunk/research"
