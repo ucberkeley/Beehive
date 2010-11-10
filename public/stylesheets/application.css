@@ -404,17 +404,20 @@ h2#dashboard_header {
 
 
 /*long*/
-.dashboard_wrapper_long{
+.dashboard_wrapper_long, .dashboard_wrapper_medium {
 	
 	border-left: 1px solid #f5f5f5;
 	border-right: 1px solid #f5f5f5;
 }
-.dashboard_container_long{
+.dashboard_container_long, .dashboard_container_medium {
 	padding: 15px;
 	background: #E5FEB4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
 
-
+/*medium*/
+.dashboard_container_medium, .dashboard_wrapper_medium {
+  width: 480px;
+}
 
 /**Links**/
 a { 
