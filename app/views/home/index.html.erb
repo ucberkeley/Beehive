@@ -20,25 +20,23 @@
 <br>
 <br><br>
 
-<table id="Table_01" width="898" height="203" cellpadding="0" cellspacing="0">
+<table id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
 	<tr>
-		<td colspan="3" background="<%= image_path "research_match_display_01.png" %>" width="898" height="144">
+		<td colspan="3" background="<%= image_path "research_match_display_01a.png" %>" style="background-repeat: no-repeat">
 		</td>
 	</tr>
 	<tr>
-		<td background="<%= image_path "research_match_display_02.png" %>" width="308" height="59">
+		<td background="<%= image_path "research_match_display_02.png" %>" height="59" style="width: 308px;background-repeat: no-repeat">
 			<div id="browse_listings_menu">
 				<% form_tag(:jobs, :method => "get") do %>
 					<%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
 				<% end %>
 			</div>
 		</td>
-		<td width="254" height="59">
-			<%= link_to image_tag("research_match_display_03.png", :border=>0, :alt=>"Post a Job"), :controller => "jobs", :action => 'new'%>
+		<td height="59" style="width: 342px;">
+			<%= link_to image_tag("research_match_display_03a.png", :border=>0, :alt=>"Post a Job"), :controller => "jobs", :action => 'new'%>
 		</td>
-		<td width="336" height="59">
-			<%= link_to image_tag("research_match_display_04.png", :border=>0, :alt=>"Read Reviews"), :controller => "reviews", :action => 'index'%>
-		</td>
+
 	</tr>
 </table>
 </center>
