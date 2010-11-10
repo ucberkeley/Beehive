@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   
   has_many :jobs
   has_many :reviews
-  has_one :picture
+  has_one  :picture
+  has_one  :resume,      :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}
+  has_one  :transcript,  :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}
   
   has_many :reviews
   has_many :applied_jobs, :class_name => 'Job', :through => :applics

@@ -14,4 +14,17 @@ class ApplicationController < ActionController::Base
   def current_user_if_logged_in
 	  @user = current_user if logged_in?
   end
+  
+  # Puts a flash[:notice] error message and redirects if condition isn't true.
+  # Returns true if redirected.
+  #
+  # Usage: return if redirected_because(!user_logged_in, "Not logged in!", "/diaf")
+  #
+  def redirected_because(condition=true, error_msg="Error!", redirect_url=nil)
+    return false if condition == false or redirect_url.nil?
+    flash[:notice] = error_msg
+    redirect_to redirect_url unless redirect_url.nil?
+    return true
+  end
+  
 end

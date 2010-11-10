@@ -5,9 +5,24 @@
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
+<!-- basic info -->
+<div id="dashboard_container" class="box_shadow">
+<div class="dashboard_wrapper_long">
+	<div class="dashboard_container_long">
+<h2>The Basics</h2>
 <p>Full Name<br/>
 <%= f.text_field :name %></p>
 <br />
+
+</div></div></div>
+<!-- end basic info -->
+
+<!-- courses / interests / proglangs. part of the user form. -->
+<!-- #TODO: don't rip off dashboard CSS! -->
+<div id="dashboard_container" class="box_shadow">
+<div class="dashboard_wrapper_long">
+	<div class="dashboard_container_long">
+<h2>Education & Interests</h2>
 <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
 <%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
 </p><br />
@@ -20,7 +35,35 @@ Programming languages in which you are proficient: <br />
 <%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'wide' %>
 </p>
 
+<!-- end courses -->
+</div></div></div>
+
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
+
+<!-- attachments -->
+<div id="dashboard_container" class="box_shadow">
+<div class="dashboard_wrapper_long">
+	<div class="dashboard_container_long">
+	    <h2>Attachments</h2>
+	    Resume: 
+	        <!-- no resume -->
+	        <% if current_user.resume.nil? -%>
+	            None. You should upload one to impress the professors!
+	                <% form_for(:document, :url => documents_path, :html => {:multipart=>true}) do |f| -%>
+	                    <%= f.file_field :uploaded_data %>
+	                    <%= f.submit "Upload", :disable_with => "Uploading..." %>
+	                    <%= f.hidden_field :user_id, :value => current_user.id %>
+	                    <%= f.hidden_field :document_type, :value => "resume" %>
+	                <% end -%>
+	        <!-- already has resume -->
+	        <% else -%>
+	            <%= current_user.resume.filename %>
+	            <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => current_user.resume.id} %>
+	        <% end -%>
+	</div>
+</div>
+</div>
+
