@@ -28,8 +28,8 @@
 <% if @jobs.empty? %>
 Nothing found! Try a different search.
 <% else %> <!-- there are results -->
-<% if params[:search_terms].nonempty? %>
-	Your search for "<%= params[:search_terms][:query] %>" returned <%= @jobs.length %> results.<br /><br />
+<% if params[:query].nonempty? %>
+	Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
 <div id="browse_results_wrapper">
 	<div id="browse_results">
