@@ -44,7 +44,7 @@
 		        <li><%= link_to "Dashboard", :controller => :dashboard %></li>		    
 		        <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
 		        
-		        <% if not logged_in? or logged_in? and current_user.user_type != User::Types::Undergrad %>
+		        <% if ! logged_in? || logged_in? && current_user.user_type != User::Types::Undergrad %>
   		        <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
 		        <% end %>
 		        
