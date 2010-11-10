@@ -4,9 +4,9 @@
   <%= f.error_messages %>
 
 <!-- basic info -->
-<div class="dashboard_container box_shadow">
-<div class="dashboard_wrapper_long">
-	<div class="dashboard_container_long">
+<div class="dashboard_container">
+<div class="dashboard_wrapper_medium">
+	<div class="dashboard_container_medium box_shadow">
 <h2>The Basics</h2>
 <p>Full Name<br/>
 <%= f.text_field :name %></p>
@@ -19,9 +19,9 @@
 
 <!-- courses / interests / proglangs. part of the user form. -->
 <!-- #TODO: don't rip off dashboard CSS! -->
-<div class="dashboard_container box_shadow">
-  <div class="dashboard_wrapper_long">
-	  <div class="dashboard_container_long">
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+	  <div class="dashboard_container_medium box_shadow">
       <h2>Education & Interests</h2>
       <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
       <%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
@@ -47,9 +47,9 @@
 <% end %>
 
 <!-- attachments -->
-<div class="dashboard_container box_shadow">
-<div class="dashboard_wrapper_long">
-	<div class="dashboard_container_long">
+<div class="dashboard_container">
+<div class="dashboard_wrapper_medium">
+	<div class="dashboard_container_medium box_shadow">
 	    <h2>Attachments</h2>
 	    <% [ ["Resume", :resume, "You should upload one to impress the professors!"],
 	         ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
