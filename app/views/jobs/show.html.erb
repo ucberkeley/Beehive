@@ -57,7 +57,7 @@
 
 <p>
   <b>
-	Categor<%=h ((@job.category_list_of_job.length == 1) ? "y" : "ies") %>:
+	<%=h pluralize @job.categories.length, 'Category' %>:
   </b>
   <% if ! @job.category_list_of_job.empty? %>
 	<%=h @job.category_list_of_job %>
@@ -86,7 +86,7 @@
 
 <p>
   <b>Position Expiration Date:</b>
-  <%=h @job.exp_date %>
+  <%=h @job.exp_date.pp %>
 </p>
 
 <p>
@@ -131,8 +131,12 @@
     <% if @job.applics.empty? -%>
     None yet...
     <% else -%>
-        <% @job.applics.each do |a| -%>
-            <%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %>
+        <% if @job.allow_admin_by? current_user -%>
+            <% @job.applics.each do |a| -%>
+                <%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %>
+            <% end -%>
+        <% else -%>
+            This listing has <b><%= pluralize @job.applics.length, 'applicant' %></b> so far.
         <% end -%>
     <% end -%>
 </p>

@@ -21,7 +21,7 @@
 				<% if @watched_jobs.empty? %>
 					You are not watching any postings.
 				<% else %>
-					<%= render :partial => "jobs/watched_job", :collection => @watched_jobs %>
+					<%= render :partial => "jobs/watched_job", :collection => current_user.watches %>
 				<% end %>
 				<br />
 			

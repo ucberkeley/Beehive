@@ -22,6 +22,11 @@ class NilClass
     include ApplicationHelper::NonEmpty
 end
 
+class Time
+    def pp
+        self.getlocal.strftime("%b %d, %Y")
+    end
+end
 
 
 # Finds value in find_from, and returns the corresponding item from choose_from,

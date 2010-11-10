@@ -40,6 +40,12 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
 
+    # update watch time so this job is now 'read'
+    watch=Watch.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
+    if not watch.nil?
+        watch.mark_read
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @job }

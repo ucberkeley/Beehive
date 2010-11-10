@@ -1,4 +1,4 @@
-<% job = watched_job %>
+<% job = watched_job.job %>
 <div id="watched_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 	<div class="job_padding_wrapper">
 		<table class="job_table">
@@ -13,9 +13,12 @@
 					<% else %>
 						<%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
 					<% end %>
+					
+					<% if watched_job.unread? -%>
+					    [updated!]
+					<% end -%>
+					
 					</div>
-					
-					
 				</td>
 			</tr>
 		</table>
