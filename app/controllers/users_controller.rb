@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     respond_to do |format|
         if success && @user.errors.empty?
 	        @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
-          format.html { redirect_back_or_default('/') }
+          format.html { redirect_back_or_default(:controller=>"dashboard", :action=>:index) }
           flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
           #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
         else
@@ -59,10 +59,10 @@ class UsersController < ApplicationController
       redirect_to '/login'
     when params[:activation_code].blank?
       flash[:error] = "The activation code was missing.  Please follow the URL from your email."
-      redirect_back_or_default('/')
+      redirect_back_or_default(:controller=>"dashboard", :action=>:index)
     else 
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
-      redirect_back_or_default('/')
+      redirect_back_or_default(:controller=>"dashboard", :action=>:index)
     end
   end
   

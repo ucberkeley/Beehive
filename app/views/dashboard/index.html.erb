@@ -3,7 +3,7 @@
 	<div class="dashboard_wrapper_watched">
 		<div class="dashboard_container_watched box_shadow">
 		
-			<% if current_user.is_faculty %>
+			<% if current_user.can_post? -%>
 				<h2>Your Postings</h2>
 				
 				<% if @your_jobs.empty? %>
@@ -12,8 +12,9 @@
 				<% else %>
 					<%= render :partial => "jobs/your_job", :collection => @your_jobs %>
 				<% end %>
-				
-			<% elsif ! current_user.is_faculty %>
+			
+			<% end -%>	
+			<% if !current_user.is_faculty %>
 			
 				<h2>Your Watched Postings</h2>
 				<!-- //list of postings you're watching -->
