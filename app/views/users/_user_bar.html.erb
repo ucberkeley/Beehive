@@ -1,10 +1,24 @@
-<% if logged_in? -%>
+<div id="user-bar-greeting">
+  <% if controller.controller_name != 'jobs' %>
+    CalNet authentication is required.
+  <% else %>
+    CalNet UID: <%=h session[:cas_user] %>
+  <% end %>
+</div>
+
+
+
+
+<%-# Stuff below is probably deprecated -%>
+
+
+<% if 2 == 3 and logged_in? -%>
   <div id="user-bar-greeting">
-	Logged in as <%= link_to @user.name, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)
+	Logged in as <%= link_to @user.name, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %> | )
 	<br><b><%= link_to "Dashboard", :controller=>"dashboard" %></b> | <%= link_to "Edit Your Profile", edit_user_url(@user) %>
   </div>
 
-<% else -%>
-  <div id="user-bar-greeting">Log in to access our listings or sign up for a free account.</div>
-  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> / <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
+<% elsif 2==4 -%>
+  <div id="user-bar-greeting">Please log in to access listings.</div>
+  <div id="user-bar-action"  ><%= link_to "CalNet Login",  login_path %> </div>
 <% end -%>

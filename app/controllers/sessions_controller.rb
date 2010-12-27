@@ -30,8 +30,12 @@ class SessionsController < ApplicationController
 
   def destroy
     logout_killing_session!
+    
+    # Attempt to also do CAS logout.
+    CASClient::Frameworks::Rails::Filter.logout(self)    #, url_for(:controller => 'sessions', :action => 'new')
+    
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller=>"dashboard", :action=>:index) 
+    #    redirect_back_or_default(:controller=>"dashboard", :action=>:index) 
   end
 
 protected
