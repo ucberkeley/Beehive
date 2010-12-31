@@ -12,6 +12,12 @@ end
 
 class String
     include ApplicationHelper::NonEmpty
+    
+    # Translates \n line breaks to <br />'s.
+    def to_br
+        self.gsub("\n", "<br />")
+    end
+    
 end
 
 class Array
