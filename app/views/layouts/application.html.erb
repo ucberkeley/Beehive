@@ -53,7 +53,7 @@
 		        <% end %>
 		        
 		        <% if logged_in? %>
-    		        <li><%= link_to "Edit Profile", edit_user_url(@user) %></li>		               
+    		        <li><%= link_to "Edit Profile", edit_user_url(current_user) %></li>		  
 		        <% end %>
 		        
 		    </ul>

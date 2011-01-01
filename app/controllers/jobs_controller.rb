@@ -2,6 +2,8 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   
+  include CASControllerIncludes
+  
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, 
 		:auto_complete_for_course_name, :auto_complete_for_proglang_name]
   auto_complete_for :category, :name
@@ -10,7 +12,8 @@ class JobsController < ApplicationController
   
   #CalNet / CAS Authentication
   before_filter CASClient::Frameworks::Rails::Filter
-  
+  before_filter :setup_cas_user  
+    
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
   
@@ -316,6 +319,8 @@ class JobsController < ApplicationController
 	end
   
   private
+  
+
 	
 	def correct_user_access
 		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)

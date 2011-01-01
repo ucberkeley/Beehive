@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   # include AuthenticatedSystem    --- ^ did this.
+
+
+  include CASControllerIncludes
   
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name, 
 		:auto_complete_for_category_name, :auto_complete_for_proglang_name]
@@ -8,9 +11,17 @@ class UsersController < ApplicationController
   auto_complete_for :category, :name
   auto_complete_for :proglang, :name
   
+  
+    
+  #CalNet / CAS Authentication
+  before_filter CASClient::Frameworks::Rails::Filter
+  before_filter :setup_cas_user  
+  
+  
+  
   # Ensures that only this user -- and no other users -- can edit his/her profile
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
-  
+
   
   # render new.rhtml
   def new
@@ -67,6 +78,7 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @user = User.find(params[:id])
   end
   
   def update
@@ -97,7 +109,9 @@ class UsersController < ApplicationController
 	
 	def correct_user_access
 		if (User.find_by_id(params[:id]) == nil || current_user != User.find_by_id(params[:id]))
-			flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+		  # flash[:error] = "params[:id] is " + params[:id] + "<br />"
+		  # flash[:error] = "current_user is " + @current_user + "<br />"
+		  flash[:error] += "Unauthorized access denied. Do not pass Go. Do not collect $200."
 			redirect_to :controller => 'dashboard', :action => :index
 		end
 	end
