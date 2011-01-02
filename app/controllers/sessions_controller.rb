@@ -3,8 +3,13 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  # render new.rhtml
+  include CASControllerIncludes
+
+  # Don't render new.rhtml; instead, just redirect to dashboard, because  
+  # we want to prevent people from accessing restful_authentication's 
+  # user subsystem directly, instead using CAS.
   def new
+    redirect_to :controller => "dashboard", :action => "index"
   end
 
   def create

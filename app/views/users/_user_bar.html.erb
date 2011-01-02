@@ -1,8 +1,8 @@
 <div id="user-bar-greeting">
-  <% if controller.controller_name != 'jobs' %>
-    CalNet authentication is required.
+  <% if session[:cas_user].present? %>
+    Authenticated via CalNet (UID: <%=h session[:cas_user] %>).  <%= link_to "Log Out", logout_path %>
   <% else %>
-    CalNet UID: <%=h session[:cas_user] %>
+    CalNet authentication is required for access to our listings.
   <% end %>
 </div>
 

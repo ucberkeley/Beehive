@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     
-	@faculty_names = Faculty.all.collect { |f| f.name }
+  	@faculty_names = Faculty.all.collect { |f| f.name }
   	@selected_user_type = params[:user][:user_type].to_i
   	
   	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
