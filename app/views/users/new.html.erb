@@ -8,113 +8,80 @@
 
 <% form_for :user, :url => users_path do |f| -%>
 
-<p>User type:<br />
-    <% [
-         [User::Types::Undergrad, "user_signup_student_fields()", "Undergrad"],
-         [User::Types::Grad,      "user_signup_student_fields()", "Grad student / Postdoc"],
-         [User::Types::Faculty,   "user_signup_faculty_fields()", "Faculty"  ]
-       ].each do |type|
-     %>
-
-    <% options = {:onclick => type[1]} %>
-    <% options[:checked] = "checked" if @selected_user_type == type[0] %>
-
-    <%= f.radio_button :user_type, type[0], options %>
-    <%= f.label "user_type_#{type[0]}", type[2] %>
-    
-    <% end %>
-
+<p>User type: <%= @user.user_type_string %>
+ <%= render "shared/tooltip", :text => 'Your user type was automatically determined from Calnet. If this isn\'t correct, please let us know!' %>
 </p>
 
 <div id="signup_fields">
 
-    <!-- Student or GSI -->
-    <div id="fields_student_above_password">
+    <!-- Step 1 -->
+    <div id="step1">
+      <div id="full_name_field">
+        <p>Name: <%= @user.name %></p>
+      </div>
 
-        <div id="email_field">
-            <p><%= label_tag 'student_email', 'Student e-mail address' %> (must be a valid Berkeley or LBL e-mail address!):<br/>  
-            <%= f.text_field :student_email %></p>
-        </div>
+      <div id="email_field">
+          <p><%= label_tag 'email', 'E-mail address' %> (All ResearchMatch-affiliated messages will be sent to this address):<br/>  
+          <%= f.text_field :email %></p>
+      </div>
 
-        <div id="full_name_field">
-            <p>Full Name:<br/>
-            <%= f.text_field :student_name %></p>
-        </div>
+      <div id="password_field">
+          <%= label_tag 'password' %>:<br/>
+          <%= f.password_field :password %>
+          <br />
+          <%= label_tag 'password_confirmation', 'Confirm password (enter it again)' %>:<br/>
+          <%= f.password_field :password_confirmation %>
+      </div>
+   </div>
+
+    <%- if @user.user_type < User::Types::Faculty -%>
+
+    <!-- Step 2 -->
+    <div id="step2">
+      <br/>
+      <%= submit_tag 'Sign Up Now' %> or <b>continue below</b>.
+      <br/><br/><br/>
+
+      <i><b>Note:</b> The rest of this information is optional, but it may increase your chances of landing a research position. <br />
+      Don't feel obligated to fill this in right now -- you can always do so later by clicking the "Edit Profile" tab near the top of the page.</i>
+
+      <br>
+      <br>
+
+      <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
+
+      <br />
+      
+
+      <div class="ui-widget">
+      Courses (please enter the names of your courses, separated by commas, e.g. <i>CS194, CS61A</i>):<br />
+      <%= text_field :course, :name, :class => 'wide'  %>
+      <br />
+      </div>
+
+
+      <div class="ui-widget">
+      <br />
+      Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
+              e.g. <i>algorithms, security, signal processing</i>):<br />
+      <%= text_field :category, :name, :class => 'wide'  %>
+      <br />
+      </div>
+      
+      <div class="ui-widget">
+      <br />
+      Programming languages in which you are proficient: <br />
+      <%= text_field :proglang, :name, :class => 'wide' %>
+      <br />
+      </div>
     </div>
 
-    <div id="fields_faculty">
-
-        <!-- Faculty -->
-        <div id="faculty_emails">
-            Faculty member (Who are you?): <br />
-            <%= f.select :faculty_name, @faculty_names %>
-        </div>
-
-        <div id="faculty_email">
-        Faculty e-mail address:<br />
-        <span id="user_faculty_email"><b><i>&nbsp;&nbsp;&nbsp;&nbsp;We'll contact you at your EECS e-mail address.</i></b></span>
-        <br />
-        </div>
-        <br />
-
-        <% if params[:user] && params[:user][:is_faculty] %>
-        <script type="text/javascript">
-	        document.getElementById("user_is_faculty_true").onclick();
-        </script>
-        <% end %>
-    </div>
-    <div id="password_field">
-        <%= label_tag 'password' %>:<br/>
-        <%= f.password_field :password %>
-        <br />
-        <%= label_tag 'password_confirmation', 'Confirm password (enter it again)' %>:<br/>
-        <%= f.password_field :password_confirmation %>
-    </div>
-
-    <div id="fields_student_below_password">
-        <div id="step2">
-
-            <br/><br/>
-            <%= submit_tag 'Sign Up Now' %> or <b>continue below</b>.
-            <br/><br/><br />
-            <i><b>Note:</b> The rest of this information is optional, but it may increase your chances of landing a research position. <br />
-            Don't feel obligated to fill this in right now -- you can always do so later by clicking "Edit Profile" in the top-right corner of the page.</i>
-
-            <br>
-            <br>
-
-            <%= image_tag "../images/new_user_steps_02.png", :border => 0 %>
-
-            <br />
-            
-
-            <div class="ui-widget">
-            Courses (please enter the names of your courses, separated by commas, e.g. <i>CS194, CS61A</i>):<br />
-            <%= text_field :course, :name, :class => 'wide'  %>
-            <br />
-            </div>
-
-
-            <div class="ui-widget">
-            <br />
-            Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
-	            e.g. <i>algorithms, security, signal processing</i>):<br />
-            <%= text_field :category, :name, :class => 'wide'  %>
-            <br />
-            </div>
-            
-            <div class="ui-widget">
-            <br />
-            Programming languages in which you are proficient: <br />
-            <%= text_field :proglang, :name, :class => 'wide' %>
-            <br />
-            </div>
-        </div>   
-    </div>
+    <%- end # user_type < faculty -%>
 
 </div>
 
 <br />
 <%= submit_tag 'Sign Up' %>
+<br /><br />
 
-<% end -%>
+<% end # form_for :user -%>

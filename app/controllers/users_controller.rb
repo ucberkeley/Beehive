@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     
   #CalNet / CAS Authentication
   before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :setup_cas_user  
+  before_filter :setup_cas_user, :except => [:new, :create]
   
   
   
@@ -29,38 +29,52 @@ class UsersController < ApplicationController
   
   # render new.rhtml
   def new
-    @user = User.new
-      
-	  # set up list of faculty names
-	  @all_faculty = Faculty.find(:all)
-      @faculty_names = @all_faculty.map {|f| f.name }
+      @user = User.new(:login => session[:cas_user].to_s)
+#      person = UCB::LDAP::Person.find_by_uid(session[:cas_user]) 
+
+      if @user.ldap_person.nil?
+        # TODO: what to do here?
+        logger.warn "UsersController.new: Failed to find LDAP::Person for uid #{session[:cas_user]}"
+        flash[:error] = "A directory error occurred. Please make sure you're logged into Calnet and try again."
+        redirect_to '/'
+      end
+
+      @user.name  = @user.ldap_person_full_name
+      @user.email = @user.ldap_person.email
+      @user.update_user_type
   end
  
   def create
     logout_keeping_session!
     
-  	@faculty_names = Faculty.all.collect { |f| f.name }
-  	@selected_user_type = params[:user][:user_type].to_i
-  	
-  	# Handles the text_field_with_auto_complete for courses, categories, and programming languages.
-  	params[:user][:course_names] = params[:course][:name] if params[:course]
-  	params[:user][:category_names] = params[:category][:name] if params[:category]
-  	params[:user][:proglang_names] = params[:proglang][:name] if params[:proglang]
-	
-  	@user = User.new(params[:user])
-  	@user.user_type = @selected_user_type
-	
-    success = @user && @user.save
-    respond_to do |format|
-        if success && @user.errors.empty?
-	        @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
-          format.html { redirect_back_or_default(:controller=>"dashboard", :action=>:index) }
-          flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
-          #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
-        else
-          flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
-          format.html { render :action => 'new' }
-        end
+    # See if this user was already created
+    # TODO: handle this better
+    if User.find_by_login(session[:cas_user].to_s) then
+      flash[:error] = "You've already signed up." 
+      redirect_to '/'
+    end
+
+    # Handles the text_field_with_auto_complete for courses, categories, and programming languages.
+    params[:user][:course_names] = params[:course][:name] if params[:course]
+    params[:user][:category_names] = params[:category][:name] if params[:category]
+    params[:user][:proglang_names] = params[:proglang][:name] if params[:proglang]
+    
+    @user = User.new(params[:user])
+    @user.login = session[:cas_user]
+    @user.name = @user.ldap_person_full_name
+    @user.update_user_type
+    
+    if @user.save && @user.errors.empty? then
+      respond_to do |format|
+        @user.activate! #FIXME: Remove this when we get ActionMailer up for email activations
+        flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in." #FIXME: Change back when we get activation emails up
+        #flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+        format.html { redirect_back_or_default(:controller=>"dashboard", :action=>:index) }
+      end
+    else
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
+      # format.html { render :action => 'new' }
+      redirect_to new_user_path
     end
   end
 

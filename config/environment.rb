@@ -39,7 +39,6 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
   config.action_controller.relative_url_root = '/research'
-  
 end
 
 # This is the root url for our app (like localhost:3000/)
@@ -51,6 +50,12 @@ ActionMailer::Base.default_url_options[:host] = $rm_root
 ActionMailer::Base.delivery_method = :test # Defaults to STMP
 
 CASClient::Frameworks::Rails::Filter.configure(
-  :cas_base_url => "https://auth-test.berkeley.edu/cas/"
+  :cas_base_url => ({'development' => "https://auth-test.berkeley.edu/cas/",
+                    'test'        => "https://auth-test.berkeley.edu/cas/",
+                    'production'  => "https://auth.berkeley.edu/cas/"}[RAILS_ENV])
   #:cas_base_url => "https://auth.berkeley.edu/cas/"
 )
+
+require 'ucb_ldap'
+UCB::LDAP.host = ({'development' => 'ldap-test.berkeley.edu', 'test' => 'ldap-test.berkeley.edu', 'production' => 'ldap.berkeley.edu'}[RAILS_ENV])
+UCB::LDAP.bind_for_rails()
