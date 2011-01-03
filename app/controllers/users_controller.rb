@@ -23,13 +23,17 @@ class UsersController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
 
   
+  def show 
+    redirect_to :controller => :dashboard, :action => :index unless params[:id].to_s == current_user.id.to_s
+  end
+  
   # render new.rhtml
   def new
     @user = User.new
-    
-	# set up list of faculty names
-	@all_faculty = Faculty.find(:all)
-    @faculty_names = @all_faculty.map {|f| f.name }
+      
+	  # set up list of faculty names
+	  @all_faculty = Faculty.find(:all)
+      @faculty_names = @all_faculty.map {|f| f.name }
   end
  
   def create

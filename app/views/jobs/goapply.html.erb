@@ -17,14 +17,13 @@
 		    <b>
 		        <% @job.faculties.each do |fac| %> 
                 	<%= fac.name %> 
+              	
+              	  <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley <%= @job.department.name %>" target="_blank">
+          		  		<%= image_tag(@job.department.name.downcase + "_icon.gif") %>
+              		</a>
+            	    
                 	
-                    <% if @job.department.name == 'EECS' %>
-                	    <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley EECS" target="_blank">
-                    		<%= image_tag("eecs_icon.gif") %>
-                		</a>
-            		<% end %>
-                	
-                <% end %> 
+            <% end %> 
     		</b>
 		</td>
 	  </tr>

@@ -242,7 +242,7 @@ class JobsController < ApplicationController
      @job = Job.find(params[:id])
      
      if Applic.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
-        flash[:error] = "Whoa, slow down! You've already applied for this job before."
+        flash[:error] = "Whoa, slow down! You've already applied for this job."
         redirect_to(url_for(@job))
         return
      end
@@ -270,10 +270,9 @@ class JobsController < ApplicationController
             flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
             format.html { redirect_to(:controller=>:dashboard) }
         else
-            flash[:notice] = 'Unsuccessful attempt to apply for a position. No worries, the economy is terrible these days.
-                              <br />On a serious note, please contact the site administrators if you get this message 
-                              repeatedly. Something went wrong.' 
-            format.html { redirect_to(:controller=>:dashboard) }
+            flash[:error] = "Could not apply to position. Make sure you've written " + 
+                            "a message to the faculty sponsor!"
+            format.html { redirect_to(:controller=>:jobs, :action => :goapply, :id => params[:id]) }
         end
     end
   end
