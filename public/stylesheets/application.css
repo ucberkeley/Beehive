@@ -249,6 +249,10 @@ input.wide {
     width: 300px;
 }
 
+input.extrawide {
+    width: 400px;
+}
+
 .box_shadow {
     /* drop shadow */
     box-shadow: 0px 3px 10px #ccc;  
@@ -416,7 +420,7 @@ h2#dashboard_header {
 
 /*medium*/
 .dashboard_container_medium, .dashboard_wrapper_medium {
-  width: 480px;
+  width: 500px;
 }
 
 /**Links**/

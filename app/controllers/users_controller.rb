@@ -83,7 +83,12 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-	
+    
+    # If params[:user] is blank? for some reason, instantiate it.
+    if params[:user].blank? 
+      params[:user] = {}
+    end
+    
 	  # Handles the text_field_with_auto_complete for courses.
   	params[:user][:course_names] = params[:course][:name] if params[:course]
 	

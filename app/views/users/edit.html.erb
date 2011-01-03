@@ -3,19 +3,7 @@
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
-<!-- basic info -->
-<div class="dashboard_container">
-<div class="dashboard_wrapper_medium">
-	<div class="dashboard_container_medium box_shadow">
-<h2>The Basics</h2>
-<p>Full Name<br/>
-<%= f.text_field :name %></p>
-<br />
-<br />
-</div></div></div>
-<!-- end basic info -->
 
-<br />
 
 <!-- courses / interests / proglangs. part of the user form. -->
 <!-- #TODO: don't rip off dashboard CSS! -->
@@ -23,17 +11,25 @@
   <div class="dashboard_wrapper_medium">
 	  <div class="dashboard_container_medium box_shadow">
       <h2>Education & Interests</h2>
-      <p>Courses (please enter the names of your courses, separated by commas, e.g. CS194,CS61A):<br />
-      <%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'wide' %>
+      <p>
+      Fill in the following details in order for ResearchMatch to find research positioned tailored to you.
+      </p>
+      <br />
+      <p>Courses:<br />
+      <%= text_field :course, :name, :value => @user.course_list_of_user, :class => 'extrawide', 
+            :placeholder => "Courses you've taken, separated by commas (e.g. CS61A, EE123)" %>
       </p><br />
       <p>
       Interests (Categories): <br />
-      <%= text_field :category, :name, :value => @user.category_list_of_user, :class => 'wide' %>
+      <%= text_field :category, :name, :value => @user.category_list_of_user, :class => 'extrawide', 
+            :placeholder => "Fields of interest, separated by commas (e.g. signal processing)" %>
       </p><br />
       <p>
-      Programming languages in which you are proficient: <br />
-      <%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'wide' %>
+      Programming Languages: <br />
+      <%= text_field :proglang, :name, :value => @user.proglang_list_of_user, :class => 'extrawide',
+            :placeholder => "Languages in which you are proficient, separated by commas" %>
       </p>
+      <br />
     </div>
   </div>
 </div>
@@ -51,18 +47,22 @@
 <div class="dashboard_wrapper_medium">
 	<div class="dashboard_container_medium box_shadow">
 	    <h2>Attachments</h2>
-	    <% [ ["Resume", :resume, "You should upload one to impress the professors!"],
+	    <p>
+	    Please upload a résumé and/or a transcript for use when applying to positions.
+	    </p>
+	    <br />
+	    <% [ ["Résumé", :resume, "You should upload one to impress the professors!"],
 	         ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
 	       ].each do |item| -%>
 	       <% doc = current_user.send(item[1]) -%>
 	       
-	        <%= item[0] %>: 
+	        <b><%= item[0] %>:</b> 
 	        <!-- no document -->
 	        <% if doc.nil? -%>
 	            None. <%= item[2] %>
 	        <!-- already has document -->
 	        <% else -%>
-	            <%= doc.filename %> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
+	            <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
 	            <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => doc.id} %>
 	        <% end -%>
 	        <br /><br />

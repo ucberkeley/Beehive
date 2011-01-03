@@ -1,5 +1,11 @@
 class DocumentsController < ApplicationController
 
+include CASControllerIncludes
+
+#CalNet / CAS Authentication
+before_filter CASClient::Frameworks::Rails::Filter
+before_filter :setup_cas_user  
+
 def new
     @document = Document.new
 end
