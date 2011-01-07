@@ -41,7 +41,7 @@
 					<% if controller.controller_name != 'dashboard' %>
 					
 					    <div class="job_desc">
-					    <span id="job_desc_<%= job.id %>"><%= truncate(job.desc, 200, "...") %></span> 
+					    <span id="job_desc_<%= job.id %>"><%= truncate job.desc, :length => 200, :omission => '...' %></span> 
 					    <% if job.desc.length > 200 %>
 						    <%= link_to_remote "[read more]", :update=>"job_desc_#{job.id}", :url => {:controller=> :jobs, :action=>:job_read_more, :id=>job.id} %> 
 					    <% end %>
