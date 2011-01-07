@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       if @user.ldap_person.nil?
         # TODO: what to do here?
         logger.warn "UsersController.new: Failed to find LDAP::Person for uid #{session[:cas_user]}"
-        flash[:error] = "A directory error occurred. Please make sure you're logged into Calnet and try again."
+        flash[:error] = "A directory error occurred. Please make sure you've authenticated with CalNet and try again."
         redirect_to '/'
       end
 
