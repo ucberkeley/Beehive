@@ -17,9 +17,10 @@ class JobsController < ApplicationController
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :login_required, :except => [ :index, :show, :list ]
   
-  # Ensures that only the user who created a job -- and no other users -- can edit it 
+  # Ensures that only the user who created a job -- and no other users -- can edit 
+  # or destroy it.
   before_filter :check_post_permissions, :only => [ :new, :create ]
-  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
+  before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
   
   def index #list
   	
@@ -166,6 +167,17 @@ class JobsController < ApplicationController
   end
   
 
+  # Just the page that asks for confirmation for deletion of the job.
+  # The actual deletion is performed by the "destroy" action.
+  def delete
+    @job = Job.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.xml
+    end
+  end
+
   # DELETE /jobs/1
   # DELETE /jobs/1.xml
   def destroy
@@ -173,6 +185,7 @@ class JobsController < ApplicationController
     @job.destroy
 
     respond_to do |format|
+      flash[:notice] = "Listing deleted successfully."
       format.html { redirect_to(jobs_url) }
       format.xml  { head :ok }
     end

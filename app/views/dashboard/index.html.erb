@@ -7,7 +7,7 @@
 				<h2>Your Postings</h2>
 				
 				<% if @your_jobs.empty? %>
-					You have not created any jobs. Why not <%= link_to 'post a job', :controller => :jobs, :action => :new %> right now?
+					You have not added any listings. Why not <%= link_to 'post one', :controller => :jobs, :action => :new %>?
 				
 				<% else %>
 					<%= render :partial => "jobs/your_job", :collection => @your_jobs %>

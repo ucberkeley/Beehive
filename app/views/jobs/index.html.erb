@@ -27,7 +27,7 @@
 <br />
 <!-- no results -->
 <% if @jobs.empty? %>
-Nothing found! Try a different search.
+<h4>No matching listings were found! Try a different search.</h4>
 <% else %> <!-- there are results -->
 <% if params[:query].nonempty? %>
 	Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.<br /><br />

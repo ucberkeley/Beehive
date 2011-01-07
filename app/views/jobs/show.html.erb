@@ -1,7 +1,7 @@
 
 <div id="job_show_main">
-<br /><br /><br />
-<h2> <%=h @job.title %> </h2>
+<br />
+<h2><%=h @job.title %></h2>
 <p>
   posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
 	<b>
@@ -106,7 +106,7 @@
 <h2>Discussion</h2>
 <p>
 	<% if not @job.users or @job.users.empty? %>
-	    No comments yet. <a href="#">Be the first!</a>
+	    No comments yet. <a href="#" onclick="alert('Commenting feature coming soon!')">Be the first!</a>
     <% else %>
 	    <div>
 	    Currently watching this job:
@@ -131,7 +131,7 @@
   <h2>Applicants</h2>
   <p>
       <% if @job.applics.empty? -%>
-      None yet...
+      None yet.
       <% else -%>
           <% if @job.allow_admin_by? current_user -%>
               <% @job.applics.each do |a| -%>

@@ -37,11 +37,12 @@ h1 {
   padding-top: 20px;
 }
 
-h1, h2 {
+h1, h2, h3 {
   color: #5b7f72;
   text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
 }
+
 
 /**Layout**/
 
@@ -154,6 +155,10 @@ width: 100%;
 
 #menu_bar{
 	text-align: center;
+}
+
+.inline-form-container form {
+  display: inline-block;
 }
 
 
