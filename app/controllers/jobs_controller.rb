@@ -22,15 +22,25 @@ class JobsController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
   
   def index #list
+  	
+  	# Tags will filter whatever the query returns
+
   	@jobs = Job.find_jobs(params[:query], {
-  		                    :department => params[:department].to_i, 
-  		                    :faculty => params[:faculty].to_i, 
-  		                    :paid => params[:paid].to_i, 
-  		                    :credit => params[:credit].to_i
-                            })
+    		                    :department => params[:department].to_i, 
+    		                    :faculty => params[:faculty].to_i, 
+    		                    :paid => params[:paid].to_i, 
+    		                    :credit => params[:credit].to_i
+                              })
+  	
     @department_id = params[:department] ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
     @query         = ((not params[:query].nil?) and (not params[:query].empty?)) ? params[:query] : nil
+    
+    if params[:tags].present?
+      jobs_tagged_with_tags = Job.find_tagged_with(params[:tags])
+      @jobs = @jobs.select { |job| jobs_tagged_with_tags.include?(job) }
+    end
+  	
   	respond_to do |format|
   		format.html { render :action => :index }
   		format.xml { render :xml => @jobs }

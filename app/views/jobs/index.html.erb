@@ -16,10 +16,11 @@
 	<% end %>
 </div>
 
+<!-- tag cloud -->
 <div id="tag_cloud">
   <%= image_tag 'tag.gif' %> <b>Top Tags:</b><br />
   <% tag_cloud Job.tag_counts, %w(tag_s tag_m tag_l tag_xl) do |tag, css_class| %>
-    <span class="tag"><%=h link_to tag.name, jobs_path + '?query=' + tag.name, :class => css_class %></span>
+    <span class="tag"><%=h link_to tag.name, jobs_path + '?tags=' + tag.name, :class => css_class %></span>
   <% end %>
 </div>
 
