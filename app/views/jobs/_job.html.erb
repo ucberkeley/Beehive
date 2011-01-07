@@ -5,22 +5,23 @@
             <tr class="job_table_row">
 				<td class="job_table_left">
 					<div class="job_title">
-                    <a href="<%= job_path(job) %>" title="Click to apply for this research position!"><%= job.title %></a>
-                    (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
-					<% if logged_in? && job.user_id == current_user.id %>
-						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
-					<% end %>
-					<% if job.users.include?(current_user) %>
-						<%= link_to "[unwatch]", :controller=>:jobs, :action => :unwatch, :id => job.id %>
-					<% else %>
-						<%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
-					<% end %>
-                    <% if job.applicants.include?(current_user) %>
-                        [applied!]
-                    <% else %>
-                        <%= link_to "[apply for this job]", :controller => :jobs, :action => :goapply, :id => job.id %>
-                    <% end %>
-                        
+            <a href="<%= job_path(job) %>" title="Click to apply for this research position!"><%= job.title %></a>
+            (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
+					  <% if logged_in? && job.user_id == current_user.id %>
+						  <%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
+					  <% end %>
+					  <% if job.users.include?(current_user) %>
+						  <%= link_to "[unwatch]", :controller=>:jobs, :action => :unwatch, :id => job.id %>
+					  <% elsif job.user != current_user %>
+						  <%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
+					  <% end %>
+					  
+            <% if job.applicants.include?(current_user) %>
+                [applied!]
+            <% elsif job.user != current_user %>
+                <%= link_to "[apply for this job]", :controller => :jobs, :action => :goapply, :id => job.id %>
+            <% end %>
+                          
                     
                     
 					</div>
