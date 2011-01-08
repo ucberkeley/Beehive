@@ -113,7 +113,11 @@
       Number of positions:
     </td>
     <td class="job_attr_value">
-      <%=h @job.num_positions %>
+      <% if @job.num_positions > 0 %>
+        <%=h @job.num_positions %>
+      <% else %> 
+        Unspecified
+      <% end %>
     </td>
   </tr>      
   

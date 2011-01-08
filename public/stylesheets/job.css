@@ -179,6 +179,7 @@ span.tag {
     width: 300px;
 }
 .job_clear_table_label {
+	font-weight: bold;
 	width:150px;
 }
 .job_clear_table_field {
