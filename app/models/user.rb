@@ -226,7 +226,7 @@ class User < ActiveRecord::Base
       'Faculty'
     when User::Types::Grad
       'Grad student/postdoc'
-    when
+    when User::Types::Undergrad
       'Undergrad'
     else
       '(undefined)'

@@ -30,9 +30,9 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
       @user = User.new(:login => session[:cas_user].to_s)
-#      person = UCB::LDAP::Person.find_by_uid(session[:cas_user]) 
+      person = @user.ldap_person
 
-      if @user.ldap_person.nil?
+      if person.nil?
         # TODO: what to do here?
         logger.warn "UsersController.new: Failed to find LDAP::Person for uid #{session[:cas_user]}"
         flash[:error] = "A directory error occurred. Please make sure you've authenticated with CalNet and try again."
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       end
 
       @user.name  = @user.ldap_person_full_name
-      @user.email = @user.ldap_person.email
+      @user.email = person.email
       @user.update_user_type
   end
  
