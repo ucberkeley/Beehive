@@ -2,10 +2,11 @@
 
 <br />
 
+<!-- search bar -->
 <div id="browse_search_bar">
 	<% form_tag(:jobs, :method => "get") do %>
 	    <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
-		<%= text_field_tag :query, @query, :placeholder => "Search Parameters" %>
+		<%= text_field_tag :query, @query, :placeholder => "Search Parameters", :style => "width: 180px" %>&nbsp;
 		<%= label_tag :department, "Department" %>
 		<%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
 		<%= label_tag :faculty, "Faculty" %>
@@ -39,7 +40,7 @@
 		<table id="browse_header_table">
 		<tr>
 			
-			<td class="job_table_left">Title/Description</td>
+			<td class="job_table_left">Title & Description</td>
 			<td class="job_credit">Paid?</td>
 			<td class="job_credit">Credit?</td>
 			<td class="job_credit"># Positions</td>

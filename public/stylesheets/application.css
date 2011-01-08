@@ -230,7 +230,7 @@ width: 100%;
 #flash_error, #flash_notice{
 	color: #339900;
 	background: #f9ffea;
-	border: 1px solid #F0FFD2;
+	border: 2px solid #F0FFD2;
 	padding:10px;
 	margin: auto;
 	margin-top: 15px;
