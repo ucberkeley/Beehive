@@ -111,34 +111,52 @@ class User < ActiveRecord::Base
   end
   
   
-  # Returns a string containing the course names taken by user @user
-  # e.g. "CS162,CS61A"
-  def course_list_of_user
+  # Returns a string containing the 'required course' names taken by this User
+  # e.g. "CS61A,CS61B"
+  def course_list_of_user(add_spaces = false)
   	course_list = ''
-  	courses.each do |course|
-  		course_list << course.name + ','
+  	courses.each do |c|
+  		course_list << c.name + ','
+  		if add_spaces: course_list << ' ' end
   	end
-  	course_list[0..(course_list.length - 2)].upcase
+  	
+  	if add_spaces
+  	  return course_list[0..(course_list.length - 3)].upcase
+	  else
+    	return course_list[0..(course_list.length - 2)].upcase
+  	end
   end
 
-  # Returns a string containing the category names taken by user @user
-  # e.g. "signal processing,robotics,algorithms"
-  def category_list_of_user
+  # Returns a string containing the category names taken by this User
+  # e.g. "robotics,signal processing"
+  def category_list_of_user(add_spaces = false)
   	category_list = ''
   	categories.each do |cat|
   		category_list << cat.name + ','
+  		if add_spaces: category_list << ' ' end
   	end
-  	category_list[0..(category_list.length - 2)].downcase
+  	
+  	if add_spaces
+  	  return category_list[0..(category_list.length - 3)].downcase
+	  else
+    	return category_list[0..(category_list.length - 2)].downcase
+  	end
   end
   
-  # Returns a string containing the proglang names taken by user @user
-  # e.g. "java,c++,ruby"
-  def proglang_list_of_user
+  # Returns a string containing the 'desired proglang' names taken by this User
+  # e.g. "java,scheme,c++"
+  def proglang_list_of_user(add_spaces = false)
   	proglang_list = ''
   	proglangs.each do |pl|
-  		proglang_list << pl.name + ','
+  		proglang_list << pl.name.capitalize + ','
+   		if add_spaces: proglang_list << ' ' end
   	end
-  	proglang_list[0..(proglang_list.length - 2)].downcase
+  	
+  	if add_spaces
+  	  return proglang_list[0..(proglang_list.length - 3)]
+	  else
+    	return proglang_list[0..(proglang_list.length - 2)]
+  	end
   end
   
   # Returns an array of this user's watched jobs

@@ -222,7 +222,6 @@ class Job < ActiveRecord::Base
 	  else
     	return proglang_list[0..(proglang_list.length - 2)]
   	end
-    
   end
   
   # Returns the activation url for this job
