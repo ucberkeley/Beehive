@@ -184,3 +184,24 @@ span.tag {
 .job_clear_table_field {
 	width:350px;
 }
+
+/* job show page */
+
+table.job_attributes {
+
+}
+
+  table.job_attributes td.job_attr_title {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    width: 30%;
+  }
+
+  table.job_attributes td.job_attr_value {
+    padding-left: 5px;
+    text-align: left;
+    vertical-align: top;
+    width: 70%;
+  }
+

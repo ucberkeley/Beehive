@@ -53,54 +53,91 @@
   <p id="description"><%= @job.desc.to_br %></p>
 </p>
 
-<p>
-  <b>
-	<%=h pluralize @job.categories.length, 'Category' %>:
-  </b>
-  <% if ! @job.category_list_of_job.empty? %>
-	<%=h @job.category_list_of_job(true) %>
-  <% else %>
-    (none)
-  <% end %>
-</p>
 
-<p>
-  <b>Required courses:</b>
-  <% if ! @job.course_list_of_job.empty? %>
-	<%=h @job.course_list_of_job(true) %>
-  <% else %>
-    (none)
-  <% end %>
-</p>
 
-<p>
-  <b>Desired programming languages: </b>
-  <% if ! @job.proglang_list_of_job.empty? %>
-	<%=h @job.proglang_list_of_job(true) %>
-  <% else %>
-    (none)
-  <% end %>
-</p>
 
-<p>
-  <b>Position Expiration Date:</b>
-  <%=h @job.exp_date.pp %>
-</p>
 
-<p>
-  <b>Number of Positions:</b>
-  <%=h @job.num_positions %>
-</p>
+<table class="job_attributes">
+  <tr>
+    <td class="job_attr_title">
+	      <%=h pluralize @job.categories.length, 'Category' %>:
+    </td>
+    <td class="job_attr_value">
+      <% if ! @job.category_list_of_job.empty? %>
+        <%=h @job.category_list_of_job(true) %>
+      <% else %>
+          (none)
+      <% end %>      
+    </td>
+  </tr>
+  
+  
+  <tr>
+    <td class="job_attr_title">
+      Required courses:
+    </td>
+    <td class="job_attr_value">
+      <% if ! @job.course_list_of_job.empty? %>
+      	<%=h @job.course_list_of_job(true) %>
+      <% else %>
+        (none)
+      <% end %> 
+    </td>
+  </tr>  
+  
+  <tr>
+    <td class="job_attr_title">
+      Desired programming languages:
+    </td>
+    <td class="job_attr_value">
+      <% if ! @job.proglang_list_of_job.empty? %>
+	      <%=h @job.proglang_list_of_job(true) %>
+      <% else %>
+          (none)
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="job_attr_title">
+      Position expiration date:
+    </td>
+    <td class="job_attr_value">
+      <%=h @job.exp_date.pp %>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="job_attr_title">
+      Number of positions:
+    </td>
+    <td class="job_attr_value">
+      <%=h @job.num_positions %>
+    </td>
+  </tr>      
+  
+  <tr>
+    <td class="job_attr_title">
+      Paid:
+    </td>
+    <td class="job_attr_value">
+      <% if @job.paid %> Yes <% else %> No <% end %>
+    </td>
+  </tr>
+    
+  <tr>
+    <td class="job_attr_title">
+      Credit:
+    </td>
+    <td class="job_attr_value">
+      <% if @job.credit %> Yes <% else %> No <% end %>
+    </td>
+  </tr>
+  
+  
+  
+</table>
 
-<p>
-  <b>Paid:</b>
-  <% if @job.paid %> Yes <% else %> No <% end %>
-</p>
-
-<p>
-  <b>Credit:</b>
-  <% if @job.credit %> Yes <% else %> No <% end %>
-</p>
 
 <br /><br />
 <h2>Discussion</h2>
