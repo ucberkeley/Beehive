@@ -3,10 +3,25 @@
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
+<!-- Basic info: i.e., email address -->
+<!-- #TODO: don't rip off dashboard CSS! -->
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+	  <div class="dashboard_container_medium box_shadow">
+	    <h2>The Basics</h2>
+	    <p>Name:
+	      <b><%= @user.name %></b>
+      </p><br />
+      <p><%= label_tag 'email', 'E-mail address' %>:<br />
+          <%= f.text_field :email %>
+      </p>
+	  </div>
+  </div>
+</div>
 
+<br />
 
 <!-- courses / interests / proglangs. part of the user form. -->
-<!-- #TODO: don't rip off dashboard CSS! -->
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">
 	  <div class="dashboard_container_medium box_shadow">
@@ -44,45 +59,45 @@
 
 <!-- attachments -->
 <div class="dashboard_container">
-<div class="dashboard_wrapper_medium">
-	<div class="dashboard_container_medium box_shadow">
-	    <h2>Attachments</h2>
-	    <p>
-	    Please upload a résumé and/or a transcript for use when applying to positions.
-	    </p>
-	    <br />
-	    <% [ ["Résumé", :resume, "You should upload one to impress the professors!"],
-	         ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
-	       ].each do |item| -%>
-	       <% doc = current_user.send(item[1]) -%>
-	       
-	        <b><%= item[0] %>:</b> 
-	        <!-- no document -->
-	        <% if doc.nil? -%>
-	            None. <%= item[2] %>
-	        <!-- already has document -->
-	        <% else -%>
-	            <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
-	            <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => doc.id} %>
-	        <% end -%>
-	        <br /><br />
-	    <% end -%>
-	    
-	    <% if current_user.resume.nil? or current_user.transcript.nil? -%>
-	    <% form_for(:document, :url => documents_path, :html => {:multipart=>true}) do |f| -%>
-            <%= f.file_field :uploaded_data %>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-            <% [:resume, :transcript].each do |item| -%>
-                <% if current_user.send(item).nil? -%>
-                    <%= f.radio_button(:document_type, item.to_s, {:checked => "checked"} ) %>
-                    <%= f.label "document_type_#{item.to_s}", item.to_s.capitalize %>
-                <% end -%>
-            <% end -%>
-            <%= f.submit "Upload", :disable_with => "Uploading..." %>
-	    <% end -%>
-   	    <div id="upload_desc"><small>Note: We only accept PDF, Word, and plaintext uploads, up to 1 MB.</small></div>
-  	    <% end -%>
-	</div>
-</div>
+  <div class="dashboard_wrapper_medium">
+	  <div class="dashboard_container_medium box_shadow">
+	      <h2>Attachments</h2>
+	      <p>
+	      Please upload a résumé and/or a transcript for use when applying to positions.
+	      </p>
+	      <br />
+	      <% [ ["Résumé", :resume, "You should upload one to impress the professors!"],
+	           ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
+	         ].each do |item| -%>
+	         <% doc = current_user.send(item[1]) -%>
+	         
+	          <b><%= item[0] %>:</b> 
+	          <!-- no document -->
+	          <% if doc.nil? -%>
+	              None. <%= item[2] %>
+	          <!-- already has document -->
+	          <% else -%>
+	              <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
+	              <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => doc.id} %>
+	          <% end -%>
+	          <br /><br />
+	      <% end -%>
+	      
+	      <% if current_user.resume.nil? or current_user.transcript.nil? -%>
+	      <% form_for(:document, :url => documents_path, :html => {:multipart=>true}) do |f| -%>
+              <%= f.file_field :uploaded_data %>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+              <% [:resume, :transcript].each do |item| -%>
+                  <% if current_user.send(item).nil? -%>
+                      <%= f.radio_button(:document_type, item.to_s, {:checked => "checked"} ) %>
+                      <%= f.label "document_type_#{item.to_s}", item.to_s.capitalize %>
+                  <% end -%>
+              <% end -%>
+              <%= f.submit "Upload", :disable_with => "Uploading..." %>
+	      <% end -%>
+     	    <div id="upload_desc"><small>Note: We only accept PDF, Word, and plaintext uploads, up to 1 MB.</small></div>
+    	    <% end -%>
+	  </div>
+  </div>
 </div>
 
