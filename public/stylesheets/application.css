@@ -254,7 +254,7 @@ input.wide {
     width: 300px;
 }
 
-input.extrawide {
+input.extrawide, textarea.extrawide {
     width: 400px;
 }
 

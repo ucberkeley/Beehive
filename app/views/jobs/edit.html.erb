@@ -9,8 +9,8 @@
   
   <table class="job_clear_table">
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :title, 'Job title' %></td>
-		<td class="job_clear_table_field"><%= f.text_field :title, :class => 'wide' %></td>
+		<td class="job_clear_table_label"><%= f.label :title, 'Listing title' %></td>
+		<td class="job_clear_table_field"><%= f.text_field :title, :class => 'extrawide' %></td>
 	  </tr>
       <tr>
 		<td class="job_clear_table_label"><%= f.label :department %></td>
@@ -29,27 +29,27 @@
         </td>
 	  </tr>
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :desc, 'Job description' %></td>
-		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>7}%></td>
+		<td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %></td>
+		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
 	  </tr>
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :category, 'Category(ies)' %></td>
+		<td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
 		<td class="job_clear_table_field">
-            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'wide' %>
+            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide' %>
         </td>
 	  </tr>
 	  <tr>
 		<div class="ui-widget">
 		    <td class="job_clear_table_label"><%= f.label :course, 'Required courses' %></td>
 		    <td class="job_clear_table_field">
-                <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'wide' %>
+                <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'extrawide' %>
             </td>
 		</div>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired programming language(s)' %></td>
 		<td class="job_clear_table_field">
-            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'wide' %>
+            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'extrawide' %>
         </td>
 	  </tr>
 	  <tr>
