@@ -176,34 +176,53 @@ class Job < ActiveRecord::Base
     Job.find_jobs( :extra_conditions => {:order=>"created_at DESC", :limit=>n} )
   end
   
-  # Returns a string containing the category names taken by job @job
+  # Returns a string containing the category names taken by this Job
   # e.g. "robotics,signal processing"
-  def category_list_of_job
+  def category_list_of_job(add_spaces = false)
   	category_list = ''
   	categories.each do |cat|
   		category_list << cat.name + ','
+  		if add_spaces: category_list << ' ' end
   	end
-  	category_list[0..(category_list.length - 2)].downcase
+  	
+  	if add_spaces
+  	  return category_list[0..(category_list.length - 3)].downcase
+	  else
+    	return category_list[0..(category_list.length - 2)].downcase
+  	end
   end
   
-  # Returns a string containing the 'required course' names taken by job @job
+  # Returns a string containing the 'required course' names taken by this Job
   # e.g. "CS61A,CS61B"
-  def course_list_of_job
+  def course_list_of_job(add_spaces = false)
   	course_list = ''
   	courses.each do |c|
   		course_list << c.name + ','
+  		if add_spaces: course_list << ' ' end
   	end
-  	course_list[0..(course_list.length - 2)].upcase
+  	
+  	if add_spaces
+  	  return course_list[0..(course_list.length - 3)].upcase
+	  else
+    	return course_list[0..(course_list.length - 2)].upcase
+  	end
   end
   
-  # Returns a string containing the 'desired proglang' names taken by job @job
+  # Returns a string containing the 'desired proglang' names taken by this Job
   # e.g. "java,scheme,c++"
-  def proglang_list_of_job
+  def proglang_list_of_job(add_spaces = false)
   	proglang_list = ''
   	proglangs.each do |pl|
-  		proglang_list << pl.name + ','
+  		proglang_list << pl.name.capitalize + ','
+   		if add_spaces: proglang_list << ' ' end
   	end
-  	proglang_list[0..(proglang_list.length - 2)].downcase
+  	
+  	if add_spaces
+  	  return proglang_list[0..(proglang_list.length - 3)]
+	  else
+    	return proglang_list[0..(proglang_list.length - 2)]
+  	end
+    
   end
   
   # Returns the activation url for this job

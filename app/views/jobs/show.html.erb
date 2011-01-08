@@ -58,7 +58,7 @@
 	<%=h pluralize @job.categories.length, 'Category' %>:
   </b>
   <% if ! @job.category_list_of_job.empty? %>
-	<%=h @job.category_list_of_job %>
+	<%=h @job.category_list_of_job(true) %>
   <% else %>
     (none)
   <% end %>
@@ -67,7 +67,7 @@
 <p>
   <b>Required courses:</b>
   <% if ! @job.course_list_of_job.empty? %>
-	<%=h @job.course_list_of_job %>
+	<%=h @job.course_list_of_job(true) %>
   <% else %>
     (none)
   <% end %>
@@ -76,7 +76,7 @@
 <p>
   <b>Desired programming languages: </b>
   <% if ! @job.proglang_list_of_job.empty? %>
-	<%=h @job.proglang_list_of_job %>
+	<%=h @job.proglang_list_of_job(true) %>
   <% else %>
     (none)
   <% end %>
