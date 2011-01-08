@@ -60,7 +60,8 @@
 <table class="job_attributes">
   <tr>
     <td class="job_attr_title">
-	      <%=h pluralize @job.categories.length, 'Category' %>:
+        <% categ_str = pluralize(@job.categories.length, 'Category') %>
+        <%=h categ_str[categ_str.index('Categor') .. categ_str.length] %>:
     </td>
     <td class="job_attr_value">
       <% if ! @job.category_list_of_job.empty? %>
@@ -133,9 +134,6 @@
       <% if @job.credit %> Yes <% else %> No <% end %>
     </td>
   </tr>
-  
-  
-  
 </table>
 
 
