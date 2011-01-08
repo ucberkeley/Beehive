@@ -3,7 +3,7 @@
 <br />
 <h2><%=h @job.title %></h2>
 <p>
-  posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
+  posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
 	<b>
 	<% if logged_in? && @job.user_id == current_user.id %>
 		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
@@ -27,25 +27,24 @@
 </p>
 <br />
 <p>
-						<div class="job_tags">
-                        <%= image_tag 'tag.gif' %>
-						Tags:
-                          <% if @job.active %>
-                            <%= render :partial => "tag", :collection => @job.tag_list %>
-                          <% else %>
-                            (Tags will be generated once job is activated)
-                          <% end %>	
-						</div>
+  <div class="job_tags">
+    <%= image_tag 'tag.gif' %>Tags:
+    <% if @job.active %>
+      <%= render :partial => "tag", :collection => @job.tag_list %>
+    <% else %>
+      (Tags will be generated once job is activated)
+    <% end %>	
+  </div>
 </p>
 
 <br />
 <p>
   <b>Faculty Sponsor:</b>
   <% @job.faculties.each do |f| %> 
-	  <%= f.name %> 
+    <%= f.name %> 
     <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
-  		<%= image_tag(@job.department.name.downcase + "_icon.gif") %>
-		</a>
+      <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
+    </a>
   <% end %> 
 </p>
 

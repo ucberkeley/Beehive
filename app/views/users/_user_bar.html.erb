@@ -1,24 +1,7 @@
 <div id="user-bar-greeting">
-  <% if session[:cas_user].present? %>
-    Authenticated via CalNet (UID: <%=h session[:cas_user] %>).  <%= link_to "Log Out", logout_path %>
+  <% if logged_in? %>
+    Logged in as <%= current_user.name %>. <%= link_to 'Log Out', logout_path %>
   <% else %>
-    CalNet authentication is required for access to our listings.
+    <%= link_to 'Log In', login_path, :class => 'user-bar-action' %><%= ' via CalNet' unless session[:cas_user].present? %> to access our listings.
   <% end %>
 </div>
-
-
-
-
-<%-# Stuff below is probably deprecated -%>
-
-
-<% if 2 == 3 and logged_in? -%>
-  <div id="user-bar-greeting">
-	Logged in as <%= link_to @user.name, :controller=>"dashboard" %> (<%= link_to "Log out", logout_path, { :title => "Log out" }    %> | )
-	<br><b><%= link_to "Dashboard", :controller=>"dashboard" %></b> | <%= link_to "Edit Your Profile", edit_user_url(@user) %>
-  </div>
-
-<% elsif 2==4 -%>
-  <div id="user-bar-greeting">Please log in to access listings.</div>
-  <div id="user-bar-action"  ><%= link_to "CalNet Login",  login_path %> </div>
-<% end -%>

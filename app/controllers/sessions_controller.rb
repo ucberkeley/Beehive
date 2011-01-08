@@ -2,7 +2,6 @@
 class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-
   include CASControllerIncludes
 
   # Don't render new.rhtml; instead, just redirect to dashboard, because  
@@ -34,13 +33,17 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-#    logout_killing_session!
+    logout_killing_session!
     
-    # Attempt to also do CAS logout.
-    CASClient::Frameworks::Rails::Filter.logout(self)    #, url_for(:controller => 'sessions', :action => 'new')
+     # http://wiki.case.edu/Central_Authentication_Service: best practices: only logout app, not CAS
 
-    flash[:notice] = "You have been logged out."
-    #    redirect_back_or_default(:controller=>"dashboard", :action=>:index) 
+    flash[:notice] = "You have been logged out of ResearchMatch. You're still logged in to CAS, though.. click <a href='#{url_for :action=>:logout_cas}'><b>here</b></a> to logout of CAS."
+#    redirect_back_or_default(:controller=>"dashboard", :action=>:index) 
+    redirect_to :controller=>:dashboard, :action=>:index
+  end
+
+  def logout_cas
+    CASClient::Frameworks::Rails::Filter.logout(self, url_for(:controller=>:dashboard, :action=>:index) )
   end
 
 protected

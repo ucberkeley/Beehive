@@ -26,10 +26,11 @@
 </div>
 
 <br />
+<% if @jobs.empty? # no results %>
 <!-- no results -->
-<% if @jobs.empty? %>
 <h4>No matching listings were found! Try a different search.</h4>
-<% else %> <!-- there are results -->
+<% else %> 
+<!-- there are results -->
 <% if params[:query].nonempty? %>
 	Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
@@ -40,7 +41,7 @@
 		<table id="browse_header_table">
 		<tr>
 			
-			<td class="job_table_left">Title & Description</td>
+			<td class="job_table_left">Title &amp; Description</td>
 			<td class="job_credit">Paid?</td>
 			<td class="job_credit">Credit?</td>
 			<td class="job_credit"># Positions</td>
