@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   
   # Check that the email address is @*.berkeley.edu or @*.lbl.gov
-  validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
+  # validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
 
   # Check that user type is valid
   validates_inclusion_of    :user_type, :in => [Types::Undergrad, Types::Grad, Types::Faculty]
