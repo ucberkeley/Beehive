@@ -6,7 +6,8 @@
   posted by <b><%= link_to @job.user.name, :controller => :users, :action => :show, :id => @job.user_id %></b> &nbsp; 	
 	<b>
 	<% if logged_in? && @job.user_id == current_user.id %>
-		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %>
+		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
+		<%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
 	<% end %>&nbsp;
 	
 	<% if current_user != nil && !current_user.is_faculty %>

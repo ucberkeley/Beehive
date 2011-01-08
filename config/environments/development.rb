@@ -14,3 +14,16 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 config.action_mailer.raise_delivery_errors = true
+
+# ActionMailer config for Gmail
+
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {      # FIXME please
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'gmail.com',
+  :user_name            => 'ucbresearchmatch@gmail.com',
+  :password             => 'THIS IS NOT THE PASSWORD LOL.',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
+
