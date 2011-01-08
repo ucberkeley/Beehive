@@ -3,8 +3,8 @@ namespace :ldap do
   task :setup do
     default_template = <<-EOF
 base: &base
-username: uid=researchmatch,ou=applications,dc=berkeley,dc=edu
-password: <% puts "Enter LDAP password:" %><%= STDIN.readline %>
+  username: uid=researchmatch,ou=applications,dc=berkeley,dc=edu
+  password: <% puts "Enter LDAP password:" %><%= STDIN.readline %>
 
 development:
   <<: *base
