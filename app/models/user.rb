@@ -177,26 +177,45 @@ class User < ActiveRecord::Base
   end
 
 
-  # Updates (but does *NOT* save) this User's role, based on the LDAP information
-  def update_user_type
+  # Updates (but does *NOT* save, by default) this User's role, based on the
+  # LDAP information. Raises an error if the user type can't be determined.
+  #
+  # Options:
+  #  - save|update: If true, DO update user type in the database.
+  #
+  def update_user_type(options={})
     person = self.ldap_person
 
-    # test
-    self.user_type = User::Types::Grad
-    return self.user_type
-    # end test
-
     case
-    when (person.employee_academic? and not person.employee_expired?)
-      self.user_type = User::Types::Faculty
-    when true
-      self.user_type = User::Types::Grad
-    when (person.student? and person.student_registered?)
-      self.user_type = User::Types::Undergrad
-    else
-      logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}"
-    end
+      when (person.employee_academic? and not person.employee_expired?)
+        self.user_type = User::Types::Faculty
+      when (person.student? and person.student_registered?)
+        case person.berkeleyEduStuUGCode
+          when 'G'
+            self.user_type = User::Types::Grad
+          when 'U' 
+            self.user_type = User::Types::Undergrad
+          else
+            logger.error "User.update_user_type: Couldn't determine student type for login #{self.login}"
+            raise StandardError, "berkeleyEduStuUGCode not accessible. Have you authenticated with LDAP?"
+        end # under/grad
+      else
+        logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}"
+        raise StandardError, "couldn't determine user type for login #{self.login}"
+      end # employee/student
+
+    self.update_attribute(:user_type, self.user_type) if options[:save] or options[:update]
     self.user_type
+  end
+
+  def is_faculty?
+    user_type == User::Types::Faculty
+  end
+  def is_grad?
+    user_type == User::Types::Grad
+  end
+  def is_undergrad?
+    user_type == User::Types::Undergrad
   end
 
   # User type, as a string
