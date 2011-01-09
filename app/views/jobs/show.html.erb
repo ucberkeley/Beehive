@@ -41,7 +41,7 @@
 <p>
   <b>Faculty Sponsor:</b>
   <% @job.faculties.each do |f| %> 
-    <%= f.name %> 
+    <b><%= link_to f.name, :controller => "jobs", :action => "index", :params => { :faculty => f.id } %></b>
     <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
       <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
     </a>
@@ -186,12 +186,7 @@
 <% end %>
 
 <%= link_to "&#0171; Back to listings", :controller => :jobs, :action => :index %>
-<br /><br /><br /><br />
-<!-- === Debug === -->
-
-<span style="color: #CCCCCC">Activation Link: <a href="<%= @job.activation_url %>" style="color: #CCCCCC"><%= @job.activation_url %></a></span>
-<br />
-
+<br /><br /><br />
 
 
 </div>

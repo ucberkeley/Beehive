@@ -63,7 +63,7 @@ $rm_root = "http://upe.cs.berkeley.edu/research/"
 
 # Set up ActionMailer
 ActionMailer::Base.default_url_options[:host] = $rm_root
-ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.delivery_method = :test #:smtp
 ActionMailer::Base.perform_deliveries = true  
 
 # CAS authentication

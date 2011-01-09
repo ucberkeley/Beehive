@@ -99,7 +99,7 @@ class JobsController < ApplicationController
   	params[:job][:activation_code] = 0
 	
 
-	sponsor = Faculty.find(params[:faculty_sponsor].to_i)
+	  sponsor = Faculty.find(params[:faculty_sponsor].to_i)
 	  @job = Job.new(params[:job])
 	  @sponsorship = Sponsorship.create(:faculty => sponsor, :job_id => @job.id)
   	@job.sponsorships << @sponsorship
