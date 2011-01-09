@@ -1,7 +1,7 @@
 class FacultyMailer < ActionMailer::Base
    def faculty_confirmer(email, name, job)#job_id, job_title, job_description, activation_code)
      recipients email
-     from       "ucbresearchmatch@gmail.com"
+     from       "UC Berkeley ResearchMatch"  #"ucbresearchmatch@gmail.com"
      subject    "ResearchMatch Job Posting Confirmation"
      body       :email => email, :name => name, :job => job #:activation_url => job.activation_url :job_title => job_title, :job_description => job_description, :job_id => job_id
    end
