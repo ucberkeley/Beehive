@@ -100,7 +100,7 @@ class UsersController < ApplicationController
     # Ruby magic
     # This saves the form data, in the event you tried to update but failed a validation
     [:course, :category, :proglang].each do |list|
-      params[list] ||= {:name => @user.send("#{list}_list_of_user".to_sym, true)}
+      params[list.to_s] ||= {:name=>@user.send("#{list}_list_of_user".to_sym, true)}
     end
 
   end

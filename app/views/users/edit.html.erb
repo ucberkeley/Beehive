@@ -1,6 +1,6 @@
 <h1>User Profile</h1>
 
-<% form_for(@user) do |f| %>
+<% form_for @user do |f| %>
   <%= f.error_messages %>
 
 <!-- Basic info: i.e., email address -->
@@ -50,17 +50,17 @@
       </p>
       <br />
       <p>Courses:<br />
-      <%= text_field :course, :name, :value => @user.course_list_of_user(true), :class => 'extrawide', 
+      <%= text_field :course, :name, :value => params[:course][:name], :class => 'extrawide', 
             :placeholder => "Courses you've taken, separated by commas (e.g. CS61A, EE123)" %>
       </p><br />
       <p>
       Interests (Categories): <br />
-      <%= text_field :category, :name, :value => @user.category_list_of_user(true), :class => 'extrawide', 
+      <%= text_field :category, :name, :value => params[:category][:name], :class => 'extrawide', 
             :placeholder => "Fields of interest, separated by commas (e.g. signal processing)" %>
       </p><br />
       <p>
       Programming Languages: <br />
-      <%= text_field :proglang, :name, :value => @user.proglang_list_of_user(true), :class => 'extrawide',
+      <%= text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide',
             :placeholder => "Languages in which you are proficient, separated by commas" %>
       </p>
       <br />
