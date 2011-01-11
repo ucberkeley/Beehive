@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   include Authentication
-  include Authentication::ByPassword
+#  include Authentication::ByPassword
   include Authentication::ByCookieToken
   
   class Types
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   #validates_uniqueness_of   :login
   #validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
   
-  validates_presence_of :name
+  validates_presence_of     :name
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :name,     :within => 0..100
 
@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
   # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
   # email address to the user (depending on whether the user is a student or gsi or a faculty) 
   # and handle the courses for the user.
-  before_validation :handle_email
-  before_validation :handle_name
+  # before_validation :handle_email       # Handled by CAS
+  # before_validation :handle_name        # Handled by LDAP
   before_validation :handle_courses
   before_validation :handle_categories
   before_validation :handle_proglangs
@@ -62,15 +62,19 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :login, :name, :password, :password_confirmation, :faculty_email, :student_email, :is_faculty, :course_names, 
-	:category_names, :student_name, :faculty_name, :proglang_names
-  attr_reader :faculty_email; attr_writer :faculty_email  
-  attr_reader :student_email; attr_writer :student_email
+  attr_accessible :email, :login, :name,
+                  # :password, :password_confirmation,
+                  # :faculty_email, :student_email,
+                  # :is_faculty,
+                  :course_names, :category_names, :proglang_names
+                  # :student_name, :faculty_name 
+  # attr_reader :faculty_email; attr_writer :faculty_email  
+  # attr_reader :student_email; attr_writer :student_email
   attr_reader :course_names; attr_writer :course_names
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
-  attr_reader :student_name; attr_writer :student_name
-  attr_reader :faculty_name; attr_writer :faculty_name
+  # attr_reader :student_name; attr_writer :student_name
+  # attr_reader :faculty_name; attr_writer :faculty_name
   
   # Activates the user in the database.
   def activate!
@@ -90,17 +94,31 @@ class User < ActiveRecord::Base
     activation_code.nil?
   end
 
+  # Return the user corresponding to given login
+  def self.authenticate_by_login(loggin)
+    # Return user corresponding to login, or nil if there isn't one
+    User.find_by_login(loggin)
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
+  # what is this
+  # |
+  # v
   # uff.  this is really an authorization, not authentication routine.  
   # We really need a Dispatch Chain here or something.
   # This will also let us return a human error message.
   #
-  def self.authenticate(email, password)
-    return nil if email.blank? || password.blank?
-    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email] # need to get the salt
-    u && u.authenticated?(password) ? u : nil
-  end
+  # *** Password authentication is deprecated
+  #
+#  def self.authenticate_by_password(email, password)
+#    # Since we authenticate with CAS, the existence of a valid CAS session is enough.
+#    session[:cas_user].present?
+#
+#    return nil if email.blank? || password.blank?
+#    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email] # need to get the salt
+#    u && u.authenticated?(password) ? u : nil
+#  end
 
   #def login=(value)
   #  write_attribute :login, (value ? value.downcase : nil)
@@ -238,17 +256,24 @@ class User < ActiveRecord::Base
 
   # User type, as a string
   # TODO: there's probably a better way to do this programmatically
-  def user_type_string
+  def user_type_string(options={})
+    options[:long] ||= false
+    s = ''
+
     case self.user_type
     when User::Types::Faculty
-      'Faculty'
+      s = 'Faculty'
+      s += ' member' if options[:long]
     when User::Types::Grad
-      'Grad student/postdoc'
+      s = 'Grad student/postdoc'
     when User::Types::Undergrad
-      'Undergrad'
+      s = 'Undergrad'
+      s += 'uate' if options[:long]
     else
-      '(undefined)'
+      s = '(undefined)'
+      logger.warn "Couldn't find user type string for user type #{self.user_type}"
     end
+    s
   end
   
   protected
@@ -259,52 +284,55 @@ class User < ActiveRecord::Base
       self.activation_code = self.class.make_token
     end
 
-	# Dynamically assign the value of :email, based on whether this user
-	# is marked as faculty or not. This should occur as a before_validation
-	# since we want to save a value for :email, not :faculty_email or :student_email.
-	def handle_email
-		self.email = (self.is_faculty ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
-	end
-	
-	# Dynamically assign the value of :name, based on whether this user
-	# is marked as faculty or not. This should occur as a before_validation
-	# since we want to save a value for :name, not :faculty_name or :student_name.
-	def handle_name
-		if self.name.nil? || self.name == ""
-			self.name = is_faculty ? faculty_name : student_name
-		end
-	end
+    # Dynamically assign the value of :email, based on whether this user
+    # is marked as faculty or not. This should occur as a before_validation
+    # since we want to save a value for :email, not :faculty_email or :student_email.
+    def handle_email
+      self.email = (self.is_faculty ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
+    end
+    
+    # Dynamically assign the value of :name, based on whether this user
+    # is marked as faculty or not. This should occur as a before_validation
+    # since we want to save a value for :name, not :faculty_name or :student_name.
+    def handle_name
+      if self.name.nil? || self.name == ""
+              self.name = is_faculty ? faculty_name : student_name
+      end
+    end
 
-	# Parses the textbox list of courses from "CS162,CS61A,EE123"
-	# etc. to an enumerable object courses
-	def handle_courses
-		self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
-		course_array = []
-		course_array = course_names.split(',').uniq if ! course_names.nil?
-		course_array.each do |item|
-			self.courses << Course.find_or_create_by_name(item.upcase.strip)
-		end
-	end
-	
-	# Parses the textbox list of categories from "signal processing,robotics"
-	# etc. to an enumerable object categories
-	def handle_categories
-		self.categories = []  # eliminates any previous interests so as to avoid duplicates
-		category_array = []
-		category_array = category_names.split(',').uniq if ! category_names.nil?
-		category_array.each do |cat|
-			self.categories << Category.find_or_create_by_name(cat.downcase.strip)
-		end
-	end
-	
-	# Parses the textbox list of proglangs from "c++,python"
-	# etc. to an enumerable object proglangs
-	def handle_proglangs
-		self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
-		proglang_array = []
-		proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
-		proglang_array.each do |pl|
-			self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
-		end
-	end	
+    # Parses the textbox list of courses from "CS162,CS61A,EE123"
+    # etc. to an enumerable object courses
+    def handle_courses
+      return if self.is_faculty?
+      self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
+      course_array = []
+      course_array = course_names.split(',').uniq if ! course_names.nil?
+      course_array.each do |item|
+              self.courses << Course.find_or_create_by_name(item.upcase.strip)
+      end
+    end
+    
+    # Parses the textbox list of categories from "signal processing,robotics"
+    # etc. to an enumerable object categories
+    def handle_categories
+      return if self.is_faculty?
+      self.categories = []  # eliminates any previous interests so as to avoid duplicates
+      category_array = []
+      category_array = category_names.split(',').uniq if ! category_names.nil?
+      category_array.each do |cat|
+              self.categories << Category.find_or_create_by_name(cat.downcase.strip)
+      end
+    end
+    
+    # Parses the textbox list of proglangs from "c++,python"
+    # etc. to an enumerable object proglangs
+    def handle_proglangs
+      return if self.is_faculty?
+      self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
+      proglang_array = []
+      proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
+      proglang_array.each do |pl|
+              self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
+      end
+    end	
 end

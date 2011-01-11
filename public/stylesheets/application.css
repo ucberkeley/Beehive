@@ -185,7 +185,11 @@ width: 100%;
 
 
 
-
+/** Misc **/
+.caslogout {
+  color: red;
+  font-weight: bold;
+}
 
 #shadowdown{
 	background: url('../images/trans_down.png');

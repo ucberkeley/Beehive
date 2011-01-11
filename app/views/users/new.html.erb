@@ -1,7 +1,7 @@
 <h1>Sign Up</h1>
 <%= stylesheet_link_tag "user" %>
 
-<% @user.password = @user.password_confirmation = nil %>
+<% # @user.password = @user.password_confirmation = nil %>
 
 <%= image_tag "../images/new_user_steps_01.png", :border=>0 %>
 <%= error_messages_for :user %>
@@ -25,6 +25,7 @@
           <%= f.text_field :email %></p>
       </div>
 
+<% if false %>
       <div id="password_field">
           <%= label_tag 'password' %>:<br/>
           <%= f.password_field :password %>
@@ -33,6 +34,7 @@
           <%= f.password_field :password_confirmation %>
       </div>
    </div>
+<% end %>
 
     <%- if @user.user_type < User::Types::Faculty -%>
 

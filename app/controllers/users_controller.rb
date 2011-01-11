@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  # include AuthenticatedSystem    --- ^ did this.
-
-
   include CASControllerIncludes
   
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name, 
@@ -10,18 +6,14 @@ class UsersController < ApplicationController
   auto_complete_for :course, :name
   auto_complete_for :category, :name
   auto_complete_for :proglang, :name
-  
-  
     
   #CalNet / CAS Authentication
   before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :setup_cas_user, :except => [:new, :create]
-  
-  
-  
+  before_filter :login_required, :except => [:new, :create]
+  #before_filter :setup_cas_user, :except => [:new, :create]
+   
   # Ensures that only this user -- and no other users -- can edit his/her profile
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
-
   
   def show 
     redirect_to :controller => :dashboard, :action => :index unless params[:id].to_s == current_user.id.to_s
@@ -29,6 +21,13 @@ class UsersController < ApplicationController
   
   # render new.rhtml
   def new
+      # Make sure user isn't already signed up
+      if User.exists?(:login => session[:cas_user]) then
+        flash[:warning] = "You're already signed up."
+        redirect_to dashboard_path
+        return
+      end
+
       @user = User.new(:login => session[:cas_user].to_s)
       person = @user.ldap_person
 
@@ -49,7 +48,7 @@ class UsersController < ApplicationController
     
     # See if this user was already created
     # TODO: handle this better
-    if User.find_by_login(session[:cas_user].to_s) then
+    if User.exists?(:login=>session[:cas_user].to_s) then
       flash[:error] = "You've already signed up." 
       redirect_to '/'
     end
@@ -97,24 +96,25 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+
+    # Ruby magic
+    # This saves the form data, in the event you tried to update but failed a validation
+    [:course, :category, :proglang].each do |list|
+      params[list] ||= {:name => @user.send("#{list}_list_of_user".to_sym, true)}
+    end
+
   end
   
   def update
     @user = User.find(params[:id])
     
     # If params[:user] is blank? for some reason, instantiate it.
-    if params[:user].blank? 
-      params[:user] = {}
-    end
+    params[:user] ||= {}
     
-	  # Handles the text_field_with_auto_complete for courses.
-  	params[:user][:course_names] = params[:course][:name] if params[:course]
-	
-  	# Handles the text_field_with_auto_complete for categories.
-  	params[:user][:category_names] = params[:category][:name]	if params[:category]
-
-  	# Handles the text_field_with_auto_complete for proglangs.
-  	params[:user][:proglang_names] = params[:proglang][:name]	if params[:proglang]	
+    # Handle autocompletes
+    [:course, :category, :proglang].each do |thing|
+      params[:user]["#{thing.to_s}_names".to_sym] = params[thing][:name]
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -130,13 +130,13 @@ class UsersController < ApplicationController
   
   private
 	
-	def correct_user_access
-		if (User.find_by_id(params[:id]) == nil || current_user != User.find_by_id(params[:id]))
-		  # flash[:error] = "params[:id] is " + params[:id] + "<br />"
-		  # flash[:error] = "current_user is " + @current_user + "<br />"
-		  flash[:error] += "Unauthorized access denied. Do not pass Go. Do not collect $200."
-			redirect_to :controller => 'dashboard', :action => :index
-		end
-	end
+  def correct_user_access
+    if (User.find_by_id(params[:id]) == nil || current_user != User.find_by_id(params[:id]))
+      # flash[:error] = "params[:id] is " + params[:id] + "<br />"
+      # flash[:error] = "current_user is " + @current_user + "<br />"
+      flash[:error] += "Unauthorized access denied. Do not pass Go. Do not collect $200."
+            redirect_to :controller => 'dashboard', :action => :index
+    end
+  end
 
 end

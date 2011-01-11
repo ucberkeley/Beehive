@@ -11,11 +11,11 @@ class JobsController < ApplicationController
   auto_complete_for :proglang, :name
   
   #CalNet / CAS Authentication
-  before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :setup_cas_user  
+  #before_filter CASClient::Frameworks::Rails::Filter
+  #before_filter :goto_cas_unless_logged_in
     
   # Ensures that only logged-in users can create, edit, or delete jobs
-  before_filter :login_required, :except => [ :index, :show, :list ]
+  before_filter :rm_login_required, :except => [ :index, :show ]
   
   # Ensures that only the user who created a job -- and no other users -- can edit 
   # or destroy it.
@@ -23,16 +23,15 @@ class JobsController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
   
   def index #list
-  	
-  	# Tags will filter whatever the query returns
+    # Tags will filter whatever the query returns
 
-  	@jobs = Job.find_jobs(params[:query], {
-    		                    :department => params[:department].to_i, 
-    		                    :faculty => params[:faculty].to_i, 
-    		                    :paid => params[:paid].to_i, 
-    		                    :credit => params[:credit].to_i
-                              })
-  	
+    @jobs = Job.find_jobs(params[:query], {
+                                :department => params[:department].to_i, 
+                                :faculty => params[:faculty].to_i, 
+                                :paid => params[:paid].to_i, 
+                                :credit => params[:credit].to_i
+                          })
+    
     @department_id = params[:department] ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
     @query         = ((not params[:query].nil?) and (not params[:query].empty?)) ? params[:query] : nil
@@ -42,11 +41,10 @@ class JobsController < ApplicationController
       @jobs = @jobs.select { |job| jobs_tagged_with_tags.include?(job) }
     end
   	
-  	respond_to do |format|
-  		format.html { render :action => :index }
-  		format.xml { render :xml => @jobs }
-  	end
-		
+    respond_to do |format|
+            format.html { render :action => :index }
+            format.xml { render :xml => @jobs }
+    end
   end
     
   # GET /jobs/1
@@ -55,8 +53,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     # update watch time so this job is now 'read'
-    watch=Watch.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
-    if not watch.nil?
+    if current_user.present? && (watch=Watch.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id}))
         watch.mark_read
     end
 

@@ -1,13 +1,14 @@
 class DashboardController < ApplicationController
   # This filter is probably not necessary because of the CAS authentication stuff.
   # Hence, it's commented out:
-  #      before_filter :login_required
+  # before_filter :login_required
   
   include CASControllerIncludes
       
   #CalNet / CAS Authentication
-  before_filter :cas_unless_logged_in  #CASClient::Frameworks::Rails::Filter
-  before_filter :setup_cas_user  
+  before_filter :goto_cas_unless_logged_in  #CASClient::Frameworks::Rails::Filter
+  # before_filter :setup_cas_user  
+  before_filter :rm_login_required
   
   def index
       @user = current_user

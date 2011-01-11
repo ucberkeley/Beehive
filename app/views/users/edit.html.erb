@@ -4,18 +4,37 @@
   <%= f.error_messages %>
 
 <!-- Basic info: i.e., email address -->
-<!-- #TODO: don't rip off dashboard CSS! -->
+<%# TODO: don't rip off dashboard CSS! %>
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">
-	  <div class="dashboard_container_medium box_shadow">
-	    <h2>The Basics</h2>
-	    <p>Name:
-	      <b><%= @user.name %></b>
-      </p><br />
-      <p><%= label_tag 'email', 'E-mail address' %>:<br />
-          <%= f.text_field :email %>
-      </p>
-	  </div>
+      <div class="dashboard_container_medium box_shadow" style="float:left">
+        <h2>The Basics</h2>
+        <div class="left_col">
+          <p>Name: <b><%= @user.name %></b></p>
+          <br />
+          <p><%= label_tag 'email', 'E-mail address' %>:<br />
+              <%= f.text_field :email %>
+          </p>
+        </div> <%# Left col %>
+        <div class="right_col">
+          <%- utype = @user.user_type -%>
+          <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %></b>, you can:
+            <ul>
+            <%- if utype >= User::Types::Undergrad -%>
+              <li>View listings</li>
+              <li>Watch and apply for jobs</li>
+            <%- end # undergrad -%>
+            <%- if utype >= User::Types::Grad -%>
+              <li>Post listings</li>
+              <li>Review applications</li>
+            <%- end # grad -%>
+            <%- if utype >= User::Types::Faculty -%>
+              <li>Receive applications via email</li>
+            <%- end # faculty -%>
+            </ul>
+          </p>
+        </div> <%# Right col %>
+      </div><%# dashboard_container_medium %>
   </div>
 </div>
 

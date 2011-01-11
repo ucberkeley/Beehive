@@ -16,6 +16,15 @@
   <% if c == 'users' %>
     <%= stylesheet_link_tag 'user' %>
   <% end %>
+
+  <%# Automatically includes css files with the same name as the controller
+      Courtesy of Amber
+   %>
+  <% filename = controller.controller_name %>
+  <% if File.file? File.join(RAILS_ROOT, 'public', 'stylesheets', filename+'.css') %>
+    <%= stylesheet_link_tag "#{filename}" %>
+  <% end %>
+
   
   <%= javascript_include_tag "application.js" %>  
   <%= javascript_include_tag "jquery-1.4.2.min.js" %>

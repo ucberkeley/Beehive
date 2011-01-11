@@ -6,3 +6,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.left_col {
+  float: left;
+}
+
+.right_col {
+  float: right
+}
