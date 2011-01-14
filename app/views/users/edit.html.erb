@@ -91,13 +91,13 @@
 	         <% doc = current_user.send(item[1]) -%>
 	         
 	          <b><%= item[0] %>:</b> 
-	          <!-- no document -->
 	          <% if doc.nil? -%>
-	              None. <%= item[2] %>
-	          <!-- already has document -->
+                    <!-- no document -->
+                    None. <%= item[2] %>
 	          <% else -%>
-	              <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
-	              <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => doc.id} %>
+                    <!-- already has document -->
+                    <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
+                    <%= button_to "Remove", {:controller => "Documents", :action => "destroy", :id => doc.id, :confirm=>"Are you sure you want to remove your #{item[0].downcase}? This action cannot be undone.", :disable_with=>"Removing..."} %>
 	          <% end -%>
 	          <br /><br />
 	      <% end -%>
