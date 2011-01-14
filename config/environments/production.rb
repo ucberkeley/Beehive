@@ -9,9 +9,6 @@ config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
 
-# ActionMailer should actually send mail when using the production server
-ActionMailer::Base.delivery_method = :smtp
-
 # See everything in the log (default is :info)
 # config.log_level = :debug
 
