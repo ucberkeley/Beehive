@@ -15,7 +15,7 @@ class JobsController < ApplicationController
   #before_filter :goto_cas_unless_logged_in
     
   # Ensures that only logged-in users can create, edit, or delete jobs
-  before_filter :rm_login_required
+  before_filter :rm_login_required #, :except => [ :index, :show ]
   
   # Ensures that only the user who created a job -- and no other users -- can edit 
   # or destroy it.
@@ -247,64 +247,51 @@ class JobsController < ApplicationController
 	
   end
   
-  # the landing page for applying for a job
-  def goapply
-     @job = Job.find(params[:id])
-     
-     if Applic.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
-        flash[:error] = "Whoa, slow down! You've already applied for this job."
-        redirect_to(url_for(@job))
-        return
-     end
-     
-     @applic = Applic.new({:user => current_user, :job => @job})
-  end
   
-  
-  # the action for actually applying.
-  def apply
-    job = Job.find(params[:id])
-    
-    if job.nil? or params[:applic].nil?
-        flash[:error] = "Error: Couldn't tell which job you want to apply to. Please try again from the listing page."
-        redirect_to(:controller=>:jobs, :action=>:index)
-        return
-    end
-    
-    applic = Applic.new({:user_id => current_user.id, :job_id => job.id}.update(params[:applic]))
-    applic.resume_id = current_user.resume.nil? ? nil : current_user.resume.id
-    applic.transcript_id = current_user.transcript.nil? ? nil : current_user.transcript.id
-    
-    respond_to do |format|
-        if applic.save
-            flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
-            format.html { redirect_to(:controller=>:dashboard) }
-        else
-            flash[:error] = "Could not apply to position. Make sure you've written " + 
-                            "a message to the faculty sponsor!"
-            format.html { redirect_to(:controller=>:jobs, :action => :goapply, :id => params[:id]) }
-        end
-    end
-  end
-  
-  # withdraw from an application (destroy the applic)
-  def withdraw
-    applic = Applic.find(:job_id=>params[:id])
-    if !applic.nil? && applic.user == current_user
-        respond_to do |format|
-            if applic.destroy
-                flash[:error] = "Withdrew your application successfully. Keep in mind that your initial application email has already been sent."
-                format.html { redirect_to(:controller=>:jobs, :action=>:index) }
-            else
-                flash[:error] = "Couldn't withdraw your application. Try again, or contact support."
-                format.html { redirect_to(:controller=>:dashboard) }
-            end
-        end
-    else
-        flash[:error] = "Error: Couldn't find that application."
-        redirect_to(:controller=>:dashboard)
-    end
-  end
+##  # the action for actually applying.
+##  def apply
+##    job = Job.find(params[:id])
+##    
+##    if job.nil? or params[:applic].nil?
+##        flash[:error] = "Error: Couldn't tell which job you want to apply to. Please try again from the listing page."
+##        redirect_to(:controller=>:jobs, :action=>:index)
+##        return
+##    end
+##    
+##    applic = Applic.new({:user_id => current_user.id, :job_id => job.id}.update(params[:applic]))
+##    applic.resume_id = current_user.resume.nil? ? nil : current_user.resume.id
+##    applic.transcript_id = current_user.transcript.nil? ? nil : current_user.transcript.id
+##    
+##    respond_to do |format|
+##        if applic.save
+##            flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
+##            format.html { redirect_to(:controller=>:dashboard) }
+##        else
+##            flash[:error] = "Could not apply to position. Make sure you've written " + 
+##                            "a message to the faculty sponsor!"
+##            format.html { redirect_to(:controller=>:jobs, :action => :goapply, :id => params[:id]) }
+##        end
+##    end
+##  end
+##  
+##  # withdraw from an application (destroy the applic)
+##  def withdraw
+##    applic = Applic.find(:job_id=>params[:id])
+##    if !applic.nil? && applic.user == current_user
+##        respond_to do |format|
+##            if applic.destroy
+##                flash[:error] = "Withdrew your application successfully. Keep in mind that your initial application email has already been sent."
+##                format.html { redirect_to(:controller=>:jobs, :action=>:index) }
+##            else
+##                flash[:error] = "Couldn't withdraw your application. Try again, or contact support."
+##                format.html { redirect_to(:controller=>:dashboard) }
+##            end
+##        end
+##    else
+##        flash[:error] = "Error: Couldn't find that application."
+##        redirect_to(:controller=>:dashboard)
+##    end
+##  end
   
   protected
     # Saves sponsorship specified in the params page

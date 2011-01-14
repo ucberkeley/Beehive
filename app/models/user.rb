@@ -11,21 +11,21 @@ class User < ActiveRecord::Base
       Faculty   = 2
   end
   
-  has_many :jobs
+  has_many :jobs,        :dependent => :nullify
   has_many :reviews
   has_one  :picture
   has_one  :resume,      :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
   has_one  :transcript,  :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
   
   has_many :reviews
-  has_many :applied_jobs, :class_name => 'Job', :through => :applics
-  has_many :watches
-  has_many :enrollments
-  has_many :courses, :through => :enrollments
-  has_many :interests
-  has_many :categories, :through => :interests
-  has_many :proficiencies
-  has_many :proglangs, :through => :proficiencies
+  has_many :applied_jobs,  :class_name => 'Job', :through => :applics
+  has_many :watches,       :dependent => :destroy
+  has_many :enrollments,   :dependent => :destroy
+  has_many :courses,       :through => :enrollments
+  has_many :interests,     :dependent => :destroy
+  has_many :categories,    :through => :interests
+  has_many :proficiencies, :dependent => :destroy
+  has_many :proglangs,     :through => :proficiencies
   
 
   #validates_presence_of     :login

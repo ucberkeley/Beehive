@@ -10,12 +10,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pictures
 
 #  map.connect '/jobs/list', :controller => 'jobs', :action => 'index'
-  map.resources :jobs do
-    map.connect '/goapply/:id', :controller => 'jobs', :action => 'goapply'
-    map.connect '/apply/:id', :controller => 'jobs', :action => 'apply'
-  end
-
-  map.connect '/applications/:id', :controller => 'applics', :action => 'show'
+  map.activate_job      '/jobs/activate/:id',         :controller => 'jobs',    :action => 'activate'
+  map.new_job_applic    '/jobs/:job_id/apply',        :controller => 'applics', :action => 'new'
+  map.create_job_applic '/jobs/:job_id/doapply',      :controller => 'applics', :action => 'create', :method => 'post'
+  map.list_jobs_applics '/jobs/:job_id/applications', :controller => 'applics', :action => 'index'
+  map.applic            '/applications/:id',          :controller => 'applics', :action => 'show'
+  map.destroy_applic    '/applications/:id/withdraw', :controller => 'applics', :action => 'destroy'
+  map.resources :jobs   # Must be last so the above routes take precedence
 
   map.resources :reviews
 
