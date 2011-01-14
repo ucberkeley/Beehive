@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
   include CASControllerIncludes
 
   before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :require_signed_up, :except => [:new]
-  before_filter :set_setjmp, :only => [:new] # Remember previous page when logging in
+  before_filter :require_signed_up
+  # before_filter :set_setjmp, :only => [:new] # Remember previous page when logging in
   before_filter :dashboard_if_logged_in, :except => [:destroy]
 
   protected
@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def set_setjmp
+    return # TODO: this causes redirect loop when clicking post listing with no user
     puts "\n\n\n\n\n\nsetjmp = #{flash[:setjmp]} => "
     flash[:setjmp] = request.referer if flash[:setjmp].blank?
     puts "#{flash[:setjmp]}\n\n\n\n\n\n"
@@ -40,11 +41,12 @@ class SessionsController < ApplicationController
     if current_user.present?
       handle_remember_cookie! if params[:remember_me].eql?('1')
       flash[:notice] = 'Logged in successfully'
-      redirect_to (flash[:setjmp] || dashboard_path)
-      flash[:setjmp] = nil
+#      redirect_to (flash[:setjmp] || dashboard_path)
+#      flash[:setjmp] = nil
+      redirect_to dashboard_path
     else # No User found
       flash[:error] = "There was a problem logging you in. Try again, <del>eat</del> clear your cookies, and if you still can't log in, please contact support."
-      redirect_to login_path
+      redirect_to '/'
     end
   end
 
