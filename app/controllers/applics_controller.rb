@@ -6,7 +6,7 @@ class ApplicsController < ApplicationController
 
   # These filters verify that current_user has the right permissions
   before_filter :verify_applic_ownership, :only => [:destroy]  # only applicant can withdraw
-  before_filter :verify_applic_admin,     :only => [:show]     # applicant, job admin can view applic
+  before_filter :verify_applic_admin,     :only => [:show, :resume, :transcript]     # applicant, job admin can view applic
   before_filter :verify_job_ownership,    :only => [:index]    # only job admin can view applics
 
 
@@ -34,7 +34,21 @@ class ApplicsController < ApplicationController
     return if redirected_because(! j.allow_admin_by?(current_user), "You are not authorized to view the applications for this job.", job_path(j))
   end
 
+  def serve_document(type)
+    return unless [:resume, :transcript].include?(type)
+    @doc = @applic.send(type)
+    return if redirected_because(@doc.nil?, "There was an error retrieving the requested document.", applic_path(@applic))
+    send_file @doc.public_filename, :type => @doc.content_type
+  end
+
   public
+  def resume
+    serve_document(:resume)
+  end
+
+  def transcript
+    serve_document(:transcript)
+  end
 
   def show
     #@applic = Applic.find(params[:id])

@@ -9,4 +9,20 @@
         Message from <%= @applic.user.name %>:<br />
         <%= @applic.message %>
     </p>
+    <br />
+
+    <h3>Attachments</h3>
+    <p>
+      <% if @applic.resume.nil? && @applic.transcript.nil? then %>
+        None
+      <% else # has document(s) %>
+        <ul>
+        <% [:resume, :transcript].each do |doctype|
+             doc = @applic.send(doctype)
+             next if doc.nil?      %>
+          <li><%= link_to Document.type_string(doctype), send("applic_#{doctype.to_s}_path".to_s, @applic) %></li>
+        <% end # doctype %>
+        </ul>
+      <% end # has docs? %>
+    </p>
 </div>

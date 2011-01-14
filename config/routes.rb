@@ -16,6 +16,8 @@ ActionController::Routing::Routes.draw do |map|
   map.list_jobs_applics '/jobs/:job_id/applications', :controller => 'applics', :action => 'index'
   map.applic            '/applications/:id',          :controller => 'applics', :action => 'show'
   map.destroy_applic    '/applications/:id/withdraw', :controller => 'applics', :action => 'destroy'
+  map.applic_resume     '/applications/:id/resume',   :controller => 'applics', :action => 'resume'
+  map.applic_transcript '/applications/:id/transcript', :controller=>'applics', :action => 'transcript'
   map.resources :jobs   # Must be last so the above routes take precedence
 
   map.resources :reviews

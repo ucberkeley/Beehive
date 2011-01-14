@@ -37,6 +37,10 @@ def create
     redirect_to url_for(:controller => 'users', :action => 'edit', :id => current_user.id)
 end
 
+def show
+  redirect_to '/'
+end
+
 def destroy
     @document = Document.find(params[:id])
     if @document.user == current_user
