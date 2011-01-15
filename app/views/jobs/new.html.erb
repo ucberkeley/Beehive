@@ -2,6 +2,11 @@
 
 <h1>Post New Research Listing</h1>
 
+<p>
+  After submitting your listing, the faculty sponsor you've selected will need to <br />
+  confirm the listing before it is displayed on ResearchMatch.
+</p>
+<br />
 <% form_for(@job) do |f| %>
   <%= f.error_messages %>
 
@@ -25,17 +30,20 @@
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
-		<td class="job_clear_table_field"><%= text_field :category, :name, :class => 'extrawide' %></td>
+		<td class="job_clear_table_field"><%= text_field :category, :name, :class => 'extrawide', 
+          		:placeholder => "(e.g. signal processing, computer vision)" %></td>
 	  </tr>
 	  <tr>
 		<div class="ui-widget">
 		    <td class="job_clear_table_label"><%= f.label :course, 'Required courses' %></td>
-		    <td class="job_clear_table_field"><%= text_field :course, :name, :class => 'extrawide' %></td>
+		    <td class="job_clear_table_field"><%= text_field :course, :name, :class => 'extrawide',
+		          :placeholder => "(e.g. CS61A, EE123)"  %></td>
 		</div>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired programming language(s)' %></td>
-		<td class="job_clear_table_field"><%= text_field :proglang, :name, :class => 'extrawide' %></td>
+		<td class="job_clear_table_field"><%= text_field :proglang, :name, :class => 'extrawide', 
+		          :placeholder => "(e.g. Python, Java)" %></td>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :exp_date, 'Expiration time of this listing' %></td>

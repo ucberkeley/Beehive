@@ -61,7 +61,7 @@
   		        <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
 		        <% end %>
 		        
-		        <% if logged_in? && ! current_user.is_faculty %>
+		        <% if logged_in? %>
     		        <li><%= link_to "Edit Profile", edit_user_url(current_user) %></li>		  
 		        <% end %>
 		        

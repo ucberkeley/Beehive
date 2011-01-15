@@ -1,10 +1,5 @@
 <% content_for :title, "Apply for Position" %>
 
-<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
-
-
-
-
 <h1>Apply for Research Position</h1>
 
 <% form_for(@applic, :url=>{:controller=>:jobs, :action=>:apply, :id=>params[:id]} ) do |f| -%>
