@@ -11,7 +11,7 @@ class Job < ActiveRecord::Base
   #has_many :applicants, :class_name => 'User', :through => :applics
   has_many :applicants, :through => :applics, :source => :user
   has_many :users, :through => :watches
-  has_many :sponsorships
+  has_many :sponsorships, :dependent => :destroy
   has_many :faculties, :through => :sponsorships
   has_many :coursereqs
   has_many :courses, :through => :coursereqs

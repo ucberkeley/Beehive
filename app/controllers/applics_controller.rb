@@ -8,12 +8,22 @@ class ApplicsController < ApplicationController
   before_filter :verify_applic_ownership, :only => [:destroy]  # only applicant can withdraw
   before_filter :verify_applic_admin,     :only => [:show, :resume, :transcript]     # applicant, job admin can view applic
   before_filter :verify_job_ownership,    :only => [:index]    # only job admin can view applics
+  before_filter :verify_job_unapplied,    :only => [:new, :create] # don't allow multiple applications
 
 
   protected
   def find_objects
     @applic = Applic.find(params[:id])  unless params[:id].blank?
     @job    = Job.find(params[:job_id]) unless params[:job_id].blank?
+  end
+
+  def verify_job_unapplied
+    if existing = Applic.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
+       flash[:error] = "Whoa, slow down! You've already applied for this job. If you'd like to update your application, please withdraw your existing one, shown here."
+       #redirect_to(url_for(@job))
+       redirect_to(url_for(existing))
+       return
+    end
   end
 
   def verify_applic_ownership

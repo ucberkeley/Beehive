@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/south-street/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/application.css" type="text/css" rel="stylesheet" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/job.css" type="text/css" rel="stylesheet" />
+    <title>ResearchMatch | Notification</title>
+  </head>
+  <body>
+  
+  <div id="everything">
+    <div id="header">
+      <div id="header_image"><%= link_to "", :controller => :home %></div>
+    </div>
+    <div id="content" class="mailer">
+      <%= yield %>	    
+      <br />
+      <p>
+      If you believe you have received this e-mail in error, please disregard this notice.</p>
+      <br />
+      <p>Regards,</p>
+      <br />
+      <p><b>UC Berkeley ResearchMatch<br />
+      <a href="http://upe.cs.berkeley.edu/research/">http://upe.cs.berkeley.edu/research/</a></b>
+      </p>
+    </div>
+  </div>
+  </body>
+</html>

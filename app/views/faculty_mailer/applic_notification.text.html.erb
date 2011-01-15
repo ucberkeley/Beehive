@@ -1,0 +1,21 @@
+<p>Dear <%= @applic.job.user.name %>,</p>
+
+<p>
+ A new application for your listing, <b><%= @applic.job.title %></b>, has been received: 
+</p>
+
+<table>
+  <% [ ['Applicant', @applic.user.name],
+       ['Message',   @applic.message],
+       ['Attachments', (@applic.resume||@applic.transcript ? "Included" : "None")]
+     ].each do |fieldname, msg| %>
+     <tr>
+       <td><b><%= fieldname %></b></td>
+       <td><%= msg %></td>
+     </tr>
+  <% end %>
+</table>
+
+<% if false  # or, unless user_preferences.present? we need to set up subscription features. %>
+<p>You received this notification because you are currently subscribed to receive email notifications for your postings. You can change this setting in your profile page.</p>
+<% end %>

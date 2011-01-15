@@ -103,7 +103,7 @@ class JobsController < ApplicationController
       if @job.valid_without_sponsorships?
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
-        @job.activation_code = ActiveSupport::SecureRandom.random_number(10e10.to_i)
+        @job.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
         # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
         @job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
