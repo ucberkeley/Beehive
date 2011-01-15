@@ -34,7 +34,7 @@ class Job < ActiveRecord::Base
   
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions
-  validate :validate_sponsorships
+  validate :validate_sponsorships, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   
   
   attr_accessor :category_names
@@ -45,6 +45,9 @@ class Job < ActiveRecord::Base
   # The purpose of this is so that in activating a job, these data aren't lost.
   @skip_handlers = false
   attr_accessor :skip_handlers
+  
+  @skip_validate_sponsorships = false
+  attr_accessor :skip_validate_sponsorships
   
   acts_as_taggable
 
@@ -239,6 +242,15 @@ class Job < ActiveRecord::Base
   # edit, etc.) for this job.
   def allow_admin_by?(u)
     self.user == u or self.faculties.include?(u)
+  end
+
+  # Perform validations without sponsorships. Used to determine whether to create a sponsorship later on.
+  def valid_without_sponsorships?
+    svs = @skip_validate_sponsorships
+    @skip_validate_sponsorships = true
+    retval = valid?
+    @skip_validate_sponsorships = svs
+    retval
   end
   
   protected

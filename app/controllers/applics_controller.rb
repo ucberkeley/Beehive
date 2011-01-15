@@ -41,6 +41,10 @@ class ApplicsController < ApplicationController
     send_file @doc.public_filename, :type => @doc.content_type
   end
 
+  def send_applic_notification
+    FacultyMailer.deliver_applic_notification(@applic)
+  end
+
   public
   def resume
     serve_document(:resume)
@@ -73,20 +77,13 @@ class ApplicsController < ApplicationController
 
   # the action for actually applying.
   def create
-    #job = Job.find(params[:job_id])
-    
-#    if job.nil? or params[:applic].nil?
-#        flash[:error] = "Error: Couldn't tell which job you want to apply to. Please try again from the listing page."
-#        redirect_to(:controller=>:jobs, :action=>:index)
-#        return
-#    end
-    
-    applic = Applic.new({:user_id => current_user.id, :job_id => @job.id}.update(params[:applic]))
-    applic.resume_id     = current_user.resume.id     if params[:include_resume]     && current_user.resume.present?
-    applic.transcript_id = current_user.transcript.id if params[:include_transcript] && current_user.transcript.present?
+    @applic = Applic.new({:user_id => current_user.id, :job_id => @job.id}.update(params[:applic]))
+    @applic.resume_id     = current_user.resume.id     if params[:include_resume]     && current_user.resume.present?
+    @applic.transcript_id = current_user.transcript.id if params[:include_transcript] && current_user.transcript.present?
     
     respond_to do |format|
-        if applic.save
+        if @applic.save
+            send_applic_notification
             flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
             format.html { redirect_to job_path(@job) }
         else

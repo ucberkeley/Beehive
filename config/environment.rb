@@ -67,10 +67,10 @@ end
 # Set up ActionMailer
 ActionMailer::Base.default_url_options[:host] = "upe.cs.berkeley.edu"   # /research is auto appended
 ActionMailer::Base.default_content_type = "text/html"
-ActionMailer::Base.delivery_method = ({'development' => :test, 'test' => :test, 'production' => :smtp}[RAILS_ENV])
-#ActionMailer::Base.delivery_method = :smtp
-
+# You can 'export ENABLE_ACTION_MAILER=true' or false to turn it on or off specifically.
+ActionMailer::Base.delivery_method = (ENV['ENABLE_ACTION_MAILER'].present? && ActiveRecord::ConnectionAdapters::Column.value_to_boolean(ENV['ENABLE_ACTION_MAILER'])) ? :smtp : ({'development' => :test, 'test' => :test, 'production' => :smtp}[RAILS_ENV])
 ActionMailer::Base.perform_deliveries = true  
+puts "ActionMailer delivery method is #{ActionMailer::Base.delivery_method.to_s.upcase}"
 
 # CAS authentication
 CASClient::Frameworks::Rails::Filter.configure(

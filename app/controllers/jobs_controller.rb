@@ -85,30 +85,30 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-	  params[:job][:user] = current_user
-		
-  	# Handles the text_fields for categories, courses, and programming languages
-  	params[:job][:category_names] = params[:category][:name] if params[:category]
-  	params[:job][:course_names] = params[:course][:name] if params[:course]
-  	params[:job][:proglang_names] = params[:proglang][:name] if params[:proglang]
-	
-  	params[:job][:active] = false
-  	params[:job][:activation_code] = 0
-	
+    params[:job][:user] = current_user
+            
+    # Handles the text_fields for categories, courses, and programming languages
+    params[:job][:category_names] = params[:category][:name] if params[:category]
+    params[:job][:course_names] = params[:course][:name] if params[:course]
+    params[:job][:proglang_names] = params[:proglang][:name] if params[:proglang]
+    
+    params[:job][:active] = false
+    params[:job][:activation_code] = 0
+    
 
-	  sponsor = Faculty.find(params[:faculty_sponsor].to_i)
-	  @job = Job.new(params[:job])
-	  @sponsorship = Sponsorship.create(:faculty => sponsor, :job_id => @job.id)
-  	@job.sponsorships << @sponsorship
+    sponsor = Faculty.find(params[:faculty_sponsor].to_i)
+    @job = Job.new(params[:job])
 
     respond_to do |format|
-      if @job.save
-#        @job.sponsorships.each {|s| s.job_id = @job.id}
-    		@job.activation_code = (@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
-    		@job.save
+      if @job.valid_without_sponsorships?
+        @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
+        @job.sponsorships << @sponsorship
+        @job.activation_code = ActiveSupport::SecureRandom.random_number(10e10.to_i)
+        # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
+        @job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
-    		flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-    		flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+        flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
+        flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
         
         #TODO: Send an e-mail to the faculty member(s) involved.
         # At this point, ActionMailer should have been set up by /config/environment.rb
