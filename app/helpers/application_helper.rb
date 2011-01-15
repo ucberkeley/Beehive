@@ -1,4 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
+include JobsHelper
+
+
 module ApplicationHelper
 	include TagsHelper 
 	
@@ -33,6 +36,7 @@ class Time
         self.getlocal.strftime("%b %d, %Y")
     end
 end
+
 
 
 # Finds value in find_from, and returns the corresponding item from choose_from,
