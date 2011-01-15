@@ -206,6 +206,10 @@ width: 100%;
 	top: -159px;*/
 }
 
+#content .mailer {
+  margin-left: 106px;
+}
+
 #contentcenter{
 	width: 900px;
 	margin: auto;
