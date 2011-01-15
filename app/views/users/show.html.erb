@@ -1,3 +1,5 @@
+<% content_for :title, User.find_by_id(params[:id]).name %>
+
 <h2><%= User.find_by_id(params[:id]).name %></h2>
 <p>
 <%= User.find_by_id(params[:id]).is_faculty ? "Faculty" : "Student" %>
