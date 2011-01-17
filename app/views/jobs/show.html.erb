@@ -105,7 +105,7 @@
       Position expiration date:
     </td>
     <td class="job_attr_value">
-      <%=h @job.exp_date.pp %>
+      <%=h (@job.exp_date ? @job.exp_date.pp : 'None Listed') %>
     </td>
   </tr>
   
@@ -114,7 +114,7 @@
       Number of positions:
     </td>
     <td class="job_attr_value">
-      <% if @job.num_positions > 0 %>
+      <% if @job.num_positions && @job.num_positions > 0 %>
         <%=h @job.num_positions %>
       <% else %> 
         Unspecified

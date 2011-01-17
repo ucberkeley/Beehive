@@ -21,8 +21,33 @@ class JobsController < ApplicationController
   # or destroy it.
   before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
+
+  protected
+  def search_params_hash
+    h = {}
+    # booleans
+    [:paid, :credit].each do |param|
+      h[param] = params[param] if ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[param]) #unless params[param].nil?
+    end
+    
+    # strings
+    [:query, :faculty].each do |param|
+      h[param] = params[param] unless params[param].blank?
+    end
+
+    # dept. 0 => all
+    h[:department] = params[:department] if params[:department].to_i > 0
+
+    h
+  end
+
+  public
   
   def index #list
+    # strip out some weird args
+    # may cause double-request but that's okay
+    redirect_to(search_params_hash) and return if [:commit, :utf8].any? {|k| !params[k].nil?}
+
     # Tags will filter whatever the query returns
 
     @jobs = Job.find_jobs(params[:query], {
@@ -32,8 +57,8 @@ class JobsController < ApplicationController
                                 :credit => params[:credit].to_i
                           })
     
-    @department_id = params[:department] ? params[:department].to_i : 0
-    @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
+    @department_id = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:department]) #params[:department] ? params[:department].to_i : 0
+    @faculty_id    = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:faculty]) #params[:faculty]    ? params[:faculty].to_i    : 0
     @query         = ((not params[:query].nil?) and (not params[:query].empty?)) ? params[:query] : nil
     
     if params[:tags].present?

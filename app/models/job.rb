@@ -25,15 +25,15 @@ class Job < ActiveRecord::Base
   before_validation :handle_courses
   before_validation :handle_proglangs
   
-  validates_presence_of :title, :desc, :exp_date, :num_positions, :department
+  validates_presence_of :title, :desc, :department #:exp_date, :num_positions
   
   # Validates that expiration dates are no earlier than right now.
   validates_each :exp_date do |record, attr, value|
-	record.errors.add attr, 'Expiration date cannot be earlier than right now.' if value < Time.now - 1.hour
+	record.errors.add attr, 'Expiration date cannot be earlier than right now.' if value.present? && (value < Time.now - 1.hour)
   end
   
   validates_length_of :title, :within => 10..200
-  validates_numericality_of :num_positions
+  validates_numericality_of :num_positions, :allow_nil => true
   validate :validate_sponsorships, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   
   

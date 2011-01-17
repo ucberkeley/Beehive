@@ -13,8 +13,8 @@
 		<%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
 		<%= label_tag :faculty, "Faculty" %>
 		<%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
-		&nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid %>
-		&nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit %>
+		&nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid, '1', params[:paid] %>
+		&nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit, '1', params[:credit] %>
 		<%= submit_tag "Search" %>
 	<% end %>
 </div>
@@ -28,7 +28,7 @@
 </div>
 
 <br />
-<% if @jobs.empty? # no results %>
+<% if @jobs.empty? %>
 <!-- no results -->
 <h4>No matching listings were found! Try a different search.</h4>
 <% else %> 
