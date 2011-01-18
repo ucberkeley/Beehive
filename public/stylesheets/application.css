@@ -191,6 +191,10 @@ width: 100%;
   font-weight: bold;
 }
 
+span.required_field {
+  color: #FF0000;
+}
+
 #shadowdown{
 	background: url('../images/trans_down.png');
 	background-repeat: x-repeat;
