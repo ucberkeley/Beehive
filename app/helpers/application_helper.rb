@@ -20,6 +20,10 @@ class String
     def to_br
         self.gsub("\n", "<br />")
     end
+
+    def pluralize_for(n=1)
+      n == 1 ? self : self.pluralize
+    end
     
 end
 
