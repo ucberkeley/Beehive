@@ -26,17 +26,18 @@ class JobsController < ApplicationController
   def search_params_hash
     h = {}
     # booleans
-    [:paid, :credit].each do |param|
+    [:paid, :credit, :expired, :filled].each do |param|
       h[param] = params[param] if ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[param]) #unless params[param].nil?
     end
     
     # strings, directly copy attribs
-    [:query, :faculty, :tags].each do |param|
+    [:query, :tags, :page, :per_page, :as].each do |param|
       h[param] = params[param] unless params[param].blank?
     end
 
     # dept. 0 => all
     h[:department] = params[:department] if params[:department].to_i > 0
+    h[:faculty]    = params[:faculty]    if params[:faculty].to_i    > 0
 
     h
   end
@@ -54,7 +55,11 @@ class JobsController < ApplicationController
                                 :department => params[:department].to_i, 
                                 :faculty => params[:faculty].to_i, 
                                 :paid => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:paid]),
-                                :credit => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit])
+                                :credit => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit]),
+
+                                # will_paginate
+                                :page => params[:page] || 1,
+                                :per_page => params[:per_page]
                           })
     
     @department_id = params[:department] ? params[:department].to_i : 0

@@ -155,6 +155,8 @@ class Job < ActiveRecord::Base
     ts_options[:match_mode]     = options[:match_mode] if [:all, :any, :extended].include? options[:match_mode]
     ts_options[:max_matches]    = options[:limit]   if options[:limit] > 0
     ts_options[:rank_mode]      = options[:rank_mode] if [:proximity_bm25, :bm25, :wordcount].include? options[:rank_mode]
+    ts_options[:page]           ||= options[:page]
+    ts_options[:per_page]       ||= options[:per_page]
     
     if options[:custom_rank] and not options[:custom_rank].empty?
         ts_options[:sort_mode] = :expr
@@ -163,7 +165,7 @@ class Job < ActiveRecord::Base
     
     # Do the search
     results = Job.search query, {:conditions => ts_conditions}.update(ts_options)
-    results.delete_if { |item| item.nil? }
+    #results.delete_if { |item| item.nil? }
   end
   
   

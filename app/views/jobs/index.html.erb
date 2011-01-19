@@ -6,17 +6,33 @@
 
 <!-- search bar -->
 <div id="browse_search_bar">
-	<% form_tag(:jobs, :method => "get") do %>
-	    <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
-		<%= text_field_tag :query, @query, :placeholder => "Search Parameters", :style => "width: 180px" %>&nbsp;
-		<%= label_tag :department, "Department" %>
-		<%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
-		<%= label_tag :faculty, "Faculty" %>
-		<%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
-		&nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid, '1', params[:paid] %>
-		&nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit, '1', params[:credit] %>
-		<%= submit_tag "Search" %>
-	<% end %>
+  <% form_tag(job_search_path, :method => "get") do %>
+    <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
+    <%= text_field_tag :query, @query, :placeholder => "Search Parameters", :style => "width: 180px" %>&nbsp;
+    <%= label_tag :department, "Department" %>
+    <%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
+    <%= label_tag :faculty, "Faculty" %>
+    <%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
+    &nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid, '1', params[:paid] %>
+    &nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit, '1', params[:credit] %>
+    <%= submit_tag "Search" %>
+    <br />
+    <%= link_to "[More Options]", '#', :id => 'more_options', :onclick => "#{visual_effect(:toggle_slide, 'advanced_search')} (as=document.getElementById('as')).value = 1-Number(as.value); return false;" %>
+    <div id="advanced_search">
+      <%# javascript_tag "$('#advanced_search').hide()" %>
+      <%= javascript_tag visual_effect(:toggle_slide, 'advanced_search') unless params[:as].to_i == 1 %>
+      <%= hidden_field_tag :as, params[:as] %>
+
+      <%= label_tag :per_page, "Listings per page" %>
+      <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false %>
+
+      <%= label_tag :expired, "Include expired", :title => "Include listings with expiration dates in the past. These positions may not be available anymore." %>
+      <%= check_box_tag :expired, '1', params[:expired] %>
+
+      <%= label_tag :empty, "Include filled", :title => "Include listings with zero open positions." %>
+      <%= check_box_tag :filled, '1', params[:filled] %>
+    </div>
+  <% end %>
 </div>
 
 <!-- tag cloud -->
@@ -37,25 +53,32 @@
 	Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
 <div id="browse_results_wrapper">
-	<div id="browse_results">
-	  <div id="browse_header">
-		<div class="job_padding_wrapper">
-		<table id="browse_header_table">
-		<tr>
-			
-			<td class="job_table_left">Title &amp; Description</td>
-			<td class="job_credit">Paid?</td>
-			<td class="job_credit">Credit?</td>
-			<td class="job_credit"># Positions</td>
-			
-			</div>
-		</tr>
-		</table>
-		</div>
-	  </div>
-	  <%= render(:partial => "job", :collection => @jobs) %>
-	</div>
+  <div id="browse_results_pagination">
+    <span class="left"><%= page_entries_info @jobs %></span>
+    <span class="right"><%= will_paginate @jobs %></span>
+  </div>
+  <br />
+  <div id="browse_results">
+    <div id="browse_header">
+          <div class="job_padding_wrapper">
+          <table id="browse_header_table">
+          <tr>
+                  
+                  <td class="job_table_left">Title &amp; Description</td>
+                  <td class="job_credit">Paid?</td>
+                  <td class="job_credit">Credit?</td>
+                  <td class="job_credit"># Positions</td>
+                  
+                  </div>
+          </tr>
+          </table>
+          </div>
+    </div>
+    <%= render(:partial => "job", :collection => @jobs) %>
+  </div>
+  <%= will_paginate @jobs %>
 </div>
+
 
 <!-- end jobs.empty? -->
 <% end %>
