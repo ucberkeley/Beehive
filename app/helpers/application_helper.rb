@@ -84,17 +84,22 @@ module CASControllerIncludes
   def rm_login_required
     #flash[:setjmp] = request.url
   
-    # If user doesn't exist, create it
+    # If user doesn't exist, create it. Use current_user
+    # so as to ensure that redirects work properly; i.e. 
+    # so that you are 'logged in' when you go to the Edit Profile
+    # page in this next section here.
     if ! User.exists?(:login => session[:cas_user].to_s)
-      user = User.new(:login => session[:cas_user].to_s)
-      person = user.ldap_person
-      user.email = person.email
-      user.name = user.ldap_person_full_name
-      user.update_user_type
+      current_user = User.new(:login => session[:cas_user].to_s)
+      person = current_user.ldap_person
+      current_user.email = person.email
+      current_user.name = current_user.ldap_person_full_name
+      current_user.update_user_type
       
-      if user.save && user.errors.empty? then 
+      if current_user.save && current_user.errors.empty? then 
         flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in."
-        redirect_to :controller => "users", :action => "edit", :id => user.id
+        logger.info("\n\n\n\n LOLOLOLOLOLOLOL \n\n\n\n")
+        current_user = User.authenticate_by_login(session[:cas_user].to_s)
+        redirect_to :controller => "users", :action => "edit", :id => current_user.id
         return false
       else
         flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
@@ -106,6 +111,8 @@ module CASControllerIncludes
     
     # login_required call handles forcing users to actually login to session
     login_required
+    
+    logger.info("\n\n\n\n GOT PAST LOGIN_REQUIRED  \n\n\n\n")
   end
 
   # Redirects to signup page if user hasn't registered.
