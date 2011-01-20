@@ -130,7 +130,7 @@
       Paid:
     </td>
     <td class="job_attr_value">
-      <% if @job.paid %> Yes <% else %> No <% end %>
+      <%= ActionView::Helpers::ThreeStateLabels[@job.paid] %>
     </td>
   </tr>
     
@@ -139,7 +139,7 @@
       Credit:
     </td>
     <td class="job_attr_value">
-      <% if @job.credit %> Yes <% else %> No <% end %>
+      <%= ActionView::Helpers::ThreeStateLabels[@job.credit] %>
     </td>
   </tr>
 </tbody></table>

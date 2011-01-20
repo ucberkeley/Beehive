@@ -9,15 +9,15 @@
   
   <table class="job_clear_table">
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :title, 'Listing title' %></td>
+		<td class="job_clear_table_label"><%= f.label :title, 'Listing title' %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field"><%= f.text_field :title, :class => 'extrawide' %></td>
 	  </tr>
       <tr>
-		<td class="job_clear_table_label"><%= f.label :department %></td>
+		<td class="job_clear_table_label"><%= f.label :department %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
 	  </tr>
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
+		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field">
             <%= select_tag :faculty_name,
                 options_from_collection_for_select(Faculty.all,
@@ -29,7 +29,7 @@
         </td>
 	  </tr>
 	  <tr>
-		<td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %></td>
+		<td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
 	  </tr>
 	  <tr>
@@ -64,11 +64,11 @@
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :paid, 'Paid?' %></td>
-		<td class="job_clear_table_field"><%= f.check_box :paid %></td>
+		<td class="job_clear_table_field"><%= three_state_select_tag 'job[paid]', @job.paid %></td>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :credit, 'Credit (units) offered?' %></td>
-		<td class="job_clear_table_field"><%= f.check_box :credit %></td>
+		<td class="job_clear_table_field"><%= three_state_select_tag 'job[credit]', @job.credit %></td>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>

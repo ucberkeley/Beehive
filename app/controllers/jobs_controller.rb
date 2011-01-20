@@ -97,6 +97,11 @@ class JobsController < ApplicationController
   # GET /jobs/new.xml
   def new
     @job = Job.new
+
+    respond_to do |format|
+      format.html { render :action => 'edit' }
+      format.xml
+    end
 	
   end
 
@@ -117,11 +122,8 @@ class JobsController < ApplicationController
   def create
     params[:job][:user] = current_user
             
-    # Handles the text_fields for categories, courses, and programming languages
-    params[:job][:category_names] = params[:category][:name] if params[:category]
-    params[:job][:course_names] = params[:course][:name] if params[:course]
-    params[:job][:proglang_names] = params[:proglang][:name] if params[:proglang]
-    
+    process_form_params
+
     params[:job][:active] = false
     params[:job][:activation_code] = 0
     
@@ -156,17 +158,11 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.xml
   def update	
-	  #params[:job][:sponsorships] = Sponsorship.new(:faculty => Faculty.find(:first, :conditions => [ "name = ?", params[:job][:faculties] ]), :job => nil)	
-      
-    # Handles the text_fields for categories, courses, and programming languages
-  	params[:job][:category_names] = params[:category][:name]
-  	params[:job][:course_names] = params[:course][:name]
-  	params[:job][:proglang_names] = params[:proglang][:name] 
-    
+    process_form_params
+
     @job = Job.find(params[:id])
-    @faculty_names = Faculty.all.map {|f| f.name }
 	
-	  update_sponsorships  	
+    update_sponsorships  	
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
@@ -278,52 +274,22 @@ class JobsController < ApplicationController
   end
   
   
-##  # the action for actually applying.
-##  def apply
-##    job = Job.find(params[:id])
-##    
-##    if job.nil? or params[:applic].nil?
-##        flash[:error] = "Error: Couldn't tell which job you want to apply to. Please try again from the listing page."
-##        redirect_to(:controller=>:jobs, :action=>:index)
-##        return
-##    end
-##    
-##    applic = Applic.new({:user_id => current_user.id, :job_id => job.id}.update(params[:applic]))
-##    applic.resume_id = current_user.resume.nil? ? nil : current_user.resume.id
-##    applic.transcript_id = current_user.transcript.nil? ? nil : current_user.transcript.id
-##    
-##    respond_to do |format|
-##        if applic.save
-##            flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
-##            format.html { redirect_to(:controller=>:dashboard) }
-##        else
-##            flash[:error] = "Could not apply to position. Make sure you've written " + 
-##                            "a message to the faculty sponsor!"
-##            format.html { redirect_to(:controller=>:jobs, :action => :goapply, :id => params[:id]) }
-##        end
-##    end
-##  end
-##  
-##  # withdraw from an application (destroy the applic)
-##  def withdraw
-##    applic = Applic.find(:job_id=>params[:id])
-##    if !applic.nil? && applic.user == current_user
-##        respond_to do |format|
-##            if applic.destroy
-##                flash[:error] = "Withdrew your application successfully. Keep in mind that your initial application email has already been sent."
-##                format.html { redirect_to(:controller=>:jobs, :action=>:index) }
-##            else
-##                flash[:error] = "Couldn't withdraw your application. Try again, or contact support."
-##                format.html { redirect_to(:controller=>:dashboard) }
-##            end
-##        end
-##    else
-##        flash[:error] = "Error: Couldn't find that application."
-##        redirect_to(:controller=>:dashboard)
-##    end
-##  end
   
   protected
+  # Preprocesses form data for direct input to Job.update
+  def process_form_params
+    # Handles the text_fields for categories, courses, and programming languages
+    [:category, :course, :proglang].each do |k|
+      params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
+    end
+
+    # Handle three-state booleans
+    [:paid, :credit].each do |k|
+      params[:job][k] = [false,true,nil][params[:job][k].to_i]
+    end
+  end
+
+
     # Saves sponsorship specified in the params page
     def update_sponsorships
         fac = Faculty.exists?(params[:faculty_name]) ? params[:faculty_name] : 0
