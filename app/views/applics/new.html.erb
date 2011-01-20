@@ -4,31 +4,30 @@
 
 <h1>Apply for Research Position</h1>
 
+<p>
+  To apply for the following research position, please enter a message to send to <br />
+  its faculty sponsor and select a resume or transcript to attach.
+</p>
+<br />
+
 <% form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f| -%>
+
+
+
+<%= render(:partial => "jobs/job_snippet", :job => @job ) %>
+
+
+
+<br />
+
+
   <table class="job_clear_table">
+	 
 	  <tr>
-		<td class="job_clear_table_label">Job title</td>
-		<td class="job_clear_table_field"><b><a href="<%=h url_for @job %>" target="_blank"><%= @job.title %></a></b></td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label">Faculty sponsor</td>
-		<td class="job_clear_table_field">
-		    <b>
-		        <% @job.faculties.each do |fac| %> 
-                	<%= fac.name %> 
-              	
-              	  <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley <%= @job.department.name %>" target="_blank">
-          		  		<%= image_tag(@job.department.name.downcase + "_icon.gif") %>
-              		</a>
-            	    
-                	
-            <% end # job.faculties.each %> 
-    		</b>
-		</td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label">Message to faculty sponsor</td>
-		<td class="job_clear_table_field">
+		<td><b>Message to faculty sponsor</b></td>
+		</tr>
+		<tr>
+		<td>
 		    <%= f.text_area :message, {:rows=>12, :class => "extrawide"}%>
 		</td>
 	  </tr>
@@ -36,8 +35,8 @@
   <br />
   <p>
       <h2>Credentials</h2>
-      <b><%= current_user.name %></b>, you have the option to supply your transcript and resume below. 
-      The faculty sponsor of this job (<%= @job.faculties.collect(&:name).join(', ') %>) will receive your credentials along with your application.
+      <b><%= current_user.name %></b>, you have the option to supply your transcript and resume below. <br />
+      The faculty sponsor(s) of this job (<%= @job.faculties.collect(&:name).join(', ') %>) will receive your credentials along with your application.<br />
       Check the box to include the document:
   </p>
   <br />

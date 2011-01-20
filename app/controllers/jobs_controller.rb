@@ -98,10 +98,6 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
 
-    respond_to do |format|
-      format.html { render :action => 'edit' }
-      format.xml
-    end
 	
   end
 

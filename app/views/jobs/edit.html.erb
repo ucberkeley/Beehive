@@ -35,21 +35,24 @@
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
 		<td class="job_clear_table_field">
-            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide' %>
+            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide', 
+                            :placeholder => "(e.g. signal processing, computer vision)"  %>
         </td>
 	  </tr>
 	  <tr>
 		<div class="ui-widget">
 		    <td class="job_clear_table_label"><%= f.label :course, 'Required courses' %></td>
 		    <td class="job_clear_table_field">
-                <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'extrawide' %>
+                <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'extrawide', 
+                                :placeholder => "(e.g. CS61A, EE123)"  %>
             </td>
 		</div>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired programming language(s)' %></td>
 		<td class="job_clear_table_field">
-            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'extrawide' %>
+            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'extrawide', 
+                           :placeholder => "(e.g. Python, Java)" %>
         </td>
 	  </tr>
 	  <tr>
