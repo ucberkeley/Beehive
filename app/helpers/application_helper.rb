@@ -89,16 +89,19 @@ module CASControllerIncludes
     # so that you are 'logged in' when you go to the Edit Profile
     # page in this next section here.
     if ! User.exists?(:login => session[:cas_user].to_s)
-      current_user = User.new(:login => session[:cas_user].to_s)
-      person = current_user.ldap_person
-      current_user.email = person.email
-      current_user.name = current_user.ldap_person_full_name
-      current_user.update_user_type
+      new_user = User.new(:login => session[:cas_user].to_s)
+      person = new_user.ldap_person
+      new_user.email = person.email
+      new_user.name = new_user.ldap_person_full_name
+      new_user.update_user_type
       
-      if current_user.save && current_user.errors.empty? then 
-        flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in."
-        logger.info("\n\n\n\n LOLOLOLOLOLOLOL \n\n\n\n")
-        current_user = User.authenticate_by_login(session[:cas_user].to_s)
+      if new_user.save && new_user.errors.empty? then 
+        flash[:notice] = "Looks like this is your first visit to ResearchMatch."
+        flash[:notice] << "Please verify your email address, #{new_user.name}. We'll send all correspondence to this address."
+        
+        logger.info "First login for #{new_user.login}"
+
+        self.current_user = User.authenticate_by_login(session[:cas_user].to_s)
         redirect_to :controller => "users", :action => "edit", :id => current_user.id
         return false
       else

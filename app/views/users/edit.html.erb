@@ -20,7 +20,7 @@
         </div> <%# Left col %>
         <div class="right_col">
           <%- utype = @user.user_type -%>
-          <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %></b>, you can:
+          <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %><%= render 'shared/tooltip', :text => "Your user type was automatically determined. If it's wrong, please let us know!" %></b>, you can:
             <ul>
             <%- if utype >= User::Types::Undergrad -%>
               <li>View listings</li>
@@ -49,7 +49,7 @@
 	  <div class="dashboard_container_medium box_shadow">
       <h2>Education & Interests</h2>
       <p>
-      Fill in the following details in order for ResearchMatch to find research positioned tailored to you.
+      The following information is optional, but will help ResearchMatch find positions better tailored to you.
       </p>
       <br />
       <p>Courses:<br />
