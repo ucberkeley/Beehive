@@ -82,7 +82,29 @@ module CASControllerIncludes
   end
 
   def rm_login_required
-    flash[:setjmp] = request.url
+    #flash[:setjmp] = request.url
+  
+    # If user doesn't exist, create it
+    if ! User.exists?(:login => session[:cas_user].to_s)
+      user = User.new(:login => session[:cas_user].to_s)
+      person = user.ldap_person
+      user.email = person.email
+      user.name = user.ldap_person_full_name
+      user.update_user_type
+      
+      if user.save && user.errors.empty? then 
+        flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in."
+        redirect_to :controller => "users", :action => "edit", :id => user.id
+        return false
+      else
+        flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
+        redirect_to :controller => "home", :action => "index"
+        return false
+      end
+      
+    end
+    
+    # login_required call handles forcing users to actually login to session
     login_required
   end
 
