@@ -5,7 +5,7 @@
             <tr class="job_table_row">
 				<td class="job_table_left">
 					<div class="job_title">
-            <a href="<%= job_path(job) %>" title="Click to apply for this research position!"><%= job.title %></a>
+            <a href="<%= job_path(job) %>" title="Click to learn more about this research position!"><%= job.title %></a>
             (<%= (job.faculties != []) ?  link_to (job.faculties.first.name, :controller => "jobs",
                    :action => "index", :params => { :faculty => job.faculties.first.id })  : "no faculty sponsor" %>) 
 					  <% if logged_in? && job.user_id == current_user.id %>

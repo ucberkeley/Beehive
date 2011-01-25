@@ -94,7 +94,7 @@ class ApplicsController < ApplicationController
     respond_to do |format|
         if @applic.save
             send_applic_notification
-            flash[:notice] = 'Applied for job successfully. Time to cross your fingers and wait for a reply!'
+            flash[:notice] = 'Applied successfully. Time to cross your fingers and wait for a reply!'
             format.html { redirect_to job_path(@job) }
         else
             flash[:error] = "Could not apply to position. Make sure you've written " + 

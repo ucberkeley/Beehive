@@ -216,3 +216,8 @@ table.job_attributes {
     width: 70%;
   }
 
+  table.job_attributes td#description {
+    padding-bottom: 15px;
+    padding-top: 5px;
+  }
+
