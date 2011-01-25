@@ -206,14 +206,14 @@ table.job_attributes {
     font-weight: bold;
     text-align: left;
     vertical-align: top;
-    width: 30%;
+    width: 25%;
   }
 
   table.job_attributes td.job_attr_value {
     padding-left: 5px;
     text-align: left;
     vertical-align: top;
-    width: 70%;
+    width: 75%;
   }
 
   table.job_attributes td#description {
