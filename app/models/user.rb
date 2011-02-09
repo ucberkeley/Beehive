@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
       Undergrad = 0
       Grad      = 1
       Faculty   = 2
+      Admin     = 3
+      All       = [Undergrad, Grad, Faculty, Admin]
   end
   
   has_many :jobs,        :dependent => :nullify
@@ -220,26 +222,33 @@ class User < ActiveRecord::Base
   #  - save|update: If true, DO update user type in the database.
   #
   def update_user_type(options={})
-    person = self.ldap_person
+    unless options[:stub].blank?   # stub type
+      options[:stub] = User::Types::Undergrad unless User::Types::All.include?(options[:stub].to_i)
+      self.user_type = options[:stub].to_i
+    else  # update via LDAP
+      person = self.ldap_person
+      case   # Determine role
+        # Faculty
+        when (person.employee_academic? and not person.employee_expired?)
+          self.user_type = User::Types::Faculty
 
-    case
-      when (person.employee_academic? and not person.employee_expired?)
-        self.user_type = User::Types::Faculty
-      when (person.student? and person.student_registered?)
-        case person.berkeleyEduStuUGCode
-          when 'G'
-            self.user_type = User::Types::Grad
-          when 'U' 
-            self.user_type = User::Types::Undergrad
-          else
-            logger.error "User.update_user_type: Couldn't determine student type for login #{self.login}"
-            raise StandardError, "berkeleyEduStuUGCode not accessible. Have you authenticated with LDAP?"
-        end # under/grad
-      else
-        logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
-        #raise StandardError, "couldn't determine user type for login #{self.login}"
-        self.user_type = User::Types::Undergrad
-      end # employee/student
+        # Student
+        when (person.student? and person.student_registered?)
+          case person.berkeleyEduStuUGCode
+            when 'G'
+              self.user_type = User::Types::Grad
+            when 'U' 
+              self.user_type = User::Types::Undergrad
+            else
+              logger.error "User.update_user_type: Couldn't determine student type for login #{self.login}"
+              raise StandardError, "berkeleyEduStuUGCode not accessible. Have you authenticated with LDAP?"
+          end # under/grad
+        else
+          logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
+          #raise StandardError, "couldn't determine user type for login #{self.login}"
+          self.user_type = User::Types::Undergrad
+        end # employee/student
+    end # stub
 
     self.update_attribute(:user_type, self.user_type) if options[:save] || options[:update]
     self.user_type

@@ -55,7 +55,7 @@ class Job < ActiveRecord::Base
   define_index do
     indexes :title
     indexes :desc
-    indexes taggings.tag.name, :as => :tag
+    indexes tags.name, :as => :tag_names
     indexes department.name, :as => :department, :facet => true
     indexes faculties(:id), :as => :sponsor_id
     indexes faculties(:name), :as => :faculty
@@ -66,9 +66,17 @@ class Job < ActiveRecord::Base
     has :created_at
     has :updated_at
     has :exp_date
+    has tags.name
     
     set_property :delta => true
   end
+
+  sphinx_scope(:tagged_with) do |tags|
+    tags = tags.collect {|t| t.is_a?(Tag) ? t.name : t.to_s}
+    {:conditions=>{:tag_names=>tags}, :match_mode=>:extended}
+  end
+
+  # Methods
   
   def self.active_jobs
     Job.find(:all, :conditions => {:active => true}, :order => "created_at DESC")
@@ -149,23 +157,29 @@ class Job < ActiveRecord::Base
     ts_conditions[:paid]        = true              if options[:paid]
     ts_conditions[:credit]      = true              if options[:credit]
     ts_conditions[:sponsor_id]  = options[:faculty] if options[:faculty] > 0 and Faculty.exists?(options[:faculty])
-    ts_conditions[:tag]         = options[:tags]    if not options[:tags].empty?
+    #ts_conditions[:tag_names]   = options[:tags].split(/[\s,]+/)    unless options[:tags].blank?
     
+    # Custom parsing
+    options[:tags] = options[:tags].split(/[\s,]+/) unless options[:tags].blank?
+
     # Selectively build options
     ts_options[:match_mode]     = options[:match_mode] if [:all, :any, :extended].include? options[:match_mode]
     ts_options[:max_matches]    = options[:limit]   if options[:limit] > 0
     ts_options[:rank_mode]      = options[:rank_mode] if [:proximity_bm25, :bm25, :wordcount].include? options[:rank_mode]
     ts_options[:page]           ||= options[:page]
     ts_options[:per_page]       ||= options[:per_page]
-    
-    if options[:custom_rank] and not options[:custom_rank].empty?
+    ts_options[:field_weights]  = {:tag_names=>150}
+   
+    if options[:custom_rank] && !options[:custom_rank].empty?
         ts_options[:sort_mode] = :expr
         ts_options[:order]     = options[:custom_rank]
     end
     
     # Do the search
+    results = Job
     results = Job.search query, {:conditions => ts_conditions}.update(ts_options)
-    #results.delete_if { |item| item.nil? }
+    results = results.tagged_with(options[:tags]) if options[:tags].present?
+    return results
   end
   
   

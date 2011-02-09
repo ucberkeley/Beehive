@@ -1,7 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 include JobsHelper
 
-
 module ApplicationHelper
 	include TagsHelper 
 	
@@ -15,6 +14,10 @@ end
 
 module ActionView
   module Helpers
+    def tag_search_path(tagstring)
+      "#{jobs_path}?tags=#{tagstring}"
+    end
+
     module FormTagHelper
       def indeterminate_check_box_tag(name, value = "1", indeterminate_value = "2", checked = :unchecked, options = {})
         onclick = "this.value=(Number(this.value)+1)%3;this.checked=(this.value==1);this.indeterminate=(this.value==2);"

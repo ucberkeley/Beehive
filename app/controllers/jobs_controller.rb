@@ -50,26 +50,29 @@ class JobsController < ApplicationController
     redirect_to(search_params_hash) and return if [:commit, :utf8].any? {|k| !params[k].nil?}
 
     # Tags will filter whatever the query returns
+    query_parms = {
+                    :department => params[:department].to_i, 
+                    :faculty => params[:faculty].to_i, 
+                    :paid => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:paid]),
+                    :credit => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit]),
 
-    @jobs = Job.find_jobs(params[:query], {
-                                :department => params[:department].to_i, 
-                                :faculty => params[:faculty].to_i, 
-                                :paid => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:paid]),
-                                :credit => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit]),
+                    # will_paginate
+                    :page => params[:page] || 1,
+                    :per_page => params[:per_page] || 8
+                  }
+    query_parms[:tags] = params[:tags] if params[:tags].present?
 
-                                # will_paginate
-                                :page => params[:page] || 1,
-                                :per_page => params[:per_page]
-                          })
+    @query = '' if params[:query].blank?
+
+    @jobs = Job.find_jobs(@query, query_parms)
     
     @department_id = params[:department] ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
-    @query         = ((not params[:query].nil?) and (not params[:query].empty?)) ? params[:query] : nil
     
-    if params[:tags].present?
-      jobs_tagged_with_tags = Job.find_tagged_with(params[:tags])
-      @jobs = @jobs.select { |job| jobs_tagged_with_tags.include?(job) }
-    end
+#    if params[:tags].present?
+#      jobs_tagged_with_tags = Job.find_tagged_with(params[:tags])
+#      @jobs = @jobs.select { |job| jobs_tagged_with_tags.include?(job) }
+#    end
   	
     respond_to do |format|
             format.html { render :action => :index }
