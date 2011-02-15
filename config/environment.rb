@@ -83,4 +83,4 @@ CASClient::Frameworks::Rails::Filter.configure(
 # LDAP 
 require 'ucb_ldap'
 UCB::LDAP.host = ({'development' => 'ldap-test.berkeley.edu', 'test' => 'ldap-test.berkeley.edu', 'production' => 'ldap.berkeley.edu'}[RAILS_ENV])
-UCB::LDAP.bind_for_rails()
+UCB::LDAP.bind_for_rails() unless RAILS_ENV == 'test'

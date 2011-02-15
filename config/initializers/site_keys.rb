@@ -17,6 +17,7 @@
 # keep it someplace secure.  Use the random value given or type in the lyrics to
 # your favorite Jay-Z song or something; any moderately long, unpredictable text.
 #REST_AUTH_SITE_KEY         = '2aa6124dbd6a2f79364c8d231e2d1b9b1f7cca43'
+REST_AUTH_SITE_KEY         = 'irrelevant because we arent storing passwords'
   
 # Repeated applications of the hash make brute force (even with a compromised
 # database and site key) harder, and scale with Moore's law.
