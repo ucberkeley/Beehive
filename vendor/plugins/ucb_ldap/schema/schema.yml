@@ -1,0 +1,3087 @@
+#
+# Schema File For: ldap.berkeley.edu
+# Last Generated: Mon Jun 22 16:41:39 2009
+#
+# This file contains information about the following part of the tree:
+#	namespaceName
+#	namespaceService
+#	org
+#	person
+#	personAddress
+#	personAffiliateAffiliation
+#	personJobAppointment
+#	personService
+#	personStudentTerm
+#	unibears
+#	securityQuestion
+#	honorific
+#	generationalTitle
+#	salutation
+#	calnetSyncTimeProperty
+#	calnetMaxUidProperty
+#	casServiceRegistry
+#
+# Please address questions or problems to calnet-idm@lists.berkeley.edu
+#
+---
+calnetMaxUidProperty:
+  attributes:
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetMaxUid
+      required: true
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    uid:
+      aliases:
+        - userid
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetMaxUid
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetMaxUid
+  uniqueObjectClass: berkeleyEduCalNetMaxUid
+calnetSyncTimeProperty:
+  attributes:
+    berkeleyEduDateTime:
+      description: Date-Time
+      multi: false
+      objectClass: berkeleyEduCalNetLastSyncTime
+      required: true
+      syntax: timestamp
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetLastSyncTime
+      required: true
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetLastSyncTime
+  uniqueObjectClass: berkeleyEduCalNetLastSyncTime
+casServiceRegistry:
+  attributes:
+    berkeleyEduCasServiceAllowedAttributes:
+      description: 'CAS Service Registration - LDAP Attributes that can be returned to the Service'
+      multi: true
+      objectClass: berkeleyEduCasServiceRegistration
+      required: false
+      syntax: string
+    berkeleyEduCasServiceAllowedToProxy:
+      description: 'CAS Service Registration - Is the Service allowed to proxy?'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: false
+      syntax: boolean
+    berkeleyEduCasServiceAnnonymousAccess:
+      description: 'CAS Service Registration - Does Service allow anonymous access?'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: false
+      syntax: boolean
+    berkeleyEduCasServiceDescription:
+      description: 'CAS Service Registration - Description of the Service'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: true
+      syntax: string
+    berkeleyEduCasServiceEnabled:
+      description: 'CAS Service Registration - Is the Service enabled?'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: true
+      syntax: boolean
+    berkeleyEduCasServiceSsoEnabled:
+      description: 'CAS Service Registration - Is the Service allowed to use SSO?'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: false
+      syntax: boolean
+    berkeleyEduCasServiceTheme:
+      description: 'CAS Service Registration - Theme used for the Service'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: false
+      syntax: string
+    berkeleyEduCasServiceUrl:
+      description: 'CAS Service Registration - Service URL'
+      multi: false
+      objectClass: berkeleyEduCasServiceRegistration
+      required: true
+      syntax: ~
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCasServiceRegistration
+      required: true
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    uid:
+      aliases:
+        - userid
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCasServiceRegistration
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCasServiceRegistration
+  uniqueObjectClass: berkeleyEduCasServiceRegistration
+generationalTitle:
+  attributes:
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetGenerational
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetGenerational
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetGenerational
+  uniqueObjectClass: berkeleyEduCalNetGenerational
+honorific:
+  attributes:
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetHonorific
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetHonorific
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetHonorific
+  uniqueObjectClass: berkeleyEduCalNetHonorific
+namespaceName:
+  attributes:
+    berkeleyEduServices:
+      description: Services
+      multi: true
+      objectClass: berkeleyEduNamespaceName
+      required: false
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduNamespaceName
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduNamespaceName
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    uid:
+      aliases:
+        - userid
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduNamespaceName
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduNamespaceName
+  uniqueObjectClass: berkeleyEduNamespaceName
+namespaceService:
+  attributes:
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduNamespaceServiceType
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduNamespaceServiceType
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduNamespaceServiceType
+  uniqueObjectClass: berkeleyEduNamespaceServiceType
+org:
+  attributes:
+    berkeleyEduOrgUnitHierarchyString:
+      aliases:
+        - ucborgunithierarchystring
+      description: 'Org-Unit Hierarchy-String'
+      multi: false
+      objectClass: berkeleyEduOrgUnit
+      required: false
+      syntax: string
+    berkeleyEduOrgUnitParent:
+      aliases:
+        - ucborgunitparent
+      description: 'Org-Unit Parent'
+      multi: true
+      objectClass: berkeleyEduOrgUnit
+      required: false
+      syntax: string
+    berkeleyEduOrgUnitProcessUnitFlag:
+      aliases:
+        - ucborgunitprocessunitflag
+      description: 'Org-Unit Process Unit Flag'
+      multi: false
+      objectClass: berkeleyEduOrgUnit
+      required: false
+      syntax: boolean
+    businessCategory:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    destinationIndicator:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    facsimileTelephoneNumber:
+      aliases:
+        - fax
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    internationaliSDNNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    l:
+      aliases:
+        - locality
+        - localityname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    ou:
+      aliases:
+        - organizationalUnitName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: true
+      syntax: string
+    physicalDeliveryOfficeName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    postOfficeBox:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    postalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    postalCode:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    preferredDeliveryMethod:
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    registeredAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    searchGuide:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    seeAlso:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    st:
+      aliases:
+        - stateOrProvinceName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    street:
+      aliases:
+        - streetaddress
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    telephoneNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    teletexTerminalIdentifier:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    telexNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    userPassword:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+    x121Address:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalunit
+      required: false
+      syntax: string
+  objectClasses:
+    - top
+    - organizationalunit
+    - berkeleyEduOrgUnit
+  uniqueObjectClass: berkeleyEduOrgUnit
+person:
+  attributes:
+    UCTrustAssurance:
+      description: 'UC UCTrust Assurance'
+      multi: true
+      objectClass: ucEduPerson
+      required: false
+      syntax: string
+    UCnetID:
+      aliases:
+        - ucbnetid
+      description: 'UC UCTrust Net ID'
+      multi: false
+      objectClass: ucEduPerson
+      required: false
+      syntax: integer
+    audio:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    berkeleyEduAcaSenFlag:
+      aliases:
+        - ucbacasenflag
+      description: 'Academic Senate Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduAffApptBeginDate:
+      description: 'Affiliate Appointment Begin Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffApptEndDate:
+      description: 'Affiliate Appointment End Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffBirthMonthDay:
+      description: 'Affiliate Birth Month-Day'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffCreateDate:
+      description: 'Affiliate Create Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduAffExpDate:
+      aliases:
+        - ucbaffexpdate
+      description: 'Affiliate Expiration Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduAffFeePaidDate:
+      description: 'Affiliate Fee Paid Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffID:
+      aliases:
+        - ucbaffid
+      description: 'Affiliate ID'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffModDate:
+      aliases:
+        - ucbaffmoddate
+      description: 'Affiliate Modification Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduAffName:
+      aliases:
+        - ucbaffname
+      description: 'Affiliate Name'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffTerminationDate:
+      description: 'Affiliate Appointment Termination Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffTypes:
+      description: 'Affiliate Types'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffWorkStudyFlag:
+      description: 'Affiliate Work Study Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffiliations:
+      aliases:
+        - ucbaffiliations
+      description: 'Berkeley Campus General Affiliations'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAffiliationsDetailed:
+      aliases:
+        - ucbaffiliationsdetailed
+      description: 'Berkeley Campus Detailed Affiliation'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalMailDeptAccountTicket:
+      description: 'CalMail Account Ticket'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalMailDisallowedBy:
+      description: 'CalMail Disallowed By'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalMailDisallowedDate:
+      description: 'CalMail Disallowed Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalMailDisallowedFlag:
+      description: 'CalMail Disallowed Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalPhotoIDBarcode:
+      aliases:
+        - ucbappstandardcalphotoidbarcode
+      description: 'Cal Photo ID - Barcode'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCalPhotoIDLostCardDigit:
+      aliases:
+        - ucbappstandardcalphotoidlostcarddigit
+      description: 'Cal Photo ID - Lost Card Digit'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduAppStandardCalPhotoIDMagStripe:
+      aliases:
+        - ucbappstandardcalphotoidmagstripe
+      description: 'Cal Photo ID - Mag Stripe'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteAddlMbox:
+      description: 'Communite Additional Mbox'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteAdminFlag:
+      description: 'Communite Admin Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailAddress:
+      description: 'Communite Email Address'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailHost:
+      description: 'Communite Email Host'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailPassword:
+      description: 'Communite Email Password'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailUserName:
+      description: 'Communite Email User Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardDeputyOptOutFlag:
+      aliases:
+        - ucbappstandarddeputyoptoutflag
+      description: 'Deputy Opt-Out Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardQuestPerms:
+      aliases:
+        - ucbappstandardquestperms
+      description: 'Quest Permissions'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardWebDiskID:
+      aliases:
+        - ucbappstandardwebdiskid
+      description: 'Web Disk ID'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardWmfGid:
+      aliases:
+        - ucbappstandardwmfgid
+      description: 'WMF GID'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduAppStandardWmfHomeDir:
+      aliases:
+        - ucbappstandardwmfhomedir
+      description: 'WMF Home Directory'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduBirthDay:
+      aliases:
+        - ucbbday
+      description: 'Birth Day'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduBirthMonth:
+      aliases:
+        - ucbbmonth
+      description: 'Birth Month'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduBirthYear:
+      description: 'Birth Year'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCalNetIDUpdatedDate:
+      description: 'CalNet ID Change Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduCalNetIDUpdatedFlag:
+      aliases:
+        - ucbcalnetidupdatedflag
+      description: 'CalNet ID Updated Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduCalNetKey:
+      description: 'CalNet Second Level Auth Key'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCalNetKeySalt:
+      description: 'CalNet Second Level Auth Key Salt'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCalNetUIDConsolidationDate:
+      description: 'UID Consolidation Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduCalNetUIDOld:
+      description: 'Previous UIDs'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduConfidentialFlag:
+      aliases:
+        - ucbconfidentialflag
+      description: 'Confidential Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduCrisisEnabledDate:
+      description: 'Emergency Contact Info - Enabled Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduCrisisEnabledFlag:
+      description: 'Emergency Contact Info - Enabled Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduCrisisFax:
+      description: 'Emergency Contact Info - Fax'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisFaxPriority:
+      description: 'Emergency Contact Info - Fax Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisHomeEmail:
+      description: 'Emergency Contact Info - Home Email'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisHomeEmailPriority:
+      description: 'Emergency Contact Info - Home Email Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisHomePhone:
+      description: 'Emergency Contact Info - Home Phone'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisHomePhonePriority:
+      description: 'Emergency Contact Info - Home Phone Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisMobilePhone:
+      description: 'Emergency Contact Info - Mobile Phone'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisMobilePhonePriority:
+      description: 'Emergency Contact Info - Mobile Phone Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisNumericPager:
+      description: 'Emergency Contact Info - Numeric Pager'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisNumericPagerCarrier:
+      description: 'Emergency Contact Info - Numeric Pager Carrier'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisNumericPagerPin:
+      description: 'Emergency Contact Info - Numeric Pager Pin'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisNumericPagerPriority:
+      description: 'Emergency Contact Info - Numeric Pager Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisOneWayPager:
+      description: 'Emergency Contact Info - One-Way Pager'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisOneWayPagerCarrier:
+      description: 'Emergency Contact Info - One-Way Pager Carrier'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisOneWayPagerPin:
+      description: 'Emergency Contact Info - One-Way Pager Pin'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisOneWayPagerPriority:
+      description: 'Emergency Contact Info - One-Way Pager Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisSms:
+      description: 'Emergency Contact Info - Sms'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisSmsPriority:
+      description: 'Emergency Contact Info - Sms Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisTermsAcceptedDate:
+      description: 'Emergency Contact Info - Terms Accepted Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduCrisisTermsAcceptedFlag:
+      description: 'Emergency Contact Info - Terms Accepted Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduCrisisTtyPhone:
+      description: 'Emergency Contact Info - Tty Phone'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisTtyPhonePriority:
+      description: 'Emergency Contact Info - Tty Phone Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisTwoWayPager:
+      description: 'Emergency Contact Info - Two-Way Pager'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisTwoWayPagerCarrier:
+      description: 'Emergency Contact Info - Two-Way Pager Carrier'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisTwoWayPagerPin:
+      description: 'Emergency Contact Info - Two-Way Pager Pin'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisTwoWayPagerPriority:
+      description: 'Emergency Contact Info - Two-Way Pager Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisUpdatedDate:
+      description: 'Emergency Contact Info - Updated Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduCrisisWorkEmail:
+      description: 'Emergency Contact Info - Work Email'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisWorkEmailPriority:
+      description: 'Emergency Contact Info - Work Email Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduCrisisWorkPhone:
+      description: 'Emergency Contact Info - Work Phone'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduCrisisWorkPhonePriority:
+      description: 'Emergency Contact Info - Work Phone Priority'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduDeptUnitHierarchyString:
+      description: 'Department Unit Code Hierarchy String'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduDeputyAuthorizedBy:
+      aliases:
+        - ucbdeputyauthorizedby
+      description: 'CalNet Deputy Authorized By'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyClassDate:
+      aliases:
+        - ucbdeputyclassdate
+      description: 'CalNet Deputy Class Date'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyComments:
+      aliases:
+        - ucbdeputycomments
+      description: 'CalNet Deputy Comments'
+      multi: true
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyDisabledDate:
+      aliases:
+        - ucbdeputydisableddate
+      description: 'CalNet Deputy Disabled Date'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyDisabledFlag:
+      aliases:
+        - ucbdeputydisabledflag
+      description: 'CalNet Deputy Disabled Flag'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyIPsAllowed:
+      aliases:
+        - ucbdeputyipsallowed
+      description: 'CalNet Deputy IP Address Allowed'
+      multi: true
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyPrincipal:
+      aliases:
+        - ucbdeputyprincipal
+      description: 'CalNet Deputy Principal'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyPrincipalProcUnit:
+      aliases:
+        - ucbdeputyprincipalprocunit
+      description: 'CalNet Deputy Principal Process Unit'
+      multi: true
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyProcUnits:
+      aliases:
+        - ucbdeputyprocunits
+      description: 'CalNet Deputy Process Units'
+      multi: true
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduDeputyType:
+      aliases:
+        - ucbdeputytype
+      description: 'CalNet Deputy Type'
+      multi: false
+      objectClass: berkeleyEduDeputy
+      required: false
+      syntax: string
+    berkeleyEduEmailRelFlag:
+      aliases:
+        - ucbemailrelflag
+      description: 'Email Release Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduEmpApptBeginDate:
+      description: 'Employee Appointment Begin Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpApptEndDate:
+      description: 'Employee Appointment End Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpApptType:
+      description: 'Employee Appointment Type'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpBirthMonthDay:
+      description: 'Employee Birth Month-Day'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpCTOCode:
+      description: 'Employee Compensatory Time Off Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpCreateDate:
+      description: 'Employee Create Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduEmpDeptUnitTitleCode:
+      description: 'Employee Deptartment Unite Title Code'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpExpDate:
+      aliases:
+        - ucbempexpdate
+      description: 'Employee Expiration Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduEmpModDate:
+      aliases:
+        - ucbempmoddate
+      description: 'Employee Modification Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduEmpName:
+      aliases:
+        - ucbempname
+      description: 'Employee Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpRelationsCode:
+      description: 'Employee Relations Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpTerminationDate:
+      description: 'Employee Appointment Termination Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpTitleCode:
+      aliases:
+        - ucbemptitlecode
+      description: 'Employee Title Code'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduEmpWorkStudyFlag:
+      description: 'Employee Work Study Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduExcludeFlag:
+      description: 'Exclude Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduExpDate:
+      description: 'Expiration Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduFacultyFlag:
+      aliases:
+        - ucbfacflag
+      description: 'Faculty Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduFirstName:
+      description: 'First Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduIMProtocol:
+      description: 'Instant Messaging Protocal'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduIMScreenName:
+      description: 'Instant Messaging Screen Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosInstance:
+      aliases:
+        - ucbkerberosinstance
+      description: 'Kerberos Instance'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosPrimary:
+      aliases:
+        - ucbkerberosprimary
+      description: 'Kerberos Primary'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosPrincipalString:
+      aliases:
+        - ucbkerberosprincipalstring
+        - berkeleyEduCalNetID
+      description: 'Kerberos Principal-String'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosPrincipalStringOld:
+      aliases:
+        - ucbkerberosprincipalstringold
+      description: 'Kerberos Old Principal-String'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosRealm:
+      aliases:
+        - ucbkerberosrealm
+      description: 'Kerberos Realm'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduKerberosStatusCode:
+      aliases:
+        - ucbkerberosstatuscode
+      description: 'Kerberos Status Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduLastName:
+      description: 'Last Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduMaidenName:
+      description: 'Maiden Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduMiddleName:
+      aliases:
+        - ucbmiddlename
+      description: 'Middle Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduModDate:
+      description: 'Modification Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduNameGenerational:
+      description: 'Name Generational'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduNameHonorifics:
+      description: 'Name Honorifics'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduNameSalutation:
+      description: 'Name Salutation'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduOfficialEmail:
+      aliases:
+        - ucbemail
+      description: 'Email Addresses'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduOnlineUpdateAllowedFlag:
+      aliases:
+        - ucbadrwebupdate
+      description: 'Online Update Allowed Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduPPSivrStatusFlag:
+      aliases:
+        - ucbppsivrstatusflag
+      description: 'PPSIVR Status Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduPhoneBookOnlyFlag:
+      aliases:
+        - ucbadrpbonly
+      description: 'Phone Book Only Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduPhotoIDVerifiedDate:
+      description: 'UC Trust Face-to-Face Photo Verification'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduPrimaryDeptUnit:
+      aliases:
+        - ucbemphomedept
+      description: 'Primary Department Unit Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduPrimaryDeptUnitHierarchyString:
+      description: 'Primary Department Unit Code Hierarchy String'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduSSN:
+      description: 'Social Security Number'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuApprovedWithdrawEndDate:
+      description: 'Student Approved Withdraw End Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuBirthDate:
+      description: 'Student Birth Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuCollegeCode:
+      aliases:
+        - ucbstucollegecode
+      description: 'Student College Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuCollegeName:
+      aliases:
+        - ucbstucollegename
+      description: 'Student College Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuCreateDate:
+      description: 'Student Create Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduStuEduLevelCode:
+      aliases:
+        - ucbstuedulevelcode
+      description: 'Student Education Level Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuEduLevelName:
+      aliases:
+        - ucbstuedulevelname
+      description: 'Student Education Level Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuEduRoleCode:
+      aliases:
+        - ucbsturole
+      description: 'Student Education Role Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuEduRoleName:
+      description: 'Student Education Role Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuExpDate:
+      aliases:
+        - ucbstuexpdate
+      description: 'Student Expiration Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduStuID:
+      aliases:
+        - ucbstuid
+      description: 'Student ID'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduStuMajorCode:
+      aliases:
+        - ucbstumajorcode
+      description: 'Student Major Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuMajorName:
+      aliases:
+        - ucbstumajorname
+      description: 'Student Major Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuModDate:
+      aliases:
+        - ucbstumoddate
+      description: 'Student Modification Date'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: timestamp
+    berkeleyEduStuName:
+      aliases:
+        - ucbstuname
+      description: 'Student Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuRegStatCode:
+      aliases:
+        - ucbsturegstatcode
+      description: 'Student Registration Status Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuRegStatName:
+      aliases:
+        - ucbsturegstatname
+      description: 'Student Registration Status Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuTermCode:
+      aliases:
+        - ucbstutermcode
+      description: 'Student Term Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuTermName:
+      aliases:
+        - ucbstutermname
+      description: 'Student Term Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuTermStatus:
+      aliases:
+        - ucbstutermstatus
+      description: 'Student Term Status'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduStuTermYear:
+      aliases:
+        - ucbstutermyear
+      description: 'Student Term Year'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: integer
+    berkeleyEduStuUGCode:
+      aliases:
+        - ucbstuugflag
+      description: 'Student Under-Graduate Code'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduTestIDFlag:
+      aliases:
+        - ucbtestidflag
+      description: 'Test ID Entry Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduUasEligFlag:
+      aliases:
+        - ucbvalidflag
+      description: 'UAS Eligibility Flag'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: boolean
+    berkeleyEduUnitCalNetDeptName:
+      description: 'CalNet Unit Department Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    berkeleyEduUnitHRDeptName:
+      description: 'HR Unit Department Name'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    businessCategory:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    c:
+      aliases:
+        - countryName
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: berkeleyEduPerson
+      required: false
+      syntax: string
+    carLicense:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: true
+      syntax: string
+    departmentNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    destinationIndicator:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    displayName:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    eduPersonAffiliation:
+      description: 'eduPerson - Affiliation'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonEntitlement:
+      description: 'eduPerson - Entitlement'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonNickname:
+      description: 'eduPerson - Nickname'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonOrgDN:
+      description: 'eduPerson - Org DN'
+      multi: false
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonOrgUnitDN:
+      description: 'eduPerson - Org Unit DN'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonPrimaryAffiliation:
+      description: 'eduPerson - Primary Affiliation'
+      multi: false
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonPrimaryOrgUnitDN:
+      description: 'eduPerson - Primary Org Unit DN'
+      multi: false
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonPrincipalName:
+      description: 'eduPerson - Principal Name'
+      multi: false
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonScopedAffiliation:
+      description: 'eduPerson - Scoped Affiliation'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    eduPersonTargetedID:
+      description: 'eduPerson - Targeted ID'
+      multi: true
+      objectClass: eduPerson
+      required: false
+      syntax: string
+    employeeNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    employeeType:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    facsimileTelephoneNumber:
+      aliases:
+        - fax
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    givenName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    homePhone:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    homePostalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    initials:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    internationaliSDNNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    jpegPhoto:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    l:
+      aliases:
+        - locality
+        - localityname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    labeledUri:
+      aliases:
+        - labeledurl
+      description: 'Uniform Resource Identifier with optional label'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    mail:
+      aliases:
+        - rfc822mailbox
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    manager:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    mobile:
+      aliases:
+        - mobileTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    o:
+      aliases:
+        - organizationname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    ou:
+      aliases:
+        - organizationalUnitName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    pager:
+      aliases:
+        - pagerTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    photo:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    physicalDeliveryOfficeName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postOfficeBox:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postalCode:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    preferredDeliveryMethod:
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    preferredLanguage:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    registeredAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    roomNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    secretary:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    seeAlso:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    sn:
+      aliases:
+        - surName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: true
+      syntax: string
+    st:
+      aliases:
+        - stateOrProvinceName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    street:
+      aliases:
+        - streetaddress
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    telephoneNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    teletexTerminalIdentifier:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    telexNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    title:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    uid:
+      aliases:
+        - userid
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPerson
+      required: true
+      syntax: string
+    userCertificate:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    userPKCS12:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    userPassword:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    userSMIMECertificate:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    x121Address:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    x500UniqueIdentifier:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+  objectClasses:
+    - top
+    - person
+    - organizationalperson
+    - inetorgperson
+    - berkeleyEduPerson
+    - eduPerson
+    - ucEduPerson
+    - berkeleyEduDeputy
+  uniqueObjectClass: berkeleyEduPerson
+personAddress:
+  attributes:
+    berkeleyEduAssistant:
+      description: Assistant
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduEmailRelFlag:
+      aliases:
+        - ucbemailrelflag
+      description: 'Email Release Flag'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: boolean
+    berkeleyEduPersonAddressBuildingCode:
+      description: 'Address - Building Code'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressCountryCode:
+      description: 'Address - Country Code'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressDeptDN:
+      description: 'Address - DN'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressHRJobTitle:
+      description: 'Address - HR Job Title'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressLocationCode:
+      description: 'Address - Location Code'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressMailCode:
+      description: 'Address - Mail Code'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressPrimaryFlag:
+      description: 'Address - Primary Address Flag'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: boolean
+    berkeleyEduPersonAddressPublications:
+      description: 'Address - Publications'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressReceiveMailFlag:
+      description: 'Address - Receive Physical Mail Flag'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: boolean
+    berkeleyEduPersonAddressSortOrder:
+      description: 'Address - Address Sort Order'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: integer
+    berkeleyEduPersonAddressType:
+      description: 'Address - Address Type Flag'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressUnitCalNetDeptName:
+      description: 'Address - Address CalNet Dept Unit Name'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    berkeleyEduPersonAddressUnitHRDeptName:
+      description: 'Address - HR Department Name'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    c:
+      aliases:
+        - countryName
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: true
+      syntax: string
+    departmentNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    destinationIndicator:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    facsimileTelephoneNumber:
+      aliases:
+        - fax
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    l:
+      aliases:
+        - locality
+        - localityname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    labeledUri:
+      aliases:
+        - labeledurl
+      description: 'Uniform Resource Identifier with optional label'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    mail:
+      aliases:
+        - rfc822mailbox
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    mobile:
+      aliases:
+        - mobileTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    pager:
+      aliases:
+        - pagerTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    physicalDeliveryOfficeName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    postOfficeBox:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    postalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    postalCode:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    preferredDeliveryMethod:
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    registeredAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    roomNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    secretary:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    seeAlso:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    st:
+      aliases:
+        - stateOrProvinceName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    street:
+      aliases:
+        - streetaddress
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    telephoneNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    telexNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+    title:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAddress
+      required: false
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduPersonAddress
+  uniqueObjectClass: berkeleyEduPersonAddress
+personAffiliateAffiliation:
+  attributes:
+    berkeleyEduAffCreateDate:
+      description: 'Affiliate Create Date'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: timestamp
+    berkeleyEduAffExpBy:
+      description: 'Affiliate Expiratied By'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    berkeleyEduAffExpDate:
+      aliases:
+        - ucbaffexpdate
+      description: 'Affiliate Expiration Date'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: timestamp
+    berkeleyEduAffID:
+      aliases:
+        - ucbaffid
+      description: 'Affiliate ID'
+      multi: true
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    berkeleyEduAffType:
+      aliases:
+        - ucbafftype
+      description: 'Affiliate Type'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: true
+      syntax: string
+    berkeleyEduMiddleName:
+      aliases:
+        - ucbmiddlename
+      description: 'Middle Name'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    berkeleyEduModifiedBy:
+      description: 'UID of user who last modified entry'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    berkeleyEduPersonAffiliateSource:
+      description: 'Affiliate Source'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: true
+      syntax: string
+    berkeleyEduUnitCalNetDeptName:
+      description: 'CalNet Unit Department Name'
+      multi: false
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    departmentNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    givenName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    sn:
+      aliases:
+        - surName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonAffiliate
+      required: false
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduPersonAffiliate
+  uniqueObjectClass: berkeleyEduPersonAffiliate
+personJobAppointment:
+  attributes:
+    berkeleyEduPersonJobApptCTOCode:
+      description: 'Job Appointment - Compensatory Time Off Code'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptDepartment:
+      description: 'Job Appointment - Department'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptEmpRecNumber:
+      description: 'Job Appointment - Employee Record Number'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: true
+      syntax: string
+    berkeleyEduPersonJobApptPersPgmCode:
+      description: 'Job Appointment - Personnel Program Code'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptPrimaryFlag:
+      description: 'Job Appointment - Primary Appointment Flag'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: boolean
+    berkeleyEduPersonJobApptRelationsCode:
+      description: 'Job Appointment - Relations Code'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptRepresentation:
+      description: 'Job Appointment - Representation Code'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptTitleCode:
+      description: 'Job Appointment - Job Title Code'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptType:
+      description: 'Job Appointment - Type'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: string
+    berkeleyEduPersonJobApptWOS:
+      description: 'Job Appointment - With-Out Salary Flag'
+      multi: false
+      objectClass: berkeleyEduPersonJobAppt
+      required: false
+      syntax: boolean
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduPersonJobAppt
+  uniqueObjectClass: berkeleyEduPersonJobAppt
+personService:
+  attributes:
+    berkeleyEduPersonServiceEligibleBy:
+      description: 'Personal Service - Eligible By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceEligibleDate:
+      description: 'Personal Service - Eligible Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceEndBy:
+      description: 'Personal Service - End By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceEndDate:
+      description: 'Personal Service - End Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceEnteredBy:
+      description: 'Personal Service - Entered By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceEnteredDate:
+      description: 'Personal Service - Entered Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceLevel:
+      description: 'Personal Service - Level'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: integer
+    berkeleyEduPersonServiceModifiedBy:
+      description: 'Personal Service - Modified By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceModifiedDate:
+      description: 'Personal Service - Modified Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceNaughtyBit:
+      description: 'Personal Service - Naughty Bit'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: boolean
+    berkeleyEduPersonServiceNotifyBy:
+      description: 'Personal Service - Notify By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceNotifyDate:
+      description: 'Personal Service - Notify Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceStopBy:
+      description: 'Personal Service - Stop By'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduPersonServiceStopDate:
+      description: 'Personal Service - Stop Date'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: timestamp
+    berkeleyEduPersonServiceValue:
+      description: 'Personal Service - Value'
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    berkeleyEduService:
+      description: Service
+      multi: false
+      objectClass: berkeleyEduPersonService
+      required: true
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonService
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduPersonService
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduPersonService
+  uniqueObjectClass: berkeleyEduPersonService
+personStudentTerm:
+  attributes:
+    berkeleyEduStuChangeDate:
+      description: 'Student Term - Change Date'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuCollegeCode:
+      aliases:
+        - ucbstucollegecode
+      description: 'Student College Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuCollegeName:
+      aliases:
+        - ucbstucollegename
+      description: 'Student College Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuEduLevelCode:
+      aliases:
+        - ucbstuedulevelcode
+      description: 'Student Education Level Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuEduLevelName:
+      aliases:
+        - ucbstuedulevelname
+      description: 'Student Education Level Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuEduRoleCode:
+      aliases:
+        - ucbsturole
+      description: 'Student Education Role Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuEduRoleName:
+      description: 'Student Education Role Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuMajorCode:
+      aliases:
+        - ucbstumajorcode
+      description: 'Student Major Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuMajorName:
+      aliases:
+        - ucbstumajorname
+      description: 'Student Major Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuRegStatCode:
+      aliases:
+        - ucbsturegstatcode
+      description: 'Student Registration Status Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuRegStatName:
+      aliases:
+        - ucbsturegstatname
+      description: 'Student Registration Status Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuTermCode:
+      aliases:
+        - ucbstutermcode
+      description: 'Student Term Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: true
+      syntax: string
+    berkeleyEduStuTermName:
+      aliases:
+        - ucbstutermname
+      description: 'Student Term Name'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuTermStatus:
+      aliases:
+        - ucbstutermstatus
+      description: 'Student Term Status'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    berkeleyEduStuTermYear:
+      aliases:
+        - ucbstutermyear
+      description: 'Student Term Year'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: integer
+    berkeleyEduStuUGCode:
+      aliases:
+        - ucbstuugflag
+      description: 'Student Under-Graduate Code'
+      multi: false
+      objectClass: berkeleyEduPersonTerm
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduPersonTerm
+  uniqueObjectClass: berkeleyEduPersonTerm
+salutation:
+  attributes:
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetSalutation
+      required: true
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetSalutation
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetSalutation
+  uniqueObjectClass: berkeleyEduCalNetSalutation
+securityQuestion:
+  attributes:
+    berkeleyEduCalNetSalt:
+      description: 'Generic Salt For Use With Encrypted Attributes'
+      multi: false
+      objectClass: berkeleyEduCalNetSecurityQuestion
+      required: false
+      syntax: string
+    berkeleyEduCalNetSecurityQuestion:
+      description: 'Security Question'
+      multi: false
+      objectClass: berkeleyEduCalNetSecurityQuestion
+      required: false
+      syntax: string
+    berkeleyEduCalNetSecurityQuestionAnswer:
+      description: 'Security Question'
+      multi: false
+      objectClass: berkeleyEduCalNetSecurityQuestion
+      required: false
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: berkeleyEduCalNetSecurityQuestion
+      required: true
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+  objectClasses:
+    - top
+    - berkeleyEduCalNetSecurityQuestion
+  uniqueObjectClass: berkeleyEduCalNetSecurityQuestion
+unibears:
+  attributes:
+    audio:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    berkeleyEduAppStandardCommuniteAddlMbox:
+      description: 'Communite Additional Mbox'
+      multi: true
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteAdminFlag:
+      description: 'Communite Admin Flag'
+      multi: false
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailAddress:
+      description: 'Communite Email Address'
+      multi: false
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailHost:
+      description: 'Communite Email Host'
+      multi: false
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailPassword:
+      description: 'Communite Email Password'
+      multi: false
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    berkeleyEduAppStandardCommuniteEmailUserName:
+      description: 'Communite Email User Name'
+      multi: false
+      objectClass: berkeleyEduCommunite
+      required: false
+      syntax: string
+    businessCategory:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    carLicense:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    cn:
+      aliases:
+        - commonName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: true
+      syntax: string
+    departmentNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    description:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    destinationIndicator:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    displayName:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    employeeNumber:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    employeeType:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    facsimileTelephoneNumber:
+      aliases:
+        - fax
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    givenName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    homePhone:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    homePostalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    initials:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    internationaliSDNNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    jpegPhoto:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    l:
+      aliases:
+        - locality
+        - localityname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    labeledUri:
+      aliases:
+        - labeledurl
+      description: 'Uniform Resource Identifier with optional label'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    mail:
+      aliases:
+        - rfc822mailbox
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    manager:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    mobile:
+      aliases:
+        - mobileTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    o:
+      aliases:
+        - organizationname
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    objectClass:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: top
+      required: true
+      syntax: string
+    ou:
+      aliases:
+        - organizationalUnitName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    pager:
+      aliases:
+        - pagerTelephoneNumber
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    photo:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    physicalDeliveryOfficeName:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postOfficeBox:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postalAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    postalCode:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    preferredDeliveryMethod:
+      description: 'Standard LDAP attribute type'
+      multi: false
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    preferredLanguage:
+      description: 'inetOrgPerson attribute type'
+      multi: false
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    registeredAddress:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    roomNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    secretary:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    seeAlso:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    sn:
+      aliases:
+        - surName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: true
+      syntax: string
+    st:
+      aliases:
+        - stateOrProvinceName
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    street:
+      aliases:
+        - streetaddress
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    telephoneNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    teletexTerminalIdentifier:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    telexNumber:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    title:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    uid:
+      aliases:
+        - userid
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: string
+    userCertificate:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    userPKCS12:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    userPassword:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: person
+      required: false
+      syntax: string
+    userSMIMECertificate:
+      description: 'inetOrgPerson attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+    x121Address:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: organizationalperson
+      required: false
+      syntax: string
+    x500UniqueIdentifier:
+      description: 'Standard LDAP attribute type'
+      multi: true
+      objectClass: inetorgperson
+      required: false
+      syntax: binary
+  objectClasses:
+    - top
+    - person
+    - organizationalperson
+    - inetorgperson
+    - berkeleyEduCommunite
+  uniqueObjectClass: berkeleyEduCommunite

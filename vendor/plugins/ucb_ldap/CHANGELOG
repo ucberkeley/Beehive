@@ -1,0 +1,132 @@
+= UCB::LDAP Changelog
+
+== Version 1.4.1
+* Remove hack that tried to persist the net-ldap connection instance as this cause problems
+with leaving countless file descriptors open when run under JRuby.
+* Updated bundled schema.yml file
+
+== Version 1.2.1, January 22, 2008
+
+* fixed bug: include UCB::LDAP call at top level that corrupted namespace
+* fixed rspec tests to use production ldap server to verify Org structure
+
+
+== Version 1.2.0, September 20, 2007
+
+* fixed UCB::LDAP::Person.student_not_registered? which was broken
+* added support for new entities
+  * Affiliation
+  * Service
+  * StudentTerm
+* added handling of timestamp attributes
+* various additions and clean-up to the various employee_*, student_*, affiliate_* methods 
+  including handling of expiration
+* fetches schema from url rather than file packaged with gem
+* made UCB::LDAP::Person searches exclude test entries by default
+* Rails applications can use UCB::LDAP.bind_for_rails() to get environment-specific binds
+
+== Version 1.1.1, August 2, 2007
+
+* fixed bug around deleting LDAP entries.
+
+== Version 1.1.0, August 1, 2007
+
+* added Org#level_<n>_code and Org#level_<n>_name where <n> is 1-6.  Returns the
+  org node's level "n" code/name
+* added option to Org.flattened_tree() to restrict levels returned.
+
+== Version 1.0.1, July 25, 2007
+
+* do a better job trapping dropped connections in UCB::LDAP.connection_open?
+* added Person#test? to check for test entries
+
+== Version 1.0.0
+
+* got complete schema info for attributes
+* replaced attribute synonyms in favor of explicit methods
+* added support for ldap updates
+* added support for new entities (if your bind supports it):
+  * appointment
+  * address
+
+== Version 0.8.1, May 18, 2007
+
+* added Person#dept_org (synonym for Person#deptid)
+* added Person#dept_name
+
+== Version 0.8.0, April 27, 2007
+
+* added support for privileged binds via UCB::LDAP::authenticate()
+
+== Version 0.7.0, January 16, 2007
+
+* updated: UCB::LDAP::Entry.search to use Net::LDAP::Filter objects: this fixed the
+   problem with embedded whitespace
+* updated UCB::LDAP::Person.person_by_uid() to work with an Integer or a String
+   and UCB::LDAP::Person.persons_by_uids() to work with an Array of Integers or Strings.
+* updated: UCB::LDAP::Person.student? to utilize the new LDAP v2 ou structure
+* added: UCB::LDAP::Person.student_registered?, UCB::LDAP::Person.student_not_registered?
+* deprecated: UCB::LDAP::Person.student_summer?, UCB::LDAP::Person.student_summer_only?,
+   UCB::LDAP::Person.spring?, UCB::LDAP::Person.fall?. Except for UCB::LDAP::Person.student_summer_only?,
+   these methods may be added in later versions of UCB::LDAP::Person.  Note: accessing these 
+   attributes will required a privileged bind.
+ * changed UCB::LDAP::Entry to only allow filter options in hash form: :filter => {:uid => 12345}
+ * updated documentations
+ * updated unit tests. 
+
+== Version 0.6.0, January 10, 2007
+
+* Added loading/caching of all nodes
+* Added calculation of all child nodes
+* Added UCB::LDAP::Org.flattened_tree()
+* Added UCB::LDAP::Person.org_node()
+
+== Version 0.5.0, December 20, 2006
+
+* Added following methods to Org:
+  * child_nodes
+  * parent_node
+  * parent_nodes
+  * persons
+  
+== Version 0.4.0, December 14, 2006
+
+* Added Person.persons_by_uids to return array of Person for given
+  array of uids.
+* Changed implementation of Person.person_by_uid to use new Person.persons_by_uid.
+
+== Version 0.3.1, December 13, 2006
+
+* Added SchemaAttribute class and methods to load schema
+  attributes in UCB::LDAP.  Did not make use of the schema
+  attributes.
+  
+== Version 0.3.0, October 20, 2006
+
+* Moved to SVN
+* Reorganized doc directory
+
+== Version 0.2.2, October 12, 2006
+
+* Made more "booleans" actually return <tt>true</tt> and <tt>false</tt>
+  rather than expressions that evaluate to <tt>true</tt> and <tt>false</tt>.
+  
+* Added TODO[link:files/TODO.html].
+
+* Some documentation updates.  
+
+== Version 0.2.1, October 10, 2006
+
+* Changed module name and namespace from UcbLdap to UCB::LDAP.
+* Fixed so UCB::LDAP::Entry and subclasses can be marshalled,
+  otherwise can't store in a Rails session.
+
+== Version 0.2.0, October 9, 2006
+
+* Packaged as a Ruby Gem.
+* Converted underlying code to use Net::LDAP instead of LDAP.
+* Added support for searching the org unit tree.
+
+== Version 0.1.0, October 5, 2006
+
+* Initial release.
