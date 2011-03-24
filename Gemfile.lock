@@ -133,5 +133,5 @@ DEPENDENCIES
   rspec-rails
   ruby-net-ldap
   rubycas-client
-  thinking-sphinx
+  thinking-sphinx (~> 2.0.0)
   will_paginate (~> 3.0.pre2)

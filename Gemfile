@@ -25,7 +25,7 @@ gem 'ruby-net-ldap'
 gem 'acts_as_taggable_on_steroids'
 ## gem 'attachment_fu',
 ##    :git => 'git://github.com/technoweenie/attachment_fu.git'
-gem 'thinking-sphinx'
+gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 
 # Deploy with Capistrano
 gem 'capistrano'
