@@ -1,4 +1,10 @@
 ResearchMatch::Application.routes.draw do
+  resources :applics
+
+  resources :attribs
+
+  resources :jobs
+
   resources :users
 
   # The priority is based upon order of creation:

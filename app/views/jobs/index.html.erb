@@ -1,0 +1,37 @@
+<h1>Listing jobs</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Desc</th>
+    <th>Exp date</th>
+    <th>Num positions</th>
+    <th>Department</th>
+    <th>Activation code</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <td><%= job.user %></td>
+    <td><%= job.title %></td>
+    <td><%= job.desc %></td>
+    <td><%= job.exp_date %></td>
+    <td><%= job.num_positions %></td>
+    <td><%= job.department_id %></td>
+    <td><%= job.activation_code %></td>
+    <td><%= job.active %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Edit', edit_job_path(job) %></td>
+    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Job', new_job_path %>

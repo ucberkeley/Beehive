@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @job.user %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @job.title %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @job.desc %>
+</p>
+
+<p>
+  <b>Exp date:</b>
+  <%= @job.exp_date %>
+</p>
+
+<p>
+  <b>Num positions:</b>
+  <%= @job.num_positions %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @job.department_id %>
+</p>
+
+<p>
+  <b>Activation code:</b>
+  <%= @job.activation_code %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @job.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>

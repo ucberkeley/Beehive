@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Job:</b>
+  <%= @applic.job %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @applic.user %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @applic.message %>
+</p>
+
+<p>
+  <b>Resume:</b>
+  <%= @applic.resume_id %>
+</p>
+
+<p>
+  <b>Transcript:</b>
+  <%= @applic.transcript_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_applic_path(@applic) %> |
+<%= link_to 'Back', applics_path %>

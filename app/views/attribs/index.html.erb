@@ -1,0 +1,25 @@
+<h1>Listing attribs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @attribs.each do |attrib| %>
+  <tr>
+    <td><%= attrib.name %></td>
+    <td><%= attrib.value %></td>
+    <td><%= link_to 'Show', attrib %></td>
+    <td><%= link_to 'Edit', edit_attrib_path(attrib) %></td>
+    <td><%= link_to 'Destroy', attrib, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Attrib', new_attrib_path %>

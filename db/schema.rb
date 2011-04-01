@@ -10,7 +10,60 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110318224316) do
+ActiveRecord::Schema.define(:version => 20110401001735) do
+
+  create_table "applics", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.text     "message"
+    t.integer  "resume_id"
+    t.integer  "transcript_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attribs", :force => true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.string   "abbrev"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "faculties", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "department_id"
+    t.integer  "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "job_attribs", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "attrib_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "desc"
+    t.datetime "exp_date"
+    t.integer  "num_positions"
+    t.integer  "department_id"
+    t.string   "activation_code"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -21,6 +74,20 @@ ActiveRecord::Schema.define(:version => 20110318224316) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "sponsorships", :force => true do |t|
+    t.integer  "faculty_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_attribs", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "attrib_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                              :null => false
@@ -41,5 +108,12 @@ ActiveRecord::Schema.define(:version => 20110318224316) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "watches", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

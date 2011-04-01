@@ -1,0 +1,31 @@
+<h1>Listing applics</h1>
+
+<table>
+  <tr>
+    <th>Job</th>
+    <th>User</th>
+    <th>Message</th>
+    <th>Resume</th>
+    <th>Transcript</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @applics.each do |applic| %>
+  <tr>
+    <td><%= applic.job %></td>
+    <td><%= applic.user %></td>
+    <td><%= applic.message %></td>
+    <td><%= applic.resume_id %></td>
+    <td><%= applic.transcript_id %></td>
+    <td><%= link_to 'Show', applic %></td>
+    <td><%= link_to 'Edit', edit_applic_path(applic) %></td>
+    <td><%= link_to 'Destroy', applic, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Applic', new_applic_path %>
