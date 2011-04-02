@@ -1,4 +1,6 @@
 ResearchMatch::Application.routes.draw do
+  get "home/index"
+
   resources :applics
 
   resources :attribs
@@ -6,6 +8,8 @@ ResearchMatch::Application.routes.draw do
   resources :jobs
 
   resources :users
+
+  root :to => "home#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

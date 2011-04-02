@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ResearchMatch</title>
+  <title>ResearchMatch <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<%= yield %>
+  <div id="everything">
+  	<div id="header">
+		  <div id="header_image">
+			  <%= link_to "", :controller => :home %>
+			
+			  <div id="side">
+				  <div id="loginbar">
+					  <%-# render :partial => "users/user_bar" %>
+				  </div>
+				  <div id="searchbar">
+					  <%-# render :partial => "users/search_bar" %>
+				  </div>
+			  </div>	
+			  	
+		  </div>
+	  </div>
+    <div id="header_tabs">
+		  <div id="tabs">
+		      <ul>
+		          <li>Dashboard</li>
+		          <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
+		          
+		          
+		      </ul>
+		  </div>
+	  </div>
+	  
+	  <div id="content">
+		  <% if !(flash[:error].nil? || flash[:error] == '') %>
+			  <div id="flash_error">
+				  <%= flash[:error] %>
+			  </div>
+		  <% end %>
+		  <% if !(flash[:notice].nil? || flash[:notice] == '') %>
+			  <div id="flash_notice">
+				  <%= flash[:notice] %>
+			  </div>
+		  <% end %>
+		  <br />
+		  <div id="contentcenter">
+			  <%= yield %>
+		  </div>
+				
+	  </div>
+      
+    <div id="footer">
+		  <div id="footer_inside">
+              <i>ResearchMatch is currently under regular development.  <a href="mailto:ucbresearchmatch@gmail.com?subject=ResearchMatch Feedback">Got feedback?</a></i>
+              <br /><br />
+              &copy; UC Berkeley ResearchMatch, 2009-<%= Time.now.year %>. All rights reserved.
+              <br />
+          </div>
+	  </div>
+	  
+	  
+  
+  </div>
 
 </body>
 </html>
