@@ -1,4 +1,8 @@
 class JobsController < ApplicationController
+
+  #CalNet / CAS Authentication
+  before_filter CASClient::Frameworks::Rails::Filter
+
   # GET /jobs
   # GET /jobs.xml
   def index

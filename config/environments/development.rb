@@ -22,5 +22,11 @@ ResearchMatch::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  
+  # CAS authentication
+  CASClient::Frameworks::Rails::Filter.configure(
+    :cas_base_url => "https://auth-test.berkeley.edu/cas/"
+  )
+
 end
 
