@@ -26,7 +26,7 @@
 	<tr>
 		<td background="<%= image_path "research_match_display_02.png" %>" height="59" style="width: 308px;background-repeat: no-repeat">
 			<div id="browse_listings_menu">
-				<% form_tag(:jobs, :method => "get") do %>
+				<%= form_tag(:jobs, :method => "get") do %>
 					<%= select_tag(:department, options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
 					<%= submit_tag "Go" %>
 				<% end %>
