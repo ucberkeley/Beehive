@@ -5,7 +5,12 @@ ResearchMatch::Application.routes.draw do
 
   resources :attribs
 
-  resources :jobs
+  resources :jobs do
+    member do
+      get 'activate'
+    end
+  end
+
 
   resources :users
 

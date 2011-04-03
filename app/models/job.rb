@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
   #   (May require extra work to deal with sponsorships and other 
   #    data when dealing with job activations)
   validate :expiration_date_cannot_be_in_the_past
-  validate :must_have_sponsor     #, :unless => Proc.new{|j|j.skip_validate_sponsorships}
+  #validate :must_have_sponsor     #, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions, :allow_nil => true
   validates_presence_of :department, :desc, :title 
