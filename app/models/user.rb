@@ -1,4 +1,47 @@
 class User < ActiveRecord::Base
+  # for Authlogic
   acts_as_authentic do |u|
   end
+
+  # User types; used with LDAP  
+  class Types
+      Undergrad = 0
+      Grad      = 1
+      Faculty   = 2
+      Admin     = 3
+      All       = [Undergrad, Grad, Faculty, Admin]
+  end
+  
+  
+  # ASSOCIATIONS (abc order)
+  has_many :applied_jobs,  :source => 'job', :through => 'applics'
+
+  has_many :jobs,          :dependent => :nullify
+  #has_one  :resume,      :class_name => 'Document', :conditions => 
+    #{:document_type => Document::Types::Resume}, :dependent => :destroy
+  #has_one  :transcript,  :class_name => 'Document', :conditions => 
+    #{:document_type => Document::Types::Transcript}, :dependent => :destroy
+  has_many :categories,     :source => :attrib, :through => :interests
+  has_many :courses,        :source => :attrib, :through => :enrollments
+  has_many :enrollments,    :dependent => :destroy, :source => :user_attrib
+  has_many :interests,      :dependent => :destroy, :source => :user_attrib
+  has_many :proficiencies,  :dependent => :destroy, :source => :user_attrib
+  has_many :proglangs,      :source => :attrib, :through => :proficiencies
+  has_many :watches,        :dependent => :destroy
+
+  # VALIDATIONS (abc order)
+  email_regex = /\A[\w\.%\+\-]+@(?:[A-Z0-9\-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|jobs|museum)\z/i
+
+  validates_format_of       :email,    :with => email_regex, 
+    :message => "should be a valid email address."
+  #validates_format_of       :name, ...
+  validates_inclusion_of    :user_type, 
+    :in => [Types::Undergrad, Types::Grad, Types::Faculty]  
+    # Check that user type is valid
+  validates_length_of       :name,     :within => 0..100
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_presence_of     :email, :login, :name
+  validates_uniqueness_of   :email, :login
+
+  
 end
