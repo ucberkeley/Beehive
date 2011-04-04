@@ -14,19 +14,15 @@ class User < ActiveRecord::Base
   
   
   # ASSOCIATIONS (abc order)
-  has_many :applied_jobs,  :source => 'job', :through => 'applics'
-
-  has_many :jobs,          :dependent => :nullify
+  has_many :applied_jobs,   :source => 'job', :through => 'applics'
+  has_many :attribs,        :through => :job_attribs  # takes care of categories, courses, proglangs (extensible too!)
+  has_many :jobs,           :dependent => :nullify
   #has_one  :resume,      :class_name => 'Document', :conditions => 
     #{:document_type => Document::Types::Resume}, :dependent => :destroy
   #has_one  :transcript,  :class_name => 'Document', :conditions => 
     #{:document_type => Document::Types::Transcript}, :dependent => :destroy
-  has_many :categories,     :source => :attrib, :through => :interests
-  has_many :courses,        :source => :attrib, :through => :enrollments
-  has_many :enrollments,    :dependent => :destroy, :source => :user_attrib
-  has_many :interests,      :dependent => :destroy, :source => :user_attrib
-  has_many :proficiencies,  :dependent => :destroy, :source => :user_attrib
-  has_many :proglangs,      :source => :attrib, :through => :proficiencies
+  
+  has_many :user_attribs,   :dependent => :destroy # takes care of enrollments, interests, proficiencies
   has_many :watches,        :dependent => :destroy
 
   # VALIDATIONS (abc order)
@@ -43,5 +39,17 @@ class User < ActiveRecord::Base
   validates_presence_of     :email, :login, :name
   validates_uniqueness_of   :email, :login
 
+  
+  
+  # METHODS (abc order)
+  
+  def can_post?
+    [User::Types::Grad, User::Types::Faculty].include? self.user_type
+  end
+  
+  # is_faculty for backward compatibility
+  def is_faculty
+    self.user_type == User::Types::Faculty
+  end
   
 end

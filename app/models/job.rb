@@ -5,12 +5,11 @@ class Job < ActiveRecord::Base
 
   has_many :applics 
   has_many :applicants, :source => :user, :through => :applics
-  has_many :coursereqs, :source => :job_attrib
-  has_many :courses, :source => :attrib, :through => :coursereqs
+
+  has_many :attribs, :through => :job_attribs     # takes care of categories, courses, proglangs (extensible too!)
   has_many :faculties, :through => :sponsorships
-  has_many :proglangreqs, :source => :job_attrib
-  has_many :proglangs, :source => :attrib, :through => :proglangreqs
-  has_many :sponsorships, :dependent => :destroy, :through => :faculties
+  has_many :job_attribs, :dependent => :destroy # takes care of category_fields, coursereqs, proglangreqs
+  has_many :sponsorships, :dependent => :destroy
   has_many :watchers, :source => :user, :through => :watches
   has_many :watches
 

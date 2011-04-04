@@ -18,7 +18,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.xml
   def show
     @job = Job.find(params[:id])
-
+    @logged_in = logged_in?
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @job }
@@ -111,7 +111,18 @@ class JobsController < ApplicationController
       end
     end
   end
-
+  
+  # Just the page that asks for confirmation for deletion of the job.
+  # The actual deletion is performed by the "destroy" action.
+  def delete
+    @job = Job.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.xml
+    end
+  end
+  
   # DELETE /jobs/1
   # DELETE /jobs/1.xml
   def destroy
@@ -123,4 +134,36 @@ class JobsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def watch	
+	  job = Job.find(params[:id])
+  	watch = Watch.new({:user=> current_user, :job => job})
+	
+  	respond_to do |format|
+  		if watch.save
+  		  flash[:notice] = 'Job is now watched. You can find a list of your watched jobs on the dashboard.'
+  		  format.html { redirect_to(:controller=>:dashboard) }
+  		else
+  		  flash[:notice] = 'Unsuccessful job watch. Perhaps you\'re already watching this job?'
+  		  format.html { redirect_to(:controller=>:dashboard) }
+  		end
+  	end
+  end
+  
+ def unwatch	
+   job = Job.find(params[:id])
+   watch = Watch.find(:first, :conditions=>{:user_id=> current_user.id, :job_id => job.id})
+
+   respond_to do |format|
+  	 if watch.destroy
+  	   flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
+  	   format.html { redirect_to(:controller=>:dashboard) }
+  	 else
+  	   flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
+  	   format.html { redirect_to(:controller=>:dashboard) }
+  	 end
+   end
+  end  
+  
+  
 end

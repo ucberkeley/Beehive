@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110401001735) do
+ActiveRecord::Schema.define(:version => 20110404003811) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20110401001735) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.integer  "user_type",           :default => 0, :null => false
+    t.string   "name"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

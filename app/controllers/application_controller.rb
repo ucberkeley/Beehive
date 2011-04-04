@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
       @current_user = current_user_session && current_user_session.user
     end
 
+    # added by oren
+    def logged_in?
+      !!current_user
+    end
+
     def require_user
       logger.debug "ApplicationController::require_user"
       unless current_user
