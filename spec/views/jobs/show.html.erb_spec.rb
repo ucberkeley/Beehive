@@ -13,21 +13,21 @@ describe "jobs/show.html.erb" do
     ))
   end
 
-  it "renders attributes in <p>" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(//)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Title/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/MyText/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/1/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/1/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Activation Code/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/false/)
+  context "when authenticated with CAS" do
+    before(:each) do 
+      SpecHelperMethods.stub_cas_ok
+    end
+    
+    it "renders attributes in <p>" do
+      render
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(//)
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(/Title/)
+      # Run the generator again with the --webrat flag if you want to use webrat matchers
+      rendered.should match(/MyText/)
+    end
   end
+
+
 end

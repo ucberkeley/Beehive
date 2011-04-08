@@ -12,7 +12,7 @@
 		<%-# link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
 	<% end %>&nbsp;
 	
-	<% if current_user != nil && !current_user.is_faculty %>
+	<% if @current_user != nil && !@current_user.is_faculty %>
 		<% if @job.watchers.include?(current_user) %>
 			<%= link_to "[unwatch this job]", unwatch_job_path(@job) %>
 		<% else %>
@@ -159,7 +159,7 @@
 
 
 
-<% if current_user.present? && current_user.can_post? %>
+<% if @current_user.present? && @current_user.can_post? %>
 
   <br />
   <h2>Applicants</h2>
@@ -167,7 +167,7 @@
       <% if @job.applics.empty? -%>
       None yet.
       <% else -%>
-          <% if @job.allow_admin_by? current_user -%>
+          <% if @job.allow_admin_by? @current_user -%>
               <% @job.applics.each do |a| -%>
                   <%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %>
               <% end -%>
