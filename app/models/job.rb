@@ -22,7 +22,6 @@ class Job < ActiveRecord::Base
   validates_numericality_of :num_positions, :allow_nil => true
   validates_presence_of :department, :desc, :title 
 
-  
   # CUSTOM VALIDATION METHODS
   
   # Validates that expiration dates are no earlier than right now.
