@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
     logger.warn 'got to session create....'
     logger.warn 'params[:user_session] = ' + params[:user_session]
     @user_session = UserSession.new(params[:user_session])    
-    #create_user_session
+    create_user_session
   end
 
   def destroy
