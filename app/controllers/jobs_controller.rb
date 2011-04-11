@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
 
   #CalNet / CAS Authentication
-  before_filter CASClient::Frameworks::Rails::Filter
+  #before_filter CASClient::Frameworks::Rails::Filter # done in rm_login_required
   before_filter :rm_login_required
   
   # GET /jobs

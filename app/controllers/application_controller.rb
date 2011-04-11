@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_user
+      puts "REACHED REQUIRE USER WOOOOOOOOOOO"
       logger.debug "ApplicationController::require_user"
       unless current_user
         store_location

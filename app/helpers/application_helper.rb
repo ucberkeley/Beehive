@@ -1,26 +1,50 @@
 module ApplicationHelper
+
+  # Helper method called to actually create the user session a la Authlogic.
+  def create_user_session    
+    user_session_params = { :remember_me => 0, :login => session[:cas_user], 
+      :password => "password" } 
+      # password doesn't matter because we're authenticating via CAS 
+      # and that's the only way to get through to the session now.
+    @user_session = UserSession.new(user_session_params)
+
+    if ! User.exists?(:login => session[:cas_user].to_s)
+      # TODO: Do stuff with ldap here.
+      logger.warn 'TODO: Do stuff with ldap here'
+    else
+      @current_user = User.find_by_login(session[:cas_user].to_s)    
+    end
+
+    if @user_session.save
+      flash[:notice] = "Login successful!"
+    else
+      logger.warn '@user_session did not save successfully.'
+    end
+  end
+
   # The workhorse filter for authentication.
-  # After a controller checks for CAS authentication, 
-  # via   'before_filter CASClient::Frameworks::Rails::Filter',
-  # this sets up the user via LDAP if 
+  # First, checks for CAS authentication, 
+  # via 'before_filter CASClient::Frameworks::Rails::Filter'.
+  # Then, sets up the user via LDAP if 
   # the user does not yet exist, and then creates 
   # the proper UserSession.
   def rm_login_required
-    # CASClient::Frameworks::Rails::Filter
-    # ^^ already done by calling controller
-    logger.warn 'got to rm_login_required'
-    logger.warn @user_session.present?.to_s
-    redirect_to create_user_session_path
-    #if ! @user_session.present? 
-     # @user_session = UserSession.new(params[:user_session])
-      #if @user_session.save
-       # flash[:notice] = "Logged in successfully."
-        #@current_user = User.find_by_login(session[:cas_user].to_s)
-      #else
-      #  flash[:error] = "Couldn't log in. Contact the administrators if this happens again."
-      #  redirect_to root_path
-      #end
-    #end
+    return false unless CASClient::Frameworks::Rails::Filter.filter(self)
+    
+    logger.warn 'session[:cas_user] at this point is: ' + session[:cas_user].to_s
+    # If it's present, means we authenticated with CAS successfully 
+    # and need to create the user session in rails, unless 
+    # we already have a session.
+    if session[:cas_user].present? && ! logged_in?
+      logger.warn 'session[:cas_user].present? && ! logged_in?'
+      create_user_session
+      
+    elsif session[:cas_user].blank?
+      logger.warn 'logged_in? is: ' + logged_in?.to_s
+      logger.warn 'session[:cas_user].blank?'
+      flash[:error] = "Could not log in successfully."
+      #redirect_back_or_default(root_url)
+    end
   end
   
   module NonEmpty
