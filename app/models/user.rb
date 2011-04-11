@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
   has_many :watches,        :dependent => :destroy
 
   # VALIDATIONS (abc order)
-  email_regex = /\A[\w\.%\+\-]+@(?:[A-Z0-9\-]+\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|jobs|museum)\z/i
-
-  validates_format_of       :email,    :with => email_regex, 
-    :message => "should be a valid email address."
   #validates_format_of       :name, ...
   validates_inclusion_of    :user_type, 
     :in => [Types::Undergrad, Types::Grad, Types::Faculty]  

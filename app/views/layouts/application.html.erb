@@ -30,7 +30,9 @@
 		          <li>Dashboard</li>
 		          <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
 		          
-		          
+  		        <% if logged_in? %>
+    		        <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>		  
+		          <% end %>
 		      </ul>
 		  </div>
 	  </div>

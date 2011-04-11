@@ -59,22 +59,22 @@ module ApplicationHelper
   end
   
   module NonEmpty
-	    def nonempty?
-	        not self.nil? and not self.empty?
-	    end
+    def nonempty?
+      not self.nil? and not self.empty?
+    end
 	end
 end
 
 class String
-    include ApplicationHelper::NonEmpty
-    
-    # Translates \n line breaks to <br />'s.
-    def to_br
-        self.gsub("\n", "<br />")
-    end
+  include ApplicationHelper::NonEmpty
+  
+  # Translates \n line breaks to <br />'s.
+  def to_br
+    self.gsub("\n", "<br />")
+  end
 
-    def pluralize_for(n=1)
-      n == 1 ? self : self.pluralize
-    end
+  def pluralize_for(n=1)
+    n == 1 ? self : self.pluralize
+  end
     
 end
