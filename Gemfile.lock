@@ -113,6 +113,8 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.26)
+    ucb_ldap (1.4.2)
+      ruby-net-ldap (>= 0.0.4)
     will_paginate (3.0.pre2)
 
 PLATFORMS
@@ -129,4 +131,5 @@ DEPENDENCIES
   ruby-net-ldap
   rubycas-client
   thinking-sphinx (~> 2.0.0)
+  ucb_ldap
   will_paginate (~> 3.0.pre2)

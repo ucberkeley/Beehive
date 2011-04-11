@@ -52,4 +52,6 @@ ResearchMatch::Application.configure do
     :cas_base_url => "https://auth.berkeley.edu/cas/"
   )
 
+  # LDAP 
+  UCB::LDAP.host = 'ldap-test.berkeley.edu'
 end
