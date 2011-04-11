@@ -12,17 +12,6 @@ class ApplicationController < ActionController::Base
       @current_user_session = UserSession.find
     end
 
-    def current_user
-      logger.debug "ApplicationController::current_user"
-      return @current_user if defined?(@current_user)
-      @current_user = current_user_session && current_user_session.user
-    end
-
-    # added by oren
-    def logged_in?
-      !!current_user
-    end
-
     def require_user
       puts "REACHED REQUIRE USER WOOOOOOOOOOO"
       logger.debug "ApplicationController::require_user"

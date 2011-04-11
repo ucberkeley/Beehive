@@ -1,0 +1,7 @@
+<div id="user-bar-greeting">
+  <% if logged_in? %>
+    Logged in as <%= current_user.name %>. <%= link_to 'Log Out', logout_path %>
+  <% else %>
+    Our listings are accessible to anyone with a CalNet ID.
+  <% end %>
+</div>

@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def current_user
+    logger.debug "ApplicationController::current_user"
+    return @current_user if defined?(@current_user)
+    @current_user = current_user_session && current_user_session.user
+  end
+
+  # added by oren
+  def logged_in?
+    !!current_user
+  end
+
   # Helper method called to actually create the user session a la Authlogic.
   def create_user_session    
     user_session_params = { :remember_me => 0, :login => session[:cas_user], 
