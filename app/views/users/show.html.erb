@@ -1,30 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, User.find_by_id(params[:id]).name %>
 
+<h2><%= User.find_by_id(params[:id]).name %></h2>
 <p>
-  <b>Login:</b>
-  <%= @user.login %>
+<%= User.find_by_id(params[:id]).is_faculty ? "Faculty" : "Student" %>
 </p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Persistence token:</b>
-  <%= @user.persistence_token %>
-</p>
-
-<p>
-  <b>Single access token:</b>
-  <%= @user.single_access_token %>
-</p>
-
-<p>
-  <b>Perishable token:</b>
-  <%= @user.perishable_token %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

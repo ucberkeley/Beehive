@@ -31,7 +31,18 @@
     <%= f.label :perishable_token %><br />
     <%= f.text_field :perishable_token %>
   </div>
+  
+  <%-# ------ ATTRIBS -------- %>
+  
+  <% Attrib.get_attrib_names.each do |attrib_name| %>
+    <div class="field">
+      <%= f.label attrib_name.pluralize %>
+      <%= text_field_tag attrib_name %>
+    </div>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>

@@ -1,6 +1,93 @@
-<h1>Editing user</h1>
+<% content_for :title, "User Profile" %>
 
-<%= render 'form' %>
+<h1>User Profile</h1>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= form_for @user do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <br />
+  <% end %>
+  
+<!-- Basic info: i.e., email address -->
+<%# TODO: don't rip off dashboard CSS! %>
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+      <div class="dashboard_container_medium box_shadow" style="float:left">
+        <h2>The Basics</h2>
+        <div class="left_col">
+          <p>Name: <b><%= @user.name %></b></p>
+          <br />
+          <p><%= label_tag 'email', 'E-mail address' %>:<br />
+              <%= f.text_field :email %>
+          </p>
+        </div> <%# Left col %>
+        <div class="right_col">
+          Herp derp.
+        </div> <%# Right col %>
+      </div><%# dashboard_container_medium %>
+  </div>
+</div>
+
+<br />
+
+<% if ! @user.is_faculty %>
+<!-- courses / interests / proglangs. part of the user form. -->
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+	  <div class="dashboard_container_medium box_shadow">
+      <h2>Education & Interests</h2>
+      <p>
+      The following information is optional, but will help ResearchMatch find positions better tailored to you.
+      </p>
+      
+      
+      <%-# ------ ATTRIBS -------- %>
+      
+      <% Attrib.get_attrib_names.each do |attrib_name| %>
+        <div class="field">
+          <%= f.label attrib_name.pluralize %>
+          <%= text_field_tag attrib_name %>
+        </div>
+      <% end %>
+      
+      
+      <br />
+    </div>
+  </div>
+</div>
+<!-- end courses / interests / proglangs -->
+<% end %>
+
+<br />
+<p>
+  <%= f.submit 'Update' %>
+</p>
+<br />
+<% end %>
+
+<% if ! @user.is_faculty %>
+<!-- attachments -->
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+	  <div class="dashboard_container_medium box_shadow">
+	      <h2>Attachments</h2>
+	      <p>
+	      Please upload a résumé and/or a transcript for use when applying to positions.
+	      </p>
+	      <br />
+     	    <div id="upload_desc"><small>Note: We only accept PDF, Word, and plaintext uploads, up to 1 MB.</small></div>
+
+	  </div>
+  </div>
+</div>
+<% end %>
+
