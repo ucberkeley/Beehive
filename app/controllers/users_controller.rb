@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :rm_login_required
+
   # GET /users
   # GET /users.xml
   def index
@@ -43,6 +45,12 @@ class UsersController < ApplicationController
       params['attrib_' + attrib_name] = @user.attrib_values_for_name(attrib_name, true)
     end
     
+  end
+
+  def profile
+    params[:id] = @current_user.id
+    edit
+    render :edit
   end
 
   # POST /users

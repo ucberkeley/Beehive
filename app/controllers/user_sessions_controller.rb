@@ -3,9 +3,11 @@ class UserSessionsController < ApplicationController
   before_filter CASClient::Frameworks::Rails::Filter
 
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => :destroy
+  before_filter :require_user, :only => [:new, :destroy]
 
   def new
+    # This should just redirect to CAS login
+    return
     @user_session = UserSession.new
   end
 

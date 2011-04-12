@@ -18,12 +18,14 @@ module ApplicationHelper
       # password doesn't matter because we're authenticating via CAS 
       # and that's the only way to get through to the session now.
     @user_session = UserSession.new(user_session_params)
+    @current_user = User.find_by_login(session[:cas_user].to_s)
 
-    if ! User.exists?(:login => session[:cas_user].to_s)
+    unless @current_user
       # TODO: Do stuff with ldap here.
       logger.warn 'TODO: Do stuff with ldap here'
-    else
-      @current_user = User.find_by_login(session[:cas_user].to_s)    
+
+      return false unless first_login
+      return create_user_session
     end
 
     if @user_session.save
@@ -57,24 +59,23 @@ module ApplicationHelper
       #redirect_back_or_default(root_url)
     end
   end
+
+  def first_login
+    # Called the first time a person logs in, i.e. after they've
+    # passed CAS but no matching User was found.
+
+    @current_user = User.new #(:login => session[:cas_user].to_s)
+    @current_user.first_login(session[:cas_user])
+    @current_user.save
+    raise @current_user.errors.inspect unless @current_user.valid?
+    redirect_to profile_path
+    return false # halt the filter chain
+  end
   
-  module NonEmpty
-    def nonempty?
-      not self.nil? and not self.empty?
-    end
-	end
 end
 
 class String
-  include ApplicationHelper::NonEmpty
-  
-  # Translates \n line breaks to <br />'s.
-  def to_br
-    self.gsub("\n", "<br />")
-  end
-
   def pluralize_for(n=1)
     n == 1 ? self : self.pluralize
   end
-    
 end

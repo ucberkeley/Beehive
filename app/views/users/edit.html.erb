@@ -39,7 +39,7 @@
 
 <br />
 
-<% if ! @user.is_faculty %>
+<% unless @user.is_faculty? %>
 <!-- courses / interests / proglangs. part of the user form. -->
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">
@@ -72,7 +72,7 @@
 <br />
 <% end %>
 
-<% if ! @user.is_faculty %>
+<% unless @user.is_faculty? %>
 <!-- attachments -->
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">

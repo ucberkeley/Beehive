@@ -15,8 +15,10 @@ ResearchMatch::Application.routes.draw do
   end
 
 
-  resources :users
+  get  '/profile' => 'users#profile', :as => :profile
+  resources :users, :except => [:index]
   
+  get 'login' =>  "user_sessions#new",     :as => :login
   get 'logout' => "user_sessions#destroy", :as => :logout
 
   root :to => "home#index"

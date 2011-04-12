@@ -132,14 +132,14 @@ describe JobsController do
     end
   end # context authenticated by CAS
 
-  context "when not authenticated by CAS" do
-    describe "GET index" do
-      it "redirects to CAS" do
-        get :index
-        response.should redirect_to CASClient::Frameworks::Rails::Filter.login_url(controller)
-      end
-    end
-  end
+#  context "when not authenticated by CAS" do
+#    describe "GET index" do
+#      it "redirects to CAS" do
+#        get :index
+#        response.should redirect_to CASClient::Frameworks::Rails::Filter.login_url(controller)
+#      end
+#    end
+#  end
 
 end
 

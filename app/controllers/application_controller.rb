@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
-        redirect_to login_url
+        redirect_to login_path
         return false
       end
     end
@@ -28,13 +28,13 @@ class ApplicationController < ActionController::Base
       if current_user
         store_location
         flash[:notice] = "You must be logged out to access this page"
-        redirect_to users_url
+        redirect_to users_path
         return false
       end
     end
 
     def store_location
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.fullpath
     end
 
     def redirect_back_or_default(default)
