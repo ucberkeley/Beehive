@@ -71,6 +71,9 @@ class UsersController < ApplicationController
         
         # Attribs logic. Gets the attribs from the params and finds or 
         # creates them appropriately.
+
+        @user.attribs = []
+        
         Attrib.get_attrib_names.each do |attrib_name|
 
           # What was typed into the box. May include commas and spaces.
@@ -94,8 +97,7 @@ class UsersController < ApplicationController
                 end
                 
                 the_attrib = Attrib.find_or_create_by_name_and_value(attrib_name, val)
-                the_user_attrib = UserAttrib.find_or_create_by_user_id_and_attrib_id(
-                  @user.id, the_attrib.id)
+                @user.attribs << the_attrib
               end
             end
           end
