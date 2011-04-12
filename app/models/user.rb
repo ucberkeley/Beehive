@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   
   # ASSOCIATIONS (abc order)
   has_many :applied_jobs,   :source => 'job', :through => 'applics'
-  has_many :attribs,        :through => :job_attribs  # takes care of categories, courses, proglangs (extensible too!)
+  has_many :attribs,        :through => :user_attribs  # takes care of categories, courses, proglangs (extensible too!)
   has_many :jobs,           :dependent => :nullify
   #has_one  :resume,      :class_name => 'Document', :conditions => 
     #{:document_type => Document::Types::Resume}, :dependent => :destroy
@@ -38,6 +38,21 @@ class User < ActiveRecord::Base
   
   
   # METHODS (abc order)
+  
+  def attrib_values_for_name(attrib_name, add_spaces = false)
+    attrib_values = ''
+    (attribs.select {|a| a.name == attrib_name}).each do |attrib|
+      attrib_values << attrib.value + ','
+      if add_spaces: attrib_values << ' ' end
+    end
+    
+    # lop off extra ',' or ', ' at the end
+  	if add_spaces
+  	  return attrib_values[0..(attrib_values.length - 3)]
+	  else
+    	return attrib_values[0..(attrib_values.length - 2)]
+  	end
+  end  
   
   def can_post?
     [User::Types::Grad, User::Types::Faculty].include? self.user_type
