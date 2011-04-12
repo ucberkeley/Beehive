@@ -17,7 +17,6 @@ describe JobsController do
       SpecHelperMethods.stub_cas_ok
     end
     
-    
     describe "GET index" do
       it "assigns all jobs as @jobs" do
         Job.stub(:all) { [mock_job] }
@@ -116,7 +115,7 @@ describe JobsController do
           response.should render_template("edit")
         end
       end
-    end
+    end # POST create
 
     describe "DELETE destroy" do
       it "destroys the requested job" do
@@ -131,21 +130,16 @@ describe JobsController do
         response.should redirect_to(jobs_url)
       end
     end
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  end # context authenticated by CAS
+
+  context "when not authenticated by CAS" do
+    describe "GET index" do
+      it "redirects to CAS" do
+        get :index
+        response.should redirect_to CASClient::Frameworks::Rails::Filter.login_url(controller)
+      end
+    end
   end
 
-
-
 end
+

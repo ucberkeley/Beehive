@@ -30,8 +30,11 @@ class Job < ActiveRecord::Base
       !exp_date.blank? and exp_date < Time.now - 1.hour
   end
 
- 	def must_have_sponsor
-	  errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
-	end
+  def must_have_sponsor
+    errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
+  end
+
+  # Scopes
+  scope :active, where(:active => true)
 
 end
