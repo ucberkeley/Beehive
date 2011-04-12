@@ -48,19 +48,17 @@
       <p>
       The following information is optional, but will help ResearchMatch find positions better tailored to you.
       </p>
-      
+      <br />
       
       <%-# ------ ATTRIBS -------- %>
       
       <% Attrib.get_attrib_names.each do |attrib_name| %>
         <div class="field">
-          <%= f.label attrib_name.pluralize %>
-          <%= text_field_tag attrib_name %>
+          <%= f.label attrib_name.pluralize %>:<br />
+          <%= text_field_tag 'attrib_'+attrib_name, params['attrib_' + attrib_name], :class => 'extrawide', :placeholder => 'Your ' + attrib_name.pluralize + ', separated by commas' %>
         </div>
+        <br />
       <% end %>
-      
-      
-      <br />
     </div>
   </div>
 </div>
