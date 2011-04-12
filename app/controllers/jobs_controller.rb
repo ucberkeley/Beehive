@@ -40,6 +40,13 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
+
+    # Attribs logic. Puts the attribs in the params so that 
+    # the user's edit profile form displays existing attribs.
+
+    Attrib.get_attrib_names.each do |attrib_name|
+      params['attrib_' + attrib_name] = @job.attrib_values_for_name(attrib_name, true)
+    end
   end
 
   # POST /jobs
@@ -57,6 +64,7 @@ class JobsController < ApplicationController
       if @job.save
         @job.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
         # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
+        @job.update_attribs(params)
         @job.save
         logger.warn "\nJob " + @job.id.to_s + " successfully created; activation code : " + @job.activation_code.to_s + "\n"
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
@@ -94,8 +102,6 @@ class JobsController < ApplicationController
   		end
   	end
   end  
-  
-  
 
   # PUT /jobs/1
   # PUT /jobs/1.xml
@@ -104,6 +110,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
+        @job.update_attribs(params)
         format.html { redirect_to(@job, :notice => 'Job was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -165,6 +172,5 @@ class JobsController < ApplicationController
   	 end
    end
   end  
-  
-  
+
 end

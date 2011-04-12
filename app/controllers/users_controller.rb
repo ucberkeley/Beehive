@@ -65,7 +65,6 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-    puts p(params)
     respond_to do |format|
       if @user.update_attributes(params[:user])
         
@@ -102,6 +101,8 @@ class UsersController < ApplicationController
             end
           end
         end
+        
+        @user.save
         
         format.html { redirect_to(edit_user_path, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }

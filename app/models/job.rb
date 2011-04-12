@@ -1,4 +1,6 @@
 class Job < ActiveRecord::Base
+  include AttribsHelper
+  
   # ASSOCIATIONS (abc order)
   belongs_to :department
   belongs_to :user  # who posted the job
@@ -34,7 +36,50 @@ class Job < ActiveRecord::Base
     errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
   end
 
-  # Scopes
+  # SCOPES
   scope :active, where(:active => true)
+  
+  # HELPER METHODS
+  
+  # Helper method invoked by JobController's update and
+  # create. Updates the attribs of the job with the
+  # stuff in params.
+  def update_attribs(params)
+    
+    # Attribs logic. Gets the attribs from the params and finds or 
+    # creates them appropriately.
 
+    self.attribs = []
+    
+    Attrib.get_attrib_names.each do |attrib_name|
+
+      # What was typed into the box. May include commas and spaces.
+      raw_attrib_value = params['attrib_' + attrib_name]
+      
+      # If left blank, we don't want to create "" attribs.
+      if raw_attrib_value.present?
+        raw_attrib_value.split(',').uniq.each do |val_before_fmt|
+          
+          # Avoid ", , , ," situations
+          if val_before_fmt.present?
+            
+            # Remove leading/trailing whitespace
+            val = val_before_fmt.strip
+            
+            # HACK: We want to remove spaces and use uppercase for courses only
+            if attrib_name == 'course'
+              val = val.upcase.gsub(/ /, '')
+            else
+              val = val.downcase
+            end
+            
+            the_attrib = Attrib.find_or_create_by_name_and_value(attrib_name, val)
+            self.attribs << the_attrib
+
+          end
+        end
+      end
+    end
+    
+  end
 end

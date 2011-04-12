@@ -29,6 +29,17 @@
     <td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
     <td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
     </tr>
+
+    <%-# ------ ATTRIBS -------- %>
+    <% Attrib.get_attrib_names.each do |attrib_name| %>
+    <tr>
+		<td class="job_clear_table_label"><%= label_tag attrib_name.pluralize %></td>
+		<td class="job_clear_table_field">
+          <%= text_field_tag 'attrib_'+attrib_name, params['attrib_' + attrib_name], :class => 'extrawide', :placeholder => 'The job\'s ' + attrib_name.pluralize + ', separated by commas' %>
+    </td>
+	  </tr>
+	  <% end %>
+   
     <tr>
         <td class="job_clear_table_label">
             <%= f.label :exp_date, 'Expiration date?' %>
