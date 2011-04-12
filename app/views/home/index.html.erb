@@ -19,23 +19,23 @@
 <br><br>
 
 <table id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
-	<tr>
-		<td colspan="3" background="<%= image_path "research_match_display_01a.png" %>" style="background-repeat: no-repeat">
-		</td>
-	</tr>
-	<tr>
-		<td background="<%= image_path "research_match_display_02.png" %>" height="59" style="width: 308px;background-repeat: no-repeat">
-			<div id="browse_listings_menu">
-				<%= form_tag(:jobs, :method => "get") do %>
-					<%= select_tag(:department, options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
-					<%= submit_tag "Go" %>
-				<% end %>
-			</div>
-		</td>
-		<td height="59" style="width: 342px;">
-			<%= link_to image_tag("research_match_display_03a.png", :border=>0, :alt=>"Post a Job"), :controller => "jobs", :action => 'new'%>
-		</td>
+  <tr>
+    <td colspan="3" background="<%= image_path "research_match_display_01a.png" %>" style="background-repeat: no-repeat">
+    </td>
+  </tr>
+  <tr>
+    <td background="<%= image_path "research_match_display_02.png" %>" height="59" style="width: 308px;background-repeat: no-repeat">
+      <div id="browse_listings_menu">
+        <%= form_tag(:jobs, :method => "get") do %>
+          <%= select_tag(:department, options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+          <%= submit_tag "Go" %>
+        <% end %>
+      </div>
+    </td>
+    <td height="59" style="width: 342px;">
+      <%= link_to image_tag("research_match_display_03a.png", :border=>0, :alt=>"Post a Job"), :controller => "jobs", :action => 'new'%>
+    </td>
 
-	</tr>
+  </tr>
 </table>
 </center>

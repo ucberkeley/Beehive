@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include AttribsHelper
   before_filter :rm_login_required
 
   # GET /users
@@ -37,14 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-    
-    # Attribs logic. Puts the attribs in the params so that 
-    # the user's edit profile form displays existing attribs.
-    
-    Attrib.get_attrib_names.each do |attrib_name|
-      params['attrib_' + attrib_name] = @user.attrib_values_for_name(attrib_name, true)
-    end
-    
+    prepare_attribs_in_params(@user)
   end
 
   def profile
@@ -73,44 +67,9 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-    puts p(params)
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        
-        # Attribs logic. Gets the attribs from the params and finds or 
-        # creates them appropriately.
-
-        @user.attribs = []
-        
-        Attrib.get_attrib_names.each do |attrib_name|
-
-          # What was typed into the box. May include commas and spaces.
-          raw_attrib_value = params['attrib_' + attrib_name]
-          
-          # If left blank, we don't want to create "" attribs.
-          if raw_attrib_value.present?
-            raw_attrib_value.split(',').uniq.each do |val_before_fmt|
-              
-              # Avoid ", , , ," situations
-              if val_before_fmt.present?
-                
-                # Remove leading/trailing whitespace
-                val = val_before_fmt.strip
-                
-                # HACK: We want to remove spaces and use uppercase for courses only
-                if attrib_name == 'course'
-                  val = val.upcase.gsub(/ /, '')
-                else
-                  val = val.downcase
-                end
-                
-                the_attrib = Attrib.find_or_create_by_name_and_value(attrib_name, val)
-                @user.attribs << the_attrib
-              end
-            end
-          end
-        end
-        
+        @user.update_attribs(params)
         format.html { redirect_to(edit_user_path, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else

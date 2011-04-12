@@ -7,7 +7,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 # Create departments
-[ ['Electrical Engineering and Computer Science', 'EECS'] ].each do |name, abbrev|
+[ ['Elec Eng & Comp Sci', 'EECS'] ].each do |name, abbrev|
   Department.find_or_create_by_name_and_abbrev(name, abbrev)
 end
 

@@ -35,11 +35,8 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_presence_of     :email, :login, :name
   validates_uniqueness_of   :email, :login
-  
-  
-  # METHODS (abc order)
 
-  
+  # METHODS (abc order)
   def can_post?
     [User::Types[:grad], User::Types[:faculty]].include? self.user_type
   end

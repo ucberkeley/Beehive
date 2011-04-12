@@ -54,7 +54,7 @@
       
       <% Attrib.get_attrib_names.each do |attrib_name| %>
         <div class="field">
-          <%= f.label attrib_name.pluralize %>:<br />
+          <%= label_tag attrib_name.pluralize %>:<br />
           <%= text_field_tag 'attrib_'+attrib_name, params['attrib_' + attrib_name], :class => 'extrawide', :placeholder => 'Your ' + attrib_name.pluralize + ', separated by commas' %>
         </div>
         <br />

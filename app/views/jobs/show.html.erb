@@ -61,38 +61,24 @@
 
   <tr>
     <td class="job_attr_title">Description:</td>
-    </tr><tr>
+  </tr>
+  <tr>
     <td id="description" colspan=2>
-      <%= @job.desc.to_br %>
-    </td>
-  </tr>
-
-  <tr>
-    <td class="job_attr_title">
-        <%= h 'Category'.pluralize_for(@job.attribs.where(:name => 'category').length) %>
-    </td>
-    <td class="job_attr_value">
-      <%-# TODO %>
+      <%= simple_format @job.desc %>
     </td>
   </tr>
   
+  <%-# ------ ATTRIBS -------- %>
+  <% Attrib.get_attrib_names.each do |attrib_name| %>
   <tr>
     <td class="job_attr_title">
-      Required courses:
+      <%= label_tag attrib_name.pluralize %>:      
     </td>
     <td class="job_attr_value">
-      <%-# TODO %>
-    </td>
-  </tr>  
-  
-  <tr>
-    <td class="job_attr_title">
-      Desired programming languages:
-    </td>
-    <td class="job_attr_value">
-      <%-# TODO %>
+      <%= params['attrib_' + attrib_name] %>
     </td>
   </tr>
+  <% end %>
   
   <tr>
     <td class="job_attr_title">

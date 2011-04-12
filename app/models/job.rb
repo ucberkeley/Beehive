@@ -1,4 +1,6 @@
 class Job < ActiveRecord::Base
+  include AttribsHelper
+  
   # ASSOCIATIONS (abc order)
   belongs_to :department
   belongs_to :user  # who posted the job
@@ -34,7 +36,7 @@ class Job < ActiveRecord::Base
     errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
   end
 
-  # Scopes
+  # SCOPES
   scope :active, where(:active => true)
 
 end
