@@ -37,11 +37,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :email, :login, :name
   validates_uniqueness_of   :email, :login
 
-  
-  
   # METHODS (abc order)
-
-  
   def can_post?
     [User::Types::Grad, User::Types::Faculty].include? self.user_type
   end

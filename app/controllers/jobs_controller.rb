@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  include AttribsHelper
 
   #CalNet / CAS Authentication
   #before_filter CASClient::Frameworks::Rails::Filter # done in rm_login_required
@@ -20,6 +21,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @logged_in = logged_in?
+    prepare_attribs_in_params(@job)    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @job }
@@ -40,13 +42,7 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
-
-    # Attribs logic. Puts the attribs in the params so that 
-    # the user's edit profile form displays existing attribs.
-
-    Attrib.get_attrib_names.each do |attrib_name|
-      params['attrib_' + attrib_name] = @job.attrib_values_for_name(attrib_name, true)
-    end
+    prepare_attribs_in_params(@job)
   end
 
   # POST /jobs
@@ -71,7 +67,7 @@ class JobsController < ApplicationController
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
         flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
         
-        format.html { redirect_to(@job, :notice => 'Job was successfully created.') }
+        format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
         format.html { render :action => "new" }
