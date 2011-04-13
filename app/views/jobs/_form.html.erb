@@ -23,7 +23,7 @@
     </tr>
     <tr>
     <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
-    <td class="job_clear_table_field"><%= select_tag :faculty_sponsor, options_from_collection_for_select(Faculty.all, :id, :name) %></td>
+    <td class="job_clear_table_field"><%= select_tag :faculty_sponsor, options_from_collection_for_select(Faculty.all, :id, :name_with_dept) %></td>
     </tr>      
     <tr>
     <td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>

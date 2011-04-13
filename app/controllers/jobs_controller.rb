@@ -66,6 +66,7 @@ class JobsController < ApplicationController
         @job.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
         # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
         @job.update_attribs(params)
+        @job.handle_sponsorships(params[:faculty_sponsor].to_i)        
         @job.save
         logger.warn "\nJob " + @job.id.to_s + " successfully created; activation code : " + @job.activation_code.to_s + "\n"
         flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
@@ -108,10 +109,11 @@ class JobsController < ApplicationController
   # PUT /jobs/1.xml
   def update
     @job = Job.find(params[:id])
-
+    #logger.warn params.inspect
     respond_to do |format|
       if @job.update_attributes(params[:job])
         @job.update_attribs(params)
+        @job.handle_sponsorships(params[:faculty_sponsor].to_i)
         format.html { redirect_to(@job, :notice => 'Listing was successfully updated.') }
         format.xml  { head :ok }
       else
