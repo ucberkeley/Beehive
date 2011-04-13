@@ -1,0 +1,16 @@
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+    <div class="dashboard_container_medium box_shadow">
+      <h3><%= link_to @job.title, :controller => "jobs", :action => "show", :id => @job.id %></h3>
+      <p><b>Faculty Sponsor: </b>
+          <% @job.faculties.each do |f| %> 
+	        <%= link_to f.name, :controller => "jobs", :action => "index", :params => { :faculty => f.id } %>
+          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
+        		<%= image_tag(@job.department.name.downcase + "_icon.gif") %>
+		      </a>
+          <% end %> 
+      </p>
+    </div>
+  </div>
+</div>
+

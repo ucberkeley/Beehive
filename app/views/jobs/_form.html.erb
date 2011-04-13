@@ -59,7 +59,11 @@
         <td class="job_clear_table_label"></td>
         <td class="job_clear_table_field">
             <br />
-            <%= f.submit('Post!') %>&nbsp;&nbsp;&nbsp;
+            <% if controller.action_name.downcase == 'edit' %>
+              <%= f.submit('Update') %>
+            <% else %>
+              <%= f.submit('Post!') %>
+            <% end %>&nbsp;&nbsp;&nbsp;
             <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" />
         </td>
     </tr>
