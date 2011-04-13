@@ -27,7 +27,7 @@
     <div id="header_tabs">
 		  <div id="tabs">
 		      <ul>
-		          <li>Dashboard</li>
+		          <li><%= link_to "Dashboard", dashboard_path %></li>
 		          <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
 		          
   		        <% if logged_in? %>

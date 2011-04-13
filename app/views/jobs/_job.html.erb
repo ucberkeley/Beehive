@@ -1,0 +1,74 @@
+<% if not job.nil? %>
+<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
+	<div class="job_padding_wrapper">
+		<table class="job_table">
+            <tr class="job_table_row">
+				<td class="job_table_left">
+					<div class="job_title">
+            <a href="<%= job_path(job) %>" title="Click to learn more about this research position!"><%= job.title %></a>
+            (<%= (job.faculties != []) ?  link_to (job.faculties.first.name, :controller => "jobs",
+                   :action => "index", :params => { :faculty => job.faculties.first.id })  : "no faculty sponsor" %>) 
+					  <% if logged_in? && job.user_id == current_user.id %>
+						  <%= link_to "[edit]", :controller => "jobs", :action => "edit", :id => job.id %>
+						  <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => job.id %>
+					  <% end %>
+					  <% if job.watchers.include?(current_user) %>
+						  <%= link_to "[unwatch]", :controller=>:jobs, :action => :unwatch, :id => job.id %>
+					  <% elsif job.user != current_user %>
+						  <%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>
+					  <% end %>
+					  
+            <% if job.applicants.include?(current_user) %>
+                [applied!]
+            <% elsif job.user != current_user %>
+                <% if false %> <%= link_to "[apply for this job]", new_job_applic_path(job.id) %><% end %>
+                [apply for this job]
+            <% end %>
+					</div>
+					
+				  <% if false %>
+				    <% job_tags = job.tag_list %>
+				    <% if !job_tags.empty? %>
+					    <div class="job_tags">
+              <%= image_tag 'tag.gif' %>
+					    Tags:
+						    <% if job_tags.empty? %>
+							    (none)
+						    <% else %>
+							    <%= render :partial => "jobs/tag", :collection => job.tag_list %>
+						    <% end %>
+					    </div>
+				    <% end %>
+			    <% end %>
+					
+					
+					<% if controller.controller_name != 'dashboard' %>
+					
+					    <div class="job_desc">
+					    <span id="job_desc_<%= job.id %>"><%= truncate job.desc, :length => 200, :omission => '...' %></span> 
+					    <% if job.desc.length > 200 %>
+					      <%= link_to "[read more]", :controller => "jobs", :action => "show", :id => job.id %>
+					    <% end %>
+					    </div>
+					
+					<% end %>
+					
+				</td>
+				
+				<% if false %>
+				<td class="job_credit">
+					<div class="job_attr"><%= (job.paid ? image_tag('yes_check.gif') : image_tag('no_check.gif') ) unless job.paid.nil? %></div>
+				</td>
+				<td class="job_credit">
+					<div class="job_attr"><%= ( job.credit ? image_tag('yes_check.gif') : image_tag('no_check.gif') ) unless job.credit.nil? %></div>
+				</td>
+				<td class="job_credit">
+					<div class="job_attr"><span class="job_numpositions"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span></div>
+				</td>
+				<% end %>
+
+			</tr>
+		</table>
+	</div>
+</div>
+<% end %>

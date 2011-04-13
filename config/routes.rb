@@ -14,7 +14,7 @@ ResearchMatch::Application.routes.draw do
     end
   end
 
-
+  get '/dashboard' => 'dashboard#index', :as => :dashboard
   get  '/profile' => 'users#profile', :as => :profile
 
   resources :users, :except => [:index, :new]
