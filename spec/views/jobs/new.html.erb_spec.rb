@@ -1,15 +1,20 @@
 require 'spec_helper'
 
 describe "jobs/new.html.erb" do
+
+  def mock_user(stubs={})
+    @mock_user ||= mock_model(User, stubs).as_null_object
+  end
+  
   before(:each) do
     assign(:job, stub_model(Job,
-      :user => nil,
+      :user => mock_user,
       :title => "MyString",
       :desc => "MyText",
       :num_positions => 1,
       :department_id => 1,
       :activation_code => "MyString",
-      :active => false
+      :active => true
     ).as_new_record)
   end
 

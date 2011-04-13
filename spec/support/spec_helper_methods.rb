@@ -4,4 +4,5 @@ class SpecHelperMethods
           # the plugin deemed okay
     CASClient::Frameworks::Rails::Filter.stub(:filter).and_return(true)
   end
+  
 end

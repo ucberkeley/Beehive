@@ -7,6 +7,7 @@ require 'spec_helper'
 describe UsersController do
   before(:each) do
     SpecHelperMethods.stub_cas_ok
+    controller.stub(:correct_user_access).and_return(true)
   end
 
   def mock_user(stubs={})
@@ -17,14 +18,6 @@ describe UsersController do
     it "assigns the requested user as @user" do
       User.stub(:find).with("37") { mock_user }
       get :show, :id => "37"
-      assigns(:user).should be(mock_user)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new user as @user" do
-      User.stub(:new) { mock_user }
-      get :new
       assigns(:user).should be(mock_user)
     end
   end
@@ -81,10 +74,11 @@ describe UsersController do
         assigns(:user).should be(mock_user)
       end
 
-      it "redirects to the user" do
+      it "redirects to the user's edit page" do
         User.stub(:find) { mock_user(:update_attributes => true) }
         put :update, :id => "1"
-        response.should redirect_to(user_url(mock_user))
+        #response.should redirect_to(user_url(mock_user))
+        response.should redirect_to(:controller => :users, :action => :edit, :id => "1")
       end
     end
 

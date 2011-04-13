@@ -11,6 +11,10 @@ describe JobsController do
   def mock_job(stubs={})
     @mock_job ||= mock_model(Job, stubs).as_null_object
   end
+  
+  before(:each) do
+    controller.stub(:correct_user_access).and_return(true)
+  end
 
   context "when authenticated via CAS" do 
     before(:each) do
@@ -20,6 +24,10 @@ describe JobsController do
     describe "GET index" do
       it "assigns all jobs as @jobs" do
         Job.stub(:all) { [mock_job] }
+        #@mock_job.stub(:active).and_return(true)
+        # ^ Still broken. I suspect it's because 
+        # mock_job isn't active so it doesn't show up 
+        # on the index.. not 100% sure though
         get :index
         assigns(:jobs).should eq([mock_job])
       end
