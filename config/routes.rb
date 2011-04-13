@@ -16,7 +16,8 @@ ResearchMatch::Application.routes.draw do
 
 
   get  '/profile' => 'users#profile', :as => :profile
-  resources :users, :except => [:index]
+  get  '/users/:id' => 'users#show', :as => :show_user
+  #resources :users, :except => [:index]
   
   get 'login' =>  "user_sessions#new",     :as => :login
   get 'logout' => "user_sessions#destroy", :as => :logout
