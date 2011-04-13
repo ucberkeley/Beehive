@@ -1,0 +1,26 @@
+<% job = watched_job.job %>
+<div id="watched_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
+	<div class="job_padding_wrapper">
+		<table class="job_table">
+			<tr>
+				<td class="job_table_left">
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
+					<% if logged_in? && job.user_id == current_user.id %>
+						<%= link_to "[edit]", edit_job_url(job) %>
+					<% end %>
+					<% if job.users.include?(current_user) %>
+						<%= link_to "[unwatch]", unwatch_job_url(job) %>
+					<% else %>
+						<%= link_to "[watch]", watch_job_url(job) %>
+					<% end %>
+					
+					<% if watched_job.unread? -%>
+					    [updated!]
+					<% end -%>
+					
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

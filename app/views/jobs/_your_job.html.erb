@@ -1,0 +1,19 @@
+<% job = your_job %>
+<div id="your_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
+	<div class="job_padding_wrapper">
+		<table class="job_table">
+			<tr>
+				<td class="job_table_left">
+					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (watched by <%= job.watchers.length %> user<%= job.watchers.length != 1 ? "s" : "" %>) 
+					<% if logged_in? && job.user_id == current_user.id %>
+					  <%= link_to "[edit]", edit_job_url(job) %>
+					  <%= link_to "[delete]", delete_job_url(job) %>
+					<% end %>
+					</div>
+					
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
