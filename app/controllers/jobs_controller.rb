@@ -5,6 +5,11 @@ class JobsController < ApplicationController
   #before_filter CASClient::Frameworks::Rails::Filter # done in rm_login_required
   before_filter :rm_login_required
   
+  # Ensures that only the user who created a job -- and no other users -- can edit 
+  # or destroy it.
+  #####before_filter :check_post_permissions, :only => [ :new, :create ]
+  before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
+  
   # GET /jobs
   # GET /jobs.xml
   def index
@@ -167,6 +172,17 @@ class JobsController < ApplicationController
   	   format.html { redirect_to(:controller=>:dashboard) }
   	 end
    end
-  end  
+  end
+  
+  # PRIVATE methods below e.g. filter methods
+  private
+  
+	def correct_user_access
+		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      redirect_to jobs_path
+      return false
+		end
+	end  
 
 end

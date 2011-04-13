@@ -1,6 +1,6 @@
-<h1>Editing job</h1>
+<% content_for :title, "Editing Listing" %>
+<h1>Editing Listing</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @job %> |
-<%= link_to 'Back', jobs_path %>
+<%= link_to raw('&#0171; Back to Listings'), jobs_url %>

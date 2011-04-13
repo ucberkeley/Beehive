@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   include AttribsHelper
+
+  #CalNet / CAS Authentication
   before_filter :rm_login_required
+  
+  # Ensures that only this user -- and no other users -- can edit his/her profile
+  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
 
   # GET /users
   # GET /users.xml
@@ -88,6 +93,17 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  # PRIVATE methods below e.g. filter methods
+  private
+	
+  def correct_user_access
+    if (User.find_by_id(params[:id]) == nil || current_user != User.find_by_id(params[:id]))
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      redirect_to jobs_path
+      return false
     end
   end
 end

@@ -12,11 +12,11 @@
 		<%-# link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
 	<% end %>&nbsp;
 	
-	<% if @current_user != nil && !@current_user.is_faculty %>
+	<% if @current_user != nil && !@current_user.is_faculty? %>
 		<% if @job.watchers.include?(current_user) %>
-			<%= link_to "[unwatch this job]", unwatch_job_path(@job) %>
+			<%= link_to "[unwatch this listing]", unwatch_job_path(@job) %>
 		<% else %>
-			<%= link_to "[watch this job]", watch_job_path(@job) %>
+			<%= link_to "[watch this listing]", watch_job_path(@job) %>
 		<% end %>
         &nbsp;
         <% if @job.applicants.include?(current_user) %>
