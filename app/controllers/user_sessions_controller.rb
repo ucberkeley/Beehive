@@ -3,7 +3,7 @@ class UserSessionsController < ApplicationController
   before_filter CASClient::Frameworks::Rails::Filter
 
   before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:new, :destroy]
+  before_filter :require_user, :except => [:new, :create]
 
   def new
     # This should just redirect to CAS login
@@ -19,7 +19,8 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    current_user_session.destroy
+    s = current_user_session
+    s.destroy if s
     session[:cas_user] = nil
     flash[:notice] = "Logout successful!"
     logout_cas
@@ -29,4 +30,5 @@ class UserSessionsController < ApplicationController
   def logout_cas
     CASClient::Frameworks::Rails::Filter.logout(self, url_for(:controller=>:home, :action=>:index) )
   end  
+
 end

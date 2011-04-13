@@ -41,17 +41,20 @@ class User < ActiveRecord::Base
     [User::Types[:grad], User::Types[:faculty]].include? self.user_type
   end
   
-  # is_faculty for backward compatibility
-  def is_faculty?
-    self.user_type >= User::Types[:faculty]
-  end
-
   def first_login(my_login)
     self.login    = my_login unless my_login.blank?
     self.password = self.password_confirmation = 'password'
     self.name     = ldap_person_full_name
     self.email    = ldap_person.email
     self.update_user_type 
+  end
+
+  # Convenience methods
+  def is_faculty?
+    self.user_type >= User::Types[:faculty]
+  end
+  def is_undergrad
+    return self.user_type == User::Types[:undergrad]
   end
 
   # Returns the UCB::LDAP::Person for this User
@@ -100,6 +103,16 @@ class User < ActiveRecord::Base
 
     self.update_attribute(:user_type, self.user_type) if options[:save] || options[:update]
     self.user_type
+  end # update_user_type
+
+  def user_type_string(options={})
+  # Return a string representation of this person's user type
+  # Options:
+  #  long:      [under]grad => [under]graduate
+  #
+    s = Types.invert[self.user_type].to_s
+    s += 'uate' if options[:long] && [Types[:undergrad], Types[:grad]].include?(self.user_type)
+    s = s.titleize
   end
 
 end
