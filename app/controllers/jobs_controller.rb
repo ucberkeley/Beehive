@@ -63,9 +63,9 @@ class JobsController < ApplicationController
         @job.update_attribs(params)
         @job.save
         logger.warn "\nJob " + @job.id.to_s + " successfully created; activation code : " + @job.activation_code.to_s + "\n"
-        flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
+        flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-        flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+        flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once activated, users will be able to browse and respond to the posting.'
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -90,10 +90,10 @@ class JobsController < ApplicationController
 	
   	respond_to do |format|
   		if saved
-  		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
+  		  flash[:notice] = 'Listing activated successfully.  Your listing is now available to be browsed and viewed by other users.'
   		  format.html { redirect_to(@job) }
   		else
-  		  flash[:notice] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
+  		  flash[:notice] = 'Unsuccessful activation.  Either this listing has already been activated or the activation code is incorrect.'
   		  format.html { redirect_to(jobs_url) }
   		end
   	end
@@ -107,7 +107,7 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.update_attributes(params[:job])
         @job.update_attribs(params)
-        format.html { redirect_to(@job, :notice => 'Job was successfully updated.') }
+        format.html { redirect_to(@job, :notice => 'Listing was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -134,7 +134,7 @@ class JobsController < ApplicationController
     @job.destroy
 
     respond_to do |format|
-      format.html { redirect_to(jobs_url) }
+      format.html { redirect_to(jobs_url, :notice => 'Listing was deleted successfully.') }
       format.xml  { head :ok }
     end
   end
@@ -145,10 +145,10 @@ class JobsController < ApplicationController
 	
   	respond_to do |format|
   		if watch.save
-  		  flash[:notice] = 'Job is now watched. You can find a list of your watched jobs on the dashboard.'
+  		  flash[:notice] = 'Listing is now watched. You can find a list of your watched listings on the dashboard.'
   		  format.html { redirect_to(:controller=>:dashboard) }
   		else
-  		  flash[:notice] = 'Unsuccessful job watch. Perhaps you\'re already watching this job?'
+  		  flash[:notice] = 'Unsuccessful listing watch. Perhaps you\'re already watching this listing?'
   		  format.html { redirect_to(:controller=>:dashboard) }
   		end
   	end
@@ -160,10 +160,10 @@ class JobsController < ApplicationController
 
    respond_to do |format|
   	 if watch.destroy
-  	   flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
+  	   flash[:notice] = 'Listing is now unwatched. You can find a list of your watched listings on the dashboard.'
   	   format.html { redirect_to(:controller=>:dashboard) }
   	 else
-  	   flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
+  	   flash[:notice] = 'Unsuccessful listing un-watch. Perhaps you\'re not watching this listing yet?'
   	   format.html { redirect_to(:controller=>:dashboard) }
   	 end
    end

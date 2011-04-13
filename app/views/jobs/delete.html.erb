@@ -1,0 +1,28 @@
+<% content_for :title, "Delete Listing" %>
+<div id="job_show_main">
+<br />
+<h2>Delete Listing</h2>
+<p>
+  Are you sure you would like to delete the following listing? This action cannot be undone.
+</p>
+<br />
+
+<%= render(:partial => "jobs/job_snippet", :job => @job ) %>
+
+<br /><br />
+
+<div class="inline-form-container">
+
+  <%= button_to "Delete", {:action => "destroy", :id => @job.id}, :method => :delete, :class => "inline-form-element" %>&nbsp;&nbsp;&nbsp;
+  <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" />
+
+</div>
+
+<br /><br />
+
+<%= link_to raw("&#0171; Back to listings"), :controller => :jobs, :action => :index %>
+<br /><br /><br /><br />
+
+
+
+</div>
