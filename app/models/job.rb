@@ -1,4 +1,20 @@
 class Job < ActiveRecord::Base
+
+  # === List of columns ===
+  #   id              : integer 
+  #   user_id         : integer 
+  #   title           : string 
+  #   desc            : text 
+  #   exp_date        : datetime 
+  #   num_positions   : integer 
+  #   department_id   : integer 
+  #   activation_code : string 
+  #   active          : boolean 
+  #   created_at      : datetime 
+  #   updated_at      : datetime 
+  #   delta           : boolean 
+  # =======================
+
   include AttribsHelper
   
   # ASSOCIATIONS (abc order)
