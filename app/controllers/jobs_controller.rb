@@ -13,7 +13,8 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   def index
-    @jobs = Job.active
+    search_params = {}
+    @jobs = Job.search params[:q], search_params
 
     respond_to do |format|
       format.html # index.html.erb
@@ -145,7 +146,7 @@ class JobsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def watch	
 	  job = Job.find(params[:id])
   	watch = Watch.new({:user=> current_user, :job => job})

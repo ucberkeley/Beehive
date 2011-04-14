@@ -12,7 +12,10 @@ ResearchMatch::Application.routes.draw do
       get 'unwatch'
       get 'watch'
     end
-  end
+    collection do
+      get 'search', :action => :index
+    end
+   end
 
   get '/dashboard' => 'dashboard#index', :as => :dashboard
   get  '/profile' => 'users#profile', :as => :profile

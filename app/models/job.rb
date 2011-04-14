@@ -48,6 +48,17 @@ class Job < ActiveRecord::Base
     self.faculties = []
     self.faculties << Faculty.find_by_id(faculty_id)
   end
-    
+
+  def self.search(query, options)
+  # Main job search function
+  # Query is a string of keywords to search
+  # Options can include:
+  #
+  #
+    results = Job.active
+    return results
+  end # search
+
+   
   
 end
