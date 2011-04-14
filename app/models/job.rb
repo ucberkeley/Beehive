@@ -41,6 +41,12 @@ class Job < ActiveRecord::Base
   
   # OTHER METHODS (abc order)
   
+  # Returns true if the specified user has admin rights (can view applications,
+  # edit, etc.) for this job.
+  def allow_admin_by?(u)
+    self.user == u or self.faculties.include?(u)
+  end
+  
   # Sets the faculty specified by the given id
   # as this job's sponsor.
   def handle_sponsorships(faculty_id)

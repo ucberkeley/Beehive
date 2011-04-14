@@ -115,5 +115,14 @@ class User < ActiveRecord::Base
     s += 'uate' if options[:long] && [Types[:undergrad], Types[:grad]].include?(self.user_type)
     s = s.titleize
   end
+  
+  # Returns a list of Jobs this user is watching.
+  def watched_jobs
+    watched_jobs = []
+    self.watches.each do |watch|
+      watched_jobs << Job.find(watch.job_id)
+    end
+    return watched_jobs
+  end
 
 end

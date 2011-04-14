@@ -15,16 +15,16 @@
 			
 			<% end -%>	
 			<% if !current_user.is_faculty? %>
-			
+			  <br />
 				<h2>Your Watched Postings</h2>
 				<!-- //list of postings you're watching -->
-				<% if false %>
-				  <% if @watched_jobs.empty? %>
-					  You are not watching any postings.
-				  <% else %>
-					  <%= render :partial => "jobs/watched_job", :collection => current_user.watches %>
-				  <% end %>
-				<% end %>
+
+			  <% if @watched_jobs.empty? %>
+				  You are not watching any postings.
+			  <% else %>
+				  <%= render :partial => "jobs/job_watch", :collection => current_user.watches %>
+			  <% end %>
+
 				<br />
 			
 			<% end %>

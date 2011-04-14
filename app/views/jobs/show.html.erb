@@ -10,19 +10,19 @@
 	<% if logged_in? %>
 	  <% if @job.user_id == @current_user.id %>
 		  <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-		  <%= link_to "[delete]", delete_job_path(@job) %>	  
+		  <%= link_to "[delete]", delete_job_url(@job) %>	  
 	  <% else %>
 	    <% if @current_user != nil && !@current_user.is_faculty? %>
 		    <% if @job.watchers.include?(@current_user) %>
-			    <%= link_to "[unwatch this listing]", unwatch_job_path(@job) %>
+			    <%= link_to "[unwatch this listing]", unwatch_job_url(@job) %>
 		    <% else %>
-			    <%= link_to "[watch this listing]", watch_job_path(@job) %>
+			    <%= link_to "[watch this listing]", watch_job_url(@job) %>
 		    <% end %>
             &nbsp;
             <% if @job.applicants.include?(current_user) %>
 			    [applied!]
 		    <% else %>
-			    [apply for this job]
+			    <%= link_to "[apply for this job]", goapply_job_url(@job) %>
 		    <% end %>
 	    <% end %>	  
 	  <% end %>
@@ -53,8 +53,8 @@
       <% @job.faculties.each do |f| %> 
         <span>
           <b><%= link_to f.name, :controller => "jobs", :action => "index", :params => { :faculty => f.id } %></b>
-          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%=h f.name %> Berkeley <%= @job.department.name %>" target="_blank">
-            <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
+          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%=h f.name %> Berkeley <%= f.department.name %>" target="_blank">
+            <%= image_tag(f.department.abbrev.downcase + "_icon.gif") %>
           </a>
         </span>
         <br />
