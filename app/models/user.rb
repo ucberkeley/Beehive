@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   
   
   # ASSOCIATIONS (abc order)
+  has_many :applics
   has_many :applied_jobs,   :source => 'job', :through => 'applics'
   has_many :attribs,        :through => :user_attribs  # takes care of categories, courses, proglangs (extensible too!)
   has_many :jobs,           :dependent => :nullify
