@@ -85,10 +85,10 @@
   
   <tr>
     <td class="job_attr_title">
-      Position expiration date:
+      Position end date:
     </td>
     <td class="job_attr_value">
-      <%=h (@job.exp_date ? @job.exp_date.pp : 'None Listed') %>
+      <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
     </td>
   </tr>
   

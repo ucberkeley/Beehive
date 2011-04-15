@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
   # VALIDATIONS  (abc order)
   #   (May require extra work to deal with sponsorships and other 
   #    data when dealing with job activations)
-  validate :expiration_date_cannot_be_in_the_past
+  validate :end_date_cannot_be_in_the_past
   #validate :must_have_sponsor  #, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions, :allow_nil => true
@@ -26,10 +26,10 @@ class Job < ActiveRecord::Base
 
   # CUSTOM VALIDATION METHODS
   
-  # Validates that expiration dates are no earlier than right now.
-  def expiration_date_cannot_be_in_the_past
-    errors[:expiration_date] << "cannot be earlier than now" if 
-      !exp_date.blank? and exp_date < Time.now - 1.hour
+  # Validates that end dates are no earlier than right now.
+  def end_date_cannot_be_in_the_past
+    errors[:end_date] << "cannot be earlier than now" if 
+      !end_date.blank? and end_date < Time.now - 1.hour
   end
 
   def must_have_sponsor

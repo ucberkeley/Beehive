@@ -42,12 +42,13 @@
    
     <tr>
         <td class="job_clear_table_label">
-            <%= f.label :exp_date, 'Expiration date?' %>
-            <%= check_box_tag 'job[exp_date]', '', false, :onclick => "$('#expdate').toggle()" %>
+            <%= f.label :open_ended_end_date, 'Open-ended end date?' %>
+            <%= f.check_box :open_ended_end_date, :onclick => "$('#enddate').toggle()" %>
+            <%-# check_box_tag 'job[end_date]', '', false, :onclick => "$('#enddate').toggle()" %>
         </td>
         <td class="job_clear_table_field">
-            <div id="expdate">
-            <%= f.datetime_select :exp_date, {:default => 1.month.from_now, :start_year => Date.today.year} %>
+            <div id="enddate">
+            <%= f.date_select :end_date, {:default => 1.month.from_now, :start_year => Date.today.year} %>
             </span>
         </td>
     </tr>
