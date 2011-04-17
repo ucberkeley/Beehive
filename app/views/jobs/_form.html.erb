@@ -1,3 +1,6 @@
+<p>
+  Fields marked with an asterisk* are required.
+</p>
 <%= form_for(@job) do |f| %>
   <% if @job.errors.any? %>
     <div id="error_explanation">
@@ -39,24 +42,43 @@
     </td>
 	  </tr>
 	  <% end %>
-   
+	  
     <tr>
         <td class="job_clear_table_label">
-            <%= f.label :open_ended_end_date, 'Open-ended end date?' %>
-            <%= f.check_box :open_ended_end_date, :onclick => "$('#enddate').toggle()" %>
-            <%-# check_box_tag 'job[end_date]', '', false, :onclick => "$('#enddate').toggle()" %>
+            <%= f.label :earliest_start_date, 'Earliest start date' %>
+        </td>
+        <td class="job_clear_table_field">
+            <%= f.date_select :earliest_start_date %>
+        </td>
+    </tr>   
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :end_date, 'End date' %>
         </td>
         <td class="job_clear_table_field">
             <div id="enddate">
+            <%= f.radio_button :open_ended_end_date, true, :onclick => "$('#enddate select').attr('disabled', true);" %>
+            <%= f.label :open_ended_end_date, 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);" %>&nbsp;
+            <%= f.radio_button :open_ended_end_date, false, :onclick => "$('#enddate select').attr('disabled', false);" %>
+            <%= f.label :open_ended_end_date, 'Specified as:', :value => false, :onclick => "$('#enddate select').attr('disabled', false);" %>
             <%= f.date_select :end_date, {:default => 1.month.from_now, :start_year => Date.today.year} %>
-            </span>
+            </div>
         </td>
     </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :paid, "Available as paid position?" %></td>
+        <td class="job_clear_table_field"><%= f.check_box :paid %></td>
+    </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :credit, "Available as for-credit position?" %></td>
+        <td class="job_clear_table_field"><%= f.check_box :credit %></td>
+    </tr>    
+    <tr>    
     <tr>
         <td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br /> (enter 0 to leave unspecified)</td>
         <td class="job_clear_table_field"><%= f.text_field :num_positions, {:value=> 0, :size=> 5} %></td>
     </tr>
-    <tr>
+
         <td class="job_clear_table_label"></td>
         <td class="job_clear_table_field">
             <br />

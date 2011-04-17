@@ -91,7 +91,22 @@
       <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
     </td>
   </tr>
-  
+  <tr>
+    <td class="job_attr_title">
+      Available as paid position?:
+    </td>
+    <td class="job_attr_value">
+      <%= @job.paid ? raw("<b>Yes</b>") : "No" %>
+    </td>
+  </tr>
+  <tr>
+    <td class="job_attr_title">
+      Available as for-credit position?:
+    </td>
+    <td class="job_attr_value">
+      <%= @job.credit ? raw("<b>Yes</b>") : "No" %>
+    </td>
+  </tr>  
   <tr>
     <td class="job_attr_title">
       Number of positions:
@@ -105,23 +120,7 @@
     </td>
   </tr>      
   
-  <tr>
-    <td class="job_attr_title">
-      Paid:
-    </td>
-    <td class="job_attr_value">
-      <%-# ActionView::Helpers::ThreeStateLabels[@job.paid] %>
-    </td>
-  </tr>
-    
-  <tr>
-    <td class="job_attr_title">
-      Credit:
-    </td>
-    <td class="job_attr_value">
-      <%-# ActionView::Helpers::ThreeStateLabels[@job.credit] %>
-    </td>
-  </tr>
+
 </tbody></table>
 
 
