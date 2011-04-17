@@ -1,9 +1,9 @@
 ResearchMatch::Application.routes.draw do
   get "home/index"
 
-  resources :applics
+#  resources :applics
 
-  resources :attribs
+#  resources :attribs
 
   resources :jobs do
     member do
@@ -11,6 +11,8 @@ ResearchMatch::Application.routes.draw do
       get 'delete'
       get 'unwatch'
       get 'watch'
+      get 'goapply'
+      post 'apply'
     end
     collection do
       get 'search', :action => :index

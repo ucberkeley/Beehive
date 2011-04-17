@@ -1,0 +1,59 @@
+<% content_for :title, "Apply for Position" %>
+
+<h1>Apply for Research Position</h1>
+
+<% form_for(@applic, :url => apply_job_path(@job)) do |f| -%>
+  <table class="job_clear_table">
+	  <tr>
+		<td class="job_clear_table_label">Job title</td>
+		<td class="job_clear_table_field"><b><a href="<%=h url_for @job %>" target="_blank"><%= @job.title %></a></b></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label">Faculty sponsor</td>
+		<td class="job_clear_table_field">
+		    <b>
+		        <% @job.faculties.each do |fac| %> 
+                	<%= fac.name %> 
+              	
+              	  <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley <%= fac.department.name %>" target="_blank">
+          		  		<%= image_tag(fac.department.abbrev.downcase + "_icon.gif") %>
+              		</a>
+            	    
+                	
+            <% end %> 
+    		</b>
+		</td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label">Message to faculty sponsor</td>
+		<td class="job_clear_table_field">
+		    <%= f.text_area :message, {:rows=>12, :class => "extrawide"}%>
+		</td>
+	  </tr>
+  </table>
+  <br />
+  <p>
+      <h2>Credentials</h2>
+      <b><%= current_user.name %></b>, please supply your transcript and resume in PDF format below. 
+      The faculty sponsor of this job will receive your credentials along with your application.
+  </p>
+  <br />
+    
+  <table class="job_clear_table">
+  	  <tr>
+		<td class="job_clear_table_label">Unofficial Transcript</td>
+		<td class="job_clear_table_field"><i>N/A</i></td>
+	  </tr>
+  	  <tr>
+		<td class="job_clear_table_label">Resume</td>
+		<td class="job_clear_table_field"><i>N/A</i></td>
+	  </tr>
+  </table>
+  
+  <br />
+  
+  <%= f.submit('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
+  <% end -%><!-- end form -->
+  
+<br /><br />
+<%= link_to raw('&#0171; Back to Listings'), jobs_path %>

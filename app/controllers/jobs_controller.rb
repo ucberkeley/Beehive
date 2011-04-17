@@ -27,7 +27,16 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @logged_in = logged_in?
-    prepare_attribs_in_params(@job)    
+    prepare_attribs_in_params(@job)
+    
+    # If user is watching this job, mark it as "read."
+    if logged_in?
+      w = Watch.find_by_job_id_and_user_id(@job.id, current_user.id)
+      if w.present?
+        w.mark_read
+      end
+    end
+     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @job }
@@ -176,10 +185,43 @@ class JobsController < ApplicationController
   	 end
    end
   end
+
+  # GET /jobs/1/goapply
+  # The get action for setting up applying for the job.
+  def goapply
+    @job = Job.find(params[:id])       
+    @applic = Applic.new
+    
+    if Applic.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id})
+      flash[:error] = "Whoa, slow down! You've already applied for this job."
+      redirect_to(url_for(@job))
+      return
+    end
+  end
   
+  # PUT /jobs/1/apply
+  # The post action for actually applying for the job.
+  def apply
+    @job = Job.find(params[:id])
+    @applic = Applic.new(params[:applic])
+    @applic.job = @job
+    @applic.user = current_user
+
+    respond_to do |format|
+      if @applic.save
+        format.html { redirect_to(@job, :notice => "Successfully applied for the position! Good luck and keep an eye on your email inbox.") }
+        format.xml  { render :xml => @job, :status => :created, :location => @job }
+      else
+        format.html { render :action => "goapply" }
+        format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
+      end
+    end
+
+  end
+
   # PRIVATE methods below e.g. filter methods
   private
-  
+
 	def correct_user_access
 		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
       flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."

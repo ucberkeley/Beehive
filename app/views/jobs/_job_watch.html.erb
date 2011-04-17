@@ -1,4 +1,4 @@
-<% job = watched_job.job %>
+<% job = job_watch.job %>
 <div id="watched_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 	<div class="job_padding_wrapper">
 		<table class="job_table">
@@ -8,13 +8,13 @@
 					<% if logged_in? && job.user_id == current_user.id %>
 						<%= link_to "[edit]", edit_job_url(job) %>
 					<% end %>
-					<% if job.users.include?(current_user) %>
+					<% if job.watchers.include?(current_user) %>
 						<%= link_to "[unwatch]", unwatch_job_url(job) %>
 					<% else %>
 						<%= link_to "[watch]", watch_job_url(job) %>
 					<% end %>
 					
-					<% if watched_job.unread? -%>
+					<% if job_watch.unread? -%>
 					    [updated!]
 					<% end -%>
 					

@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   
   
   # ASSOCIATIONS (abc order)
+  has_many :applics
   has_many :applied_jobs,   :source => 'job', :through => 'applics'
   has_many :attribs,        :through => :user_attribs  # takes care of categories, courses, proglangs (extensible too!)
   has_many :jobs,           :dependent => :nullify
@@ -134,6 +135,15 @@ class User < ActiveRecord::Base
     s = Types.invert[self.user_type].to_s
     s += 'uate' if options[:long] && [Types[:undergrad], Types[:grad]].include?(self.user_type)
     s = s.titleize
+  end
+  
+  # Returns a list of Jobs this user is watching.
+  def watched_jobs
+    watched_jobs = []
+    self.watches.each do |watch|
+      watched_jobs << Job.find(watch.job_id)
+    end
+    return watched_jobs
   end
 
 end
