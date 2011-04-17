@@ -36,11 +36,11 @@ class JobsController < ApplicationController
                       :department_id => params[:d]
                     }
 
-    @jobs = Job.search_jobs params[:q], search_params
+    @results = Job.search_jobs params[:q], search_params
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @jobs }
+      format.xml  { render :xml => @results }
     end
   end
 

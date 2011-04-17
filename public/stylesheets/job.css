@@ -1,24 +1,56 @@
-.job_table tr.job_table_row:hover {
+/**************
+ * jobs#index *
+ **************/
+.job_table td, .job_table th {
+    margin: 0px;
+    border: 0px;
+    border-spacing: 0px;
+    padding: 0px;
+}
+
+.job_table tr:hover {
 
 }
 
-.job_table tr.job_table_row td:hover {
+.job_table tr td:hover {
     /* cursor: pointer; */
 }
 
-.job_table_left {
+.job_table th {
+    text-color: black;
+}
+
+.job_table tr.result {
+    vertical-align: middle;
+    padding: 3px;
+}
+
+.job_table .left {
 	width: 40%;
 }
-.job_odd {
-	background: #F0FFD2;
-	
 
+/* Elements of the 'title & description' column */
+.job_table .title, .job_table .sponsors {
+    float: left;
 }
 
-.job_even {
-	background: none;
-	
+/* Actions like edit, watch */
+.job_table .actions {
+    float: right;
+}
 
+.job_table .desc {
+    padding: 5px;
+    text-align: left;
+    border: 2px #F0FFD2;
+    border-left-style: solid;
+}
+
+.job_table tr.result:nth-child(even) {
+}
+
+.job_table tr.result:nth-child(odd) {
+    background: #F0FFD2;
 }
 
 .job_padding_wrapper{
@@ -86,9 +118,12 @@
 	height: 40px;
 }
 
-#browse_header_table{
-	height: 40px;
-	width: 100%;
+.job_table tr.header {
+    height: 40px;
+    width: 100%;
+}
+.job_table th, td {
+    vertical-align: middle; 
 }
 
 #job_show_main p {
@@ -175,7 +210,9 @@ span.tag {
 	width:auto;
 	padding:5px;
 	vertical-align: top;
-}input.wide {
+}
+
+input.wide {
     width: 300px;
 }
 .job_clear_table_label {

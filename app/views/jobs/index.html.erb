@@ -5,37 +5,39 @@
 
 <%= render :partial => 'search' %>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Desc</th>
-    <th>Exp date</th>
-    <th>Num positions</th>
-    <th>Department</th>
-    <th>Activation code</th>
-    <th>Active</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%- if @results.empty? -%>
 
-<% @jobs.each do |job| %>
-  <tr>
-    <td><%= job.user %></td>
-    <td><%= job.title %></td>
-    <td><%= job.desc %></td>
-    <td><%= job.exp_date %></td>
-    <td><%= job.num_positions %></td>
-    <td><%= job.department_id %></td>
-    <td><%= job.activation_code %></td>
-    <td><%= job.active %></td>
-    <td><%= link_to 'Show', job %></td>
-    <td><%= link_to 'Edit', edit_job_path(job) %></td>
-    <td><%= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <h4>No matching listings found! Try broadening your search.</h4>
+
+<%- else # not @results.empty? -%>
+
+    <!-- there are results -->
+
+    <% unless params[:q].blank? %>
+
+        <div id="browse-info">
+        Your search for "<%= params[:q] %>" returned <%= pluralize @results.count, 'result' %>.
+        </div><br /><br />
+
+    <% end # query nonempty %>
+
+<div id="browse_results_wrapper">
+    <div id="browse_results_pagination">
+        <span class="left"><%= page_entries_info @results %></span>
+        <span class="right"><%= will_paginate @results %></span>
+    </div>
+    <br />
+    <table id="browse_header">
+        <%= render 'job', :header => true %>
+    </table>
+    <div class="job_padding_wrapper">
+    <table id="browse_results" class="job_table">
+        <%= render @results %>
+    </table>
+    </div><%# padding_wrapper %>
+    <%= will_paginate @results %>
+    </div>
+<%- end # not @results.empty -%>
 
 <br />
 
