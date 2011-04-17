@@ -1,0 +1,45 @@
+<!-- search bar -->
+<div id="browse_search_bar">
+  <form action="<%= search_jobs_path %>" method="get">
+    <span id="searchbox">
+      <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
+      <%= text_field_tag :q, params[:q], :placeholder => "Search", :style => "width: 180px" %>&nbsp;
+    </span>
+    <span id="department">
+      <%= label_tag :d, "Department" %>
+      <%= collection_select :department, :id,
+              Department.all, :id, :name,
+              {:prompt => 'All departments', :selected => params[:d].get(:to_i)},
+              {:name => :d}
+       %>
+    </span>
+    <span id="faculty">
+      <%= label_tag :f, "Faculty" %>
+      <%= collection_select :faculty, :id,
+              Faculty.all, :id, :name,
+              {:prompt => 'All faculty', :selected => params[:f].get(:to_i)},
+              {:name => :f}
+       %>
+    </span>
+    <span id="attribs">
+      &nbsp;&nbsp;<%= label_tag :paid,   "Paid?"   %> <%= check_box_tag :paid,   '1', params[:paid]   %>
+      &nbsp;&nbsp;<%= label_tag :credit, "Credit?" %> <%= check_box_tag :credit, '1', params[:credit] %>
+    </span>
+    <span id="btn">
+      <input type="submit" value="Search" />
+    </span>
+    <br />
+    <div id="advanced_search">
+      <%= hidden_field_tag :as, params[:as] %>
+
+      <%= label_tag :per_page, "Listings per page" %>
+      <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false %>
+
+      <%= label_tag :expired, "Include expired", :title => "Include listings with expiration dates in the past. These positions may not be available anymore." %>
+      <%= check_box_tag :expired, '1', params[:expired] %>
+
+      <%= label_tag :empty, "Include filled", :title => "Include listings with zero open positions." %>
+      <%= check_box_tag :filled, '1', params[:filled] %>
+    </div>
+  </form>
+</div>

@@ -14,7 +14,10 @@ ResearchMatch::Application.routes.draw do
       get 'goapply'
       post 'apply'
     end
-  end
+    collection do
+      get 'search', :action => :index
+    end
+   end
 
   get '/dashboard' => 'dashboard#index', :as => :dashboard
   get  '/profile' => 'users#profile', :as => :profile

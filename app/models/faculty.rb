@@ -1,4 +1,15 @@
 class Faculty < ActiveRecord::Base
+
+  # === List of columns ===
+  #   id            : integer 
+  #   name          : string 
+  #   email         : string 
+  #   department_id : integer 
+  #   uid           : integer 
+  #   created_at    : datetime 
+  #   updated_at    : datetime 
+  # =======================
+
   # ASSOCIATIONS (abc order)
   belongs_to :department
   

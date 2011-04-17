@@ -1,6 +1,10 @@
 class JobsController < ApplicationController
   include AttribsHelper
 
+  #####################
+  #     Filters       #
+  #####################
+
   #CalNet / CAS Authentication
   #before_filter CASClient::Frameworks::Rails::Filter # done in rm_login_required
   before_filter :rm_login_required
@@ -9,15 +13,34 @@ class JobsController < ApplicationController
   # or destroy it.
   #####before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
+
+
+  ######################
+  #    Misc. setup     #
+  ######################
+
+  #autocomplete :faculty, :name
+  def autocomplete_faculty_name
+    render :json => Faculty.all.collect(&:name)
+  end
+
+  ######################
+  #    Actions         #
+  ######################
   
   # GET /jobs
   # GET /jobs.xml
   def index
-    @jobs = Job.active
+    search_params = {
+                      :faculty_id    => params[:f],
+                      :department_id => params[:d]
+                    }
+
+    @results = Job.search_jobs params[:q], search_params
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @jobs }
+      format.xml  { render :xml => @results }
     end
   end
 
@@ -154,7 +177,7 @@ class JobsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def watch	
 	  job = Job.find(params[:id])
   	watch = Watch.new({:user=> current_user, :job => job})
