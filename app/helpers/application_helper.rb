@@ -79,3 +79,16 @@ class String
     n == 1 ? self : self.pluralize
   end
 end
+
+class Object
+  # Convenience method that calls the specified method on this object,
+  # or returns nil (or another default) if this object is nil.
+  #
+  # @param meth method name to send to this object
+  # @param default_value to return when SELF is nil
+  #
+  def get(meth, default_value=nil)
+    return default_value if self.nil?
+    self.send(*meth) rescue default_value
+  end
+end

@@ -52,6 +52,37 @@ class Job < ActiveRecord::Base
     errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
   end
 
+  # ThinkingSphinx search
+  define_index do
+    # Job texts
+    indexes :title
+    indexes :desc
+
+    # Job attributes
+    has exp_date
+    has :active
+    has num_positions
+
+    # Foreign keys
+    indexes faculties(:name), :as => :sponsors, :facet => true
+    has     faculties(:id),   :as => :faculty_ids
+    has     department(:id),  :as => :department_id
+
+    indexes attribs.value,  :as => :attribs,  :facet => true
+
+    # Sphinx properties
+    set_property :delta => true
+  end
+
+  # Delta indexing
+  before_save   :set_delta
+  before_update :set_delta
+  private
+  def set_delta
+    self.delta = true
+  end
+  public
+
   # SCOPES
   scope :active, where(:active => true)
   
@@ -71,14 +102,37 @@ class Job < ActiveRecord::Base
     self.faculties << Faculty.find_by_id(faculty_id)
   end
 
-  def self.search(query, options)
-  # Main job search function
+  def self.search_jobs(query, options)
+  # Main job search function (can't call it 'search' b/c that conflicts with ThinkingSphinx...)
   # Query is a string of keywords to search
   # Options can include:
+  #   faculty_id:       Restrict results to specific faculty
+  #   department_id:    Restrict results to specific department
   #
-  #
-    results = Job.active
-    return results
+    # Sanitize input
+    query ||= ""
+    query.gsub! /[^a-zA-z0-9]/, ''
+
+    ts_options = {:conditions=>{}, :with=>{}} #Hash.new{|h,k|h[k]={}}
+
+    ################
+    # phase 1: ALL #
+    ################
+    ts_options[:with][:active]        = true
+    ts_options[:with][:faculty_ids]   = options.delete(:faculty_id).to_i if options[:faculty_id].present?
+    ts_options[:with][:department_id] = options.delete(:department_id).to_i if options[:department_id].present?
+
+    ts_options[:match_mode] = :all
+
+    # Get results
+    results = Job.search ts_options
+
+    ################
+    # phase 2: ANY #
+    ################
+    ts_options = {:conditions => {}, :with => {}}
+    results = results.search query, ts_options
+
   end # search
 
    
