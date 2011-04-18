@@ -1,18 +1,23 @@
 class Job < ActiveRecord::Base
 
   # === List of columns ===
-  #   id              : integer 
-  #   user_id         : integer 
-  #   title           : string 
-  #   desc            : text 
-  #   exp_date        : datetime 
-  #   num_positions   : integer 
-  #   department_id   : integer 
-  #   activation_code : string 
-  #   active          : boolean 
-  #   created_at      : datetime 
-  #   updated_at      : datetime 
-  #   delta           : boolean 
+  #   id                  : integer 
+  #   user_id             : integer 
+  #   title               : string 
+  #   desc                : text 
+  #   num_positions       : integer 
+  #   department_id       : integer 
+  #   activation_code     : string 
+  #   active              : boolean 
+  #   created_at          : datetime 
+  #   updated_at          : datetime 
+  #   delta               : boolean 
+  #   earliest_start_date : datetime 
+  #   latest_start_date   : datetime 
+  #   end_date            : datetime 
+  #   open_ended_end_date : boolean 
+  #   paid                : boolean 
+  #   credit              : boolean 
   # =======================
 
   include AttribsHelper
@@ -35,6 +40,7 @@ class Job < ActiveRecord::Base
   #   (May require extra work to deal with sponsorships and other 
   #    data when dealing with job activations)
   validate :end_date_cannot_be_in_the_past
+  validate :latest_start_date_must_be_before_earliest
   #validate :must_have_sponsor  #, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   validates_length_of :title, :within => 10..200
   validates_numericality_of :num_positions, :allow_nil => true
@@ -48,6 +54,11 @@ class Job < ActiveRecord::Base
       !end_date.blank? and end_date < Time.now - 1.hour
   end
 
+  def latest_start_date_must_be_before_earliest
+    errors[:latest_start_date] << "cannot be earlier than the earliest start date" if 
+      !latest_start_date.blank? and latest_start_date < earliest_start_date
+  end
+
   def must_have_sponsor
     errors[:base] << ("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
   end
@@ -59,7 +70,7 @@ class Job < ActiveRecord::Base
     indexes :desc
 
     # Job attributes
-    has exp_date
+    has end_date
     has :active
     has num_positions
 

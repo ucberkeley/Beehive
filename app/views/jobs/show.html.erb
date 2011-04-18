@@ -82,7 +82,23 @@
     </td>
   </tr>
   <% end %>
-  
+
+  <tr>
+    <td class="job_attr_title"><br />
+      Earliest start date:
+    </td>
+    <td class="job_attr_value"><br />
+      <%=h @job.earliest_start_date.strftime("%b %e, %Y") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="job_attr_title">
+      Latest start date (work must start by):
+    </td>
+    <td class="job_attr_value">
+      <%=h @job.latest_start_date.strftime("%b %e, %Y") %>
+    </td>
+  </tr>  
   <tr>
     <td class="job_attr_title">
       Position end date:

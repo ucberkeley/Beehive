@@ -50,7 +50,15 @@
         <td class="job_clear_table_field">
             <%= f.date_select :earliest_start_date %>
         </td>
-    </tr>   
+    </tr>
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :earliest_start_date, raw('Latest start date<br />(work must start by)') %>
+        </td>
+        <td class="job_clear_table_field">
+            <%= f.date_select :latest_start_date %>
+        </td>
+    </tr>    
     <tr>
         <td class="job_clear_table_label">
             <%= f.label :end_date, 'End date' %>
@@ -75,17 +83,17 @@
     </tr>    
     <tr>    
     <tr>
-        <td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br /> (enter 0 to leave unspecified)</td>
+        <td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br />(enter 0 to leave unspecified)</td>
         <td class="job_clear_table_field"><%= f.text_field :num_positions, {:value=> 0, :size=> 5} %></td>
     </tr>
 
         <td class="job_clear_table_label"></td>
         <td class="job_clear_table_field">
             <br />
-            <% if controller.action_name.downcase == 'edit' %>
-              <%= f.submit('Update') %>
-            <% else %>
+            <% if controller.action_name.downcase == 'new' %>
               <%= f.submit('Post!') %>
+            <% else %>
+              <%= f.submit('Update') %>
             <% end %>&nbsp;&nbsp;&nbsp;
             <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" />
         </td>
