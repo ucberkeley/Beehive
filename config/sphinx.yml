@@ -1,5 +1,0 @@
-development:
-    morphology: stem_en
-
-production:
-    searchd_file_path: "/home/amber/researchmatch/shared/db/sphinx"

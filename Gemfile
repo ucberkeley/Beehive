@@ -31,6 +31,9 @@ gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 # Deploy with Capistrano
 gem 'capistrano'
 
+# Heroku
+gem 'heroku'
+
 
 ################################################################################
 
