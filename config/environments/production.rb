@@ -46,4 +46,12 @@ ResearchMatch::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # CAS authentication
+  CASClient::Frameworks::Rails::Filter.configure(
+    :cas_base_url => "https://auth.berkeley.edu/cas/"
+  )
+
+  # LDAP
+  UCB::LDAP.host = 'ldap.berkeley.edu'
 end

@@ -1,4 +1,16 @@
 class Document < ActiveRecord::Base
+
+  # === List of columns ===
+  #   id            : integer 
+  #   user_id       : integer 
+  #   document_type : integer 
+  #   size          : integer 
+  #   content_type  : string 
+  #   filename      : string 
+  #   created_at    : datetime 
+  #   updated_at    : datetime 
+  # =======================
+
   belongs_to :user
   
   class Types

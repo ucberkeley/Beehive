@@ -24,7 +24,7 @@ module ActionView
         check_box_tag(name, value, checked, options.merge({:onclick=>onclick}))
       end
 
-      ThreeStateLabels = {true=>'Yes', false=>'No', nil=>'N/A'}
+      ThreeStateLabels ||= {true=>'Yes', false=>'No', nil=>'N/A'}
 
       # Select box that maps {true=>1, false=>0, nil=>2}
       def three_state_select_tag(name, value=nil, options={})
@@ -129,6 +129,7 @@ module CASControllerIncludes
         return false
       else
         flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
+        flash[:error] += new_user.errors.inspect if Rails.env == 'development'
         redirect_to :controller => "home", :action => "index"
         return false
       end

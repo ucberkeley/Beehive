@@ -1,4 +1,15 @@
 class Review < ActiveRecord::Base
+
+  # === List of columns ===
+  #   id         : integer 
+  #   user_id    : integer 
+  #   body       : text 
+  #   rating     : integer 
+  #   created_at : datetime 
+  #   updated_at : datetime 
+  #   faculty_id : integer 
+  # =======================
+
     belongs_to :user
 	belongs_to :faculty
 	

@@ -1,10 +1,34 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  include Authentication
+
+  # === List of columns ===
+  #   id                  : integer 
+  #   name                : string 
+  #   login               : string 
+  #   email               : string 
+  #   persistence_token   : string 
+  #   single_access_token : string 
+  #   perishable_token    : string 
+  #   login_count         : integer 
+  #   failed_login_count  : integer 
+  #   last_request_at     : datetime 
+  #   current_login_at    : datetime 
+  #   last_login_at       : datetime 
+  #   current_login_ip    : string 
+  #   last_login_ip       : string 
+  #   user_type           : integer 
+  # =======================
+
+#  include Authentication
 #  include Authentication::ByPassword
-  include Authentication::ByCookieToken
+#  include Authentication::ByCookieToken
   
+
+  # Authlogic
+  acts_as_authentic do |u|
+  end
+
   class Types
       Undergrad = 0
       Grad      = 1
@@ -36,13 +60,18 @@ class User < ActiveRecord::Base
   #validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
   
   validates_presence_of     :name
-  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+
+  # TODO i think authlogic handles this for us
+  #validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+
   validates_length_of       :name,     :within => 0..100
 
   validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
-  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+
+  # TODO i think authlogic handles this for us
+  #validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   
   # Check that the email address is @*.berkeley.edu or @*.lbl.gov
   # validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
@@ -50,8 +79,6 @@ class User < ActiveRecord::Base
   # Check that user type is valid
   validates_inclusion_of    :user_type, :in => [Types::Undergrad, Types::Grad, Types::Faculty]
 
-  before_create :make_activation_code 
-  
   # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
   # email address to the user (depending on whether the user is a student or gsi or a faculty) 
   # and handle the courses for the user.
@@ -288,12 +315,6 @@ class User < ActiveRecord::Base
   
   protected
     
-
-    def make_activation_code
-  
-      self.activation_code = self.class.make_token
-    end
-
     # Dynamically assign the value of :email, based on whether this user
     # is marked as faculty or not. This should occur as a before_validation
     # since we want to save a value for :email, not :faculty_email or :student_email.

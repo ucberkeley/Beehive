@@ -122,7 +122,7 @@ module UCB #:nodoc:
       # Runtime error will be raised if bind_file not found or if environment key not
       # found in bind_file.
       #
-      def bind_for_rails(bind_file = "#{RAILS_ROOT}/config/ldap.yml", environment = RAILS_ENV)
+      def bind_for_rails(bind_file = "#{Rails.root}/config/ldap.yml", environment = RAILS_ENV)
         bind(bind_file, environment)
       end
       

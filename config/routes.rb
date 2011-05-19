@@ -1,4 +1,48 @@
 ResearchMatch::Application.routes.draw do
+
+  get  'courses_json'    => 'courses#json'
+  get  'categories_json' => 'categories#json'
+  get  'proglangs'       => 'proglangs#json'
+
+  resources :pictures
+
+  # Jobs
+  scope '/jobs', :as => :jobs do
+    get  '/activate/:id' => 'jobs#activate', :as => :activate
+    get  '/search' => 'jobs#index', :as => :search
+  end
+  resources :jobs
+
+  # Applics
+  scope :applics do
+    get  '/jobs/:job_id/apply' => 'applics#new', :as => :new_job_applic
+    get  '/jobs/:job_id/doapply' => 'applics#create', :method => 'post', :as => :create_job_applic
+    get  '/jobs/:job_id/applications' => 'applics#index', :as => :list_jobs_applics
+    get  '/applications/:id' => 'applics#show', :as => :applic
+    get  '/applications/:id/withdraw' => 'applics#destroy', :as => :destroy_applic
+    get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume
+    get  '/applications/:id/transcript'=>'applics#transcript', :as => :applic_transcript
+  end # applics
+
+  # Categories
+  resources :categories
+
+  # Documents
+  resources :documents
+
+  # Access control
+  match '/logout' => 'sessions#destroy'
+  match '/login'  => 'sessions#new'
+  resources :session
+
+  # Users
+  resources :users
+  get  '/dashboard' => 'dashboard#index'
+
+  # Home
+  get  '/' => 'home#index'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

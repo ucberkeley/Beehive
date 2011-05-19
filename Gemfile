@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~> 3.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Data
-gem 'mysql2'
+gem 'mysql2', '< 0.3.0'  # rails 3.0.3 and mysql >= .3 don't mix
 
 # Testing
 gem 'rspec-rails'
@@ -20,7 +20,7 @@ gem "exception_notification",
 gem 'authlogic',
     :git => 'git://github.com/binarylogic/authlogic.git'
 gem 'will_paginate', "~> 3.0.pre2"
-gem 'rubycas-client'
+gem 'rubycas-client', :require => ['casclient', 'casclient/frameworks/rails/filter']
 gem 'ruby-net-ldap'
 gem 'acts_as_taggable_on_steroids'
 ## gem 'attachment_fu',
