@@ -1,13 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html>
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>ResearchMatch <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
-  
+
+  <%# Resources %>
+  <%= stylesheet_link_tag :all %>
   <%= stylesheet_link_tag 'south-street/jquery-ui-1.8.4.custom' %>
   <%= stylesheet_link_tag 'application' %>
+
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
   
   <% c = controller.controller_name %>
   <% if c == 'jobs' or c == 'dashboard' %>
