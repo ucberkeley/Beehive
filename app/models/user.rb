@@ -105,22 +105,10 @@ class User < ActiveRecord::Base
   # attr_reader :student_name; attr_writer :student_name
   # attr_reader :faculty_name; attr_writer :faculty_name
   
-  # Activates the user in the database.
-  def activate!
-    @activated = true
-    self.activated_at = Time.now.utc
-    self.activation_code = nil
-    save(false)
-  end
-
-  # Returns true if the user has just been activated.
+ 
+  # (DEPRECATED) Returns true if the user has just been activated.
   def recently_activated?
-    @activated
-  end
-
-  def active?
-    # the existence of an activation code means they have not activated yet
-    activation_code.nil?
+    false 
   end
 
   # Return the user corresponding to given login
