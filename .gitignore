@@ -4,3 +4,4 @@ log/*.log
 **/*.pid
 tmp/
 cscope.*
+mysql2/
