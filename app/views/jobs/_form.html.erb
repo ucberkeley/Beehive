@@ -1,0 +1,101 @@
+<p>
+  After submitting your listing, the faculty sponsor you've selected will need to <br />
+  confirm the listing before it is displayed on ResearchMatch.
+</p>
+<p>
+  Fields labeled with an asterisk are required.
+</p>
+<br />
+<% form_for(@job) do |f| %>
+
+  <% if @job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% @job.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <br />
+  <% end %>
+ 
+  <table class="job_clear_table">
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :title, 'Listing title' %><span class="required_field">*</span></td>
+		<td class="job_clear_table_field"><%= f.text_field :title, :class => 'extrawide' %></td>
+	  </tr>
+      <tr>
+		<td class="job_clear_table_label"><%= f.label :department %><span class="required_field">*</span></td>
+		<td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
+		<td class="job_clear_table_field">
+            <%= select_tag :faculty_name,
+                options_from_collection_for_select(Faculty.all,
+                    :id,
+                    :name,
+                    @job.faculties.first.nil? ? 0 : @job.faculties.first.id
+                )
+             %>
+        </td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
+		<td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
+		<td class="job_clear_table_field">
+            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide', 
+                            :placeholder => "(e.g. signal processing, computer vision)"  %>
+        </td>
+	  </tr>
+	  <tr>
+		<div class="ui-widget">
+		    <td class="job_clear_table_label"><%= f.label :course, 'Required courses' %></td>
+		    <td class="job_clear_table_field">
+                <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'extrawide', 
+                                :placeholder => "(e.g. CS61A, EE123)"  %>
+            </td>
+		</div>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :proglang, 'Desired programming language(s)' %></td>
+		<td class="job_clear_table_field">
+            <%= text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'extrawide', 
+                           :placeholder => "(e.g. Python, Java)" %>
+        </td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :exp_date, 'Expiration time of this listing' %></td>
+		<td class="job_clear_table_field">
+            <%= f.datetime_select :exp_date %> &nbsp; &nbsp; Note: Time is UTC-8.
+        </td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br />(enter 0 to leave unspecified)</td>
+		<td class="job_clear_table_field"><%= f.text_field :num_positions, {:size=> 5} %></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :paid, 'Paid?' %></td>
+		<td class="job_clear_table_field"><%= three_state_select_tag 'job[paid]', @job.paid %></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"><%= f.label :credit, 'Credit (units) offered?' %></td>
+		<td class="job_clear_table_field"><%= three_state_select_tag 'job[credit]', @job.credit %></td>
+	  </tr>
+	  <tr>
+		<td class="job_clear_table_label"></td>
+		<td class="job_clear_table_field"><br />
+	    <% if controller.action_name.downcase == 'new' %>
+              <%= f.submit('Post') %>
+            <% else %>
+              <%= f.submit('Update') %>
+            <% end %>&nbsp;&nbsp;&nbsp;
+      <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" /></td>
+	  </tr>
+  </table>
+<% end %>
