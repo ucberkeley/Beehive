@@ -17,6 +17,8 @@ module ActionView
     def tag_search_path(tagstring)
       "#{jobs_path}?tags=#{tagstring}"
     end
+    
+    ThreeStateLabels = {true=>'Yes', false=>'No', nil=>'N/A'}
 
     module FormTagHelper
       def indeterminate_check_box_tag(name, value = "1", indeterminate_value = "2", checked = :unchecked, options = {})
@@ -24,8 +26,7 @@ module ActionView
         check_box_tag(name, value, checked, options.merge({:onclick=>onclick}))
       end
 
-      #ThreeStateLabels ||= {true=>'Yes', false=>'No', nil=>'N/A'}
-
+      
       # Select box that maps {true=>1, false=>0, nil=>2}
       def three_state_select_tag(name, value=nil, options={})
         labels = options.delete(:labels) || ThreeStateLabels

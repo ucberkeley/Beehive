@@ -10,6 +10,7 @@ ResearchMatch::Application.routes.draw do
   scope '/jobs', :as => :jobs do
     get  '/activate/:id' => 'jobs#activate', :as => :activate
     get  '/search' => 'jobs#index', :as => :search
+    get  '/delete/:id' => 'jobs#delete', :as => :delete
   end
   resources :jobs
 
