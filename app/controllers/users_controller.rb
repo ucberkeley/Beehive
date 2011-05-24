@@ -108,7 +108,7 @@ class UsersController < ApplicationController
         @user.update_attribs(params)
         puts "UPDATE: " + params.inspect
         flash[:notice] = 'User profile was successfully updated.'
-        format.html { render :action => :edit }
+        format.html { redirect_to(edit_user_path, :notice => 'User profile was successfully updated.') } 
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

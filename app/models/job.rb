@@ -1,4 +1,5 @@
 class Job < ActiveRecord::Base
+  include AttribsHelper
 
   # === List of columns ===
   #   id              : integer 

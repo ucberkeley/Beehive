@@ -3,6 +3,7 @@ class JobsController < ApplicationController
   # GET /jobs.xml
   
   include CASControllerIncludes
+  include AttribsHelper
   
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, 
 		:auto_complete_for_course_name, :auto_complete_for_proglang_name]
