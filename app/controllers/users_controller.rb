@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include AttribsHelper
   include CASControllerIncludes
   
   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name, 
@@ -47,8 +48,6 @@ class UsersController < ApplicationController
       create
   end
  
- 
- 
   def create
     logout_keeping_session!
 
@@ -88,11 +87,13 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
 
+    prepare_attribs_in_params(@user)
+    puts "EDIT:" +  params.inspect
     # Ruby magic
     # This saves the form data, in the event you tried to update but failed a validation
-    [:course, :category, :proglang].each do |list|
-      params[list.to_s] ||= {:name=>@user.send("#{list}_list_of_user".to_sym, true)}
-    end
+    #[:course, :category, :proglang].each do |list|
+    #  params[list.to_s] ||= {:name=>@user.send("#{list}_list_of_user".to_sym, true)}
+    #end
 
   end
   
@@ -102,13 +103,10 @@ class UsersController < ApplicationController
     # If params[:user] is blank? for some reason, instantiate it.
     params[:user] ||= {}
     
-    # Handle autocompletes
-    [:course, :category, :proglang].each do |thing|
-      params[:user]["#{thing.to_s}_names".to_sym] = params[thing][:name]
-    end
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        @user.update_attribs(params)
+        puts "UPDATE: " + params.inspect
         flash[:notice] = 'User profile was successfully updated.'
         format.html { render :action => :edit }
         format.xml  { head :ok }
