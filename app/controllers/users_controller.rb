@@ -58,11 +58,6 @@ class UsersController < ApplicationController
       redirect_to '/'
     end
 
-    # Handles the text_field_with_auto_complete for courses, categories, and programming languages.
-    params[:user][:course_names] = params[:course][:name] if params[:course]
-    params[:user][:category_names] = params[:category][:name] if params[:category]
-    params[:user][:proglang_names] = params[:proglang][:name] if params[:proglang]
-    
     @user = User.new(params[:user])
     @user.login = session[:cas_user]
     @user.name = @user.ldap_person_full_name
@@ -86,15 +81,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-
     prepare_attribs_in_params(@user)
-    puts "EDIT:" +  params.inspect
-    # Ruby magic
-    # This saves the form data, in the event you tried to update but failed a validation
-    #[:course, :category, :proglang].each do |list|
-    #  params[list.to_s] ||= {:name=>@user.send("#{list}_list_of_user".to_sym, true)}
-    #end
-
   end
   
   def update
@@ -106,7 +93,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         @user.update_attribs(params)
-        puts "UPDATE: " + params.inspect
         flash[:notice] = 'User profile was successfully updated.'
         format.html { redirect_to(edit_user_path, :notice => 'User profile was successfully updated.') } 
         format.xml  { head :ok }
