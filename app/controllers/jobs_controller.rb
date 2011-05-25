@@ -289,12 +289,12 @@ class JobsController < ApplicationController
   end
 
 
-    # Saves sponsorship specified in the params page
-    def update_sponsorships
-        fac = Faculty.exists?(params[:faculty_name]) ? params[:faculty_name] : 0
-        sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
-        @job.sponsorships = [sponsor]
-    end
+  # Saves sponsorship specified in the params page
+  def update_sponsorships
+    fac = Faculty.exists?(params[:faculty_id]) ? params[:faculty_id] : 0
+    sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
+    @job.sponsorships = [sponsor]
+  end
   
   
 	  # Populates the tag_list of the job.
@@ -310,9 +310,6 @@ class JobsController < ApplicationController
 	end
   
   private
-  
-
-	
 	def correct_user_access
 		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
 			flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
