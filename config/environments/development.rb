@@ -24,7 +24,7 @@ ResearchMatch::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   # Logging
-  config.log_level = :warn
+  config.log_level = :info
 
   # CAS authentication
   CASClient::Frameworks::Rails::Filter.configure(

@@ -33,7 +33,7 @@
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field">
-            <%= select_tag :faculty_name,
+            <%= select_tag :faculty_id,
                 options_from_collection_for_select(Faculty.all,
                     :id,
                     :name,
@@ -90,7 +90,7 @@
 	  <tr>
 		<td class="job_clear_table_label"></td>
 		<td class="job_clear_table_field"><br />
-	    <% if controller.action_name.downcase == 'new' %>
+	    <% if ['new', 'create'].include?(controller.action_name.downcase) %>
               <%= f.submit('Post') %>
             <% else %>
               <%= f.submit('Update') %>

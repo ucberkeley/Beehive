@@ -101,8 +101,6 @@ class JobsController < ApplicationController
   # GET /jobs/new.xml
   def new
     @job = Job.new
-
-	
   end
 
   # GET /jobs/1/edit
@@ -128,7 +126,7 @@ class JobsController < ApplicationController
     params[:job][:activation_code] = 0
     
 
-    sponsor = Faculty.find(params[:faculty_sponsor].to_i)
+    sponsor = Faculty.find(params[:faculty_id].to_i)
     @job = Job.new(params[:job])
 
     respond_to do |format|
@@ -144,7 +142,8 @@ class JobsController < ApplicationController
         
         #TODO: Send an e-mail to the faculty member(s) involved.
         # At this point, ActionMailer should have been set up by /config/environment.rb
-        FacultyMailer.deliver_faculty_confirmer(sponsor.email, sponsor.name, @job)
+        puts "[][][] ACTIVATION CODE:  @job.activation_code"
+        #FacultyMailer.deliver_faculty_confirmer(sponsor.email, sponsor.name, @job)
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
