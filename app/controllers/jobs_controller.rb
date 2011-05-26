@@ -133,17 +133,11 @@ class JobsController < ApplicationController
       if @job.valid_without_sponsorships?
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
-        @job.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
-        # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
+        @job.reset_activation
         @job.save
         flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
         flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
-        
-        #TODO: Send an e-mail to the faculty member(s) involved.
-        # At this point, ActionMailer should have been set up by /config/environment.rb
-        puts "[][][] ACTIVATION CODE:  @job.activation_code"
-        #FacultyMailer.deliver_faculty_confirmer(sponsor.email, sponsor.name, @job)
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -161,14 +155,29 @@ class JobsController < ApplicationController
 
     @job = Job.find(params[:id])
 	
-    update_sponsorships  	
+    changed_sponsors = update_sponsorships  	
 			
     respond_to do |format|
       if @job.update_attributes(params[:job])
         
         populate_tag_list
+        
+        # If the faculty sponsor changed, require activation again.
+        # (require the faculty to confirm again)
+        if changed_sponsors
+          @job.reset_activation 
+
+          flash[:notice] = 'Since the faculty sponsor(s) for this listing have '
+          flash[:notice] << 'changed, the listing must be approved by the '
+          flash[:notice] << 'new sponsor(s) before it can be added to the '
+          flash[:notice] << 'listings page and viewed by other users. '
+          flash[:notice] << 'An e-mail has been dispatched to the faculty '
+          flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+        else
+          flash[:notice] = 'Job was successfully updated.'
+        end
+
         @job.save
-        flash[:notice] = 'Job was successfully updated.'
         format.html { redirect_to(@job) }
         format.xml  { head :ok }
       else
@@ -289,11 +298,15 @@ class JobsController < ApplicationController
   end
 
 
-  # Saves sponsorship specified in the params page
+  # Saves sponsorship specified in the params page.
+  # Returns true if sponsorships changed at all for this update,
+  #   and false if they did not.
   def update_sponsorships
+    orig_sponsorships = @job.sponsorships.clone
     fac = Faculty.exists?(params[:faculty_id]) ? params[:faculty_id] : 0
     sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
     @job.sponsorships = [sponsor]
+    return orig_sponsorships != @job.sponsorships
   end
   
   
