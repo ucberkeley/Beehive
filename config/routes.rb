@@ -11,6 +11,8 @@ ResearchMatch::Application.routes.draw do
     member do 
       get 'activate'
       get 'delete'
+      get 'watch'
+      get 'unwatch'
     end
   end
 
@@ -24,9 +26,6 @@ ResearchMatch::Application.routes.draw do
     get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume
     get  '/applications/:id/transcript'=>'applics#transcript', :as => :applic_transcript
   end # applics
-
-  # Categories
-  resources :categories
 
   # Documents
   resources :documents
