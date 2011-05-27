@@ -2,7 +2,10 @@
 
 <div id="job_show_main">
 <br />
-<h2><%=h @job.title %></h2>
+<h2>
+  <%=h @job.title %>
+  <% unless @job.active %><span style="color: red">(not activated)</span><% end %>  
+</h2>
 <p>
   posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
 	<b>
