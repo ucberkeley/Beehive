@@ -9,7 +9,18 @@ module ApplicationHelper
 	        not self.nil? and not self.empty?
 	    end
 	end
-	
+
+  def current_user
+    # TODO: transition this out in favor of @current_user
+    ActiveSupport::Deprecation.warn "current_user is deprecated in favor of @current_user", caller
+    @current_user
+  end
+
+  def logged_in?
+    # TODO: transition out in favor of @current_user
+    ActiveSupport::Deprecation.warn "logged_in? is deprecated in favor of @current_user", caller
+    !!@current_user
+  end
 end
 
 module ActionView
@@ -102,11 +113,19 @@ end
 
 module CASControllerIncludes
   def goto_cas_unless_logged_in
-    CASClient::Frameworks::Rails::Filter.filter(self) unless logged_in?
+    CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user
+  end
+
+  def login_user!(user)
+    @user_session = UserSession.new(user)
+    return @user_session.save
   end
 
   def rm_login_required
-    #flash[:setjmp] = request.url
+    # Require CAS login first
+    unless @user_session
+      redirect_to login_path
+    end
   
     # If user doesn't exist, create it. Use current_user
     # so as to ensure that redirects work properly; i.e. 
@@ -126,7 +145,7 @@ module CASControllerIncludes
         logger.info "First login for #{new_user.login}"
 
         self.current_user = User.authenticate_by_login(session[:cas_user].to_s)
-        redirect_to :controller => "users", :action => "edit", :id => current_user.id
+        redirect_to :controller => "users", :action => "edit", :id => @current_user.id
         return false
       else
         flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
@@ -134,11 +153,7 @@ module CASControllerIncludes
         redirect_to :controller => "home", :action => "index"
         return false
       end
-      
     end
-    
-    # login_required call handles forcing users to actually login to session
-    login_required
     
     logger.info("\n\n\n\n GOT PAST LOGIN_REQUIRED  \n\n\n\n")
   end
