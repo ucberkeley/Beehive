@@ -155,7 +155,7 @@ module CASControllerIncludes
       end
     end
     
-    logger.info("\n\n\n\n GOT PAST LOGIN_REQUIRED  \n\n\n\n")
+    logger.info("\n\n GOT PAST LOGIN_REQUIRED  \n\n")
   end
 
   # Redirects to signup page if user hasn't registered.

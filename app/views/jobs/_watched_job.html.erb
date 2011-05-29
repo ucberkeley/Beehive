@@ -5,10 +5,10 @@
 			<tr>
 				<td class="job_table_left">
 					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span> (<%= (job.faculties != []) ? job.faculties.first.name : "no faculty sponsor" %>) 
-					<% if logged_in? && job.user_id == current_user.id %>
+					<% if @current_user.present? && job.user_id == @current_user.id %>
 						<%= link_to "[edit]", :controller=>:jobs, :action => :edit, :id => job.id %>
 					<% end %>
-					<% if job.users.include?(current_user) %>
+					<% if job.users.include?(@current_user) %>
 						<%= link_to "[unwatch]", :controller=>:jobs, :action => :unwatch, :id => job.id %>
 					<% else %>
 						<%= link_to "[watch]", :controller=>:jobs, :action => :watch, :id => job.id %>

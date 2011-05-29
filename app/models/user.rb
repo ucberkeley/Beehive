@@ -207,7 +207,7 @@ class User < ActiveRecord::Base
         end
     end
     jobs
-    #@watched_jobs = current_user.watches.map{|w| w.job }
+    #@watched_jobs = @current_user.watches.map{|w| w.job }
   end
   
   

@@ -87,7 +87,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     # update watch time so this job is now 'read'
-    if current_user.present? && (watch=Watch.find(:first, :conditions => {:user_id => current_user.id, :job_id => @job.id}))
+    if @current_user.present? && (watch=Watch.find(:first, :conditions => {:user_id => @current_user.id, :job_id => @job.id}))
         watch.mark_read
     end
 
@@ -118,7 +118,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    params[:job][:user] = current_user
+    params[:job][:user] = @current_user
             
     process_form_params
 
@@ -250,10 +250,10 @@ class JobsController < ApplicationController
   	desc = desc << "..." if job.desc.length > 100
   	render :text=>  desc
   end
-  
+
   def watch	
 	  job = Job.find(params[:id])
-  	watch = Watch.new({:user=> current_user, :job => job})
+  	watch = Watch.new({:user=> @current_user, :job => job})
 	
   	respond_to do |format|
   		if watch.save
@@ -268,7 +268,7 @@ class JobsController < ApplicationController
   
  def unwatch	
    job = Job.find(params[:id])
-   watch = Watch.find(:first, :conditions=>{:user_id=> current_user.id, :job_id => job.id})
+   watch = Watch.find(:first, :conditions=>{:user_id=> @current_user.id, :job_id => job.id})
 
    respond_to do |format|
   	 if watch.destroy
@@ -325,14 +325,14 @@ class JobsController < ApplicationController
   
   private
 	def correct_user_access
-		if (Job.find(params[:id]) == nil || current_user != Job.find(params[:id]).user)
+		if (Job.find(params[:id]) == nil || @current_user != Job.find(params[:id]).user)
 			flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
 			redirect_to :controller => 'dashboard', :action => :index
 		end
 	end
 	
 	def check_post_permissions
-	    if not current_user.can_post?
+	    if not @current_user.can_post?
 	        flash[:error] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
 	        redirect_to :controller => 'dashboard', :action => :index
 	    end

@@ -104,7 +104,7 @@
 	      <% [ ["Résumé", :resume, "You should upload one to impress the professors!"],
 	           ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
 	         ].each do |item| -%>
-	         <% doc = current_user.send(item[1]) -%>
+	         <% doc = @current_user.send(item[1]) -%>
 	         
 	          <b><%= item[0] %>:</b> 
 	          <% if doc.nil? -%>
@@ -118,12 +118,12 @@
 	          <br /><br />
 	      <% end -%>
 	      
-	      <% if current_user.resume.nil? or current_user.transcript.nil? -%>
+	      <% if @current_user.resume.nil? or @current_user.transcript.nil? -%>
 	      <% form_for(:document, :url => documents_path, :html => {:multipart=>true}) do |f| -%>
               <%= f.file_field :uploaded_data %>
-              <%= f.hidden_field :user_id, :value => current_user.id %>
+              <%= f.hidden_field :user_id, :value => @current_user.id %>
               <% [:resume, :transcript].each do |item| %>
-                  <% if current_user.send(item).nil? %>
+                  <% if @current_user.send(item).nil? %>
                       <%= f.radio_button(:document_type, item.to_s, {:checked => "checked"} ) %>
                       <%= f.label "document_type_#{item.to_s}", item.to_s.capitalize %>
                   <% end %>

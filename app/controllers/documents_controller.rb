@@ -15,11 +15,11 @@ end
 def create
     @document = Document.new(params[:document])
     # TODO: additional verification of correct user?
-    return if redirected_because(params[:document].nil? || params[:document][:user_id].nil? || params[:document][:user_id].to_i != current_user.id,
+    return if redirected_because(params[:document].nil? || params[:document][:user_id].nil? || params[:document][:user_id].to_i != @current_user.id,
         "Error: Couldn't associate document with your user. Please re-upload.",
         "/dashboard")
      
-    @document.user = current_user
+    @document.user = @current_user
     
     # Process document type
     @document.set_document_type(params[:document][:document_type])
@@ -35,7 +35,7 @@ def create
     end
 
     #redirect_back_or_default "/dashboard"
-    redirect_to url_for(:controller => 'users', :action => 'edit', :id => current_user.id)
+    redirect_to url_for(:controller => 'users', :action => 'edit', :id => @current_user.id)
 end
 
 def show
@@ -44,7 +44,7 @@ end
 
 def destroy
     @document = Document.find(params[:id])
-    if @document.user == current_user
+    if @document.user == @current_user
         if @document.destroy
             flash[:notice] = "Removed the requested document."
         else
@@ -53,7 +53,7 @@ def destroy
     else
         flash[:error] = "Access violation."
     end
-    redirect_to url_for(:controller => 'users', :action => 'edit', :id => current_user.id)
+    redirect_to url_for(:controller => 'users', :action => 'edit', :id => @current_user.id)
 end
 
 end

@@ -61,12 +61,12 @@
 		        <li><%= link_to "Dashboard", :controller => :dashboard %></li>		    
 		        <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", :controller => :jobs, :action => :index %></li>
 		        
-		        <% if ! logged_in? || logged_in? && current_user.user_type != User::Types::Undergrad %>
+		        <% if @current_user.blank? || @current_user.present? && @current_user.user_type != User::Types::Undergrad %>
   		        <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", :controller => :jobs, :action => :new %></li>
 		        <% end %>
 		        
-		        <% if logged_in? %>
-    		        <li><%= link_to "Edit Profile", edit_user_url(current_user) %></li>		  
+		        <% if @current_user.present? %>
+    		        <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li> 
 		        <% end %>
 		        
 		    </ul>

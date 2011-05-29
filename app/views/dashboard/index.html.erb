@@ -3,7 +3,7 @@
 	<div class="dashboard_wrapper_watched">
 		<div class="dashboard_container_watched box_shadow">
 		
-			<% if current_user.can_post? -%>
+			<% if @current_user.can_post? -%>
 				<h2>Your Postings</h2>
 				
 				<% if @your_jobs.empty? %>
@@ -14,14 +14,14 @@
 				<% end %>
 			
 			<% end -%>	
-			<% if !current_user.is_faculty %>
+			<% if !@current_user.is_faculty %>
 			
 				<h2>Your Watched Postings</h2>
 				<!-- //list of postings you're watching -->
 				<% if @watched_jobs.empty? %>
 					You are not watching any postings.
 				<% else %>
-					<%= render :partial => "jobs/watched_job", :collection => current_user.watches %>
+					<%= render :partial => "jobs/watched_job", :collection => @current_user.watches %>
 				<% end %>
 				<br />
 			
@@ -32,16 +32,13 @@
 	<div class="dashboard_wrapper_smartmatch">
 		<div class="dashboard_container_smartmatch box_shadow">
 			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
-			
-
-
 			<% if @relevant_jobs.empty? %>
 			 <p>
 			    Unfortunately, we were unable to match you to any research positions.
 			 </p> 
 			 <p>
     			 Most likely, this is caused by a lack of information regarding your coursework and interests.
-	    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?
+	    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => @current_user %> with courses and interests to get started?
 			 </p>
 			<% else %>
 			<%= @current_user.name %>, we've automatically matched your interests and skill set to the
