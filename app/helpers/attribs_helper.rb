@@ -62,7 +62,6 @@ module AttribsHelper
             # Find or create the attrib 
             the_attrib = attrib_type.to_s.capitalize.constantize.find_or_create_by_name(val)
             attrib_array << the_attrib unless attrib_array.include?(the_attrib)
-
           end
         end
       end

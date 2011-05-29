@@ -44,7 +44,7 @@
 	    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => current_user %> with courses and interests to get started?
 			 </p>
 			<% else %>
-			<%= @user.name %>, we've automatically matched your interests and skill set to the
+			<%= @current_user.name %>, we've automatically matched your interests and skill set to the
 			following <b><%= @relevant_jobs.length %> research
 			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
 						<br /><br />
