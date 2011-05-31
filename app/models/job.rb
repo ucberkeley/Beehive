@@ -33,9 +33,9 @@ class Job < ActiveRecord::Base
   has_many :users, :through => :watches
   has_many :sponsorships, :dependent => :destroy
   has_many :faculties, :through => :sponsorships
-  has_many :coursereqs
+  has_many :coursereqs, :dependent => :destroy
   has_many :courses, :through => :coursereqs
-  has_many :proglangreqs
+  has_many :proglangreqs, :dependent => :destroy
   has_many :proglangs, :through => :proglangreqs
   
   # Before carrying out validations and creating the actual object, 
@@ -221,7 +221,7 @@ class Job < ActiveRecord::Base
   # e.g. "robotics,signal processing"
   def category_list_of_job(add_spaces = false)
   	category_list = ''
-  	categories.each do |cat|
+  	self.categories.each do |cat|
   		category_list << cat.name + ','
   		if add_spaces: category_list << ' ' end
   	end
@@ -237,7 +237,7 @@ class Job < ActiveRecord::Base
   # e.g. "CS61A,CS61B"
   def course_list_of_job(add_spaces = false)
   	course_list = ''
-  	courses.each do |c|
+  	self.courses.each do |c|
   		course_list << c.name + ','
   		if add_spaces: course_list << ' ' end
   	end
@@ -253,7 +253,7 @@ class Job < ActiveRecord::Base
   # e.g. "java,scheme,c++"
   def proglang_list_of_job(add_spaces = false)
   	proglang_list = ''
-  	proglangs.each do |pl|
+  	self.proglangs.each do |pl|
   		proglang_list << pl.name.capitalize + ','
    		if add_spaces: proglang_list << ' ' end
   	end
@@ -305,7 +305,7 @@ class Job < ActiveRecord::Base
 
   protected
   
-  	# Parses the textbox list of category names from "Signal Processing, Robotics"
+  # Parses the textbox list of category names from "Signal Processing, Robotics"
 	# etc. to an enumerable object categories
 	def handle_categories
 		unless skip_handlers

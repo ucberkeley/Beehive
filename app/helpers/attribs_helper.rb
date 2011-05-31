@@ -65,6 +65,7 @@ module AttribsHelper
           end
         end
       end
+
     end
     
   end

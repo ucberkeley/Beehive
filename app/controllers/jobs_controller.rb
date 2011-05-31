@@ -159,7 +159,9 @@ class JobsController < ApplicationController
     changed_sponsors = update_sponsorships  	
 			
     respond_to do |format|
+      @job.skip_handlers = true
       if @job.update_attributes(params[:job])
+
         @job.update_attribs(params)      
         populate_tag_list
         
