@@ -38,13 +38,6 @@ class Job < ActiveRecord::Base
   has_many :proglangreqs, :dependent => :destroy
   has_many :proglangs, :through => :proglangreqs
   
-  # Before carrying out validations and creating the actual object, 
-  # handle the name of the category(ies), the required courses, and the 
-  # desired proglangs so as to deal with associations properly.
-  before_validation :handle_categories
-  before_validation :handle_courses
-  before_validation :handle_proglangs
-  
   validates_presence_of :title, :desc, :department #:exp_date, :num_positions
   
   # Validates that expiration dates are no earlier than right now.
@@ -201,8 +194,7 @@ class Job < ActiveRecord::Base
     results = results.tagged_with(options[:tags]) if options[:tags].present?
     return results
   end
-  
-  
+ 
   def self.query_url(options)
     params = {}
     params[:query]          = options[:query]               if options[:query]
@@ -273,7 +265,6 @@ class Job < ActiveRecord::Base
     end
   end
   
-  
   # Returns true if the specified user has admin rights (can view applications,
   # edit, etc.) for this job.
   def allow_admin_by?(u)
@@ -305,45 +296,6 @@ class Job < ActiveRecord::Base
 
   protected
   
-  # Parses the textbox list of category names from "Signal Processing, Robotics"
-	# etc. to an enumerable object categories
-	def handle_categories
-		unless skip_handlers
-			self.categories = []  # eliminates any previous categories_jobs so as to avoid duplicates
-			category_array = []
-			category_array = category_names.split(',').uniq if ! category_names.nil?
-			category_array.each do |item|
-				self.categories << Category.find_or_create_by_name(item.downcase.strip)
-			end
-		end
-	end
-	
-	# Parses the textbox list of courses from "CS162,CS61A,EE123"
-	# etc. to an enumerable object courses
-	def handle_courses
-		unless skip_handlers
-			self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
-			course_array = []
-			course_array = course_names.split(',').uniq if ! course_names.nil?
-			course_array.each do |item|
-				self.courses << Course.find_or_create_by_name(item.upcase.strip.gsub(/ /, ''))
-			end
-		end
-	end
-	
-	# Parses the textbox list of proglangs from "java,c,scheme"
-	# etc. to an enumerable object proglangs
-	def handle_proglangs
-		unless skip_handlers
-			self.proglangs = []  # eliminates any previous enrollments so as to avoid duplicates
-			proglang_array = []
-			proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
-			proglang_array.each do |pl|
-				self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
-			end
-		end
-	end	
-	
 	def validate_sponsorships
 	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
 	end
