@@ -10,6 +10,7 @@ gem 'mysql2'
 
 # Testing
 gem 'rspec-rails'
+gem 'ZenTest'
 
 # Debugging
 gem "exception_notification",

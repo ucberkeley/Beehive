@@ -23,7 +23,10 @@ class User < ActiveRecord::Base
   include AttribsHelper
 
   # for Authlogic
-  acts_as_authentic do |u|
+  acts_as_authentic do |config|
+    config.require_password_confirmation = false
+    config.validate_password_field = false
+    config.ignore_blank_passwords = true
   end
 
   # User types; used with LDAP  
@@ -65,7 +68,7 @@ class User < ActiveRecord::Base
   
   def first_login(my_login)
     self.login    = my_login unless my_login.blank?
-    self.password = self.password_confirmation = 'password'
+    self.password = 'password'    # TODO: make authlogic not require this field at all
     self.name     = ldap_person_full_name
     self.email    = ldap_person.email
     self.update_user_type 
@@ -95,8 +98,10 @@ class User < ActiveRecord::Base
   #  - save|update: If true, DO update user type in the database.
   #
   def update_user_type(options={})
+    options = {:stub => options} if User::Types.values.include? options
+
     unless options[:stub].blank?   # stub type
-      options[:stub] = User::Types[:undergrad] unless User::Types.include?(options[:stub].to_i)
+      options[:stub] = User::Types[:undergrad] unless User::Types.values.include?(options[:stub].to_i)
       self.user_type = options[:stub].to_i
     else  # update via LDAP
       person = self.ldap_person
