@@ -71,6 +71,13 @@ module ApplicationHelper
     redirect_to profile_path
     return false # halt the filter chain
   end
+
+  #############
+  #    UI     #
+  #############
+  def boolean_image_tag(b=true)
+    image_tag (b ? 'yes_check.gif' : 'no_check.gif')
+  end
   
 end
 

@@ -113,7 +113,7 @@
 #browse_header{
 	font-weight: bold;
 	background: #798493 url("../images/dashboard_box_grad_darker.png") repeat-x bottom left;
-	color: white;
+	color: black;
 	width: 100%;
 	height: 40px;
 }

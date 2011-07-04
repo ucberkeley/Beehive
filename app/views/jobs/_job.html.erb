@@ -4,9 +4,14 @@
   Optional locals:
     - header
       Set true to output a header row, rather than a result row
+    - short
+      Set true to show just the snippet, without details like paid/credit
  %>
 
-<%- col_headers = ['Title & Description', 'Paid?', 'Credit?'] -%>
+<%- 
+    col_headers = ['Title & Description', 'Paid?', 'Credit?']
+    col_headers = [col_headers[0]] if defined?(short) && short
+-%>
 
 <%-
     # hack for: if header
@@ -24,6 +29,7 @@
 -%>
 <tr class="result">
     <!-- <%= col_headers[0] %> -->
+    <%- if col_headers[0] -%>
     <td class="left">
       <div class="title">
           <%= link_to job.title, job_path(job) %>
@@ -54,16 +60,21 @@
       </div>
 
     </td>
+    <%- end -%>
 
     <!-- <%= col_headers[1] %> -->
-    <td>
-      payed
+    <%- if col_headers[1] -%>
+    <td class="left">
+      <%= boolean_image_tag job.paid %>
     </td>
+    <%- end -%>
 
     <!-- <%= col_headers[2] %> -->
-    <td>
-      creddit
+    <%- if col_headers[2] -%>
+    <td class="left">
+      <%= boolean_image_tag job.credit %>
     </td>
+    <%- end -%>
 </tr>
 <%-
     end # result row
