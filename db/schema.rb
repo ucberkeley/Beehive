@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110529025644) do
+ActiveRecord::Schema.define(:version => 20110626210351) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(:version => 20110529025644) do
     t.string   "title"
     t.text     "desc"
     t.integer  "category_id"
-    t.datetime "exp_date"
     t.integer  "num_positions"
     t.boolean  "paid"
     t.boolean  "credit"
@@ -101,7 +100,11 @@ ActiveRecord::Schema.define(:version => 20110529025644) do
     t.integer  "department_id"
     t.integer  "activation_code"
     t.boolean  "active"
-    t.boolean  "delta",           :default => true, :null => false
+    t.boolean  "delta",               :default => true, :null => false
+    t.datetime "earliest_start_date"
+    t.datetime "latest_start_date"
+    t.datetime "end_date"
+    t.boolean  "open_ended_end_date"
   end
 
   create_table "pictures", :force => true do |t|

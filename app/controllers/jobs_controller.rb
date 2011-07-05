@@ -27,7 +27,7 @@ class JobsController < ApplicationController
   def search_params_hash
     h = {}
     # booleans
-    [:paid, :credit, :expired, :filled].each do |param|
+    [:paid, :credit, :ended, :filled].each do |param|
       h[param] = params[param] if ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[param]) #unless params[param].nil?
     end
     

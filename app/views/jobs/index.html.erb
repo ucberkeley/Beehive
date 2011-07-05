@@ -26,8 +26,8 @@
       <%= label_tag :per_page, "Listings per page" %>
       <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false %>
 
-      <%= label_tag :expired, "Include expired", :title => "Include listings with expiration dates in the past. These positions may not be available anymore." %>
-      <%= check_box_tag :expired, '1', params[:expired] %>
+      <%= label_tag :ended, "Include ended", :title => "Include listings with end dates in the past. These positions may not be available anymore." %>
+      <%= check_box_tag :ended, '1', params[:ended] %>
 
       <%= label_tag :empty, "Include filled", :title => "Include listings with zero open positions." %>
       <%= check_box_tag :filled, '1', params[:filled] %>

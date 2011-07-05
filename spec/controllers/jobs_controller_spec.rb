@@ -14,7 +14,7 @@ describe JobsController, :type => :controller do
   
   before(:each) do
     @controller.stub!(:login_required).and_return(true)
-	@job_attr = {:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ]}
+	@job_attr = {:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :end_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ]}
   end
   
   def mock_job(stubs={})
@@ -100,7 +100,7 @@ describe JobsController, :type => :controller do
 	  
 	    it "should create new faculty sponsorship" do
   	    @f = Faculty.create(:id => 1, :name => "Faculty Me", :email => "examplefaculty@berkeley.edu")
-  		  post :create, :job => {:title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100}, :faculty_sponsor => @f.id
+  		  post :create, :job => {:title => "This is ten characters", :desc => "Description", :num_positions => 9, :end_date => Time.now+100}, :faculty_sponsor => @f.id
   		  assigns[:job].sponsorships.should_not be_empty
   	  end
     end
@@ -170,7 +170,7 @@ describe JobsController, :type => :controller do
 	    @f = Faculty.create(:id => 1, :name => "Faculty Me", :email => "examplefaculty@berkeley.edu")
 	  	@f2 = Faculty.create(:id => 2, :name => "Faculty Me 2", :email => "examplefaculty2@berkeley.edu")
   		@d = Department.create(:name => "Test Dept")
-  		@j = Job.create(:id => 1, :title => "This is ten characters", :desc => "Description", :num_positions => 9, :exp_date => Time.now+100, :sponsorships => [ Sponsorship.create(:faculty => @f) ], :department => @d)
+  		@j = Job.create(:id => 1, :title => "This is ten characters", :desc => "Description", :num_positions => 9, :end_date => Time.now+100, :sponsorships => [ Sponsorship.create(:faculty => @f) ], :department => @d)
   		@j.save
   		@f.sponsorships.first.faculty.id.should equal(@f.id)
   		put :update, :id => "1", :faculty_name => @f2.id, :job => @j.attributes
@@ -234,8 +234,8 @@ describe JobsController, :type => :controller do
 		@c_proglang = Proglang.create(:name => "C")
 		@python_proglang = Proglang.create(:name => "Python")
 		@first_faculty = Faculty.find(:first)
-		@job1 = Job.create(:title => "This is Ten Characters Hello", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :paid => true, :credit => false, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
-		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => @first_faculty, :job => nil) ], :exp_date => Time.now+100, :active => 1, :paid => false, :credit => true, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
+		@job1 = Job.create(:title => "This is Ten Characters Hello", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :paid => true, :credit => false, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :end_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
+		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => @first_faculty, :job => nil) ], :end_date => Time.now+100, :active => 1, :paid => false, :credit => true, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
 	end
 	it "should return all active jobs if there are no search parameters" do
 		get :list, :search_terms => {:query => ""}
@@ -269,7 +269,7 @@ describe JobsController, :type => :controller do
   
   describe "activating jobs" do
     before(:each) do
-		@valid_job = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 0, :activation_code => 1000 )
+		@valid_job = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :end_date => Time.now+100, :active => 0, :activation_code => 1000 )
 		@valid_job.save
 	end
 	it "should activate job with a correct activation code and unactivated job" do
@@ -296,8 +296,8 @@ describe JobsController, :type => :controller do
 		@java_proglang = Proglang.create(:name => "Java")
 		@c_proglang = Proglang.create(:name => "C")
 		@python_proglang = Proglang.create(:name => "Python")
-		@job1 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
-		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :exp_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
+		@job1 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :end_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @c_proglang ], :categories => [ Category.create(:name => "tag1"), Category.create(:name=> "tag2") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61B") ])
+		@job2 = Job.create(:title => "This is Ten Characters", :desc => "This is a description.", :department_id => 1, :num_positions => 9, :sponsorships => [ Sponsorship.create(:faculty => Faculty.find(:first), :job => nil) ], :end_date => Time.now+100, :active => 1, :activation_code => 1000, :proglangs => [ @java_proglang, @python_proglang ], :categories => [ Category.create(:name => "tag2"), Category.create(:name=> "tag3") ], :courses => [ Course.create(:name => "CS61A"), Course.create(:name => "CS61C") ])
 	end
 	it "should return jobs that match course requirements" do
 		@user1 = User.create(:name => "Someone Name", :email => "someonesname333@berkeley.edu")

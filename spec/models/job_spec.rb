@@ -8,7 +8,7 @@ describe Job do
       :title => "value for title",
       :desc => "value for desc",
       :category_id => 1,
-      :exp_date => Time.now + 5.hours,
+      :end_date => Time.now + 5.hours,
       :num_positions => 1,
       :paid => false,
       :credit => false,
@@ -51,25 +51,25 @@ describe Job do
 	end
   end
   
-  describe "exp_date of the job" do
-	describe 'allows exp_date during or after right now' do
+  describe "end_date of the job" do
+	describe 'allows end_date during or after right now' do
 		[Time.now, Time.now + 1.second, Time.now + 1.day, Time.now + 1.year].each do |e|
 			it "'#{e}'" do
 				lambda do
-					j = create_job(:exp_date => e)
-					j.errors.on(:exp_date).should be_nil
+					j = create_job(:end_date => e)
+					j.errors.on(:end_date).should be_nil
 				end.should change(Job, :count).by(1)
 			end
 		end
 	end
 	
   
-    describe 'disallows exp_date before (right now - 1.hour)' do
+    describe 'disallows end_date before (right now - 1.hour)' do
 		[Time.now - 1.day, Time.now - 1.month, Time.now - 1.year].each do |e|
 			it "'#{e}'" do
 				lambda do
-					j = create_job(:exp_date => e)
-					j.errors.on(:exp_date).should_not be_nil
+					j = create_job(:end_date => e)
+					j.errors.on(:end_date).should_not be_nil
 				end.should_not change(Job, :count)
 			end
 		end
@@ -89,7 +89,7 @@ describe Job do
   protected
   def create_job(options = {})
     record = Job.new({ :title => 'SampleJobTitle', :desc => 'descriptiongoeshere', 
-		:exp_date => Time.now + 5.hours, :num_positions => 0, 
+		:end_date => Time.now + 5.hours, :num_positions => 0, 
 				:department => Department.find_or_create_by_name(:name => "EECS") }.merge(options))
 	record.sponsorships = record.sponsorships << Sponsorship.create({:faculty_id => 1, :job_id => 1})
     record.save
