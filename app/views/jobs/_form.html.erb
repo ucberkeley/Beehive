@@ -10,7 +10,7 @@
 
   <% if @job.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+      <h2><span style="color: red"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being saved:</span></h2>
 
       <ul>
       <% @job.errors.full_messages.each do |msg| %>
@@ -69,23 +69,47 @@
                            :placeholder => "(e.g. Python, Java)" %>
         </td>
 	  </tr>
-	  <tr>
-		<td class="job_clear_table_label"><%= f.label :end_date, 'End date of this listing' %></td>
-		<td class="job_clear_table_field">
-            <%= f.datetime_select :end_date %> &nbsp; &nbsp; Note: Time is UTC-8.
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :earliest_start_date, 'Earliest start date' %>
         </td>
-	  </tr>
+        <td class="job_clear_table_field">
+            <%= f.date_select :earliest_start_date %>
+        </td>
+    </tr>
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :earliest_start_date, raw('Latest start date<br />(work must start by)') %>
+        </td>
+        <td class="job_clear_table_field">
+            <%= f.date_select :latest_start_date %>
+        </td>
+    </tr>    
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :end_date, 'End date' %>
+        </td>
+        <td class="job_clear_table_field">
+            <div id="enddate">
+            <%= f.radio_button :open_ended_end_date, true, :onclick => "$('#enddate select').attr('disabled', true);" %>
+            <%= f.label :open_ended_end_date, 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);" %>&nbsp;
+            <%= f.radio_button :open_ended_end_date, false, :onclick => "$('#enddate select').attr('disabled', false);" %>
+            <%= f.label :open_ended_end_date, 'Specified as:', :value => false, :onclick => "$('#enddate select').attr('disabled', false);" %>
+            <%= f.date_select :end_date, {:default => 1.month.from_now, :start_year => Date.today.year} %>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :paid, "Available as paid position?" %></td>
+        <td class="job_clear_table_field"><%= f.check_box :paid %></td>
+    </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :credit, "Available as for-credit position?" %></td>
+        <td class="job_clear_table_field"><%= f.check_box :credit %></td>
+    </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br />(enter 0 to leave unspecified)</td>
 		<td class="job_clear_table_field"><%= f.text_field :num_positions, {:size=> 5} %></td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label"><%= f.label :paid, 'Paid?' %></td>
-		<td class="job_clear_table_field"><%= three_state_select_tag 'job[paid]', @job.paid %></td>
-	  </tr>
-	  <tr>
-		<td class="job_clear_table_label"><%= f.label :credit, 'Credit (units) offered?' %></td>
-		<td class="job_clear_table_field"><%= three_state_select_tag 'job[credit]', @job.credit %></td>
 	  </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>

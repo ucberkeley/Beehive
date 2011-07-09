@@ -24,6 +24,10 @@ class Job < ActiveRecord::Base
   include AttribsHelper
   include ActionController::UrlWriter # for activate_job_url
 
+  ##################
+  #  ASSOCIATIONS  #
+  ##################
+
   belongs_to :user
   belongs_to :department
   has_and_belongs_to_many :categories
@@ -41,18 +45,26 @@ class Job < ActiveRecord::Base
   has_many :proglangreqs, :dependent => :destroy
   has_many :proglangs, :through => :proglangreqs
   
+  #################
+  #  VALIDATIONS  #
+  #################
+
   validates_presence_of :title, :desc, :department
   
   # Validates that end dates are no earlier than right now.
   validates_each :end_date do |record, attr, value|
-	record.errors.add attr, 'End date cannot be earlier than right now.' if value.present? && (value < Time.now - 1.hour)
+    record.errors.add attr, 'cannot be earlier than right now' if
+      value.present? && (value < Time.now - 1.hour)
   end
-  
+
   validates_length_of :title, :within => 10..200
-  validates_numericality_of :num_positions, :allow_nil => true
+  validates_length_of :desc, :within => 10..20000
+  validates_numericality_of :num_positions, :greater_than_or_equal_to => 0,
+    :allow_nil => true
   validate :validate_sponsorships, :unless => Proc.new{|j|j.skip_validate_sponsorships}
-  
-  
+  validate :earliest_start_date_must_be_before_latest
+  validate :latest_start_date_must_be_before_end_date
+ 
   attr_accessor :category_names
   attr_accessor :course_names
   attr_accessor :proglang_names
@@ -92,8 +104,10 @@ class Job < ActiveRecord::Base
     {:conditions=>{:tag_names=>tags}, :match_mode=>:extended}
   end
 
-  # Methods
-  
+  #############
+  #  METHODS  #
+  #############
+
   def self.active_jobs
     Job.find(:all, :conditions => {:active => true}, :order => "created_at DESC")
   end
@@ -211,6 +225,13 @@ class Job < ActiveRecord::Base
 	#Job.find(:all, {:order => "created_at DESC", :limit=>n, :active=>true} )
     Job.find_jobs( :extra_conditions => {:order=>"created_at DESC", :limit=>n} )
   end
+
+  def self.human_attribute_name(attr, options = {})
+    if attr == :desc
+      return "Description"
+    end
+    return super
+  end
   
   # Returns a string containing the category names taken by this Job
   # e.g. "robotics,signal processing"
@@ -302,5 +323,16 @@ class Job < ActiveRecord::Base
 	def validate_sponsorships
 	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
 	end
-	
+
+  def earliest_start_date_must_be_before_latest
+    errors[:earliest_start_date] << "cannot be later than the latest start date" if 
+      latest_start_date.present? && earliest_start_date > latest_start_date
+  end
+
+  def latest_start_date_must_be_before_end_date
+    errors.add(:latest_start_date, "cannot be later than the end date") if
+      latest_start_date.present? && !open_ended_end_date &&
+        latest_start_date > end_date
+  end
+
 end

@@ -71,7 +71,7 @@
 
   <tr>
     <td class="job_attr_title">
-        <%= h 'Category'.pluralize_for(@job.categories.length) %>
+        <%= h 'Category'.pluralize_for(@job.categories.length) %>:
     </td>
     <td class="job_attr_value">
       <% if ! @job.category_list_of_job.empty? %>
@@ -107,13 +107,28 @@
       <% end %>
     </td>
   </tr>
-  
+  <tr>
+    <td class="job_attr_title"><br />
+      Earliest start date:
+    </td>
+    <td class="job_attr_value"><br />
+      <%=h @job.earliest_start_date.strftime("%b %e, %Y") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="job_attr_title">
+      Latest start date (work must start by):
+    </td>
+    <td class="job_attr_value">
+      <%=h @job.latest_start_date.strftime("%b %e, %Y") %>
+    </td>
+  </tr>
   <tr>
     <td class="job_attr_title">
       Position end date:
     </td>
     <td class="job_attr_value">
-      <%=h (@job.end_date ? @job.end_date.pp : 'None Listed') %>
+      <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
     </td>
   </tr>
   
