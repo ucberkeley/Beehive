@@ -32,7 +32,7 @@
 <br />
 <p>
   <div class="job_tags">
-    <%= image_tag 'tag.gif' %>Tags:
+    <%= image_tag 'tag.gif' %> <b>Tags:</b>
     <% if @job.active %>
       <%= render :partial => "tag", :collection => @job.tag_list %>
     <% else %>

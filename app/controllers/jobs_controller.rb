@@ -136,9 +136,9 @@ class JobsController < ApplicationController
         @job.sponsorships << @sponsorship
         @job.reset_activation
         @job.save
-        flash[:notice] = 'Thank you for submitting a job.  Before this job can be added to our listings page and be viewed by '
+        flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-        flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+        flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once activated, users will be able to browse and respond to the posting.'
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
