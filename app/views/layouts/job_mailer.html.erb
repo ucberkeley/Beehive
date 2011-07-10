@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="<%= ROOT_URL %>/stylesheets/south-street/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />
+    <link href="<%= ROOT_URL %>/stylesheets/application.css" type="text/css" rel="stylesheet" />
+    <link href="<%= ROOT_URL %>/stylesheets/job.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+  
+    <div id="everything">
+      <div id="header">
+		    <div id="header_image">
+			    <%= link_to "", :controller => :home %>
+
+		    </div>
+	    </div>
+	    <div id="content" class="mailer">
+        <%= yield %>
+	    </div>
+    </div>
+  </body>
+</html>

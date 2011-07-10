@@ -1,6 +1,9 @@
-Dear <%= @name %>,
+Dear <%= @faculty_sponsor_names %>,
 
-Someone has posted a research listing at ResearchMatch, listing you as their faculty sponsor.  For this listing to be viewed on the website, we'll need your confirmation to prove it's authentic. Here is the content of the post that was made:
+Someone has posted a research listing at ResearchMatch, listing you as their
+faculty sponsor.  For this listing to be viewed on the website, we'll need
+your confirmation to prove it's authentic. Here is the content of the post
+that was made:
 
 Title: <%= @job.title %>
 Description: <%= @job.desc %>
@@ -9,9 +12,10 @@ To confirm this listing, please visit the following link:
 
     <%= activation_url(@job) %>
 
-If you believe you have received this e-mail in error, please disregard this notice. 
+If you believe you have received this e-mail in error, please disregard this
+notice. 
 
 Regards,
 
 UC Berkeley ResearchMatch
-http://upe.cs.berkeley.edu/research/
+<%= ROOT_URL %>

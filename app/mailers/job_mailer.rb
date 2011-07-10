@@ -1,9 +1,6 @@
 # The mailer for jobs, e.g. to send activation emails out
 class JobMailer < ActionMailer::Base
-  default_url_options[:host] = "localhost:3000"
-  #TODO: Set this localhost:3000 / the actual host name to be a global uniform
-  # variable someplace that we refer to!!!!
-
+  default_url_options[:host] = ROOT_URL
   default :from => "UCB ResearchMatch <ucbresearchmatch@gmail.com>"
 
   def activate_job_email(job)

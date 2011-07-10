@@ -138,7 +138,7 @@ class JobsController < ApplicationController
         @job.reset_activation(true) # sends the email too
         flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-        flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once activated, users will be able to browse and respond to the posting.'
+        flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -173,10 +173,12 @@ class JobsController < ApplicationController
           flash[:notice] << 'new sponsor(s) before it can be added to the '
           flash[:notice] << 'listings page and viewed by other users. '
           flash[:notice] << 'An e-mail has been dispatched to the faculty '
-          flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+          flash[:notice] << 'sponsor with instructions on how to activate '
+          flash[:notice] << 'this listing. Once it has been activated, users '
+          flash[:notice] << 'will be able to browse and respond to the posting.'
 
         else
-          flash[:notice] = 'Job was successfully updated.'
+          flash[:notice] = 'Listing was successfully updated.'
         end
 
         @job.save

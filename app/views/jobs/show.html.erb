@@ -4,7 +4,7 @@
 <br />
 <h2>
   <%=h @job.title %>
-  <% unless @job.active %><span style="color: red">(not activated)</span><% end %>  
+  <% unless @job.active %><span class="urgent">(not activated)</span><% end %>  
 </h2>
 <p>
   posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	

@@ -186,7 +186,7 @@ width: 100%;
 
 
 /** Misc **/
-.caslogout {
+.urgent, .caslogout {
   color: red;
   font-weight: bold;
 }

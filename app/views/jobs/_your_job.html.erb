@@ -6,7 +6,7 @@
 				<td class="job_table_left">
 					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span>
             <% if ! job.active %>
-              <span style="color: red"><b>(not activated!)</b></span>
+              <span class="urgent">(not activated!)</span>
             <% else %>
               (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
             <% end %>

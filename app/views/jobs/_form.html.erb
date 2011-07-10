@@ -10,7 +10,7 @@
 
   <% if @job.errors.any? %>
     <div id="error_explanation">
-      <h2><span style="color: red"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span></h2>
+      <h2><span class="urgent"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span></h2>
 
       <ul>
       <% @job.errors.full_messages.each do |msg| %>
