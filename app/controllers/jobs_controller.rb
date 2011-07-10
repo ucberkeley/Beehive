@@ -134,8 +134,8 @@ class JobsController < ApplicationController
       if @job.valid_without_sponsorships?
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
-        @job.reset_activation
         @job.save
+        @job.reset_activation(true) # sends the email too
         flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
         flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
         flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once activated, users will be able to browse and respond to the posting.'
@@ -166,7 +166,7 @@ class JobsController < ApplicationController
         # If the faculty sponsor changed, require activation again.
         # (require the faculty to confirm again)
         if changed_sponsors
-          @job.reset_activation 
+          @job.reset_activation(true) # sends the email too
 
           flash[:notice] = 'Since the faculty sponsor(s) for this listing have '
           flash[:notice] << 'changed, the listing must be approved by the '
@@ -174,6 +174,7 @@ class JobsController < ApplicationController
           flash[:notice] << 'listings page and viewed by other users. '
           flash[:notice] << 'An e-mail has been dispatched to the faculty '
           flash[:notice] << 'sponsor with instructions on how to activate this job.  Once activated, users will be able to browse and respond to the job posting.'
+
         else
           flash[:notice] = 'Job was successfully updated.'
         end
@@ -187,7 +188,7 @@ class JobsController < ApplicationController
       end
     end
   end
-  
+
 
   # Just the page that asks for confirmation for deletion of the job.
   # The actual deletion is performed by the "destroy" action.

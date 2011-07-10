@@ -6,3 +6,4 @@ tmp/
 cscope.*
 *.swp
 mysql2/
+config/smtp_settings.rb

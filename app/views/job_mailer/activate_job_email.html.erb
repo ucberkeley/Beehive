@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/south-street/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/application.css" type="text/css" rel="stylesheet" />
+    <link href="http://upe.cs.berkeley.edu/research/stylesheets/job.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+  
+    <div id="everything">
+      <div id="header">
+		    <div id="header_image">
+			    <%= link_to "", :controller => :home %>
+
+		    </div>
+	    </div>
+	    <div id="content" class="mailer">
+	    
+	      <p>
+	        Dear <b><%= @faculty_sponsor_names %></b>,
+	      </p>
+        <br />
+        <p>
+         Someone has posted a research listing at ResearchMatch, listing you as their faculty sponsor.  For this listing to be viewed on the website, we'll need your confirmation to prove it's authentic. Here is the content of the post that was made:
+        </p>
+
+        <br />
+
+
+        <div class="dashboard_container">
+          <div class="dashboard_wrapper_medium">
+            <div class="dashboard_container_medium box_shadow">
+              <h3><%= @job.title %></h3>
+              <p><b>Faculty Sponsor: </b>
+                  <% @job.faculties.each do |f| %> 
+	                <%= f.name %> 
+                  <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
+                		<img src="http://upe.cs.berkeley.edu/research/images/<%= @job.department.name.downcase %>_icon.gif" /> 
+		              </a>
+                  <% end %> 
+              </p>
+              <b>Description: </b>
+              <p id="description">
+              <%= @job.desc %>
+              </p>
+              
+            </div>
+          </div>
+        </div>
+        
+        <br />
+
+        <p>
+        To confirm this listing, please click <a href="<%= activation_url(@job) %>">here</a>, or copy and paste the following URL into your browser: 
+        <b><%= activation_url(@job) %></b>
+        <br />
+        </p>
+        <br />
+        <p>
+        If you believe you have received this e-mail in error, please disregard this notice.</p>
+        <br />
+        <p>Regards,</p>
+        <br />
+        <p><b>UC Berkeley ResearchMatch<br />
+        <a href="http://upe.cs.berkeley.edu/research/">http://upe.cs.berkeley.edu/research/</a></b>
+        </p>
+	    </div>
+    </div>
+  </body>
+</html>
