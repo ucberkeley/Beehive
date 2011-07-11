@@ -113,7 +113,7 @@ end
 
 module CASControllerIncludes
   def goto_cas_unless_logged_in
-    CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user
+    CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
   end
 
   def login_user!(user)
@@ -122,16 +122,27 @@ module CASControllerIncludes
   end
 
   def rm_login_required
+    return true if @current_user
+    redirect_to login_path and return false
+  end
+
+  def first_login
+  # Processes a user's first login, which involves creating a new User.
+  # Requires a CAS session to be present, and redirects if it isn't.
+  # @returns false if redirected because of new user processing, true if user was already signed up
+  #
+
     # Require CAS login first
     unless @user_session
       redirect_to login_path
+      return false
     end
   
     # If user doesn't exist, create it. Use current_user
     # so as to ensure that redirects work properly; i.e. 
     # so that you are 'logged in' when you go to the Edit Profile
     # page in this next section here.
-    if ! User.exists?(:login => session[:cas_user].to_s)
+    unless User.exists?(:login => session[:cas_user].to_s)
       new_user = User.new(:login => session[:cas_user].to_s)
       person = new_user.ldap_person
       new_user.email = person.email
@@ -139,23 +150,24 @@ module CASControllerIncludes
       new_user.update_user_type
       
       if new_user.save && new_user.errors.empty? then 
-        flash[:notice] = "Looks like this is your first visit to ResearchMatch. "
+        flash[:notice] = "Looks like this is your first visit to ResearchMatch."
         flash[:notice] << "Please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
         
         logger.info "First login for #{new_user.login}"
 
-        self.current_user = User.authenticate_by_login(session[:cas_user].to_s)
-        redirect_to :controller => "users", :action => "edit", :id => @current_user.id
+        @current_user = User.authenticate_by_login(session[:cas_user].to_s)
+        redirect_to edit_user_path(@current_user.id)
         return false
       else
         flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
         flash[:error] += new_user.errors.inspect if Rails.env == 'development'
-        redirect_to :controller => "home", :action => "index"
+        redirect_to home_path
         return false
       end
     end
     
-    logger.info("\n\n GOT PAST LOGIN_REQUIRED  \n\n")
+    logger.info("\n\n GOT PAST LOGIN_REQUIRED  \n\n") if Rails.env == 'development'
+    return true
   end
 
   # Redirects to signup page if user hasn't registered.
