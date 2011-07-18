@@ -50,31 +50,27 @@ class JobsController < ApplicationController
     # may cause double-request but that's okay
     redirect_to(search_params_hash) and return if [:commit, :utf8].any? {|k| !params[k].nil?}
 
-    # Tags will filter whatever the query returns
-    query_parms = {
-                    :department => params[:department].to_i, 
-                    :faculty => params[:faculty].to_i, 
-                    :paid => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:paid]),
-                    :credit => ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit]),
+    # Advanced search
+    query_parms = {}
+    query_parms[:department_id] = params[:department].to_i if params[:department] && params[:department].to_i > 0
+    query_parms[:faculty_id   ] = params[:faculty].to_i    if params[:faculty] && params[:faculty].to_i > 0
+    query_parms[:paid         ] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:paid])
+    query_parms[:credit       ] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:credit])
+    query_parms[:ended        ] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:ended])
+    query_parms[:filled       ] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:filled])
+    query_parms[:tags         ] = params[:tags] if params[:tags].present?
 
-                    # will_paginate
-                    :page => params[:page] || 1,
-                    :per_page => params[:per_page] || 8
-                  }
-    query_parms[:tags] = params[:tags] if params[:tags].present?
+    # will_paginate
+    query_parms[:page         ] = params[:page]     || 1
+    query_parms[:per_page     ] = params[:per_page] || 8
 
-    @query = '' if params[:query].blank?
-
+    @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
     
+    # Set some view props
     @department_id = params[:department] ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]    ? params[:faculty].to_i    : 0
-    
-#    if params[:tags].present?
-#      jobs_tagged_with_tags = Job.find_tagged_with(params[:tags])
-#      @jobs = @jobs.select { |job| jobs_tagged_with_tags.include?(job) }
-#    end
-  	
+
     respond_to do |format|
             format.html { render :action => :index }
             format.xml { render :xml => @jobs }

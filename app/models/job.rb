@@ -83,10 +83,9 @@ class Job < ActiveRecord::Base
   define_index do
     indexes :title
     indexes :desc
-    indexes tags.name, :as => :tag_names
-    indexes department.name, :as => :department, :facet => true
-    indexes faculties(:id), :as => :sponsor_id
-    indexes faculties(:name), :as => :faculty
+    indexes tags(:name),       :as => :tag_names,     :facet => true
+    indexes department(:name), :as => :department,    :facet => true
+    indexes faculties(:name),  :as => :faculty,       :facet => true
     
     has :active
     has :paid
@@ -94,7 +93,9 @@ class Job < ActiveRecord::Base
     has :created_at
     has :updated_at
     has :end_date
-    has tags.name
+    has :num_positions
+    has department(:id),  :as => :department_id
+    has faculties(:id),   :as => :faculty_ids
     
     set_property :delta => true
   end
@@ -151,7 +152,58 @@ class Job < ActiveRecord::Base
   #   - tags: array of tag strings to match (searches only tags and not body, title, etc.)
   #   - order: ARRAY of custom sorting conditions, besides @relevance. Conditions concatenated left to right.
   #
-  def self.find_jobs(query, extra_options={})
+  def self.find_jobs(query, options={})
+    throw "Query must be a string" unless query.is_a? String
+
+    # Sanitize input
+    query ||= ""
+    query.gsub! /[^a-zA-Z0-9]/, ''
+
+    # Sanitize some boolean options to avoid false positives.
+    # This happens in situations like paid=0 => paid=true
+    [:paid, :credit].each do |attrib|
+        options[attrib] = from_binary(options[attrib])
+    end
+
+    # Common conditions
+    ts_common_options = {}
+    ts_common_options[:max_matches]    = options[:limit] if options[:limit].present? && options[:limit] > 0
+    ts_common_options[:page]         ||= options[:page]
+    ts_common_options[:per_page]     ||= options[:per_page]
+    ts_common_options[:rank_mode]      = :proximity_bm25
+
+    ##################
+    # ALL conditions #
+    ##################
+    ts_options = { :conditions => {}, :with => {}, :without => {} }
+    ts_options[:with][:active]        = true
+    ts_options[:with][:paid]          = true if options[:paid]
+    ts_options[:with][:credit]          = true if options[:credit]
+    ts_options[:with][:faculty_ids]   = [options[:faculty_id].to_i]   if options[:faculty_id].present? && Faculty.exists?(options[:faculty_id])
+    ts_options[:with][:department_id] = options[:department_id].to_i  if options[:department_id].present? && Department.exists?(options[:department_id])
+    ts_options[:with][:end_date]      = (Time.now .. 100.years.since) unless options[:ended]
+
+    ts_options[:without][:num_positions] = 0 unless options[:filled]
+
+    ts_options[:match_mode] = :all
+    ts_options.update(ts_common_options)
+
+    results = Job.search ts_options
+
+    ##################
+    # ANY conditions #
+    ##################
+    ts_options = { :conditions => {}, :with => {}, :without => {} }
+    ts_options[:match_mode] = :any
+    ts_options.update(ts_common_options)
+
+    results = results.search query, ts_options
+
+    return results
+  end # find_jobs
+
+
+  def self.find_jobs_ASDF(query, extra_options={})
     # Sanitize some boolean options to avoid false positives.
     # This happens in situations like paid=0 => paid=true
     [:paid, :credit].each do |attrib|
