@@ -4,10 +4,13 @@
 		<table class="job_table">
 			<tr>
 				<td class="job_table_left">
-					<div class="job_title"><a href="<%= job_path(job) %>"><%= job.title %></a></span>
-            <% if ! job.active %>
-              <span class="urgent">(not activated!)</span>
-            <% else %>
+					<div class="job_title">
+            <a href="<%= job_path(job) %>"><%= job.title %>
+              <% if ! job.active %>
+                <span class="urgent">(not activated!)</span>
+              <% end %>
+            </a>
+            <% if job.active %>
               (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
             <% end %>
 					<% if @current_user.present? && job.user_id == @current_user.id %>

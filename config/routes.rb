@@ -11,6 +11,7 @@ ResearchMatch::Application.routes.draw do
     member do 
       get 'activate'
       get 'delete'
+      get 'resend_activation_email'
       get 'watch'
       get 'unwatch'
     end

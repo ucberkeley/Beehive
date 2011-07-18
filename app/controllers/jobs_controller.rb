@@ -21,8 +21,8 @@ class JobsController < ApplicationController
   # Ensures that only the user who created a job -- and no other users -- can edit 
   # or destroy it.
   before_filter :check_post_permissions, :only => [ :new, :create ]
-  before_filter :correct_user_access, :only => [ :edit, :update, :delete, :destroy ]
-
+  before_filter :correct_user_access, :only => [ :edit, :update, :resend_activation_email,
+                                                  :delete, :destroy ]
   protected
   def search_params_hash
     h = {}
@@ -113,6 +113,17 @@ class JobsController < ApplicationController
         format.xml
     end
     
+  end
+
+  def resend_activation_email
+    @job = Job.find(params[:id])
+    @job.reset_activation(true)
+    flash[:notice] = 'Thank you. The activation email for this listing has '
+    flash[:notice] << 'been re-sent to its faculty sponsors.'
+
+    respond_to do |format|
+      format.html { redirect_to(@job) }
+    end
   end
 
   # POST /jobs
