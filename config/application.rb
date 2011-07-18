@@ -2,9 +2,6 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# Get the SMTP password for Action Mailer
-require File.join(File.dirname(__FILE__), 'smtp_settings')
-
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
@@ -43,18 +40,5 @@ module ResearchMatch
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-
-    # Configure the Action Mailer.
-    # TODO: Move this into per-environment config rb's.
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => 'localhost',
-      :user_name            => @@smtp_username,
-      :password             => @@smtp_pw,
-      :authentication       => 'plain',
-      :enable_starttls_auto => true
-    }
   end
 end
