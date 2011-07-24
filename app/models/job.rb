@@ -120,13 +120,13 @@ class Job < ActiveRecord::Base
     [my.course_list_of_user,
      my.category_list_of_user,
      my.proglang_list_of_user].each do |list|
-        query.concat list.split(list_separator)
+      query << list.split(list_separator)
     end
-    
+
     # magic
     smartmatch_ranker = "@weight"
-    
-    Job.find_jobs(query, {:match_mode=>:any, :limit=>limit, :custom_rank=>smartmatch_ranker, :rank_mode=>:bm25})
+
+    Job.find_jobs(query.join(list_separator).chomp(list_separator), {:match_mode=>:any, :limit=>limit, :custom_rank=>smartmatch_ranker, :rank_mode=>:bm25})
   end
   
   # This is the main search handler.
@@ -274,7 +274,7 @@ class Job < ActiveRecord::Base
   end
    
   def self.find_recently_added(n)
-	#Job.find(:all, {:order => "created_at DESC", :limit=>n, :active=>true} )
+  #Job.find(:all, {:order => "created_at DESC", :limit=>n, :active=>true} )
     Job.find_jobs( :extra_conditions => {:order=>"created_at DESC", :limit=>n} )
   end
 
@@ -288,49 +288,49 @@ class Job < ActiveRecord::Base
   # Returns a string containing the category names taken by this Job
   # e.g. "robotics,signal processing"
   def category_list_of_job(add_spaces = false)
-  	category_list = ''
-  	self.categories.each do |cat|
-  		category_list << cat.name + ','
-  		if add_spaces: category_list << ' ' end
-  	end
-  	
-  	if add_spaces
-  	  return category_list[0..(category_list.length - 3)].downcase
-	  else
-    	return category_list[0..(category_list.length - 2)].downcase
-  	end
+    category_list = ''
+    self.categories.each do |cat|
+      category_list << cat.name + ','
+      if add_spaces: category_list << ' ' end
+    end
+    
+    if add_spaces
+      return category_list[0..(category_list.length - 3)].downcase
+    else
+      return category_list[0..(category_list.length - 2)].downcase
+    end
   end
   
   # Returns a string containing the 'required course' names taken by this Job
   # e.g. "CS61A,CS61B"
   def course_list_of_job(add_spaces = false)
-  	course_list = ''
-  	self.courses.each do |c|
-  		course_list << c.name + ','
-  		if add_spaces: course_list << ' ' end
-  	end
-  	
-  	if add_spaces
-  	  return course_list[0..(course_list.length - 3)].upcase
-	  else
-    	return course_list[0..(course_list.length - 2)].upcase
-  	end
+    course_list = ''
+    self.courses.each do |c|
+      course_list << c.name + ','
+      if add_spaces: course_list << ' ' end
+    end
+    
+    if add_spaces
+      return course_list[0..(course_list.length - 3)].upcase
+    else
+      return course_list[0..(course_list.length - 2)].upcase
+    end
   end
   
   # Returns a string containing the 'desired proglang' names taken by this Job
   # e.g. "java,scheme,c++"
   def proglang_list_of_job(add_spaces = false)
-  	proglang_list = ''
-  	self.proglangs.each do |pl|
-  		proglang_list << pl.name.capitalize + ','
-   		if add_spaces: proglang_list << ' ' end
-  	end
-  	
-  	if add_spaces
-  	  return proglang_list[0..(proglang_list.length - 3)]
-	  else
-    	return proglang_list[0..(proglang_list.length - 2)]
-  	end
+    proglang_list = ''
+    self.proglangs.each do |pl|
+      proglang_list << pl.name.capitalize + ','
+      if add_spaces: proglang_list << ' ' end
+    end
+    
+    if add_spaces
+      return proglang_list[0..(proglang_list.length - 3)]
+    else
+      return proglang_list[0..(proglang_list.length - 2)]
+    end
   end
   
   # Ensures all fields are valid
@@ -375,9 +375,9 @@ class Job < ActiveRecord::Base
 
   protected
   
-	def validate_sponsorships
-	  errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
-	end
+  def validate_sponsorships
+    errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
+  end
 
   def earliest_start_date_must_be_before_latest
     errors[:earliest_start_date] << "cannot be later than the latest start date" if 
