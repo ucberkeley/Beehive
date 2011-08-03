@@ -369,7 +369,12 @@ class Job < ActiveRecord::Base
 
     if send_email
       # Send the email for activation.
-      JobMailer.activate_job_email(self).deliver
+      begin
+        JobMailer.activate_job_email(self).deliver
+      rescue => e
+        Rails.logger.error "Failed to send activation mail for job##{self.id}: #{e.inspect}"
+        raise if Rails.env == 'development'
+      end
     end
   end
 

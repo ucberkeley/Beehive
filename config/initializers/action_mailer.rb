@@ -3,11 +3,10 @@ settings_path = File.join Rails.root, 'config', 'smtp_settings'
 begin
   require settings_path
   ResearchMatch::Application.configure do
-    config.action_mailer.delivery_method = :test
-    config.action_mailer.smtp_settings = {
+    ActionMailer::Base.smtp_settings = {
       :address              => "smtp.gmail.com",
       :port                 => 587,
-      :domain               => 'localhost',
+      :domain               => 'researchmatch.heroku.com',
       :user_name            => @@smtp_username,
       :password             => @@smtp_pw,
       :authentication       => 'plain',

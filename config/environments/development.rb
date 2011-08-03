@@ -14,9 +14,6 @@ ResearchMatch::Application.configure do
   config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -35,6 +32,9 @@ ResearchMatch::Application.configure do
   UCB::LDAP.host = 'ldap-test.berkeley.edu'
 
   # ActionMailer
-  config.action_mailer.delivery_method = :test
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.perform_deliveries = !!(ENV['action_mailer'] =~ /1|true/i)
+  ActionMailer::Base.delivery_method = (ActionMailer::Base.perform_deliveries ? :smtp : :test)
+  puts "INFO: ActionMailer ON" if ActionMailer::Base.perform_deliveries
 end
 
