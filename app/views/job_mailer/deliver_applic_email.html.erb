@@ -1,21 +1,49 @@
-<p>Dear <%= @applic.job.user.name %>,</p>
+<p>Dear <b><%= @applic.job.user.name %></b>,</p>
 
 <p>
  A new application for your listing, <b><%= @job.title %></b>, has been received: 
 </p>
-
-<table>
-  <% [ ['Applicant', @applic.user.name],
-       ['Message',   @applic.message],
-       ['Attachments', (@applic.resume||@applic.transcript ? "Included" : "None")]
-     ].each do |fieldname, msg| %>
-     <tr>
-       <td><b><%= fieldname %></b></td>
-       <td><%= msg %></td>
-     </tr>
-  <% end %>
-</table>
+<br />
+<div class="dashboard_container">
+  <div class="dashboard_wrapper_medium">
+    <div class="dashboard_container_medium box_shadow">
+      <h3><%= @job.title %></h3>
+      <p><b>Faculty Sponsor: </b>
+          <% @job.faculties.each do |f| %>
+          <%= f.name %>
+          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
+          <img src="<%= ROOT_URL %>/images/<%= @job.department.name.downcase %>_icon.gif" />
+          </a>
+          <% end %>
+      </p>
+      <br />
+      <p><b>Applicant: </b> <%= @applic.user.name %>
+        (<a href="mailto:<%=@applic.user.email%>"><%=@applic.user.email%></a>)
+      </p>
+      <br />
+      <b>Applicant's Message:</b>
+      <p id="description">
+        <%= @applic.message %>
+      </p>
+      <p><b>Attachments: </b><%= (@applic.resume||@applic.transcript ?
+        "Included" : "None") %>
+      </p>
+    </div>
+  </div>
+</div>
+<br />
+<p>
+If you are interested in this applicant for your research listing, please
+contact him or her via the email address provided.
+</p>
 
 <% if false  # or, unless user_preferences.present? we need to set up subscription features. %>
 <p>You received this notification because you are currently subscribed to receive email notifications for your postings. You can change this setting in your profile page.</p>
 <% end %>
+
+<br />
+<p>Regards,</p>
+<br />
+<p><b>UC Berkeley ResearchMatch<br />
+<a href="<%= ROOT_URL %>/"><%= ROOT_URL %>/</a></b>
+</p>
