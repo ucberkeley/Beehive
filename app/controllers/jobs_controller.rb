@@ -268,7 +268,7 @@ class JobsController < ApplicationController
   	respond_to do |format|
   		if watch.save
   		  flash[:notice] = 'Job is now watched. You can find a list of your watched jobs on the dashboard.'
-  		  format.html { redirect_to(:controller=>:dashboard) }
+  		  format.html { redirect_to(job) } #:controller=>:dashboard) }
   		else
   		  flash[:notice] = 'Unsuccessful job watch. Perhaps you\'re already watching this job?'
   		  format.html { redirect_to(:controller=>:dashboard) }

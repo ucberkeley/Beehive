@@ -150,8 +150,8 @@ module CASControllerIncludes
       new_user.update_user_type
       
       if new_user.save && new_user.errors.empty? then 
-        flash[:notice] = "Looks like this is your first visit to ResearchMatch."
-        flash[:notice] << "Please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
+        flash[:notice] = "Welcome to ResearchMatch! Since this is your first time here, "
+        flash[:notice] << "please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
         
         logger.info "First login for #{new_user.login}"
 
