@@ -12,15 +12,8 @@
 
 <% form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f| -%>
 
-
-
 <%= render(:partial => "jobs/job_snippet", :job => @job ) %>
-
-
-
 <br />
-
-
   <table class="job_clear_table">
 	 
 	  <tr>
@@ -41,7 +34,6 @@
   </p>
   <br />
     
-
   <% [ ["Résumé", :resume], ["Transcript", :transcript] ].each do |docname, docsym| -%>
     <% doc = @current_user.send(docsym)    -%>
     <% tagname = "include_#{docsym.to_s}" -%>

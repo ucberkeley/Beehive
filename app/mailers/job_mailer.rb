@@ -19,7 +19,6 @@ class JobMailer < ActionMailer::Base
     @applic = applic
     @job = applic.job
 
-    #puts "\n\n\n\n" + @job.user.email + "\n\n\n\n"
     mail(:to => @job.user.email,
           :subject => "Application for Research | UCB ResearchMatch")
   end
