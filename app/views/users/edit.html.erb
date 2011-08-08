@@ -113,7 +113,7 @@
 	          <% else -%>
                     <!-- already has document -->
                     <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
-                    <%= button_to "Remove", {:controller => :documents, :action => :destroy, :id => doc.id, :confirm=>"Are you sure you want to remove your #{item[0].downcase}? This action cannot be undone.", :disable_with=>"Removing..."} %>
+                    <%= button_to "Remove", destroy_document_path(doc), :confirm=>"Are you sure you want to remove your #{item[0].downcase}? This action cannot be undone.", :disable_with=>"Removing..." %>
 	          <% end -%>
 	          <br /><br />
 	      <% end -%>
