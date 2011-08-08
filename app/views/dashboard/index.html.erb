@@ -15,7 +15,7 @@
 			
 			<% end -%>	
 			<% if !@current_user.is_faculty %>
-		    <br />
+		    <% if @current_user.can_post? %><br /><% end %>
 				<h2>Your Watched Postings</h2>
 				<!-- //list of postings you're watching -->
 				<% if @watched_jobs.empty? %>
