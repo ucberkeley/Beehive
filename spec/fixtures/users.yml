@@ -1,45 +1,61 @@
 
 
+#undergrad
 quentin:
   id:                        1
   name:                     quentin
+  login:                     1
   email:                     quentin@berkeley.edu
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          555186c1e090bfcb0f6a130794b0bc753c78346a # 'monkey'
-  created_at:                <%= 5.days.ago.to_s :db  %>
-  remember_token_expires_at: <%= 1.days.from_now.to_s %>
-  remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
+  persistence_token:         b6589fc6ab0dc82cf12099d1c2d40ab994e8410c
+  single_access_token:       356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
+  perishable_token:          555186c1e090bfcb0f6a130794b0bc753c78346a # 'monkey'
+  login_count:               0
+  failed_login_count:        0
+  last_request_at:           <%= 5.days.ago.to_s :db  %>
+  current_login_at:          <%= 1.day.ago.to_s :db  %>
+  last_login_at:             <%= 2.days.ago.to_s :db %>
+  current_login_ip:          <%= 235908.to_s %>
+  last_login_ip:             <%= 235908.to_s %>
+  user_type:                 0
 
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
+
 
 
       
+# grad
 aaron:
   id:                        2
   name:                     aaron
+  login:                     2
   email:                     aaron@berkeley.edu
-  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
-  crypted_password:          7745110cc1f8fcda9b23d77bfba5214830d57c37 # 'monkey'
-  created_at:                <%= 1.days.ago.to_s :db %>
-  remember_token_expires_at: 
-  remember_token:            
+  persistence_token:         c6581fc6ab0dc82cf12099d1c2d40ab994e8410c
+  single_access_token:       456a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
+  perishable_token:          655186c1e090bfcb0f6a130794b0bc753c78346a # 'monkey'
+  login_count:               0
+  failed_login_count:        0
+  last_request_at:           <%= 5.days.ago.to_s :db  %>
+  current_login_at:          <%= 1.day.ago.to_s :db  %>
+  last_login_at:             <%= 2.days.ago.to_s :db %>
+  current_login_ip:          <%= 235909.to_s %>
+  last_login_ip:             <%= 235909.to_s %>
+  user_type:                 1
 
-  activation_code:           1b6453892473a467d07372d45eb05abc2031647a
-  activated_at:              
 
 
-
-
-old_password_holder:
+# faculty
+gary:
   id:                        3
-  login:                     old_password_holder
-  email:                     salty_dog@example.com
-  salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  created_at:                <%= 1.days.ago.to_s :db %>
-
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
-
-
+  name:                     gary
+  login:                     3
+  email:                     gary@berkeley.edu
+  persistence_token:         c65213c6ab0dc82cf12099d1c2d40ab994e8410c
+  single_access_token:       356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
+  perishable_token:          255186c1e090bfcb0f6a130794b0bc753c78346a # 'monkey'
+  login_count:               0
+  failed_login_count:        0
+  last_request_at:           <%= 5.days.ago.to_s :db  %>
+  current_login_at:          <%= 1.day.ago.to_s :db  %>
+  last_login_at:             <%= 2.days.ago.to_s :db %>
+  current_login_ip:          <%= 235919.to_s %>
+  last_login_ip:             <%= 235919.to_s %>
+  user_type:                 2

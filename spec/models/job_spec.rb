@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Job do
   before(:each) do
-	@controller.stub!(:login_required).and_return(true)
+    @controller = mock('JobsController')
+    @controller.stub!(:login_required).and_return(true)
     @valid_attributes = {
       :user_id => 1,
       :title => "value for title",
@@ -32,7 +33,7 @@ describe Job do
 			it "'#{title_str}'" do
 				lambda do
 					j = create_job(:title => title_str)
-					j.errors.on(:title).should be_nil
+					j.errors[:title].should be_empty
 				end.should change(Job, :count).by(1)
 			end
 		end
@@ -44,7 +45,7 @@ describe Job do
 			it "'#{title_str}'" do
 				lambda do
 					j = create_job(:title => title_str)
-					j.errors.on(:title).should_not be_nil
+					j.errors[:title].should_not be_empty
 				end.should_not change(Job, :count)
 			end
 		end
@@ -57,7 +58,7 @@ describe Job do
 			it "'#{e}'" do
 				lambda do
 					j = create_job(:end_date => e)
-					j.errors.on(:end_date).should be_nil
+					j.errors[:end_date].should be_empty
 				end.should change(Job, :count).by(1)
 			end
 		end
@@ -69,7 +70,7 @@ describe Job do
 			it "'#{e}'" do
 				lambda do
 					j = create_job(:end_date => e)
-					j.errors.on(:end_date).should_not be_nil
+					j.errors[:end_date].should_not be_empty
 				end.should_not change(Job, :count)
 			end
 		end
@@ -80,7 +81,7 @@ describe Job do
 	it "should not be blank" do
 		lambda do
 			j = create_job(:desc => '')
-			j.errors.on(:desc).should_not be_nil
+			j.errors[:desc].should_not be_empty
 		end.should_not change(Job, :count)
 	end
   end
