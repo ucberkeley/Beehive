@@ -21,13 +21,13 @@ class JobMailer < ActionMailer::Base
 
     [:resume, :transcript].each do |doctype|
       if @applic.send(doctype).present?
-       attachments[@job.user.name + '_' + doctype.to_s + '.' +
+       attachments[@applic.user.name + '_' + doctype.to_s + '.' +
          @applic.send(doctype).public_filename.split('.').last] =
          File.read(@applic.send(doctype).public_filename)
       end
     end
 
-    mail(:to => @job.user.email,
+    mail(:to => @job.user.email + ', ' + @job.faculties.map(&:email).join("& "),
           :subject => "Application for Research | UCB ResearchMatch")
   end
 end

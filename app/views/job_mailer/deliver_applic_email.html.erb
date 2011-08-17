@@ -1,5 +1,6 @@
-<p>Dear <b><%= @applic.job.user.name %></b>,</p>
-
+<p>Dear <b><%= @applic.job.user.name %>,
+  <%= @job.faculties.map(&:name).join("& ") %></b>,</p>
+<br />
 <p>
  A new application for your listing, <b><%= @job.title %></b>, has been received: 
 </p>

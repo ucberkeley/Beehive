@@ -1,4 +1,5 @@
 Dear <%= @applic.job.user.name %>,
+   <%= @job.faculties.map(&:name).join("& ") %>,
 
 A new application for your listing, <%= @job.title %>, has been received: 
 
