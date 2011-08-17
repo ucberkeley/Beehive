@@ -133,6 +133,10 @@ class Job < ActiveRecord::Base
     puts "\n\n\n" + opts.inspect + "\n\n\n"
     Job.find_jobs(qu, opts)
   end
+
+  def open_ended_end_date
+    end_date.present?
+  end
   
   # This is the main search handler.
   # It should be the ONLY interface between search queries and jobs;
