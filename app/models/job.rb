@@ -126,7 +126,13 @@ class Job < ActiveRecord::Base
     # magic
     smartmatch_ranker = "@weight"
 
-    Job.find_jobs(query.join(list_separator).chomp(list_separator), {:match_mode=>:any, :limit=>limit, :custom_rank=>smartmatch_ranker, :rank_mode=>:bm25})
+    qu = query.join(list_separator).chomp(list_separator)
+    opts = {:match_mode=>:any, :limit=>limit, :custom_rank=>smartmatch_ranker,
+        :rank_mode=>:bm25}
+
+    puts "\n\n\n" + qu.inspect+ "\n\n\n"
+    puts "\n\n\n" + opts.inspect + "\n\n\n"
+    Job.find_jobs(qu, opts)
   end
   
   # This is the main search handler.
@@ -155,9 +161,11 @@ class Job < ActiveRecord::Base
   def self.find_jobs(query, options={})
     throw "Query must be a string" unless query.is_a? String
 
+    puts "\n\norig query: " + query + "\n\n"
+
     # Sanitize input
     query ||= ""
-    query.gsub! /[^a-zA-Z0-9]/, ''
+    query.gsub! /[^a-zA-Z0-9 ,]/, ''
 
     # Sanitize some boolean options to avoid false positives.
     # This happens in situations like paid=0 => paid=true
@@ -197,7 +205,8 @@ class Job < ActiveRecord::Base
     ts_options[:match_mode] = :any
     ts_options.update(ts_common_options)
 
-    results = results.search query, ts_options
+    puts "\n\n\nQUERY:" + query.to_s + "\n\n\n"
+    results = Job.search query, ts_options
 
     return results
   end # find_jobs
