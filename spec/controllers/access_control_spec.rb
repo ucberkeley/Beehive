@@ -42,8 +42,8 @@ describe AccessControlTestController do
   fixtures        :users
   before do
     # is there a better way to do this?
-    ActionController::Routing::Routes.add_route '/login_is_required',           :controller => 'access_control_test',   :action => 'login_is_required'
-    ActionController::Routing::Routes.add_route '/login_not_required',          :controller => 'access_control_test',   :action => 'login_not_required'
+    Rails.application.routes.add_route '/login_is_required',           :controller => 'access_control_test',   :action => 'login_is_required'
+    Rails.application.routes.add_route '/login_not_required',          :controller => 'access_control_test',   :action => 'login_not_required'
   end
 
   ACCESS_CONTROL_FORMATS.each do |format, success_text|

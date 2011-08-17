@@ -208,6 +208,7 @@ class Job < ActiveRecord::Base
     puts "\n\n\nQUERY:" + query.to_s + "\n\n\n"
     results = Job.search query, ts_options
 
+    results = results.tagged_with(options[:tags]) if options[:tags].present?
     return results
   end # find_jobs
 
