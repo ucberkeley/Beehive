@@ -76,7 +76,7 @@ describe JobsController, :type => :controller do
         @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => true))
         Faculty.stub!(:find).and_return(@faculty)
-        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        JobMailer.stub!(:activate_job_email)
         
         @faculty.stub!(:email).and_return("")
         @faculty.stub!(:name).and_return("")
@@ -89,7 +89,7 @@ describe JobsController, :type => :controller do
         @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => true))
         Faculty.stub!(:find).and_return(@faculty)
-        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        JobMailer.stub!(:activate_job_email)
         
         @faculty.stub!(:email).and_return("")
         @faculty.stub!(:name).and_return("")
@@ -116,7 +116,7 @@ describe JobsController, :type => :controller do
         @faculty = mock_model(Faculty, :id=>1)
         Job.stub!(:new).and_return(mock_job(:save => false))
         Faculty.stub!(:find).and_return(@faculty)
-        FacultyMailer.stub!(:deliver_faculty_confirmer)
+        JobMailer.stub!(:activate_job_email)
         @faculty.stub!(:email).and_return("")
         @faculty.stub!(:name).and_return("")
         
