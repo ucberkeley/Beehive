@@ -17,6 +17,9 @@ class ApplicsController < ApplicationController
   # Ensures that other users can't view your job if your job is not yet active!
   before_filter :view_ok_for_unactivated_job, :only => [ :new, :create, :show ]
 
+  # Prohibits a user from applying to his/her own job
+  before_filter :watch_apply_ok_for_job, :only => [ :new, :create ]
+
   protected
   def find_objects
     @applic = Applic.find(params[:id])  unless params[:id].blank?

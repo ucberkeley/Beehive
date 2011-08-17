@@ -25,13 +25,13 @@
 	<% if @current_user != nil && !@current_user.is_faculty %>
 		<% if @job.users.include?(@current_user) %>
 			<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
-		<% else %>
+		<% elsif @job.user != @current_user %>
 			<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
 		<% end %>
         &nbsp;
-        <% if @job.applicants.include?(@current_user) %>
+    <% if @job.applicants.include?(@current_user) %>
 			[applied!]
-		<% else %>
+		<% elsif @job.user != @current_user %>
 			<%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
 		<% end %>
 	<% end %>

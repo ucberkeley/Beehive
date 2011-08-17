@@ -27,6 +27,9 @@ class JobsController < ApplicationController
   # Ensures that other users can't view your job if your job is not yet active!
   before_filter :view_ok_for_unactivated_job, :only => [ :show, :apply ]
 
+  # Prohibits a user from watching his/her own job
+  before_filter :watch_apply_ok_for_job, :only => [ :watch ]
+
   protected
   def search_params_hash
     h = {}
