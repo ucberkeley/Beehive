@@ -25,6 +25,23 @@ class ApplicationController < ActionController::Base
     return true
   end
 
+
+
+####################
+#     FILTERS      #
+####################
+
+  def view_ok_for_unactivated_job
+    j = Job.find(params[:id].present? ? params[:id] : params[:job_id])
+      # id and job_id because this filter is used by both the JobsController
+      # and the ApplicsController
+    if (j == nil || ! j.active && @current_user != j.user)
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      redirect_to :controller => 'dashboard', :action => :index
+    end
+  end
+
+
   private
 
   def set_current_user

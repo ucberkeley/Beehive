@@ -25,7 +25,7 @@ class JobsController < ApplicationController
                                                   :delete, :destroy ]
 
   # Ensures that other users can't view your job if your job is not yet active!
-  before_filter :view_ok_for_unactivated_job, :only => [ :show ]
+  before_filter :view_ok_for_unactivated_job, :only => [ :show, :apply ]
 
   protected
   def search_params_hash
@@ -337,6 +337,11 @@ class JobsController < ApplicationController
 		@job.tag_list = tags_string
 	end
   
+
+####################
+#     FILTERS      #
+####################
+
   private
 	def correct_user_access
 		if (Job.find(params[:id]) == nil || @current_user != Job.find(params[:id]).user)
@@ -352,12 +357,5 @@ class JobsController < ApplicationController
 	    end
 	end
 
-  def view_ok_for_unactivated_job
-    j = Job.find(params[:id])
-    if (j == nil || ! j.active && @current_user != j.user)
-      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
-      redirect_to :controller => 'dashboard', :action => :index
-    end
-  end
 
 end
