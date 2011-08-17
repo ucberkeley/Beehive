@@ -23,6 +23,10 @@ class JobsController < ApplicationController
   before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :resend_activation_email,
                                                   :delete, :destroy ]
+
+  # Ensures that other users can't view your job if your job is not yet active!
+  before_filter :view_ok_for_unactivated_job, :only => [ :show ]
+
   protected
   def search_params_hash
     h = {}
@@ -243,7 +247,7 @@ class JobsController < ApplicationController
   		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
   		  format.html { redirect_to(@job) }
   		else
-  		  flash[:notice] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
+        flash[:error] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
   		  format.html { redirect_to(jobs_url) }
   		end
   	end
@@ -347,5 +351,13 @@ class JobsController < ApplicationController
 	        redirect_to :controller => 'dashboard', :action => :index
 	    end
 	end
-	
+
+  def view_ok_for_unactivated_job
+    j = Job.find(params[:id])
+    if (j == nil || ! j.active && @current_user != j.user)
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      redirect_to :controller => 'dashboard', :action => :index
+    end
+  end
+
 end

@@ -191,21 +191,12 @@ class Job < ActiveRecord::Base
     ts_options[:with][:department_id] = options[:department_id].to_i  if options[:department_id].present? && Department.exists?(options[:department_id])
     ts_options[:with][:end_date]      = (Time.now .. 100.years.since) unless options[:ended]
 
-    ts_options[:without][:num_positions] = 0 unless options[:filled]
+    ts_options[:without][:num_positions] = -1 unless options[:filled]
+      # Assume -1, not 0, means it's filled.
 
     ts_options[:match_mode] = :all
     ts_options.update(ts_common_options)
 
-    results = Job.search ts_options
-
-    ##################
-    # ANY conditions #
-    ##################
-    ts_options = { :conditions => {}, :with => {}, :without => {} }
-    ts_options[:match_mode] = :any
-    ts_options.update(ts_common_options)
-
-    puts "\n\n\nQUERY:" + query.to_s + "\n\n\n"
     results = Job.search query, ts_options
 
     results = results.tagged_with(options[:tags]) if options[:tags].present?
@@ -375,7 +366,11 @@ class Job < ActiveRecord::Base
     # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
 
     puts "[][][] ACTIVATION CODE: " + self.activation_code.to_s
-    self.save
+
+    # Save, skipping validations, so that we just change the activation code
+    # and leave the rest alone! (Also so that we don't encounter weird bugs with
+    # activating jobs whose end dates are in the past, etc.)
+    self.save(false)
 
     if send_email
       # Send the email for activation.
