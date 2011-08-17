@@ -25,8 +25,13 @@
       <p id="description">
         <%= @applic.message %>
       </p>
-      <p><b>Attachments: </b><%= (@applic.resume||@applic.transcript ?
-        "Included" : "None") %>
+      <p><b>Attachments: </b>
+      <% attachment_list = [] %>
+      <% [:resume, :transcript].each do |doctype| %>
+        <% attachment_list += [doctype.to_s.capitalize] if
+          @applic.send(doctype).present? %>
+      <% end %>
+      <%= attachment_list.empty? ? 'None' : attachment_list.join(', ') %>
       </p>
     </div>
   </div>
