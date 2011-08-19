@@ -22,7 +22,6 @@ class Job < ActiveRecord::Base
   # =======================
 
   include AttribsHelper
-  include ActionController::UrlWriter # for activate_job_url
 
   ##################
   #  ASSOCIATIONS  #

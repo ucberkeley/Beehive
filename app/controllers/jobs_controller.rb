@@ -247,10 +247,10 @@ class JobsController < ApplicationController
   	respond_to do |format|
   		if saved
   		  @job.skip_handlers = false
-  		  flash[:notice] = 'Job activated successfully.  Your job is now available to be browsed and viewed by other users.'
+  		  flash[:notice] = 'Listing activated successfully.  Your listing is now available to be viewed by other users.'
   		  format.html { redirect_to(@job) }
   		else
-        flash[:error] = 'Unsuccessful activation.  Either this job has already been activated or the activation code is incorrect.'
+        flash[:error] = 'Unsuccessful activation.  Either this listing has already been activated or the activation code is incorrect.'
   		  format.html { redirect_to(jobs_url) }
   		end
   	end
