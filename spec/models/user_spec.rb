@@ -5,6 +5,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 # Then, you can remove it from this and the functional test.
 include AuthenticatedTestHelper
 
+@@next_user_login = 11
+
 describe User do
   fixtures :users
 
@@ -21,11 +23,6 @@ describe User do
       @creating_user.should change(User, :count).by(1)
     end
 
-    it 'initializes #activation_code' do
-      @creating_user.call
-      @user.reload
-      @user.activation_code.should_not be_nil
-    end
   end
 
   #
@@ -119,8 +116,11 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({ :name => 'quire', :email => 'quire@berkeley.edu', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record = User.new({ :name => 'quire', :email => 'quire' +
+      @@next_user_login.to_s + '@berkeley.edu',
+      :login => @@next_user_login, :user_type => 0}.merge(options))
     record.save
+    @@next_user_login += 1
     record
   end
 end
