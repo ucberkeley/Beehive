@@ -10,7 +10,7 @@ Echoe.new('ucb_ldap', '1.4.2') do |p|
   p.email          = "runner@berkeley.edu"
   p.ignore_pattern = ["svn_user.yml", "tasks/ucb_ldap.rake", "spec/**/**", "test/**/**"]
   p.project = "ucbrb"
-  p.runtime_dependencies = ["ruby-net-ldap >=0.0.4"]
+  p.runtime_dependencies = ["net-ldap >=0.2.2"]
   p.rdoc_options = "-o doc --inline-source -T hanna lib/*.rb"
   p.rdoc_pattern = ["README", "lib/**/**"]
 end

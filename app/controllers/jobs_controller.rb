@@ -313,6 +313,9 @@ class JobsController < ApplicationController
     [:paid, :credit].each do |k|
       params[:job][k] = [false,true,nil][params[:job][k].to_i]
     end
+
+    # Handle end date
+    params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
   end
 
 

@@ -1,0 +1,4 @@
+Autotest.add_hook :initialize do |at|
+  # These things cause cucumber to run infinitely. Don't watch them.
+  %w(log .git tmp).each {|x| at.add_exception(%r{^\./x})}
+end

@@ -28,9 +28,6 @@ ResearchMatch::Application.configure do
     :cas_base_url => "https://auth-test.berkeley.edu/cas/"
   )
 
-  # LDAP
-  UCB::LDAP.host = 'ldap-test.berkeley.edu'
-
   # ActionMailer
   ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.perform_deliveries = !!(ENV['action_mailer'] =~ /1|true/i)

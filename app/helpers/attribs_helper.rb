@@ -10,7 +10,7 @@ module AttribsHelper
     attrib_names = ''
     self.send(attrib_type.to_s.downcase.pluralize).each do |attrib|
       attrib_names << attrib.name + ','
-      if add_spaces: attrib_names << ' ' end
+      if add_spaces then attrib_names << ' ' end
     end
     
     # lop off extra ',' or ', ' at the end

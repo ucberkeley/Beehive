@@ -135,7 +135,7 @@ class Job < ActiveRecord::Base
   end
 
   def open_ended_end_date
-    end_date.present?
+    end_date.nil?
   end
   
   # This is the main search handler.
@@ -164,11 +164,10 @@ class Job < ActiveRecord::Base
   def self.find_jobs(query, options={})
     throw "Query must be a string" unless query.is_a? String
 
-    puts "\n\norig query: " + query + "\n\n"
-
     # Sanitize input
     query ||= ""
     query.gsub! /[^a-zA-Z0-9 ,]/, ''
+    options[:tags] = [*options[:tags]]
 
     # Sanitize some boolean options to avoid false positives.
     # This happens in situations like paid=0 => paid=true
@@ -189,19 +188,22 @@ class Job < ActiveRecord::Base
     ts_options = { :conditions => {}, :with => {}, :without => {} }
     ts_options[:with][:active]        = true
     ts_options[:with][:paid]          = true if options[:paid]
-    ts_options[:with][:credit]          = true if options[:credit]
+    ts_options[:with][:credit]        = true if options[:credit]
     ts_options[:with][:faculty_ids]   = [options[:faculty_id].to_i]   if options[:faculty_id].present? && Faculty.exists?(options[:faculty_id])
     ts_options[:with][:department_id] = options[:department_id].to_i  if options[:department_id].present? && Department.exists?(options[:department_id])
-    ts_options[:with][:end_date]      = (Time.now .. 100.years.since) unless options[:ended]
+    #ts_options[:with][:end_date]      = (Time.now .. 100.years.since) unless options[:ended]
 
+    ts_options[:without][:end_date]    = (Time.at(1) .. Time.now)  unless options[:ended]
+      # Implementation detail: Sphinx indexes nil times as 0, so search from (0, now]
     ts_options[:without][:num_positions] = -1 unless options[:filled]
       # Assume -1, not 0, means it's filled.
 
-    ts_options[:match_mode] = :all
+    ts_options[:match_mode] = :extended
     ts_options.update(ts_common_options)
 
     results = Job.search query, ts_options
 
+    # Final filters
     results = results.tagged_with(options[:tags]) if options[:tags].present?
     return results
   end # find_jobs
@@ -295,7 +297,7 @@ class Job < ActiveRecord::Base
     category_list = ''
     self.categories.each do |cat|
       category_list << cat.name + ','
-      if add_spaces: category_list << ' ' end
+      category_list << ' ' if add_spaces
     end
     
     if add_spaces
@@ -311,7 +313,7 @@ class Job < ActiveRecord::Base
     course_list = ''
     self.courses.each do |c|
       course_list << c.name + ','
-      if add_spaces: course_list << ' ' end
+      course_list << ' ' if add_spaces
     end
     
     if add_spaces
@@ -327,7 +329,7 @@ class Job < ActiveRecord::Base
     proglang_list = ''
     self.proglangs.each do |pl|
       proglang_list << pl.name.capitalize + ','
-      if add_spaces: proglang_list << ' ' end
+      proglang_list << ' ' if add_spaces
     end
     
     if add_spaces

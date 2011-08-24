@@ -156,7 +156,7 @@ class User < ActiveRecord::Base
   	course_list = ''
   	courses.each do |c|
   		course_list << c.name + ','
-  		if add_spaces: course_list << ' ' end
+  		course_list << ' ' if add_spaces
   	end
   	
   	if add_spaces
@@ -172,7 +172,7 @@ class User < ActiveRecord::Base
   	category_list = ''
   	categories.each do |cat|
   		category_list << cat.name + ','
-  		if add_spaces: category_list << ' ' end
+  		category_list << ' ' if add_spaces
   	end
   	
   	if add_spaces
@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
   	proglang_list = ''
   	proglangs.each do |pl|
   		proglang_list << pl.name.capitalize + ','
-   		if add_spaces: proglang_list << ' ' end
+   		proglang_list << ' ' if add_spaces
   	end
   	
   	if add_spaces

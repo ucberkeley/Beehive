@@ -32,7 +32,7 @@ class Document < ActiveRecord::Base
   def self.type_string(type)
     case
     when type.is_a?(Integer)
-      ["Document", "Résumé", "Transcript"][type]
+      ["Document", "Resume", "Transcript"][type]
     when type.is_a?(Symbol)
       self.type_string({:document=>Document::Types::Generic, :resume=>Document::Types::Resume, :transcript=>Document::Types::Transcript}[type])
     else

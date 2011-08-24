@@ -7,8 +7,8 @@ begin
       :address              => "smtp.gmail.com",
       :port                 => 587,
       :domain               => 'researchmatch.heroku.com',
-      :user_name            => @@smtp_username,
-      :password             => @@smtp_pw,
+      :user_name            => $smtp_username,
+      :password             => $smtp_pw,
       :authentication       => 'plain',
       :enable_starttls_auto => true
     }

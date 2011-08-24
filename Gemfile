@@ -6,8 +6,7 @@ gem 'rails', '~> 3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Data
-#gem 'mysql2', '< 0.3.0'  # rails 3.0.3 and mysql >= .3 don't mix
-gem 'mysql2'
+gem 'mysql2', '< 0.3.0'  # rails 3.0.x and mysql >= .3 don't mix
 
 # Testing
 gem 'rspec-rails'
@@ -22,11 +21,8 @@ gem 'authlogic',
     :git => 'git://github.com/binarylogic/authlogic.git'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'rubycas-client', :require => ['casclient', 'casclient/frameworks/rails/filter']
-gem 'ruby-net-ldap'
-gem 'acts_as_taggable_on_steroids'
-## gem 'attachment_fu',
-##    :git => 'git://github.com/technoweenie/attachment_fu.git'
-gem 'ucb_ldap'
+gem 'acts_as_taggable_on_steroids', :require => ['acts_as_taggable', 'tags_helper', 'tag_list', 'tagging', 'tag']
+gem 'net-ldap', :require => 'net/ldap'
 gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 
 # Deploy with Capistrano
@@ -34,6 +30,9 @@ gem 'capistrano'
 
 # Heroku
 gem 'heroku'
+
+# Testing
+gem 'ZenTest'
 
 
 ################################################################################
