@@ -3,21 +3,20 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
 
   # === List of columns ===
-  #   id                  : integer 
-  #   name                : string 
-  #   login               : string 
-  #   email               : string 
-  #   persistence_token   : string 
-  #   single_access_token : string 
-  #   perishable_token    : string 
-  #   login_count         : integer 
-  #   failed_login_count  : integer 
-  #   last_request_at     : datetime 
-  #   current_login_at    : datetime 
-  #   last_login_at       : datetime 
-  #   current_login_ip    : string 
-  #   last_login_ip       : string 
-  #   user_type           : integer 
+  #   id                        : integer 
+  #   login                     : string 
+  #   name                      : string 
+  #   email                     : string 
+  #   crypted_password          : string 
+  #   salt                      : string 
+  #   created_at                : datetime 
+  #   updated_at                : datetime 
+  #   remember_token            : string 
+  #   remember_token_expires_at : datetime 
+  #   activation_code           : string 
+  #   activated_at              : datetime 
+  #   is_faculty                : boolean 
+  #   user_type                 : integer 
   # =======================
 
   include AttribsHelper
