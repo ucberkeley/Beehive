@@ -91,11 +91,17 @@
         </td>
         <td class="job_clear_table_field">
             <div id="enddate">
-            <%= f.radio_button :open_ended_end_date, true, :onclick => "$('#enddate select').attr('disabled', true);" %>
-            <%= f.label :open_ended_end_date, 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);" %>&nbsp;
-            <%= f.radio_button :open_ended_end_date, false, :onclick => "$('#enddate select').attr('disabled', false);" %>
-            <%= f.label :open_ended_end_date, 'Specified as:', :value => false, :onclick => "$('#enddate select').attr('disabled', false);" %>
-            <%= f.date_select :end_date, {:default => 1.month.from_now, :start_year => Date.today.year} %>
+            <% was_open_ended = @job.open_ended_end_date %>
+            <%= radio_button_tag 'open_ended_end_date', true, was_open_ended, :onclick => "$('#enddate select').attr('disabled', true); $('#enddate select').val('');" %>
+            <%= label_tag 'open_ended_end_date_true', 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);" %>&nbsp;
+            <%= radio_button_tag 'open_ended_end_date', false, ! was_open_ended, :onclick => "$('#enddate select').attr('disabled', false);" %>&nbsp;
+            <%= label_tag 'open_ended_end_date_false', 'Specified as:', :value => true, :onclick => "$('#enddate select').attr('disabled', true);" %>&nbsp;
+
+            <% date_select_options = {} %>
+            <% date_select_options.update({:default => 1.month.from_now, :start_year => Date.today.year}) if
+                ! was_open_ended %>
+
+            <%= f.date_select :end_date, date_select_options, { :disabled => was_open_ended } %>
             </div>
         </td>
     </tr>
