@@ -195,6 +195,10 @@ class JobsController < ApplicationController
           flash[:notice] = 'Listing was successfully updated.'
         end
 
+        if params[:open_ended_end_date] == "true"
+          @job.end_date = nil
+        end
+
         @job.save
         format.html { redirect_to(@job) }
         format.xml  { head :ok }
