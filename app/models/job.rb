@@ -160,8 +160,8 @@ class Job < ActiveRecord::Base
   #   - tags: array of tag strings to match (searches only tags and not body, title, etc.)
   #   - order: ARRAY of custom sorting conditions, besides @relevance. Conditions concatenated left to right.
   #
-  def self.find_jobs(query, options={})
-    throw "Query must be a string" unless query.is_a? String
+  def self.find_jobs(query=nil, options={})
+    throw "Query must be a string" unless query.nil? || query.is_a?(String)
 
     # Sanitize input
     query ||= ""

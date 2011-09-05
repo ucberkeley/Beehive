@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
     c.merge_validates_length_of_login_field_options :within => 1..100
       # so that logins can be 1 character in length even; 'login' is provided
       # by CAS so we don't want to artificially limit the values we get for it.
+
+    c.validate_email_field = true
   end
 
   class Types
@@ -57,31 +59,16 @@ class User < ActiveRecord::Base
   has_many :proficiencies, :dependent => :destroy
   has_many :proglangs,     :through => :proficiencies
   
-
-  #validates_presence_of     :login
-  #validates_length_of       :login,    :within => 3..40
-  #validates_uniqueness_of   :login
-  #validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
-  
   validates_presence_of     :name
-
-  # TODO i think authlogic handles this for us
-  #validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
-
   validates_length_of       :name,     :within => 0..100
+  validates_format_of       :name,     :with => /\A[A-Za-z\-_ ]+\z/
 
   validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
 
-  # TODO i think authlogic handles this for us
-  #validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
-  
-  # Check that the email address is @*.berkeley.edu or @*.lbl.gov
-  # validates_format_of		:email,	   :with => /^[^@]+@(?:.+\.)?(?:(?:berkeley\.edu)|(?:lbl\.gov))$/i, :message => "is not a Berkeley or LBL address."
-
   # Check that user type is valid
-  validates_inclusion_of    :user_type, :in => [Types::Undergrad, Types::Grad, Types::Faculty]
+  validates_inclusion_of    :user_type, :in => Types::All, :message => "is invalid"
 
   # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
   # email address to the user (depending on whether the user is a student or gsi or a faculty) 
@@ -109,7 +96,12 @@ class User < ActiveRecord::Base
   # attr_reader :student_name; attr_writer :student_name
   # attr_reader :faculty_name; attr_writer :faculty_name
   
- 
+  attr_reader :user_type
+
+protected
+  attr_writer :user_type 
+public
+
   # (DEPRECATED) Returns true if the user has just been activated.
   def recently_activated?
     false 
