@@ -8,9 +8,6 @@ gem 'rails', '~> 3.0.3'
 # Data
 gem 'mysql2', '< 0.3.0'  # rails 3.0.x and mysql >= .3 don't mix
 
-# Testing
-gem 'rspec-rails'
-
 # Debugging
 gem "exception_notification",
     :git => "git://github.com/rails/exception_notification.git",
@@ -32,7 +29,13 @@ gem 'capistrano'
 gem 'heroku'
 
 # Testing
-gem 'ZenTest'
+group :test do
+  gem 'autotest-rails'
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+end
 
 
 ################################################################################
