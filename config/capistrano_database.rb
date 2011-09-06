@@ -149,7 +149,7 @@ Capistrano::Configuration.instance.load do
         
         # for LDAP and SMTP_PW shared files
         run "ln -nfs #{shared_path}/config/ldap.yml #{release_path}/config/ldap.yml" 
-        run "ln -nfs #{shared_path}/config/smtp_pw.rb #{release_path}/config/smtp_pw.rb"         
+        run "ln -nfs #{shared_path}/config/smtp_settings.rb #{release_path}/config/smtp_settings.rb"         
       end
 
     end

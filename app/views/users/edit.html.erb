@@ -30,20 +30,20 @@
           </p>
         </div> <%# Left col %>
         <div class="right_col">
-          <%- utype = @user.user_type -%>
+          <% utype = @user.user_type %>
           <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %><%= render 'shared/tooltip', :text => "Your user type was automatically determined. If it's wrong, please let us know!" %></b>, you can:
             <ul>
-            <%- if utype >= User::Types::Undergrad -%>
+            <% if utype.present? && utype >= User::Types::Undergrad %>
               <li>View listings</li>
               <li>Watch and apply for jobs</li>
-            <%- end # undergrad -%>
-            <%- if utype >= User::Types::Grad -%>
+            <% end # undergrad %>
+            <% if utype.present? && utype >= User::Types::Grad %>
               <li>Post listings</li>
               <li>Review applications</li>
-            <%- end # grad -%>
-            <%- if utype >= User::Types::Faculty -%>
+            <% end # grad %>
+            <% if utype.present? && utype >= User::Types::Faculty %>
               <li>Receive applications via email</li>
-            <%- end # faculty -%>
+            <% end # faculty %>
             </ul>
           </p>
         </div> <%# Right col %>
