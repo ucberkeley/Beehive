@@ -21,7 +21,8 @@ begin
 
   unless Rails.env == 'test'
     # 1) Try using env vars
-    if username=ENV['LDAP_USERNAME'] && password=ENV['LDAP_PASSWORD']
+    username, password = ENV['LDAP_USERNAME'], ENV['LDAP_PASSWORD']
+    if username && password
       UCB::LDAP::authenticate(username, password)
 
     # 2) Use config/ldap.yml
