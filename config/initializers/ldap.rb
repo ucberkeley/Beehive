@@ -12,6 +12,11 @@ begin
   end
 
   UCB::LDAP.bind_for_rails unless Rails.env == 'test'
+
 rescue UCB::LDAP::BindFailedException => e
-  $stderr.puts "ERROR: Failed to bind: #{e.inspect}"
+  $stderr.puts "WARNING: Failed to bind: #{e.inspect}"
+
+rescue RuntimeError => e  # UCB::LDAP throws this for missing file
+  $stderr.puts "WARNING: Missing file: #{e.inspect}"
+
 end
