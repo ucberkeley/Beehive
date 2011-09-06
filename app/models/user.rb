@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   has_many :categories,    :through => :interests
   has_many :proficiencies, :dependent => :destroy
   has_many :proglangs,     :through => :proficiencies
-  
+
   validates_presence_of     :name
   validates_length_of       :name,     :within => 0..100
   validates_format_of       :name,     :with => /\A[A-Za-z\-_ ]+\z/
@@ -78,29 +78,15 @@ class User < ActiveRecord::Base
   before_validation :handle_courses
   before_validation :handle_categories
   before_validation :handle_proglangs
-  
+
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :login, :name,
-                  # :password, :password_confirmation,
-                  # :faculty_email, :student_email,
-                  # :is_faculty,
-                  :course_names, :category_names, :proglang_names
-                  # :student_name, :faculty_name 
-  # attr_reader :faculty_email; attr_writer :faculty_email  
-  # attr_reader :student_email; attr_writer :student_email
+  attr_accessible :email
+
   attr_reader :course_names; attr_writer :course_names
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
-  # attr_reader :student_name; attr_writer :student_name
-  # attr_reader :faculty_name; attr_writer :faculty_name
-  
-  attr_reader :user_type
-
-protected
-  attr_writer :user_type 
-public
 
   # (DEPRECATED) Returns true if the user has just been activated.
   def recently_activated?
