@@ -59,11 +59,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     @user_session = UserSession.find
-    if @user_session
-      @current_user ||= @user_session.user
-    else
-      @current_user = nil
-    end
+    @current_user = @user_session ? @user_session.user : nil
   end
-  
+
 end

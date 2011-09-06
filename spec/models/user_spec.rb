@@ -55,7 +55,7 @@ describe User do
 
     describe 'should be disallowed:' do
       ['!!@nobadchars.com', 'foo@no-rep-dots..com', 'failberkeley.edu',
-        'my@badberkeleyderp', 'foo@foilblgov', 
+        'my@badberkeleyderp', 'foo@foilblgov',
            'foo@toolongtld.abcdefg',
        'Iñtërnâtiônàlizætiøn@hasnt.happened.to.email', 'need.domain.and.tld@de',
        "tab\t", "newline\n",
@@ -154,15 +154,18 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({
+    record = User.new
+    {
       :name => 'quire',
       :email => "quire#{@@next_user_login}@berkeley.edu",
       :login => @@next_user_login,
-      :user_type => User::Types::Undergrad}.merge(options))
-    record.update_user_type(:stub => options[:user_type] || User::Types::Undergrad)
-    record.user_type.should == User::Types::Undergrad
+      :user_type => User::Types::Undergrad
+    }.merge(options).each_pair do |attr,val|
+      record[attr] = val
+    end
     record.save if record.valid? && options[:save] != false
     @@next_user_login += 1
     record
   end
 end
+
