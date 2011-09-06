@@ -64,6 +64,6 @@ function user_signup_faculty_fields() {
 
 /* autocomplete endpoint GET requests */
 function get_categories() {
-    return $.getJSON('/categories/json');
+    return $.getJSON('/research/categories/json');
 }
 
