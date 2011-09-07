@@ -1,6 +1,6 @@
 ResearchMatch::Application.routes.draw do
 
-  scope '/research' do
+  scope "/research" do
 
     resources :pictures
 
