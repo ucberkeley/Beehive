@@ -143,7 +143,8 @@ module CASControllerIncludes
     # so that you are 'logged in' when you go to the Edit Profile
     # page in this next section here.
     unless User.exists?(:login => session[:cas_user].to_s)
-      new_user = User.new(:login => session[:cas_user].to_s)
+      new_user = User.new
+      new_user.login = session[:cas_user].to_s
       person = new_user.ldap_person
       new_user.email = person.email
       new_user.name = new_user.ldap_person_full_name
