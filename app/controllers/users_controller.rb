@@ -72,6 +72,7 @@ class UsersController < ApplicationController
       redirect_to :controller => "jobs", :action => "index"
            
     else
+      logger.error "UsersController.create: Failed because #{@user.errors.inspect}"
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
       # format.html { render :action => 'new' }
       # redirect_to new_user_path
