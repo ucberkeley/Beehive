@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.3'
+gem 'rails', ['~> 3.0.3', '< 3.1.0']
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,6 +27,11 @@ gem 'capistrano'
 
 # Heroku
 gem 'heroku'
+
+# Production-specific
+group :production do
+  gem 'flying-sphinx',   '~> 0.6.0'
+end
 
 # Testing
 group :test do
