@@ -81,8 +81,9 @@ class Job < ActiveRecord::Base
   define_index do
     indexes :title
     indexes :desc
-    indexes department(:name), :as => :department,    :facet => true
-    indexes faculties(:name),  :as => :faculty,       :facet => true
+    indexes tags(:name),       :as => :tag_names#,     :facet => true
+    indexes department(:name), :as => :department#,    :facet => true
+    indexes faculties(:name),  :as => :faculty#,       :facet => true
     
     has :active
     has :paid
@@ -93,7 +94,6 @@ class Job < ActiveRecord::Base
     has :num_positions
     has department(:id),  :as => :department_id
     has faculties(:id),   :as => :faculty_ids
-    has tags(:name),       :as => :tag_names,     :facet => true
     
     set_property :delta => true
   end
