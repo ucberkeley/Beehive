@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :department
+  has_many :categories_jobs
   has_many :categories, :through => :categories_jobs
   has_many :pictures
   

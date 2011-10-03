@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
   #   updated_at : datetime 
   # =======================
 
+  has_many :categories_jobs
   has_many :jobs, :through => :categories_jobs
   
   has_many :interests

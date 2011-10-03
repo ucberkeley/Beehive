@@ -1,6 +1,9 @@
 ResearchMatch::Application.routes.draw do
 
 
+  get "contact_us/contact", :as => :contact_us
+  post "contact_us/send_email", :as => :feedback_email_link
+
   resources :pictures
 
   # Jobs

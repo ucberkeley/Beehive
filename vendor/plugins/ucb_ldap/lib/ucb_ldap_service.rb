@@ -8,7 +8,7 @@ module UCB
     #
     #   services = Services.find_by_uid("1234")       #=> [#<UCB::LDAP::Service: ...>, ...]
     #
-    # Servicess are usually loaded through a Person instance:
+    # Services are usually loaded through a Person instance:
     #
     #   p = Person.find_by_uid("1234")    #=> #<UCB::LDAP::Person: ...>
     #   services = p.services        #=> [#<UCB::LDAP::Service: ...>, ...]
