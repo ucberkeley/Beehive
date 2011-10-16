@@ -1,21 +1,61 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user: 
+  user_id: 1
   title: MyString
   desc: MyText
-  category: 
-  exp_date: 2009-11-07 11:45:46
+  category_id: 
   num_positions: 1
   paid: false
   credit: false
+  department_id: 2
+  active: true
+  end_date: 2020-11-07 11:45:46
 
 two:
-  user: 
+  user_id: 2
   title: MyString
-  desc: MyText
-  category: 
-  exp_date: 2009-11-07 11:45:46
+  desc: this is a long description
+  category_id: 
   num_positions: 1
   paid: false
   credit: false
+  department_id: 2
+  active: true
+  end_date: 2020-11-07 11:45:46
+  
+three:
+  user_id: 3
+  title: MyString
+  desc: MyText
+  category_id: 
+  num_positions: 1
+  paid: false
+  credit: false
+  department_id: 2
+  active: true
+  end_date: 2020-11-07 11:45:46
+  
+four:
+  user_id: 3
+  title: interesting title
+  desc: MyText
+  category_id: 
+  num_positions: 1
+  paid: false
+  credit: false
+  department_id: 2
+  active: true
+  end_date: 2020-11-07 11:45:46
+  
+five:
+  user_id: 3
+  title: boring title
+  desc: MyText
+  category_id: 
+  num_positions: 1
+  paid: false
+  credit: false
+  department_id: 2
+  active: true
+  end_date: 2020-11-07 11:45:46
