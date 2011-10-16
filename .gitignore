@@ -8,3 +8,4 @@ cscope.*
 files/
 mysql2/
 config/smtp_settings.rb
+.project
