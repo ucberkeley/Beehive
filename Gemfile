@@ -23,6 +23,8 @@ gem 'net-ldap', :require => 'net/ldap'
 gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 gem 'nokogiri'
 
+gem 'jquery-rails', '>= 1.0.12'
+
 # Deploy with Capistrano
 gem 'capistrano'
 
