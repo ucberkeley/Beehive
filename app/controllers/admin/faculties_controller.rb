@@ -17,4 +17,24 @@ class Admin::FacultiesController < AdminController
 
   end
 
+  def create
+    @new_faculty = Faculty.new(params[:faculty])
+
+    if @new_faculty.save
+      flash[:notice] = "Successfully added #{@new_faculty.name}"
+    else
+      flash[:notice] = "Error: #{@new_faculty.errors.inspect}"
+    end
+
+    index
+    render :action => :index
+  end
+
+  def destroy
+    f = Faculty.find(params[:id])
+    f.destroy
+
+    redirect_to admin_faculties_path
+  end
+
 end

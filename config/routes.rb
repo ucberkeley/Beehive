@@ -53,6 +53,8 @@ ResearchMatch::Application.routes.draw do
     scope 'faculties', :as => :faculties do
       get  '/' => 'faculties#index', :as => ''
       put  '/:id' => 'faculties#update', :as => :update
+      delete '/:id' => 'faculties#destroy', :as => :destroy
+      post '/' => 'faculties#create', :as => :create
     end
   end
 
