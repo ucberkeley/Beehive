@@ -21,6 +21,7 @@ gem 'rubycas-client', :require => ['casclient', 'casclient/frameworks/rails/filt
 gem 'acts_as_taggable_on_steroids', :require => ['acts_as_taggable', 'tags_helper', 'tag_list', 'tagging', 'tag']
 gem 'net-ldap', :require => 'net/ldap'
 gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
+gem 'nokogiri'
 
 # Deploy with Capistrano
 gem 'capistrano'
