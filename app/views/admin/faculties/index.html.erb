@@ -1,0 +1,22 @@
+<table id="faculties">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>Actions</th>
+  </tr>
+
+<%- @faculties.each do |faculty| -%>
+  <%= form_for faculty, :url => admin_faculties_update_path(faculty.id) do |f| -%>
+  <tr>
+    <td><%= f.text_field :name %></td>
+    <td><%= f.text_field :email %></td>
+    <td><%= f.collection_select :department_id, Department.all, :id, :name %></td>
+    <td>
+      <%= f.submit 'Update' %>
+    </td>
+  </tr>
+  <%- end # form_for -%>
+<%- end # @faculties.each -%>
+
+</table>

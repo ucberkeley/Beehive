@@ -49,6 +49,13 @@ ResearchMatch::Application.routes.draw do
   get '/courses/json' => 'courses#json', :as => :courses_json
   get '/proglangs/json' => 'proglangs#json', :as => :proglangs_json
 
+  namespace :admin do
+    scope 'faculties', :as => :faculties do
+      get  '/' => 'faculties#index', :as => ''
+      put  '/:id' => 'faculties#update', :as => :update
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
