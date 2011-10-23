@@ -1,0 +1,164 @@
+cs61a:
+  id: 1
+  name: CS61A
+  desc: The Structure and Interpretation of Computer Programs
+  
+cs61b:
+  id: 2
+  name: CS61B
+  desc: Data Structures
+  
+cs61c:
+  id: 3
+  name: CS61B
+  desc: Machine Structures
+
+cs70:
+  id: 4
+  name: CS70
+  desc: Discrete Mathematics and Probability Theory
+  
+cs150:
+  id: 5
+  name: CS150
+  desc: Components and Design Techniques for Digital Systems
+
+cs160:
+  id: 6
+  name: CS160
+  desc: User Interface Design and Development
+  
+cs161:
+  id: 7
+  name: CS161
+  desc: Computer Security
+  
+cs162:
+  id: 8
+  name: CS162
+  desc: Operating Systems and System Programming
+  
+cs164:
+  id: 9
+  name: CS164
+  desc: Programming Languages and Compilers
+  
+cs169:
+  id: 10
+  name: CS169
+  desc: Software Engineering
+  
+cs170:
+  id: 11
+  name: CS170
+  desc: Efficient Algorithms and Intractable Problems
+  
+cs172:
+  id: 12
+  name: CS172
+  desc: Computability and Complexity
+  
+cs184:
+  id: 13
+  name: CS184
+  desc: Foundations of Computer Graphics
+  
+cs186:
+  id: 14
+  name: CS186
+  desc: Introduction to Database Systems
+  
+cs188:
+  id: 15
+  name: CS188
+  desc: Introduction to Artificial Intelligence
+
+ee20n:
+  id: 16
+  name: EE20N
+  desc: Structure and Interpretation of Systems and Signals
+  
+ee40:
+  id: 17
+  name: EE40
+  desc: Introduction to Microelectronic Circuits
+  
+ee42:
+  id: 18
+  name: EE42
+  desc: Introduction to Digital Electronics
+  
+ee100:
+  id: 19
+  name: EE100
+  desc: Electronic Techniques for Engineering
+  
+ee105:
+  id: 20
+  name: EE105
+  desc: Microelectronic Devices and Circuits
+  
+ee113:
+  id: 21
+  name: EE113
+  desc: Power Electronics
+  
+ee117:
+  id: 22
+  name: EE117
+  desc: Electromagnetic Fields and Waves
+  
+ee120:
+  id: 23
+  name: EE120
+  desc: Signals and Systems
+  
+ee122:
+  id: 24
+  name: EE122
+  desc: Introduction to Communication Networks
+  
+ee123:
+  id: 25
+  name: EE123
+  desc: Digital Signal Processing
+
+ee126:
+  id: 26
+  name: EE126
+  desc: Probability and Random Processes
+  
+ee128:
+  id: 27
+  name: EE128
+  desc: Feedback Control
+  
+ee129:
+  id: 28
+  name: EE129
+  desc: Neural and Nonlinear Information Processing
+  
+ee130:
+  id: 29
+  name: EE130
+  desc: Integrated-Circuit Devices
+  
+ee140:
+  id: 30
+  name: EE140
+  desc: Linear Integrated Circuits
+  
+ee141:
+  id: 31
+  name: EE141
+  desc: Introduction to Digital Integrated Circuits
+  
+ee142:
+  id: 32
+  name: EE142
+  desc: Integrated Circuits for Communications
+  
+ee143:
+  id: 33
+  name: EE143
+  desc: Microfabrication Technology

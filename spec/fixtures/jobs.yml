@@ -1,61 +1,223 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+sejits:
+  id: 1
   user_id: 1
-  title: MyString
-  desc: MyText
-  category_id: 
-  num_positions: 1
+  title: "Selective, Embedded Just-in-Time Specialization (SEJITS)"
+  desc: "Application writers require 3-10x fewer lines of code and can develop
+        3-5x faster when using productivity-layer languages (PLLs) like Ruby or
+        Python rather than efficiency-layer languages (ELLs) like C or C++, and
+        they don’t need to internalize new programming models like GPU’s or hybrid
+        architectures to do so.  But PLL implementations can be 1-3 orders of
+        magnitude slower than carefully-coded ELL implementations. SEJITS combines
+        the best of both approaches by maintaining a catalog of hand-crafted
+        specializers, each of which can generate ELL code to perform a particular
+        computation pattern on a particular hardware programming model; for example,
+        FFT on a CUDA GPU, or stencil computations on MPI.  Modern scripting
+        languages such as Python and Ruby include the necessary facilities to allow
+        late binding of a particular specializer to execute a function in the PLL
+        application. In particular, introspection allows a function to inspect
+        its own abstract syntax tree (AST) when first called, and determine whether
+        the AST matches a specializer in the catalog. If yes, the metaprogramming
+        support of the PLL is used to generate, compile and link ELL code to the
+        running interpreter, and call the ELL implementation of the function;
+        if no, the unmodified source program continues executing as usual in the
+        PLL, albeit with lower performance. Our approach does not require modifying
+        the source PLL program, which would wreck portability."
+  num_positions: 6
+  paid: true
+  credit: true
+  active: true
+  earliest_start_date: 2000-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 2030-11-07 11:45:46
+  categories: parallelism
+  department: eecs
+  created_at: 2008-11-07 11:45:46
+  
+scads:
+  id: 2
+  user_id: 1
+  title: "SCADS: Scalable, Consistency-Adjustable Document Store"
+  desc: "Collaborative web applications such as Facebook, Flickr and Yelp present
+        new challenges for storing and querying large amounts of data. As users
+        and developers are focused more on performance than single copy consistency
+        or the ability to perform ad-hoc queries, there exists an opportunity for
+        a highly-scalable system tailored specifically for relaxed consistency,
+        precomputed queries, andÂ the ability to automatically scale with the number
+        of users, while providing a richer structured data model thanÂ key-value
+        stores. SCADS, built on top of Cassandra,Â allows the developer to
+        declaratively state application-specific consistency requirements,
+        takes advantage of utility computing to provide cost effective scale-up
+        and scale-down, and will use machine learning models to introspectively
+        anticipate performance problems and predict the resource requirements of
+        new queries before execution."
+  num_positions: 
+  paid: true
+  credit: false
+  active: true
+  earliest_start_date: 2015-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 
+  categories: databases, ai, distributedsystems
+  department: eecs
+  created_at: 2009-11-07 11:45:46
+  
+cloud:
+  id: 3
+  user_id: 1
+  title: "Cloud Computing"
+  desc: "investigating the scalability limits, bottlenecks, and developing best
+        practices for development & deployment in Cloud Computing environments:
+        Scaling and benchmarking application frameworks in the cloud. How will
+        popular development environments like RoR scale/perform on modern
+        (manycore) platforms and on “cloud computing” platforms such as Amazon
+        EC2? We are collaborating with RAD Lab founding sponsor Sun Microsystems
+        on investigating scalability and performance of RoR and other Web
+        platforms, on both “cloud computing” environments and modern multicore
+        hardware. We have made many improvements to Sun’s Olio, now an Apache
+        Foundation Incubator project, have suggested a metric and methodology
+        for evaluating its performance in different deployment environments,
+        and are using it internally as a representative Web 2.0 test app
+        (it includes its own workload generator) for a number of projects."
+  num_positions: 
+  paid: true
+  credit: true
+  active: true
+  earliest_start_date: 2000-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 
+  categories: webdevelopment, cloud
+  department: eecs
+  created_at: 2002-11-07 11:45:46
+  
+console:
+  id: 4
+  user_id: 1
+  title: "Console Log Mining"
+  desc: "combining text mining techniques with source code analysis to find
+        markers for hard-to-find bugs in the console logs of complex applications."
+  num_positions: 2
+  paid: true
+  credit: false
+  active: true
+  earliest_start_date: 2000-11-07 11:45:46
+  latest_start_date: 2000-11-07 11:45:46
+  end_date: 2020-11-07 11:45:46
+  categories: ai, operatingsystems
+  department: eecs
+  created_at: 2005-01-07 11:45:46
+  
+awe:
+  id: 5
+  user_id: 1
+  title: "Automatic Workload Evaluation (AWE)"
+  desc: "Using modern SML techniques to understand and characterize complex
+        workloads and their performance on distributed systems.Our goal is to
+        predict simultaneously several aspects of system performance when
+        stimulated by a previously unseen workload. We use Kernel Canonical
+        Correlation Analysis (KCCA) to predict message counts, running time
+        and disk operations for a database business-intelligence workload,
+        after showing that simpler prediction techniques give poor results.
+        Given two data spaces (in this case, the space of database query
+        features and the space of measured performance characteristics of
+        each query), KCCA finds maximally-correlated subspaces of fixed
+        dimension embedded in those spaces. We use these findings to predict
+        the performance of previously unseen queries via interpolation. Our
+        approach achieves predictions within 20% of measured values more
+        than 80% of the time on a real customer workload, even in cases where
+        the database’s built-in query optimizer gives poor estimates.We’re
+        now working on applying this approach to predict the performance of
+        Hadoop (i.e. MapReduce-style) batch jobs and the performance of
+        automatically tuned scientific codes on multicore parallel processors."
+  num_positions: 
   paid: false
   credit: false
-  department_id: 2
   active: true
+  earliest_start_date: 2010-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
   end_date: 2020-11-07 11:45:46
+  categories: ai, databases, distributedsystems
+  department: eecs
+  created_at: 2005-11-07 11:45:46
 
-two:
-  user_id: 2
-  title: MyString
-  desc: this is a long description
-  category_id: 
-  num_positions: 1
-  paid: false
-  credit: false
-  department_id: 2
+brain:
+  id: 6
+  user_id: 1
+  title: "How The Human Brain Works"
+  desc: "A deep investigation into how the human brain works"
+  num_positions: 10
+  paid: true
+  credit: true
   active: true
-  end_date: 2020-11-07 11:45:46
+  earliest_start_date: 2000-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 2030-11-07 11:45:46
+  categories: ai, mobile
+  department: cogsci
+  created_at: 2030-11-07 11:45:46
   
-three:
-  user_id: 3
-  title: MyString
-  desc: MyText
-  category_id: 
-  num_positions: 1
-  paid: false
+bridges:
+  id: 7
+  user_id: 1
+  title: "The World's Most Advanced Bridge"
+  desc: "An objective search for the world's best bridge design"
+  num_positions: 
+  paid: true
   credit: false
-  department_id: 2
   active: true
-  end_date: 2020-11-07 11:45:46
+  earliest_start_date: 2020-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 
+  categories: computervision
+  department: ce
+  created_at: 2031-11-07 11:45:46
+
+airplanes:
+  id: 8
+  user_id: 1
+  title: "Advanced Airplane Design"
+  desc: "Research into the possibilities of three-winged airplanes"
+  num_positions: 
+  paid: false
+  credit: true
+  active: true
+  earliest_start_date: 2020-11-07 11:45:46
+  latest_start_date: 2020-11-07 11:45:46
+  end_date: 
+  categories: computerarchitecture
+  department: me
+  created_at: 2032-11-07 11:45:46
   
-four:
-  user_id: 3
-  title: interesting title
-  desc: MyText
-  category_id: 
-  num_positions: 1
-  paid: false
-  credit: false
-  department_id: 2
+raid:
+  id: 9
+  user_id: 1
+  title: "RAID"
+  desc: "Redundant Array of Independent Disks"
+  num_positions: 
+  paid: true
+  credit: true
   active: true
-  end_date: 2020-11-07 11:45:46
+  earliest_start_date:
+  latest_start_date: 
+  end_date: 1997-11-07 11:45:46
+  categories: 
+  department: eecs
+  created_at: 1990-11-07 11:45:46
   
-five:
-  user_id: 3
-  title: boring title
-  desc: MyText
-  category_id: 
-  num_positions: 1
-  paid: false
-  credit: false
-  department_id: 2
-  active: true
-  end_date: 2020-11-07 11:45:46
+inactive:
+  id: 10
+  user_id: 1
+  title: "Inactive Job"
+  desc: "Inactive Job"
+  num_positions: 
+  paid: true
+  credit: true
+  active: false
+  earliest_start_date:
+  latest_start_date: 
+  end_date: 
+  categories: 
+  department: eecs
+  created_at: 1980-11-07 11:45:46
+

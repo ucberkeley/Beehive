@@ -1,0 +1,89 @@
+abbeel:
+  id: 1
+  name: Pieter Abbeel
+  email: pabbeel@cs.berkeley.edu
+  department: EECS
+  
+agrawala:
+  id: 2
+  name: Maneesh Agrawala
+  email: maneesh@eecs.berkeley.edu
+  department: EECS
+  
+alon:
+  id: 3
+  name: Elad Alon
+  email: elad@eecs.berkeley.edu
+  department: EECS
+  
+asanovic:
+  id: 4
+  name: Krste Asanovic
+  email: krste@eecs.berkeley.edu
+  department: EECS
+  
+babak:
+  id: 5
+  name: Babak Ayazifar
+  email: ayazifar@eecs.berkeley.edu
+  department: EECS
+  
+boser:
+  id: 6
+  name: Bernhard Boser
+  email: boser@eecs.berkeley.edu
+  department: EECS
+  
+fox:
+  id: 7
+  name: Armando Fox
+  email: fox@cs.berkeley.edu
+  department: EECS
+  
+garcia:
+  id: 8
+  name: Dan Garcia
+  email: ddgarcia@cs.berkeley.edu
+  department: EECS
+  
+hellerstein:
+  id: 9
+  name: Joseph M. Hellerstein
+  email: hellerstein@cs.berkeley.edu
+  department: EECS
+  
+hilfinger:
+  id: 10
+  name: Paul Hilfinger
+  email: hilfingr@cs.berkeley.edu
+  department: EECS
+
+joseph:
+  id: 11
+  name: Anthony D. Joseph
+  email: adj@cs.berkeley.edu
+  department: EECS
+  
+katz:
+  id: 12
+  name: Randy H. Katz
+  email: randy@cs.berkeley.edu
+  department: EECS
+  
+klein:
+  id: 13
+  name: Dan Klein
+  email: klein@cs.berkeley.edu
+  department: EECS
+  
+patterson:
+  id: 14
+  name: David A. Patterson
+  email: pattrsn@eecs.berkeley.edu
+  department: EECS
+  
+wagner:
+  id: 15
+  name: David Wagner
+  email: daw@cs.berkeley.edu
+  department: EECS

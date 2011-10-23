@@ -1,9 +1,40 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  job: 
+signalprocessing:
+  name: Signal Processing
 
-two:
-  name: MyString
-  job: 
+ai:
+  name: Artificial Intelligence
+
+computervision:
+  name: Computer Vision
+
+distributedsystems:
+  name: Distributed Systems
+
+cloud:
+  name: Cloud
+
+robotics:
+  name: Robotics
+
+embeddedsystems:
+  name: Embeded Systems
+
+computerarchitecture:
+  name: Computer Architecture
+
+mobile:
+  name: Mobile
+
+operatingsystems:
+  name: Operating Systems
+
+parallelism:
+  name: Parallelism
+  
+webdevelopment:
+  name: Web Development
+  
+databases:
+  name: Databases

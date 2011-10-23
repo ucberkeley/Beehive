@@ -1,0 +1,55 @@
+sejits1:
+  course_id: 3
+  job_id: 1
+  
+sejits2:
+  course_id: 2
+  job_id: 1
+  
+scads1:
+  course_id: 15
+  job_id: 2
+  
+cloud1:
+  course_id: 10
+  job_id: 3
+  
+awe1:
+  course_id: 9
+  job_id: 5
+  
+awe2:
+  course_id: 11
+  job_id: 5
+  
+awe3:
+  course_id: 12
+  job_id: 5
+  
+awe4:
+  course_id: 7
+  job_id: 5
+  
+awe5:
+  course_id: 8
+  job_id: 5
+  
+awe6:
+  course_id: 2
+  job_id: 5
+  
+awe7:
+  course_id: 3
+  job_id: 5
+  
+brain:
+  course_id: 15
+  job_id: 6
+  
+airplanes1:
+  course_id: 15
+  job_id: 8
+  
+airplanes2:
+  course_id: 10
+  job_id: 8
