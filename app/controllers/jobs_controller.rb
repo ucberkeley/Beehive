@@ -138,12 +138,13 @@ class JobsController < ApplicationController
 
     params[:job][:active] = false
     params[:job][:activation_code] = 0
-    
 
     sponsor = Faculty.find(params[:faculty_id].to_i)
     @job = Job.new(params[:job])
     @job.update_attribs(params)
-
+    @job.num_positions ||= 0
+    populate_tag_list
+    
     respond_to do |format|
       if @job.valid_without_sponsorships?
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
@@ -338,7 +339,7 @@ class JobsController < ApplicationController
 	  # Populates the tag_list of the job.
 	def populate_tag_list
 		tags_string = ""
-        tags_string << @job.department.name
+    tags_string << @job.department.name
 		tags_string << ',' + @job.category_list_of_job 
 		tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
 		tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
