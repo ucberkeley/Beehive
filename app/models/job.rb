@@ -173,6 +173,28 @@ class Job < ActiveRecord::Base
     [:paid, :credit].each do |attrib|
         options[attrib] = from_binary(options[attrib])
     end
+    
+    query = "%" + query + "%"
+    end_date = options[:exclude_ended] ? Time.at(1) : Time.now
+    
+    jobs = Job.arel_table
+    faculties = Faculty.arel_table
+    sponsorships = Sponsorship.arel_table
+    
+    results = Job.joins(:sponsorships).where(jobs[:id].eq(sponsorships[:job_id]))
+                 .joins(:faculties).where(faculties[:id].eq(sponsorships[:faculty_id]))
+                 .where(jobs[:active].eq(true))
+                 .where(jobs[:end_date].gt(end_date).or(jobs[:end_date].eq(nil)))
+                 .where(jobs[:desc].matches(query).or(jobs[:title].matches(query)).or(faculties[:name].matches(query)))
+
+
+    # puts results.to_sql
+    # puts "*" * 100
+    # for j in results
+      # puts j.title
+    # end
+    
+    return results
 
     # Common conditions
     ts_common_options = {}
@@ -204,6 +226,7 @@ class Job < ActiveRecord::Base
 
     # Final filters
     results = results.tagged_with(options[:tags]) if options[:tags].present?
+    
     return results
   end # find_jobs
 
@@ -220,7 +243,7 @@ class Job < ActiveRecord::Base
     
     # Default options
     options = {
-        :exclude_ended        => true,
+        :exclude_ended          => true,
         :paid                   => false,
         :credit                 => false,
         :faculty                => 0,
