@@ -145,7 +145,7 @@ class JobsController < ApplicationController
     @job.update_attribs(params)
 
     respond_to do |format|
-      if @job.valid_without_sponsorships?
+      if sponsor and @job.valid_without_sponsorships?
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
         @job.save
