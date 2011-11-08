@@ -1,5 +1,11 @@
 <% content_for :title, @job.title %>
 
+<%- if logged_in_as_admin? -%>
+<div class="admin">
+  <p>Activation url: <%= link_to activation_url(@job), activation_url(@job) %></p>
+</div>
+<%- end -%>
+
 <div id="job_show_main">
 <br />
 <h2>
