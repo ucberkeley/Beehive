@@ -37,6 +37,7 @@ module AttribsHelper
       attrib_array.clear
 
       # What was typed into the box. May include commas and spaces.
+      next unless params[attrib_type]
       raw_attrib_value = params[attrib_type][:name]
       
       # If left blank, we don't want to create "" attribs.
