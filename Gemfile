@@ -22,6 +22,7 @@ gem 'acts_as_taggable_on_steroids', :require => ['acts_as_taggable', 'tags_helpe
 gem 'net-ldap', :require => 'net/ldap'
 gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 gem 'nokogiri'
+gem 'actionmailer-with-request', '~> 0.3'
 
 gem 'jquery-rails', '>= 1.0.12'
 
@@ -34,6 +35,11 @@ gem 'heroku'
 # Production-specific
 group :production do
   gem 'flying-sphinx',   '~> 0.6.0'
+end
+
+# Development
+group :development do
+  gem 'yard'
 end
 
 # Testing
