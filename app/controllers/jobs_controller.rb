@@ -140,7 +140,7 @@ class JobsController < ApplicationController
     params[:job][:activation_code] = 0
     
 
-    sponsor = Faculty.find(params[:faculty_id].to_i)
+    sponsor = Faculty.find(params[:faculty_id].to_i) rescue nil
     @job = Job.new(params[:job])
     @job.update_attribs(params)
 

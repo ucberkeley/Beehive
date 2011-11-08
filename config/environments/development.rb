@@ -30,8 +30,8 @@ ResearchMatch::Application.configure do
 
   # ActionMailer
   ActionMailer::Base.raise_delivery_errors = true
-  ActionMailer::Base.perform_deliveries = !!(ENV['action_mailer'] =~ /1|true/i)
-  ActionMailer::Base.delivery_method = (ActionMailer::Base.perform_deliveries ? :smtp : :test)
-  puts "INFO: ActionMailer ON" if ActionMailer::Base.perform_deliveries
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.delivery_method = !!(ENV['action_mailer'] =~ /1|true/i) ? :smtp : :test
+  puts "INFO: ActionMailer ON" if ActionMailer::Base.delivery_method == :smtp
 end
 

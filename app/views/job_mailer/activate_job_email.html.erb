@@ -1,51 +1,44 @@
 <p>
   Dear <b><%= @faculty_sponsor_names %></b>,
 </p>
-<br />
+
 <p>
-Someone has posted a research listing at ResearchMatch, listing you
-  as their faculty sponsor.  For this listing to be viewed on the
-  website, we'll need your confirmation to prove it's authentic. Here
-  is the content of the post that was made:
+Someone has posted a research listing at ResearchMatch, indicating you
+as a faculty sponsor. For this listing to be viewed on the
+website, we'll need your confirmation to prove it's authentic. Here
+is the content of the post that was made:
 </p>
-<br />
-<div class="dashboard_container">
-  <div class="dashboard_wrapper_medium">
-    <div class="dashboard_container_medium box_shadow">
-      <h3><%= @job.title %></h3>
-      <p><b>Faculty Sponsor: </b>
-          <% @job.faculties.each do |f| %> 
-          <%= f.name %> 
-          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
-          <img src="<%= ROOT_URL %>/images/<%= @job.department.name.downcase %>_icon.gif" /> 
-          </a>
-          <% end %> 
-      </p>
-      <br />
-      <b>Description: </b>
-      <p id="description">
-      <%= @job.desc %>
-      </p>
-      
-    </div>
-  </div>
-</div>
-<br />
+
 <p>
-To confirm this listing, please click
-<b><a href="<%= activation_url(@job) %>">here</a></b>, or copy and paste the
-following URL into your browser:<br />
-<b><%= activation_url(@job) %></b>
-<br />
+  <h3><%= @job.title %></h3>
+  <table>
+    <%-
+      [
+        [ 'Faculty Sponsor', @job.faculties.collect(&:name).join(', ') ],
+        [ 'Description', @job.desc ]
+      ].each do |k,v|
+    -%>
+    <tr>
+      <td><b><%= k %></b></td>
+      <td><%= v %></td>
+    </tr>
+    <%- end -%>
+  </table>
 </p>
-<br />
+
 <p>
-  If you believe you have received this e-mail in error, please
-  disregard this notice.
+To confirm this listing, please click <%= link_to 'here', activation_url(@job) %>, or copy and paste the following link into your browser:<br/>
+<p>
+<%= link_to activation_url(@job), activation_url(@job) %>
 </p>
-<br />
-<p>Regards,</p>
-<br />
-<p><b>UC Berkeley ResearchMatch<br />
-<a href="<%= ROOT_URL %>/"><%= ROOT_URL %>/</a></b>
+</p>
+
+<p>
+If you believe you have received this e-mail in error, please disregard this notice.
+</p>
+
+<p>
+Regards,<br/><br/>
+<b>UC Berkeley ResearchMatch</b>
+<%= root_url %>
 </p>

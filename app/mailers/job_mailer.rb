@@ -6,12 +6,9 @@ class JobMailer < ActionMailer::Base
 
   def activate_job_email(job)
     @job = job
-    @faculty_sponsor_names = ""
-    job.faculties.map(&:name).each do |name|
-      @faculty_sponsor_names << name
-    end
+    @faculty_sponsor_names = job.faculties.collect(&:name).join(", ")
 
-    mail(:to => job.faculties.map(&:email).join("& "),
+    mail(:to => job.faculties.collect(&:email),
          :subject => "Research Listing Confirmation | UCB ResearchMatch")
   end
 

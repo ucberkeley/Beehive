@@ -367,9 +367,6 @@ class Job < ActiveRecord::Base
   def reset_activation(send_email = false)
     self.active = false
     self.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
-    # don't have id at this point     #(@job.id * 10000000) + (rand(99999) + 100000) # Job ID appended to a random 6 digit number.
-
-    puts "[][][] ACTIVATION CODE: " + self.activation_code.to_s
 
     # Save, skipping validations, so that we just change the activation code
     # and leave the rest alone! (Also so that we don't encounter weird bugs with
@@ -382,7 +379,7 @@ class Job < ActiveRecord::Base
         JobMailer.activate_job_email(self).deliver
       rescue => e
         Rails.logger.error "Failed to send activation mail for job##{self.id}: #{e.inspect}"
-        raise if Rails.env == 'development'
+        raise if Rails.development?
       end
     end
   end

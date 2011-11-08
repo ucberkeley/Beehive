@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   before_filter :set_current_user
+  before_filter :set_actionmailer_base_url
 
   def current_user
     # TODO: transition this out in favor of @current_user
@@ -56,6 +57,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_actionmailer_base_url
+    ActionMailer::Base.default_url_options ||= {}
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
 
   def set_current_user
     @user_session = UserSession.find

@@ -1,6 +1,6 @@
 <p>
-  After submitting your listing, the faculty sponsor you've selected will need to <br />
-  confirm the listing before it is displayed on ResearchMatch.
+After submitting your listing, the faculty sponsor you've selected will need to
+confirm the listing before it is displayed on ResearchMatch.
 </p>
 <p>
   Fields labeled with an asterisk are required.
@@ -34,7 +34,7 @@
 		<td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
 		<td class="job_clear_table_field">
             <%= select_tag :faculty_id,
-                options_from_collection_for_select(Faculty.all,
+                '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
                     :id,
                     :name,
                     @job.faculties.first.nil? ? 0 : @job.faculties.first.id
