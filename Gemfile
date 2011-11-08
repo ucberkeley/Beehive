@@ -9,9 +9,7 @@ gem 'rails', ['~> 3.0.3', '< 3.1.0']
 gem 'mysql2', '< 0.3.0'  # rails 3.0.x and mysql >= .3 don't mix
 
 # Debugging
-gem "exception_notification",
-    :git => "git://github.com/rails/exception_notification.git",
-    :require => "exception_notifier"
+gem 'exception_notification'
 
 # Misc
 gem 'authlogic',

@@ -6,12 +6,6 @@ GIT
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
 
-GIT
-  remote: git://github.com/rails/exception_notification.git
-  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
-  specs:
-    exception_notification (1.0.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -80,6 +74,8 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    exception_notification (2.5.2)
+      actionmailer (>= 3.0.4)
     faraday (0.6.1)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -204,7 +200,7 @@ DEPENDENCIES
   capybara
   cucumber-rails
   database_cleaner
-  exception_notification!
+  exception_notification
   flying-sphinx (~> 0.6.0)
   heroku
   jquery-rails (>= 1.0.12)

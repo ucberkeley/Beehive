@@ -60,6 +60,8 @@ ResearchMatch::Application.routes.draw do
 
   root :to => 'home#index'
 
+  match '/test_error(/:code)' => 'application#test_exception_notification'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

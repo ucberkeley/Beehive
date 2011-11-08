@@ -10,7 +10,14 @@ class ApplicationController < ActionController::Base
 
   rescue_from Exception do |e|
     render 'common/exception', :status => 500
-    Rails.logger.error e.inspect
+
+    Rails.logger.error "ERROR 500: #{e.inspect}"
+
+    request.env["exception_notifier.exception_data"] = {
+      :timestamp => Time.now.to_i
+    }
+
+    ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
   end
 
   def current_user
@@ -59,6 +66,11 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You cannot watch or apply to your own listing."
       redirect_to job_path(j)
     end
+  end
+
+  # Tests exception notification by raising an uncaught exception.
+  def test_exception_notification
+    raise NotImplementedError.new("Exceptions aren't implemented yet.")
   end
 
   private
