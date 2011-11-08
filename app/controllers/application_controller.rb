@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
   before_filter :set_actionmailer_base_url
 
+  rescue_from Exception do |e|
+    render 'common/exception', :status => 500
+    return
+  end
+
   def current_user
     # TODO: transition this out in favor of @current_user
     ActiveSupport::Deprecation.warn "current_user is deprecated in favor of @current_user", caller
