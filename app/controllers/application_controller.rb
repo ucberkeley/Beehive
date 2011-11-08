@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Exception do |e|
     render 'common/exception', :status => 500
-    return
+    Rails.logger.error e.inspect
   end
 
   def current_user
