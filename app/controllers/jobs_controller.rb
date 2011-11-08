@@ -145,7 +145,7 @@ class JobsController < ApplicationController
     @job.update_attribs(params)
 
     respond_to do |format|
-      if sponsor and @job.valid_without_sponsorships?
+      if @job.valid_without_sponsorships? and sponsor
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
         @job.save
@@ -157,6 +157,7 @@ class JobsController < ApplicationController
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
+        @faculty_id = params[:faculty_id]
         format.html { render :action => "new" }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end
@@ -236,28 +237,40 @@ class JobsController < ApplicationController
   
   def activate
     # /jobs/activate/job_id?a=xxx
-	  @job = Job.find(:first, :conditions => [ "activation_code = ? AND active = ?", params[:a], false ])
-	
-	  if @job != nil
-  		populate_tag_list
-		
-  		@job.skip_handlers = true
-  		@job.active = true
-  		saved = @job.save
-  	else 
-  		saved = false
-  	end
-	
-  	respond_to do |format|
-  		if saved
-  		  @job.skip_handlers = false
-  		  flash[:notice] = 'Listing activated successfully.  Your listing is now available to be viewed by other users.'
-  		  format.html { redirect_to(@job) }
-  		else
-        flash[:error] = 'Unsuccessful activation.  Either this listing has already been activated or the activation code is incorrect.'
-  		  format.html { redirect_to(jobs_url) }
-  		end
-  	end
+    @job = Job.find(:first, :conditions => {
+      :activation_code => params[:a], :active => false
+    })
+
+    unless @job
+      flash[:error] = 'Unable to process activation request.'
+      return redirect_to jobs_url
+    end
+
+    populate_tag_list
+
+    @job.skip_handlers = true
+    @job.active = true
+
+    unless @job.save
+      flash[:error] = 'Unsuccessful activation. Please contact us if the problem persists.'
+      return redirect_to(jobs_url)
+    end
+
+    @job.skip_handlers = false
+    if Rails.production?
+      begin
+        FlyingSphinx::IndexRequest.cancel_jobs
+        request = FlyingSphinx::IndexRequest.new
+        request.update_and_index
+        Rails.logger.info "reindex okay :)"
+      rescue => e
+        Rails.logger.warn "jobs#activate: Unable to reindex: #{e.inspect}"
+      end
+    end
+
+    flash[:notice] = 'Listing activated successfully.  Your listing is now available to be viewed by other users.'
+    redirect_to @job
+
   end
   
   def job_read_more

@@ -37,7 +37,7 @@ confirm the listing before it is displayed on ResearchMatch.
                 '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
                     :id,
                     :name,
-                    @job.faculties.first.nil? ? 0 : @job.faculties.first.id
+                    @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
                 )
              %>
         </td>
