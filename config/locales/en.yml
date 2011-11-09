@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  will_paginate:
+    models:
+      job:
+        zero:  jobs
+        one:   job
+        few:   jobs
+        other: jobs
