@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+  include CASControllerIncludes
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   before_filter :set_current_user
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
     }
 
     ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
+    raise if Rails.test?
   end
 
   def current_user

@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 # A test controller with and without access controls
 #
 class AccessControlTestController < ApplicationController
-  before_filter :login_required, :only => :login_is_required
+  before_filter :rm_login_required, :only => :login_is_required
   def login_is_required
     respond_to do |format|
       @foo = { 'success' => params[:format]||'no fmt given'}
@@ -41,9 +41,11 @@ ACCESS_CONTROL_IS_LOGIN_REQD = [
 describe AccessControlTestController do
   fixtures        :users
   before do
-    # is there a better way to do this?
-    Rails.application.routes.add_route '/login_is_required',           :controller => 'access_control_test',   :action => 'login_is_required'
-    Rails.application.routes.add_route '/login_not_required',          :controller => 'access_control_test',   :action => 'login_not_required'
+#    TODO this breaks everything
+#    Rails.application.routes.draw do |map|
+#      match '/login_is_required'  => 'access_control_test#login_is_required'
+#      match '/login_not_required' => 'access_control_test#login_not_required'
+#    end
   end
 
   ACCESS_CONTROL_FORMATS.each do |format, success_text|
@@ -51,8 +53,11 @@ describe AccessControlTestController do
       ACCESS_CONTROL_IS_LOGIN_REQD.each do |login_reqd_status|
         describe "requesting #{format.blank? ? 'html' : format}; #{logged_in_status.to_s.humanize} and #{login_reqd_status.to_s.humanize}" do
           before do
-            logout_keeping_session!
-            @user = format.blank? ? login_as(user_login) : authorize_as(user_login)
+            logout
+            if user_login.present?
+              @user = users(user_login)
+              login_user(@user)
+            end
             get login_reqd_status.to_s, :format => format
           end
 
@@ -70,7 +75,6 @@ describe AccessControlTestController do
               end
             else
               it "returns 'Access denied' and a 406 (Access Denied) status code" do
-                response.should have_text("HTTP Basic: Access denied.\n")
                 response.code.to_s.should == '401'
               end
             end

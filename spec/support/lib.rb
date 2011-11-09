@@ -1,7 +1,9 @@
 ##
 # Takes a range and yields pairs of [value, valid?]
 #
-# Ex:
+# @param r [Range] range to test
+#
+# @example
 #   test_range(10..20) do |value, valid|
 #     MyModel.new(:value => value).valid?.should == valid
 #   end
