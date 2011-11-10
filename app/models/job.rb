@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class Job < ActiveRecord::Base
 
   # === List of columns ===
@@ -150,19 +152,55 @@ class Job < ActiveRecord::Base
   #
   # query: Array or string of search terms.
   # extra_options: Hash of additional options:
-  #   - exclude_ended: if true, don't include ended jobs
-  #   - department: ID of department you want to search, or 0 for all depts
+  #   - included_ended: if false, don't include ended jobs
+  #   - department_id: ID of department you want to search, or 0 for all depts
   #   - faculty: ID of faculty member you want to search, or 0 for all
-  #   - paid: if true, return jobs that have paid=true; else return paid and nonpaid
-  #   - credit: if true, return jobs that have credit=true; else return credit and noncredit
+  #   - compensation: can be "Paid Only", "Credit Only", or "Paid and Credit"
   #   - limit: max. number of results, or 0 for no limit
-  #   - match_mode: [:any | :all | :extended], sets match mode. Default :any.
   #   - tags: array of tag strings to match (searches only tags and not body, title, etc.)
   #   - order: ARRAY of custom sorting conditions, besides @relevance. Conditions concatenated left to right.
+  #   - include_inactive: if true, include inactive jobs
   #
   def self.find_jobs(query=nil, options={})
     throw "Query must be a string" unless query.nil? || query.is_a?(String)
 
+    # Sanitize input
+    query ||= ""
+    query = query.gsub(/\\/, '\\\\\\\\').gsub(/%/, '\%').gsub(/_/, '\_')
+    query = "%" + query + "%"
+    
+    # needed?
+    options[:tags] = [*options[:tags]]
+
+    jobs = Job.arel_table
+    faculties = Faculty.arel_table
+    departments = Department.arel_table
+
+    results = Job.select("distinct jobs.*").joins(:faculties).joins(:department)
+                 .where(jobs[:title].matches(query)
+                        .or(jobs[:desc].matches(query))
+                        .or(faculties[:name].matches(query))
+                        .or(departments[:name].matches(query))
+                        )
+                 
+    results = results.where(jobs[:end_date].gt(Time.now).or(jobs[:end_date].eq(nil))) unless options[:include_ended]
+    results = results.where(departments[:id].eq(options[:department_id])) if options[:department_id]
+    results = results.where(faculties[:id].eq(options[:faculty_id])) if options[:faculty_id]
+    results = results.where(jobs[:paid].eq(true)) if options[:compensation] == "Paid Only"
+    results = results.where(jobs[:credit].eq(true)) if options[:compensation] == "Credit Only"
+    results = results.limit(options[:limit]) if options[:limit]
+    order = options[:order] || "created_at DESC"
+    results = results.order(order)
+    results = results.where(jobs[:active].eq(true)) unless options[:include_inactive]
+    
+    # results = results.tagged_with(options[:tags]) if options[:tags].present?
+    
+    page = options[:page] || 1
+    per_page = options[:per_page] || 16
+    return results.all.paginate(:page => page, :per_page => per_page)
+    
+    # begin thinkingsphinx code
+    
     # Sanitize input
     query ||= ""
     query.gsub! /[^a-zA-Z0-9 ,]/, ''
@@ -173,28 +211,6 @@ class Job < ActiveRecord::Base
     [:paid, :credit].each do |attrib|
         options[attrib] = from_binary(options[attrib])
     end
-    
-    query = "%" + query + "%"
-    end_date = options[:exclude_ended] ? Time.at(1) : Time.now
-    
-    jobs = Job.arel_table
-    faculties = Faculty.arel_table
-    sponsorships = Sponsorship.arel_table
-    
-    results = Job.joins(:sponsorships).where(jobs[:id].eq(sponsorships[:job_id]))
-                 .joins(:faculties).where(faculties[:id].eq(sponsorships[:faculty_id]))
-                 .where(jobs[:active].eq(true))
-                 .where(jobs[:end_date].gt(end_date).or(jobs[:end_date].eq(nil)))
-                 .where(jobs[:desc].matches(query).or(jobs[:title].matches(query)).or(faculties[:name].matches(query)))
-
-
-    # puts results.to_sql
-    # puts "*" * 100
-    # for j in results
-      # puts j.title
-    # end
-    
-    return results
 
     # Common conditions
     ts_common_options = {}

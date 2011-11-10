@@ -145,7 +145,7 @@ brain:
   id: 6
   user_id: 1
   title: "How The Human Brain Works"
-  desc: "A deep investigation into how the human brain works"
+  desc: "A deep investigation into how the human brain works. Pay will be $20.00 per hour"
   num_positions: 10
   paid: true
   credit: true
@@ -161,7 +161,8 @@ bridges:
   id: 7
   user_id: 1
   title: "The World's Most Advanced Bridge"
-  desc: "An objective search for the world's best bridge design"
+  desc: "An objective search for the world's best bridge design.
+        This is an under_score, this is a url: http://www.armandofox.com/geek/, \\test"
   num_positions: 
   paid: true
   credit: false

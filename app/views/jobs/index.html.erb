@@ -13,8 +13,8 @@
     <%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
     <%= label_tag :faculty, "Faculty" %>
     <%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
-    &nbsp;&nbsp;<%= label_tag :paid, "Paid?" %> <%= check_box_tag :paid, '1', params[:paid] %>
-    &nbsp;&nbsp;<%= label_tag :credit, "Credit?" %>  <%= check_box_tag :credit, '1', params[:credit] %>
+    <%= label_tag :compensation, "Compensation" %>
+    <%= select_tag :compensation, options_for_select([ "Paid or Credit", "Paid Only", "Credit Only" ], @compensation) %>
     <%= submit_tag "Search" %>
     <br />
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick => "#{visual_effect(:toggle_slide, 'advanced_search')} (as=document.getElementById('as')).value = 1-Number(as.value); return false;" %>
@@ -24,13 +24,10 @@
       <%= hidden_field_tag :as, params[:as] %>
 
       <%= label_tag :per_page, "Listings per page" %>
-      <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false %>
+      <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false%>
 
-      <%= label_tag :ended, "Include ended", :title => "Include listings with end dates in the past. These positions may not be available anymore." %>
-      <%= check_box_tag :ended, '1', params[:ended] %>
-
-      <%= label_tag :empty, "Include filled", :title => "Include listings with zero open positions." %>
-      <%= check_box_tag :filled, '1', params[:filled] %>
+      <%= label_tag :include_ended, "Include ended", :title => "Include listings with end dates in the past. These positions may not be available anymore." %>
+      <%= check_box_tag :include_ended, '1', params[:include_ended] %>
     </div>
   <% end %>
 </div>

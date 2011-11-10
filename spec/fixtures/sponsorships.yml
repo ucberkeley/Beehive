@@ -77,3 +77,7 @@ raid1:
 raid2:
   faculty_id: 14
   job_id: 9
+  
+inactive:
+  faculty_id: 3
+  job_id: 10
