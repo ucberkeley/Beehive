@@ -1,3 +1,34 @@
+function setupExternalLinks() {
+  $('a').each(function(){
+    if( this.host && this.host != location.host )
+      $(this).attr( 'target', '_blank' );
+  });
+}
+
+function charcounter( inputElem, counterElem, limit ) {
+  var c = $( counterElem );
+  var i = $( inputElem );
+  var update = function( n ){
+    n = n || limit - i.val().length;
+    c.text( n + " characters left" );
+  };
+  var updateCallback = function( event ) {
+    if( this.value.length > limit ) {
+      this.value = this.value.slice(0,limit);
+      update();
+      return false;
+    }
+    update();
+  }
+
+  i
+   .keydown( updateCallback )
+   .keyup  ( updateCallback )
+  ;
+
+  $(document).ready(function(){ update(); });
+}
+
 function textChange(elementID, defaultText)
 {
    var element = $(elementID)
@@ -67,3 +98,6 @@ function get_categories() {
     return $.getJSON('/research/categories/json');
 }
 
+$(document).ready(function(){
+  setupExternalLinks();
+});

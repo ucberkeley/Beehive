@@ -18,13 +18,16 @@ class User < ActiveRecord::Base
   #   current_login_ip    : string 
   #   last_login_ip       : string 
   #   user_type           : integer 
+  #   units               : integer 
+  #   free_hours          : integer 
+  #   research_blurb      : text 
+  #   experience          : string 
+  #   summer              : boolean 
+  #   url                 : string 
+  #   year                : integer 
   # =======================
 
   include AttribsHelper
-#  include Authentication
-#  include Authentication::ByPassword
-#  include Authentication::ByCookieToken
-  
 
   # Authlogic
   acts_as_authentic do |c|
@@ -42,7 +45,7 @@ class User < ActiveRecord::Base
       Admin     = 3
       All       = [Undergrad, Grad, Faculty, Admin]
   end
-  
+
   has_many :jobs,        :dependent => :nullify
   has_many :reviews
   has_one  :picture
@@ -59,78 +62,58 @@ class User < ActiveRecord::Base
   has_many :proficiencies, :dependent => :destroy
   has_many :proglangs,     :through => :proficiencies
 
+  # Name
   validates_presence_of     :name
   validates_length_of       :name,     :within => 0..100
   validates_format_of       :name,     :with => /\A[A-Za-z\-_ \.]+\z/
 
+  # Email
   validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
   validates_uniqueness_of   :email
 
+  # Misc info
+  validates_numericality_of :units,          :allow_nil => true
+  validates_numericality_of :free_hours,     :allow_nil => true
+  validates_length_of       :experience,     :maximum => 255
+  validates_length_of       :research_blurb, :maximum => 300
+  validates_length_of       :url,            :maximum => 255
+  validates_numericality_of :year,           :allow_nil => true
+  validates_inclusion_of    :year,           :in => (1..4), :allow_nil => true
+
   # Check that user type is valid
   validates_inclusion_of    :user_type, :in => Types::All, :message => "is invalid"
-  #validates :user_type, :inclusion => { :in => [0,1,2,3], :message => "is invalid" }
 
-  # Before carrying out validations (i.e., before actually creating the user object), assign the proper 
-  # email address to the user (depending on whether the user is a student or gsi or a faculty) 
-  # and handle the courses for the user.
-  # before_validation :handle_email       # Handled by CAS
-  # before_validation :handle_name        # Handled by LDAP
   before_validation :handle_courses
   before_validation :handle_categories
   before_validation :handle_proglangs
 
-  # HACK HACK HACK -- how to do attr_accessible from here?
-  # prevents a user from submitting a crafted form that bypasses activation
-  # anything else you want your user to change should be added here.
-  attr_accessible :email
+  attr_accessible :email, :units, :free_hours, :research_blurb, :experience, :summer, :url
 
   attr_reader :course_names; attr_writer :course_names
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
 
-  # (DEPRECATED) Returns true if the user has just been activated.
+  # @return [Boolean] true if the user has just been activated.
+  # @deprecated
   def recently_activated?
     false 
   end
 
-  # Return the user corresponding to given login
+  # @return [User] the user corresponding to given login
   def self.authenticate_by_login(loggin)
     # Return user corresponding to login, or nil if there isn't one
     User.find_by_login(loggin)
   end
 
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  #
-  # what is this
-  # |
-  # v
-  # uff.  this is really an authorization, not authentication routine.  
-  # We really need a Dispatch Chain here or something.
-  # This will also let us return a human error message.
-  #
-  # *** Password authentication is deprecated
-  #
-#  def self.authenticate_by_password(email, password)
-#    # Since we authenticate with CAS, the existence of a valid CAS session is enough.
-#    session[:cas_user].present?
-#
-#    return nil if email.blank? || password.blank?
-#    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', email] # need to get the salt
-#    u && u.authenticated?(password) ? u : nil
-#  end
-
-  #def login=(value)
-  #  write_attribute :login, (value ? value.downcase : nil)
-  #end
-
+  # Downcases email address
   def email=(value)
     write_attribute :email, (value && !value.empty? ? value.downcase : self.email)
   end
   
   
-  # Returns a string containing the 'required course' names taken by this User
-  # e.g. "CS61A,CS61B"
+  # @param add_spaces [Boolean] use ', ' as separator instead of ','
+  # @return [String] the 'required course' names taken by this User, e.g. "CS61A,CS61B"
   def course_list_of_user(add_spaces = false)
   	course_list = ''
   	courses.each do |c|
@@ -145,8 +128,8 @@ class User < ActiveRecord::Base
   	end
   end
 
-  # Returns a string containing the category names taken by this User
-  # e.g. "robotics,signal processing"
+  # @param add_spaces [Boolean] use ', ' as separator instead of ','
+  # @return [String] the category names taken by this User, e.g. "robotics,signal processing"
   def category_list_of_user(add_spaces = false)
   	category_list = ''
   	categories.each do |cat|
@@ -161,8 +144,7 @@ class User < ActiveRecord::Base
   	end
   end
   
-  # Returns a string containing the 'desired proglang' names taken by this User
-  # e.g. "java,scheme,c++"
+  # @return [String] the 'desired proglang' names taken by this User, e.g. "java,scheme,c++"
   def proglang_list_of_user(add_spaces = false)
   	proglang_list = ''
   	proglangs.each do |pl|
@@ -177,7 +159,7 @@ class User < ActiveRecord::Base
   	end
   end
   
-  # Returns an array of this user's watched jobs
+  # @return [Array<Job>] this user's watched jobs
   def watched_jobs_list_of_user
     jobs = []
     self.watches.all.each do |w|
@@ -203,11 +185,12 @@ class User < ActiveRecord::Base
   end
 
 
-  # Returns the UCB::LDAP::Person for this User
+  # @return [UCB::LDAP::Person] for this User
   def ldap_person
     @person ||= UCB::LDAP::Person.find_by_uid(self.login) if self.login
   end
 
+  # @return [String] Full name, as provided by LDAP
   def ldap_person_full_name
     "#{self.ldap_person.firstname} #{self.ldap_person.lastname}".titleize
   end
@@ -216,8 +199,9 @@ class User < ActiveRecord::Base
   # Updates (but does *NOT* save, by default) this User's role, based on the
   # LDAP information. Raises an error if the user type can't be determined.
   #
-  # Options:
-  #  - save|update: If true, DO update user type in the database.
+  # @param options [Hash]
+  #   @option options [Boolean] :save Also commit user type to the database
+  #   @option options [Boolean] :update Same as :save
   #
   def update_user_type(options={})
     unless options[:stub].blank?   # stub type

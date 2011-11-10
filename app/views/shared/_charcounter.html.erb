@@ -1,0 +1,21 @@
+<%# Renders a character countdown, like a tweet thing.
+    Uses jQuery.
+    @param :linked [String,Symbol] id of linked element
+    @param :limit  [Integer]       max # of chars allowed
+-%>
+<%-
+  raise ArgumentError.new("No :input provided") unless linked and linked = linked.to_s
+  raise ArgumentError.new("No :limit provided") unless limit
+-%>
+
+<%- my_id = "char-counter-#{linked.to_s.underscore}" -%>
+
+<div class="char-counter" id="<%= my_id %>">
+[ ]
+</div>
+<script type='text/javascript'>
+  charcounter(
+    document.getElementById("<%= linked %>"),
+    document.getElementById("<%= my_id %>"),
+    <%= limit %>);
+</script>

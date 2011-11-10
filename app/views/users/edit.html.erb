@@ -57,7 +57,7 @@
 <!-- courses / interests / proglangs. part of the user form. -->
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">
-	  <div class="dashboard_container_medium box_shadow">
+    <div class="dashboard_container_medium box_shadow">
       <h2>Education & Interests</h2>
       <p>
       The following information is optional, but will help ResearchMatch find positions better tailored to you.
@@ -77,63 +77,101 @@
       <%= text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide',
             :placeholder => "Languages in which you are proficient, separated by commas" %>
       </p>
-      <br />
+      <p>
+        <%= f.submit 'Update' %>
+      </p>
     </div>
   </div>
 </div>
-<!-- end courses / interests / proglangs -->
+<%# end courses / interests / proglangs -%>
 <% end %>
 
 <br />
-<p>
-  <%= f.submit 'Update' %>
-</p>
 <br />
-<% end %>
 
-<% if ! @user.is_faculty %>
-<!-- attachments -->
-<div class="dashboard_container">
-  <div class="dashboard_wrapper_medium">
-	  <div class="dashboard_container_medium box_shadow">
-	      <h2>Attachments</h2>
-	      <p>
-	      Please upload a résumé and/or a transcript for use when applying to positions.
-	      </p>
-	      <br />
-	      <% [ ["Résumé", :resume, "You should upload one to impress the professors!"],
-	           ["Transcript", :transcript, "Don't be shy! Professors want to see your classes, grades, and GPA."]
-	         ].each do |item| -%>
-	         <% doc = @current_user.send(item[1]) -%>
-	         
-	          <b><%= item[0] %>:</b> 
-	          <% if doc.nil? -%>
-                    <!-- no document -->
-                    None. <%= item[2] %>
-	          <% else -%>
-                    <!-- already has document -->
-                    <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
-                    <%= button_to "Remove", destroy_document_path(doc), :confirm=>"Are you sure you want to remove your #{item[0].downcase}? This action cannot be undone.", :disable_with=>"Removing..." %>
-	          <% end -%>
-	          <br /><br />
-	      <% end -%>
-	      
-	      <% if @current_user.resume.nil? or @current_user.transcript.nil? -%>
-	      <% form_for(:document, :url => documents_path, :html => {:multipart=>true}) do |f| -%>
-              <%= f.file_field :uploaded_data %>
-              <%= f.hidden_field :user_id, :value => @current_user.id %>
-              <% [:resume, :transcript].each do |item| %>
-                  <% if @current_user.send(item).nil? %>
-                      <%= f.radio_button(:document_type, item.to_s, {:checked => "checked"} ) %>
-                      <%= f.label "document_type_#{item.to_s}", item.to_s.capitalize %>
-                  <% end %>
-              <% end %>
-              <%= f.submit "Upload", :disable_with => "Uploading..." %>
-	      <% end -%>
-     	    <div id="upload_desc"><small>Note: We only accept PDF, Word, and plaintext uploads, up to 1 MB.</small></div>
-    	    <% end -%>
-	  </div>
-  </div>
+<%# TODO CSS this up %>
+<%- unless @current_user.is_faculty? -%>
+<div class="dashboard_container"><div class="wrapper_medium"><div class="dashboard_container_medium box_shadow">
+  <h2>At a Glance</h2>
+
+  <p>
+  These are the basics that faculty will want to know up-front when you apply.
+  </p>
+  <br/>
+
+  <p>
+  I'm a
+  <%= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] } ) %> year student, and taking
+  <%= f.text_field :units, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
+  units this semester.
+  </p>
+  <br/>
+
+  <p>
+  I can commit
+  <%= f.text_field :free_hours, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
+  hours per week to research.
+  </p>
+  <br/>
+
+  <p>
+  Available to work over summer?
+  <%= f.check_box :summer %>
+  </p>
+  <br/>
+
+  <p>
+  Why are you interested in research?<br/>
+  <%= f.text_area :research_blurb, :rows => 3, :id => 'research-blurb' %>
+  <%= render 'shared/charcounter', :linked => 'research-blurb', :limit => 255 %>
+  </p>
+  <br/>
+
+  <p>
+  Brief description of past internships or other relevant experience:
+  <%= f.text_area :experience, :rows => 3, :id => 'experience-box' %>
+  <%= render 'shared/charcounter', :linked => 'experience-box', :limit => 255 %>
+  </p>
+  <br/>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+
 </div>
+<br/>
+<%- end -%>
+
+<% unless @user.is_faculty? %>
+<div class="dashboard_container"><div class="dashboard_wrapper_medium"><div class="dashboard_container_medium box_shadow">
+  <h2>Attachments</h2>
+
+  <p>
+    Please provide a link to any relevant supplementary material, like a r&eacute;sum&eacute; or portfolio.
+    This is your chance to impress the faculty!
+    <br/>
+
+  </p>
+  <br/>
+
+  <p>
+  <%= f.text_field :url, :class => 'external-url', :style => 'width:100%;' %>
+  </p>
+  <p style="font-size:x-small;">
+    If you need a place to store files, there are many free options, like
+    <%= link_to 'Dropbox', 'http://dropbox.com' %> and 
+    <%= link_to 'Google Docs', 'http://docs.google.com' %>.
+  </p>
+  <br/>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+
+  <br/>
+
+</div></div></div>
 <% end %>
+
+<% end # form_for %>
 
