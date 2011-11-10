@@ -101,7 +101,7 @@
 
   <p>
   I'm a
-  <%= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] } ) %> year student, and taking
+  <%= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] }, @current_user.year) %> year student, and taking
   <%= f.text_field :units, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
   units this semester.
   </p>

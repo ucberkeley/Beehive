@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
       :timestamp => Time.now.to_i
     }
 
-    ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
+    begin
+      ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
+    rescue => f
+      Rails.logger.error "ExceptionNotifier: Failed to deliver because #{f.inspect}"
+    end
     raise if Rails.test?
   end
 

@@ -1,10 +1,7 @@
 <%# Basic user application-related info
     @param user [User]
 -%>
-
 <%- raise ArgumentError.new('No User provided') unless user -%>
-
-<div class="applic-info">
 <%-
   [
     [ :name,           'Full Name'],
@@ -25,22 +22,14 @@
     [ :url,            'URL'      ]
   ].each do |attr, label|
 -%>
-
 <%- if attr == :separator -%>
-    <br/>
+
 <%- else
     val = user.send(attr)
     val = {true=>'Yes',false=>'No'}[val] if (!!val == val) # if val is a boolean
     val = (val.nil? or val.blank?) ? '<b>Not specified</b>' : val
     val = val.to_s.html_safe
 -%>
-
-  <div>
-    <span style="font-weight:bold;"><%= label %></span>:&nbsp;
-    <span><%= val %></span>
-  </div>
-
+  <%= "#{label}:".ljust(14) %><%= val %>
 <%- end -%>
 <%- end -%>
-
-</div>

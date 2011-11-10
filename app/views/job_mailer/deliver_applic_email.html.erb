@@ -1,55 +1,35 @@
-<p>Dear <b><%= @applic.job.user.name %>,
-  <%= @job.faculties.map(&:name).join("& ") %></b>,</p>
-<br />
 <p>
- A new application for your listing, <b><%= @job.title %></b>, has been received: 
-</p>
-<br />
-<div class="dashboard_container">
-  <div class="dashboard_wrapper_medium">
-    <div class="dashboard_container_medium box_shadow">
-      <h3><%= @job.title %></h3>
-      <p><b>Faculty Sponsor: </b>
-          <% @job.faculties.each do |f| %>
-          <%= f.name %>
-          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= f.name %> Berkeley <%= @job.department.name %>" target="_blank">
-          <img src="<%= ROOT_URL %>/images/<%= @job.department.name.downcase %>_icon.gif" />
-          </a>
-          <% end %>
-      </p>
-      <br />
-      <p><b>Applicant: </b> <%= @applic.user.name %>
-        (<a href="mailto:<%=@applic.user.email%>"><%=@applic.user.email%></a>)
-      </p>
-      <br />
-      <b>Applicant's Message:</b>
-      <p id="description">
-        <%= @applic.message %>
-      </p>
-      <p><b>Attachments: </b>
-      <% attachment_list = [] %>
-      <% [:resume, :transcript].each do |doctype| %>
-        <% attachment_list += [doctype.to_s.capitalize] if
-          @applic.send(doctype).present? %>
-      <% end %>
-      <%= attachment_list.empty? ? 'None' : attachment_list.join(', ') %>
-      </p>
-    </div>
-  </div>
-</div>
-<br />
-<p>
-If you are interested in this applicant for your research listing, please
-contact him or her via the email address provided.
+  Dear <b><%= @job.faculties.collect(&:name).join(', ') %></b>,
 </p>
 
-<% if false  # or, unless user_preferences.present? we need to set up subscription features. %>
-<p>You received this notification because you are currently subscribed to receive email notifications for your postings. You can change this setting in your profile page.</p>
-<% end %>
+<p>
+A new application for your listing, <%= @job.title %>, has been received:
+</p>
 
-<br />
-<p>Regards,</p>
-<br />
-<p><b>UC Berkeley ResearchMatch<br />
-<a href="<%= ROOT_URL %>/"><%= ROOT_URL %>/</a></b>
+<%- unless @applic.message.blank? -%>
+<p>
+  <h3>Message</h3>
+  <%= simple_format @applic.message %>
+</p>
+<%- end -%>
+
+<p>
+  <h3>Applicant Info</h3>
+  <%= render 'users/applic_info', :format => :html, :user => @applic.user %>
+</p>
+
+<p>
+You can view this application, and the applicant's most recent information, at
+  <%= link_to applic_url(@applic), applic_url(@applic) %>
+<p>
+
+<p>
+If you believe you have received this e-mail in error, please disregard this notice.
+</p>
+
+<p>
+Regards,<br/><br/>
+<b>UC Berkeley ResearchMatch</b>
+<br/>
+<%= root_url %>
 </p>

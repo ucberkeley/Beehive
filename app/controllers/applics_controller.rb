@@ -115,8 +115,7 @@ class ApplicsController < ApplicationController
     respond_to do |format|
         if @applic.save
             JobMailer.deliver_applic_email(@applic).deliver
-            flash[:notice] = 'Applied successfully. Time to cross your '
-            flash[:notice] << 'fingers and wait for a reply!'
+            flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
             format.html { redirect_to job_path(@job) }
         else
             flash[:error] = "Could not apply to position. Make sure you've " + 
