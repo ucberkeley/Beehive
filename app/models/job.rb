@@ -62,6 +62,12 @@ class Job < ActiveRecord::Base
   validate :validate_sponsorships, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   validate :earliest_start_date_must_be_before_latest
   validate :latest_start_date_must_be_before_end_date
+
+  ##########
+  # Scopes #
+  ##########
+
+  scope :active, lambda { where(:active => true) }
  
   attr_accessor :category_names
   attr_accessor :course_names

@@ -1,2 +1,12 @@
 <h1>Oops!</h1>
+<p>
 500: Something went wrong. Please try again, or contact us.
+</p>
+<%- if Rails.development? -%>
+<p>
+<%= @exception.inspect %>
+<ol>
+<%= @exception.backtrace.collect {|x| "<li>#{x}</li>"} .join.html_safe %>
+</ol>
+</p>
+<%- end -%>

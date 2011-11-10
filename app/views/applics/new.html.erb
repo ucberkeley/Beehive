@@ -1,12 +1,13 @@
 <% content_for :title, "Apply for Listing" %>
 
-<script language="JavaScript" src="/javascripts/autocomplete_setup.js"></script>
+<script type='text/javascript' src="/javascripts/autocomplete_setup.js"></script>
 
 <h1>Apply for Research Position</h1>
 
 <p>
-  To apply for the following research position, please enter a message to send to <br />
-  its faculty sponsor and select a resume or transcript to attach.
+  To apply for the following research position, please enter a message to send to
+  the faculty <%= 'sponsor'.pluralize_for @job.faculties.count %> and review the
+  info that will be provided.
 </p>
 <br />
 
@@ -17,7 +18,7 @@
   <table class="job_clear_table">
 	 
 	  <tr>
-		<td><b>Message to faculty sponsor(s)</b></td>
+		<td><b>Message to faculty <%= 'sponsor'.pluralize_for @job.faculties.count %></b></td>
 		</tr>
 		<tr>
 		<td>
@@ -27,32 +28,18 @@
   </table>
   <br />
   <p>
-      <h2>Credentials</h2>
-      <b><%= @current_user.name %></b>, you have the option to supply your transcript and resume below. <br />
-      The faculty sponsor(s) of this job (<%= @job.faculties.collect(&:name).join(', ') %>) will receive your credentials along with your application.<br />
-      Check the box to include the document:
-  </p>
-  <br />
-    
-  <% [ ["Résumé", :resume], ["Transcript", :transcript] ].each do |docname, docsym| -%>
-    <% doc = @current_user.send(docsym)    -%>
-    <% tagname = "include_#{docsym.to_s}" -%>
-    <%= check_box_tag tagname, "1", !doc.nil?, :disabled => doc.nil? %>
-    <% docstr = capture do %>
-      <b><%= docname %>:</b> 
-      <% if doc.nil? # no document-%>
-        None.
-      <% else        # has document -%>
-        <i><%= doc.filename %></i> (uploaded <%= doc.created_at.getlocal.strftime("%b %d, %Y") %>)
-      <% end # doc.nil -%>
-    <% end # label_tag %>
-    <%= label_tag tagname, docstr %>
-    <br />
-  <% end %>
+      <h2>The Application</h2>
+      By applying for this listing, you grant the faculty <%= 'sponsor'.pluralize_for @job.faculties.count %>
+      (<%= @job.faculties.collect(&:name).join(', ') %>) access to view
+      <%= link_to 'your profile', profile_path, :target => '_blank' %> and any information you've entered there.
+      <br/>
+      Please review the following information before submitting:
+      <br/>
+      <%= render 'users/applic_info', :format => :html, :user => @current_user %>
 
   <br /><br />
   
-  <%= f.submit('Submit') %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
+  <%= f.submit 'Submit' %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
   <% end # form -%>
   
 <br /><br />

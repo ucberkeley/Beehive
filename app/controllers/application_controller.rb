@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_actionmailer_base_url
 
   rescue_from Exception do |e|
+    @exception = e
     render 'common/exception', :status => 500
 
     Rails.logger.error "ERROR 500: #{e.inspect}"
@@ -49,7 +50,7 @@ class ApplicationController < ActionController::Base
   # Only the user to whom the job belongs is permitted to view the particular
   # action for this job.
   def view_ok_for_unactivated_job
-    j = Job.find(params[:id].present? ? params[:id] : params[:job_id])
+    j = (Job.find(params[:id].present? ? params[:id] : params[:job_id]) rescue nil)
       # id and job_id because this filter is used by both the JobsController
       # and the ApplicsController
     if (j == nil || ! j.active && @current_user != j.user)

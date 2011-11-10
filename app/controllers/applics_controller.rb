@@ -15,7 +15,7 @@ class ApplicsController < ApplicationController
     # don't allow multiple applications
 
   # Ensures that other users can't view your job if your job is not yet active!
-  before_filter :view_ok_for_unactivated_job, :only => [ :new, :create, :show ]
+  before_filter :view_ok_for_unactivated_job, :only => [ :new, :create, :index ]
 
   # Prohibits a user from applying to his/her own job
   before_filter :watch_apply_ok_for_job, :only => [ :new, :create ]

@@ -84,6 +84,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     prepare_attribs_in_params(@user)
   end
+
+  def profile
+    @user = @current_user
+    prepare_attribs_in_params(@current_user)
+    render :edit
+  end
   
   def update
     @user = User.find(params[:id])

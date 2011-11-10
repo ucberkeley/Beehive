@@ -4,27 +4,19 @@
     <h1><%= @applic.job.title %></h1>
     
     <p><h3>Applicant: <%= link_to @applic.user.name, url_for(@applic.user) %></h3></p>
-    <p>Date applied: <%= @applic.created_at.getlocal %></p>
+    <p>Date applied: <%= @applic.created_at.getlocal.pp %></p>
     
     <br />
     <p>
-        Message from <%= @applic.user.name %>:<br />
+        Message:<br />
+        <p>
         <%= @applic.message %>
+        </p>
     </p>
     <br />
 
-    <h3>Attachments</h3>
+    <h3>Applicant Info</h3>
     <p>
-      <% if @applic.resume.nil? && @applic.transcript.nil? then %>
-        None
-      <% else # has document(s) %>
-        <ul>
-        <% [:resume, :transcript].each do |doctype|
-             doc = @applic.send(doctype)
-             next if doc.nil?      %>
-          <li><%= link_to Document.type_string(doctype), send("applic_#{doctype.to_s}_path".to_s, @applic) %></li>
-        <% end # doctype %>
-        </ul>
-      <% end # has docs? %>
+      <%= render 'users/applic_info', :user => @applic.user %>
     </p>
 </div>

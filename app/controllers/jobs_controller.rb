@@ -148,11 +148,29 @@ class JobsController < ApplicationController
       if @job.valid_without_sponsorships? and sponsor
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
         @job.sponsorships << @sponsorship
+
+        @job.active =  true     # TODO: remove this at some point
         @job.save
-        @job.reset_activation(true) # sends the email too
-        flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
-        flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-        flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
+
+        if false
+          @job.reset_activation(true) # sends the email too
+
+          flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
+          flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
+          flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
+        end
+        flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
+        # TODO refactor
+        if Rails.production?
+          begin
+            FlyingSphinx::IndexRequest.cancel_jobs
+            request = FlyingSphinx::IndexRequest.new
+            request.update_and_index
+            Rails.logger.info "reindex okay :)"
+          rescue => e
+            Rails.logger.warn "jobs#create: Unable to reindex: #{e.inspect}"
+          end
+        end
         
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }

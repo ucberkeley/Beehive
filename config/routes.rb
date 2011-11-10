@@ -21,12 +21,12 @@ ResearchMatch::Application.routes.draw do
   # Applics
   scope :applics do
     get  '/jobs/:job_id/apply' => 'applics#new', :as => :new_job_applic
-    post  '/jobs/:job_id/doapply' => 'applics#create', :as => :create_job_applic
+    post '/jobs/:job_id/apply' => 'applics#create', :as => :create_job_applic
     get  '/jobs/:job_id/applications' => 'applics#index', :as => :list_jobs_applics
     get  '/applications/:id' => 'applics#show', :as => :applic
     get  '/applications/:id/withdraw' => 'applics#destroy', :as => :destroy_applic
-    get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume
-    get  '/applications/:id/transcript'=>'applics#transcript', :as => :applic_transcript
+    #get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume
+    #get  '/applications/:id/transcript'=>'applics#transcript', :as => :applic_transcript
   end # applics
 
   # Documents
@@ -40,6 +40,7 @@ ResearchMatch::Application.routes.draw do
   # Users
   resources :users
   get  '/dashboard' => 'dashboard#index'
+  get  '/profile'   => 'users#profile', :as => :profile
 
   # Home
   get  '/' => 'home#index', :as => :home
