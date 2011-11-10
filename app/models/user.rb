@@ -196,12 +196,13 @@ class User < ActiveRecord::Base
   end
 
 
-  # Updates (but does *NOT* save, by default) this User's role, based on the
+  # Updates this User's role, based on the
   # LDAP information. Raises an error if the user type can't be determined.
   #
   # @param options [Hash]
-  #   @option options [Boolean] :save Also commit user type to the database
-  #   @option options [Boolean] :update Same as :save
+  # @option options [Boolean] :save Also commit user type to the database (default +false+)
+  # @option options [Boolean] :update Same as +:save+
+  # @return [Integer] Inferred user {Types Type}
   #
   def update_user_type(options={})
     unless options[:stub].blank?   # stub type
@@ -211,7 +212,7 @@ class User < ActiveRecord::Base
       person = self.ldap_person
       case   # Determine role
         # Faculty
-        when (person.employee_academic? and not person.employee_expired?)
+        when (person.employee_academic? and not person.employee_expired? and not ['G','U'].include?(person.berkeleyEduStuUGCode))
           self.user_type = User::Types::Faculty
 
         # Student
