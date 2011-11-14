@@ -20,7 +20,6 @@ gem 'will_paginate', "~> 3.0.pre2"
 gem 'rubycas-client', :require => ['casclient', 'casclient/frameworks/rails/filter']
 gem 'acts_as_taggable_on_steroids', :require => ['acts_as_taggable', 'tags_helper', 'tag_list', 'tagging', 'tag']
 gem 'net-ldap', :require => 'net/ldap'
-gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 
 # Deploy with Capistrano
 gem 'capistrano'

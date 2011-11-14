@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-# require 'thinking_sphinx/test'
-# ThinkingSphinx::Test.init
-# ThinkingSphinx::Test.start_with_autostop
-
 describe Job do
   fixtures :all
 
