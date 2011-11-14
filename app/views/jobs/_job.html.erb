@@ -42,23 +42,22 @@
 					
 					
 					<% if controller.controller_name != 'dashboard' %>
-					
 					    <div class="job_desc">
 					    <span id="job_desc_<%= job.id %>"><%= truncate job.desc, :length => 200, :omission => '...' %></span> 
 					    <% if job.desc.length > 200 %>
 					      <%= link_to "[read more]", :controller => "jobs", :action => "show", :id => job.id %>
 					    <% end %>
 					    </div>
-					
 					<% end %>
 					
-				</td>
-				<td class="job_credit">
-					<div class="job_attr"><%= (job.paid ? image_tag('yes_check.gif') : image_tag('no_check.gif') ) unless job.paid.nil? %></div>
-				</td>
-				<td class="job_credit">
-					<div class="job_attr"><%= ( job.credit ? image_tag('yes_check.gif') : image_tag('no_check.gif') ) unless job.credit.nil? %></div>
-				</td>
+        <td class="job_credit">
+          <div class="job_attr">
+            <%= image_tag('dollar_sign.gif', :alt => 'pay') if (job.compensation && job.compensation.include?("Paid"))%>
+            <%= image_tag('a_plus.gif', :alt => 'credit') if (job.compensation && job.compensation.include?("Credit")) %>
+            <%= "Unspecified" if (job.compensation.blank? || job.compensation.include?("Unspecified")) %>
+          </div>
+        </td>
+        
 				<td class="job_credit">
 					<div class="job_attr"><span class="job_numpositions"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span></div>
 				</td>

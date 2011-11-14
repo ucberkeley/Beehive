@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109233722) do
+ActiveRecord::Schema.define(:version => 20111114023612) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20111109233722) do
     t.datetime "earliest_start_date"
     t.datetime "latest_start_date"
     t.datetime "end_date"
+    t.string   "compensation"
+    t.boolean  "open",                :default => true
   end
 
   create_table "pictures", :force => true do |t|

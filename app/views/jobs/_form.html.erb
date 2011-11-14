@@ -106,17 +106,27 @@ confirm the listing before it is displayed on ResearchMatch.
         </td>
     </tr>
     <tr>
-        <td class="job_clear_table_label"><%= f.label :paid, "Available as paid position?" %></td>
-        <td class="job_clear_table_field"><%= f.check_box :paid %></td>
-    </tr>
-    <tr>
-        <td class="job_clear_table_label"><%= f.label :credit, "Available as for-credit position?" %></td>
-        <td class="job_clear_table_field"><%= f.check_box :credit %></td>
+    <td class="job_clear_table_label"><%= f.label :compensation, 'Form of Compensation' %></td>
+    <td class="job_clear_table_field">
+            <%= f.select :compensation, options_for_select(
+                 [ "Paid or Credit", "Paid Only", "Credit Only", "Unspecified" ],
+                 :selected => @job.compensation)
+            %>
+    </td>
     </tr>
 	  <tr>
 		<td class="job_clear_table_label"><%= f.label :num_positions, 'Number of available positions' %> <br />(enter 0 to leave unspecified)</td>
 		<td class="job_clear_table_field"><%= f.text_field :num_positions, {:size=> 5} %></td>
 	  </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :open, "Is this position currently open?" %></td>
+        <td class="job_clear_table_field">
+            <%= radio_button_tag :open, 'true', @job.open %>
+            <%= label_tag(:is_open, "Yes") %>
+            <%= radio_button_tag :open, 'false', !@job.open %>
+            <%= label_tag(:is_closed, "No") %>
+        </td>
+    </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>
 		<td class="job_clear_table_field"><br />

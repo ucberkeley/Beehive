@@ -104,6 +104,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.xml
   def new
     @job = Job.new
+    @job.num_positions = 0
   end
 
   # GET /jobs/1/edit
@@ -348,6 +349,8 @@ class JobsController < ApplicationController
     [:paid, :credit].each do |k|
       params[:job][k] = [false,true,nil][params[:job][k].to_i]
     end
+    
+    params[:job][:open] = params[:open]
 
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)

@@ -146,6 +146,15 @@
     </td>
   </tr>
   
+    <tr>
+    <td class="job_attr_title">
+      Form of Compensation:
+    </td>
+    <td class="job_attr_value">
+      <%=h @job.compensation || "Unspecified" %>
+    </td>
+  </tr>
+  
   <tr>
     <td class="job_attr_title">
       Number of positions:
@@ -157,23 +166,18 @@
         Unspecified
       <% end %>
     </td>
-  </tr>      
+  </tr>
   
   <tr>
     <td class="job_attr_title">
-      Paid:
+      Position is:
     </td>
     <td class="job_attr_value">
-      <%= ActionView::Helpers::ThreeStateLabels[@job.paid] %>
-    </td>
-  </tr>
-    
-  <tr>
-    <td class="job_attr_title">
-      Credit:
-    </td>
-    <td class="job_attr_value">
-      <%= ActionView::Helpers::ThreeStateLabels[@job.credit] %>
+      <% if !@job.open.nil? && @job.open == false %>
+        Closed
+      <% else %> 
+        Open
+      <% end %>
     </td>
   </tr>
 </tbody></table>
