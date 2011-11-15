@@ -174,7 +174,7 @@ class JobsController < ApplicationController
     process_form_params
 
     @job = Job.find(params[:id])
-    changed_sponsors = update_sponsorships  	
+    changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
     @job.update_attribs(params)      
 
     respond_to do |format|
