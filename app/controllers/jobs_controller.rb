@@ -157,19 +157,7 @@ class JobsController < ApplicationController
           flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
           flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
         end
-        flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
-        # TODO refactor
-        if Rails.production?
-          begin
-            FlyingSphinx::IndexRequest.cancel_jobs
-            request = FlyingSphinx::IndexRequest.new
-            request.update_and_index
-            Rails.logger.info "reindex okay :)"
-          rescue => e
-            Rails.logger.warn "jobs#create: Unable to reindex: #{e.inspect}"
-          end
-        end
-        
+        flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'        
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
@@ -273,17 +261,6 @@ class JobsController < ApplicationController
     end
 
     @job.skip_handlers = false
-    if Rails.production?
-      begin
-        FlyingSphinx::IndexRequest.cancel_jobs
-        request = FlyingSphinx::IndexRequest.new
-        request.update_and_index
-        Rails.logger.info "reindex okay :)"
-      rescue => e
-        Rails.logger.warn "jobs#activate: Unable to reindex: #{e.inspect}"
-      end
-    end
-
     flash[:notice] = 'Listing activated successfully.  Your listing is now available to be viewed by other users.'
     redirect_to @job
 
