@@ -1,0 +1,83 @@
+sejits1:
+  faculty_id: 7
+  job_id: 1
+  
+sejits2:
+  faculty_id: 14
+  job_id: 1
+  
+scads1:
+  faculty_id: 7
+  job_id: 2
+  
+scads2:
+  faculty_id: 14
+  job_id: 2
+  
+cloud1:
+  faculty_id: 7
+  job_id: 3
+  
+cloud2:
+  faculty_id: 11
+  job_id: 3
+  
+cloud3:
+  faculty_id: 12
+  job_id: 3
+  
+console1:
+  faculty_id: 7
+  job_id: 4
+  
+console2:
+  faculty_id: 9
+  job_id: 4
+  
+console3:
+  faculty_id: 14
+  job_id: 4
+  
+awe1:
+  faculty_id: 7
+  job_id: 5
+  
+brain:
+  faculty_id: 10
+  job_id: 6
+  
+bridges1:
+  faculty_id: 9
+  job_id: 7
+  
+bridges2:
+  faculty_id: 8
+  job_id: 7
+  
+bridges3:
+  faculty_id: 6
+  job_id: 7
+  
+bridges4:
+  faculty_id: 3
+  job_id: 7
+  
+airplanes1:
+  faculty_id: 6
+  job_id: 8
+  
+airplanes2:
+  faculty_id: 3
+  job_id: 8
+  
+raid1:
+  faculty_id: 12
+  job_id: 9
+  
+raid2:
+  faculty_id: 14
+  job_id: 9
+  
+inactive:
+  faculty_id: 3
+  job_id: 10

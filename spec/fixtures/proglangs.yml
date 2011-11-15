@@ -1,0 +1,39 @@
+python:
+  id: 1
+  name: Python
+  
+ruby:
+  id: 2
+  name: Ruby
+  
+c:
+  id: 3
+  name: C
+  
+java:
+  id: 4
+  name: Java
+  
+rails:
+  id: 5
+  name: Rails
+  
+pascal:
+  id: 6
+  name: Pascal
+  
+php:
+  id: 7
+  name: PHP
+  
+perl:
+  id: 8
+  name: Perl
+  
+vb:
+  id: 9
+  name: Visual Basic
+  
+lisp:
+  id: 10
+  name: Lisp

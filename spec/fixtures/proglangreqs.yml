@@ -1,0 +1,39 @@
+sejits1:
+  job_id: 1
+  proglang_id: 1
+  
+sejits2:
+  job_id: 1
+  proglang_id: 3
+  
+scads1:
+  job_id: 2
+  proglang_id: 4
+  
+scads2:
+  job_id: 2
+  proglang_id: 3
+  
+cloud1:
+  job_id: 2
+  proglang_id: 2
+  
+cloud2:
+  job_id: 3
+  proglang_id: 5
+
+awe1:
+  job_id: 5
+  proglang_id: 6
+  
+awe2:
+  job_id: 5
+  proglang_id: 1
+  
+awe3:
+  job_id: 5
+  proglang_id: 10
+  
+awe3:
+  job_id: 5
+  proglang_id: 9

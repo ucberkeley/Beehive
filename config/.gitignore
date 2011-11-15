@@ -1,4 +1,2 @@
 database.yml
 ldap.yml
-*.sphinx.conf
-

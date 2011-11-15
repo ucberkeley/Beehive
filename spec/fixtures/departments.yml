@@ -1,0 +1,18 @@
+
+eecs:
+  name: EECS
+  
+cogsci:
+  name: Cognitive Science
+  
+psychology:
+  name: Psychology
+  
+bio:
+  name: Biology
+  
+me:
+  name: Mechanical Engineering
+  
+ce:
+  name: Civil Engineering

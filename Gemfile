@@ -18,10 +18,8 @@ gem 'will_paginate', "~> 3.0.pre2"
 gem 'rubycas-client', :require => ['casclient', 'casclient/frameworks/rails/filter']
 gem 'acts_as_taggable_on_steroids', :require => ['acts_as_taggable', 'tags_helper', 'tag_list', 'tagging', 'tag']
 gem 'net-ldap', :require => 'net/ldap'
-gem 'thinking-sphinx', '~> 2.0.0', :require => 'thinking_sphinx'
 gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
-
 gem 'jquery-rails', '>= 1.0.12'
 
 # Deploy with Capistrano
@@ -32,7 +30,6 @@ gem 'heroku'
 
 # Production-specific
 group :production do
-  gem 'flying-sphinx',   '~> 0.6.0'
 end
 
 # Development
