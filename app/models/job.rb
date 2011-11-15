@@ -152,13 +152,25 @@ class Job < ActiveRecord::Base
     jobs = Job.arel_table
     faculties = Faculty.arel_table
     departments = Department.arel_table
+    proglangs = Proglang.arel_table
+    courses = Course.arel_table
+    categories = Category.arel_table
     tags = Tag.arel_table
 
-    results = Job.select("distinct jobs.*").joins(:faculties).joins(:department).includes(:tags)
+    results = Job.select("distinct jobs.*")
+                 .joins(:faculties)
+                 .joins(:department)
+                 .includes(:tags)
+                 .includes(:proglangs)
+                 .includes(:courses)
+                 .includes(:categories)
                  .where(jobs[:title].matches(query)
                         .or(jobs[:desc].matches(query))
                         .or(faculties[:name].matches(query))
                         .or(departments[:name].matches(query))
+                        .or(proglangs[:name].matches(query))
+                        .or(courses[:name].matches(query))
+                        .or(categories[:name].matches(query))
                         )
     
     results = results.where(jobs[:open].eq(true))

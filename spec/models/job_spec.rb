@@ -213,57 +213,57 @@ describe Job do
       end
       
       it "should match categories" do
-        # results = Job.find_jobs "Artificial Intelligence"
-        # expected = [jobs(:scads), jobs(:console), jobs(:awe), jobs(:brain)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Computer Vision"
-        # expected = [jobs(:bridges)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Computer"
-        # expected = [jobs(:bridges), jobs(:airplanes)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Operating Systems"
-        # expected = [jobs(:console)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Operating"
-        # expected = [jobs(:console)]
-        # verify_match results, expected
+        results = Job.find_jobs "Artificial Intelligence"
+        expected = [jobs(:scads), jobs(:console), jobs(:awe), jobs(:brain)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Computer Vision"
+        expected = [jobs(:bridges)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Computer"
+        expected = [jobs(:bridges), jobs(:airplanes)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Operating Systems"
+        expected = [jobs(:console)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Operating"
+        expected = [jobs(:console)]
+        verify_match results, expected
       end
       
       it "should match courses" do
-        # results = Job.find_jobs "CS161"
-        # expected = [jobs(:awe)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "CS188"
-        # expected = [jobs(:scads), jobs(:airplanes), jobs(:brain)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "CS61B"
-        # expected = [jobs(:awe), jobs(:sejits)]
-        # verify_match results, expected
-#         
+        results = Job.find_jobs "CS161"
+        expected = [jobs(:awe)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "CS188"
+        expected = [jobs(:scads), jobs(:airplanes), jobs(:brain)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "CS61B"
+        expected = [jobs(:awe), jobs(:sejits)]
+        verify_match results, expected
+        
         # results = Job.find_jobs "Data Structures"
         # expected = [jobs(:awe), jobs(:sejits)]
         # verify_match results, expected
       end
       
       it "should match programming languages" do
-        # results = Job.find_jobs "Java"
-        # expected = [jobs(:scads)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Visual Basic"
-        # expected = [jobs(:awe)]
-        # verify_match results, expected
-#         
-        # results = Job.find_jobs "Visual"
-        # expected = [jobs(:awe)]
-        # verify_match results, expected
+        results = Job.find_jobs "Java"
+        expected = [jobs(:scads)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Visual Basic"
+        expected = [jobs(:awe)]
+        verify_match results, expected
+        
+        results = Job.find_jobs "Visual"
+        expected = [jobs(:awe)]
+        verify_match results, expected
       end
               
       it "should match partial words" do
@@ -287,10 +287,10 @@ describe Job do
         expected = [jobs(:sejits), jobs(:scads), jobs(:cloud), jobs(:console), jobs(:awe)]
         verify_match results, expected
         
-        # results = Job.find_jobs "Cognitive Scienc"
-        # expected = [jobs(:brain)]
-        # verify_match results, expected
-#         
+        results = Job.find_jobs "Cognitive Scienc"
+        expected = [jobs(:brain)]
+        verify_match results, expected
+        
         # results = Job.find_jobs "Operatin"
         # expected = [jobs(:console)]
         # verify_match results, expected
@@ -464,11 +464,11 @@ describe Job do
       end
       
       it "should respect :order" do
-        params = {:limit => 3, :order => "created_at DESC"}
+        params = {:limit => 3, :order => "jobs.created_at DESC"}
         results = Job.find_jobs nil, params
         results.should == [jobs(:airplanes), jobs(:bridges), jobs(:brain)]
         
-        params = {:limit => 3, :order => "title ASC"}
+        params = {:limit => 3, :order => "jobs.title ASC"}
         results = Job.find_jobs nil, params
         results.should == [jobs(:airplanes), jobs(:awe), jobs(:cloud)]
       end
