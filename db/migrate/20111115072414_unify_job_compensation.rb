@@ -1,19 +1,22 @@
 class UnifyJobCompensation < ActiveRecord::Migration
   def self.up
-    change_column :jobs, :compensation, :integer, :null => :false, :default => Job::Compensation::None
+    remove_column :jobs, :compensation
+    add_column :jobs, :compensation, :integer, :null => :false, :default => Job::Compensation::None
 
     Job.all.each do |job|
-      c = case
-      when (job.paid? and job.credit?)
+      p = job.read_attribute :paid
+      c = job.read_attribute :credit
+      comp = case
+      when (p and c)
         Job::Compensation::Both
-      when job.paid?
+      when p
         Job::Compensation::Pay
-      when job.credit?
+      when c
         Job::Compensation::Credit
       else
         Job::Compensation::None
       end
-      job.update_attribute :compensation, c
+      job.update_attribute :compensation, comp
     end
 
     remove_column :jobs, :paid
@@ -31,6 +34,7 @@ class UnifyJobCompensation < ActiveRecord::Migration
       job.update_attributes :paid => p, :credit => c
     end
 
-    change_column :jobs, :compensation, :string
+    remove_column :jobs, :compensation
+    add_column :jobs, :compensation, :string
   end
 end
