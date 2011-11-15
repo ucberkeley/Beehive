@@ -12,10 +12,13 @@ class Department < ActiveRecord::Base
 
   class << self
     # Define methods like ".eecs"
-    Department.all.each do |d|
-      define_method d.name.underscore do
-        d
-      end rescue nil
+    begin
+      Department.all.each do |d|
+        define_method d.name.underscore do
+          d
+        end rescue nil
+      end
+    rescue => e
     end
   end
 
