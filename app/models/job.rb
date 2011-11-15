@@ -162,7 +162,8 @@ class Job < ActiveRecord::Base
                         .or(faculties[:name].matches(query))
                         .or(departments[:name].matches(query))
                         )
-                 
+    
+    results = results.where(jobs[:open].eq(true))
     results = results.where(jobs[:end_date].gt(Time.now).or(jobs[:end_date].eq(nil))) unless options[:include_ended]
     results = results.where(departments[:id].eq(options[:department_id])) if options[:department_id]
     results = results.where(faculties[:id].eq(options[:faculty_id])) if options[:faculty_id]

@@ -121,7 +121,7 @@ describe Job do
     describe "search with default options" do
       it "should return all active jobs that have not ended" do
         results = Job.find_jobs
-        excluded = [jobs(:raid), jobs(:inactive)]
+        excluded = [jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
       end
     end
@@ -174,7 +174,7 @@ describe Job do
             
       it "should match faculty" do
         results = Job.find_jobs "fox"
-        excluded = [jobs(:brain), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
+        excluded = [jobs(:brain), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
                                    
         results = Job.find_jobs "joseph"
@@ -196,7 +196,7 @@ describe Job do
       
       it "should match department" do
         results = Job.find_jobs "EECS"
-        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
+        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
         
         results = Job.find_jobs "Cognitive Science"
@@ -322,7 +322,7 @@ describe Job do
         verify_match results, expected
         
         results = Job.find_jobs "eecs"
-        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
+        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
       end
       
@@ -370,7 +370,7 @@ describe Job do
       it "should respect :department" do
         params = {:department_id => Department.find_by_name('eecs').id}
         results = Job.find_jobs "", params
-        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
+        excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
         
         params = {:department_id => Department.find_by_name('Cognitive Science').id}
@@ -449,13 +449,13 @@ describe Job do
       it "should respect :compensation" do
         params = {:compensation => nil}
         results = Job.find_jobs nil, params
-        unexpected = [jobs(:raid), jobs(:inactive)]
-        verify_exclusion results, unexpected
+        excluded = [jobs(:raid), jobs(:inactive), jobs(:closed)]
+        verify_exclusion results, excluded
         
         params = {:compensation => 'Paid Only'}
         results = Job.find_jobs nil, params
-        unexpected = [jobs(:awe), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
-        verify_exclusion results, unexpected
+        excluded = [jobs(:awe), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
+        verify_exclusion results, excluded
         
         params = {:compensation => 'Credit Only'}
         results = Job.find_jobs nil, params
@@ -476,13 +476,13 @@ describe Job do
       it "should respect :include_inactive" do
         params = {:include_inactive => true}
         results = Job.find_jobs nil, params
-        unexpected = [jobs(:raid)]
-        verify_exclusion results, unexpected
+        excluded = [jobs(:raid), jobs(:closed)]
+        verify_exclusion results, excluded
         
         params = {:include_inactive => false}
         results = Job.find_jobs nil, params
-        unexpected = [jobs(:raid), jobs(:inactive)]
-        verify_exclusion results, unexpected
+        excluded = [jobs(:raid), jobs(:inactive), jobs(:closed)]
+        verify_exclusion results, excluded
       end
     end
   end # searching
@@ -490,7 +490,7 @@ describe Job do
 def verify_match(actual_results, expected_results)
   unexpected_results = [jobs(:sejits), jobs(:awe), jobs(:console), jobs(:scads),
                        jobs(:cloud), jobs(:brain), jobs(:bridges), jobs(:airplanes),
-                       jobs(:raid), jobs(:inactive)] - expected_results
+                       jobs(:raid), jobs(:inactive), jobs(:closed)] - expected_results
   for result in expected_results
     actual_results.should include result
   end
@@ -502,7 +502,7 @@ end
 def verify_exclusion(actual_results, unexpected_results)
   expected_results = [jobs(:sejits), jobs(:awe), jobs(:console), jobs(:scads),
                        jobs(:cloud), jobs(:brain), jobs(:bridges), jobs(:airplanes),
-                       jobs(:raid), jobs(:inactive)] - unexpected_results
+                       jobs(:raid), jobs(:inactive), jobs(:closed)] - unexpected_results
   for result in expected_results
     actual_results.should include result
   end
