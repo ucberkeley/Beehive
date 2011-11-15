@@ -408,30 +408,30 @@ describe Job do
       end
       
       it "should respect :tags" do
-        # for job in Job.all[0..2]
-          # populate_tag_list job
-          # job.save!
-        # end
-#         
-        # params = {:tags => 'EECS'}
-        # results = Job.find_jobs nil, params
-        # expected = [jobs(:sejits), jobs(:scads), jobs(:cloud)]
-        # verify_match results, expected
-#         
-        # params = {:tags => 'credit'}
-        # results = Job.find_jobs nil, params
-        # expected = [jobs(:sejits), jobs(:cloud)]
-        # verify_match results, expected
-#         
-        # params = {:tags => 'Java'}
-        # results = Job.find_jobs nil, params
-        # expected = [jobs(:scads)]
-        # verify_match results, expected
-#         
-        # params = {:tags => 'unknown_tag'}
-        # results = Job.find_jobs nil, params
-        # expected = []
-        # verify_match results, expected
+        for job in Job.all[0..2]
+          populate_tag_list job
+          job.save!
+        end
+        
+        params = {:tags => 'EECS'}
+        results = Job.find_jobs nil, params
+        expected = [jobs(:sejits), jobs(:scads), jobs(:cloud)]
+        verify_match results, expected
+        
+        params = {:tags => 'credit'}
+        results = Job.find_jobs nil, params
+        expected = [jobs(:sejits), jobs(:cloud)]
+        verify_match results, expected
+        
+        params = {:tags => 'Java'}
+        results = Job.find_jobs nil, params
+        expected = [jobs(:scads)]
+        verify_match results, expected
+        
+        params = {:tags => 'unknown_tag'}
+        results = Job.find_jobs nil, params
+        expected = []
+        verify_match results, expected
       end
       
       it "should respect :include_ended" do

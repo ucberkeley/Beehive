@@ -149,14 +149,12 @@ class Job < ActiveRecord::Base
     query = query.gsub(/\\/, '\\\\\\\\').gsub(/%/, '\%').gsub(/_/, '\_')
     query = "%" + query + "%"
     
-    # needed?
-    options[:tags] = [*options[:tags]]
-
     jobs = Job.arel_table
     faculties = Faculty.arel_table
     departments = Department.arel_table
+    tags = Tag.arel_table
 
-    results = Job.select("distinct jobs.*").joins(:faculties).joins(:department)
+    results = Job.select("distinct jobs.*").joins(:faculties).joins(:department).includes(:tags)
                  .where(jobs[:title].matches(query)
                         .or(jobs[:desc].matches(query))
                         .or(faculties[:name].matches(query))
@@ -169,13 +167,12 @@ class Job < ActiveRecord::Base
     results = results.where(faculties[:id].eq(options[:faculty_id])) if options[:faculty_id]
     results = results.where(jobs[:paid].eq(true)) if options[:compensation] == "Paid Only"
     results = results.where(jobs[:credit].eq(true)) if options[:compensation] == "Credit Only"
-    results = results.limit(options[:limit]) if options[:limit]
-    order = options[:order] || "created_at DESC"
-    results = results.order(order)
     results = results.where(jobs[:active].eq(true)) unless options[:include_inactive]
-    
-    # results = results.tagged_with(options[:tags]) if options[:tags].present?
-    
+    results = results.where(tags[:name].matches(options[:tags])) if options[:tags].present?
+    results = results.limit(options[:limit]) if options[:limit]
+    order = options[:order] || "jobs.created_at DESC"
+    results = results.order(order)
+
     page = options[:page] || 1
     per_page = options[:per_page] || 16
     return results.all.paginate(:page => page, :per_page => per_page)
