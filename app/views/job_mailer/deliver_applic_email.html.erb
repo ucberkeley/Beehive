@@ -3,7 +3,8 @@
 </p>
 
 <p>
-A new application for your listing, <%= @job.title %>, has been received:
+A new application for your listing, <%= @job.title %>, has been received.<br/>
+You may contact the applicant at the email address provided below.
 </p>
 
 <%- unless @applic.message.blank? -%>
@@ -24,12 +25,13 @@ You can view this application, and the applicant's most recent information, at
 <p>
 
 <p>
-If you believe you have received this e-mail in error, please disregard this notice.
-</p>
-
-<p>
 Regards,<br/><br/>
 <b>UC Berkeley ResearchMatch</b>
 <br/>
 <%= root_url %>
 </p>
+
+<p>
+If you believe you have received this e-mail in error, please disregard this notice.<br/>
+</p>
+

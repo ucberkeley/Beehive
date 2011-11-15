@@ -24,7 +24,7 @@ class JobMailer < ActionMailer::Base
       end
     end
 
-    mail(:to => @job.user.email + ', ' + @job.faculties.map(&:email).join("& "),
-          :subject => "Application for Research | UCB ResearchMatch")
+    mail(:to => [@job.user.email] | @job.faculties.collect(&:email),
+         :subject => "[ResearchMatch] Application for Research")
   end
 end

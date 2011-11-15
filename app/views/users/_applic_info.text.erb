@@ -27,7 +27,7 @@
 <%- else
     val = user.send(attr)
     val = {true=>'Yes',false=>'No'}[val] if (!!val == val) # if val is a boolean
-    val = (val.nil? or val.blank?) ? '<b>Not specified</b>' : val
+    val = (val.nil? or val.blank?) ? 'Not specified' : val
     val = val.to_s.html_safe
 -%>
   <%= "#{label}:".ljust(14) %><%= val %>

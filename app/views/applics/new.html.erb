@@ -33,7 +33,9 @@
       (<%= @job.faculties.collect(&:name).join(', ') %>) access to view
       <%= link_to 'your profile', profile_path, :target => '_blank' %> and any information you've entered there.
       <br/>
-      Please review the following information before submitting:
+      Please review the following information before submitting. A copy will be emailed to the faculty
+      <%= 'sponsor'.pluralize_for @job.faculties.count %>.
+      <br/>
       <br/>
       <%= render 'users/applic_info', :format => :html, :user => @current_user %>
 

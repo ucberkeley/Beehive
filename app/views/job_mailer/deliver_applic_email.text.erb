@@ -1,6 +1,7 @@
 Dear <%= @job.faculties.map(&:name).join("& ") %>,
 
-A new application for your listing, <%= @job.title %>, has been received: 
+A new application for your listing, <%= @job.title %>, has been received.
+You may contact the applicant at the email address provided below.
 
 <%- unless @applic.message.blank? -%>
 <%= '-'*60 %>
@@ -18,6 +19,10 @@ A new application for your listing, <%= @job.title %>, has been received:
 You can view this application, and the applicant's most recent information, at
   <%= applic_url(@applic) %>
 
-<% if false  # or, unless user_preferences.present? we need to set up subscription features. %>
-You received this notification because you are currently subscribed to receive email notifications for your postings. You can change this setting in your profile page.
-<% end %>
+
+Regards,
+
+UC Berkeley ResearchMatch
+<%= root_url %>
+
+If you believe you have received this e-mail in error, please disregard this notice.
