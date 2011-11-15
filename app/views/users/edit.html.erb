@@ -77,9 +77,6 @@
       <%= text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide',
             :placeholder => "Languages in which you are proficient, separated by commas" %>
       </p>
-      <p>
-        <%= f.submit 'Update' %>
-      </p>
     </div>
   </div>
 </div>
@@ -134,10 +131,6 @@
   </p>
   <br/>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-
 </div>
 <br/>
 <%- end -%>
@@ -164,13 +157,15 @@
   </p>
   <br/>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+</div>
 
-  <br/>
+<p style="text-align:center;">
+  <br />
+  <%= f.submit 'Update' %>
+</p>
 
-</div></div></div>
+<br/>
+</div></div>
 <% end %>
 
 <% end # form_for %>

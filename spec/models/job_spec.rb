@@ -11,8 +11,7 @@ describe Job do
       :desc => "value for desc",
       :end_date => Time.now + 5.hours,
       :num_positions => 1,
-      :paid => false,
-      :credit => false,
+      :compensation => Job::Compensation::None,
       :active => true
     }
 
@@ -409,7 +408,7 @@ describe Job do
       
       it "should respect :tags" do
         for job in Job.all[0..2]
-          populate_tag_list job
+          job.populate_tag_list
           job.save!
         end
         
@@ -452,12 +451,12 @@ describe Job do
         excluded = [jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
         
-        params = {:compensation => 'Paid Only'}
+        params = {:compensation => Job::Compensation::Pay.to_s}
         results = Job.find_jobs nil, params
         excluded = [jobs(:awe), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
         
-        params = {:compensation => 'Credit Only'}
+        params = {:compensation => Job::Compensation::Credit.to_s}
         results = Job.find_jobs nil, params
         expected = [jobs(:sejits), jobs(:cloud), jobs(:brain), jobs(:airplanes)]
         verify_match results, expected
@@ -510,18 +509,7 @@ def verify_exclusion(actual_results, unexpected_results)
     actual_results.should_not include result
   end
 end
-  
-def populate_tag_list(job)
-  tags_string = ""
-  tags_string << job.department.name
-  tags_string << ',' + job.category_list_of_job 
-  tags_string << ',' + job.course_list_of_job unless job.course_list_of_job.empty?
-  tags_string << ',' + job.proglang_list_of_job unless job.proglang_list_of_job.empty?
-  tags_string << ',' + (job.paid ? 'paid' : 'unpaid')
-  tags_string << ',' + (job.credit ? 'credit' : 'no credit')
-  job.tag_list = tags_string
-end
-  
+
 protected
   def create_job(attribs={})
     j = Job.new(@valid_attributes.merge(attribs))

@@ -52,9 +52,9 @@
 					
         <td class="job_credit">
           <div class="job_attr">
-            <%= image_tag('dollar_sign.gif', :alt => 'pay') if (job.compensation && job.compensation.include?("Paid"))%>
-            <%= image_tag('a_plus.gif', :alt => 'credit') if (job.compensation && job.compensation.include?("Credit")) %>
-            <%= "Unspecified" if (job.compensation.blank? || job.compensation.include?("Unspecified")) %>
+            <%= image_tag('dollar_sign.gif', :alt => 'pay') if job.pay? %>
+            <%= image_tag('a_plus.gif', :alt => 'credit') if job.credit? %>
+            <%= "Unspecified" unless job.pay? or job.credit? %>
           </div>
         </td>
         
