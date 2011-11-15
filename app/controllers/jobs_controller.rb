@@ -342,11 +342,6 @@ class JobsController < ApplicationController
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
 
-    # Handle three-state booleans
-    [:paid, :credit].each do |k|
-      params[:job][k] = [false,true,nil][params[:job][k].to_i]
-    end
-    
     params[:job][:open] = params[:open]
 
     # Handle end date
@@ -366,17 +361,15 @@ class JobsController < ApplicationController
   end
   
   
-	  # Populates the tag_list of the job.
-	def populate_tag_list
-		tags_string = ""
+    # Populates the tag_list of the job.
+  def populate_tag_list
+    tags_string = ""
     tags_string << @job.department.name
-		tags_string << ',' + @job.category_list_of_job 
-		tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
-		tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
-		tags_string << ',' + (@job.paid ? 'paid' : 'unpaid')
-		tags_string << ',' + (@job.credit ? 'credit' : 'no credit')
-		@job.tag_list = tags_string
-	end
+    tags_string << ',' + @job.category_list_of_job 
+    tags_string << ',' + @job.course_list_of_job unless @job.course_list_of_job.empty?
+    tags_string << ',' + @job.proglang_list_of_job unless @job.proglang_list_of_job.empty?
+    @job.tag_list = tags_string
+  end
   
 
 ####################

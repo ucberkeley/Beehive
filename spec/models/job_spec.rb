@@ -11,8 +11,7 @@ describe Job do
       :desc => "value for desc",
       :end_date => Time.now + 5.hours,
       :num_positions => 1,
-      :paid => false,
-      :credit => false,
+      :compensation => Job::Compensation::None,
       :active => true
     }
 
@@ -452,12 +451,12 @@ describe Job do
         unexpected = [jobs(:raid), jobs(:inactive)]
         verify_exclusion results, unexpected
         
-        params = {:compensation => 'Paid Only'}
+        params = {:compensation => Job::Compensation::Pay.to_s}
         results = Job.find_jobs nil, params
         unexpected = [jobs(:awe), jobs(:airplanes), jobs(:raid), jobs(:inactive)]
         verify_exclusion results, unexpected
         
-        params = {:compensation => 'Credit Only'}
+        params = {:compensation => Job::Compensation::Credit.to_s}
         results = Job.find_jobs nil, params
         expected = [jobs(:sejits), jobs(:cloud), jobs(:brain), jobs(:airplanes)]
         verify_match results, expected

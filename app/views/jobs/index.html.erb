@@ -14,7 +14,13 @@
     <%= label_tag :faculty, "Faculty" %>
     <%= select_tag :faculty, options_for_select([["All Faculty",0]]) + options_from_collection_for_select(Faculty.all, "id", "name", @faculty_id) %>
     <%= label_tag :compensation, "Compensation" %>
-    <%= select_tag :compensation, options_for_select([ "Paid or Credit", "Paid Only", "Credit Only" ], @compensation) %>
+    <%= select_tag :compensation,
+          options_for_select({
+            "Don't care" => Job::Compensation::None,
+            "Pay"        => Job::Compensation::Pay,
+            "Credit"     => Job::Compensation::Credit,
+            "Pay or credit" => Job::Compensation::Both
+            }, @compensation) %>
     <%= submit_tag "Search" %>
     <br />
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick => "#{visual_effect(:toggle_slide, 'advanced_search')} (as=document.getElementById('as')).value = 1-Number(as.value); return false;" %>

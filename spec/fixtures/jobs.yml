@@ -25,8 +25,7 @@ sejits:
         PLL, albeit with lower performance. Our approach does not require modifying
         the source PLL program, which would wreck portability."
   num_positions: 6
-  paid: true
-  credit: true
+  compensation: 3
   active: true
   earliest_start_date: 2000-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -53,8 +52,7 @@ scads:
         anticipate performance problems and predict the resource requirements of
         new queries before execution."
   num_positions: 
-  paid: true
-  credit: false
+  compensation: 1
   active: true
   earliest_start_date: 2015-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -81,8 +79,7 @@ cloud:
         and are using it internally as a representative Web 2.0 test app
         (it includes its own workload generator) for a number of projects."
   num_positions: 
-  paid: true
-  credit: true
+  compensation: 3
   active: true
   earliest_start_date: 2000-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -98,8 +95,7 @@ console:
   desc: "combining text mining techniques with source code analysis to find
         markers for hard-to-find bugs in the console logs of complex applications."
   num_positions: 2
-  paid: true
-  credit: false
+  compensation: 1
   active: true
   earliest_start_date: 2000-11-07 11:45:46
   latest_start_date: 2000-11-07 11:45:46
@@ -131,8 +127,7 @@ awe:
         Hadoop (i.e. MapReduce-style) batch jobs and the performance of
         automatically tuned scientific codes on multicore parallel processors."
   num_positions: 
-  paid: false
-  credit: false
+  compensation: 0
   active: true
   earliest_start_date: 2010-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -147,8 +142,7 @@ brain:
   title: "How The Human Brain Works"
   desc: "A deep investigation into how the human brain works. Pay will be $20.00 per hour"
   num_positions: 10
-  paid: true
-  credit: true
+  compensation: 3
   active: true
   earliest_start_date: 2000-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -164,8 +158,7 @@ bridges:
   desc: "An objective search for the world's best bridge design.
         This is an under_score, this is a url: http://www.armandofox.com/geek/, \\test"
   num_positions: 
-  paid: true
-  credit: false
+  compensation: 1
   active: true
   earliest_start_date: 2020-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -180,8 +173,7 @@ airplanes:
   title: "Advanced Airplane Design"
   desc: "Research into the possibilities of three-winged airplanes"
   num_positions: 
-  paid: false
-  credit: true
+  compensation: 2
   active: true
   earliest_start_date: 2020-11-07 11:45:46
   latest_start_date: 2020-11-07 11:45:46
@@ -196,8 +188,7 @@ raid:
   title: "RAID"
   desc: "Redundant Array of Independent Disks"
   num_positions: 
-  paid: true
-  credit: true
+  compensation: 3
   active: true
   earliest_start_date:
   latest_start_date: 
@@ -212,8 +203,7 @@ inactive:
   title: "Inactive Job"
   desc: "Inactive Job"
   num_positions: 
-  paid: true
-  credit: true
+  compensation: 3
   active: false
   earliest_start_date:
   latest_start_date: 

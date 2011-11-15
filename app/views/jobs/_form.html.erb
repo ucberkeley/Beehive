@@ -108,10 +108,7 @@ confirm the listing before it is displayed on ResearchMatch.
     <tr>
     <td class="job_clear_table_label"><%= f.label :compensation, 'Form of Compensation' %></td>
     <td class="job_clear_table_field">
-            <%= f.select :compensation, options_for_select(
-                 [ "Paid or Credit", "Paid Only", "Credit Only", "Unspecified" ],
-                 :selected => @job.compensation)
-            %>
+            <%= f.select :compensation, options_for_select( Job::Compensation::All, @job.compensation ) %>
     </td>
     </tr>
 	  <tr>

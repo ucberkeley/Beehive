@@ -151,7 +151,7 @@
       Form of Compensation:
     </td>
     <td class="job_attr_value">
-      <%=h @job.compensation || "Unspecified" %>
+      <%= Job::Compensation::All.key(@job.compensation) || "Unspecified" %>
     </td>
   </tr>
   
