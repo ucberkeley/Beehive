@@ -2,7 +2,7 @@
 # or to notify of applications to jobs
 class JobMailer < ActionMailer::Base
   default_url_options[:host] = ROOT_URL
-  default :from => "UCB ResearchMatch <researchmatch@eecs.berkeley.edu>"
+  default :from => "UCB ResearchMatch <ucbresearchmatch@gmail.com>"
 
   def activate_job_email(job)
     @job = job
