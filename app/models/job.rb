@@ -295,6 +295,19 @@ class Job < ActiveRecord::Base
         self.faculties = []
     end
   end
+
+  # Populates tag list
+  def populate_tag_list
+    tags_string = [
+      self.department.name,
+      self.category_list_of_job,
+      self.course_list_of_job,
+      self.proglang_list_of_job,
+      ('credit' if self.credit?),
+      ('paid' if self.pay?)
+    ].compact.join(',')
+    self.tag_list = tags_string
+  end
   
   # Returns true if the specified user has admin rights (can view applications,
   # edit, etc.) for this job.

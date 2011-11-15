@@ -218,8 +218,7 @@ closed:
   title: "Closed Job"
   desc: "Closed Job"
   num_positions: 
-  paid: true
-  credit: true
+  compensation: 3
   active: true
   earliest_start_date:
   latest_start_date: 
