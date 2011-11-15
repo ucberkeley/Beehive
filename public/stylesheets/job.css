@@ -47,6 +47,25 @@
 	width: 10%;
 }
 
+.icon {
+  width:  2.75em;
+  height: 2.75em;
+  background-size: 100%;
+  display: inline-block;
+  position: relative;
+}
+.icon:hover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  background-color: white;
+}
+.icon.paid { background-image: url(/images/paid_icon.png); }
+.icon.paid:hover::after { content: "pay"; }
+.icon.credit { background-image: url(/images/credit_icon.png); }
+.icon.credit:hover::after { content: "credit"; }
+
 #tag_cloud {
     padding-top: 15px;
     padding-bottom: 10px;

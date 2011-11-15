@@ -6,7 +6,7 @@
 
 <!-- search bar -->
 <div id="browse_search_bar">
-  <% form_tag(jobs_search_path, :method => "get") do %>
+  <%= form_tag(jobs_search_path, :method => "get") do %>
     <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
     <%= text_field_tag :query, @query, :placeholder => "Search Parameters", :style => "width: 180px" %>&nbsp;
     <%= label_tag :department, "Department" %>
