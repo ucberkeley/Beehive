@@ -1,0 +1,13 @@
+table {
+  width: 50%;
+}
+
+td {
+  width: 60px;
+  color: #5B7F72;
+  font-weight: bold;
+}
+
+td.body {
+    vertical-align: top;
+}

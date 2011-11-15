@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag 'contactus' %>
+
+<h1>Contact Us</h1>
+<%= form_tag(:feedback_email_link, :method => "post") do %>
+  <table>
+    <tr>
+      <td><%= label_tag(:sender, "Reply To:") %></td>
+      <td><%= text_field_tag :sender, @user_email, :size => 25 %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag(:subject, "Subject:") %></td>
+      <td><%= text_field_tag :subject, nil, :placeholder => "Enter subject...", :size => 25 %></td>
+    <tr>
+      <td class = "body"><%= label_tag(:body, "Body:") %></td>
+      <td><%= text_area_tag :body, nil, :placeholder => "Enter feedback...", :rows => 5 %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= submit_tag("Send Message") %></td>
+    </tr>
+  </table>
+<% end %>
