@@ -367,7 +367,7 @@ describe Job do
     describe "search with params" do
             
       it "should respect :department" do
-        params = {:department_id => Department.find_by_name('eecs').id}
+        params = {:department_id => Department.find_by_name('EECS').id}
         results = Job.find_jobs "", params
         excluded = [jobs(:brain), jobs(:bridges), jobs(:airplanes), jobs(:raid), jobs(:inactive), jobs(:closed)]
         verify_exclusion results, excluded
