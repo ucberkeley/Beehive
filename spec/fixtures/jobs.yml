@@ -212,3 +212,19 @@ inactive:
   department: eecs
   created_at: 1980-11-07 11:45:46
 
+closed:
+  id: 11
+  user_id: 1
+  title: "Closed Job"
+  desc: "Closed Job"
+  num_positions: 
+  paid: true
+  credit: true
+  active: true
+  earliest_start_date:
+  latest_start_date: 
+  end_date: 2020-01-07 11:45:46
+  categories: 
+  department: eecs
+  created_at: 1980-11-07 11:45:46
+  open: false

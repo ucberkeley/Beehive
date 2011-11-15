@@ -171,20 +171,31 @@ class Job < ActiveRecord::Base
     query = query.gsub(/\\/, '\\\\\\\\').gsub(/%/, '\%').gsub(/_/, '\_')
     query = "%" + query + "%"
     
-    # needed?
-    options[:tags] = [*options[:tags]]
-
     jobs = Job.arel_table
     faculties = Faculty.arel_table
     departments = Department.arel_table
+    proglangs = Proglang.arel_table
+    courses = Course.arel_table
+    categories = Category.arel_table
+    tags = Tag.arel_table
 
-    results = Job.select("distinct jobs.*").joins(:faculties).joins(:department)
+    results = Job.select("distinct jobs.*")
+                 .joins(:faculties)
+                 .joins(:department)
+                 .includes(:tags)
+                 .includes(:proglangs)
+                 .includes(:courses)
+                 .includes(:categories)
                  .where(jobs[:title].matches(query)
                         .or(jobs[:desc].matches(query))
                         .or(faculties[:name].matches(query))
                         .or(departments[:name].matches(query))
+                        .or(proglangs[:name].matches(query))
+                        .or(courses[:name].matches(query))
+                        .or(categories[:name].matches(query))
                         )
-                 
+    
+    results = results.where(jobs[:open].eq(true))
     results = results.where(jobs[:end_date].gt(Time.now).or(jobs[:end_date].eq(nil))) unless options[:include_ended]
     results = results.where(departments[:id].eq(options[:department_id])) if options[:department_id]
     results = results.where(faculties[:id].eq(options[:faculty_id])) if options[:faculty_id]
@@ -198,17 +209,15 @@ class Job < ActiveRecord::Base
       results = results.where(jobs[:compensation].in_any(compensations))
     end
 
-    results = results.limit(options[:limit]) if options[:limit]
-    order = options[:order] || "created_at DESC"
-    results = results.order(order)
     results = results.where(jobs[:active].eq(true)) unless options[:include_inactive]
-    
-    results = results.tagged_with(options[:tags]) if options[:tags].present?
-    
+    results = results.where(tags[:name].matches(options[:tags])) if options[:tags].present?
+    results = results.limit(options[:limit]) if options[:limit]
+    order = options[:order] || "jobs.created_at DESC"
+    results = results.order(order)
+
     page = options[:page] || 1
     per_page = options[:per_page] || 16
     return results.all.paginate(:page => page, :per_page => per_page)
-    
   end # find_jobs
 
   def self.query_url(options)
