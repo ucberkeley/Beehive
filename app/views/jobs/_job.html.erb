@@ -59,7 +59,7 @@
         </td>
         
 				<td class="job_credit">
-					<div class="job_attr"><span class="job_numpositions"><%= job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span></div>
+					<div class="job_attr"><span class="job_numpositions"><%= job.num_positions.nil? || job.num_positions == 0 ? "No limit" : job.num_positions.to_s %></span></div>
 				</td>
 
 			</tr>
