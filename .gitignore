@@ -10,3 +10,4 @@ files/
 mysql2/
 log/*.log
 tmp/
+*.project
