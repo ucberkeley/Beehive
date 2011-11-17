@@ -2,7 +2,7 @@
 class FeedbackMailer < ActionMailer::Base
   
   def send_feedback(sender, subject_line, body_text)
-    recipients  'ucbresearchmatch@gmail.com'
+    recipients  'researchmatch@lists.eecs.berkeley.edu'
     reply_to    sender
     from        sender
     subject     subject_line
