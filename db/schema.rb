@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(:version => 20111115072414) do
     t.datetime "earliest_start_date"
     t.datetime "latest_start_date"
     t.datetime "end_date"
-    t.boolean  "open",                :default => true
     t.integer  "compensation",        :default => 0
+    t.boolean  "open",                :default => true
   end
 
   create_table "pictures", :force => true do |t|

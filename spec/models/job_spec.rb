@@ -407,7 +407,7 @@ describe Job do
       end
       
       it "should respect :tags" do
-        for job in Job.all[0..2]
+        for job in Job.all
           job.populate_tag_list
           job.save!
         end
