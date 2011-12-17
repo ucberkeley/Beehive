@@ -4,7 +4,7 @@ class ContactUsController < ApplicationController
       @user_email = @current_user.email
     else
       flash[:notice] = "You must be logged in to leave feedback"
-      redirect_to :back
+      redirect_back_or home_path
     end
   end
   
@@ -15,6 +15,6 @@ class ContactUsController < ApplicationController
     mail = FeedbackMailer.send_feedback(sender, subject, body)
     mail.deliver
     flash[:notice] = "Your message has been sent. Thanks for your feedback!"
-    redirect_to '/dashboard'
+    redirect_to dashboard_path
   end
 end

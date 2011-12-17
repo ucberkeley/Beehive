@@ -42,7 +42,7 @@ ResearchMatch::Application.routes.draw do
 
   # Users
   resources :users
-  get  '/dashboard' => 'dashboard#index'
+  get  '/dashboard' => 'dashboard#index', :as => :dashboard
   get  '/profile'   => 'users#profile', :as => :profile
 
   # Home

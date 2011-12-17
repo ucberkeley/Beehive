@@ -27,6 +27,11 @@ module ApplicationHelper
   def logged_in_as_admin?
     @current_user and @current_user.admin?
   end
+
+  def redirect_back_or(path)
+    redirect_to request.referer || path
+  end
+
 end
 
 module ActionView
