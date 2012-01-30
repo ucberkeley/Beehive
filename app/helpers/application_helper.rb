@@ -119,7 +119,9 @@ end
 
 module CASControllerIncludes
   def goto_cas_unless_logged_in
-    CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
+    #CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
+    redirect_to :back
+    flash[:notice] = 'That part of ResearchMatch is not useful for this assignment'
   end
 
   def login_user!(user)

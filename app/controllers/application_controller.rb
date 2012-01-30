@@ -88,8 +88,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    @user_session = UserSession.find
-    @current_user = @user_session ? @user_session.user : nil
+    #@user_session = UserSession.find
+    #@current_user = @user_session ? @user_session.user : nil
   end
 
 end

@@ -1,7 +1,7 @@
 class UserSessionsController < ApplicationController
   include CASControllerIncludes
 
-  before_filter CASClient::Frameworks::Rails::Filter, :except => :destroy
+  before_filter :goto_cas_unless_logged_in, :except => :destroy
 
   def new
     if login_user!(User.find_by_login(session[:cas_user]))
