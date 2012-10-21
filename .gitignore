@@ -11,3 +11,5 @@ mysql2/
 log/*.log
 tmp/
 *.project
+*.sublime-project
+*.sublime-workspace

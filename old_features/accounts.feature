@@ -1,4 +1,4 @@
-Visitors should be in control of creating an account and of proving their
+Feature: Visitors should be in control of creating an account and of proving their
 essential humanity/accountability or whatever it is people think the
 id-validation does.  We should be fairly skeptical about this process, as the
 identity+trust chain starts here.
