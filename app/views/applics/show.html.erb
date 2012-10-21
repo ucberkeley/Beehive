@@ -3,7 +3,10 @@
 <div id="applic_show_main">
     <h1><%= @applic.job.title %></h1>
     
-    <p><h3>Applicant: <%= link_to @applic.user.name, url_for(@applic.user) %></h3></p>
+    <h3>Applicant: <%= link_to @applic.user.name, url_for(@applic.user) %></h3>
+
+    <h3>Status: <%=@applic.status.capitalize%></h3>
+
     <p>Date applied: <%= @applic.created_at.getlocal.pp %></p>
     
     <br />
@@ -19,4 +22,12 @@
     <p>
       <%= render 'users/applic_info', :user => @applic.user %>
     </p>
+
+    <br>
+    <% if @applic.status != "accepted" %>
+    <%= form_tag('/applications/%s' % @applic.id, :method => "post") do %>
+      <%= submit_tag("Accept this Applicant") %>
+    <% end %>
+    <% end %>
+
 </div>

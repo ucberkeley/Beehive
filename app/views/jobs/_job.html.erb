@@ -39,7 +39,16 @@
 							<% end %>
 						</div>
 					<% end %>
-					
+
+          <% accepted_students = Applic.where(:job_id=>job.id, :status=>"accepted").map{|i| i.user.name} %>
+          <div>
+          Accepted Students:
+            <% if accepted_students.empty? %>
+              (none)
+            <% else %>
+              <%= accepted_students.to_s.slice(1,accepted_students.to_s.length-2).delete("\"") %>
+            <% end %>
+          </div>
 					
 					<% if controller.controller_name != 'dashboard' %>
 					    <div class="job_desc">

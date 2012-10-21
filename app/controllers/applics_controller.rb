@@ -147,6 +147,16 @@ class ApplicsController < ApplicationController
     end
   end
 
+  def accept
+    applic = Applic.find_by_id(params[:applic_id])
+    if !applic.nil?
+      applic.status = "accepted"
+      applic.save
+      flash[:notice] = "Applicant %s was accepted" % applic.user.name
+    end
+    redirect_to('/applications/%s' % applic.id)
+  end
+
   def index
     flash[:notice] = "Application listing not implemented yet."
     redirect_to job_path(@job)
