@@ -5,7 +5,6 @@ class UserSessionsController < ApplicationController
 
   def new
     #if login_user!(User.find_by_login(session[:cas_user]))
-    p auth_hash
     if login_user!(User.find_by_login(auth_hash[:uid]))
       redirect_to request.referer || home_path
     elsif !first_login
