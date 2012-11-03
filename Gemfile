@@ -21,6 +21,8 @@ gem 'net-ldap', :require => 'net/ldap'
 gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
 gem 'jquery-rails', '>= 1.0.12'
+gem 'omniauth'
+gem 'omniauth-cas'
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -45,6 +47,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'simplecov'
 end
 
 

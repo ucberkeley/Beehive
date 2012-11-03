@@ -49,3 +49,14 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:cas] = OmniAuth::AuthHash.new({
+  :provider => 'cas',
+  :uid => '764489'
+})
+=begin
+OmniAuth.config.add_mock(:cas, {
+  :uid => '764489'
+}
+=end

@@ -10,3 +10,7 @@ When /^I log out$/ do
   end
   visit "/"
 end
+
+Given /^I am signed in with provider "([^"]*)"$/ do |provider|
+  visit "/auth/#{provider.downcase}"
+end
