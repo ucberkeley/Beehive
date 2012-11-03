@@ -180,6 +180,15 @@
       <% end %>
     </td>
   </tr>
+
+  <tr>
+    <td class="job_attr_title">
+      Listing Status:
+    </td>
+    <td class="job_attr_value">
+      <%= Job::Status::All.key(@job.status) %>
+    </td>
+  </tr>
 </tbody></table>
 
 

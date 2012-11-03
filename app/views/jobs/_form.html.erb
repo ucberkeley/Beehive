@@ -124,6 +124,12 @@ confirm the listing before it is displayed on ResearchMatch.
             <%= label_tag(:is_closed, "No") %>
         </td>
     </tr>
+    <tr>
+        <td class="job_clear_table_label"><%= f.label :status, 'Listing Status' %></td>
+        <td class="job_clear_table_field">
+                <%= f.select :status, options_for_select( Job::Status::All, @job.status ) %>
+        </td>
+    </tr>
 	  <tr>
 		<td class="job_clear_table_label"></td>
 		<td class="job_clear_table_field"><br />

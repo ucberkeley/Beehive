@@ -15,19 +15,19 @@ Feature: A faculty user should be able to mark a listing is either "open", "fill
 		And I fill in "Listing description" with "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
 		
 	Scenario: Mark listing as "Open"
-		When I select "Open" from "listing_status"
+		When I select "Open" from "job_status"
 		And I press "Post"
 		Then I should see "Thank your for submitting a listing."
-		And I should see "Listing Status:Open"
-	
+		Then I should see "Open" after "Listing Status:"
+
 	Scenario: Mark listing as "Filled"
-		When I select "Filled" from "listing_status"
+		When I select "Filled" from "job_status"
 		And I press "Post"
 		Then I should see "Thank your for submitting a listing."
-		And I should see "Listing Status:Filled"
+		Then I should see "Filled" after "Listing Status:"
 	
 	Scenario: Mark listing as "Inactive"
-		When I select "Inactive" from "listing_status"
+		When I select "Inactive" from "job_status"
 		And I press "Post"
 		Then I should see "Thank your for submitting a listing."
-		And I should see "Listing Status:Inactive"
+		Then I should see "Inactive" after "Listing Status:"

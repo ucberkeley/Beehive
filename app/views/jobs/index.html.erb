@@ -21,6 +21,12 @@
             "Credit"     => Job::Compensation::Credit,
             "Pay or credit" => Job::Compensation::Both
             }, @compensation) %>
+    <%= label_tag :post_status, "Status" %>
+    <%= select_tag :post_status,
+          options_for_select({
+            "Open" => Job::Status::Open,
+            "Filled" => Job::Status::Filled
+            }, @post_status) %>
     <%= submit_tag "Search" %>
     <br />
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick => "#{visual_effect(:toggle_slide, 'advanced_search')} (as=document.getElementById('as')).value = 1-Number(as.value); return false;" %>

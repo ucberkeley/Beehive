@@ -42,6 +42,7 @@ class JobsController < ApplicationController
     end
 
     # dept. 0 => all
+    h[:post_status]     = params[:post_status]     if params[:post_status]
     h[:department] = params[:department] if params[:department].to_i > 0
     h[:faculty]    = params[:faculty]    if params[:faculty].to_i    > 0
     h
@@ -61,6 +62,7 @@ class JobsController < ApplicationController
     query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
+    query_parms[:post_status  ] = params[:post_status] || 0
 
     # will_paginate
     query_parms[:page         ] = params[:page]     || 1
@@ -73,6 +75,7 @@ class JobsController < ApplicationController
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
     @compensation  = params[:compensation]
+    @post_status   = params[:post_status]
 
     respond_to do |format|
             format.html { render :action => :index }
