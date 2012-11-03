@@ -18,8 +18,9 @@ class Job < ActiveRecord::Base
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
-  #   compensation        : integer 
   #   open                : boolean 
+  #   compensation        : integer 
+  #   status              : integer 
   # =======================
 
   include AttribsHelper
@@ -35,6 +36,18 @@ class Job < ActiveRecord::Base
       'Pay'    => Pay,
       'Credit' => Credit,
       'Pay and Credit'   => Both
+    }
+  end
+
+  module Status
+    Open = 0
+    Filled = 1
+    Inactive = 2
+
+    All = {
+      'Open' => Open,
+      'Filled' => Filled,
+      'Inactive' => Inactive
     }
   end
 
@@ -199,6 +212,10 @@ class Job < ActiveRecord::Base
       compensations << Compensation::Credit if (options[:compensation].to_i & Compensation::Credit) != 0
       compensations << Compensation::Both unless compensations.empty?
       relation = relation.where(tables['jobs'][:compensation].in_any(compensations))
+    end
+    if options[:post_status].present?
+      statuses = [options[:post_status]]
+      relation = relation.where(tables['jobs'][:status].in_any(statuses))
     end
     relation = relation.where(tables['jobs'][:active].eq(true)) unless options[:include_inactive]
     relation = relation.where(tables['tags'][:name].matches(options[:tags])) if options[:tags].present?

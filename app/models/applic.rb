@@ -9,6 +9,7 @@ class Applic < ActiveRecord::Base
   #   message       : text 
   #   resume_id     : integer 
   #   transcript_id : integer 
+  #   status        : string 
   # =======================
 
   belongs_to :job
