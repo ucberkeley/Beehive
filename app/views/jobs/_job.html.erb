@@ -20,7 +20,7 @@
 					  
             <% if job.applicants.include?(@current_user) %>
                 [applied!]
-            <% elsif job.user != @current_user %>
+            <% elsif job.user != @current_user and job.status == 0%>
                 <%= link_to "[apply for this job]", new_job_applic_path(job.id) %>
             <% end %>
                           
