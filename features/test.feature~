@@ -1,7 +1,0 @@
-Feature: blah
-
-Scenario: Log in
-  Given I am logged in as "winstonlee"
-  And I go to the home page
-  And I follow "Dashboard"
-  Then I should see "Your Watched Postings"
