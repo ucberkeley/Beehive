@@ -1,24 +1,24 @@
 class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
-  
+
   include CASControllerIncludes
   include AttribsHelper
-  
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name, 
-		:auto_complete_for_course_name, :auto_complete_for_proglang_name]
+
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_category_name,
+    :auto_complete_for_course_name, :auto_complete_for_proglang_name]
   auto_complete_for :category, :name
   auto_complete_for :course, :name
   auto_complete_for :proglang, :name
-  
+
   #CalNet / CAS Authentication
-  before_filter CASClient::Frameworks::Rails::Filter
-  #before_filter :goto_cas_unless_logged_in
-    
+  #before_filter CASClient::Frameworks::Rails::Filter
+  before_filter :goto_home_unless_logged_in
+
   # Ensures that only logged-in users can create, edit, or delete jobs
   before_filter :rm_login_required #, :except => [ :index, :show ]
-  
-  # Ensures that only the user who created a job -- and no other users -- can edit 
+
+  # Ensures that only the user who created a job -- and no other users -- can edit
   # or destroy it.
   before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :resend_activation_email,
@@ -35,7 +35,7 @@ class JobsController < ApplicationController
     h = {}
     # booleans
     h[:include_ended] = params[:include_ended] if ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended]) #unless params[param].nil?
-    
+
     # strings, directly copy attribs
     [:query, :tags, :page, :per_page, :as, :compensation].each do |param|
       h[param] = params[param] unless params[param].blank?
@@ -49,7 +49,7 @@ class JobsController < ApplicationController
   end
 
   public
-  
+
   def index #list
     # strip out some weird args
     # may cause double-request but that's okay
@@ -70,7 +70,7 @@ class JobsController < ApplicationController
 
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
-    
+
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
@@ -82,7 +82,7 @@ class JobsController < ApplicationController
             format.xml { render :xml => @jobs }
     end
   end
-    
+
   # GET /jobs/1
   # GET /jobs/1.xml
   def show
@@ -110,12 +110,12 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @job.mend
-    
+
     respond_to do |format|
         format.html
         format.xml
     end
-    
+
   end
 
   def resend_activation_email
@@ -133,7 +133,7 @@ class JobsController < ApplicationController
   # POST /jobs.xml
   def create
     params[:job][:user] = @current_user
-            
+
     process_form_params
 
     params[:job][:active] = false
@@ -144,7 +144,7 @@ class JobsController < ApplicationController
     @job.update_attribs(params)
     @job.num_positions ||= 0
     @job.populate_tag_list
-    
+
     respond_to do |format|
       if @job.valid_without_sponsorships? and sponsor
         @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
@@ -160,7 +160,7 @@ class JobsController < ApplicationController
           flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
           flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
         end
-        flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'        
+        flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
@@ -173,18 +173,18 @@ class JobsController < ApplicationController
 
   # PUT /jobs/1
   # PUT /jobs/1.xml
-  def update	
+  def update
     process_form_params
 
     @job = Job.find(params[:id])
     changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
-    @job.update_attribs(params)      
+    @job.update_attribs(params)
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
 
         @job.populate_tag_list
-        
+
         # If the faculty sponsor changed, require activation again.
         # (require the faculty to confirm again)
         if changed_sponsors
@@ -222,7 +222,7 @@ class JobsController < ApplicationController
   # The actual deletion is performed by the "destroy" action.
   def delete
     @job = Job.find(params[:id])
-    
+
     respond_to do |format|
       format.html
       format.xml
@@ -241,7 +241,7 @@ class JobsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def activate
     # /jobs/activate/job_id?a=xxx
     @job = Job.find(:first, :conditions => {
@@ -268,52 +268,52 @@ class JobsController < ApplicationController
     redirect_to @job
 
   end
-  
+
   def job_read_more
-	  job = Job.find(params[:id])
-  	render :text=> job.desc
-  end
-  
-  def job_read_less
-	  job = Job.find(params[:id])
-  	desc = job.desc.first(100)
-  	desc = desc << "..." if job.desc.length > 100
-  	render :text=>  desc
+    job = Job.find(params[:id])
+    render :text=> job.desc
   end
 
-  def watch	
-	  job = Job.find(params[:id])
-  	watch = Watch.new({:user=> @current_user, :job => job})
-	
-  	respond_to do |format|
-  		if watch.save
-  		  flash[:notice] = 'Job is now watched. You can find a list of your watched jobs on the dashboard.'
-  		  format.html { redirect_to(job) } #:controller=>:dashboard) }
-  		else
-  		  flash[:notice] = 'Unsuccessful job watch. Perhaps you\'re already watching this job?'
-  		  format.html { redirect_to(job) }
-  		end
-  	end
+  def job_read_less
+    job = Job.find(params[:id])
+    desc = job.desc.first(100)
+    desc = desc << "..." if job.desc.length > 100
+    render :text=>  desc
   end
-  
- def unwatch	
+
+  def watch
+    job = Job.find(params[:id])
+    watch = Watch.new({:user=> @current_user, :job => job})
+
+    respond_to do |format|
+      if watch.save
+        flash[:notice] = 'Job is now watched. You can find a list of your watched jobs on the dashboard.'
+        format.html { redirect_to(job) } #:controller=>:dashboard) }
+      else
+        flash[:notice] = 'Unsuccessful job watch. Perhaps you\'re already watching this job?'
+        format.html { redirect_to(job) }
+      end
+    end
+  end
+
+ def unwatch
    job = Job.find(params[:id])
    watch = Watch.find(:first, :conditions=>{:user_id=> @current_user.id, :job_id => job.id})
 
    respond_to do |format|
-  	 if watch.destroy
-  	   flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
-  	   format.html { redirect_to(job) }
-  	 else
-  	   flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
-  	   format.html { redirect_to(job) }
-  	 end
+     if watch.destroy
+       flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
+       format.html { redirect_to(job) }
+     else
+       flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
+       format.html { redirect_to(job) }
+     end
    end
-	
+
   end
-  
-  
-  
+
+
+
   protected
   # Preprocesses form data for direct input to Job.update
   def process_form_params
@@ -345,19 +345,19 @@ class JobsController < ApplicationController
 ####################
 
   private
-	def correct_user_access
-		if (Job.find(params[:id]) == nil || @current_user != Job.find(params[:id]).user)
-			flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
-			redirect_to :controller => 'dashboard', :action => :index
-		end
-	end
-	
-	def check_post_permissions
-	    if not @current_user.can_post?
-	        flash[:error] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
-	        redirect_to :controller => 'dashboard', :action => :index
-	    end
-	end
+  def correct_user_access
+    if (Job.find(params[:id]) == nil || @current_user != Job.find(params[:id]).user)
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      redirect_to :controller => 'dashboard', :action => :index
+    end
+  end
+
+  def check_post_permissions
+      if not @current_user.can_post?
+          flash[:error] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
+          redirect_to :controller => 'dashboard', :action => :index
+      end
+  end
 
 
 end

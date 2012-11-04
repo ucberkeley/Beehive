@@ -1,0 +1,47 @@
+def find_or_create_user(user_params={})
+  user_params = user_params.merge default_user_options
+  if @user = User.find(:first, :conditions => ["email = ?", user_params[:email]])
+    log_in_user user_params.merge :email => user_params[:email]
+    return @user
+  end
+  @user_params ||= user_params
+  post "/users", :user => user_params, :course => {:name => ""}, :category => {:name => ""}, :proglang => {:name => ""}
+  @user = find_or_create_user(user_params)
+#@user=User.find(:first, :conditions => ["email = ?", user_params[:email]])
+end
+
+def log_in_user user_params=nil
+  @user_params ||= user_params
+  user_params  ||= @user_params
+  post "/session", user_params
+  @user = User.find_by_login(user_params['login'])
+  controller.current_user
+end
+
+def log_in_user! *args
+  log_in_user *args
+  response.should redirect_to('/')
+  follow_redirect!
+  response.should have_flash("notice", /Logged in successfully/)
+end
+
+def create_user(user_params={})
+  @user_params       ||= user_params
+  post "/users", :user => user_params
+  @user = User.find_by_login(user_params['login'])
+end
+
+def create_user!(user_type, user_params)
+  user_params['password_confirmation'] ||= user_params['password'] ||= user_params['password']
+  create_user user_params
+  response.should redirect_to('/')
+  follow_redirect!
+end
+
+Given /^I am logged in as "(.*)"$/ do |user|
+  find_or_create_user :student_name => user, :student_email => "#{user}@berkeley.edu"
+end
+
+def default_user_options
+  { :name => "joe", :email => "joe@berkeley.edu", :password => "abc123", :password_confirmation => "abc123", :is_faculty => false }
+end
