@@ -15,6 +15,7 @@ Feature: View hired students for a position
 		And I press "Post"
 		Then I should see "Thank your for submitting a listing."
 		When I log out
+		
 		Given I am logged in as "758752"
 		When I follow "Browse Listings"
 		Then I should see "titletitletitle"
@@ -24,6 +25,7 @@ Feature: View hired students for a position
 		And I press "Submit"
 		Then I should see "Application sent"
 		When I log out
+
 		Given I am signed in with provider "cas" as Fox
 		And I go to the home page
 		Then I should see "Logged in as Armando Fox"
