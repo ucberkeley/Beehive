@@ -6,6 +6,6 @@ Scenario: Log in and log out
   Then I should see "Logged in as Henry Kwan"
   When I log out
   Then I should see "Log In"
-  Given I am logged in as "758711"
+  Given I am logged in as "762062"
   Then I should not see "Logged in as Henry Kwan"
-  And I should see "Logged in as Winston C Lee"
+  And I should see "Logged in as Edward Chin"
