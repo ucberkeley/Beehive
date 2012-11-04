@@ -28,3 +28,10 @@ Given /^I am signed in with provider "([^"]*)" as Edward$/ do |provider|
   })
   visit "/auth/#{provider.downcase}"
 end
+
+Then /^I should see "(.*)" after "(.*)"$/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.content  is the entire content of the page as a string.
+  regexp = /#{e2}.*#{e1}/m
+  assert_match regexp, page.body
+end
