@@ -116,15 +116,6 @@ confirm the listing before it is displayed on ResearchMatch.
 		<td class="job_clear_table_field"><%= f.text_field :num_positions, {:size=> 5} %></td>
 	  </tr>
     <tr>
-        <td class="job_clear_table_label"><%= f.label :open, "Is this position currently open?" %></td>
-        <td class="job_clear_table_field">
-            <%= radio_button_tag :open, 'true', @job.open %>
-            <%= label_tag(:is_open, "Yes") %>
-            <%= radio_button_tag :open, 'false', !@job.open %>
-            <%= label_tag(:is_closed, "No") %>
-        </td>
-    </tr>
-    <tr>
         <td class="job_clear_table_label"><%= f.label :status, 'Listing Status' %></td>
         <td class="job_clear_table_field">
                 <%= f.select :status, options_for_select( Job::Status::All, @job.status ) %>

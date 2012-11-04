@@ -322,7 +322,7 @@ class JobsController < ApplicationController
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
 
-    params[:job][:open] = params[:open]
+    params[:job][:open] = [Job::Status::Open, Job::Status::Filled].include? params[:job][:status].to_i
 
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
