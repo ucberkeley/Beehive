@@ -62,7 +62,7 @@ class JobsController < ApplicationController
     query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
-    query_parms[:post_status  ] = params[:post_status] || 0
+    query_parms[:post_status  ] = params[:post_status] if params[:post_status].present? and params[:post_status]
 
     # will_paginate
     query_parms[:page         ] = params[:page]     || 1
