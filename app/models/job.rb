@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
-  #   open                : boolean    #legacy (use status)
+  #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
   # =======================

@@ -24,9 +24,9 @@
     <%= label_tag :post_status, "Status" %>
     <%= select_tag :post_status,
           options_for_select({
+            "All" => nil,
             "Open" => Job::Status::Open,
             "Filled" => Job::Status::Filled,
-            "All" => nil
             }, @post_status) %>
     <%= submit_tag "Search" %>
     <br />
