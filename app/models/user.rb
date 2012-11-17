@@ -51,9 +51,11 @@ class User < ActiveRecord::Base
   has_one  :picture
   has_one  :resume,      :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
   has_one  :transcript,  :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
-  
   has_many :reviews
-  has_many :applied_jobs,  :class_name => 'Job', :through => :applics
+  has_many :owns
+  has_many :applics
+  has_many :applied_jobs,  :through => :applics, :source => :job
+  has_many :owned_jobs,    :through => :owns, :source => :job
   has_many :watches,       :dependent => :destroy
   has_many :enrollments,   :dependent => :destroy
   has_many :courses,       :through => :enrollments

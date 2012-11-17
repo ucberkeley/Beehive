@@ -62,8 +62,11 @@ class Job < ActiveRecord::Base
   
   has_many :watches
   has_many :applics
+  has_many :owns
   #has_many :applicants, :class_name => 'User', :through => :applics
   has_many :applicants, :through => :applics, :source => :user
+  has_many :owners, :through => :owns, :source => :user
+
   has_many :users, :through => :watches
   has_many :sponsorships, :dependent => :destroy
   has_many :faculties, :through => :sponsorships
