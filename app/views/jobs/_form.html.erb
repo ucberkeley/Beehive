@@ -121,7 +121,35 @@ confirm the listing before it is displayed on ResearchMatch.
                 <%= f.select :status, options_for_select( Job::Status::All, @job.status ) %>
         </td>
     </tr>
-	  <tr>
+    <% if @current_owners.size > 0 %>
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :delete_owners, 'Delete Owners' %>
+        </td>
+        <td class="job_clear_table_field">
+            <%= select_tag :delete_owners,
+                '<option value="-1">Delete Current Owner</option>'.html_safe + options_from_collection_for_select(@current_owners,
+                    :id,
+                    :name
+                )
+             %>
+        </td>
+    </tr>
+    <% end %>
+    <tr>
+        <td class="job_clear_table_label">
+            <%= f.label :add_owners, 'Add Owners' %>
+        </td>
+        <td class="job_clear_table_field">
+            <%= select_tag :add_owners,
+                '<option value="-1">Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                    :id,
+                    :name
+                )
+             %>
+        </td>
+    </tr>
+	<tr>
 		<td class="job_clear_table_label"></td>
 		<td class="job_clear_table_field"><br />
 	    <% if ['new', 'create'].include?(controller.action_name.downcase) %>
@@ -130,6 +158,6 @@ confirm the listing before it is displayed on ResearchMatch.
               <%= f.submit('Update') %>
             <% end %>&nbsp;&nbsp;&nbsp;
       <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" /></td>
-	  </tr>
+	</tr>
   </table>
 <% end %>

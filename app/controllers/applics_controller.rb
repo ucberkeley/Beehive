@@ -51,14 +51,14 @@ class ApplicsController < ApplicationController
     return if redirected_because(a.nil?, "Couldn't find that application.",
       jobs_path)
     return if redirected_because( (a.user != @current_user) &&
-      !a.job.allow_admin_by?(@current_user),
+      !a.job.allow_admin_by?(@current_user) && !a.job.owners.include?(@current_user),
       "You are not authorized to view that application.", job_path(a.job))
   end
 
   def verify_job_ownership
     j = @job #Job.find(params[:job_id])
     return if redirected_because(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirected_because(! j.allow_admin_by?(@current_user),
+    return if redirected_because(! j.allow_admin_by?(@current_user) && !j.owners.include?(@current_user),
       "You are not authorized to view the applications for this job.",
       job_path(j))
   end

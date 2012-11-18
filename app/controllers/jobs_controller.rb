@@ -104,6 +104,11 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @job.num_positions = 0
+
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
+
   end
 
   # GET /jobs/1/edit
@@ -111,6 +116,9 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.mend
 
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
     respond_to do |format|
         format.html
         format.xml
@@ -180,9 +188,16 @@ class JobsController < ApplicationController
     changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
     @job.update_attribs(params)
 
+    p 'wafawefawefawefawe'
+    p params
     respond_to do |format|
       if @job.update_attributes(params[:job])
-
+        if params.has_key?(:delete_owners) and params[:delete_owners].to_i >= 0
+          @job.owners.delete(User.find(params[:delete_owners]))
+        end
+        if params.has_key?(:add_owners) and params[:add_owners].to_i >= 0
+          @job.owners << User.find(params[:add_owners])
+        end
         @job.populate_tag_list
 
         # If the faculty sponsor changed, require activation again.
@@ -346,7 +361,7 @@ class JobsController < ApplicationController
 
   private
   def correct_user_access
-    if (Job.find(params[:id]) == nil || @current_user != Job.find(params[:id]).user)
+    if (Job.find(params[:id]) == nil || (@current_user != Job.find(params[:id]).user and !Job.find(params[:id]).owners.include?(@current_user)))
       flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
       redirect_to :controller => 'dashboard', :action => :index
     end
