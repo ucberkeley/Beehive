@@ -121,7 +121,7 @@ confirm the listing before it is displayed on ResearchMatch.
                 <%= f.select :status, options_for_select( Job::Status::All, @job.status ) %>
         </td>
     </tr>
-    <% if @current_owners.size > 0 %>
+    <% if !@current_owners.nil? and @current_owners.size > 0 %>
     <tr>
         <td class="job_clear_table_label">
             <%= f.label :delete_owners, 'Delete Owners' %>
@@ -136,6 +136,7 @@ confirm the listing before it is displayed on ResearchMatch.
         </td>
     </tr>
     <% end %>
+    <% if !@current_owners.nil? %>
     <tr>
         <td class="job_clear_table_label">
             <%= f.label :add_owners, 'Add Owners' %>
@@ -149,6 +150,7 @@ confirm the listing before it is displayed on ResearchMatch.
              %>
         </td>
     </tr>
+    <% end %>
 	<tr>
 		<td class="job_clear_table_label"></td>
 		<td class="job_clear_table_field"><br />
