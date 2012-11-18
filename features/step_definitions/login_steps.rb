@@ -36,6 +36,13 @@ Given /^I am signed in with provider "([^"]*)" as Fox$/ do |provider|
   visit "/auth/#{provider.downcase}"
 end
 
+Given /^I am signed in with provider "([^"]*)" as Stoica$/ do |provider|
+  OmniAuth.config.add_mock(:cas, {
+    :uid => '174817'
+  })
+  visit "/auth/#{provider.downcase}"
+end
+
 Then /^I should see "(.*)" after "(.*)"$/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
