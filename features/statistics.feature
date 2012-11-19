@@ -14,6 +14,8 @@ Feature: A user should be able to see ResearchMatch statistics.
     When I fill in "Listing title" with "titletitletitle"
     And I select "Ras Bodik" from "faculty_id"
     And I fill in "Listing description" with "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
+    And I fill in "Required courses" with "CS61A, CS61B"
+    And I fill in "Desired programming language(s)" with "Python, Java"
     And I press "Post"
     Then I should see "Thank your for submitting a listing."
     And I follow "Statistics" 
@@ -41,3 +43,7 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I press "Accept this Applicant"
     And I follow "Statistics"
     Then I should see "Number of applications accepted this month 1"
+    And I should see "Most desired courses CS61A, CS61B"
+    And I should see "Most desired programming languages Python, Java"
+
+
