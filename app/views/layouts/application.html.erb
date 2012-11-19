@@ -62,7 +62,9 @@
 		        <% if @current_user.present? %>
     		        <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li> 
 		        <% end %>
-		        
+		        <% if @current_user.present? %>
+              <li><%= link_to "Statistics", statistics_path %></li>
+		        <% end %>
 		    </ul>
 		</div>
 	</div>
