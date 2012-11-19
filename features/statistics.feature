@@ -27,8 +27,7 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I press "Post"
     Then I should see "Thank your for submitting a listing."
     And I follow "Statistics" 
-    Then I should see "Number of applications accepted this month 0"
-    And I should see "Number of active jobs 2"
+    And I should not see "Number of active jobs 0"
     When I log out
     
     Given I am logged in as "758752"
@@ -50,7 +49,7 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I follow "Justin Vu Nguyen"
     And I press "Accept this Applicant"
     And I follow "Statistics"
-    Then I should see "Number of applications accepted this month 1"
+    Then I should not see "Number of applications accepted this month 0"
     And I should see "Most desired courses CS61B, CS61A"
     And I should see "Most desired programming languages Java, Python"
 
