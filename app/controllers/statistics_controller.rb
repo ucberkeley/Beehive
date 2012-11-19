@@ -16,8 +16,8 @@ class StatisticsController < ApplicationController
     @num_new_jobs_in_last_month = Job.where("created_at >= ?", DateTime.now - 1.month).count
     @num_new_jobs_this_month = Job.where("created_at >= ?", DateTime.now.beginning_of_month).count
 
-    @most_desired_courses = Coursereq.select('courses.name as cname, count(course_id) as total').joins(:course).group('course_id').order('total desc').limit(8).map {|x| x.cname}
-    @most_desired_proglangs = Proglangreq.select('proglangs.name as lname, count(proglang_id) as total').joins(:proglang).group('proglang_id').order('total desc').limit(8).map {|x| x.lname}
+    @most_desired_courses = Coursereq.select('courses.name as cname, count(course_id) as total').joins(:course).group('course_id', 'courses.name').order('total desc').limit(8).map {|x| x.cname}
+    @most_desired_proglangs = Proglangreq.select('proglangs.name as lname, count(proglang_id) as total').joins(:proglang).group('proglang_id', 'proglangs.name').order('total desc').limit(8).map {|x| x.lname}
 
   end
 end
