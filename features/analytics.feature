@@ -17,7 +17,7 @@ Feature: A faculty user should be able to see hiring analytics.
     And I fill in "Listing description" with "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
     And I press "Post"
     Then I should see "Thank your for submitting a listing."
-    And I follow Dashboard
+    And I follow "Statistics" 
     Then I should see "students hired this month: 0"
     And I should see "average duration per position: N/A"
     And I should see "reason for leaving: (completed N/A) (graduated N/A) (fired N/A) (other N/A)"
