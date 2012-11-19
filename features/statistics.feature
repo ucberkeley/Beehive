@@ -21,12 +21,15 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I follow "Statistics" 
     Then I should see "Number of applications accepted this month 0"
     And I should see "Number of active jobs 1"
+    And I should see "Number of new jobs within the last month 1"
+    And I should see "Total watches 0"
     When I log out
     
     Given I am logged in as "758752"
     When I follow "Browse Listings"
     Then I should see "titletitletitle"
     When I follow "titletitletitle"
+    And I follow "[watch]"
     And I follow "[apply for this job]"
     And I fill in "applic[message]" with "message"
     And I press "Submit"
@@ -45,5 +48,5 @@ Feature: A user should be able to see ResearchMatch statistics.
     Then I should see "Number of applications accepted this month 1"
     And I should see "Most desired courses CS61A, CS61B"
     And I should see "Most desired programming languages Python, Java"
-
+    And I should see "Total watches 1"
 
