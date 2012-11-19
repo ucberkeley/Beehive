@@ -18,10 +18,17 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I fill in "proglang_name" with "Python, Java"
     And I press "Post"
     Then I should see "Thank your for submitting a listing."
+    And I follow "Post a Listing"
+    When I fill in "Listing title" with "titletitletitle2"
+    And I select "Ras Bodik" from "faculty_id"
+    And I fill in "Listing description" with "2descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
+    And I fill in "course_name" with "CS61B"
+    And I fill in "proglang_name" with "Java"
+    And I press "Post"
+    Then I should see "Thank your for submitting a listing."
     And I follow "Statistics" 
     Then I should see "Number of applications accepted this month 0"
     And I should see "Number of active jobs 1"
-    And I should see "Number of new jobs within the last month 1"
     And I should see "Total watches 0"
     When I log out
     
@@ -46,7 +53,7 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I press "Accept this Applicant"
     And I follow "Statistics"
     Then I should see "Number of applications accepted this month 1"
-    And I should see "Most desired courses CS61A, CS61B"
-    And I should see "Most desired programming languages Python, Java"
+    And I should see "Most desired courses CS61B, CS61A"
+    And I should see "Most desired programming languages Java, Python"
     And I should see "Total watches 1"
 
