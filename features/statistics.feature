@@ -28,7 +28,7 @@ Feature: A user should be able to see ResearchMatch statistics.
     Then I should see "Thank your for submitting a listing."
     And I follow "Statistics" 
     Then I should see "Number of applications accepted this month 0"
-    And I should see "Number of active jobs 1"
+    And I should see "Number of active jobs 2"
     And I should see "Total watches 0"
     When I log out
     
