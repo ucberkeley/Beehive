@@ -30,72 +30,75 @@
   <% if c == 'users' %>
     <%= stylesheet_link_tag 'user' %>
   <% end %>
+  <% if c == 'statistics' %>
+    <%= stylesheet_link_tag 'statistic' %>
+  <% end %>
 
-</head> 
+</head>
 <body>
 
 <div id="everything">
-	<div id="header">
-		<div id="header_image">
-			<%= link_to "", home_path %>
-			
-			<div id="side">
-				<div id="loginbar">
-					<%= render :partial => "users/user_bar" %>
-				</div>
-				<div id="searchbar">
-					<%= render :partial => "users/search_bar" %>
-				</div>
-			</div>		
-		</div>
-	</div>
-	<div id="header_tabs">
-		<div id="tabs">
-		    <ul>
-		        <li><%= link_to "Dashboard", dashboard_path %></li>
-		        <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", jobs_path %></li>
-		        
-		        <% if @current_user.blank? || @current_user.present? && @current_user.user_type != User::Types::Undergrad %>
-  		        <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", new_job_path %></li>
-		        <% end %>
-		        
-		        <% if @current_user.present? %>
-    		        <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li> 
-		        <% end %>
-		        <% if @current_user.present? %>
+  <div id="header">
+    <div id="header_image">
+      <%= link_to "", home_path %>
+
+      <div id="side">
+        <div id="loginbar">
+          <%= render :partial => "users/user_bar" %>
+        </div>
+        <div id="searchbar">
+          <%= render :partial => "users/search_bar" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="header_tabs">
+    <div id="tabs">
+        <ul>
+            <li><%= link_to "Dashboard", dashboard_path %></li>
+            <li><%= image_tag "search_icon.png", :size => "16x16" %> <%= link_to "Browse Listings", jobs_path %></li>
+
+            <% if @current_user.blank? || @current_user.present? && @current_user.user_type != User::Types::Undergrad %>
+              <li><%= image_tag "plus_icon.png", :size => "16x16" %> <%= link_to "Post a Listing", new_job_path %></li>
+            <% end %>
+
+            <% if @current_user.present? %>
+                <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
+            <% end %>
+            <% if @current_user.present? %>
               <li><%= link_to "Statistics", statistics_path %></li>
-		        <% end %>
-		    </ul>
-		</div>
-	</div>
-	<div id="shadowdown"></div>
-	
-	<div id="content">
-		<% if !(flash[:error].nil? || flash[:error] == '') %>
-			<div id="flash_error">
-				<%= flash[:error] %>
-			</div>
-		<% end %>
-		<% if !(flash[:notice].nil? || flash[:notice] == '') %>
-			<div id="flash_notice">
-				<%= flash[:notice] %>
-			</div>
-		<% end %>
-		<br />
-		<div id="contentcenter">
-			<%= yield %>
-		</div>
-				
-	</div>
-    
+            <% end %>
+        </ul>
+    </div>
+  </div>
+  <div id="shadowdown"></div>
+
+  <div id="content">
+    <% if !(flash[:error].nil? || flash[:error] == '') %>
+      <div id="flash_error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    <% if !(flash[:notice].nil? || flash[:notice] == '') %>
+      <div id="flash_notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <br />
+    <div id="contentcenter">
+      <%= yield %>
+    </div>
+
+  </div>
+
     <div id="footer">
-		<div id="footer_inside">
+    <div id="footer_inside">
             <i>ResearchMatch is currently under regular development. <i><%= link_to "Got feedback?", contact_us_path %></i>
             <br /><br />
             &copy; UC Berkeley ResearchMatch, 2009-<%= Time.now.year %>. All rights reserved.
             <br />
         </div>
-	</div>
+  </div>
 </div>
 </body>
 </html>

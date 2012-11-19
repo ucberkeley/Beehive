@@ -1,82 +1,73 @@
 <h1>Statistics</h1>
 
-<table>
+<table class="statistics-table">
   <tr>
     <td><h2>Users</h2></td>
   </tr>
   <tr>
     <td>Total users</td>
-    <td><%= @total_users %></td>
+    <td class="stat_value"><%= @total_users %></td>
   </tr>
   <tr>
     <td>Active users this month</td>
-    <td><%= @num_active_users_this_month %></td>
+    <td class="stat_value"><%= @num_active_users_this_month %></td>
   </tr>
   <tr>
     <td>Active users within the last month</td>
-    <td><%= @num_active_users_in_last_month %></td>
+    <td class="stat_value"><%= @num_active_users_in_last_month %></td>
   </tr>
 </table>
 
-<br>
-<br>
-
-<table>
+<table class="statistics-table">
   <tr>
     <td><h2>Applications</h2></td>
   </tr>
   <tr>
     <td>Number of applications this month</td>
-    <td><%= @num_applics_this_month %></td>
+    <td class="stat_value"><%= @num_applics_this_month %></td>
   </tr>
   <tr>
     <td>Number of applications within the last month</td>
-    <td><%= @num_applics_in_last_month %></td>
+    <td class="stat_value"><%= @num_applics_in_last_month %></td>
   </tr>
   <tr>
     <td>Number of applications accepted this month</td>
-    <td><%= @num_applics_accepted_this_month %></td>
+    <td class="stat_value"><%= @num_applics_accepted_this_month %></td>
   </tr>
 </table>
 
-<br>
-<br>
-
-<table>
+<table class="statistics-table">
   <tr>
     <td><h2>Jobs</h2></td>
   </tr>
   <tr>
     <td>Number of active jobs</td>
-    <td><%= @total_active_jobs %></td>
+    <td class="stat_value"><%= @total_active_jobs %></td>
   </tr>
   <tr>
     <td>Total watches</td>
-    <td><%= @num_jobs_watched %></td>
+    <td class="stat_value"><%= @num_jobs_watched %></td>
   </tr>
   <tr>
     <td>Number of new jobs within the last month</td>
-    <td><%= @num_new_jobs_in_last_month %></td>
+    <td class="stat_value"><%= @num_new_jobs_in_last_month %></td>
   </tr>
   <tr>
     <td>Number of new jobs this month</td>
-    <td><%= @num_new_jobs_this_month %></td>
+    <td class="stat_value"><%= @num_new_jobs_this_month %></td>
   </tr>
 </table>
 
-<br>
-<br>
-
-<table>
+<table class="statistics-table">
   <tr>
     <td><h2>Miscellaneous</h2></td>
   </tr>
   <tr>
     <td>Most desired courses</td>
-    <td><%= @most_desired_courses.join(', ') %></td>
+    <td class="stat_value"><%= @most_desired_courses.join(', ') %></td>
   </tr>
   <tr>
     <td>Most desired programming languages</td>
-    <td><%= @most_desired_proglangs.join(', ') %></td>
+    <td class="stat_value"><%= @most_desired_proglangs.join(', ') %></td>
   </tr>
 </table>
