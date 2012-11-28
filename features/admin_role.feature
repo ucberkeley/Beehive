@@ -1,10 +1,8 @@
-Feature: A faculty user should be able to add owners to a listing.
+Feature: A user should have an administrator role with admin privileges
 
-  As a faculty user
-  So that I can allocate listing management to grad students / other faculty
-  I want to be able to add owners to a listing with permissions equal to mine (added
-  owners can accept applicants and edit the listing following the same steps as the
-  original owner)
+  As an admin
+  So that I can belong to a group distinct from the existing groups, but have privileges to perform administrative tasks.
+  I want to be able to make any changes to listings as if I were an owner and to update roles of existing users (one user at a time) overwriting the roles provided by the default authorization system.
 
   Scenario: Admin should be able to edit someone else's posting.
     Given I am signed in with provider "cas" as Fox
@@ -38,7 +36,7 @@ Feature: A faculty user should be able to add owners to a listing.
     Given I am signed in as a admin
     When I follow "Admin"
     And I select "Justin Vu Nguyen - Student" from "user_role"
-    And I select "Professor" from "user_role_new"
+    And I select "Faculty" from "user_role_new"
     And I press "Update"
     Then I should see "User role successfully updated."
     When I log out
