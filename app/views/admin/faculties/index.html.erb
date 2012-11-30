@@ -1,26 +1,4 @@
-<table id="faculties">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Department</th>
-    <th>Actions</th>
-  </tr>
-
-<%- @faculties.each do |faculty| -%>
-  <%= form_for faculty, :url => admin_faculties_update_path(faculty.id) do |f| -%>
-  <tr>
-    <td><%= f.text_field :name %></td>
-    <td><%= f.text_field :email %></td>
-    <td><%= f.collection_select :department_id, Department.all, :id, :name %></td>
-    <td>
-      <%= f.submit 'Update' %>
-      <%= link_to 'Delete', admin_faculties_destroy_path(faculty.id), :confirm => "Are you sure you want to delete #{faculty.name}?", :method => :delete %>
-    </td>
-  </tr>
-  <%- end # form_for -%>
-<%- end # @faculties.each -%>
-
-</table>
+<h1>Create and Edit Faculty</h1>
 
 <div id="new-faculty">
   <h1>Add faculty</h1>
@@ -42,3 +20,29 @@
     </div>
   <%- end -%>
 </div>
+
+
+<table id="faculties">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>Actions</th>
+  </tr>
+<%- @faculties.each do |faculty| -%>
+  <%= form_for faculty, :url => admin_faculties_update_path(faculty.id) do |f| -%>
+  <tr>
+    <td><%= f.text_field :name %></td>
+    <td><%= f.text_field :email %></td>
+    <td><%= f.collection_select :department_id, Department.all, :id, :name %></td>
+    <td>
+      <%= f.submit 'Update' %>
+      <%= link_to 'Delete', admin_faculties_destroy_path(faculty.id), :confirm => "Are you sure you want to delete #{faculty.name}?", :method => :delete %>
+    </td>
+  </tr>
+  <%- end # form_for -%>
+<%- end # @faculties.each -%>
+
+</table>
+
+

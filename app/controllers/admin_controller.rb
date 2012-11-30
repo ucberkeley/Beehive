@@ -8,4 +8,8 @@ private
     end
   end
 
+  def index
+
+  end
+
 end
