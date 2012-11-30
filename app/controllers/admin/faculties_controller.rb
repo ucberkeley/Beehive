@@ -9,17 +9,6 @@ class Admin::FacultiesController < AdminController
   end
 
   def index
-    p 'XXXXXXXXXXXXXXX'
-    p 'XXXXXXXXXXXXXXX'
-
-    p 'XXXXXXXXXXXXXXX'
-
-    p 'XXXXXXXXXXXXXXX'
-
-    p 'XXXXXXXXXXXXXXX'
-
-    p 'XXXXXXXXXXXXXXX'
-    
     @faculties = Faculty.all
   end
 

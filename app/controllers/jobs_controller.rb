@@ -362,7 +362,7 @@ class JobsController < ApplicationController
 
   private
   def correct_user_access
-    if (Job.find(params[:id]) == nil || (@current_user != Job.find(params[:id]).user and !Job.find(params[:id]).owners.include?(@current_user)))
+    if (Job.find(params[:id]) == nil || (@current_user.user_type != User::Type::Admin and @current_user != Job.find(params[:id]).user and !Job.find(params[:id]).owners.include?(@current_user)))
       flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
       redirect_to :controller => 'dashboard', :action => :index
     end

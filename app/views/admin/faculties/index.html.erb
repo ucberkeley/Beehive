@@ -21,7 +21,6 @@
   <%- end -%>
 </div>
 
-
 <table id="faculties">
   <tr>
     <th>Name</th>
@@ -29,6 +28,7 @@
     <th>Department</th>
     <th>Actions</th>
   </tr>
+
 <%- @faculties.each do |faculty| -%>
   <%= form_for faculty, :url => admin_faculties_update_path(faculty.id) do |f| -%>
   <tr>
