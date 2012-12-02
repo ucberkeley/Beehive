@@ -68,7 +68,7 @@
             <% if @current_user.present? %>
               <li><%= link_to "Statistics", statistics_path %></li>
             <% end %>
-            <% if @current_user.present? && @current_user.user_type == User::Types::Admin %>
+            <% if @current_user.present? && @current_user.admin? %>
               <li><%= link_to "Admin", admin_path %></li>
             <% end %>
         </ul>

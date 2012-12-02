@@ -16,7 +16,8 @@ Feature: A user should have an administrator role with admin privileges
     Then I should see "Thank your for submitting a listing."
     When I log out
 
-    Given I am signed in as a admin
+    Given I am signed in with provider "cas" as Justina
+    When I set "1005472" as admin
     When I follow "Browse Listings"
     Then I should see "titletitletitle"
     When I follow "titletitletitle"
@@ -33,12 +34,14 @@ Feature: A user should have an administrator role with admin privileges
   Scenario: Admin should be able to change a user's role.
     Given I am signed in with provider "cas" as Justin
     When I log out
-    Given I am signed in as a admin
+    Given I am signed in with provider "cas" as Justina
+    When I set "1005472" as admin
+    When I follow "Dashboard"
     When I follow "Admin"
-    And I select "Justin Vu Nguyen - Student" from "user_role"
+    And I select "Justin Vu Nguyen - Undergrad" from "user_role"
     And I select "Faculty" from "user_role_new"
     And I press "Update"
-    Then I should see "User role successfully updated."
+    Then I should see "User Justin Vu Nguyen successfully set as Faculty."
     When I log out
 
     Given I am signed in with provider "cas" as Justin

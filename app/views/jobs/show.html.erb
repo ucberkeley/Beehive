@@ -1,11 +1,5 @@
 <% content_for :title, @job.title %>
 
-<%- if logged_in_as_admin? -%>
-<div class="admin">
-  <p>Activation url: <%= link_to activation_url(@job), activation_url(@job) %></p>
-</div>
-<%- end -%>
-
 <div id="job_show_main">
 <br />
 <h2>
@@ -15,7 +9,7 @@
 <p>
   posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
 	<b>
-	<% if @current_user.present? && (@job.user_id == @current_user.id || @job.owners.include?(@current_user)) %>
+	<% if @current_user.present? && (@job.user_id == @current_user.id || @job.owners.include?(@current_user) || @current_user.admin?) %>
     <% if ! @job.active %>
       <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
       'confirmation email? This will contact the faculty sponsors for this listing ' +
