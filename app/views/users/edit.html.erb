@@ -44,6 +44,10 @@
             <% if utype.present? && utype >= User::Types::Faculty %>
               <li>Receive applications via email</li>
             <% end # faculty %>
+            <% if utype.present? && utype >= User::Types::Admin %>
+              <li>Change user roles</li>
+              <li>Upload a csv of authorized users</li>
+            <% end # admin %>
             </ul>
           </p>
         </div> <%# Right col %>
