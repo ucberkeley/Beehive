@@ -57,7 +57,7 @@
 
 <br />
 
-<% if ! @user.is_faculty %>
+<% if ! @user.is_faculty and !@user.admin? %>
 <!-- courses / interests / proglangs. part of the user form. -->
 <div class="dashboard_container">
   <div class="dashboard_wrapper_medium">
@@ -91,7 +91,7 @@
 <br />
 
 <%# TODO CSS this up %>
-<%- unless @current_user.is_faculty? -%>
+<%- unless @current_user.is_faculty? or @user.admin? -%>
 <div class="dashboard_container"><div class="wrapper_medium"><div class="dashboard_container_medium box_shadow">
   <h2>At a Glance</h2>
 
@@ -139,7 +139,7 @@
 <br/>
 <%- end -%>
 
-<% unless @user.is_faculty? %>
+<% unless @user.is_faculty? or @user.admin? %>
 <div class="dashboard_container"><div class="dashboard_wrapper_medium"><div class="dashboard_container_medium box_shadow">
   <h2>Attachments</h2>
 
