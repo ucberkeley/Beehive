@@ -39,6 +39,7 @@
                 .appendTo( wrapper )
                 .val( value )
                 .attr( "title", "" )
+	        .attr( "placeholder", "Enter an owner")
                 .addClass( "ui-state-default ui-combobox-input" )
                 .autocomplete({
                     delay: 0,
