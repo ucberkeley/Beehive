@@ -269,6 +269,8 @@ class User < ActiveRecord::Base
     when User::Types::Undergrad
       s = 'Undergrad'
       s += 'uate' if options[:long]
+    when User::Types::Admin
+      s = 'Administrator'
     else
       s = '(undefined)'
       logger.warn "Couldn't find user type string for user type #{self.user_type}"

@@ -7,6 +7,12 @@ Given /^I am logged in as "(.*)"$/ do |user|
   visit "/auth/cas"
 end
 
+When /^I set "(.*)" as admin$/ do |user|
+  t = User.find_by_login(user)
+  t.user_type = 3
+  t.save!
+end
+
 When /^I log out$/ do
   begin
     visit "/logout"

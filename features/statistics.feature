@@ -50,6 +50,6 @@ Feature: A user should be able to see ResearchMatch statistics.
     And I press "Accept this Applicant"
     And I follow "Statistics"
     Then I should not see "Number of applications accepted this month 0"
-    And I should see "Most desired courses CS61B, CS61A"
-    And I should see "Most desired programming languages Java, Python"
+    And I should see "CS61A, CS61B, CS169" after "Most desired courses"
+    And I should see "Python, Java, Ruby" after "Most desired programming languages"
 

@@ -1,0 +1,11 @@
+<h1>Admin Panel</h1>
+<div class="admin">  
+  <h2>Modify User Role</h2>
+  <%= form_tag(admin_path, :method => "get") do %>
+    <%= label_tag :user_role, "User" %>
+    <%= select_tag :user_role, options_for_select([["Select User", nil]] + @non_admins) %>
+    <%= label_tag :user_role_new, "Role" %>
+    <%= select_tag :user_role_new, options_for_select([["Select Role", nil]] + @roles) %>
+    <%= submit_tag "Update" %>
+  <% end %>
+</div>
