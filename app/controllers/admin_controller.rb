@@ -5,21 +5,21 @@ class AdminController < ApplicationController
     roles = {User::Types::Undergrad => 'Undergrad', User::Types::Grad => 'Grad Student', User::Types::Faculty => 'Faculty', User::Types::Admin => 'Admin'}
     if params.has_key?('user_role') and params.has_key?('user_role_new')
       form_error = false
-      error_msg = "Oops! The following errors prevented the selected user from being updated!"
+      error_msg = ["Oops! The following errors prevented the selected user from being updated!"]
       if params['user_role'] == ""
         form_error = true
-        error_msg += "\n1) No user selected."
+        error_msg  << "1) No user selected."
       end
       if params['user_role_new'] == ""
         if form_error
-          error_msg += "\n2) No role selected."
+          error_msg << "2) No role selected."
         else
-          error_msg += "\n1) No role selected."
+          error_msg << "1) No role selected."
           form_error = true
         end
       end
       if form_error
-        flash[:error] = error_msg
+        flash[:error] = error_msg.join("<br/>").html_safe
       else
         u = User.find_by_login(params['user_role'])
         u.user_type = params['user_role_new'].to_i

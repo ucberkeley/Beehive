@@ -128,7 +128,7 @@ confirm the listing before it is displayed on ResearchMatch.
         </td>
         <td class="job_clear_table_field">
             <%= select_tag :delete_owners,
-                '<option value="-1">Delete Current Owner</option>'.html_safe + options_from_collection_for_select(@current_owners,
+                '<option value="-1">Select Owner</option>'.html_safe + options_from_collection_for_select(@current_owners,
                     :id,
                     :name
                 )
