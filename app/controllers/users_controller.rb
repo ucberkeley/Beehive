@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # and redirect to the edit profile page.
   def new
       # Make sure user isn't already signed up
-      if User.exists?(:login => session[:cas_user]) then
+      if User.exists?(:id => session[:user_id]) then
         flash[:warning] = "You're already signed up."
         redirect_to dashboard_path
         return

@@ -138,7 +138,7 @@ module CASControllerIncludes
     redirect_to login_path and return false
   end
 
-  def first_login
+  def first_login(auth_field, auth_value)
   # Processes a user's first login, which involves creating a new User.
   # Requires a CAS session to be present, and redirects if it isn't.
   # @returns false if redirected because of new user processing, true if user was already signed up
@@ -154,20 +154,27 @@ module CASControllerIncludes
     # so as to ensure that redirects work properly; i.e.
     # so that you are 'logged in' when you go to the Edit Profile
     # page in this next section here.
-    unless User.exists?(:login => session[:cas_user].to_s)
-      new_user = User.new
-      new_user.login = session[:cas_user].to_s
-      person = new_user.ldap_person
-      new_user.email = person.email
-      new_user.name = new_user.ldap_person_full_name
-      new_user.update_user_type
 
-      if new_user.save && new_user.errors.empty? then
+    unless User.exists?(auth_field => auth_value)
+      new_user = User.new
+      new_user[auth_field] = auth_value
+
+      # Implement separate auth provider logic here
+      if session[:auth_hash][:provider] == :cas
+        # When using CAS, the Users table is populated from LDAP
+        person = new_user.ldap_person
+        new_user.email = person.email
+        new_user.name = new_user.ldap_person_full_name
+        new_user.update_user_type
+      end
+
+      if new_user.save && new_user.errors.empty?
         flash[:notice] = "Welcome to ResearchMatch! Since this is your first time here, "
         flash[:notice] << "please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
         logger.info "First login for #{new_user.login}"
 
-        @current_user = User.authenticate_by_login(session[:cas_user].to_s)
+        @current_user = User.where(auth_field => auth_value)[0]
+        session[:user_id] = @current_user.id
         redirect_to edit_user_path(@current_user.id)
         return false
       else
@@ -183,11 +190,11 @@ module CASControllerIncludes
   end
 
   # Redirects to signup page if user hasn't registered.
-  # Filter fails if no CAS session is present, or if user was redirected to
+  # Filter fails if no auth hash is present, or if user was redirected to
   # signup page.
-  # Filter passes if CAS session is present, and a user exists.
+  # Filter passes if auth hash is present, and a user exists.
   def require_signed_up
-    return true if session[:cas_user].present? and User.exists?(:login => session[:cas_user])
+    return true if session[:auth_hash].present? and User.exists?(:id => session[:user_id])
 
     redirect_to :controller => :users, :action => :new
     return false

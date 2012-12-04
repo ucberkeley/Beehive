@@ -5,3 +5,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   #provider :developer unless Rails.env.production?
 end
+
+ResearchMatch::Application.config.auth_providers = { :cas => {:auth_field => :login, :auth_value => :uid} }

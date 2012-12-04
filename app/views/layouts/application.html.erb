@@ -25,13 +25,20 @@
     <%= javascript_include_tag "autocomplete_setup.js" %>
   <% end %>
   <% if c == 'jobs' or c == 'dashboard' %>
+    <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
     <%= stylesheet_link_tag 'job' %>
+    <%= javascript_include_tag "autocomplete_owners.js" %>
   <% end %>
   <% if c == 'users' %>
     <%= stylesheet_link_tag 'user' %>
   <% end %>
   <% if c == 'statistics' %>
     <%= stylesheet_link_tag 'statistic' %>
+  <% end %>
+  <% if c == 'admin' %>
+    <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
+    <%= stylesheet_link_tag 'job' %>
+    <%= javascript_include_tag "autocomplete_admin.js" %>
   <% end %>
 
 </head>
