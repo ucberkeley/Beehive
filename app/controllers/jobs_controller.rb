@@ -196,7 +196,7 @@ class JobsController < ApplicationController
         if params.has_key?(:delete_owners) and params[:delete_owners].to_i >= 0
           @job.owners.delete(User.find(params[:delete_owners]))
         end
-        if params.has_key?(:add_owners) and params[:add_owners].to_i >= 0
+        if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
           @job.owners << User.find(params[:add_owners])
         end
         @job.populate_tag_list
