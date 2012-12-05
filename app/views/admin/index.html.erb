@@ -12,8 +12,9 @@
   <% end %>
   <br/>
   <h2>Upload User CSV</h2>
-  Upload a CSV to update authorized users (identified by email).<br/>
-  The CSV should have the following columns: name, email, user role. The header row must be: "name,email,user_role".<br/>
+  Upload a CSV to update and create authorized users (identified by email).<br/>
+  The CSV should have (at minimum) the following columns: name, email, user role. In this case, the header row must be: "name,email,user_role".<br/>
+  For creating new users, you will also need to supply a login identifier (e.g. LDAP uses uid). In this case, another column "login_id" will also be needed, and the header row must be: "name,email,user_role,login_id".<br/>
   User role 0 corresponds to an undergraduate student, 1 to a graduate student, 2 to a faculty member, 3 to an admin.<br/><br/>
   <%= form_tag(admin_upload_path, :multipart => true) do %>
     <%= file_field_tag 'user_csv', :accept => 'text/csv' %>

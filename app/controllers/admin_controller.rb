@@ -68,13 +68,24 @@ class AdminController < ApplicationController
     for i in 0..1 do
       CSV.foreach(csv_file_handle, {:headers => true, :header_converters => :symbol}) do |row|
         row_hash = row.to_hash
+        p row_hash
         user = User.find_by_email(row_hash[:email])
         if user.nil?
           user = User.new
+          if !row_hash[:login_id].nil?
+            user.name = row_hash[:name]
+            user.email = row_hash[:email]
+            user.user_type = row_hash[:user_role]
+            user.login = row_hash[:login_id]
+          else
+            flash[:error] = "The following error(s) occurred with the CSV upload: Attempted to add new user without login_id."
+            File.delete(csv_file_handle)
+            return redirect_to admin_path
+          end
+        else
+          user.name = row_hash[:name]
+          user.user_type = row_hash[:user_role]
         end
-        user.name = row_hash[:name]
-        user.email = row_hash[:email]
-        user.user_type = row_hash[:user_role]
         if !user.valid? && !row_hash.empty?
           # invalid user and not a newline
           flash[:error] = "The following error(s) occurred with the CSV upload: " + user.errors.full_messages.join(",")
