@@ -23,7 +23,7 @@ class AdminController < ApplicationController
       if form_error
         flash[:error] = error_msg.join("<br/>").html_safe
       else
-        u = User.find_by_login(params['user_role'])
+        u = User.find_by_email(params['user_role'])
         u.user_type = params['user_role_new'].to_i
         u.save!
         flash[:notice] = "User #{u.name} successfully set as #{roles[u.user_type]}."
@@ -32,13 +32,13 @@ class AdminController < ApplicationController
     @non_admins = []
     User.all.each do |i|
       if i.user_type == User::Types::Undergrad
-        @non_admins << [i.name + " - Undergrad", i.login]
+        @non_admins << [i.name + " - Undergrad", i.email]
       end
       if i.user_type == User::Types::Grad
-        @non_admins << [i.name + " - Grad Student", i.login]
+        @non_admins << [i.name + " - Grad Student", i.email]
       end
       if i.user_type == User::Types::Faculty
-        @non_admins << [i.name + " - Faculty", i.login]
+        @non_admins << [i.name + " - Faculty", i.email]
       end
     end
     @non_admins = @non_admins.sort
@@ -68,14 +68,12 @@ class AdminController < ApplicationController
     for i in 0..1 do
       CSV.foreach(csv_file_handle, {:headers => true, :header_converters => :symbol}) do |row|
         row_hash = row.to_hash
-        #NEED TO CHANGE THIS TO CHECK AGAINST EMAIL LATER
-        user = User.find_by_login(row_hash[:login_id])
+        user = User.find_by_email(row_hash[:email])
         if user.nil?
           user = User.new
         end
         user.name = row_hash[:name]
         user.email = row_hash[:email]
-        user.login = row_hash[:login_id]
         user.user_type = row_hash[:user_role]
         if !user.valid? && !row_hash.empty?
           # invalid user and not a newline
