@@ -29,5 +29,10 @@
       <%= submit_tag("Accept this Applicant") %>
     <% end %>
     <% end %>
+    <% if @applic.status == "accepted" %>
+    <%= form_tag('/applications/%s/unaccept' % @applic.id, :method => "post") do %>
+      <%= submit_tag("Unhire Accepted Applicant") %>
+    <% end %>
+    <% end %>
 
 </div>

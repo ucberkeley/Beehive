@@ -157,6 +157,16 @@ class ApplicsController < ApplicationController
     redirect_to('/applications/%s' % applic.id)
   end
 
+  def unaccept
+    applic = Applic.find_by_id(params[:applic_id])
+    job_id = applic.job_id.to_s
+    if !applic.nil?
+      applic.destroy
+      flash[:notice] = "Accepted hire %s was removed" % applic.user.name
+    end
+    redirect_to('/jobs/%s' % job_id)
+  end
+
   def index
     flash[:notice] = "Application listing not implemented yet."
     redirect_to job_path(@job)
