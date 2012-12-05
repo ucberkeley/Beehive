@@ -12,8 +12,9 @@
   <% end %>
   <br/>
   <h2>Upload User CSV</h2>
-  Upload a CSV to update existing users (identified by email) or to add a list of people who are authorized to use ResearchMatch. <br />
-  The CSV should have the following columns: name, email, user_role. The header row must be: "name,email,user_role"
+  Upload a CSV to update existing users (identified by email) or to add a list of people who are authorized to use ResearchMatch. <br/>
+  The CSV should have the following columns: name, email, user role. The header row must be: "name,email,user_role".<br/>
+  User role 0 corresponds to an undergraduate student, 1 to a graduate student, 2 to a faculty member, 3 to an admin.<br/><br/>
   <%= form_tag(admin_upload_path, :multipart => true) do %>
     <%= file_field_tag 'user_csv', :accept => 'text/csv' %>
     <%= submit_tag 'Upload' %>
