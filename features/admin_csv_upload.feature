@@ -5,12 +5,17 @@ Feature: An administrator should be able to upload a CSV as an authorization sys
   I want to be able to upload user data in a csv format with columns: name, user role, login id. New users who login will be authorized based on the data supplied in the csv, and the csv will override any settings for existing users.
 
   Scenario: Change multiple users' role via csv.
+    Given I am signed in with provider "cas" as Justin
+    Then I should not see "Post a Listing"
+    When I log out
+
     Given I am signed in with provider "cas" as Justina
     When I set "1005472" as admin
     When I follow "Dashboard"
     When I follow "Admin" 
     When I upload a file with valid data
     Then I should see "CSV successfully uploaded!"
+    When I log out
 
     Given I am signed in with provider "cas" as Justin
     And I follow "Post a Listing"
