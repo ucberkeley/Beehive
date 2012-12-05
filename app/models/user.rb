@@ -75,6 +75,9 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 6..100 #r@a.wk
 #validates_uniqueness_of   :email
 
+  # Login
+  validates_uniqueness_of   :login
+
   # Misc info
   validates_numericality_of :units,          :allow_nil => true
   validates_numericality_of :free_hours,     :allow_nil => true
