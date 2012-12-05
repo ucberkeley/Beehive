@@ -160,7 +160,7 @@ module CASControllerIncludes
       new_user[auth_field] = auth_value
 
       # Implement separate auth provider logic here
-      if session[:auth_hash][:provider] == :cas
+      if session[:auth_hash][:provider].to_sym == :cas
         # When using CAS, the Users table is populated from LDAP
         person = new_user.ldap_person
         new_user.email = person.email

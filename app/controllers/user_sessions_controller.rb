@@ -12,7 +12,10 @@ include CASControllerIncludes
     # right Users column and change auth_value to match that provider's auth
     # details. Add these on to /config/initializers/omniauth.rb.
 
-    if auth_config = ResearchMatch::Application.config.auth_providers[session[:auth_hash][:provider]]
+
+
+    auth_config = ResearchMatch::Application.config.auth_providers[session[:auth_hash][:provider].to_sym]
+    if auth_config
       auth_field = auth_config[:auth_field].to_s
       auth_value = session[:auth_hash][auth_config[:auth_value]].to_s
     else
@@ -30,7 +33,7 @@ include CASControllerIncludes
 
     # cas_user should be removed entirely in a full transition away from CAS to
     # generic OmniAuth.
-    if session[:auth_hash][:provider] == :cas
+    if session[:auth_hash][:provider].to_sym == :cas
       session[:cas_user] = auth_value
     end
 

@@ -151,7 +151,7 @@ class JobsController < ApplicationController
     @job = Job.new(params[:job])
     @job.update_attribs(params)
     @job.num_positions ||= 0
-    if params.has_key?(:add_owners) and params[:add_owners].to_i >= 0
+    if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
       @job.owners << User.find(params[:add_owners])
     end
     @job.populate_tag_list
