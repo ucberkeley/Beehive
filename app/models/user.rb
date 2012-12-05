@@ -31,11 +31,11 @@ class User < ActiveRecord::Base
 
   # Authlogic
   acts_as_authentic do |c|
-    c.merge_validates_length_of_login_field_options :within => 1..100
+#c.merge_validates_length_of_login_field_options :within => 1..100
       # so that logins can be 1 character in length even; 'login' is provided
       # by CAS so we don't want to artificially limit the values we get for it.
 
-    c.validate_email_field = true
+#c.validate_email_field = true
   end
 
   class Types
@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   # Email
   validates_presence_of     :email
   validates_length_of       :email,    :within => 6..100 #r@a.wk
-  validates_uniqueness_of   :email
+#validates_uniqueness_of   :email
 
   # Misc info
   validates_numericality_of :units,          :allow_nil => true
