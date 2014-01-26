@@ -30,6 +30,11 @@
 					<% job_tags = job.tag_list %>
 					<% if !job_tags.empty? %>
 						<div class="job_tags">
+					<% if job.open %>
+					<span class="label label-success">Open</span>
+					<% else %>
+					<span class="label label-danger">Closed</span>
+					<% end %>
                         <%= image_tag 'tag.gif' %>
 						Tags:
 							<% if job_tags.empty? %>

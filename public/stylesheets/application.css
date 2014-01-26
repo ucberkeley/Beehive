@@ -232,7 +232,7 @@ span.required_field {
     padding-top: 10px;
     padding-bottom: 10px;
 	width: 100%;
-    height: 50px;
+    height: 100px;
     background: #eee;
     border-top: 1px solid #ccc;
 	overflow: hidden;	
@@ -493,3 +493,6 @@ a:hover {
   list-style: square;
 }*/
 
+table {
+    display:block;
+}

@@ -12,6 +12,11 @@
   <%=h @job.title %>
   <% if ! @job.active %><span class="urgent">(not activated)</span><% end %>  
 </h2>
+<% if @job.open %>
+    <span class="label label-success">Open</span>
+<% else %>
+    <span class="label label-danger">Closed</span>
+<% end %>
 <p>
   posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
 	<b>
