@@ -211,8 +211,8 @@ class User < ActiveRecord::Base
     else  # update via LDAP
       person = self.ldap_person
       case   # Determine role
-        # Faculty
-        when (person.employee_academic? and not person.employee_expired? and not ['G','U'].include?(person.berkeleyEduStuUGCode))
+        # Faculty & staff
+        when (person.employee? and not person.employee_expired? and not ['G','U'].include?(person.berkeleyEduStuUGCode))
           self.user_type = User::Types::Faculty
 
         # Student
@@ -230,7 +230,7 @@ class User < ActiveRecord::Base
           logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
           #raise StandardError, "couldn't determine user type for login #{self.login}"
           self.user_type = User::Types::Undergrad
-        end # employee/student
+        end # student
     end # stub
 
     self.update_attribute(:user_type, self.user_type) if options[:save] || options[:update]
