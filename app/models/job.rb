@@ -193,6 +193,10 @@ class Job < ActiveRecord::Base
     relation = relation.where(tables['departments'][:id].eq(options[:department_id])) if options[:department_id]
     relation = relation.where(tables['faculties'][:id].eq(options[:faculty_id])) if options[:faculty_id]
 
+    puts 'FILTERING BY OPTIONS'
+    puts options
+    puts relation.to_sql
+
     # Search paid, credit
     if options[:compensation].present? and options[:compensation].to_i != Compensation::None
       compensations = []
@@ -213,6 +217,7 @@ class Job < ActiveRecord::Base
     relation = Job.select("distinct jobs.*").joins(:faculties).joins(:department)
                                             .includes(:tags).includes(:proglangs)
                                             .includes(:courses).includes(:categories)
+    puts relation.to_sql
     return relation
   end
   
