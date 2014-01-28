@@ -51,14 +51,14 @@ class ApplicsController < ApplicationController
     return if redirected_because(a.nil?, "Couldn't find that application.",
       jobs_path)
     return if redirected_because( (a.user != @current_user) &&
-      !a.job.allow_admin_by?(@current_user),
+      !a.job.allow_admin_by?(@current_user) && !a.job.owners.include?(@current_user) && !@current_user.admin?,
       "You are not authorized to view that application.", job_path(a.job))
   end
 
   def verify_job_ownership
     j = @job #Job.find(params[:job_id])
     return if redirected_because(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirected_because(! j.allow_admin_by?(@current_user),
+    return if redirected_because(! j.allow_admin_by?(@current_user) && !j.owners.include?(@current_user) && !@current_user.admin?,
       "You are not authorized to view the applications for this job.",
       job_path(j))
   end
@@ -155,6 +155,16 @@ class ApplicsController < ApplicationController
       flash[:notice] = "Applicant %s was accepted" % applic.user.name
     end
     redirect_to('/applications/%s' % applic.id)
+  end
+
+  def unaccept
+    applic = Applic.find_by_id(params[:applic_id])
+    job_id = applic.job_id.to_s
+    if !applic.nil?
+      applic.destroy
+      flash[:notice] = "Accepted hire %s was removed" % applic.user.name
+    end
+    redirect_to('/jobs/%s' % job_id)
   end
 
   def index

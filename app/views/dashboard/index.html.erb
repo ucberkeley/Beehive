@@ -3,14 +3,14 @@
 	<div class="dashboard_wrapper_watched">
 		<div class="dashboard_container_watched box_shadow">
 		
-			<% if @current_user.can_post? -%>
+			<% if @current_user.can_post? || @current_user.owned_jobs.size > 0 -%>
 				<h2>Your Postings</h2>
-				
-				<% if @your_jobs.empty? %>
+
+				<% if (@your_jobs + @current_user.owned_jobs).empty? %>
 					You have not added any listings. Why not <%= link_to 'post one', :controller => :jobs, :action => :new %>?
 				
 				<% else %>
-					<%= render :partial => "jobs/your_job", :collection => @your_jobs %>
+					<%= render :partial => "jobs/your_job", :collection => @your_jobs + @current_user.owned_jobs %>
 				<% end %>
 			
 			<% end -%>	

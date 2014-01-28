@@ -4,8 +4,8 @@ include CASControllerIncludes
 
 #CalNet / CAS Authentication
 #before_filter CASClient::Frameworks::Rails::Filter
-#before_filter :setup_cas_user  
-before_filter :goto_cas_unless_logged_in
+#before_filter :setup_cas_user
+before_filter :goto_home_unless_logged_in
 before_filter :rm_login_required
 
 def new
@@ -18,12 +18,12 @@ def create
     return if redirected_because(params[:document].nil? || params[:document][:user_id].nil? || params[:document][:user_id].to_i != @current_user.id,
         "Error: Couldn't associate document with your user. Please re-upload.",
         "/dashboard")
-     
+
     @document.user = @current_user
-    
+
     # Process document type
     @document.set_document_type(params[:document][:document_type])
-    
+
     if [Document::Types::Resume, Document::Types::Transcript].include?(@document.document_type)
         if @document.save
             flash[:notice] = "Thanks for uploading your #{params[:document][:document_type]}! It should now show up in your profile."

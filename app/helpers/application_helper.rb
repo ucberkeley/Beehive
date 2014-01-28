@@ -2,13 +2,13 @@
 include JobsHelper
 
 module ApplicationHelper
-	include TagsHelper 
-	
-	module NonEmpty
-	    def nonempty?
-	        not self.nil? and not self.empty?
-	    end
-	end
+  include TagsHelper
+
+  module NonEmpty
+      def nonempty?
+          not self.nil? and not self.empty?
+      end
+  end
 
   def current_user
     # TODO: transition this out in favor of @current_user
@@ -39,7 +39,7 @@ module ActionView
     def tag_search_path(tagstring)
       "#{jobs_path}?tags=#{tagstring}"
     end
-    
+
     ThreeStateLabels = {true=>'Yes', false=>'No', nil=>'N/A'}
 
     module FormTagHelper
@@ -48,12 +48,12 @@ module ActionView
         check_box_tag(name, value, checked, options.merge({:onclick=>onclick}))
       end
 
-      
+
       # Select box that maps {true=>1, false=>0, nil=>2}
       def three_state_select_tag(name, value=nil, options={})
         labels = options.delete(:labels) || ThreeStateLabels
         values = options.delete(:values) || {true=>1, false=>0, nil=>2}
-        select_tag name, options_for_select([true,false,nil].collect{|k|[labels[k],values[k]]},values[value]), options 
+        select_tag name, options_for_select([true,false,nil].collect{|k|[labels[k],values[k]]},values[value]), options
       end
     end
   end
@@ -61,7 +61,7 @@ end
 
 class String
     include ApplicationHelper::NonEmpty
-    
+
     # Translates \n line breaks to <br />'s.
     def to_br
         self.gsub("\n", "<br />")
@@ -70,7 +70,7 @@ class String
     def pluralize_for(n=1)
       n == 1 ? self : self.pluralize
     end
-    
+
 end
 
 class Array
@@ -123,8 +123,9 @@ end
 
 
 module CASControllerIncludes
-  def goto_cas_unless_logged_in
-    CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
+  def goto_home_unless_logged_in
+    #CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
+    redirect_to home_path unless @current_user && @user_session
   end
 
   def login_user!(user)
@@ -137,7 +138,7 @@ module CASControllerIncludes
     redirect_to login_path and return false
   end
 
-  def first_login
+  def first_login(auth_field, auth_value)
   # Processes a user's first login, which involves creating a new User.
   # Requires a CAS session to be present, and redirects if it isn't.
   # @returns false if redirected because of new user processing, true if user was already signed up
@@ -148,26 +149,32 @@ module CASControllerIncludes
       redirect_to login_path
       return false
     end
-  
+
     # If user doesn't exist, create it. Use current_user
-    # so as to ensure that redirects work properly; i.e. 
+    # so as to ensure that redirects work properly; i.e.
     # so that you are 'logged in' when you go to the Edit Profile
     # page in this next section here.
-    unless User.exists?(:login => session[:cas_user].to_s)
+
+    unless User.exists?(auth_field => auth_value)
       new_user = User.new
-      new_user.login = session[:cas_user].to_s
-      person = new_user.ldap_person
-      new_user.email = person.email
-      new_user.name = new_user.ldap_person_full_name
-      new_user.update_user_type
-      
-      if new_user.save && new_user.errors.empty? then 
+      new_user[auth_field] = auth_value
+
+      # Implement separate auth provider logic here
+      if session[:auth_hash][:provider].to_sym == :cas
+        # When using CAS, the Users table is populated from LDAP
+        person = new_user.ldap_person
+        new_user.email = person.email
+        new_user.name = new_user.ldap_person_full_name
+        new_user.update_user_type
+      end
+
+      if new_user.save && new_user.errors.empty?
         flash[:notice] = "Welcome to ResearchMatch! Since this is your first time here, "
         flash[:notice] << "please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
-        
         logger.info "First login for #{new_user.login}"
 
-        @current_user = User.authenticate_by_login(session[:cas_user].to_s)
+        @current_user = User.where(auth_field => auth_value)[0]
+        session[:user_id] = @current_user.id
         redirect_to edit_user_path(@current_user.id)
         return false
       else
@@ -177,17 +184,17 @@ module CASControllerIncludes
         return false
       end
     end
-    
+
     logger.info("\n\n GOT PAST LOGIN_REQUIRED  \n\n") if Rails.env == 'development'
     return true
   end
 
   # Redirects to signup page if user hasn't registered.
-  # Filter fails if no CAS session is present, or if user was redirected to
+  # Filter fails if no auth hash is present, or if user was redirected to
   # signup page.
-  # Filter passes if CAS session is present, and a user exists.
+  # Filter passes if auth hash is present, and a user exists.
   def require_signed_up
-    return true if session[:cas_user].present? and User.exists?(:login => session[:cas_user])
+    return true if session[:auth_hash].present? and User.exists?(:id => session[:user_id])
 
     redirect_to :controller => :users, :action => :new
     return false

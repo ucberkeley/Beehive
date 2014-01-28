@@ -8,7 +8,7 @@
             <a href="<%= job_path(job) %>" title="Click to learn more about this research position!"><%= job.title %></a>
             (<%= (job.faculties != []) ?  link_to(job.faculties.first.name, :controller => "jobs",
                    :action => "index", :faculty => job.faculties.first.id)  : "no faculty sponsor" %>)
-					  <% if @current_user.present? && job.user_id == @current_user.id %>
+					  <% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) || @current_user.admin?) %>
 						  <%= link_to "[edit]", :controller => "jobs", :action => "edit", :id => job.id %>
 						  <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => job.id %>
 					  <% end %>
@@ -20,7 +20,7 @@
 					  
             <% if job.applicants.include?(@current_user) %>
                 [applied!]
-            <% elsif job.user != @current_user %>
+            <% elsif job.user != @current_user and job.status == 0%>
                 <%= link_to "[apply for this job]", new_job_applic_path(job.id) %>
             <% end %>
                           

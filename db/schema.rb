@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111115072414) do
+ActiveRecord::Schema.define(:version => 20121205014557) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20111115072414) do
     t.text     "message"
     t.integer  "resume_id"
     t.integer  "transcript_id"
+    t.string   "status",        :default => "undecided"
   end
 
   create_table "categories", :force => true do |t|
@@ -103,8 +104,16 @@ ActiveRecord::Schema.define(:version => 20111115072414) do
     t.datetime "earliest_start_date"
     t.datetime "latest_start_date"
     t.datetime "end_date"
-    t.integer  "compensation",        :default => 0
     t.boolean  "open",                :default => true
+    t.integer  "compensation",        :default => 0
+    t.integer  "status",              :default => 0
+  end
+
+  create_table "owns", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pictures", :force => true do |t|
@@ -168,7 +177,7 @@ ActiveRecord::Schema.define(:version => 20111115072414) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "login",                              :null => false
+    t.string   "login"
     t.string   "email",                              :null => false
     t.string   "persistence_token",                  :null => false
     t.string   "single_access_token",                :null => false

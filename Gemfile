@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.10'
+# gem 'rails', '~> 3.0.19'
+# 3.0.19 fixes security vulnerability CVE-2013-0156
+# not tested with Rails >= 3.1
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# Data
-gem 'pg'
 
 # Debugging
 gem 'exception_notification'
@@ -21,6 +21,8 @@ gem 'net-ldap', :require => 'net/ldap'
 gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
 gem 'jquery-rails', '>= 1.0.12'
+gem 'omniauth'
+gem 'omniauth-cas'
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -30,6 +32,7 @@ gem 'heroku'
 
 # Production-specific
 group :production do
+  gem 'pg'
 end
 
 # Development

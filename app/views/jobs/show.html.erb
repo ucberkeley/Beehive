@@ -1,11 +1,5 @@
 <% content_for :title, @job.title %>
 
-<%- if logged_in_as_admin? -%>
-<div class="admin">
-  <p>Activation url: <%= link_to activation_url(@job), activation_url(@job) %></p>
-</div>
-<%- end -%>
-
 <div id="job_show_main">
 <br />
 <h2>
@@ -20,7 +14,7 @@
 <p>
   posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
 	<b>
-	<% if @current_user.present? && @job.user_id == @current_user.id %>
+	<% if @current_user.present? && (@job.user_id == @current_user.id || @job.owners.include?(@current_user) || @current_user.admin?) %>
     <% if ! @job.active %>
       <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
       'confirmation email? This will contact the faculty sponsors for this listing ' +
@@ -42,7 +36,7 @@
         &nbsp;
     <% if @job.applicants.include?(@current_user) %>
 			[applied!]
-		<% elsif @job.user != @current_user %>
+		<% elsif @job.user != @current_user and @job.status == 0%>
 			<%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
 		<% end %>
 	<% end %>
@@ -172,16 +166,22 @@
       <% end %>
     </td>
   </tr>
-  
+
   <tr>
     <td class="job_attr_title">
-      Position is:
+      Listing Status:
     </td>
     <td class="job_attr_value">
-      <% if !@job.open.nil? && @job.open == false %>
-        Closed
-      <% else %> 
-        Open
+      <%= Job::Status::All.key(@job.status) %>
+    </td>
+  </tr>
+  <tr>
+    <td class="job_attr_title">
+      Listing Owners:
+    </td>
+    <td class="job_attr_value">
+      <% @job.owners.each do |i| %>
+        <%= i.name %> <br>
       <% end %>
     </td>
   </tr>
@@ -211,7 +211,7 @@
 
 
 
-<% if @current_user.present? && @current_user.can_post? %>
+<% if @current_user.present? && ( @current_user.can_post? || @current_user.owned_jobs.include?(@job) ) %>
 
   <br />
   <h2>Applications</h2>
@@ -219,7 +219,7 @@
       <% if @job.applics.empty? -%>
       None yet.
       <% else -%>
-          <% if @job.allow_admin_by? @current_user -%>
+          <% if @job.allow_admin_by?(@current_user) || @current_user.owned_jobs.include?(@job) -%>
             <ul>
             <% @job.applics.each do |a| -%>
                 <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>

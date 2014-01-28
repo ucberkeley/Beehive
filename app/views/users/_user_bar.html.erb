@@ -2,6 +2,6 @@
   <% if @current_user %>
     Logged in as <%= @current_user.name %>. <%= link_to 'Log Out', logout_path %>
   <% else %>
-    <%= link_to 'Log In', login_path, :class => 'user-bar-action' %><%= ' via CalNet' unless session[:cas_user].present? %> to access our listings.
+    <%= link_to 'Log In', login_path, :class => 'user-bar-action' %><%= ' via CalNet' unless session[:user_id].present? %> to access our listings.
   <% end %>
 </div>

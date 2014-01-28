@@ -29,6 +29,7 @@ ResearchMatch::Application.routes.draw do
     get  '/applications/:id' => 'applics#show', :as => :applic
     get  '/applications/:id/withdraw' => 'applics#destroy', :as => :destroy_applic
     post '/applications/:applic_id' => 'applics#accept'
+    post '/applications/:applic_id/unaccept' => 'applics#unaccept'
     #get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume
     #get  '/applications/:id/transcript'=>'applics#transcript', :as => :applic_transcript
   end # applics
@@ -39,7 +40,9 @@ ResearchMatch::Application.routes.draw do
 
   # Access control
   match '/logout' => 'user_sessions#destroy'
-  match '/login'  => 'user_sessions#new'
+  #match '/login'  => 'user_sessions#new'
+  match '/login'  => redirect('/auth/cas')
+  match '/auth/:provider/callback' => 'user_sessions#new'
 
   # Users
   resources :users
@@ -49,19 +52,22 @@ ResearchMatch::Application.routes.draw do
   # Home
   get  '/' => 'home#index', :as => :home
 
+  # Statistics
+  get '/statistics'      => 'statistics#index', :as => :statistics
+
   # Autocomplete routes
   get '/categories/json' => 'categories#json', :as => :categories_json
   get '/courses/json' => 'courses#json', :as => :courses_json
   get '/proglangs/json' => 'proglangs#json', :as => :proglangs_json
 
-  namespace :admin do
-    scope 'faculties', :as => :faculties do
-      get  '/' => 'faculties#index', :as => ''
-      put  '/:id' => 'faculties#update', :as => :update
-      delete '/:id' => 'faculties#destroy', :as => :destroy
-      post '/' => 'faculties#create', :as => :create
-    end
-  end
+  # Admin
+  get '/admin' => 'admin#index', :as => :admin
+  match '/admin/upload' => 'admin#upload', :as => :admin_upload
+
+  # get  '/faculties' => 'faculties#index', :as => :faculties
+  # put  'faculties/:id' => 'faculties#update', :as => :faculties_update
+  # delete 'faculties/:id' => 'faculties#destroy', :as => :faculties_destroy
+  # post 'faculties' => 'faculties#create', :as => :faculties_create
 
   root :to => 'home#index'
 

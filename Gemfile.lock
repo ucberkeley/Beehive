@@ -79,6 +79,7 @@ GEM
     ffi (1.0.9)
     gherkin (2.4.18)
       json (>= 1.4.6)
+    hashie (2.0.5)
     heroku (2.5.0)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -110,6 +111,13 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.0)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-cas (0.0.7)
+      addressable (~> 2.2)
+      nokogiri (~> 1.5)
+      omniauth (~> 1.1.0)
     pg (0.11.0)
     polyglot (0.3.2)
     rack (1.2.3)
@@ -190,6 +198,8 @@ DEPENDENCIES
   mysql2 (< 0.3.0)
   net-ldap
   nokogiri
+  omniauth
+  omniauth-cas
   pg
   rails (~> 3.0.10)
   rspec-rails

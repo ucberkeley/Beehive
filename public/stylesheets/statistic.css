@@ -1,0 +1,15 @@
+h2 {
+    margin-bottom: 10px;
+}
+
+.statistics-table {
+    margin-bottom: 20px;
+}
+
+.statistics-table td {
+    width: 300px;
+    padding-bottom: 4px;
+}
+
+.statistics-table td.stat_value {
+}
