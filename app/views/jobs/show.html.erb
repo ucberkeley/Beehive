@@ -64,7 +64,7 @@
     <td class="job_attr_value">
       <% @job.faculties.each do |f| %> 
         <span>
-          <b><%= link_to f.name, :controller => "jobs", :action => "index", :params => { :faculty => f.id } %></b>
+	  <b><%= link_to(f.name, :controller => "jobs", :action => "index", :faculty => f.id) %></b>
           <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%=h f.name %> Berkeley #{job.department.name}" target="_blank">
             <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
           </a>
