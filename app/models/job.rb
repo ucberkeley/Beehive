@@ -91,7 +91,6 @@ class Job < ActiveRecord::Base
   validates_length_of :desc, :within => 10..20000
   validates_numericality_of :num_positions, :greater_than_or_equal_to => 0,
     :allow_nil => true
-  validate :validate_sponsorships, :unless => Proc.new{|j|j.skip_validate_sponsorships}
   validate :earliest_start_date_must_be_before_latest
   validate :latest_start_date_must_be_before_end_date
 
@@ -111,9 +110,6 @@ class Job < ActiveRecord::Base
   # The purpose of this is so that in activating a job, these data aren't lost.
   @skip_handlers = false
   attr_accessor :skip_handlers
-  
-  @skip_validate_sponsorships = false
-  attr_accessor :skip_validate_sponsorships
   
   acts_as_taggable
 
@@ -357,15 +353,6 @@ class Job < ActiveRecord::Base
     self.user == u or self.faculties.include?(u)
   end
 
-  # Perform validations without sponsorships. Used to determine whether to create a sponsorship later on.
-  def valid_without_sponsorships?
-    svs = @skip_validate_sponsorships
-    @skip_validate_sponsorships = true
-    retval = valid?
-    @skip_validate_sponsorships = svs
-    retval
-  end
-  
   # Makes the job not active, and reassigns it an activation code.
   # Used when creating a job or if, when updating the job, a new 
   #   faculty sponsor is specified.
@@ -391,10 +378,6 @@ class Job < ActiveRecord::Base
 
   protected
   
-  def validate_sponsorships
-    errors.add_to_base("Job posting must have at least one faculty sponsor.") unless (sponsorships.size > 0)
-  end
-
   def earliest_start_date_must_be_before_latest
     errors[:earliest_start_date] << "cannot be later than the latest start date" if 
       latest_start_date.present? && earliest_start_date > latest_start_date

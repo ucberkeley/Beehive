@@ -37,7 +37,7 @@ class WillowScraper
     @current_job.categories << @current_category
 
     # check and save
-    unless @current_job.valid_without_sponsorships?
+    unless @current_job.valid?
       puts "*** error validating job #{@current_job.inspect}"
     else
      set_sponsor
