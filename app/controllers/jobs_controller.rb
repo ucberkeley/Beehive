@@ -157,12 +157,14 @@ class JobsController < ApplicationController
     @job.populate_tag_list
 
     respond_to do |format|
-      if @job.valid_without_sponsorships? and sponsor
-        @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
-        @job.sponsorships << @sponsorship
-
+      if @job.valid_without_sponsorships?
+        if sponsor
+          @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
+          @job.sponsorships << @sponsorship
+        end
+        
         @job.active =  true     # TODO: remove this at some point
-        @job.save
+        @job.save(:validate => false)
 
         if false
           @job.reset_activation(true) # sends the email too
@@ -178,6 +180,7 @@ class JobsController < ApplicationController
         @faculty_id = params[:faculty_id]
         format.html { render :action => "new" }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
+        puts "JOB CREATION FAIL"
       end
     end
   end

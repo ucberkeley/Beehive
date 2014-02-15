@@ -31,7 +31,7 @@ confirm the listing before it is displayed on ResearchMatch.
     <td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
     </tr>
     <tr>
-    <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %><span class="required_field">*</span></td>
+    <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
     <td class="job_clear_table_field">
             <%= select_tag :faculty_id,
                 '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
