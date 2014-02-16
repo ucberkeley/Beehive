@@ -196,6 +196,8 @@ class Job < ActiveRecord::Base
                     .or(tables['courses'][:name].matches(query))
                     .or(tables['categories'][:name].matches(query))
                     )
+    puts "FILTERING BY QUERY"
+    puts relation.to_sql
     return relation
   end
   
@@ -230,9 +232,10 @@ class Job < ActiveRecord::Base
   end
   
   def self.generate_relation
-    relation = Job.select("distinct jobs.*").joins(:faculties).joins(:department)
-                                            .includes(:tags).includes(:proglangs)
-                                            .includes(:courses).includes(:categories)
+    relation = Job.select("distinct jobs.*").joins(' LEFT OUTER JOIN "sponsorships" INNER JOIN "faculties" ON "faculties"."id" = "sponsorships"."faculty_id" ON "jobs"."id" = "sponsorships"."job_id"').joins(:department)
+      .includes(:tags).includes(:proglangs)
+      .includes(:courses).includes(:categories)
+    puts "RELATION"
     puts relation.to_sql
     return relation
   end
