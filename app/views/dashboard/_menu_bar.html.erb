@@ -1,33 +1,35 @@
 <%
-@browse = false
-@newjob = false
-@readreviews = false
-if controller.controller_name == 'jobs'
-	@browse = true if controller.action_name == 'index'
-	@newjob = true if controller.action_name == 'new'
-elsif controller.controller_name == 'reviews'
-	@readreviews = true if controller.action_name == 'index'
-end
-%>
+   @browse = false
+   @newjob = false
+   @readreviews = false
+   if controller.controller_name == 'jobs'
+   @browse = true if controller.action_name == 'index'
+   @newjob = true if controller.action_name == 'new'
+   elsif controller.controller_name == 'reviews'
+   @readreviews = true if controller.action_name == 'index'
+   end
+   %>
 <div id="menu_bar">
-	  <%= link_to image_tag("../images/menu_bar" + (@browse ? "" : "_fade") + "_01.png", :alt => "Browse Listings", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
-	  <%= link_to image_tag("../images/menu_bar" + (@newjob ? "" : "_fade") + "_02.png", :alt => "Post a Job", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
-	  <%= link_to image_tag("../images/menu_bar" + (@readreviews ? "" : "_fade") + "_03.png", :alt => "Read Reviews", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
+  
+  <%= link_to image_tag("../images/menu_bar" + (@browse ? "" : "_fade") + "_01.png", :alt => "Browse Listings", :border=>0, :id=>"menu_bar_01"), :controller => "jobs", :action => 'index'%>
+  <%= link_to image_tag("../images/menu_bar" + (@newjob ? "" : "_fade") + "_02.png", :alt => "Post a Job", :border=>0, :id=>"menu_bar_02"), :controller=> "jobs", :action => "new" %>
+  <%= link_to image_tag("../images/menu_bar" + (@readreviews ? "" : "_fade") + "_03.png", :alt => "Read Reviews", :border=>0, :id=>"menu_bar_03"), :controller => "reviews", :action => 'index'%>
+
+</div>
+<div id="department_speech">
+  <div id="department_speech_top"></div>
+  <div id="department_speech_bot">
+    <% form_for :job, :url => { :controller => "jobs", :action => "index" } do |f| %>
+    <%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(Department.all, :id, :name),  { :onchange => "this.form.submit();"}) %>
+    <% end %>
   </div>
-  <div id="department_speech">
-		<div id="department_speech_top"></div>
-		<div id="department_speech_bot">
-			<% form_for :job, :url => { :controller => "jobs", :action => "index" } do |f| %>
-				<%= select_tag(:department_select, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>" + options_from_collection_for_select(Department.all, :id, :name),  { :onchange => "this.form.submit();"}) %>
-			<% end %>
-		</div>
 </div>
 
 <%= 
+   
+   "<script type='text/JavaScript'><!--menu_bar_one();//--></script>" unless @browse
+   "<script type='text/JavaScript'><!--menu_bar_two();//--></script>" unless @newjob
+   "<script type='text/JavaScript'><!--menu_bar_three();//--></script>" unless @readreviews
+   
+   %>
 
-"<script type='text/JavaScript'><!--menu_bar_one();//--></script>" unless @browse
-"<script type='text/JavaScript'><!--menu_bar_two();//--></script>" unless @newjob
-"<script type='text/JavaScript'><!--menu_bar_three();//--></script>" unless @readreviews
-
-%>
-	  
