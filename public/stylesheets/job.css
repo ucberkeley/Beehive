@@ -10,15 +10,11 @@
 	width: 40%;
 }
 .job_odd {
-	background: #F0FFD2;
-	
-
+    background: none;
 }
 
 .job_even {
-	background: none;
-	
-
+    background: #F0FFD2;
 }
 
 .job_padding_wrapper{

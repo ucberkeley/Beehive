@@ -1,6 +1,6 @@
 <% content_for :title, "Listings" %>
 
-<h1>Research Listings</h1>
+<h1>Listings</h1>
 
 <br />
 
@@ -8,9 +8,18 @@
 <div id="browse_search_bar">
   <%= form_tag(jobs_search_path, :method => "get") do %>
     <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
-    <%= text_field_tag :query, @query, :placeholder => "Search Parameters", :style => "width: 180px" %>&nbsp;
+    <%= text_field_tag :query, @query, :placeholder => "Search Parameters",
+    :style => "width: 180px" %>&nbsp;
+    <%= submit_tag "Search" %>
+    <%= link_to "[More Options]", '#', :id => 'more_options', :onclick =>
+    "$('#advanced_search').toggle('show')" %>
+    <div id="advanced_search" style="display:none">
+    <br/>
     <%= label_tag :department, "Department" %>
-    <%= select_tag :department, options_for_select([["All Departments",0]]) + options_from_collection_for_select(Department.all, "id", "name", @department_id) %>
+    <%= select_tag :department, options_for_select([["All Departments",0]]) +
+    options_from_collection_for_select(Department.all, "id", "name",
+    @department_id) %>
+    <br/>
     <%= label_tag :faculty, "Faculty" %>
 
     <%= select_tag :faculty, options_for_select([["All Faculty",0]]) +
@@ -21,6 +30,7 @@
 	jobs.id=sponsorships.job_id WHERE jobs.active=TRUE AND jobs.open=TRUE
 	AND (jobs.end_date >= now() OR jobs.end_date is NULL)"),
 	"id", "name", @faculty_id) %> 
+    <br/>
 
     <%= label_tag :compensation, "Compensation" %>
     <%= select_tag :compensation,
@@ -30,6 +40,7 @@
             "Credit"     => Job::Compensation::Credit,
             "Pay or credit" => Job::Compensation::Both
             }, @compensation) %>
+    <br/>
 
     <%= label_tag :post_status, "Status" %>
     <%= select_tag :post_status,
@@ -38,10 +49,7 @@
             "Open" => Job::Status::Open,
             "Filled" => Job::Status::Filled,
             }, @post_status) %>
-    <%= submit_tag "Search" %>
     <br />
-    <%= link_to "[More Options]", '#', :id => 'more_options', :onclick => "#{visual_effect(:toggle_slide, 'advanced_search')} (as=document.getElementById('as')).value = 1-Number(as.value); return false;" %>
-    <div id="advanced_search">
       <%# javascript_tag "$('#advanced_search').hide()" %>
       <%= javascript_tag visual_effect(:toggle_slide, 'advanced_search') unless params[:as].to_i == 1 %>
       <%= hidden_field_tag :as, params[:as] %>
@@ -81,20 +89,6 @@
   </div>
   <br />
   <div id="browse_results">
-    <div id="browse_header">
-          <div class="job_padding_wrapper">
-          <table id="browse_header_table">
-          <tr>
-                  
-                  <td class="job_table_left">Title &amp; Description</td>
-                  <td class="job_credit">Form of Compensation</td>
-                  <td class="job_credit"># Positions</td>
-                  
-                  </div>
-          </tr>
-          </table>
-          </div>
-    </div>
     <%= render(:partial => "job", :collection => @jobs) %>
   </div>
   <%= will_paginate @jobs %>
