@@ -45,17 +45,6 @@
 			following <b><%= @relevant_jobs.length %> research
 			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
 						<br /><br />
-            <table class="browse_header_table">
-                <tr>
-                    
-                    <td class="job_table_left">Title</td>
-                    <td class="job_credit">Paid?</td>
-                    <td class="job_credit">Credit?</td>
-                    <td class="job_credit"># Positions</td>
-                    
-                    </div>
-                </tr>
-            </table>
             <% end %>
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
 		</div>
@@ -69,15 +58,6 @@
 			<% if @recently_added_jobs.empty? %>
 			No research positions were recently added. Please try again later!
 			<% else %>
-			    <table class="browse_header_table">
-				    <tr>
-					
-					    <td class="job_table_left">Title</td>
-					    <td class="job_credit">Compensation</td>
-					    <td class="job_credit"># Positions</td>
-					    </div>
-				    </tr>
-			    </table>
 			    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 			<% end %>
 			
