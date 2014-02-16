@@ -66,7 +66,7 @@ class JobsController < ApplicationController
 
     # will_paginate
     query_parms[:page         ] = params[:page]     || 1
-    query_parms[:per_page     ] = params[:per_page] || 8
+    query_parms[:per_page     ] = params[:per_page] || 10
 
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
