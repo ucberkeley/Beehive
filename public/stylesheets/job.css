@@ -26,6 +26,7 @@
     font-size:14pt;
     padding-top: 4px;
     padding-bottom: 0px;
+    color: #003060;
 }
 
 .job_desc {
@@ -138,13 +139,13 @@
 /*jobs*/
 
 span.tag {
-	background-color: #428bca;
+	background-color: #92AFC9;
     -moz-border-radius: 4px;
     -o-border-radius: 4px;
     
 	border-radius: 4px;
     
-	border: 1px solid #428BBD;
+	border: 1px solid #92AFC9;
 	/* font-weight: bold; */
 	/* margin: 2px; */
 	line-height: 2.5;
@@ -168,6 +169,7 @@ span.tag {
 .job_title{
 	font-weight: bold;
 	font-size: 13pt;
+	color: #003060;
 }
 
 .job_table {
@@ -272,3 +274,4 @@ table.job_attributes {
 }
 
 .pagination {}
+
