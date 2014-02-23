@@ -4,61 +4,60 @@
     <table class="job_table">
       <tr class="job_table_row">
 	<td class="job_table_left">
-	  <div class="job_title">
-            <a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
-            research position!"><%= job.title %></a>
-	    <div class="btn-group" style="float:right">
-	      <button type="button" style="margin-top:-10px;padding:none" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		Actions <span class="caret"></span>
-	      </button>
-	      <ul class="dropdown-menu" role="menu">
-		<!--
-		(<%= (job.faculties != []) ?  link_to(job.faculties.first.name, :controller => "jobs",
-		:action => "index", :faculty => job.faculties.first.id)  : "no
-		faculty sponsor" %>)
-		-->
-		<% if @current_user.present? && (job.user_id == @current_user.id ||
-		   job.owners.include?(@current_user) || @current_user.admin?)
-		%>
-		<li>
+	  <div class="btn-group" style="float:right">
+	    <button type="button" style="padding:none" 
+		    class="btn btn-default dropdown-toggle" 
+		    data-toggle="dropdown">
+	      <% if job.open %>
+	      Open
+	      <% else %>
+	      Closed
+	      <% end %>                    
+	      <span class="caret"></span>
+	    </button>
+	    <ul class="dropdown-menu" role="menu">
+	      <% if @current_user.present? && (job.user_id == @current_user.id ||
+		 job.owners.include?(@current_user) || @current_user.admin?)
+		 %>
+	      <li>
 		<%= link_to "edit", :controller => "jobs", :action => "edit",
 		:id => job.id %>
-		</li>
-		<li>
-		  <%= link_to "delete", :controller=> "jobs", :action =>
-		  "delete", :id => job.id %>
-		</li>
-		<% end %>
-		<% if job.users.include?(@current_user) %>
-		<li>
+	      </li>
+	      <li>
+		<%= link_to "delete", :controller=> "jobs", :action =>
+		"delete", :id => job.id %>
+	      </li>
+	      <% end %>
+	      <% if job.users.include?(@current_user) %>
+	      <li>
 		<%= link_to "unwatch", :controller=>:jobs, :action =>
 		:unwatch, :id => job.id %>
-		</li>
-		<% elsif job.user != @current_user %>
-		<li>
+	      </li>
+	      <% elsif job.user != @current_user %>
+	      <li>
 		<%= link_to "watch", :controller=>:jobs, :action => :watch,
 		:id => job.id %>
-		</li>
-		<% end %>
-		<% if job.applicants.include?(@current_user) %>
-		<li>
+	      </li>
+	      <% end %>
+	      <% if job.applicants.include?(@current_user) %>
+	      <li>
 		[applied!]
-		</li>
-		<% elsif job.user != @current_user and job.status == 0%>
-		<li>
+	      </li>
+	      <% elsif job.user != @current_user and job.status == 0%>
+	      <li>
 		<%= link_to "apply", new_job_applic_path(job.id)
-		%>
-		</li>
-		<% end %>
+		    %>
+	      </li>
+	      <% end %>
 	    </ul>
-	    </div>
-	    <!--
-	    <% if job.open %>
-	    <span style="float:right" class="label label-success">Open</span>
-	    <% else %>
-	    <span style="float:right" class="label label-danger">Closed</span>
-	    <% end %>                    
-	    -->
+	  </div>
+	  <div class="job_title">
+            <a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
+								    research position!"><%= job.title %></a>
+	    <span class="faculty_title">
+	      - <%= (job.faculties != []) ?  link_to(job.faculties.first.name, :controller => "jobs",
+	      :action => "index", :faculty => job.faculties.first.id)  : "no sponsor" %>
+	    </span>	    
 	  </div>
 	  
 	  <% job_tags = job.tag_list %>

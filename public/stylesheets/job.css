@@ -26,18 +26,21 @@
     font-size:14pt;
     padding-top: 4px;
     padding-bottom: 0px;
-    color: #003060;
+    color: #003162;
+    max-width: 550px;
 }
 
 .job_desc {
     padding-top: 13px;
     padding-bottom: 13px;
+    max-width: 550px;
 }
 
 .job_tags {
     margin-top: 3px;
     margin-bottom: 3px;
     /* margin-left: 8px; */
+    max-width:550px;
 }
 
 .job_credit {
@@ -275,3 +278,14 @@ table.job_attributes {
 
 .pagination {}
 
+.faculty_title a {
+    color: #2a6496;
+    font-size:8pt;
+    font-weight:normal;
+}
+
+.faculty_title {
+    color: #2a6496;
+    font-size:8pt;
+    font-weight:normal;
+}
