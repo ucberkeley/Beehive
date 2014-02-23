@@ -1,20 +1,15 @@
 <% content_for :title, "Listings" %>
 
-<h1>Listings</h1>
-
-<br />
-
 <!-- search bar -->
 <div id="browse_search_bar">
   <%= form_tag(jobs_search_path, :method => "get") do %>
-    <%= image_tag "search_icon.png", :style => "vertical-align: top;" %>
-    <%= text_field_tag :query, @query, :placeholder => "Search Parameters",
-    :style => "width: 180px" %>&nbsp;
-    <%= submit_tag "Search" %>
+    <%= text_field_tag :query, @query, :placeholder => "Search",
+    :style => "width: 450px;", :class => "form-control"%>
+    <%= submit_tag @query, :style => "margin-top:-1px;margin-left:-4px",:class => "btn btn-primary", :value => "Search" %>
+    <br/>
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick =>
     "$('#advanced_search').toggle('show')" %>
     <div id="advanced_search" style="display:none">
-    <br/>
     <%= label_tag :department, "Department" %>
     <%= select_tag :department, options_for_select([["All Departments",0]]) +
     options_from_collection_for_select(Department.all, "id", "name",
@@ -83,11 +78,6 @@
 	Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.<br /><br />
 <% end %>
 <div id="browse_results_wrapper">
-  <div id="browse_results_pagination">
-    <span class="right"><%= will_paginate @jobs %></span>
-    <span class="left"><%= page_entries_info @jobs %></span>
-  </div>
-  <br />
   <div id="browse_results">
     <%= render(:partial => "job", :collection => @jobs) %>
   </div>
