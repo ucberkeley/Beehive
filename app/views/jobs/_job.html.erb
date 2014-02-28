@@ -66,9 +66,23 @@
 	    
 	    <% if controller.controller_name != 'dashboard' %>
 	    <div class="job_desc">
-	      <span id="job_desc_<%= job.id %>"><%= truncate job.desc, :length => 200, :omission => '...' %></span> 
+	      <span id="job_desc_<%= job.id %>">
+                <%= truncate job.desc, :length => 200, :omission => '...' %>
+	      </span> 
+	      <span id="job_<%= job.id %>" style="display:none;overflow:hidden;height0px;">
+		<%= job.desc %>
+	      </span>
 	      <% if job.desc.length > 200 %>
-	      <%= link_to "[read more]", :controller => "jobs", :action => "show", :id => job.id %>
+	      <!--<%= link_to "[read more]", :controller => "jobs", :action =>
+	      "show", :id => job.id %>-->
+	      <div id="expand_<%= job.id %>">
+	      <a onclick='
+		 $("#job_desc_<%= job.id %>").css("display", "none");
+		 $("#job_<%= job.id %>").css("display", "inline");
+		 $("#expand_<%= job.id %>").css("display", "none");
+		 '>[read
+		more]</a>
+	      </div>
 	      <% end %>
 	    </div>
 	    <% end %>
