@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title>ResearchMatch <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
+    <title>Beehive <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
     
     <%# Resources %>
     <%= stylesheet_link_tag 'dist/css/bootstrap-theme.css' %>
@@ -106,10 +106,9 @@
       
       <div id="footer">
 	<div id="footer_inside">
-          <i>ResearchMatch is currently under regular development. <i><%= link_to "Got feedback?", contact_us_path %></i>
-            <br /><br />
-            &copy; UC Berkeley ResearchMatch, 2009-<%= Time.now.year %>. All rights reserved.
-            <br />
+	  <br/>
+          &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
+          <br />
         </div>
       </div>
     </div>
