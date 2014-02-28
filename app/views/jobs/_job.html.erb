@@ -9,11 +9,11 @@
 		    class="btn btn-default dropdown-toggle" 
 		    data-toggle="dropdown">
 	      <% if job.open %>
-	      Open
 	      <% else %>
-	      Closed
 	      <% end %>                    
+	      
 	      <span class="caret"></span>
+	      
 	    </button>
 	    <ul class="dropdown-menu" role="menu">
 	      <% if @current_user.present? && (job.user_id == @current_user.id ||
