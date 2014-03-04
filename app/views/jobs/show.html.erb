@@ -17,32 +17,32 @@
     <% if @current_user.present? && (@job.user_id == @current_user.id ||
        @job.owners.include?(@current_user) || @current_user.admin?) %>
     
-	
+    
     <% if ! @job.active %>
-      <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
-      'confirmation email? This will contact the faculty sponsors for this listing ' +
-      'immediately. Please be considerate and don\'t pester faculty unnecessarily. ' + 
-      'Click OK to resend the confirmation email.'))
-      window.location='<%= resend_activation_email_job_path(@job) %>'">
+    <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
+			 'confirmation email? This will contact the faculty sponsors for this listing ' +
+			 'immediately. Please be considerate and don\'t pester faculty unnecessarily. ' + 
+			 'Click OK to resend the confirmation email.'))
+			 window.location='<%= resend_activation_email_job_path(@job) %>'">
       <span class="urgent">[resend confirmation email]</span></a>
-      <% end %>
-      <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-      <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
-      <% end %>&nbsp;
-      
-      <% if @current_user != nil && !@current_user.is_faculty %>
-      <% if @job.users.include?(@current_user) %>
-      <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
-      <% elsif @job.user != @current_user %>
-      <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
-      <% end %>
-      &nbsp;
-      <% if @job.applicants.include?(@current_user) %>
-      [applied!]
-      <% elsif @job.user != @current_user and @job.status == 0%>
-      <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
-      <% end %>
-      <% end %>
+    <% end %>
+    <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
+    <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
+    <% end %>&nbsp;
+    
+    <% if @current_user != nil && !@current_user.is_faculty %>
+    <% if @job.users.include?(@current_user) %>
+    <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+    <% elsif @job.user != @current_user %>
+    <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+    <% end %>
+    &nbsp;
+    <% if @job.applicants.include?(@current_user) %>
+    [applied!]
+    <% elsif @job.user != @current_user and @job.status == 0%>
+    <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
+    <% end %>
+    <% end %>
   </b>
 </p>
 <% if @job.owners.length != 0 %>
