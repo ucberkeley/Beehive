@@ -54,10 +54,6 @@
 	  <div class="job_title">
             <a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
 								    research position!"><%= job.title %></a>
-	    <span class="faculty_title">
-	      - <%= (job.faculties != []) ?  link_to(job.faculties.first.name, :controller => "jobs",
-	      :action => "index", :faculty => job.faculties.first.id)  : "no sponsor" %>
-	    </span>	    
 	  </div>
 	  
 	  <% job_tags = job.tag_list %>

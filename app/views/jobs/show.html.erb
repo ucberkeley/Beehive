@@ -12,9 +12,12 @@
     <span class="label label-danger">Closed</span>
 <% end %>
 <p>
-  posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
-	<b>
-	<% if @current_user.present? && (@job.user_id == @current_user.id || @job.owners.include?(@current_user) || @current_user.admin?) %>
+  Posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
+  <b>
+    <% if @current_user.present? && (@job.user_id == @current_user.id ||
+       @job.owners.include?(@current_user) || @current_user.admin?) %>
+    
+	
     <% if ! @job.active %>
       <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
       'confirmation email? This will contact the faculty sponsors for this listing ' +
@@ -22,27 +25,38 @@
       'Click OK to resend the confirmation email.'))
       window.location='<%= resend_activation_email_job_path(@job) %>'">
       <span class="urgent">[resend confirmation email]</span></a>
-    <% end %>
-		<%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-		<%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
-	<% end %>&nbsp;
-	
-	<% if @current_user != nil && !@current_user.is_faculty %>
-		<% if @job.users.include?(@current_user) %>
-			<%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
-		<% elsif @job.user != @current_user %>
-			<%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
-		<% end %>
-        &nbsp;
-    <% if @job.applicants.include?(@current_user) %>
-			[applied!]
-		<% elsif @job.user != @current_user and @job.status == 0%>
-			<%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
-		<% end %>
-	<% end %>
-	</b>
+      <% end %>
+      <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
+      <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
+      <% end %>&nbsp;
+      
+      <% if @current_user != nil && !@current_user.is_faculty %>
+      <% if @job.users.include?(@current_user) %>
+      <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+      <% elsif @job.user != @current_user %>
+      <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+      <% end %>
+      &nbsp;
+      <% if @job.applicants.include?(@current_user) %>
+      [applied!]
+      <% elsif @job.user != @current_user and @job.status == 0%>
+      <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
+      <% end %>
+      <% end %>
+  </b>
 </p>
-<br />
+<% if @job.owners.length != 0 %>
+Owned by
+<td class="job_attr_value">
+  <% @job.owners.each do |i| %>
+  <%= link_to(i.name, :controller => :users, 
+  :action => :show, 
+  :id => i.id) %>
+  <% end %>
+</td>
+<% else %>
+There are no owners<br/>
+<% end %>
 <p>
   <div class="job_tags">
     <%= image_tag 'tag.gif' %> <b>Tags:</b>
@@ -58,27 +72,11 @@
 
 <!-- Job attributes -->
 <table class="job_attributes"><tbody>
-  <%# sponsor(s) %>
-  <tr>
-    <td class="job_attr_title">Faculty <%= 'Sponsor'.pluralize_for(@job.faculties.length) %>:</td>
-    <td class="job_attr_value">
-      <% @job.faculties.each do |f| %> 
-        <span>
-	  <b><%= link_to(f.name, :controller => "jobs", :action => "index", :faculty => f.id) %></b>
-          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%=h f.name %> Berkeley #{job.department.name}" target="_blank">
-            <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
-          </a>
-        </span>
-        <br />
-      <% end %> 
-    </td>
-  </tr>
-
-  <tr>
-    <td class="job_attr_title">Description:</td>
+    <tr>
+      <td class="job_attr_title">Description:</td>
     </tr><tr>
-    <td id="description" colspan=2>
-      <%= simple_format @job.desc %>
+      <td id="description" colspan=2>
+	<%= simple_format @job.desc %>
     </td>
   </tr>
 
@@ -173,16 +171,6 @@
     </td>
     <td class="job_attr_value">
       <%= Job::Status::All.key(@job.status) %>
-    </td>
-  </tr>
-  <tr>
-    <td class="job_attr_title">
-      Listing Owners:
-    </td>
-    <td class="job_attr_value">
-      <% @job.owners.each do |i| %>
-        <%= i.name %> <br>
-      <% end %>
     </td>
   </tr>
 </tbody></table>
