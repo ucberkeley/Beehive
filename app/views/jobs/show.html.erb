@@ -6,7 +6,7 @@
   <%=h @job.title %>
   <% if ! @job.active %><span class="urgent">(not activated)</span><% end %>  
 </h2>
-<% if @job.open %>
+<% if @job.active %>
     <span class="label label-success">Open</span>
 <% else %>
     <span class="label label-danger">Closed</span>

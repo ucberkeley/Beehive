@@ -202,7 +202,7 @@ class Job < ActiveRecord::Base
   end
   
   def self.filter_by_options(options, relation, tables)
-    relation = relation.where(tables['jobs'][:open].eq(true))
+    relation = relation.where(tables['jobs'][:active].eq(true))
     relation = relation.where(tables['jobs'][:end_date].gt(Time.now).or(tables['jobs'][:end_date].eq(nil))) unless options[:include_ended]
     relation = relation.where(tables['departments'][:id].eq(options[:department_id])) if options[:department_id]
     relation = relation.where(tables['faculties'][:id].eq(options[:faculty_id])) if options[:faculty_id]
