@@ -46,7 +46,6 @@
             }, @post_status) %>
     <br />
       <%# javascript_tag "$('#advanced_search').hide()" %>
-      <%= javascript_tag visual_effect(:toggle_slide, 'advanced_search') unless params[:as].to_i == 1 %>
       <%= hidden_field_tag :as, params[:as] %>
 
       <%= label_tag :per_page, "Listings per page" %>

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.0.10'
+gem 'rails', '3.1.1'
 # gem 'rails', '~> 3.0.19'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
@@ -38,7 +38,7 @@ end
 # Development
 group :development do
   gem 'yard'
-  gem 'mysql2', '< 0.3.0'  # rails 3.0.x and mysql >= .3 don't mix
+  gem "mysql2", "~> 0.3.11"
 end
 
 # Testing

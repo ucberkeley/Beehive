@@ -1,8 +1,6 @@
 module Rails
 
-
   class << self
-
     # Test environments like Rails.test?
     [:development, :production, :test].each do |e|
       define_method "#{e.to_s}?" do
@@ -13,3 +11,4 @@ module Rails
   end
 
 end
+RAILS_ENV='development'
