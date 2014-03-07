@@ -48,6 +48,6 @@ module ResearchMatch
 
     # Prevent initializing application and connecting to the database
     config.assets.precompile += ['*.js']
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
   end
 end
