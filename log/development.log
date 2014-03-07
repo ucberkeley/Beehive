@@ -50538,3 +50538,4 @@ Served asset /autocomplete_owners.js - 304 Not Modified (18ms)
 
 Started GET "/assets/clipboard.gif" for 127.0.0.1 at 2014-03-07 03:12:13 -0800
 Served asset /clipboard.gif - 304 Not Modified (40ms)
+Connecting to database specified by database.yml
