@@ -12,7 +12,7 @@ gem 'unicorn'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Debugging
-gem 'exception_notification'
+gem "exception_notification", git: "git://github.com/smartinez87/exception_notification.git"
 
 # Performance optimization
 # Bullet alerts N+1 query problems

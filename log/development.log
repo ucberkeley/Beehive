@@ -50482,3 +50482,59 @@ Served asset /clipboard.gif - 304 Not Modified (5ms)
 
 Started GET "/assets/dashboard_box_grad.png" for 127.0.0.1 at 2014-03-07 03:07:29 -0800
 Served asset /dashboard_box_grad.png - 304 Not Modified (9ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2014-03-07 03:12:08 -0800
+Processing by DashboardController#index as HTML
+  Rendered jobs/_your_job.html.erb (6.0ms)
+  Rendered jobs/_job.html.erb (0.0ms)
+  Rendered jobs/_tag.html.erb (3.2ms)
+  Rendered jobs/_tag.html.erb (1.1ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (0.9ms)
+  Rendered jobs/_job.html.erb (278.7ms)
+  Rendered dashboard/index.html.erb within layouts/application (354.3ms)
+  Rendered users/_user_bar.html.erb (1.1ms)
+  Rendered users/_search_bar.html.erb (1.2ms)
+Completed 200 OK in 1875.4ms (Views: 412.3ms | ActiveRecord: 644.2ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-07 03:12:11 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (74ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-07 03:12:11 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (75ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-07 03:12:11 -0800
+Served asset /application.css - 304 Not Modified (50ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-07 03:12:12 -0800
+Served asset /job.css - 304 Not Modified (107ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-07 03:12:12 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (81ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-07 03:12:12 -0800
+Served asset /application.js - 304 Not Modified (724ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-07 03:12:12 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (71ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-07 03:12:13 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (36ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-07 03:12:13 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (18ms)
+
+
+Started GET "/assets/clipboard.gif" for 127.0.0.1 at 2014-03-07 03:12:13 -0800
+Served asset /clipboard.gif - 304 Not Modified (40ms)
