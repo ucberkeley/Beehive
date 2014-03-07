@@ -1,3 +1,4 @@
+
 # The mailer for feedback
 class FeedbackMailer < ActionMailer::Base
   

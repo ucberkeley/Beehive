@@ -1,3 +1,4 @@
+
 # The mailer for jobs, e.g. to send activation emails out
 # or to notify of applications to jobs
 class JobMailer < ActionMailer::Base
