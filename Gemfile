@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1' 
+gem 'rails', '3.2.17' 
 # gem 'rails', '~> 3.0.19'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
@@ -19,6 +19,7 @@ gem 'exception_notification'
 gem "bullet", :group => "development"
 
 # Misc
+gem 'pothoven-attachment_fu'
 gem 'authlogic',
     :git => 'git://github.com/binarylogic/authlogic.git'
 gem 'will_paginate', "~> 3.0.pre2"
