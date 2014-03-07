@@ -6,52 +6,52 @@ confirm the listing before it is displayed on ResearchMatch.
   Fields labeled with an asterisk are required.
 </p>
 <br />
-<% form_for(@job) do |f| %>
 
-  <% if @job.errors.any? %>
-    <div id="error_explanation">
-      <h2><span class="urgent"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span></h2>
+<%= form_for(@job) do |f| %>
+<% if @job.errors.any? %>
+<div id="error_explanation">
+  <h2><span class="urgent"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span></h2>
+  
+  <ul>
+    <% @job.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<br/ >
+<% end %>
 
-      <ul>
-      <% @job.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-    <br />
-  <% end %>
-
-  <table class="job_clear_table">
-    <tr>
+<table class="job_clear_table">
+  <tr>
     <td class="job_clear_table_label"><%= f.label :title, 'Listing title' %><span class="required_field">*</span></td>
     <td class="job_clear_table_field"><%= f.text_field :title, :class => 'extrawide' %></td>
-    </tr>
-      <tr>
+  </tr>
+  <tr>
     <td class="job_clear_table_label"><%= f.label :department %><span class="required_field">*</span></td>
     <td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
     <td class="job_clear_table_field">
-            <%= select_tag :faculty_id,
-                '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
-                    :id,
-                    :name,
-                    @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
-                )
-             %>
-        </td>
-    </tr>
-    <tr>
+      <%= select_tag :faculty_id,
+          '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
+          :id,
+          :name,
+          @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
+          )
+          %>
+    </td>
+  </tr>
+  <tr>
     <td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
     <td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
-    </tr>
+  </tr>
     <tr>
-    <td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
-    <td class="job_clear_table_field">
-            <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide',
-                            :placeholder => "(e.g. signal processing, computer vision)"  %>
-        </td>
+      <td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
+      <td class="job_clear_table_field">
+        <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide',
+        :placeholder => "(e.g. signal processing, computer vision)"  %>
+      </td>
     </tr>
     <tr>
     <div class="ui-widget">

@@ -16,7 +16,7 @@ gem 'exception_notification'
 
 # Performance optimization
 # Bullet alerts N+1 query problems
-# gem "bullet", :group => "development"
+gem "bullet", :group => "development"
 
 # Misc
 gem 'authlogic',
