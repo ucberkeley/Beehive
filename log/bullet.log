@@ -11,10 +11,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:08:27[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:08:27[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -27,10 +27,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:19:02[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:19:02[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -43,10 +43,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:23:34[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:23:34[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -59,10 +59,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:24:55[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185803127540'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:24:55[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -75,10 +75,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:25:35[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:25:35[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -91,10 +91,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:26:31[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:26:31[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -107,10 +107,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:27:25[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:27:25[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -123,9 +123,9 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:28:10[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:28:10[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -138,10 +138,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:28:48[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:28:48[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -154,10 +154,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:29:00[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:29:00[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -170,10 +170,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:50:01[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__1632180495127902603_70185831778360'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___257671116113634656_70185818462660'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:80:in `index'2014-03-04 19:50:01[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -186,10 +186,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:50:37[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:50:37[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -202,10 +202,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:52:48[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:52:48[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -218,10 +218,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:53:59[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:53:59[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -234,10 +234,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:58:56[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 19:58:56[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -250,10 +250,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:01:37[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:01:37[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -266,10 +266,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:01:56[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:01:56[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -282,10 +282,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:25[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:25[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -298,10 +298,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:35[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:35[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -314,10 +314,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:58[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:02:58[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -330,10 +330,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:03:23[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:03:23[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -346,10 +346,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:04:20[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-04 20:04:20[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -362,10 +362,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:04:47[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:83:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `index'2014-03-04 20:04:47[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -378,10 +378,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:84:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:83:in `index'2014-03-06 22:10:07[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__446309608924081887_70309456671240'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___2366087503706974604_70309447651280'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:84:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:83:in `index'2014-03-06 22:10:07[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -394,10 +394,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:12:24[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:12:24[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/dashboard
 N+1 Query detected
   Job => [:user]
@@ -410,8 +410,8 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/dashboard/index.html.erb:61:in `_app_views_dashboard_index_html_erb__431067521009332037_70360272347080'2014-03-06 22:12:24[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/dashboard/index.html.erb:61:in `_app_views_dashboard_index_html_erb__431067521009332037_70360272347080'2014-03-06 22:12:24[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/dashboard
 N+1 Query detected
   Job => [:tags]
@@ -424,8 +424,8 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:59:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/dashboard/index.html.erb:61:in `_app_views_dashboard_index_html_erb__431067521009332037_70360272347080'2014-03-06 22:12:52[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:59:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/dashboard/index.html.erb:61:in `_app_views_dashboard_index_html_erb__431067521009332037_70360272347080'2014-03-06 22:12:52[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -438,10 +438,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:13:18[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:13:18[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -454,10 +454,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:19:32[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:19:32[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -470,10 +470,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:51:28[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 22:51:28[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -486,10 +486,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 23:15:30[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2556657581392540252_70360271205220'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb___3052971260458002427_70360268934520'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 23:15:30[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -502,10 +502,10 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2485552328065246072_70166653310120'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb__1809316404304548173_70166653096680'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 23:15:37[WARN] user: agnusmaximus
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2485552328065246072_70166653310120'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb__1809316404304548173_70166653096680'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'2014-03-06 23:15:37[WARN] user: agnusmaximus
 127.0.0.1:3000http://127.0.0.1:3000/jobs
 N+1 Query detected
   Job => [:user]
@@ -518,7 +518,7 @@ N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
   N+1 Query method call stack
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2485552328065246072_70166653310120'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb__1809316404304548173_70166653096680'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
-  /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/app/controllers/jobs_controller.rb:81:in `index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/_job.html.erb:36:in `_app_views_jobs__job_html_erb__2485552328065246072_70166653310120'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/views/jobs/index.html.erb:81:in `_app_views_jobs_index_html_erb__1809316404304548173_70166653096680'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:82:in `block (2 levels) in index'
+  /Users/agnusmaximus/Desktop/ResearchMatchProject/BeeHive/app/controllers/jobs_controller.rb:81:in `index'
