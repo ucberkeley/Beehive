@@ -1,0 +1,16 @@
+#fields_faculty {
+    display: none;
+}
+
+#signup_fields div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.left_col {
+  float: left;
+}
+
+.right_col {
+  float: right
+}

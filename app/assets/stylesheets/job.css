@@ -1,0 +1,291 @@
+.job_table tr.job_table_row:hover {
+
+}
+
+.job_table tr.job_table_row td:hover {
+    /* cursor: pointer; */
+}
+
+.job_table_left {
+	width: 40%;
+}
+.job_odd {
+    background: none;
+}
+
+.job_even {
+    /* background: #F0FFD2; */
+}
+
+.job_padding_wrapper{
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.job_title {
+    font-size:14pt;
+    padding-top: 4px;
+    padding-bottom: 0px;
+    color: #003162;
+    max-width: 550px;
+}
+
+.job_desc {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    max-width: 550px;
+}
+
+.job_tags {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /* margin-left: 8px; */
+    max-width:550px;
+}
+
+.job_credit {
+	text-align: center;
+	width: 10%;
+}
+
+.icon {
+  width:  2.75em;
+  height: 2.75em;
+  background-size: 100%;
+  display: inline-block;
+  position: relative;
+}
+.icon:hover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  background-color: white;
+}
+.icon.paid { background-image: url(/images/paid_icon.png); }
+.icon.paid:hover::after { content: "pay"; }
+.icon.credit { background-image: url(/images/credit_icon.png); }
+.icon.credit:hover::after { content: "credit"; }
+
+#tag_cloud {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.tag_s { font-size: 1.0em; }
+.tag_m { font-size: 1.1em; }
+.tag_l { font-size: 1.2em; }
+.tag_xl { font-size: 1.3em; }
+
+.left { float: left; }
+.right { float: right; }
+
+#browse_results_wrapper{
+
+}
+
+#browse_results_pagination {
+  text-align: right;
+}
+
+#browse_results{
+    /* drop shadow */
+    
+	padding-left: 10px;
+	-box-shadow: 0px 3px 10px #ccc;  
+    -moz-box-shadow: 0px 3px 10px #ccc;  
+    
+	/* -webkit-box-shadow: 0px 3px 10px #ccc; */  
+    
+
+	/* border-right: 1px solid #e2e2e2; */
+	border-left: 1px solid #e2e2e2;
+	/* border-bottom: 1px solid #e2e2e2; */
+	/* border-top: 1px solid #e2e2e2; */
+	margin-bottom: 10px;
+}
+
+#browse_search_bar{
+	text-align: left;
+}
+
+#more_options {
+  font-size: x-small;
+}
+
+#browse_header{
+	font-weight: bold;
+	background: #798493 url("../images/dashboard_box_grad_darker.png") repeat-x bottom left;
+	color: white;
+	width: 100%;
+	height: 47px;
+}
+
+#browse_header_table{
+	height: 40px;
+	width: 100%;
+}
+
+#job_show_main p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#description {
+	margin-left: 15px;
+	margin-bottom: 15px;
+	padding-left: 15px;
+	border-left: 1px solid #F0FFD2;
+}
+
+
+/*jobs*/
+
+span.tag {
+	background-color: #92AFC9;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    
+	border-radius: 4px;
+    
+	border: 1px solid #92AFC9;
+	/* font-weight: bold; */
+	/* margin: 2px; */
+	line-height: 2.5;
+    padding-left: 4px;
+    padding-right: 4px;
+	color: black;
+	padding: 3px;
+	font-size: 10px;
+}
+
+    span.tag:hover {
+        /* background-color: #dddddd; */
+    }
+
+    span.tag a {
+        color: white;
+    
+        padding:;
+}
+
+.job_title{
+	font-weight: bold;
+	font-size: 13pt;
+	color: #003060;
+}
+
+.job_table {
+	border: 0px;
+	width: 100%;
+}
+
+.job_table_left {
+	width: 50%;
+}
+.job_odd, .job_even {
+	border-bottom: 1px solid #E7E7E7;
+	padding: 10px;
+	width: 80%;
+	/* border-bottom: 1px solid #abe68b; */
+}
+
+.job_padding_wrapper{
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.job_credit {
+	text-align: center;
+	width: 10%;
+}
+    .job_credit span.job_numpositions {
+        
+        font-size: 12pt;
+    }
+    
+.browse_header_table{
+	height: 40px;
+	width: 100%;
+	font-weight: bold;
+}
+
+.job_clear_table {
+	font-family: tahoma, arial, helvetica, sans-serif;
+	font-size: 12px;
+	color: #333;
+	border:0px;
+}
+.job_clear_table td {
+	text-align:left;
+	width:auto;
+	padding:5px;
+	vertical-align: top;
+}input.wide {
+    width: 300px;
+}
+.job_clear_table_label {
+	font-weight: bold;
+	width:150px;
+}
+.job_clear_table_field {
+	width:350px;
+}
+
+/* job show page */
+
+table.job_attributes {
+
+}
+
+  table.job_attributes td.job_attr_title {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    width: 25%;
+  }
+
+  table.job_attributes td.job_attr_value {
+    padding-left: 5px;
+    text-align: left;
+    vertical-align: top;
+    width: 75%;
+  }
+
+  table.job_attributes td#description {
+    padding-bottom: 15px;
+    padding-top: 5px;
+  }
+
+.ui-combobox {
+    position: relative;
+    display: inline-block;
+}
+.ui-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+    /* adjust styles for IE 6/7 */
+    *height: 1.7em;
+    *top: 0.1em;
+}
+.ui-combobox-input {
+    margin: 0;
+    padding: 0.3em;
+}
+
+.pagination {}
+
+.faculty_title a {
+    color: #2a6496;
+    font-size:8pt;
+    font-weight:normal;
+}
+
+.faculty_title {
+    color: #2a6496;
+    font-size:8pt;
+    font-weight:normal;
+}
