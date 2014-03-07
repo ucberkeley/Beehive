@@ -12,7 +12,7 @@
     <span class="label label-danger">Closed</span>
 <% end %>
 <p>
-  Posted by <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.user.name, :controller => :users, :action => :show, :id => @job.user_id)%></b> &nbsp; 	
+  Contact: <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.contacter.name, :controller => :users, :action => :show, :id => @job.primary_contact_id)%></b> &nbsp; 	
   <b>
     <% if @current_user.present? && (@job.user_id == @current_user.id ||
        @job.owners.include?(@current_user) || @current_user.admin?) %>

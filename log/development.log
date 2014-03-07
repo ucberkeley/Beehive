@@ -40558,3 +40558,601 @@ Completed 200 OK in 21.5ms (Views: 2.9ms | ActiveRecord: 3.3ms)
 Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:08:40 -0800
 Processing by ProglangsController#json as JSON
 Completed 200 OK in 20.0ms (Views: 2.1ms | ActiveRecord: 4.3ms)
+Connecting to database specified by database.yml
+DEPRECATION WARNING: ActionDispatch::ShowExceptions.rescue_responses is deprecated. Please configure your exceptions using a railtie or in your application config instead. (called from <top (required)> at /Users/agnusmaximus/Desktop/ResearchMatchProject/researchmatch/config/environment.rb:5)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2014-03-07 00:11:40 -0800
+Processing by JobsController#index as HTML
+  Rendered jobs/_tag.html.erb (1.8ms)
+  Rendered jobs/_tag.html.erb (1.4ms)
+  Rendered jobs/_tag.html.erb (1.1ms)
+  Rendered jobs/_tag.html.erb (0.8ms)
+  Rendered jobs/_tag.html.erb (1.7ms)
+  Rendered jobs/_tag.html.erb (0.8ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (1.6ms)
+  Rendered jobs/_tag.html.erb (0.8ms)
+  Rendered jobs/_job.html.erb (584.1ms)
+  Rendered jobs/index.html.erb within layouts/application (688.1ms)
+  Rendered users/_user_bar.html.erb (0.7ms)
+  Rendered users/_search_bar.html.erb (0.8ms)
+Completed 200 OK in 2698.4ms (Views: 537.9ms | ActiveRecord: 777.2ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:11:44 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 28.8ms (Views: 2.2ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:11:45 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 23.3ms (Views: 1.8ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:11:45 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 16.6ms (Views: 1.7ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:12:32 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (112.3ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 150.8ms (Views: 135.0ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:12:33 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 34.6ms (Views: 3.1ms | ActiveRecord: 13.1ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:12:33 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 20.9ms (Views: 3.2ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:12:33 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 12.2ms (Views: 1.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:16:42 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (300.4ms)
+  Rendered users/_user_bar.html.erb (0.4ms)
+  Rendered users/_search_bar.html.erb (0.8ms)
+Completed 200 OK in 953.3ms (Views: 207.4ms | ActiveRecord: 359.2ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:16:46 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 46.2ms (Views: 1.9ms | ActiveRecord: 28.0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:16:46 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 157.3ms (Views: 1.6ms | ActiveRecord: 138.0ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:16:46 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 259.7ms (Views: 2.1ms | ActiveRecord: 235.7ms)
+
+
+Started GET "/users/1346" for 127.0.0.1 at 2014-03-07 00:16:53 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1346"}
+  Rendered users/show.html.erb within layouts/application (3.1ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 109.9ms (Views: 100.7ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:16:55 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 86.7ms (Views: 2.0ms | ActiveRecord: 27.0ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:16:55 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 26.9ms (Views: 2.0ms | ActiveRecord: 10.3ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:16:55 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 16.4ms (Views: 1.0ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/jobs/108" for 127.0.0.1 at 2014-03-07 00:17:26 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"108"}
+  Rendered jobs/_tag.html.erb (1.3ms)
+  Rendered jobs/show.html.erb within layouts/application (121.6ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.6ms)
+Completed 200 OK in 208.7ms (Views: 91.3ms | ActiveRecord: 111.8ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:17:26 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 16.4ms (Views: 1.6ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:17:26 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 30.1ms (Views: 1.7ms | ActiveRecord: 16.6ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:17:26 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 11.6ms (Views: 1.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/users/560" for 127.0.0.1 at 2014-03-07 00:17:28 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"560"}
+Redirected to http://127.0.0.1:3000/dashboard
+Completed 302 Found in 5.5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2014-03-07 00:17:28 -0800
+Processing by DashboardController#index as HTML
+  Rendered jobs/_your_job.html.erb (3.8ms)
+  Rendered jobs/_job.html.erb (0.0ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (0.9ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_job.html.erb (66.4ms)
+  Rendered dashboard/index.html.erb within layouts/application (97.7ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 872.7ms (Views: 106.8ms | ActiveRecord: 604.0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:17:29 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 22.5ms (Views: 3.1ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:17:29 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 16.6ms (Views: 2.5ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:17:29 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 13.8ms (Views: 1.8ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/users/560" for 127.0.0.1 at 2014-03-07 00:17:41 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"560"}
+Redirected to http://127.0.0.1:3000/dashboard
+Completed 302 Found in 5.6ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2014-03-07 00:17:41 -0800
+Processing by DashboardController#index as HTML
+  Rendered jobs/_your_job.html.erb (3.4ms)
+  Rendered jobs/_job.html.erb (0.0ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (1.2ms)
+  Rendered jobs/_tag.html.erb (1.1ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_job.html.erb (102.9ms)
+  Rendered dashboard/index.html.erb within layouts/application (134.2ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.6ms)
+Completed 200 OK in 362.2ms (Views: 182.0ms | ActiveRecord: 166.1ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:17:42 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 41.3ms (Views: 1.5ms | ActiveRecord: 27.9ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:17:42 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 12.6ms (Views: 1.1ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:17:42 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 20.2ms (Views: 3.6ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/users/560" for 127.0.0.1 at 2014-03-07 00:18:08 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"560"}
+Redirected to http://127.0.0.1:3000/dashboard
+Completed 302 Found in 75.0ms (ActiveRecord: 66.1ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2014-03-07 00:18:08 -0800
+Processing by DashboardController#index as HTML
+  Rendered jobs/_your_job.html.erb (3.8ms)
+  Rendered jobs/_job.html.erb (0.0ms)
+  Rendered jobs/_tag.html.erb (1.5ms)
+  Rendered jobs/_tag.html.erb (1.3ms)
+  Rendered jobs/_tag.html.erb (0.9ms)
+  Rendered jobs/_tag.html.erb (0.7ms)
+  Rendered jobs/_job.html.erb (68.0ms)
+  Rendered dashboard/index.html.erb within layouts/application (99.1ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.7ms)
+Completed 200 OK in 478.4ms (Views: 144.8ms | ActiveRecord: 314.3ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:45:03 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (286.5ms)
+  Rendered users/_user_bar.html.erb (0.5ms)
+  Rendered users/_search_bar.html.erb (0.7ms)
+Completed 200 OK in 1229.8ms (Views: 319.5ms | ActiveRecord: 185.8ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:06 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 48.8ms (Views: 11.6ms | ActiveRecord: 16.3ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:06 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 25.5ms (Views: 1.1ms | ActiveRecord: 11.7ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:06 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 75.3ms (Views: 2.6ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:45:07 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (16.5ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 44.2ms (Views: 19.8ms | ActiveRecord: 18.3ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 28.3ms (Views: 3.5ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 16.7ms (Views: 2.1ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 14.9ms (Views: 1.4ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (17.3ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.3ms)
+Completed 200 OK in 31.9ms (Views: 19.9ms | ActiveRecord: 7.3ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 24.6ms (Views: 3.7ms | ActiveRecord: 6.5ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:08 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 82.6ms (Views: 1.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:09 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 11.9ms (Views: 1.0ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:45:09 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (20.0ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 34.6ms (Views: 22.1ms | ActiveRecord: 7.7ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:09 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 25.9ms (Views: 3.7ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:09 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 19.2ms (Views: 1.4ms | ActiveRecord: 6.9ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:09 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 15.0ms (Views: 1.9ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/users/1346" for 127.0.0.1 at 2014-03-07 00:45:14 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1346"}
+  Rendered users/show.html.erb within layouts/application (2.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 41.0ms (Views: 31.2ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:15 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 26.1ms (Views: 3.0ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:15 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 16.1ms (Views: 1.6ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:15 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 102.9ms (Views: 2.2ms | ActiveRecord: 16.0ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:45:23 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (17.8ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 48.6ms (Views: 20.6ms | ActiveRecord: 22.3ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:23 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 22.6ms (Views: 1.8ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:23 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 37.6ms (Views: 2.6ms | ActiveRecord: 19.6ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:23 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 12.4ms (Views: 1.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/users/1346" for 127.0.0.1 at 2014-03-07 00:45:24 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1346"}
+  Rendered users/show.html.erb within layouts/application (1.8ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 14.8ms (Views: 9.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:45:24 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 21.7ms (Views: 2.4ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:45:24 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 15.3ms (Views: 2.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:45:24 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 17.4ms (Views: 2.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:46:07 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/show.html.erb within layouts/application (520.3ms)
+  Rendered common/exception.html.erb within layouts/application (1.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+ERROR 500: #<NoMethodError: undefined method `error_field' for #<PGresult:0x007fa39b5c9d88>>
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_request.text.erb (0.8ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_title.text.erb (0.4ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_session.text.erb (0.8ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_title.text.erb (0.1ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_environment.text.erb (240.1ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_title.text.erb (0.1ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_backtrace.text.erb (1.0ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/_title.text.erb (0.1ms)
+  Rendered /opt/local/lib/ruby1.9/gems/1.9.1/gems/exception_notification-2.5.2/lib/exception_notifier/views/exception_notifier/exception_notification.text.erb (268.2ms)
+
+Sent mail to  (33.3ms)
+ExceptionNotifier: Failed to deliver because #<ArgumentError: An SMTP To address is required to send a message. Set the message smtp_envelope_to, to, cc, or bcc address.>
+Completed 500 Internal Server Error in 1764.8ms (Views: 30.2ms | ActiveRecord: 484.6ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:46:09 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 110.8ms (Views: 3.7ms | ActiveRecord: 56.0ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:46:09 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 65.5ms (Views: 1.2ms | ActiveRecord: 20.0ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:46:09 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 58.6ms (Views: 1.5ms | ActiveRecord: 30.3ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:46:13 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (259.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 628.0ms (Views: 146.7ms | ActiveRecord: 170.2ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:46:14 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 38.6ms (Views: 3.3ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:46:14 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 29.7ms (Views: 3.2ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:46:14 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 21.2ms (Views: 1.2ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:48:01 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (278.6ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 583.3ms (Views: 137.8ms | ActiveRecord: 189.1ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:48:02 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 70.3ms (Views: 2.8ms | ActiveRecord: 42.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:48:02 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 27.2ms (Views: 2.0ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:48:02 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 21.2ms (Views: 2.2ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2014-03-07 00:49:46 -0800
+Processing by JobsController#new as HTML
+  Rendered jobs/_form.html.erb (226.5ms)
+  Rendered jobs/new.html.erb within layouts/application (237.9ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.7ms)
+Completed 200 OK in 770.4ms (Views: 254.2ms | ActiveRecord: 69.0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:49:48 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 63.4ms (Views: 4.9ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:49:48 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 36.6ms (Views: 1.6ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:49:48 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 57.4ms (Views: 2.1ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2014-03-07 00:50:14 -0800
+Processing by JobsController#index as HTML
+  Rendered jobs/_tag.html.erb (1.7ms)
+  Rendered jobs/_tag.html.erb (1.2ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_tag.html.erb (1.2ms)
+  Rendered jobs/_tag.html.erb (0.7ms)
+  Rendered jobs/_job.html.erb (298.9ms)
+  Rendered jobs/index.html.erb within layouts/application (398.2ms)
+  Rendered users/_user_bar.html.erb (0.4ms)
+  Rendered users/_search_bar.html.erb (0.8ms)
+Completed 200 OK in 1521.6ms (Views: 215.8ms | ActiveRecord: 693.6ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:50:16 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 45.9ms (Views: 1.9ms | ActiveRecord: 31.3ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:50:16 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 22.7ms (Views: 1.6ms | ActiveRecord: 11.7ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:50:16 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 33.6ms (Views: 2.0ms | ActiveRecord: 22.3ms)
+
+
+Started GET "/jobs/106" for 127.0.0.1 at 2014-03-07 00:50:20 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"106"}
+  Rendered jobs/_tag.html.erb (94.8ms)
+  Rendered jobs/show.html.erb within layouts/application (202.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 226.5ms (Views: 139.8ms | ActiveRecord: 80.3ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:50:21 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 25.3ms (Views: 2.3ms | ActiveRecord: 6.5ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:50:21 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 20.7ms (Views: 1.9ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:50:21 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 19.2ms (Views: 1.7ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/jobs/111" for 127.0.0.1 at 2014-03-07 00:50:24 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"111"}
+  Rendered jobs/_tag.html.erb (0.0ms)
+  Rendered jobs/show.html.erb within layouts/application (18.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.3ms)
+Completed 200 OK in 32.7ms (Views: 20.9ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-07 00:50:24 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 24.3ms (Views: 1.9ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-07 00:50:24 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 14.6ms (Views: 2.0ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-07 00:50:24 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 17.3ms (Views: 1.7ms | ActiveRecord: 2.4ms)

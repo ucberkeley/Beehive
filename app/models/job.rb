@@ -21,6 +21,7 @@ class Job < ActiveRecord::Base
   #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
+  #   primary_contact_id  : integer
   # =======================
 
   include AttribsHelper
@@ -59,7 +60,7 @@ class Job < ActiveRecord::Base
   belongs_to :department
   has_and_belongs_to_many :categories
   has_many :pictures
-  
+  has_one :contacter, :class_name => "User", :foreign_key => "id", :primary_key => 'primary_contact_id'
   has_many :watches
   has_many :applics
   has_many :owns

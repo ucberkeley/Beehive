@@ -142,6 +142,7 @@ confirm the listing before it is displayed on ResearchMatch.
         <td class="job_clear_table_label">
             <%= f.label :add_owners, 'Add Owners' %>
         </td>
+	
         <td class="job_clear_table_field">
             <%= select_tag :add_owners,
                 '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
