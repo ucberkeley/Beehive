@@ -128,5 +128,5 @@
 })( jQuery );
  
 $(function() {
-    $( "#add_owners" ).combobox();
+    $("#add_owners").combobox();
 });
