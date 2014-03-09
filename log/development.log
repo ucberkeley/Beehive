@@ -53093,3 +53093,349 @@ Completed 200 OK in 15.6ms (Views: 1.5ms | ActiveRecord: 2.9ms)
 Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-08 23:41:58 -0800
 Processing by ProglangsController#json as JSON
 Completed 200 OK in 16.8ms (Views: 1.4ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/jobs/108" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"108"}
+  Rendered jobs/_tag.html.erb (1.1ms)
+  Rendered jobs/show.html.erb within layouts/application (22.0ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 127.9ms (Views: 25.7ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /job.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_setup.js" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /autocomplete_setup.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/tag.gif" for 127.0.0.1 at 2014-03-08 23:42:25 -0800
+Served asset /tag.gif - 304 Not Modified (0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-08 23:42:26 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 20.0ms (Views: 2.3ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-08 23:42:26 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 19.0ms (Views: 2.4ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-08 23:42:26 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 12.8ms (Views: 1.1ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2014-03-08 23:43:24 -0800
+Processing by JobsController#index as HTML
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (1.1ms)
+  Rendered jobs/_tag.html.erb (0.8ms)
+  Rendered jobs/_tag.html.erb (0.7ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_tag.html.erb (1.3ms)
+  Rendered jobs/_tag.html.erb (0.7ms)
+  Rendered jobs/_job.html.erb (116.8ms)
+  Rendered jobs/index.html.erb within layouts/application (123.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 868.5ms (Views: 80.2ms | ActiveRecord: 299.4ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /job.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_setup.js" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /autocomplete_setup.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-08 23:43:25 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 127.7ms (Views: 103.1ms | ActiveRecord: 6.4ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-08 23:43:26 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 20.9ms (Views: 2.9ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-08 23:43:26 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 12.4ms (Views: 1.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Processing by DashboardController#index as HTML
+  Rendered jobs/_your_job.html.erb (3.9ms)
+  Rendered jobs/_job.html.erb (0.0ms)
+  Rendered jobs/_tag.html.erb (1.6ms)
+  Rendered jobs/_tag.html.erb (0.9ms)
+  Rendered jobs/_tag.html.erb (1.0ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_job.html.erb (51.0ms)
+  Rendered dashboard/index.html.erb within layouts/application (75.6ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 393.0ms (Views: 81.0ms | ActiveRecord: 240.7ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /job.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/clipboard.gif" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /clipboard.gif - 304 Not Modified (29ms)
+
+
+Started GET "/assets/dashboard_box_grad.png" for 127.0.0.1 at 2014-03-08 23:43:27 -0800
+Served asset /dashboard_box_grad.png - 304 Not Modified (14ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2014-03-08 23:43:28 -0800
+Processing by JobsController#index as HTML
+  Rendered jobs/_tag.html.erb (1.5ms)
+  Rendered jobs/_tag.html.erb (1.5ms)
+  Rendered jobs/_tag.html.erb (0.9ms)
+  Rendered jobs/_tag.html.erb (0.5ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.6ms)
+  Rendered jobs/_tag.html.erb (0.7ms)
+  Rendered jobs/_tag.html.erb (1.5ms)
+  Rendered jobs/_tag.html.erb (0.8ms)
+  Rendered jobs/_job.html.erb (146.7ms)
+  Rendered jobs/index.html.erb within layouts/application (155.3ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 902.5ms (Views: 118.8ms | ActiveRecord: 275.9ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /job.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_setup.js" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /autocomplete_setup.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 21.2ms (Views: 2.1ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 11.6ms (Views: 1.9ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-08 23:43:29 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 19.1ms (Views: 2.6ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Processing by JobsController#new as HTML
+  Rendered jobs/_form.html.erb (65.0ms)
+  Rendered jobs/new.html.erb within layouts/application (81.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 253.6ms (Views: 105.5ms | ActiveRecord: 23.7ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /js/bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/smoothness/jquery-ui-1.9.2.custom.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /smoothness/jquery-ui-1.9.2.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/job.css" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /job.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_setup.js" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /autocomplete_setup.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/autocomplete_owners.js" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /autocomplete_owners.js - 304 Not Modified (0ms)
+
+
+Started GET "/courses/json" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Processing by CoursesController#json as JSON
+Completed 200 OK in 71.7ms (Views: 1.6ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/categories/json" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Processing by CategoriesController#json as JSON
+Completed 200 OK in 46.1ms (Views: 2.4ms | ActiveRecord: 29.8ms)
+
+
+Started GET "/proglangs/json" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Processing by ProglangsController#json as JSON
+Completed 200 OK in 18.2ms (Views: 2.9ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/smoothness/images/ui-bg_flat_75_ffffff_40x100.png" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /smoothness/images/ui-bg_flat_75_ffffff_40x100.png - 304 Not Modified (30ms)
+
+
+Started GET "/assets/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png" for 127.0.0.1 at 2014-03-08 23:43:30 -0800
+Served asset /smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png - 304 Not Modified (32ms)
