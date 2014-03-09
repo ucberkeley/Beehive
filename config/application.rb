@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
@@ -94,7 +93,6 @@ module ResearchMatch
     config.filter_parameters += [:password]
   end
 end
-=======
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
@@ -148,4 +146,4 @@ module ResearchMatch
     config.assets.initialize_on_precompile = true
   end
 end
->>>>>>> ec4670708dbe6f6eb309ffd113826c39aaa13d62
+
