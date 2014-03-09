@@ -62,14 +62,6 @@ group :test do
   gem 'simplecov'
 end
 
-group :assets do
-  gem 'therubyracer'
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
-end
-
-
 ################################################################################
 
 # Use unicorn as the web server
