@@ -49,7 +49,7 @@ module ResearchMatch
     config.assets.initialize_on_precompile = false
   end
 end
-||||||| merged common ancestors
+
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
