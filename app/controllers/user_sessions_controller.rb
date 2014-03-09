@@ -5,6 +5,7 @@ include CASControllerIncludes
 #before_filter :goto_home_unless_logged_in, :except => :destroy
 
   def new
+    puts "HELLO THERE"
     session[:auth_hash] = request.env['omniauth.auth']
 
     # When using OmniAuth, different fields in the Users table can be used for
