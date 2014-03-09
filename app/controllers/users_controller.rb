@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
 
   def show
-    redirect_to :controller => :dashboard, :action => :index unless params[:id].to_s == @current_user.id.to_s
+    
   end
 
   # Don't render new.rhtml; instead, create the user immediately
