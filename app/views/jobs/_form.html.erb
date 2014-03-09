@@ -31,6 +31,10 @@ confirm the listing before it is displayed on ResearchMatch.
     <td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
   </tr>
   <tr>
+    <td class="job_clear_table_label"><%= f.label :project_type %><span class="required_field">*</span></td>
+    <td class="job_clear_table_field"><%= f.select :project_type, @job.get_all_project_strings %></td>
+  </tr>
+  <tr>
     <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
     <td class="job_clear_table_field">
       <%= select_tag :faculty_id,
@@ -142,9 +146,26 @@ confirm the listing before it is displayed on ResearchMatch.
         <td class="job_clear_table_label">
             <%= f.label :add_owners, 'Add Owners' %>
         </td>
+	
         <td class="job_clear_table_field">
             <%= select_tag :add_owners,
                 '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                    :id,
+                    :name
+                )
+             %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <div class="ui-widget">
+        <td class="job_clear_table_label">
+            <%= f.label :add_contacts, 'Add Contacts' %>
+        </td>
+	
+        <td class="job_clear_table_field">
+            <%= select_tag :add_contacts,
+                '<option value>Select Additional Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
                     :id,
                     :name
                 )

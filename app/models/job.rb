@@ -21,6 +21,7 @@ class Job < ActiveRecord::Base
   #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
+  #   primary_contact_id  : integer
   # =======================
 
   include AttribsHelper
@@ -59,7 +60,7 @@ class Job < ActiveRecord::Base
   belongs_to :department
   has_and_belongs_to_many :categories
   has_many :pictures
-  
+  has_one :contacter, :class_name => "User", :foreign_key => "id", :primary_key => 'primary_contact_id'
   has_many :watches
   has_many :applics
   has_many :owns
@@ -117,6 +118,25 @@ class Job < ActiveRecord::Base
   #  METHODS  #
   #############
 
+  def project_string
+    if project_type == 1
+      return "Undergraduate Research"
+    end
+    if project_type == 2
+      return "Student Group"
+    end
+    if project_type == 3
+      return "Design Project"
+    end
+    if project_type == 4
+      return "Other"
+    end
+  end
+
+  def get_all_project_strings
+    return [["Undergraduate Research", 1], ["Student Group", 2], ["Design Project", 3], ["Other", 4]]
+  end
+  
   def pay?
     (self.compensation & Compensation::Pay) > 0
   end

@@ -155,6 +155,12 @@ class JobsController < ApplicationController
     if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
       @job.owners << User.find(params[:add_owners])
     end
+    if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
+      puts "YAY THERE"
+      @job.primary_contact_id = params[:add_contacts].to_i
+    else
+      @job.primary_contact_id = @current_user.id
+    end
     @job.populate_tag_list
 
     respond_to do |format|

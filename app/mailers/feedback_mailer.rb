@@ -1,8 +1,9 @@
+
 # The mailer for feedback
 class FeedbackMailer < ActionMailer::Base
   
   def send_feedback(sender, subject_line, body_text)
-    recipients  'BeeHive@lists.eecs.berkeley.edu'
+    recipients  'beehive-support@lists.berkeley.edu'
     reply_to    sender
     from        sender
     subject     "[ResearchMatch Feedback] #{subject_line}"

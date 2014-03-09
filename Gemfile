@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.17' 
+ruby '1.9.3'
 # gem 'rails', '~> 3.0.19'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
@@ -12,7 +13,7 @@ gem 'unicorn'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Debugging
-gem 'exception_notification'
+gem 'exception_notification' , '3.0.1'
 
 # Performance optimization
 # Bullet alerts N+1 query problems
@@ -28,9 +29,11 @@ gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/framework
 gem 'net-ldap', :require => 'net/ldap'
 gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
-gem 'jquery-rails', '>= 1.0.12'
 gem 'omniauth'
 gem 'omniauth-cas'
+
+gem "jquery-rails", "~> 3.1.0"
+gem 'jquery-ui-rails', "~> 4.2.0"
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -88,3 +91,10 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :assets do
+  gem 'therubyracer'
+  gem 'sass-rails', "  ~> 3.2.4"
+  gem 'coffee-rails', "~> 3.2.2"
+  gem 'uglifier'
+end
