@@ -6,7 +6,7 @@ class FeedbackMailer < ActionMailer::Base
     recipients  'beehive-support@lists.berkeley.edu'
     reply_to    sender
     from        sender
-    subject     "[ResearchMatch Feedback] #{subject_line}"
+    subject     "[BeeHive Feedback] #{subject_line}"
     body        body_text
   end
 end

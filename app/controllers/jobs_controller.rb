@@ -21,7 +21,6 @@ class JobsController < ApplicationController
 
   # Ensures that only the user who created a job -- and no other users -- can edit
   # or destroy it.
-  before_filter :check_post_permissions, :only => [ :new, :create ]
   before_filter :correct_user_access, :only => [ :edit, :update, :resend_activation_email,
                                                   :delete, :destroy ]
 
@@ -376,17 +375,9 @@ class JobsController < ApplicationController
   private
   def correct_user_access
     if (Job.find(params[:id]) == nil || (!@current_user.admin? and @current_user != Job.find(params[:id]).user and !Job.find(params[:id]).owners.include?(@current_user)))
-      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      flash[:error] = "You don't have permissions to edit or delete that listing."
       redirect_to :controller => 'dashboard', :action => :index
     end
   end
-
-  def check_post_permissions
-      if not @current_user.can_post?
-          flash[:error] = "Sorry, you don't have permissions to post a new listing. Become a grad student or ask to be hired as faculty."
-          redirect_to :controller => 'dashboard', :action => :index
-      end
-  end
-
 
 end

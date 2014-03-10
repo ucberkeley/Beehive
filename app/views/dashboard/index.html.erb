@@ -34,7 +34,7 @@
 			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
 			<% if @relevant_jobs.empty? %>
 			 <p>
-			    Unfortunately, we were unable to match you to any research positions.
+			    Unfortunately, we were unable to match you to any projects.
 			 </p> 
 			 <p>
     			 Most likely, this is caused by a lack of information regarding your coursework and interests.
@@ -42,8 +42,7 @@
 			 </p>
 			<% else %>
 			<%= @current_user.name %>, we've automatically matched your interests and skill set to the
-			following <b><%= @relevant_jobs.length %> research
-			opening<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
+			following <b><%= @relevant_jobs.length %> project<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
 						<br /><br />
             <% end %>
 			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
@@ -53,10 +52,10 @@
 <div class="dashboard_container box_shadow">
 	<div class="dashboard_wrapper_long">
 		<div class="dashboard_container_long">
-			<h2>Recently Added Postings</h2>
+			<h2>Recently Added Projects</h2>
 			
 			<% if @recently_added_jobs.empty? %>
-			No research positions were recently added. Please try again later!
+			No projects were recently added. Please try again later!
 			<% else %>
 			    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 			<% end %>
