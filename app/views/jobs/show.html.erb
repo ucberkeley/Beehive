@@ -50,6 +50,7 @@
       <% end %>
     </b>
   </p>
+  <!--
   <% if @job.owners.length != 0 %>
   Owned by
   <td class="job_attr_value">
@@ -61,6 +62,21 @@
   </td>
   <% else %>
   There are no owners<br/>
+  <% end %>
+  -->
+  <% if @job.sponsorships.length != 0 %>
+  Sponsored by 
+  <td class="job_attr_value">
+    <% @job.sponsorships.each do |i| %>
+    <% if @i %>
+    <%= link_to(i.faculty.name, :controller => :users, 
+    :action => :show, 
+    :id => i.id) %>
+    <% end %>
+    <% end %>
+  </td>
+  <% else %>
+  There are no sponsors<br/>
   <% end %>
   <p>
     <div class="job_tags">

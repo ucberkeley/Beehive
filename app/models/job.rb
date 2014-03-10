@@ -377,7 +377,7 @@ class Job < ActiveRecord::Base
   #   faculty sponsor is specified.
   def reset_activation(send_email = false)
     self.active = false
-    self.activation_code = ActiveSupport::SecureRandom.random_number(10e6.to_i)
+    self.activation_code = SecureRandom.random_number(10e6.to_i)
 
     # Save, skipping validations, so that we just change the activation code
     # and leave the rest alone! (Also so that we don't encounter weird bugs with

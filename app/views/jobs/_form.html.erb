@@ -46,6 +46,41 @@ confirm the listing before it is displayed on ResearchMatch.
           %>
     </td>
   </tr>
+    <% if !@current_owners.nil? %>
+    <tr>
+      <div class="ui-widget">
+        <td class="job_clear_table_label">
+            <%= f.label :add_owners, 'Add Owners' %>
+        </td>
+	
+        <td class="job_clear_table_field">
+            <%= select_tag :add_owners,
+                '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                    :id,
+                    :name
+                )
+             %>
+        </td>
+      </div>
+    </tr>
+    <tr>
+      <div class="ui-widget">
+        <td class="job_clear_table_label">
+            <%= f.label :add_contacts, 'Add Contacts' %>
+        </td>
+	
+        <td class="job_clear_table_field">
+            <%= select_tag :add_contacts,
+                '<option value>Select Additional Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                    :id,
+                    :name
+                )
+             %>
+        </td>
+      </div>
+    </tr>
+    <% end %>
+
   <tr>
     <td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
     <td class="job_clear_table_field"><%= f.text_area :desc, {:rows=>12, :class => "extrawide" }%></td>
@@ -138,40 +173,6 @@ confirm the listing before it is displayed on ResearchMatch.
                 )
              %>
         </td>
-    </tr>
-    <% end %>
-    <% if !@current_owners.nil? %>
-    <tr>
-      <div class="ui-widget">
-        <td class="job_clear_table_label">
-            <%= f.label :add_owners, 'Add Owners' %>
-        </td>
-	
-        <td class="job_clear_table_field">
-            <%= select_tag :add_owners,
-                '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
-                    :id,
-                    :name
-                )
-             %>
-        </td>
-      </div>
-    </tr>
-    <tr>
-      <div class="ui-widget">
-        <td class="job_clear_table_label">
-            <%= f.label :add_contacts, 'Add Contacts' %>
-        </td>
-	
-        <td class="job_clear_table_field">
-            <%= select_tag :add_contacts,
-                '<option value>Select Additional Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
-                    :id,
-                    :name
-                )
-             %>
-        </td>
-      </div>
     </tr>
     <% end %>
   <tr>

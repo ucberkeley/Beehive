@@ -119,7 +119,7 @@ class JobsController < ApplicationController
 
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
-    @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
+    @owners_list = User.all.sort_by{|u| u.name}
     respond_to do |format|
         format.html
         format.xml
@@ -156,7 +156,6 @@ class JobsController < ApplicationController
       @job.owners << User.find(params[:add_owners])
     end
     if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
-      puts "YAY THERE"
       @job.primary_contact_id = params[:add_contacts].to_i
     else
       @job.primary_contact_id = @current_user.id
@@ -208,6 +207,11 @@ class JobsController < ApplicationController
         if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
           @job.owners << User.find(params[:add_owners])
         end
+        if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
+          @job.primary_contact_id = params[:add_contacts].to_i
+        else
+          @job.primary_contact_id = @current_user.id
+        end
         @job.populate_tag_list
 
         # If the faculty sponsor changed, require activation again.
@@ -227,7 +231,7 @@ class JobsController < ApplicationController
         else
           flash[:notice] = 'Listing was successfully updated.'
         end
-
+        
         if params[:open_ended_end_date] == "true"
           @job.end_date = nil
         end
