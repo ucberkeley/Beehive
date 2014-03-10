@@ -23,7 +23,7 @@
       </div>
 
       <div id="email_field">
-          <p><%= label_tag 'email', 'E-mail address' %> (All ResearchMatch-associated messages will be sent to this address):<br/>  
+          <p><%= label_tag 'email', 'E-mail address' %> (All BeeHive-associated messages will be sent to this address):<br/>  
           <%= f.text_field :email %></p>
       </div>
 
@@ -46,7 +46,7 @@
       <%= submit_tag 'Sign Up Now' %> or <b>continue below</b>.
       <br/><br/><br/>
 
-      <i><b>Note:</b> The rest of this information is optional, but it may increase your chances of landing a research position. <br />
+      <i><b>Note:</b> The rest of this information is optional, but it may increase your chances of being accept to a project. <br />
       Don't feel obligated to fill this in right now -- you can always do so later by clicking the "Edit Profile" tab near the top of the page.</i>
 
       <br>
@@ -66,7 +66,7 @@
 
       <div class="ui-widget">
       <br />
-      Interests -- what research categories are you interested in? (please enter the names of categories, separated by commas, 
+      Interests -- what project categories are you interested in? (please enter the names of categories, separated by commas, 
               e.g. <i>algorithms, security, signal processing</i>):<br />
       <%= text_field :category, :name, :class => 'wide'  %>
       <br />
