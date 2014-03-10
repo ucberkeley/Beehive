@@ -50,7 +50,7 @@
       <td class="job_clear_table_label"><%= f.label :category, 'Categories' %></td>
       <td class="job_clear_table_field">
         <%= text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'extrawide',
-        :placeholder => "(e.g. signal processing, computer vision)"  %>
+        :placeholder => "(e.g. signal processing, environmental engineering)"  %>
       </td>
     </tr>
     <tr>
@@ -58,7 +58,7 @@
         <td class="job_clear_table_label"><%= f.label :course, 'Required courses' %></td>
         <td class="job_clear_table_field">
                 <%= text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'extrawide',
-                                :placeholder => "(e.g. CS61A, EE123)"  %>
+                                :placeholder => "(e.g. CS61A, BioE140L)"  %>
             </td>
     </div>
     </tr>
