@@ -68,7 +68,7 @@
   Sponsored by 
   <td class="job_attr_value">
     <% @job.sponsorships.each do |i| %>
-    <% if @i %>
+    <% if i.faculty %>
     <%= link_to(i.faculty.name, :controller => :users, 
     :action => :show, 
     :id => i.id) %>
