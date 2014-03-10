@@ -1,14 +1,14 @@
 <% content_for :title, "Welcome" %>
-<div>
+<div style="line-height:1.62;font-size:150%;width:65%">
     <h1>Welcome to Beehive</h1>
-    <p style="line-height:18pt;font-size:12pt;float:left;width:65%">
-      Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.<br /><br />
+    <p>
+      Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
     </p>
+<% if session[:user_id].present? %>
 </div>
-<center>
 <br>
 <br><br>
-<table style="margin-left:-350px"id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
+<table style="margin: 20px -50px" id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="3" background="<%= image_path "research_match_display_01a.png" %>" style="height: 144px;background-repeat: no-repeat">
     </td>
@@ -26,10 +26,9 @@
     </td>
   </tr>
 </table>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-</center>
+<br><br><br><br><br><br>
+<% else %>
+<p><%= link_to 'Log In', login_path %> via CalNet to get started!</p>
+<br><br><br><br><br><br><br><br><br><br>
+</div>
+<% end %>
