@@ -1,7 +1,6 @@
 development:
     adapter: postgresql
-    database: beehive_db_sandbox
-    host: localhost
-    username: ocitqqfwsbfgck
+    database: dc8gh7b3pjl8l3
+    username: postgres
     pool: 5
     timeout: 5000
