@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
 
   def show
-    
-  end
+    @user = User.find_by_id(params[:id])
+  end 
 
   # Don't render new.rhtml; instead, create the user immediately
   # and redirect to the edit profile page.

@@ -1,7 +1,56 @@
-<% content_for :title, User.find_by_id(params[:id]).name %>
+<% content_for :title, @user.name %>
 
-<h2><%= User.find_by_id(params[:id]).name %></h2>
+<h2><%= @user.name %></h2>
 <p>
-<%= User.find_by_id(params[:id]).is_faculty ? "Faculty" : "Student" %>
+<%= @user.is_faculty ? "Faculty" : "Student" %>
 </p>
+<p> 
+
+<div id="email">
+  <p> Email: </p>
+  <%= @user.email %> 
+</div>
+
+<div id="courses">
+  <p>Courses taken: </p>
+  <% @user.courses.each do |course| %>
+    <o> <%= course.name %> </o>
+  <% end %>
+</div>
+
+<div id="category">
+  <p> Interests: </p>
+  <% @user.categories.each do |category| %>
+    <p> <%= category.name %> </p>
+  <% end %>
+</div>
+
+<div id="proglang">
+  <p> Proficient Languages: </p>
+  <% @user.proglangs.each do |lang| %>
+    <p> <%= lang.name %> </p>
+  <% end %>
+</div>
+
+<div id="geninfo">
+  <p> Grade Level:</p>
+  <p> <%= @user.year.ordinalize %> year </p>
+  
+  <p> Units this semester:</p>
+  <%= @user.units %> 
+
+  <p> Hours free this: </p>
+  <%= @user.free_hours %>
+
+  <p> Free in the summer? </p>
+  <%= @user.summer %>
+
+  <p> Research: </p>
+  <%= @user.research_blurb %>
+
+  <p> Previous Experience </p>
+  <%= @user.experience %>
+</div>
+<%= @user.url %>
+
 
