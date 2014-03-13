@@ -1,4 +1,5 @@
 <% if not job.nil? %>
+<div class = "row">
 <div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
   <div class="job_padding_wrapper">
     <table class="job_table">
@@ -94,5 +95,6 @@
       </tr>
     </table>
   </div>
+</div>
 </div>
 <% end %>

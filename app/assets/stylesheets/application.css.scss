@@ -1,5 +1,5 @@
 
-html, body {
+html{
   background-color: #fff;
   color: #333;
   height: 100%;
@@ -11,7 +11,7 @@ html, body {
   width: 100%;
 }
 
-body, p, ol, ul, td {
+p, ol, ul, td {
   font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
   font-size: 12px;
   color: #333;
@@ -208,9 +208,9 @@ span.required_field {
 }
 
 #content {
-  padding: 50px;
+  /*padding: 50px;*/
   padding-top: 30px;
-  padding-bottom: 40px;
+  /*padding-bottom: 40px;*/
   /*position: relative;
     top: -159px;*/
   .mailer {
@@ -219,8 +219,6 @@ span.required_field {
 }
 
 #contentcenter {
-  width: 900px;
-  margin: auto;
 }
 
 #footer {

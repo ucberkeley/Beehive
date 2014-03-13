@@ -81,24 +81,25 @@
 	</div>
       </div>
       <div id="shadowdown"></div>
-      
-      <div id="content">
-	<% if !(flash[:error].nil? || flash[:error] == '') %>
-	<div id="flash_error">
-          <%= flash[:error] %>
-	</div>
-	<% end %>
-	<% if !(flash[:notice].nil? || flash[:notice] == '') %>
-	<div id="flash_notice">
-          <%= flash[:notice] %>
-	</div>
-	<% end %>
-	<br />
-	<div id="contentcenter">
-	  <%= yield %>
-	</div>
+      <div="row">
+      <div id="content" class="col-md-12 col-lg-12 col-xs-offset-1 col-md-offset-2">
+        	<% if !(flash[:error].nil? || flash[:error] == '') %>
+        	<div id="flash_error">
+                  <%= flash[:error] %>
+        	</div>
+        	<% end %>
+        	<% if !(flash[:notice].nil? || flash[:notice] == '') %>
+        	<div id="flash_notice">
+                  <%= flash[:notice] %>
+        	</div>
+        	<% end %>
+        	<br />
+        	<div id="contentcenter">
+        	  <%= yield %>
+        	</div>
 	
       </div>
+    </div>
       
       <div id="footer">
 	<div id="footer_inside">
