@@ -81574,3 +81574,476 @@ Served asset /research_match_display_01a.png - 304 Not Modified (0ms)
 
 Started GET "/assets/research_match_display_02.png" for 127.0.0.1 at 2014-03-12 22:38:06 -0700
 Served asset /research_match_display_02.png - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:47:52 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (4.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.3ms)
+Completed 200 OK in 25.0ms (Views: 12.1ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /application.js - 304 Not Modified (39ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_03a.png" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /research_match_display_03a.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/header_coe.gif" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /header_coe.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/header_stripe.gif" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /header_stripe.gif - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_01a.png" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /research_match_display_01a.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_02.png" for 127.0.0.1 at 2014-03-12 22:47:53 -0700
+Served asset /research_match_display_02.png - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2014-03-12 22:47:59 -0700
+Processing by UserSessionsController#destroy as HTML
+Redirected to https://auth-test.berkeley.edu/cas/logout?destination=http%3A%2F%2Flocalhost%3A3000%2F&gateway=true
+Completed 302 Found in 12.8ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.8ms)
+Completed 200 OK in 15.7ms (Views: 12.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:48:03 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 8.6ms (Views: 7.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:48:51 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 9.5ms (Views: 7.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:49:31 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:13 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 10.5ms (Views: 7.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:13 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:13 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:14 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:14 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:14 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:14 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.3ms)
+Completed 200 OK in 8.1ms (Views: 5.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:15 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.9ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 8.1ms (Views: 6.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (35ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /application.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:22 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.4ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 12.3ms (Views: 9.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:26 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.4ms)
+  Rendered users/_user_bar.html.erb (0.3ms)
+  Rendered users/_search_bar.html.erb (0.6ms)
+Completed 200 OK in 12.8ms (Views: 9.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:44 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-03-12 22:50:53 -0700
+
+
+Started GET "/auth/cas" for 127.0.0.1 at 2014-03-12 22:50:53 -0700
+
+
+Started GET "/auth/cas/callback?url=http%3A%2F%2Flocalhost%3A3000%2F&ticket=ST-3816-nJ5FrTSOT5WMZ3UFdXUl-cas-t1" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Processing by UserSessionsController#new as HTML
+  Parameters: {"url"=>"http://localhost:3000/", "ticket"=>"ST-3816-nJ5FrTSOT5WMZ3UFdXUl-cas-t1", "provider"=>"cas"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 18.5ms (ActiveRecord: 4.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.6ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 67.5ms (Views: 51.4ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_03a.png" for 127.0.0.1 at 2014-03-12 22:50:58 -0700
+Served asset /research_match_display_03a.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_01a.png" for 127.0.0.1 at 2014-03-12 22:50:59 -0700
+Served asset /research_match_display_01a.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/research_match_display_02.png" for 127.0.0.1 at 2014-03-12 22:50:59 -0700
+Served asset /research_match_display_02.png - 304 Not Modified (0ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2014-03-12 22:51:01 -0700
+Processing by UserSessionsController#destroy as HTML
+Redirected to https://auth-test.berkeley.edu/cas/logout?destination=http%3A%2F%2Flocalhost%3A3000%2F&gateway=true
+Completed 302 Found in 9.0ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 12.2ms (Views: 10.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:51:05 -0700
+Served asset /application.js - 304 Not Modified (7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.1ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.4ms)
+Completed 200 OK in 10.9ms (Views: 8.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /application.js - 304 Not Modified (42ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:51:23 -0700
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (2.2ms)
+  Rendered users/_user_bar.html.erb (0.2ms)
+  Rendered users/_search_bar.html.erb (0.5ms)
+Completed 200 OK in 13.5ms (Views: 11.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/dist/css/bootstrap-theme.css" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /dist/css/bootstrap-theme.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/dist/css/bootstrap.css" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /dist/css/bootstrap.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/south-street/jquery-ui-1.8.4.custom.css" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /south-street/jquery-ui-1.8.4.custom.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/js/bootstrap.js" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /js/bootstrap.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css" for 127.0.0.1 at 2014-03-12 22:51:30 -0700
+Served asset /application.css - 304 Not Modified (0ms)
