@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beehive <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
     
     <%# Resources %>
-    <%= stylesheet_link_tag 'dist/css/bootstrap-theme.css' %>
-    <%= stylesheet_link_tag 'dist/css/bootstrap.css' %>
+    <!-- <meta charset="utf-8" /> -->
+    <%= stylesheet_link_tag 'dist/css/app.css' %>
+    <!-- <%= stylesheet_link_tag 'dist/css/bootstrap-theme.css' %> -->
+<!--     <%= stylesheet_link_tag 'dist/css/bootstrap.css' %> -->
     <%= stylesheet_link_tag 'south-street/jquery-ui-1.8.4.custom' %>
     <%= stylesheet_link_tag 'application' %>
     
     <%= csrf_meta_tag %>
     
+
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag 'js/bootstrap.js' %>
+    <%= javascript_include_tag "bower_components/foundation/js/foundation" %>
+    <!-- <%= javascript_include_tag 'js/bootstrap.js' %> -->
+    <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
     
     <%= render 'shared/ga' if Rails.production? %>
     
@@ -47,67 +54,69 @@
   </head>
   <body>
     
-    <div id="everything">
+    <!-- <div id="everything"> -->
       <div id="header">
-	<div id="header_image">
-	  <%= link_to "", home_path %>
-	  
-	  <div id="side">
-            <div id="loginbar">
-              <%= render :partial => "users/user_bar" %>
+      	<div class="row">
+          <div class="large-8 columns header_image">
+      	  <%= link_to "", home_path %>
+      	  </div>
+
+      	  <div class="large-4 columns">
+                <%= render :partial => "users/user_bar" %>
+              <!-- <div id="searchbar"> -->
+                <%= render :partial => "users/search_bar" %>
+              <!-- </div> -->
+            
+      	  </div>
+      	</div>
+      </div>
+
+
+          <div id="header_tabs">
+            <div id="tabs">
+              <ul>
+                <% if @current_user.present? %>
+                <li><%= link_to "Dashboard", dashboard_path %></li>
+                <li><%= link_to "Browse Listings", jobs_path %></li>
+                <li><%= link_to "Post a Listing", new_job_path %></li>
+                <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
+                <% else %>
+                <li><%= link_to "Log In", login_path %></li>
+                <% end %>
+                <% if @current_user.present? && @current_user.admin? %>
+                <li><%= link_to "Statistics", statistics_path %></li>
+                <li><%= link_to "Admin", admin_path %></li>
+                <% end %>
+              </ul>
             </div>
-            <div id="searchbar">
-              <%= render :partial => "users/search_bar" %>
+           </div>
+
+         <div id="shadowdown"></div>
+          <div id="content">
+              <% if !(flash[:error].nil? || flash[:error] == '') %>
+              <div id="flash_error">
+                      <%= flash[:error] %>
+              </div>
+              <% end %>
+              <% if !(flash[:notice].nil? || flash[:notice] == '') %>
+              <div id="flash_notice">
+                      <%= flash[:notice] %>
+              </div>
+              <% end %>
+              <br />
+              <div id="contentcenter">
+                <%= yield %>
+              </div>
+
+          </div>
+          
+          <div id="footer">
+    	       <div id="footer_inside">
+    	       <br/>
+              &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
+              <br />
             </div>
-	  </div>
-	</div>
-      </div>
-      <div id="header_tabs">
-	<div id="tabs">
-          <ul>
-            <% if @current_user.present? %>
-            <li><%= link_to "Dashboard", dashboard_path %></li>
-            <li><%= link_to "Browse Listings", jobs_path %></li>
-            <li><%= link_to "Post a Listing", new_job_path %></li>
-            <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
-            <% else %>
-            <li><%= link_to "Log In", login_path %></li>
-            <% end %>
-            <% if @current_user.present? && @current_user.admin? %>
-            <li><%= link_to "Statistics", statistics_path %></li>
-            <li><%= link_to "Admin", admin_path %></li>
-            <% end %>
-          </ul>
-	</div>
-      </div>
-      <div id="shadowdown"></div>
-      <div="row">
-      <div id="content" class="col-md-12 col-lg-12 col-xs-offset-1 col-md-offset-2">
-        	<% if !(flash[:error].nil? || flash[:error] == '') %>
-        	<div id="flash_error">
-                  <%= flash[:error] %>
-        	</div>
-        	<% end %>
-        	<% if !(flash[:notice].nil? || flash[:notice] == '') %>
-        	<div id="flash_notice">
-                  <%= flash[:notice] %>
-        	</div>
-        	<% end %>
-        	<br />
-        	<div id="contentcenter">
-        	  <%= yield %>
-        	</div>
-	
-      </div>
-    </div>
-      
-      <div id="footer">
-	<div id="footer_inside">
-	  <br/>
-          &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
-          <br />
-        </div>
-      </div>
-    </div>
+          </div>
+    <!-- </div> -->
   </body>
 </html>
