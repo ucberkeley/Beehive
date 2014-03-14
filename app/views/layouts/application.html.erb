@@ -16,12 +16,7 @@
     
     <%= csrf_meta_tag %>
     
-
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "bower_components/foundation/js/foundation" %>
-    <!-- <%= javascript_include_tag 'js/bootstrap.js' %> -->
-    <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
-    
     <%= render 'shared/ga' if Rails.production? %>
     
     <%# Includes controller-specific files %>
