@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery.ui.all
+//= require_tree .
 
 function setupExternalLinks() {
   $('a').each(function(){
