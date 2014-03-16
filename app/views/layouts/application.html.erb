@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <!-- <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beehive <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
     
     <%# Resources %>
-    <%= stylesheet_link_tag 'dist/css/bootstrap-theme.css' %>
-    <%= stylesheet_link_tag 'dist/css/bootstrap.css' %>
+    <!-- <meta charset="utf-8" /> -->
+    <%= stylesheet_link_tag 'dist/css/app.css' %>
+    <!-- <%= stylesheet_link_tag 'dist/css/bootstrap-theme.css' %> -->
+<!--     <%= stylesheet_link_tag 'dist/css/bootstrap.css' %> -->
     <%= stylesheet_link_tag 'south-street/jquery-ui-1.8.4.custom' %>
     <%= stylesheet_link_tag 'application' %>
     
     <%= csrf_meta_tag %>
     
+
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag 'js/bootstrap.js' %>
+    <%= javascript_include_tag "bower_components/foundation/js/foundation" %>
+    <!-- <%= javascript_include_tag 'js/bootstrap.js' %> -->
+    <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
     
     <%= render 'shared/ga' if Rails.production? %>
     
@@ -47,21 +54,24 @@
   </head>
   <body>
     
-    <div id="everything">
+    <!-- <div id="everything"> -->
       <div id="header">
-	<div id="header_image">
-	  <%= link_to "", home_path %>
-	  
-	  <div id="side">
-            <div id="loginbar">
-              <%= render :partial => "users/user_bar" %>
-            </div>
-            <div id="searchbar">
-              <%= render :partial => "users/search_bar" %>
-            </div>
-	  </div>
-	</div>
+      	<div class="row">
+          <div class="large-8 columns header_image">
+      	  <%= link_to "", home_path %>
+      	  </div>
+
+      	  <div class="large-4 columns">
+                <%= render :partial => "users/user_bar" %>
+              <!-- <div id="searchbar"> -->
+                <%= render :partial => "users/search_bar" %>
+              <!-- </div> -->
+            
+      	  </div>
+      	</div>
       </div>
+      
+      
       <div id="header_tabs">
 	<div id="tabs">
     <ul>

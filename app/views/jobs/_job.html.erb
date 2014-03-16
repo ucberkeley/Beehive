@@ -1,37 +1,32 @@
 <% if not job.nil? %>
+<div class = "row">
 <div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
   <div class="job_padding_wrapper">
     <table class="job_table">
       <tr class="job_table_row">
 	<td class="job_table_left">
-	  <div class="btn-group" style="float:right">
-	    <button type="button" style="padding:none" 
-		    class="btn btn-default dropdown-toggle" 
-		    data-toggle="dropdown">
-	      <% if job.active %>
-	      <% else %>
-	      <% end %>                    
-	      
-	      <span class="caret"></span>
-	      
-	    </button>
-	    <ul class="dropdown-menu" role="menu">
+	  <div style="float:right">
+	  	<p>
+	    <a href="#" class="tiny button dropdown" data-dropdown="drop"></a><br>
+	       </p>
+	    <ul id="drop" data-dropdown-content class="f-dropdown open">
 	      <% if @current_user.present? && (job.user_id == @current_user.id ||
 		 job.owners.include?(@current_user) || @current_user.admin?)
 		 %>
 	      <li>
-		<%= link_to "edit", :controller => "jobs", :action => "edit",
-		:id => job.id %>
+				<%= link_to "edit", :controller => "jobs", :action => "edit",
+				:id => job.id %>
 	      </li>
 	      <li>
-		<%= link_to "delete", :controller=> "jobs", :action =>
-		"delete", :id => job.id %>
+				<%= link_to "delete", :controller=> "jobs", :action =>
+				"delete", :id => job.id %>
 	      </li>
 	      <% end %>
+
 	      <% if job.users.include?(@current_user) %>
 	      <li>
-		<%= link_to "unwatch", :controller=>:jobs, :action =>
-		:unwatch, :id => job.id %>
+				<%= link_to "unwatch", :controller=>:jobs, :action =>
+				:unwatch, :id => job.id %>
 	      </li>
 	      <% elsif job.user != @current_user %>
 	      <li>
@@ -50,6 +45,7 @@
 	      </li>
 	      <% end %>
 	    </ul>
+
 	  </div>
 	  <div class="job_title">
             <a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
@@ -94,5 +90,6 @@
       </tr>
     </table>
   </div>
+</div>
 </div>
 <% end %>

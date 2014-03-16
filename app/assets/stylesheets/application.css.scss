@@ -1,5 +1,5 @@
 
-html, body {
+html{
   background-color: #fff;
   color: #333;
   height: 100%;
@@ -11,11 +11,10 @@ html, body {
   width: 100%;
 }
 
-body, p, ol, ul, td {
+p, ol, ul, td {
   font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
   font-size: 12px;
   color: #333;
-  margin: auto;
   width: 100%;
   cursor: default;
 }
@@ -63,15 +62,12 @@ body > #everything {
 
 #header {
   /* background-color: #353d41; */
-  height: 89px;
-  width: 100%;
+  padding:22px;
 }
 
-#header_image {
+.header_image {
   color: #777777;
-  margin: auto;
   height: 89px;
-  width: 1000px;
   background: url("header_coe.gif") no-repeat;
   a {
     display: block;
@@ -208,9 +204,9 @@ span.required_field {
 }
 
 #content {
-  padding: 50px;
+  /*padding: 50px;*/
   padding-top: 30px;
-  padding-bottom: 40px;
+  /*padding-bottom: 40px;*/
   /*position: relative;
     top: -159px;*/
   .mailer {
@@ -219,8 +215,6 @@ span.required_field {
 }
 
 #contentcenter {
-  width: 900px;
-  margin: auto;
 }
 
 #footer {

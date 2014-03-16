@@ -1,11 +1,14 @@
 <% content_for :title, "Welcome" %>
-<div style="line-height:1.62;font-size:150%;width:65%">
-    <h1>Welcome to Beehive</h1>
-    <p>
-      Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
-    </p>
+<!-- <div style="line-height:1.62;font-size:150%;width:65%"> -->
+  <div class= "row">
+    <div class="large-8 columns">
+      <h1>Welcome to Beehive</h1>
+      <p>
+        Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
+      </p>
+    
 <% if session[:user_id].present? %>
-</div>
+
 <br>
 <br><br>
 <table style="margin: 20px -50px" id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
@@ -28,7 +31,11 @@
 </table>
 <br><br><br><br><br><br>
 <% else %>
-<p><%= link_to 'Log In', login_path %> via CalNet to get started!</p>
+<br><br>
+  <p><%= link_to 'Log In', login_path %> via CalNet to get started!</p>
+  </div>
+    <!-- </div> -->
+    </div>
 <br><br><br><br><br><br><br><br><br><br>
-</div>
+
 <% end %>
