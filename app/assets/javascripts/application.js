@@ -1,7 +1,3 @@
-//= require jquery
-//= require jquery.ui.all
-//= require_tree .
-
 function setupExternalLinks() {
   $('a').each(function(){
     if( this.host && this.host != location.host )

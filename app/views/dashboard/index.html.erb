@@ -1,66 +1,73 @@
 <% content_for :title, "Dashboard" %>
-<div class="dashboard_container"><h1 id="dashboard_header">Dashboard</h1>
-	<div class="dashboard_wrapper_watched">
-		<div class="dashboard_container_watched box_shadow">
-		
-			<% if @current_user.can_post? || @current_user.owned_jobs.size > 0 -%>
-				<h2>Your Postings</h2>
+<div class="row">
+<h1>Dashboard</h1>
+	
+		<div class="large-6 small-12 columns">
+			<!-- <div class="dashboard_wrapper_smartmatch"> -->
+				<!-- <div class="dashboard_container_smartmatch box_shadow"> -->
+					<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
+					<% if @relevant_jobs.empty? %>
+					 <p>
+					    Unfortunately, we were unable to match you to any projects.
+					 </p> 
+					 <p>
+		    			 Most likely, this is caused by a lack of information regarding your coursework and interests.
+			    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => @current_user %> with courses and interests to get started?
+					 </p>
+					<% else %>
+					<%= @current_user.name %>, we've automatically matched your interests and skill set to the
+					following <b><%= @relevant_jobs.length %> project<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
+								<br /><br />
+		            <% end %>
+					<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
+				<!-- </div> -->
+			<!-- </div> -->
+		</div>
 
-				<% if (@your_jobs + @current_user.owned_jobs).empty? %>
-					You have not added any listings. Why not <%= link_to 'post one', :controller => :jobs, :action => :new %>?
+		<div class="large-6 small-12 columns">
+			
+				<% if @current_user.can_post? || @current_user.owned_jobs.size > 0 -%>
+					<h2>Your Postings</h2>
+
+					<% if (@your_jobs + @current_user.owned_jobs).empty? %>
+						You have not added any listings. Why not <%= link_to 'post one', :controller => :jobs, :action => :new %>?
+					
+					<% else %>
+						<%= render :partial => "jobs/your_job", :collection => @your_jobs + @current_user.owned_jobs %>
+					<% end %>
 				
-				<% else %>
-					<%= render :partial => "jobs/your_job", :collection => @your_jobs + @current_user.owned_jobs %>
+				<% end -%>	
+				<% if !@current_user.is_faculty %>
+			    <% if @current_user.can_post? %><br /><% end %>
+					<h2>Your Watched Postings</h2>
+					<!-- //list of postings you're watching -->
+					<% if @watched_jobs.empty? %>
+						You are not watching any postings.
+					<% else %>
+						<%= render :partial => "jobs/watched_job", :collection => @current_user.watches %>
+					<% end %>
+					<br />
+				
 				<% end %>
 			
-			<% end -%>	
-			<% if !@current_user.is_faculty %>
-		    <% if @current_user.can_post? %><br /><% end %>
-				<h2>Your Watched Postings</h2>
-				<!-- //list of postings you're watching -->
-				<% if @watched_jobs.empty? %>
-					You are not watching any postings.
+		</div>
+	
+</div>
+<div class="row">
+	<div class="large-12 small-12 columns">
+		<!-- <div class="dashboard_wrapper_long"> -->
+			<!-- <div class="dashboard_container_long"> -->
+				<h2>Recently Added Projects</h2>
+				
+				<% if @recently_added_jobs.empty? %>
+				No projects were recently added. Please try again later!
 				<% else %>
-					<%= render :partial => "jobs/watched_job", :collection => @current_user.watches %>
+				    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
 				<% end %>
-				<br />
-			
-			<% end %>
-		
-		</div>
-	</div>
-	<div class="dashboard_wrapper_smartmatch">
-		<div class="dashboard_container_smartmatch box_shadow">
-			<h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
-			<% if @relevant_jobs.empty? %>
-			 <p>
-			    Unfortunately, we were unable to match you to any projects.
-			 </p> 
-			 <p>
-    			 Most likely, this is caused by a lack of information regarding your coursework and interests.
-	    		 Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => @current_user %> with courses and interests to get started?
-			 </p>
-			<% else %>
-			<%= @current_user.name %>, we've automatically matched your interests and skill set to the
-			following <b><%= @relevant_jobs.length %> project<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
-						<br /><br />
-            <% end %>
-			<%= render :partial => "jobs/job", :collection => @relevant_jobs %>
-		</div>
+				
+
+			<!-- </div> -->
+		<!-- </div> -->
 	</div>
 </div>
-<div class="dashboard_container box_shadow">
-	<div class="dashboard_wrapper_long">
-		<div class="dashboard_container_long">
-			<h2>Recently Added Projects</h2>
-			
-			<% if @recently_added_jobs.empty? %>
-			No projects were recently added. Please try again later!
-			<% else %>
-			    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
-			<% end %>
-			
-
-		</div>
-	</div>
 </div>

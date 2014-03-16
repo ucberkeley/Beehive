@@ -32,8 +32,8 @@ gem 'actionmailer-with-request', '~> 0.3'
 gem 'omniauth'
 gem 'omniauth-cas'
 
-gem "jquery-rails", "~> 3.1.0"
-gem 'jquery-ui-rails', "~> 4.2.0"
+# gem "jquery-rails", "~> 3.1.0"
+# gem 'jquery-ui-rails', "~> 4.2.0"
 
 # Deploy with Capistrano
 gem 'capistrano'
