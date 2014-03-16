@@ -6,6 +6,9 @@ ruby '1.9.3'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
 
+# adding pagination
+gem "kaminari", "~> 0.15.1"
+
 # Use unicorn web server
 gem 'unicorn'
 

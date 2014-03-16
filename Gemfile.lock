@@ -104,6 +104,9 @@ GEM
     jquery-ui-rails (4.2.0)
       railties (>= 3.2.16)
     json (1.8.1)
+    kaminari (0.15.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -178,7 +181,7 @@ GEM
     rubycas-client (2.3.9)
       activesupport
     rubyzip (1.1.0)
-    sass (3.2.14)
+    sass (3.3.2)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -208,7 +211,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -239,6 +242,7 @@ DEPENDENCIES
   heroku
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 4.2.0)
+  kaminari (~> 0.15.1)
   mysql2 (~> 0.3.11)
   net-ldap
   nokogiri

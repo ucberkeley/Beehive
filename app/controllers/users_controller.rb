@@ -112,7 +112,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.order(:name).page(params[:page])
   end
 
   private
