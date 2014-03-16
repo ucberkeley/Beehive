@@ -1,6 +1,3 @@
-//= require jquery
-//= require jquery.ui.all
-
 function setupExternalLinks() {
   $('a').each(function(){
     if( this.host && this.host != location.host )

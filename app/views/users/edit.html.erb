@@ -14,126 +14,137 @@
     <br />
   <% end %>
 
+
 <!-- Basic info: i.e., email address -->
 <%# TODO: don't rip off dashboard CSS! %>
-<div class="dashboard_container"><h1 id="profile_header">User Profile</h1>
-  <div class="dashboard_wrapper_medium">
-      <div class="dashboard_container_medium box_shadow" style="float:left">
-        <h2>The Basics</h2>
-        <div class="left_col">
-          <p>Name: <b><%= @user.name %></b></p>
-          <br />
-          <p><%= label_tag 'email', 'E-mail address' %>:<br />
-              <%= f.text_field :email %>
-          </p>
-        </div> <%# Left col %>
-        <div class="right_col">
-          <% utype = @user.user_type %>
-          <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %><%= render 'shared/tooltip', :text => "Your user type was automatically determined. If it's wrong, please let us know!" %></b>, you can:
-            <ul>
-            <% if utype.present? && utype >= User::Types::Undergrad %>
-              <li>View listings</li>
-              <li>Watch and apply for jobs</li>
-            <% end # undergrad %>
-            <% if utype.present? && utype >= User::Types::Grad %>
-              <li>Post listings</li>
-              <li>Review applications</li>
-            <% end # grad %>
-            <% if utype.present? && utype >= User::Types::Faculty %>
-              <li>Receive applications via email</li>
-            <% end # faculty %>
-            <% if utype.present? && utype >= User::Types::Admin %>
-              <li>Change user roles</li>
-              <li>Upload a csv of authorized users</li>
-            <% end # admin %>
-            </ul>
-          </p>
-        </div> <%# Right col %>
-      </div><%# dashboard_container_medium %>
+<div class="row">
+  
+    <h1>User Profile</h1>
+    <div class="large-8 small-12 columns">
+      <div class="dashboard_wrapper_medium">
+          <div class="dashboard_container_medium box_shadow" style="float:left;">
+            <h2>The Basics</h2>
+            <div class="left_col">
+              <p>Name: <b><%= @user.name %></b></p>
+              <br />
+              <p><%= label_tag 'email', 'E-mail address' %>:<br />
+                  <%= f.text_field :email %>
+              </p>
+            </div> <%# Left col %>
+            <div class="right_col">
+              <% utype = @user.user_type %>
+              <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %><%= render 'shared/tooltip', :text => "Your user type was automatically determined. If it's wrong, please let us know!" %></b>, you can:
+                <ul>
+                <% if utype.present? && utype >= User::Types::Undergrad %>
+                  <li>View listings</li>
+                  <li>Watch and apply for jobs</li>
+                <% end # undergrad %>
+                <% if utype.present? && utype >= User::Types::Grad %>
+                  <li>Post listings</li>
+                  <li>Review applications</li>
+                <% end # grad %>
+                <% if utype.present? && utype >= User::Types::Faculty %>
+                  <li>Receive applications via email</li>
+                <% end # faculty %>
+                <% if utype.present? && utype >= User::Types::Admin %>
+                  <li>Change user roles</li>
+                  <li>Upload a csv of authorized users</li>
+                <% end # admin %>
+                </ul>
+              </p>
+            </div> <%# Right col %>
+          </div><%# dashboard_container_medium %>
+      </div>
   </div>
-</div>
 
+</div>
 <br />
 
 <%- unless @current_user.is_faculty? or @user.admin? -%>
 <!-- courses / interests / proglangs. part of the user form. -->
-<div class="dashboard_container">
-  <div class="dashboard_wrapper_medium">
-    <div class="dashboard_container_medium box_shadow">
-      <h2>Education & Interests</h2>
-      <p>
-      The following information is optional, but will help BeeHive find positions better tailored to you.
-      </p>
-      <br />
-      <p>Courses:<br />
-      <%= text_field :course, :name, :value => params[:course][:name], :class => 'extrawide', 
-            :placeholder => "Courses you've taken, separated by commas (e.g. CS61A, EE123)" %>
-      </p><br />
-      <p>
-      Interests (Categories): <br />
-      <%= text_field :category, :name, :value => params[:category][:name], :class => 'extrawide', 
-            :placeholder => "Fields of interest, separated by commas (e.g. signal processing)" %>
-      </p><br />
-      <p>
-      Programming Languages: <br />
-      <%= text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide',
-            :placeholder => "Languages in which you are proficient, separated by commas" %>
-      </p>
+<div class="row">
+  <div class="large-8 small-12 columns">
+    <div class="dashboard_container">
+      <div class="dashboard_wrapper_medium">
+        <div class="dashboard_container_medium box_shadow">
+          <h2>Education & Interests</h2>
+          <p>
+          The following information is optional, but will help BeeHive find positions better tailored to you.
+          </p>
+          <br />
+          <p>Courses:<br />
+          <%= text_field :course, :name, :value => params[:course][:name], :class => 'extrawide', 
+                :placeholder => "Courses you've taken, separated by commas (e.g. CS61A, EE123)" %>
+          </p><br />
+          <p>
+          Interests (Categories): <br />
+          <%= text_field :category, :name, :value => params[:category][:name], :class => 'extrawide', 
+                :placeholder => "Fields of interest, separated by commas (e.g. signal processing)" %>
+          </p><br />
+          <p>
+          Programming Languages: <br />
+          <%= text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide',
+                :placeholder => "Languages in which you are proficient, separated by commas" %>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <%# end courses / interests / proglangs -%>
 <% end %>
-
-<br />
 <br />
 
 <%# TODO CSS this up %>
 <%- unless @current_user.is_faculty? or @user.admin? -%>
-<div class="dashboard_container">
-  <div class="wrapper_medium">
-    <div class="dashboard_container_medium box_shadow">
-      <h2>At a Glance</h2>
+<div class="row">
+  <div class="large-8 small-12 columns">
+    <div class="dashboard_container">
+      <div class="wrapper_medium">
+        <div class="dashboard_container_medium box_shadow">
+          <h2>At a Glance</h2>
 
-      <p>
-      These are the basics that faculty will want to know up-front when you apply.
-      </p>
-      <br/>
+          <p>
+          These are the basics that faculty will want to know up-front when you apply.
+          </p>
+          <br/>
 
-      <p>
-      I'm a
-      <%= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] }, @current_user.year) %> year student, and taking
-      <%= f.text_field :units, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
-      units this semester.
-      </p>
-      <br/>
+          <p>
+          I'm a
+          <%= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] }, @current_user.year) %> year student, and taking
+          <%= f.text_field :units, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
+          units this semester.
+          </p>
+          <br/>
 
-      <p>
-      I can commit
-      <%= f.text_field :free_hours, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
-      hours per week to BeeHive projects.
-      </p>
-      <br/>
+          <p>
+          I can commit
+          <%= f.text_field :free_hours, :style => 'width: 36px; text-align:center;', :placeholder => '0' %>
+          hours per week to BeeHive projects.
+          </p>
+          <br/>
 
-      <p>
-      Available to work over summer?
-      <%= f.check_box :summer %>
-      </p>
-      <br/>
+          <p>
+          Available to work over summer?
+          <%= f.check_box :summer %>
+          </p>
+          <br/>
 
-      <p>
-      Why are you interested in BeeHive projects?<br/>
-      <%= f.text_area :research_blurb, :rows => 3, :id => 'research-blurb' %>
-      <%= render 'shared/charcounter', :linked => 'research-blurb', :limit => 255 %>
-      </p>
-      <br/>
+          <p>
+          Why are you interested in BeeHive projects?<br/>
+          <%= f.text_area :research_blurb, :rows => 3, :id => 'research-blurb' %>
+          <%= render 'shared/charcounter', :linked => 'research-blurb', :limit => 255 %>
+          </p>
+          <br/>
 
-      <p>
-      Brief description of past internships or other relevant experience:
-      <%= f.text_area :experience, :rows => 3, :id => 'experience-box' %>
-      <%= render 'shared/charcounter', :linked => 'experience-box', :limit => 255 %>
-      </p>
-      <br/>
+          <p>
+          Brief description of past internships or other relevant experience:
+          <%= f.text_area :experience, :rows => 3, :id => 'experience-box' %>
+          <%= render 'shared/charcounter', :linked => 'experience-box', :limit => 255 %>
+          </p>
+          <br/>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -141,30 +152,35 @@
 <%- end -%>
 
 <% unless @user.is_faculty? or @user.admin? %>
-<div class="dashboard_container">
-  <div class="dashboard_wrapper_medium">
-    <div class="dashboard_container_medium box_shadow">
-      <h2>Attachments</h2>
-      <p>
-        Please provide a link to any relevant supplementary material, like a r&eacute;sum&eacute; or portfolio.
-        This is your chance to impress the faculty!
-        <br/>
+<div class="row">
+  <div class="large-8 small-12 columns">
+    <div class="dashboard_container">
+      <div class="dashboard_wrapper_medium">
+        <div class="dashboard_container_medium box_shadow">
+          <h2>Attachments</h2>
+          <p>
+            Please provide a link to any relevant supplementary material, like a r&eacute;sum&eacute; or portfolio.
+            This is your chance to impress the faculty!
+            <br/>
 
-      </p>
-      <br/>
+          </p>
+          <br/>
 
-      <p>
-      <%= f.text_field :url, :class => 'external-url', :style => 'width:100%;' %>
-      </p>
-      <p style="font-size:x-small;">
-        If you need a place to store files, there are many free options, like
-        <%= link_to 'Dropbox', 'http://dropbox.com' %> and 
-        <%= link_to 'Google Docs', 'http://docs.google.com' %>.
-      </p>
-      <br/>
+          <p>
+          <%= f.text_field :url, :class => 'external-url', :style => 'width:100%;' %>
+          </p>
+          <p style="font-size:x-small;">
+            If you need a place to store files, there are many free options, like
+            <%= link_to 'Dropbox', 'http://dropbox.com' %> and 
+            <%= link_to 'Google Docs', 'http://docs.google.com' %>.
+          </p>
+          <br/>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 <% end %>
 
 <p style="text-align:center;">

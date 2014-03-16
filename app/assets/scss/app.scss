@@ -414,13 +414,8 @@ textarea.extrawide {
 /**Dashboard**/
 
 .dashboard_container {
-  width: 900px;
   &:after {
     content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
   }
 }
 
@@ -431,15 +426,12 @@ h2#dashboard_header {
 /*smartmatch*/
 
 .dashboard_wrapper_smartmatch {
-  width: 60%;
-  height: 100%;
   margin-bottom: 15px;
   border-left: 1px solid #f5f5f5;
   border-right: 1px solid #f5f5f5;
 }
 
 .dashboard_container_smartmatch {
-  height: 100%;
   padding: 15px;
   background: #e5feb4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
@@ -447,16 +439,12 @@ h2#dashboard_header {
 /*watched*/
 
 .dashboard_wrapper_watched {
-  float: right;
-  clear: both;
-  width: 37.5%;
   margin-bottom: 15px;
   border-left: 1px solid #f5f5f5;
   border-right: 1px solid #f5f5f5;
 }
 
 .dashboard_container_watched {
-  padding: 15px;
   background: #e5feb4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
 
@@ -468,12 +456,10 @@ h2#dashboard_header {
 }
 
 .dashboard_container_long {
-  padding: 15px;
   background: #e5feb4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
 }
 
 .dashboard_container_medium {
-  padding: 15px;
   background: #e5feb4 url("../images/dashboard_box_grad.png") repeat-x bottom left;
   width: 500px;
 }

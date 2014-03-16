@@ -1,11 +1,11 @@
 <% content_for :title, "Listings" %>
 
 <!-- search bar -->
-<div id="browse_search_bar">
+<div class="row">
+<div id="browse_search_bar" class="large-8 small-12 columns">
   <%= form_tag(jobs_search_path, :method => "get") do %>
-    <%= text_field_tag :query, @query, :placeholder => "Search",
-    :style => "width: 450px;", :class => "form-control"%>
-    <%= submit_tag @query, :style => "margin-top:-1px;margin-left:-4px",:class => "btn btn-primary", :value => "Search" %>
+    <%= text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"%>
+    <%= submit_tag @query, :class => "button small", :value => "Search" %>
     <br/>
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick =>
     "$('#advanced_search').toggle('show')" %>
@@ -55,6 +55,7 @@
       <%= check_box_tag :include_ended, '1', params[:include_ended] %>
     </div>
   <% end %>
+</div>
 </div>
 
 <!-- tag cloud -->
