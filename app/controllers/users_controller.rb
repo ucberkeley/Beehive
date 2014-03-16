@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+    @year = @user.year.nil? ? "N/A" : "#{@user.year.ordinalize} year"
   end 
 
   # Don't render new.rhtml; instead, create the user immediately

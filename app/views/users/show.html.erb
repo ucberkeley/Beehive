@@ -8,7 +8,7 @@
 
 <div id="email">
   <p> Email: </p>
-  <%= @user.email %> 
+  <%= @user.email ||= "N/A" %> 
 </div>
 
 <div id="courses">
@@ -28,29 +28,31 @@
 <div id="proglang">
   <p> Proficient Languages: </p>
   <% @user.proglangs.each do |lang| %>
-    <p> <%= lang.name %> </p>
+    <p> <%= lang.name  %> </p>
   <% end %>
 </div>
 
 <div id="geninfo">
   <p> Grade Level:</p>
-  <p> <%= @user.year.ordinalize %> year </p>
+  <p> <%= @year %> </p>
   
   <p> Units this semester:</p>
-  <%= @user.units %> 
+  <%= @user.units ||= "N/A" %> 
 
   <p> Hours free this: </p>
-  <%= @user.free_hours %>
+  <%= @user.free_hours ||= "N/A"%>
 
   <p> Free in the summer? </p>
-  <%= @user.summer %>
+  <%= @user.summer ||= "N/A" %>
 
   <p> Research: </p>
-  <%= @user.research_blurb %>
+  <%= @user.research_blurb ||= "N/A" %>
 
-  <p> Previous Experience </p>
-  <%= @user.experience %>
+  <p> Previous Experience: </p>
+  <%= @user.experience ||= "N/A"%>
+
+  <p> Link to Resume: </p>
+  <%= link_to "Link", url_with_protocol(@user.url) %>
 </div>
-<%= @user.url %>
 
 
