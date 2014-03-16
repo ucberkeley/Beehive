@@ -64,22 +64,22 @@ class JobsController < ApplicationController
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
     query_parms[:post_status  ] = params[:post_status] if params[:post_status].present? and params[:post_status]
 
-    # will_paginate
-    query_parms[:page         ] = params[:page]     || 1
-    query_parms[:per_page     ] = params[:per_page] || 10
-
     @query = params[:query] || ''
-    @jobs = Job.find_jobs(@query, query_parms)
+    @jobs = Kaminari.paginate_array(Job.find_jobs(@query, query_parms)).page(params[:page]).per(10)
 
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
     @compensation  = params[:compensation]
     @post_status   = params[:post_status]
-
+    @faculty = Faculty.find_by_sql("SELECT DISTINCT faculties.id, faculties.name FROM 
+               faculties INNER JOIN sponsorships ON
+               sponsorships.faculty_id=faculties.id INNER JOIN jobs ON
+               jobs.id=sponsorships.job_id WHERE jobs.active=TRUE AND jobs.active=TRUE
+               AND (jobs.end_date >= now() OR jobs.end_date is NULL)")
     respond_to do |format|
-            format.html { render :action => :index }
-            format.xml { render :xml => @jobs }
+      format.html { render :action => :index }
+      format.xml { render :xml => @jobs }
     end
   end
 
