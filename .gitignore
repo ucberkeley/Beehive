@@ -13,3 +13,6 @@ tmp/
 *.project
 *.sublime-project
 *.sublime-workspace
+
+#ignore database.yml
+config/database.yml
