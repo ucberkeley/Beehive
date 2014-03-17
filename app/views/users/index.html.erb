@@ -1,16 +1,17 @@
-<h1>All students</h1>
+<div class="row">
+	<div class="large-8 small-12 columns">
+		<h1>All students</h1>
 
-<table>
-  <tr>
-  </tr>
+		<table>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= link_to user.name, user %></td>
-  </tr>
-<% end %>
-</table>
+		<% @users.each do |user| %>
+		  <tr>
+		    <td><%= link_to user.name, user %></td>
+		  </tr>
+		<% end %>
+		</table>
 
-<%= paginate @users %>
-
-<br/>
+		<%= paginate @users %>
+		<br />
+	</div>
+</div>
