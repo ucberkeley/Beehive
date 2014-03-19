@@ -31,15 +31,15 @@
 			   window.location='<%= resend_activation_email_job_path(@job) %>'">
 	<span class="urgent">[resend confirmation email]</span></a>
       <% end %>
-      <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-      <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
+      <%= link_to "[edit]", edit_job(@job.id) %> 
+      <%= link_to "[delete]", jobs, method: :delete, :id => @job.id %>
       <% end %>&nbsp;
       
       <% if @current_user != nil && !@current_user.is_faculty %>
       <% if @job.users.include?(@current_user) %>
-      <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+      <%= link_to "[unwatch this job]", unwatch_job_path(@job.id) %>
       <% elsif @job.user != @current_user %>
-      <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+      <%= link_to "[watch this job]", watch_job_path(@job.id) %>
       <% end %>
       &nbsp;
       <% if @job.applicants.include?(@current_user) %>
@@ -64,14 +64,13 @@
   There are no owners<br/>
   <% end %>
   -->
+
   <% if @job.sponsorships.length != 0 %>
   Sponsored by 
   <td class="job_attr_value">
     <% @job.sponsorships.each do |i| %>
     <% if i.faculty %>
-    <%= link_to(i.faculty.name, :controller => :users, 
-    :action => :show, 
-    :id => i.id) %>
+      <%= link_to i.faculty.name, user_path(i.id) %>
     <% end %>
     <% end %>
   </td>
@@ -191,7 +190,7 @@
 	  Listing Status:
 	</td>
 	<td class="job_attr_value">
-	  <%= Job::Status::All.key(@job.status) %>
+	  <%= Job::Status::All.key @job.status %>
 	</td>
       </tr>
   </tbody></table>
@@ -201,22 +200,23 @@
   <h2>Discussion</h2>
   <p>
     <% if not @job.users or @job.users.empty? %>
-    No comments yet. <a href="#" onclick="alert('Commenting feature coming soon!')">Be the first!</a>
+      No comments yet. <a href="#" onclick="alert('Commenting feature coming soon!')">Be the first!</a>
     <% else %>
-    <div>
-      Currently watching this job:
-      <ul>
-	<% @job.users.each do |usr| %>
-	<li>
-    	  <%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
-    	  <%= !@current_user.nil? && usr.name == @current_user.name ? " (you)" : "" %>
-    	</li>    
-	<% end %>
-      </ul>
-    </div>
+      <div>
+        Currently watching this job:
+        <ul>
+	        <% @job.users.each do |usr| %>
+	        
+          <li>
+    	      <%= link_to usr.name, user_path(usr.id) %>
+    	      <%= !@current_user.nil? && usr.name == @current_user.name ? " (you)" : "" %>
+          </li>    
+	        <% end %>
+        </ul>
+      </div>
     <% end %>
   </p>
-  <br />
+<br />
   
   
   
@@ -231,7 +231,7 @@
     <% if @job.allow_admin_by?(@current_user) || @current_user.owned_jobs.include?(@job) -%>
     <ul>
       <% @job.applics.each do |a| -%>
-      <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>
+      <li><%= link_to a.user.name, applic_path(a.id) %></li>
       <% end -%>
     </ul>
     <% else -%>
