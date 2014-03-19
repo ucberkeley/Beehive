@@ -104,7 +104,7 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @job.num_positions = 0
-
+    @faculty = Faculty.order("name").all
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}

@@ -6,11 +6,15 @@
 <%= form_for(@job) do |f| %>
 <% if @job.errors.any? %>
 <div id="error_explanation">
-  <h2><span class="urgent"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span></h2>
+  <h2>
+    <span class="urgent"><%= pluralize(@job.errors.count, "error") %> prevented this listing from being submitted:</span>
+  </h2>
   
   <ul>
     <% @job.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
+    <li>
+      <%= msg %>
+    </li>
     <% end %>
   </ul>
 </div>
@@ -19,22 +23,37 @@
 
 <table class="job_clear_table">
   <tr>
-    <td class="job_clear_table_label"><%= f.label :title, 'Listing title' %><span class="required_field">*</span></td>
-    <td class="job_clear_table_field"><%= f.text_field :title, :class => 'extrawide' %></td>
+    <td class="job_clear_table_label">
+      <%= f.label :title, 'Listing title' %>
+        <span class="required_field">*</span>
+      </td>
+    <td class="job_clear_table_field">
+      <%= f.text_field :title, :class => 'extrawide' %>
+    </td>
   </tr>
   <tr>
-    <td class="job_clear_table_label"><%= f.label :department %><span class="required_field">*</span></td>
-    <td class="job_clear_table_field"><%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %></td>
+    <td class="job_clear_table_label">
+      <%= f.label :department %>
+      <span class="required_field">*</span>
+    </td>
+    <td class="job_clear_table_field">
+      <%= f.select :department_id, Department.all.collect {|c| [c.name, c.id]} %>
+    </td>
   </tr>
   <tr>
-    <td class="job_clear_table_label"><%= f.label :project_type %><span class="required_field">*</span></td>
-    <td class="job_clear_table_field"><%= f.select :project_type, @job.get_all_project_strings %></td>
+    <td class="job_clear_table_label">
+      <%= f.label :project_type %>
+      <span class="required_field">*</span>
+    </td>
+    <td class="job_clear_table_field">
+      <%= f.select :project_type, @job.get_all_project_strings %>
+    </td>
   </tr>
   <tr>
     <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
     <td class="job_clear_table_field">
       <%= select_tag :faculty_id,
-          '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
+          '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(@faculty,
           :id,
           :name,
           @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
