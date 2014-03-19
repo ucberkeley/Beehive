@@ -76,7 +76,7 @@ class JobsController < ApplicationController
                faculties INNER JOIN sponsorships ON
                sponsorships.faculty_id=faculties.id INNER JOIN jobs ON
                jobs.id=sponsorships.job_id WHERE jobs.active=TRUE AND jobs.active=TRUE
-               AND (jobs.end_date >= now() OR jobs.end_date is NULL)")
+               AND (jobs.end_date >= now() OR jobs.end_date is NULL) ORDER BY name ASC")
     respond_to do |format|
       format.html { render :action => :index }
       format.xml { render :xml => @jobs }
