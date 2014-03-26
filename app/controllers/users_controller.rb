@@ -15,10 +15,11 @@ class UsersController < ApplicationController
   #before_filter :setup_cas_user, :except => [:new, :create]
 
   # Ensures that only this user -- and no other users -- can edit his/her profile
-  before_filter :correct_user_access, :only => [ :edit, :update, :destroy ]
+  before_filter :correct_user_access, :only => [ :edit, :update ]
 
   def show
     @user = User.find_by_id(params[:id])
+    @year = @user.year.nil? ? "N/A" : "#{@user.year.ordinalize} year"
   end 
 
   # Don't render new.rhtml; instead, create the user immediately
@@ -111,13 +112,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.order(:name).page(params[:page])
+  end
+
   private
 
   def correct_user_access
     if (User.find_by_id(params[:id]) == nil || @current_user != User.find_by_id(params[:id]))
       # flash[:error] = "params[:id] is " + params[:id] + "<br />"
       # flash[:error] = "@current_user is " + @current_user + "<br />"
-      flash[:error] += "Unauthorized access denied. Do not pass Go. Do not collect $200."
+      flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
             redirect_to :controller => 'dashboard', :action => :index
     end
   end

@@ -6,6 +6,9 @@ ruby '1.9.3'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
 
+# adding pagination
+gem "kaminari", "~> 0.15.1"
+
 # Use unicorn web server
 gem 'unicorn'
 
@@ -23,7 +26,6 @@ gem "bullet", :group => "development"
 gem 'pothoven-attachment_fu'
 gem 'authlogic',
     :git => 'git://github.com/binarylogic/authlogic.git'
-gem 'will_paginate', "~> 3.0.pre2"
 gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/frameworks/rails/filter']
 
 gem 'net-ldap', :require => 'net/ldap'
