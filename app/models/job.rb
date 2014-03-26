@@ -1,5 +1,3 @@
-require 'will_paginate/array'
-
 class Job < ActiveRecord::Base
 
   # === List of columns ===
@@ -18,10 +16,11 @@ class Job < ActiveRecord::Base
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
-  #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
-  #   primary_contact_id  : integer
+  #   primary_contact_id  : integer 
+  #   project_type        : integer 
+  #   open                : boolean 
   # =======================
 
   include AttribsHelper
@@ -204,7 +203,7 @@ class Job < ActiveRecord::Base
     results = relation.all # make SQL query
     page = options[:page] || 1
     per_page = options[:per_page] || 16
-    return results.paginate(:page => page, :per_page => per_page)
+    return Kaminari.paginate_array(results).page(page).per(per_page)
   end
   
   def self.filter_by_query(query, relation, tables)

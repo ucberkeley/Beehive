@@ -106,6 +106,8 @@ class JobsController < ApplicationController
     @job.num_positions = 0
     @faculty = Faculty.order("name").all
     @current_owners = @job.owners.select{|i| i != @current_user}
+    @faculty_id ||= (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
+    @department = Department.all.collect {|c| [c.name, c.id]}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
 
