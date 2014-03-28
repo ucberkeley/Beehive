@@ -1,58 +1,73 @@
 <% content_for :title, @user.name %>
 
-<h2><%= @user.name %></h2>
-<p>
-<%= @user.is_faculty ? "Faculty" : "Student" %>
-</p>
-<p> 
+<div class="row">
+  <h2><%= @user.name %></h2>
+  <%= @user.is_faculty ? "Faculty" : "Student" %>
+  <br><br>
 
-<div id="email">
-  <p> Email: </p>
-  <%= @user.email ||= "N/A" %> 
-</div>
 
-<div id="courses">
-  <p>Courses taken: </p>
+
+  <div class="large-6 small-6 columns">
+    <p>
+    Email:
+    <%= @user.email ||= "N/A" %> 
+    </p>
+  
+    <p>
+    Courses taken:
   <% @user.courses.each do |course| %>
     <o> <%= course.name %> </o>
+  </p>
   <% end %>
-</div>
 
-<div id="category">
-  <p> Interests: </p>
+  <p>
+    Interests:
   <% @user.categories.each do |category| %>
     <p> <%= category.name %> </p>
+  </p>
   <% end %>
-</div>
 
-<div id="proglang">
-  <p> Proficient Languages: </p>
+  <p>
+    Proficient Languages:
   <% @user.proglangs.each do |lang| %>
     <p> <%= lang.name  %> </p>
   <% end %>
+</p>
 </div>
 
-<div id="geninfo">
-  <p> Grade Level:</p>
-  <p> <%= @year %> </p>
-  
-  <p> Units this semester:</p>
-  <%= @user.units ||= "N/A" %> 
+<div class="row">
+  <div class="large-6 small-6 columns">
+    <p> Grade Level:
+    <p> <%= @year %> </p>
+    </p>
 
-  <p> Hours free this: </p>
-  <%= @user.free_hours ||= "N/A"%>
+    <p> Units this semester:
+    <%= @user.units ||= "N/A" %> 
+    </p>
 
-  <p> Free in the summer? </p>
-  <%= @user.summer ||= "N/A" %>
+    <p> Hours free this:
+    <%= @user.free_hours ||= "N/A"%>
+    </p>
 
-  <p> Research: </p>
-  <%= @user.research_blurb ||= "N/A" %>
+    <p> Free in the summer?
+    <%= @user.summer ||= "N/A" %>
+     </p>
 
-  <p> Previous Experience: </p>
-  <%= @user.experience ||= "N/A"%>
+    <p> Research:
+    <%= @user.research_blurb ||= "N/A" %>
+     </p>
 
-  <p> Link to Resume: </p>
-  <%= link_to "Link", url_with_protocol(@user.url) %>
+    <p> Previous Experience:
+    <%= @user.experience ||= "N/A"%>
+     </p>
+
+    <p> Link to Resume:
+    <%= link_to "Link", url_with_protocol(@user.url) %>
+     </p>
+  </div>
+
 </div>
+
+
 
 
