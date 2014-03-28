@@ -15,7 +15,6 @@ p, ol, ul, td {
   font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
   font-size: 12px;
   color: #333;
-  width: 100%;
   cursor: default;
 }
 
@@ -25,7 +24,7 @@ select, input {
 
 textarea {
   font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
-  width: 300px;
+  
 }
 
 pre {
@@ -35,7 +34,7 @@ pre {
 }
 
 h1 {
-  padding-top: 20px;
+  padding-top: px;
   color: #003060;
   text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
@@ -153,6 +152,10 @@ body > #everything {
   text-align: center;
 }
 
+#user-bar-greeting{
+  color: #AAA;
+}
+
 .inline-form-container form {
   display: inline-block;
 }
@@ -160,11 +163,12 @@ body > #everything {
 /** Quick Search Bar **/
 
 #quicksearch_form {
-  margin-top: 5px;
+  margin-top: 0px;
+  margin-left: 5px;
 }
 
 #quicksearch_query {
-  background: none;
+  background: #FFF;
   border: none;
   border: 1px solid #CCC;
   color: #AAA;

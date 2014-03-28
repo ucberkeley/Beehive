@@ -1,79 +1,82 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <!-- <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Beehive <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
-    
-    <%# Resources %>
-    <!-- <meta charset="utf-8" /> -->
-    <%= stylesheet_link_tag 'dist/css/app.css' %>
-    <%= stylesheet_link_tag 'application' %>
+<head>
+  <!-- <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beehive <% if yield(:title).present? %>|<% end %>  <%=h yield(:title) %></title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <%# Resources %>
+  <!-- <meta charset="utf-8" /> -->
+  <%= stylesheet_link_tag 'dist/css/app.css' %>
+  <%= stylesheet_link_tag 'application' %>
 
-    <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
-    <%= javascript_include_tag 'bower_components/foundation/js/foundation.js' %>
-    <%= javascript_include_tag 'bower_components/fastclick/lib/fastclick.js' %>
-    <%= javascript_include_tag "application" %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+  <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
+  <%= javascript_include_tag 'bower_components/foundation/js/foundation.js' %>
+  <%= javascript_include_tag 'bower_components/fastclick/lib/fastclick.js' %>
+  <%= javascript_include_tag "application" %>
 
 
-    
-    <%= csrf_meta_tag %>
-    
-    
-    <%= render 'shared/ga' if Rails.production? %>
-    
-    <%# Includes controller-specific files %>
-    <%-
-       c = controller.controller_name
-       if File.file? File.join(Rails.root, 'public', 'stylesheets', c+'.css')
-       -%>
-    <%= stylesheet_link_tag c %>
-    <% end %>
-    <% if c == 'jobs' || c == 'users' %>
-    <%= javascript_include_tag "autocomplete_setup.js" %>
-    <% end %>
-    <% if c == 'jobs' or c == 'dashboard' %>
-    <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
-    <%= stylesheet_link_tag 'job' %>
-    <%= javascript_include_tag "autocomplete_owners.js" %>
-    <% end %>
-    <% if c == 'users' %>
-    <%= stylesheet_link_tag 'user' %>
-    <% end %>
-    <% if c == 'statistics' %>
-    <%= stylesheet_link_tag 'statistic' %>
-    <% end %>
-    <% if c == 'admin' %>
-    <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
-    <%= stylesheet_link_tag 'job' %>
-    <%= javascript_include_tag "autocomplete_admin.js" %>
-    <% end %>
-    
-  </head>
-  <body>
-    
-    <!-- <div id="everything"> -->
-      <div id="header">
-      	<div class="row">
-          <div class="large-8 columns header_image">
-      	  <%= link_to "", home_path %>
-      	  </div>
 
-      	  <div class="large-4 columns">
-                <%= render :partial => "users/user_bar" %>
-              <!-- <div id="searchbar"> -->
-                <%= render :partial => "users/search_bar" %>
-              <!-- </div> -->
-            
-      	  </div>
-      	</div>
-      </div>
-      
-      <div id="header_tabs">
+  <%= csrf_meta_tag %>
+
+
+  <%= render 'shared/ga' if Rails.production? %>
+
+  <%# Includes controller-specific files %>
+  <%-
+  c = controller.controller_name
+  if File.file? File.join(Rails.root, 'public', 'stylesheets', c+'.css')
+   -%>
+   <%= stylesheet_link_tag c %>
+   <% end %>
+   <% if c == 'jobs' || c == 'users' %>
+   <%= javascript_include_tag "autocomplete_setup.js" %>
+   <% end %>
+   <% if c == 'jobs' or c == 'dashboard' %>
+   <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
+   <%= stylesheet_link_tag 'job' %>
+   <%= javascript_include_tag "autocomplete_owners.js" %>
+   <% end %>
+   <% if c == 'users' %>
+   <%= stylesheet_link_tag 'user' %>
+   <% end %>
+   <% if c == 'statistics' %>
+   <%= stylesheet_link_tag 'statistic' %>
+   <% end %>
+   <% if c == 'admin' %>
+   <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
+   <%= stylesheet_link_tag 'job' %>
+   <%= javascript_include_tag "autocomplete_admin.js" %>
+   <% end %>
+
+ </head>
+ <body>
+
+  <!-- <div id="everything"> -->
+
+  <div id="header">
+   <div class="row">
+    <div class="large-8 columns header_image">
+     <%= link_to "", home_path %>
+   </div>
+
+   <!-- <div class="large-4 columns">
+    <%= render :partial => "users/user_bar" %>
+    <div id="searchbar">
+    <%= render :partial => "users/search_bar" %>
+    
+
+  </div> -->
+
+
+</div>
+</div>
+
+<div id="header_tabs">
 	<div id="tabs">
     <ul>
       <% if @current_user.present? %>
@@ -85,43 +88,102 @@
       <% else %>
         <li><%= link_to "Log In", login_path %></li>
       <% end %>
+
       <% if @current_user.present? && @current_user.admin? %>
         <li><%= link_to "Statistics", statistics_path %></li>
         <li><%= link_to "Admin", admin_path %></li>
       <% end %>
     </ul>
-	</div>
-      </div>
-      <div id="shadowdown"></div>
-      
-      <div id="content">
+  </div>
+</div>
+<div id="shadowdown"></div>
+
+
+<div class="top-bar" data-topbar>
+  <!--Title-->
+  <ul class="title-area">
+    <li class="name">
+      <h1>
+        <a href="#">Beehive</a>
+      </h1>
+    </l1>
+  </ul>
+  <!--Top Bar Section-->
+  <section class="top-bar-section">
+    <!--Top Bar Left Nav Elements-->
+    <ul class="left">
+      <% if @current_user.present? %>
+        <li class="active"><%= link_to "Dashboard", dashboard_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "Browse Listings", jobs_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "Post a Listing", new_job_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "All Users", users_path %></li>
+      <% else %>
+        <li class="active"><%= link_to "Log In", login_path %></li>
+      <% end %>
+
+      <% if @current_user.present? && @current_user.admin? %>
+        <li class="active"><%= link_to "Statistics", statistics_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "Admin", admin_path %></li>
+      <% end %>
+
+      <li class="active"> 
+        <%= render :partial => "users/search_bar" %> 
+      </li>
+    </ul>
+
+      <ul class="right">
+        <li><%= render :partial => "users/user_bar" %></li>
+        <li class="has-form">
+        </li>
+
+
+
+    </ul>
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="content">
 	<% if !(flash[:error].nil? || flash[:error] == '') %>
 	<div id="flash_error">
-          <%= flash[:error] %>
-	</div>
-	<% end %>
-	<% if !(flash[:notice].nil? || flash[:notice] == '') %>
-	<div id="flash_notice">
-          <%= flash[:notice] %>
-	</div>
-	<% end %>
-	<br />
+    <%= flash[:error] %>
+  </div>
+  <% end %>
+  <% if !(flash[:notice].nil? || flash[:notice] == '') %>
+  <div id="flash_notice">
+    <%= flash[:notice] %>
+  </div>
+  <% end %>
+  <br />
 
-	  <%= yield %>
-    
-	
-      </div>
-      
-      <div id="footer">
+  <%= yield %>
+
+
+</div>
+
+<div id="footer">
 	<div id="footer_inside">
-	  <br/>
-          &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
-          <br />
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
-    
-    <%= javascript_include_tag 'app.js' %>
-  </body>
+   <br/>
+   &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
+   <br />
+ </div>
+</div>
+</div>
+<!-- </div> -->
+
+<%= javascript_include_tag 'app.js' %>
+</body>
 </html>
