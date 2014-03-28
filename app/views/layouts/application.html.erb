@@ -18,6 +18,7 @@
   <%= javascript_include_tag 'bower_components/foundation/js/foundation.js' %>
   <%= javascript_include_tag 'bower_components/fastclick/lib/fastclick.js' %>
   <%= javascript_include_tag "application" %>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Montserrat' rel='stylesheet' type='text/css'>
 
 
 
@@ -76,7 +77,7 @@
 </div>
 </div>
 
-<div id="header_tabs">
+<!-- <div id="header_tabs">
 	<div id="tabs">
     <ul>
       <% if @current_user.present? %>
@@ -96,7 +97,7 @@
     </ul>
   </div>
 </div>
-<div id="shadowdown"></div>
+<div id="shadowdown"></div> -->
 
 
 <div class="top-bar" data-topbar>
@@ -132,15 +133,15 @@
         <li class="active"><%= link_to "Admin", admin_path %></li>
       <% end %>
 
-      <li class="active"> 
-        <%= render :partial => "users/search_bar" %> 
-      </li>
+      
     </ul>
 
       <ul class="right">
-        <li><%= render :partial => "users/user_bar" %></li>
         <li class="has-form">
+          <li class="active">  <%= render :partial => "users/search_bar" %>  </li>
         </li>
+        <li><%= render :partial => "users/user_bar" %></li>
+
 
 
 
@@ -177,7 +178,7 @@
 <div id="footer">
 	<div id="footer_inside">
    <br/>
-   &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
+   <p>&copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %></p>
    <br />
  </div>
 </div>

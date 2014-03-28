@@ -1,41 +1,53 @@
 <% content_for :title, "Welcome" %>
 <!-- <div style="line-height:1.62;font-size:150%;width:65%"> -->
-  <div class= "row">
-    <div class="large-8 columns">
-      <h1>Welcome to Beehive</h1>
-      <p>
-        Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
-      </p>
-    
-<% if session[:user_id].present? %>
-
-<br>
-<br><br>
-<table style="margin: 20px -50px" id="Table_01" width="650" height="203" cellpadding="0" cellspacing="0">
-  <tr>
-    <td colspan="3" background="<%= image_path "research_match_display_01a.png" %>" style="height: 144px;background-repeat: no-repeat">
-    </td>
-  </tr>
-  <tr>
-    <td background="<%= image_path "research_match_display_02.png" %>" height="59" style="width: 308px;background-repeat: no-repeat">
-      <div id="browse_listings_menu">
-        <%= form_tag(:jobs, :method => "get") do %>
-          <%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>".html_safe + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
-        <% end %>
-      </div>
-    </td>
-    <td height="59" style="width: 342px;">
-      <%= link_to image_tag("research_match_display_03a.png", :border=>0, :alt=>"Post a Job"), :controller => "jobs", :action => 'new'%>
-    </td>
-  </tr>
-</table>
-<br><br><br><br><br><br>
-<% else %>
-<br><br>
-  <p><%= link_to 'Log In', login_path %> via CalNet to get started!</p>
+<div class= "row">
+  <div class="large-8 columns">
+    <h1>Welcome to Beehive</h1>
+    <p>
+      Welcome to BeeHive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
+    </p> 
   </div>
-    <!-- </div> -->
+</div>
+
+
+
+
+<% if session[:user_id].present? %>
+<div class="row">
+  <div class="large-4 columns">
+    <center>
+
+    <%= link_to image_tag("dripicons/search.svg", :border=>0, :alt=>"Browse Listings")%>
+      <h2>Browse Listings</h2>
+        <%= form_tag(:jobs, :method => "get") do %>
+        <%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>".html_safe + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
+        <% end %>
+        </center>
     </div>
+
+    <div class="large-4 columns">
+      <center>
+      <%= link_to image_tag("dripicons/document-edit.svg", :border=>0, :alt=>"Post a Job Listing"), :controller => "jobs", :action => 'new'%>
+    
+      <h2>Post a Job Listing</h2>
+      </center>
+    </div>
+
+  
+</div>
+
+<br><br><br><br><br><br>
+
+
+
+
+<% else %>
+
+
+
+
+
+
 <br><br><br><br><br><br><br><br><br><br>
 
 <% end %>

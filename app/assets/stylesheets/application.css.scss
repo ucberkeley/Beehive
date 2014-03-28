@@ -12,18 +12,18 @@ html{
 }
 
 p, ol, ul, td {
-  font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
-  font-size: 12px;
+  font-family: 'Droid Sans', trebuchet ms, lucida grande, arial, helvetica, sans-serif;
+  font-size: 14px;
   color: #333;
   cursor: default;
 }
 
 select, input {
-  font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
+  font-family: 'Droid Sans', trebuchet ms, lucida grande, arial, helvetica, sans-serif;
 }
 
 textarea {
-  font-family: trebuchet ms, lucida grande, arial, helvetica, sans-serif;
+  font-family: 'Droid Sans', trebuchet ms, lucida grande, arial, helvetica, sans-serif;
   
 }
 
@@ -38,12 +38,18 @@ h1 {
   color: #003060;
   text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size:30px;
 }
 
 h2, h3 {
   color: #003060;
   text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size:20px;
 }
 
 /**Layout**/
@@ -163,8 +169,7 @@ body > #everything {
 /** Quick Search Bar **/
 
 #quicksearch_form {
-  margin-top: 0px;
-  margin-left: 5px;
+  margin: 0px 5px 0px 5px;
 }
 
 #quicksearch_query {
