@@ -116,6 +116,8 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @job.mend
+    @faculty = Faculty.order("name").all
+    @department = Department.all_departments
 
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]

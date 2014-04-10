@@ -77,7 +77,7 @@ class Job < ActiveRecord::Base
   #  VALIDATIONS  #
   #################
 
-  validates_presence_of :title, :desc, :department
+  validates_presence_of :title, :desc
   
   # Validates that end dates are no earlier than right now.
   validates_each :end_date do |record, attr, value|
