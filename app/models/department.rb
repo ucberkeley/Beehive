@@ -22,4 +22,7 @@ class Department < ActiveRecord::Base
     end
   end
 
+  def self.all_departments
+    all.collect {|c| [c.name, c.id]}
+  end
 end

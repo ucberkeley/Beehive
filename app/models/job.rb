@@ -16,11 +16,9 @@ class Job < ActiveRecord::Base
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
+  #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
-  #   primary_contact_id  : integer 
-  #   project_type        : integer 
-  #   open                : boolean 
   # =======================
 
   include AttribsHelper
@@ -79,7 +77,7 @@ class Job < ActiveRecord::Base
   #  VALIDATIONS  #
   #################
 
-  validates_presence_of :title, :desc, :department
+  validates_presence_of :title, :desc
   
   # Validates that end dates are no earlier than right now.
   validates_each :end_date do |record, attr, value|
