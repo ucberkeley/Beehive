@@ -107,10 +107,9 @@ class JobsController < ApplicationController
     @faculty = Faculty.order("name").all
     @current_owners = @job.owners.select{|i| i != @current_user}
     @faculty_id ||= (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
-    @department = Department.all.collect {|c| [c.name, c.id]}
+    @department = Department.all_departments
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
-
   end
 
   # GET /jobs/1/edit
@@ -153,6 +152,8 @@ class JobsController < ApplicationController
     @job = Job.new(params[:job])
     @job.update_attribs(params)
     @job.num_positions ||= 0
+    @faculty = Faculty.order("name").all
+    @department = Department.all_departments
     if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
       @job.owners << User.find(params[:add_owners])
     end
@@ -185,7 +186,7 @@ class JobsController < ApplicationController
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
         @faculty_id = params[:faculty_id]
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end
     end

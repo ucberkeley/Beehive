@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205014557) do
+ActiveRecord::Schema.define(:version => 20140410035117) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.text     "message"
     t.integer  "resume_id"
     t.integer  "transcript_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "categories_jobs", :id => false, :force => true do |t|
@@ -38,24 +38,22 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
   create_table "coursereqs", :force => true do |t|
     t.integer  "course_id"
     t.integer  "job_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "courses", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "name"
     t.text     "desc"
   end
 
   create_table "departments", :force => true do |t|
-    t.text     "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "departments", ["name"], :name => "departments_name_key", :unique => true
 
   create_table "documents", :force => true do |t|
     t.integer  "user_id"
@@ -63,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
     t.integer  "size"
     t.string   "content_type"
     t.string   "filename"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "enrollments", :force => true do |t|
@@ -72,25 +70,23 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
     t.string   "semester"
     t.integer  "course_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "faculties", :force => true do |t|
-    t.string   "name",          :null => false
+    t.string   "name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "department_id"
   end
-
-  add_index "faculties", ["name"], :name => "faculties_name_key", :unique => true
 
   create_table "interests", :force => true do |t|
     t.integer  "category_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -99,8 +95,8 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
     t.text     "desc"
     t.integer  "category_id"
     t.integer  "num_positions"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "department_id"
     t.integer  "activation_code"
     t.boolean  "active"
@@ -108,64 +104,134 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
     t.datetime "earliest_start_date"
     t.datetime "latest_start_date"
     t.datetime "end_date"
+    t.boolean  "open",                :default => true
     t.integer  "compensation",        :default => 0
     t.integer  "status",              :default => 0
-    t.integer  "primary_contact_id"
-    t.integer  "project_type"
-    t.boolean  "open"
+  end
+
+  create_table "options", :force => true do |t|
+    t.text     "content"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "owns", :force => true do |t|
     t.integer  "job_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pictures", :force => true do |t|
     t.string   "url"
     t.integer  "user_id"
     t.integer  "job_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "proficiencies", :force => true do |t|
     t.integer  "proglang_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "proglangreqs", :force => true do |t|
     t.integer  "job_id"
     t.integer  "proglang_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "proglangs", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.text     "content"
+    t.integer  "number"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "points",     :default => 0, :null => false
+    t.string   "type"
+    t.integer  "lesson"
+    t.string   "difficulty"
+  end
+
+  add_index "questions", ["number", "quiz_id"], :name => "index_questions_on_number_and_quiz_id", :unique => true
+
+  create_table "quiz_locks", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "quiz_id"
+    t.boolean  "locked"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "quiz_requests", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "lesson"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "approved",   :default => false
+    t.boolean  "retake",     :default => false
+  end
+
+  add_index "quiz_requests", ["student_id"], :name => "index_quiz_requests_on_student_id"
+
+  create_table "quizzes", :force => true do |t|
+    t.integer  "lesson"
+    t.integer  "version"
+    t.boolean  "retake",     :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_draft",   :default => true
+  end
+
+  add_index "quizzes", ["lesson", "version", "retake"], :name => "index_quizzes_on_lesson_and_version_and_retake", :unique => true
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "sponsorships", :force => true do |t|
-    t.integer  "faculty_id", :null => false
-    t.integer  "job_id",     :null => false
+  create_table "solutions", :force => true do |t|
+    t.text     "content"
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "solutions", ["question_id"], :name => "index_solutions_on_question_id", :unique => true
+
+  create_table "sponsorships", :force => true do |t|
+    t.integer  "faculty_id"
+    t.integer  "job_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "submissions", :force => true do |t|
+    t.text     "content"
+    t.integer  "question_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quiz_id"
+  end
+
+  add_index "submissions", ["question_id", "student_id"], :name => "index_submissions_on_question_id_and_student_id", :unique => true
+  add_index "submissions", ["quiz_id"], :name => "index_submissions_on_quiz_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -210,8 +276,8 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
   create_table "watches", :force => true do |t|
     t.integer  "job_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

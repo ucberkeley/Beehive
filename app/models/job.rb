@@ -16,11 +16,9 @@ class Job < ActiveRecord::Base
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
+  #   open                : boolean 
   #   compensation        : integer 
   #   status              : integer 
-  #   primary_contact_id  : integer 
-  #   project_type        : integer 
-  #   open                : boolean 
   # =======================
 
   include AttribsHelper
