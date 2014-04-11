@@ -90,7 +90,8 @@
   </div>
   <div id="browse_results_wrapper">
     <div id="browse_results">
-      <%= render(:partial => "job", :collection => @jobs) %>
+      <%= @jobs %>
+      <%= render partial: "job", collection: @jobs %>
     </div>
 
     <center>
