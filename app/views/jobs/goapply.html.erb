@@ -1,5 +1,8 @@
 <% content_for :title, "Apply for Position" %>
 
+
+<div class="row">
+  <div class="large-10 small-12 columns">
 <h1>Apply for a Project</h1>
 
 <% form_for(@applic, :url=>{:controller=>:jobs, :action=>:apply, :id=>params[:id]} ) do |f| -%>
@@ -57,4 +60,6 @@
   
 <br /><br />
 <%= link_to raw('&#0171; Back to listings'), jobs_path %>
+</div>
+</div>
 
