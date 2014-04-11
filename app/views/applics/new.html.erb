@@ -1,6 +1,6 @@
 <% content_for :title, "Apply for Listing" %>
 
-<script type='text/javascript' src="/javascripts/autocomplete_setup.js"></script>
+<!--<script type='text/javascript' src="/javascripts/autocomplete_setup.js"></script>-->
 
 <h1>Apply for Project</h1>
 
@@ -11,8 +11,7 @@
 </p>
 <br />
 
-<% form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f| -%>
-
+<%= form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f| -%>
 <%= render(:partial => "jobs/job_snippet", :job => @job ) %>
 <br />
   <table class="job_clear_table">
@@ -42,7 +41,7 @@
   <br /><br />
   
   <%= f.submit 'Submit' %>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="location.href='<%= url_for(@job) %>'" />
-  <% end # form -%>
+  <% end %>
   
 <br /><br />
 <%= link_to raw('&#0171; Back to listings'), jobs_path %>
