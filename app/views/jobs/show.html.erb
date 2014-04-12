@@ -1,6 +1,7 @@
 <% content_for :title, @job.title %>
 
-<div id="job_show_main">
+<div class="row">
+<div class = "large-10 small-12 columns">
   <br />
   <h2>
     <%=h @job.title %>
@@ -15,41 +16,41 @@
   <p>
     Project Type:
     <b><%= @job.project_string %><b/>
-    <br/>
-    
-    Contact: <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.contacter.name, :controller => :users, :action => :show, :id => @job.primary_contact_id)%></b> &nbsp; 	
-    <b>
-      <% if @current_user.present? && (@job.user_id == @current_user.id ||
-	 @job.owners.include?(@current_user) || @current_user.admin?) %>
-      
-      
-      <% if ! @job.active %>
-      <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
-			   'confirmation email? This will contact the faculty sponsors for this listing ' +
-			   'immediately. Please be considerate and don\'t pester faculty unnecessarily. ' + 
-			   'Click OK to resend the confirmation email.'))
-			   window.location='<%= resend_activation_email_job_path(@job) %>'">
-	<span class="urgent">[resend confirmation email]</span></a>
-      <% end %>
-      <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-      <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
-      <% end %>&nbsp;
-      
-      <% if @current_user != nil && !@current_user.is_faculty %>
-      <% if @job.users.include?(@current_user) %>
-      <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
-      <% elsif @job.user != @current_user %>
-      <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
-      <% end %>
-      &nbsp;
-      <% if @job.applicants.include?(@current_user) %>
-      [applied!]
-      <% elsif @job.user != @current_user and @job.status == 0%>
-      <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
-      <% end %>
-      <% end %>
-    </b>
-  </p>
+      <br/>
+
+      Contact: <b><%= @job.user.nil? ? 'anonymous' : link_to(@job.contacter.name, :controller => :users, :action => :show, :id => @job.primary_contact_id)%></b> &nbsp; 	
+      <b>
+        <% if @current_user.present? && (@job.user_id == @current_user.id ||
+          @job.owners.include?(@current_user) || @current_user.admin?) %>
+
+
+          <% if ! @job.active %>
+          <a href="#" onclick="if(confirm('Are you sure you want to resend the ' +
+          'confirmation email? This will contact the faculty sponsors for this listing ' +
+          'immediately. Please be considerate and don\'t pester faculty unnecessarily. ' + 
+          'Click OK to resend the confirmation email.'))
+          window.location='<%= resend_activation_email_job_path(@job) %>'">
+          <span class="urgent">[resend confirmation email]</span></a>
+          <% end %>
+          <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
+          <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
+          <% end %>&nbsp;
+
+          <% if @current_user != nil && !@current_user.is_faculty %>
+          <% if @job.users.include?(@current_user) %>
+          <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+          <% elsif @job.user != @current_user %>
+          <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+          <% end %>
+          &nbsp;
+          <% if @job.applicants.include?(@current_user) %>
+          [applied!]
+          <% elsif @job.user != @current_user and @job.status == 0%>
+          <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
+          <% end %>
+          <% end %>
+        </b>
+      </p>
   <!--
   <% if @job.owners.length != 0 %>
   Owned by
@@ -63,13 +64,13 @@
   <% else %>
   There are no owners<br/>
   <% end %>
-  -->
-  <% if @job.sponsorships.length != 0 %>
-  Sponsored by 
-  <td class="job_attr_value">
-    <% @job.sponsorships.each do |i| %>
-    <% if i.faculty %>
-    <%= link_to(i.faculty.name, :controller => :users, 
+-->
+<% if @job.sponsorships.length != 0 %>
+Sponsored by 
+<td class="job_attr_value">
+  <% @job.sponsorships.each do |i| %>
+  <% if i.faculty %>
+  <%= link_to(i.faculty.name, :controller => :users, 
     :action => :show, 
     :id => i.id) %>
     <% end %>
@@ -93,158 +94,159 @@
   
   <!-- Job attributes -->
   <table class="job_attributes"><tbody>
-      <tr>
-	<td class="job_attr_title">Description:</td>
-      </tr><tr>
-	<td id="description" colspan=2>
-	  <%= simple_format @job.desc %>
-	</td>
-      </tr>
-      
-      <tr>
+    <tr>
+     <td class="job_attr_title">Description:</td>
+   </tr><tr>
+   <td id="description" colspan=2>
+     <%= simple_format @job.desc %>
+   </td>
+ </tr>
+
+ <tr>
+   <td class="job_attr_title">
+    <%= h 'Category'.pluralize_for(@job.categories.length) %>:
+  </td>
+  <td class="job_attr_value">
+   <% if ! @job.category_list_of_job.empty? %>
+   <%=h @job.category_list_of_job(true) %>
+   <% else %>
+   (none)
+   <% end %>      
+ </td>
+</tr>
+
+<tr>
 	<td class="job_attr_title">
-          <%= h 'Category'.pluralize_for(@job.categories.length) %>:
-	</td>
-	<td class="job_attr_value">
-	  <% if ! @job.category_list_of_job.empty? %>
-          <%=h @job.category_list_of_job(true) %>
-	  <% else %>
-          (none)
-	  <% end %>      
-	</td>
-      </tr>
-      
-      <tr>
+   Required courses:
+ </td>
+ <td class="job_attr_value">
+   <% if ! @job.course_list_of_job.empty? %>
+   <%=h @job.course_list_of_job(true) %>
+   <% else %>
+   (none)
+   <% end %> 
+ </td>
+</tr>  
+
+<tr>
 	<td class="job_attr_title">
-	  Required courses:
-	</td>
-	<td class="job_attr_value">
-	  <% if ! @job.course_list_of_job.empty? %>
-      	  <%=h @job.course_list_of_job(true) %>
-	  <% else %>
-          (none)
-	  <% end %> 
-	</td>
-      </tr>  
-      
-      <tr>
-	<td class="job_attr_title">
-	  Desired skills:
-	</td>
-	<td class="job_attr_value">
-	  <% if ! @job.proglang_list_of_job.empty? %>
-	  <%=h @job.proglang_list_of_job(true) %>
-	  <% else %>
-          (none)
-	  <% end %>
-	</td>
-      </tr>
-      <tr>
+   Desired skills:
+ </td>
+ <td class="job_attr_value">
+   <% if ! @job.proglang_list_of_job.empty? %>
+   <%=h @job.proglang_list_of_job(true) %>
+   <% else %>
+   (none)
+   <% end %>
+ </td>
+</tr>
+<tr>
 	<td class="job_attr_title"><br />
-	  Earliest start date:
-	</td>
-	<td class="job_attr_value"><br />
-	  <%=h @job.earliest_start_date.strftime("%b %e, %Y") %>
-	</td>
-      </tr>
-      <tr>
+   Earliest start date:
+ </td>
+ <td class="job_attr_value"><br />
+   <%=h @job.earliest_start_date.strftime("%b %e, %Y") %>
+ </td>
+</tr>
+<tr>
 	<td class="job_attr_title">
-	  Latest start date (work must start by):
-	</td>
-	<td class="job_attr_value">
-	  <%=h @job.latest_start_date.strftime("%b %e, %Y") %>
-	</td>
-      </tr>
-      <tr>
+   Latest start date (work must start by):
+ </td>
+ <td class="job_attr_value">
+   <%=h @job.latest_start_date.strftime("%b %e, %Y") %>
+ </td>
+</tr>
+<tr>
 	<td class="job_attr_title">
-	  Position end date:
-	</td>
-	<td class="job_attr_value">
-	  <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
-	</td>
-      </tr>
-      
-      <tr>
+   Position end date:
+ </td>
+ <td class="job_attr_value">
+   <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
+ </td>
+</tr>
+
+<tr>
 	<td class="job_attr_title">
-	  Form of Compensation:
-	</td>
-	<td class="job_attr_value">
-	  <%= Job::Compensation::All.key(@job.compensation) || "Unspecified" %>
-	</td>
-      </tr>
-      
-      <tr>
+   Form of Compensation:
+ </td>
+ <td class="job_attr_value">
+   <%= Job::Compensation::All.key(@job.compensation) || "Unspecified" %>
+ </td>
+</tr>
+
+<tr>
 	<td class="job_attr_title">
-	  Number of positions:
-	</td>
-	<td class="job_attr_value">
-	  <% if @job.num_positions && @job.num_positions > 0 %>
-          <%=h @job.num_positions %>
-	  <% else %> 
-          Unspecified
-	  <% end %>
-	</td>
-      </tr>
-      
-      <tr>
+   Number of positions:
+ </td>
+ <td class="job_attr_value">
+   <% if @job.num_positions && @job.num_positions > 0 %>
+   <%=h @job.num_positions %>
+   <% else %> 
+   Unspecified
+   <% end %>
+ </td>
+</tr>
+
+<tr>
 	<td class="job_attr_title">
-	  Listing Status:
-	</td>
-	<td class="job_attr_value">
-	  <%= Job::Status::All.key(@job.status) %>
-	</td>
-      </tr>
-  </tbody></table>
-  
-  
-  <br /><br />
-  <h2>Discussion</h2>
-  <p>
-    <% if not @job.users or @job.users.empty? %>
-    No comments yet. <a href="#" onclick="alert('Commenting feature coming soon!')">Be the first!</a>
-    <% else %>
-    <div>
-      Currently watching this job:
-      <ul>
-	<% @job.users.each do |usr| %>
-	<li>
-    	  <%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
-    	  <%= !@current_user.nil? && usr.name == @current_user.name ? " (you)" : "" %>
-    	</li>    
-	<% end %>
-      </ul>
-    </div>
-    <% end %>
-  </p>
-  <br />
-  
-  
-  
-  <% if @current_user.present? && ( @current_user.can_post? || @current_user.owned_jobs.include?(@job) ) %>
-  
-  <br />
-  <h2>Applications</h2>
-  <p>
-    <% if @job.applics.empty? -%>
-    None yet.
-    <% else -%>
-    <% if @job.allow_admin_by?(@current_user) || @current_user.owned_jobs.include?(@job) -%>
+   Listing Status:
+ </td>
+ <td class="job_attr_value">
+   <%= Job::Status::All.key(@job.status) %>
+ </td>
+</tr>
+</tbody></table>
+
+
+<br /><br />
+<h2>Discussion</h2>
+<p>
+  <% if not @job.users or @job.users.empty? %>
+  No comments yet. <a href="#" onclick="alert('Commenting feature coming soon!')">Be the first!</a>
+  <% else %>
+  <div>
+    Currently watching this job:
     <ul>
-      <% @job.applics.each do |a| -%>
-      <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>
-      <% end -%>
-    </ul>
-    <% else -%>
-    This listing has <b><%= pluralize @job.applics.length, 'applicant' %></b> so far.
+     <% @job.users.each do |usr| %>
+     <li>
+       <%= link_to usr.name, :controller => :users, :action => :show, :id => usr.id %>
+       <%= !@current_user.nil? && usr.name == @current_user.name ? " (you)" : "" %>
+     </li>    
+     <% end %>
+   </ul>
+ </div>
+ <% end %>
+</p>
+<br />
+
+
+
+<% if @current_user.present? && ( @current_user.can_post? || @current_user.owned_jobs.include?(@job) ) %>
+
+<br />
+<h2>Applications</h2>
+<p>
+  <% if @job.applics.empty? -%>
+  None yet.
+  <% else -%>
+  <% if @job.allow_admin_by?(@current_user) || @current_user.owned_jobs.include?(@job) -%>
+  <ul>
+    <% @job.applics.each do |a| -%>
+    <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>
     <% end -%>
-    <% end -%>
-  </p>
-  <br />
-  
-  <% end %>
-  
-  <%= link_to raw('&#0171; Back to listings'), jobs_path %>
-  <br /><br /><br />
-  
-  
+  </ul>
+  <% else -%>
+  This listing has <b><%= pluralize @job.applics.length, 'applicant' %></b> so far.
+  <% end -%>
+  <% end -%>
+</p>
+<br />
+
+<% end %>
+
+<%= link_to raw('&#0171; Back to listings'), jobs_path %>
+<br /><br /><br />
+
+
+</div>
 </div>
