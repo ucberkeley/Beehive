@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/binarylogic/authlogic.git
-  revision: 9870375c5659d8802caa072bdae2f02cdd63c4aa
+  revision: f19ff3a9eb882fea5aaf70f5ff9248d6897cb2d0
   specs:
     authlogic (3.4.0)
       activerecord (>= 3.2)
@@ -40,15 +40,21 @@ GEM
     activesupport (3.2.17)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    addressable (2.3.5)
+    addressable (2.3.6)
     arel (3.0.3)
     autotest-rails (4.2.1)
       ZenTest (~> 4.5)
+    bcrypt (3.1.7)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
     bullet (4.8.0)
       activesupport
       uniform_notifier (>= 1.4.0)
-    capistrano (3.1.0)
+    capistrano (3.2.0)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
@@ -58,6 +64,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -65,7 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    cucumber (1.3.12)
+    cucumber (1.3.14)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.3)
       gherkin (~> 2.12)
@@ -77,24 +84,30 @@ GEM
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
     database_cleaner (1.2.0)
+    debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.3)
     erubis (2.7.0)
     exception_notification (3.0.1)
       actionmailer (>= 3.0.4)
-    excon (0.25.3)
+    excon (0.33.0)
     execjs (2.0.2)
+    ffi (1.9.3)
+    ffi-compiler (0.1.3)
+      ffi (>= 1.0.0)
+      rake
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    hashie (2.0.5)
-    heroku (3.2.3)
-      heroku-api (~> 0.3.7)
+    hashie (2.1.1)
+    heroku (3.6.0)
+      heroku-api (~> 0.3.17)
       launchy (>= 0.3.2)
       netrc (~> 0.7.7)
       rest-client (~> 1.6.1)
       rubyzip
-    heroku-api (0.3.15)
-      excon (~> 0.25.1)
+    heroku-api (0.3.18)
+      excon (~> 0.27)
+      multi_json (~> 1.8)
     hike (1.2.3)
     i18n (0.6.9)
     journey (1.0.4)
@@ -110,12 +123,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    mini_portile (0.5.2)
-    multi_json (1.9.0)
+    mini_portile (0.5.3)
+    multi_json (1.9.2)
     multi_test (0.1.1)
     mysql2 (0.3.15)
-    net-ldap (0.3.1)
-    net-scp (1.1.2)
+    net-ldap (0.6.1)
+    net-scp (1.2.0)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
     netrc (0.7.7)
@@ -130,11 +143,11 @@ GEM
       omniauth (~> 1.1.0)
     pg (0.17.1)
     polyglot (0.3.4)
-    pothoven-attachment_fu (3.2.11)
+    pothoven-attachment_fu (3.2.12)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-ssl (1.3.3)
+    rack-ssl (1.3.4)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -154,7 +167,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     raindrops (0.13.0)
-    rake (10.1.1)
+    rake (10.3.1)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -165,7 +178,7 @@ GEM
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.6)
-    rspec-rails (2.14.1)
+    rspec-rails (2.14.2)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -175,12 +188,15 @@ GEM
       rspec-mocks (~> 2.14.0)
     rubycas-client (2.3.9)
       activesupport
-    rubyzip (1.1.1)
-    sass (3.3.3)
+    rubyzip (1.1.3)
+    sass (3.3.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    scrypt (1.2.1)
+      ffi-compiler (>= 0.0.2)
+      rake
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -191,18 +207,18 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.3.0)
+    sshkit (1.4.0)
       net-scp (>= 1.1.2)
-      net-ssh
+      net-ssh (>= 2.8.0)
       term-ansicolor
     term-ansicolor (1.3.0)
       tins (~> 1.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.18.1)
+    thor (0.19.1)
     tilt (1.4.1)
-    tins (1.0.0)
+    tins (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -218,7 +234,7 @@ GEM
     will_paginate (3.0.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    yard (0.8.7.3)
+    yard (0.8.7.4)
 
 PLATFORMS
   ruby
@@ -227,6 +243,9 @@ DEPENDENCIES
   actionmailer-with-request (~> 0.3)
   authlogic!
   autotest-rails
+  bcrypt
+  better_errors
+  binding_of_caller
   bullet
   capistrano
   capybara
@@ -247,6 +266,7 @@ DEPENDENCIES
   rspec-rails
   rubycas-client (~> 2.3.9)
   sass-rails (~> 3.2.4)
+  scrypt
   simplecov
   therubyracer
   uglifier

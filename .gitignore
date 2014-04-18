@@ -16,3 +16,6 @@ tmp/
 
 #ignore database.yml
 config/database.yml
+
+#ignore 500 page
+app/controllers/application_controller.rb

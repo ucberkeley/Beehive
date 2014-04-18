@@ -170,7 +170,7 @@ module CASControllerIncludes
 
       if new_user.save && new_user.errors.empty?
         flash[:notice] = "Welcome to BeeHive! Since this is your first time here, "
-        flash[:notice] << "please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
+        flash[:notice] << "please make sure you update your email address. We'll send all correspondence to that email address."
         logger.info "First login for #{new_user.login}"
 
         @current_user = User.where(auth_field => auth_value)[0]

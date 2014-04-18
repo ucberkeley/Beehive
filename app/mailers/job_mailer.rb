@@ -7,10 +7,10 @@ class JobMailer < ActionMailer::Base
 
   def activate_job_email(job)
     @job = job
-    @faculty_sponsor_names = job.faculties.collect(&:name).join(", ")
+      @faculty_sponsor_names = job.faculties.collect(&:name).join(", ")
 
-    mail(:to => job.faculties.collect(&:email),
-         :subject => "Project Listing Confirmation | Berkeley BeeHive") unless job.faculties.empty?
+      mail(:to => job.faculties.collect(&:email),
+         :subject => "Project Listing Confirmation | Berkeley BeeHive")
   end
 
   def deliver_applic_email(applic)

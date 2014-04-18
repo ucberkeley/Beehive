@@ -361,11 +361,13 @@ class JobsController < ApplicationController
   # Returns true if sponsorships changed at all for this update,
   #   and false if they did not.
   def update_sponsorships
-    orig_sponsorships = @job.sponsorships.clone
-    fac = Faculty.exists?(params[:faculty_id]) ? params[:faculty_id] : 0
-    sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
-    @job.sponsorships = [sponsor]
-    return orig_sponsorships != @job.sponsorships
+    # Only one sponsor allowed - may change later
+    if params[:faculty_id] != '-1'
+      @job.sponsorships.delete
+      @job.sponsorships.create(faculty_id: params[:faculty_id])
+    end
+    return @job.sponsorships
+
   end
 
 ####################
