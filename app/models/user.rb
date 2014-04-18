@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     # so that logins can be 1 character in length even; 'login' is provided
     # by CAS so we don't want to artificially limit the values we get for it.
 
-    #c.validate_email_field = true
+    c.validate_email_field = false
     c.validate_login_field = false
   end
 
@@ -71,9 +71,9 @@ class User < ActiveRecord::Base
   validates_format_of       :name,     :with => /\A[A-Za-z\-_ \.']+\z/
 
   # Email
-  validates_presence_of     :email
-  validates_length_of       :email,    :within => 6..100 #r@a.wk
-#validates_uniqueness_of   :email
+  # validates_presence_of     :email
+  # validates_length_of       :email,    :within => 6..100 #r@a.wk
+  # validates_uniqueness_of   :email
 
   # Login
   validates_uniqueness_of   :login

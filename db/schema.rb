@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205014557) do
+ActiveRecord::Schema.define(:version => 20140418085139) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(:version => 20121205014557) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "login"
-    t.string   "email",                              :null => false
+    t.string   "email"
     t.string   "persistence_token",                  :null => false
     t.string   "single_access_token",                :null => false
     t.string   "perishable_token",                   :null => false
