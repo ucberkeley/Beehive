@@ -1,0 +1,51 @@
+<% content_for :title, @user.name %>
+
+<div class="row">
+  <h1><%= @user.name %></h1>
+  <h2>Faculty</h2>
+  <br><br>
+
+
+
+  <div class="large-6 small-6 columns">
+    <p>
+    Email:
+    <%= @user.email ||= "N/A" %> 
+    </p>
+  
+  <p>
+</div>
+
+<div class="row">
+  <div class="large-6 small-6 columns">
+    <p> Grade Level:
+    <p> N/A </p>
+    </p>
+
+    <p> Units this semester:
+    <%= "N/A" %> 
+    </p>
+
+    <p> Hours free this:
+    <%= "N/A"%>
+    </p>
+
+    <p> Free in the summer?
+    <%= "N/A" %>
+     </p>
+
+    <p> Research:
+    <%= "N/A" %>
+     </p>
+
+    <p> Previous Experience:
+    <%= "N/A"%>
+     </p>
+
+  </div>
+
+</div>
+
+
+
+
