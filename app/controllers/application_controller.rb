@@ -10,23 +10,23 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
   before_filter :set_actionmailer_base_url
 
-  rescue_from Exception do |e|
-    @exception = e
-    render 'common/exception', :status => 500
+  # rescue_from Exception do |e|
+  #   @exception = e
+  #   render 'common/exception', :status => 500
 
-    Rails.logger.error "ERROR 500: #{e.inspect}"
+  #   Rails.logger.error "ERROR 500: #{e.inspect}"
 
-    request.env["exception_notifier.exception_data"] = {
-      :timestamp => Time.now.to_i
-    }
+  #   request.env["exception_notifier.exception_data"] = {
+  #     :timestamp => Time.now.to_i
+  #   }
 
-    begin
-      ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
-    rescue => f
-      Rails.logger.error "ExceptionNotifier: Failed to deliver because #{f.inspect}"
-    end
-    raise if Rails.test?
-  end
+  #   begin
+  #     ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
+  #   rescue => f
+  #     Rails.logger.error "ExceptionNotifier: Failed to deliver because #{f.inspect}"
+  #   end
+  #   raise if Rails.test?
+  # end
 
   def current_user
     # TODO: transition this out in favor of @current_user

@@ -374,8 +374,7 @@ class Job < ActiveRecord::Base
   # Makes the job not active, and reassigns it an activation code.
   # Used when creating a job or if, when updating the job, a new 
   #   faculty sponsor is specified.
-  def reset_activation(send_email = false)
-    self.active = false
+  def resend_email(send_email = false)
     self.activation_code = SecureRandom.random_number(10e6.to_i)
 
     # Save, skipping validations, so that we just change the activation code

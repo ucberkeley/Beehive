@@ -128,7 +128,7 @@ class JobsController < ApplicationController
 
   def resend_activation_email
     @job = Job.find(params[:id])
-    @job.reset_activation(true)
+    @job.resend_email(true)
     flash[:notice] = 'Thank you. The activation email for this listing has '
     flash[:notice] << 'been re-sent to its faculty sponsors.'
 
@@ -171,13 +171,6 @@ class JobsController < ApplicationController
         @job.active =  true     # TODO: remove this at some point
         @job.save()
 
-        if false
-          @job.reset_activation(true) # sends the email too
-
-          flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
-          flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-          flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
-        end
         flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -216,21 +209,9 @@ class JobsController < ApplicationController
         # If the faculty sponsor changed, require activation again.
         # (require the faculty to confirm again)
         if changed_sponsors
-          @job.reset_activation(true) # sends the email too
-
-          flash[:notice] = 'Since the faculty sponsor(s) for this listing have '
-          flash[:notice] << 'changed, the listing must be approved by the '
-          flash[:notice] << 'new sponsor(s) before it can be added to the '
-          flash[:notice] << 'listings page and viewed by other users. '
-          flash[:notice] << 'An e-mail has been dispatched to the faculty '
-          flash[:notice] << 'sponsor with instructions on how to activate '
-          flash[:notice] << 'this listing. Once it has been activated, users '
-          flash[:notice] << 'will be able to browse and respond to the posting.'
-
-        else
-          flash[:notice] = 'Listing was successfully updated.'
+          @job.resend_email(true) # sends the email too
         end
-        
+        flash[:notice] = 'Listing was successfully updated.'
         if params[:open_ended_end_date] == "true"
           @job.end_date = nil
         end
