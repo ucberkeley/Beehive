@@ -5,22 +5,13 @@
 			<tr>
 				<td class="job_table_left">
 					<div class="job_title">
-            <a href="<%= job_path(job) %>"><%= job.title %>
-              <% if ! job.active %>
-                <span class="urgent">(not activated!)</span>
-              <% end %>
-            </a>
-            <% if job.active %>
+            <a href="<%= job_path(job) %>"><%= job.title %></a>
               (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
-            <% end %>
 					<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) || @current_user.admin?) %>
-					  <%= link_to "[edit]", :controller => "jobs", :action => "edit", :id => job.id %>
-					  <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => job.id %>
-						
+					  <%= link_to "[edit]", edit_job_path(job) %>
+					  <%= link_to "[delete]", job_path, method: :delete %>
 					<% end %>
-					</div>
-					
-					
+					</div>		
 				</td>
 			</tr>
 		</table>

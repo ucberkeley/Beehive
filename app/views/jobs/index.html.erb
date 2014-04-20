@@ -26,8 +26,7 @@
        Faculty.find_by_sql("SELECT DISTINCT faculties.id, faculties.name FROM
          faculties INNER JOIN sponsorships ON
          sponsorships.faculty_id=faculties.id INNER JOIN jobs ON
-         jobs.id=sponsorships.job_id WHERE jobs.active=TRUE AND jobs.active=TRUE
-         AND (jobs.end_date >= now() OR jobs.end_date is NULL)"),
+         jobs.id=sponsorships.job_id WHERE (jobs.end_date >= now() OR jobs.end_date is NULL)"),
          "id", "name", @faculty_id) %> 
          <br/>
 
