@@ -4,15 +4,10 @@
 <div class = "large-10 small-12 columns">
   <br />
   <h2>
-    <%=h @job.title %>
-    <% if ! @job.active %><span class="urgent">(not activated)</span><% end %>  
+    <%=h @job.title %>  
   </h2>
   
-  <% if @job.active %>
   <span class="label label-success">Open</span>
-  <% else %>
-  <span class="label label-danger">Closed</span>
-  <% end %>
   <p>
     Project Type:
     <b><%= @job.project_string %><b/>
@@ -23,8 +18,8 @@
         <% if @current_user.present? && (@job.user_id == @current_user.id ||
           @job.owners.include?(@current_user) || @current_user.admin?) %>
 
-          <%= link_to "[edit]", :controller => :jobs, :action => :edit, :id => @job.id %> 
-          <%= link_to "[delete]", :controller=> "jobs", :action => "delete", :id => @job.id %>
+          <%= link_to "[edit]", edit_job_path(@job) %> 
+          <%= link_to "[delete]", job_path, method: :delete %>
           <% end %>&nbsp;
 
           <% if @current_user != nil && !@current_user.is_faculty %>
@@ -73,11 +68,7 @@ Sponsored by
   <p>
     <div class="job_tags">
       <%= image_tag 'tag.gif' %> <b>Tags:</b>
-      <% if @job.active %>
       <%= render :partial => "tag", :collection => @job.tag_list %>
-      <% else %>
-      (Tags will be generated once job is activated)
-      <% end %>	
     </div>
   </p>
   

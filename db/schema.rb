@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140418085139) do
+ActiveRecord::Schema.define(:version => 20140420010933) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -50,10 +50,12 @@ ActiveRecord::Schema.define(:version => 20140418085139) do
   end
 
   create_table "departments", :force => true do |t|
-    t.text     "name"
+    t.text     "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "departments", ["name"], :name => "departments_name_key", :unique => true
 
   create_table "documents", :force => true do |t|
     t.integer  "user_id"
@@ -75,12 +77,14 @@ ActiveRecord::Schema.define(:version => 20140418085139) do
   end
 
   create_table "faculties", :force => true do |t|
-    t.string   "name"
+    t.string   "name",          :null => false
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "department_id"
   end
+
+  add_index "faculties", ["name"], :name => "faculties_name_key", :unique => true
 
   create_table "interests", :force => true do |t|
     t.integer  "category_id"
@@ -99,14 +103,15 @@ ActiveRecord::Schema.define(:version => 20140418085139) do
     t.datetime "updated_at"
     t.integer  "department_id"
     t.integer  "activation_code"
-    t.boolean  "active"
     t.boolean  "delta",               :default => true, :null => false
     t.datetime "earliest_start_date"
     t.datetime "latest_start_date"
     t.datetime "end_date"
-    t.boolean  "open",                :default => true
     t.integer  "compensation",        :default => 0
     t.integer  "status",              :default => 0
+    t.integer  "primary_contact_id"
+    t.integer  "project_type"
+    t.boolean  "open"
   end
 
   create_table "owns", :force => true do |t|

@@ -144,7 +144,6 @@ class JobsController < ApplicationController
 
     process_form_params
 
-    params[:job][:active] = false
     params[:job][:activation_code] = 0
 
     sponsor = Faculty.find(params[:faculty_id].to_i) rescue nil
@@ -168,7 +167,6 @@ class JobsController < ApplicationController
           @job.sponsorships << @sponsorship
         end
         
-        @job.active =  true     # TODO: remove this at some point
         @job.save()
 
         flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
@@ -253,9 +251,7 @@ class JobsController < ApplicationController
 
   def activate
     # /jobs/activate/job_id?a=xxx
-    @job = Job.find(:first, :conditions => {
-      :activation_code => params[:a], :active => false
-    })
+    @job = Job.find :first, conditions: { activation_code: params[:a] }
 
     unless @job
       flash[:error] = 'Unable to process activation request.'
@@ -265,7 +261,6 @@ class JobsController < ApplicationController
     @job.populate_tag_list
 
     @job.skip_handlers = true
-    @job.active = true
 
     unless @job.save
       flash[:error] = 'Unsuccessful activation. Please contact us if the problem persists.'
@@ -331,7 +326,6 @@ class JobsController < ApplicationController
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
 
-    params[:job][:active] = [Job::Status::Open, Job::Status::Filled].include? params[:job][:status].to_i
 
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
