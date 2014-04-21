@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     j = (Job.find(params[:id].present? ? params[:id] : params[:job_id]) rescue nil)
       # id and job_id because this filter is used by both the JobsController
       # and the ApplicsController
-    if (j == nil || @current_user != j.user)
+    if j == nil
       flash[:error] = "Unauthorized access denied. Do not pass Go. Do not collect $200."
       redirect_to :controller => 'dashboard', :action => :index
     end
