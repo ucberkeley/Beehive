@@ -1,7 +1,33 @@
+# Here is an example database.yml file
+# We do not check in real database.yml files, so copy this there, making appropriate local changes
+#
 development:
-    adapter: postgresql
-    database: dc8gh7b3pjl8l3
-    host: localhost
-    username: postgres
-    pool: 5
-    timeout: 5000
+  timeout: 5000
+  database: reasearchmath_development
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  username: 
+  password: 
+
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
+# Do not set this db to the same as development or production.
+test:
+  timeout: 5000
+  database: reasearchmath_test
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  username: 
+  password:  
+
+production:
+  # production deployment overwrites database.yml, so this is only used for developers running production mode
+  timeout: 5000
+  database: reasearchmath_production
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  username: 
+  password:  
