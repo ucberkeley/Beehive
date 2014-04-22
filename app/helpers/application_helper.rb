@@ -32,6 +32,9 @@ module ApplicationHelper
     redirect_to request.referer || path
   end
 
+  def email_regex
+    /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  end
 end
 
 module ActionView
