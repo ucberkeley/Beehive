@@ -34,7 +34,7 @@
     <td class="job_clear_table_label"><%= f.label :faculty_sponsor, 'Faculty sponsor' %></td>
     <td class="job_clear_table_field">
       <%= select_tag :faculty_id,
-          '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(Faculty.all,
+          '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(@faculty,
           :id,
           :name,
           @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id)
