@@ -22,8 +22,7 @@
       <%= label_tag :faculty, "Faculty" %>
 
       <%= select_tag :faculty, options_for_select([["All Faculty",0]]) +
-      options_from_collection_for_select(
-       Faculty.find_by_sql(@faculty, "id", "name", @faculty_id) %> 
+      options_from_collection_for_select(@faculty, "id", "name", @faculty_id) %> 
          <br/>
 
          <%= label_tag :compensation, "Compensation" %>
