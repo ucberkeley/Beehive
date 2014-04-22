@@ -70,7 +70,11 @@ class JobsController < ApplicationController
 
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
-
+    @faculty = Faculty.find_by_sql("SELECT DISTINCT faculties.id, faculties.name FROM 
+               faculties INNER JOIN sponsorships ON
+               sponsorships.faculty_id=faculties.id INNER JOIN jobs ON
+               jobs.id=sponsorships.job_id
+               AND (jobs.end_date >= now() OR jobs.end_date is NULL) ORDER BY name ASC")
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
@@ -78,8 +82,8 @@ class JobsController < ApplicationController
     @post_status   = params[:post_status]
 
     respond_to do |format|
-            format.html { render :action => :index }
-            format.xml { render :xml => @jobs }
+      format.html { render :action => :index }
+      format.xml { render :xml => @jobs }
     end
   end
 
@@ -105,6 +109,7 @@ class JobsController < ApplicationController
     @job = Job.new
     @job.num_positions = 0
 
+    @faculty = Faculty.order("name").all
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
@@ -116,6 +121,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.mend
 
+    @faculty = Faculty.order("name").all
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.sort_by{|u| u.name}
@@ -325,8 +331,6 @@ class JobsController < ApplicationController
     [:category, :course, :proglang].each do |k|
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
-
-
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
   end
@@ -338,7 +342,7 @@ class JobsController < ApplicationController
   def update_sponsorships
     # Only one sponsor allowed - may change later
     if params[:faculty_id] != '-1'
-      @job.sponsorships.delete
+      @job.sponsorships.delete_all
       @job.sponsorships.create(faculty_id: params[:faculty_id])
     end
     return @job.sponsorships
