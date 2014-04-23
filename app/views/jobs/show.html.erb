@@ -19,7 +19,7 @@
           @job.owners.include?(@current_user) || @current_user.admin?) %>
 
           <%= link_to "[edit]", edit_job_path(@job) %> 
-          <%= link_to "[delete]", job_path, method: :delete %>
+          <%= link_to "[delete]", :controller => :jobs, :action => :destroy %>
           <% end %>&nbsp;
 
           <% if @current_user != nil && !@current_user.is_faculty %>
@@ -74,26 +74,37 @@ Sponsored by
   
   <!-- Job attributes -->
   <table class="job_attributes"><tbody>
+
+    <tr>
+      <td class="job_attr_title">
+        Posted:
+      </td>
+      <td class="job_attr_value">
+        <%= @job.created_at.strftime("%m/%d/%Y") %>    
+      </td>
+    </tr>
+
     <tr>
      <td class="job_attr_title">Description:</td>
-   </tr><tr>
-   <td id="description" colspan=2>
-     <%= simple_format @job.desc %>
-   </td>
- </tr>
+    </tr>
+    <tr>
+      <td id="description" colspan=2>
+        <%= simple_format @job.desc %>
+      </td>
+    </tr>
 
- <tr>
-   <td class="job_attr_title">
-    <%= h 'Category'.pluralize_for(@job.categories.length) %>:
-  </td>
-  <td class="job_attr_value">
-   <% if ! @job.category_list_of_job.empty? %>
-   <%=h @job.category_list_of_job(true) %>
-   <% else %>
-   (none)
-   <% end %>      
- </td>
-</tr>
+  <tr>
+    <td class="job_attr_title">
+      <%= h 'Category'.pluralize_for(@job.categories.length) %>:
+    </td>
+    <td class="job_attr_value">
+      <% if ! @job.category_list_of_job.empty? %>
+        <%=h @job.category_list_of_job(true) %>
+      <% else %>
+        (none)
+      <% end %>      
+    </td>
+  </tr>
 
 <tr>
 	<td class="job_attr_title">
