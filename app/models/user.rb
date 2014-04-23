@@ -95,7 +95,6 @@ class User < ActiveRecord::Base
   before_validation :handle_proglangs
 
   attr_accessible :email, :units, :free_hours, :research_blurb, :experience, :summer, :url, :year
-
   attr_reader :course_names; attr_writer :course_names
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names

@@ -97,7 +97,6 @@ class ApplicsController < ApplicationController
         {:user_id => @current_user.id, :job_id => @job.id})
        flash[:error] = "Whoa, slow down! You've already applied for this job."
        redirect_to(url_for(@job))
-       return
     end
     
     @applic = Applic.new({:user => @current_user, :job => @job})
@@ -113,15 +112,27 @@ class ApplicsController < ApplicationController
       params[:include_transcript] && @current_user.transcript.present?
 
     respond_to do |format|
-        if @applic.save
-            JobMailer.deliver_applic_email(@applic).deliver
-            flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
-            format.html { redirect_to job_path(@job) }
+      if @applic.save
+
+        # Makes sure emails are valid
+        user_email = @job.user.email
+        faculty_emails = @job.faculties.collect(&:email)
+        faculty_emails.select! { |email| email_regex === email}
+
+        if !faculty_emails.empty? || user_email === email_regex
+          JobMailer.deliver_applic_email(@applic, user_email, faculty_emails).deliver
+          flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else
-            flash[:error] = "Could not apply to position. Make sure you've " + 
-                            "written a message to the faculty sponsor!"
-            format.html { render :action => :new }
+          flash[:error] = "Looks like the job's contacts have invalid emails. 
+                           Please contact us for further support. 
+                           Your application has been submitted."
         end
+        format.html { redirect_to job_path(@job) }
+      else
+        flash[:error] = "Could not apply to position. Make sure you've " + 
+                        "written a message to the faculty sponsor!"
+        format.html { render 'new' }
+      end
     end
   end
   
@@ -129,21 +140,21 @@ class ApplicsController < ApplicationController
   def destroy
     applic = Applic.find(:job_id=>params[:id])
     if !applic.nil? && applic.user == @current_user
-        respond_to do |format|
-            if applic.destroy
-                flash[:error] = "Withdrew your application successfully. "
-                flash[:error] << "Keep in mind that your initial application "
-                flash[:error] << "email has already been sent."
-                format.html { redirect_to(:controller=>:jobs, :action=>:index) }
-            else
-                flash[:error] = "Couldn't withdraw your application. "
-                flash[:error] << "Please try again, or contact support."
-                format.html { redirect_to(:controller=>:dashboard) }
-            end
+      respond_to do |format|
+        if applic.destroy
+          flash[:error] = "Withdrew your application successfully. "
+          flash[:error] << "Keep in mind that your initial application "
+          flash[:error] << "email has already been sent."
+          format.html { redirect_to(:controller=>:jobs, :action=>:index) }
+        else
+          flash[:error] = "Couldn't withdraw your application. "
+          flash[:error] << "Please try again, or contact support."
+          format.html { redirect_to(:controller=>:dashboard) }
         end
+      end
     else
-        flash[:error] = "Error: Couldn't find that application."
-        redirect_to(:controller=>:dashboard)
+      flash[:error] = "Error: Couldn't find that application."
+      redirect_to(:controller=>:dashboard)
     end
   end
 
@@ -171,5 +182,4 @@ class ApplicsController < ApplicationController
     flash[:notice] = "Application listing not implemented yet."
     redirect_to job_path(@job)
   end
- 
 end
