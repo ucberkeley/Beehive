@@ -4,54 +4,43 @@
 		<div class="job_padding_wrapper">
 			<table class="job_table">
 				<tr class="job_table_row">
-					<td class="job_table_left">
-													    
-							    <ul style="float:right">
-							      <% if @current_user.present? && (job.user_id == @current_user.id ||
-								 job.owners.include?(@current_user) || @current_user.admin?)
-								 %>
-							      <li>
-								<%= link_to "edit", :controller => "jobs", :action => "edit",
-								:id => job.id %>
-							      </li>
-							      <li>
-								<%= link_to "delete", :controller=> "jobs", :action =>
+					<td class="job_table_left">							    
+						<ul style="float:right">
+							<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) ||@current_user.admin?)%>
+							  <li>
+									<%= link_to "edit", edit_job_path(job) %>
+							  </li>
+							  <li>
+									<%= link_to "delete", :controller=> "jobs", :action =>
 								"delete", :id => job.id %>
-							      </li>
-							      <% end %>
-							      <% if job.users.include?(@current_user) %>
-							      <li>
-								<%= link_to "unwatch", :controller=>:jobs, :action =>
-								:unwatch, :id => job.id %>
-							      </li>
-							      <% elsif job.user != @current_user %>
-							      <li>
-								<%= link_to "watch", :controller=>:jobs, :action => :watch,
-								:id => job.id %>
-							      </li>
-							      <% end %>
-							      <% if job.applicants.include?(@current_user) %>
-							      <li>
-								[applied!]
-							      </li>
-							      <% elsif job.user != @current_user and job.status == 0%>
-							      <li>
-								<%= link_to "apply", new_job_applic_path(job.id)
-								    %>
-							      </li>
-							      <% end %>
-							    </ul>
+							  </li>
+							<% end %>
+							<% if job.users.include?(@current_user) %>
+							  <li>
+									<%= link_to "unwatch", unwatch_job_path(job) %>
+							  </li>
+							<% elsif job.user != @current_user %>
+							  <li>
+									<%= link_to "watch", watch_job_path(job) %>
+							  </li>
+							<% end %>
+							<% if job.applicants.include?(@current_user) %>
+								<li> [applied!] </li>
+							<% elsif job.user != @current_user and job.status == 0%>
+							  <li>
+									<%= link_to "apply", new_job_applic_path(job.id) %>
+							  </li>
+							<% end %>
+						</ul>
 
-							<div class="job_title">
-								<a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
+						<div class="job_title">
+							<a class="job-title" href="<%= job_path(job) %>" title="Click to learn more about this
 									project!"><%= job.title %></a>
-								</div>
-
-								<% job_tags = job.tag_list %>
-								<% if !job_tags.empty? %>
-								<div class="job_tags">
-
-									<% if controller.controller_name != 'dashboard' %>
+						</div>
+						<% job_tags = job.tag_list %>
+						<% if !job_tags.empty? %>
+							<div class="job_tags">
+								<% if controller.controller_name != 'dashboard' %>
 									<div class="job_desc">
 										<span id="job_desc_<%= job.id %>">
 											<%= truncate job.desc, :length => 200, :omission => '...' %>
@@ -60,31 +49,28 @@
 											<%= job.desc %>
 										</span>
 										<% if job.desc.length > 200 %>
-	      <!--<%= link_to "[read more]", :controller => "jobs", :action =>
-	      "show", :id => job.id %>-->
-	      <div id="expand_<%= job.id %>">
-	      	<a onclick='
-	      	$("#job_desc_<%= job.id %>").css("display", "none");
-	      	$("#job_<%= job.id %>").css("display", "inline");
-	      	$("#expand_<%= job.id %>").css("display", "none");
-	      	'>[read
-	      	more]</a>
-	      </div>
-	      <% end %>
-	  </div>
-	  <% end %>
-
-	  <% if job_tags.empty? %>
-	  (none)
-	  <% else %>
-	  <%= render :partial => "jobs/tag", :collection => job.tag_list %>
-	  <% end %>
+	      							<div id="expand_<%= job.id %>">
+	      								<a onclick='
+	      								$("#job_desc_<%= job.id %>").css("display", "none");
+	      								$("#job_<%= job.id %>").css("display", "inline");
+	      								$("#expand_<%= job.id %>").css("display", "none");
+	      								'>[read more]</a>
+	      							</div>
+	      						<% end %>
+	      						</br>
+	      						Posted: <%= job.created_at.strftime("%m/%d/%Y") %>
+	  							</div>
+	  						<% end %>
+								<% if job_tags.empty? %>
+	  							(none)
+	  						<% else %>
+	  							<%= render partial: 'jobs/tag', collection: job.tag_list %>
+	  						<% end %>
+							</div>
+						<% end %>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
-	<% end %>
-
-</tr>
-</table>
-</div>
-</div>
-</div>
 <% end %>

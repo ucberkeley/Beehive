@@ -9,7 +9,7 @@
               (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
 					<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) || @current_user.admin?) %>
 					  <%= link_to "[edit]", edit_job_path(job) %>
-					  <%= link_to "[delete]", job_path, method: :delete %>
+					  <%= link_to "[delete]", controller: "jobs", action: "delete", id: job.id %>
 					<% end %>
 					</div>		
 				</td>
