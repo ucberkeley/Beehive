@@ -106,16 +106,12 @@ class JobsController < ApplicationController
   # GET /jobs/new
   # GET /jobs/new.xml
   def new
-    @job = Job.new
-    @job.num_positions = 0
-
+    @job = Job.new(num_positions: 0)
     @faculty = Faculty.all
     # @faculty = Faculty.where("email != ? OR email != ?", "None", "nil")
-
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
-
   end
 
   # GET /jobs/1/edit
@@ -148,41 +144,37 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    params[:job][:user] = @current_user
-
     process_form_params
-
-    params[:job][:activation_code] = 0
     @faculty = Faculty.all
-    sponsor = Faculty.find(params[:faculty_id].to_i) rescue nil
+    sponsor = Faculty.find(params[:faculty_id]) rescue nil
     @job = Job.new(params[:job])
     @job.update_attribs(params)
-    @job.num_positions ||= 0
-    if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
+    if !params[:add_owners].empty?
       @job.owners << User.find(params[:add_owners])
     end
-    if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
+    if !params[:add_contacts].empty?
       @job.primary_contact_id = params[:add_contacts].to_i
     else
       @job.primary_contact_id = @current_user.id
     end
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
     @job.populate_tag_list
 
     respond_to do |format|
-      if @job.valid?
+      if @job.save
         if sponsor
           @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
           @job.sponsorships << @sponsorship
         end
         
-        @job.save()
-
         flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
         @faculty_id = params[:faculty_id]
-        format.html { render :action => "new" }
+        format.html { render 'new' }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end
     end
