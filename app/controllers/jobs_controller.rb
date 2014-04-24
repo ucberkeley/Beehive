@@ -313,7 +313,8 @@ class JobsController < ApplicationController
    watch = Watch.find(:first, :conditions=>{:user_id=> @current_user.id, :job_id => job.id})
 
    respond_to do |format|
-     if watch.destroy
+     if watch
+       watch.destroy
        flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
        format.html { redirect_to(job) }
      else
