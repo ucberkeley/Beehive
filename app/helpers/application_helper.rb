@@ -146,7 +146,7 @@ module CASControllerIncludes
   # Requires a CAS session to be present, and redirects if it isn't.
   # @returns false if redirected because of new user processing, true if user was already signed up
   #
-
+    
     # Require CAS login first
     unless @user_session
       redirect_to login_path

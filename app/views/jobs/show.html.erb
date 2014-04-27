@@ -19,7 +19,7 @@
           @job.owners.include?(@current_user) || @current_user.admin?) %>
 
           <%= link_to "[edit]", edit_job_path(@job) %> 
-          <%= link_to "[delete]", :controller => :jobs, :action => :destroy %>
+          <%= link_to "[delete]", delete_job_path(@job) %>
         <% end %>&nbsp;
         <% if !@current_user.nil? && !@current_user.is_faculty %>
           <% if @job.users.include?(@current_user) %>
