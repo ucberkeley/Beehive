@@ -6,8 +6,11 @@
   <h2>
     <%=h @job.title %>  
   </h2>
-  
-  <span class="label label-success">Open</span>
+  <% if @job.status == 0 %>
+    <span class="label label-success">Open</span>
+  <% else %>
+    <span class="label label-error">Closed</span>
+  <% end %>
   <p>
     Project Type:
     <b><%= @job.project_string %><b/>
@@ -19,24 +22,23 @@
           @job.owners.include?(@current_user) || @current_user.admin?) %>
 
           <%= link_to "[edit]", edit_job_path(@job) %> 
-          <%= link_to "[delete]", :controller => :jobs, :action => :destroy %>
-          <% end %>&nbsp;
-
-          <% if @current_user != nil && !@current_user.is_faculty %>
+          <%= link_to "[delete]", delete_job_path(@job) %>
+        <% end %>&nbsp;
+        <% if !@current_user.nil? && !@current_user.is_faculty %>
           <% if @job.users.include?(@current_user) %>
-          <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+            <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
           <% elsif @job.user != @current_user %>
-          <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+            <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
           <% end %>
           &nbsp;
           <% if @job.applicants.include?(@current_user) %>
-          [applied!]
+            [applied!]
           <% elsif @job.user != @current_user and @job.status == 0%>
-          <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
+            <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
           <% end %>
-          <% end %>
-        </b>
-      </p>
+        <% end %>
+      </b>
+    </p>
   <!--
   <% if @job.owners.length != 0 %>
   Owned by

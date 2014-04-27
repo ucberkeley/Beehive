@@ -377,7 +377,8 @@ class Job < ActiveRecord::Base
     if send_email
       # Send the email for activation.
       begin
-        if !self.faculties.empty?
+        email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+        if !faculties.collect(&:email).select{|email| email === email_regex}.empty?
           JobMailer.activate_job_email(self).deliver
         end
       rescue => e

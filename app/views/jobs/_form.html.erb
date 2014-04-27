@@ -16,7 +16,8 @@
 </div>
 <br/ >
 <% end %>
-
+  <%= f.hidden_field :activation_code, value: 0 %>
+  <%= f.hidden_field :user_id, value: @current_user.id %>
 <table class="job_clear_table">
   <tr>
     <td class="job_clear_table_label"><%= f.label :title, 'Listing title' %><span class="required_field">*</span></td>
@@ -51,9 +52,7 @@
 	
         <td class="job_clear_table_field">
             <%= select_tag :add_owners,
-                '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
-                    :id,
-                    :name
+                '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list, :id, :name, @job
                 )
              %>
         </td>
@@ -75,7 +74,7 @@
         </td>
       </div>
     </tr>
-    <% end %>
+  <% end %>
 
   <tr>
     <td class="job_clear_table_label"><%= f.label :desc, 'Listing description' %><span class="required_field">*</span></td>
@@ -156,7 +155,7 @@
                 <%= f.select :status, options_for_select( Job::Status::All, @job.status ) %>
         </td>
     </tr>
-    <% if !@current_owners.nil? and @current_owners.size > 0 %>
+    <% if !@current_owners.nil?  %>
     <tr>
         <td class="job_clear_table_label">
             <%= f.label :delete_owners, 'Delete Owners' %>
