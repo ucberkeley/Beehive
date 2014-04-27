@@ -6,8 +6,11 @@
   <h2>
     <%=h @job.title %>  
   </h2>
-  
-  <span class="label label-success">Open</span>
+  <% if @job.status == 0 %>
+    <span class="label label-success">Open</span>
+  <% else %>
+    <span class="label label-error">Closed</span>
+  <% end %>
   <p>
     Project Type:
     <b><%= @job.project_string %><b/>
