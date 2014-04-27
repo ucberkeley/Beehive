@@ -10,6 +10,7 @@ class FeedbackMailer < ActionMailer::Base
     #body        body_text
     mail(:to => 'beehive-support@lists.berkeley.edu',
          :from => sender,
+         :reply_to => sender,
          :subject => "BeeHive Feedback #{subject_line}",
          :body => body_text) 
   end
