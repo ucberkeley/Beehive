@@ -40,11 +40,11 @@ class User < ActiveRecord::Base
   end
 
   class Types
-      Undergrad = 0
-      Grad      = 1
-      Faculty   = 2
-      Admin     = 3
-      All       = [Undergrad, Grad, Faculty, Admin]
+    Undergrad = 0
+    Grad      = 1
+    Faculty   = 2
+    Admin     = 3
+    All       = [Undergrad, Grad, Faculty, Admin]
   end
 
   has_many :jobs,        :dependent => :nullify
@@ -168,12 +168,12 @@ class User < ActiveRecord::Base
   def watched_jobs_list_of_user
     jobs = []
     self.watches.all.each do |w|
-        this_job = Job.find_by_id(w.job_id)
-        if this_job then
-            jobs << this_job
-        else
-            w.destroy
-        end
+      this_job = Job.find_by_id(w.job_id)
+      if this_job then
+          jobs << this_job
+      else
+          w.destroy
+      end
     end
     jobs
     #@watched_jobs = @current_user.watches.map{|w| w.job }
