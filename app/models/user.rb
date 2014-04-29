@@ -40,11 +40,11 @@ class User < ActiveRecord::Base
   end
 
   class Types
-      Undergrad = 0
-      Grad      = 1
-      Faculty   = 2
-      Admin     = 3
-      All       = [Undergrad, Grad, Faculty, Admin]
+    Undergrad = 0
+    Grad      = 1
+    Faculty   = 2
+    Admin     = 3
+    All       = [Undergrad, Grad, Faculty, Admin]
   end
 
   has_many :jobs,        :dependent => :nullify
@@ -90,9 +90,9 @@ class User < ActiveRecord::Base
   # Check that user type is valid
   validates_inclusion_of    :user_type, :in => Types::All, :message => "is invalid"
 
-  before_validation :handle_courses
-  before_validation :handle_categories
-  before_validation :handle_proglangs
+  # before_validation :handle_courses
+  # before_validation :handle_categories
+  # before_validation :handle_proglangs
 
   attr_accessible :email, :units, :free_hours, :research_blurb, :experience, :summer, :url, :year
   attr_reader :course_names; attr_writer :course_names
@@ -168,12 +168,12 @@ class User < ActiveRecord::Base
   def watched_jobs_list_of_user
     jobs = []
     self.watches.all.each do |w|
-        this_job = Job.find_by_id(w.job_id)
-        if this_job then
-            jobs << this_job
-        else
-            w.destroy
-        end
+      this_job = Job.find_by_id(w.job_id)
+      if this_job then
+          jobs << this_job
+      else
+          w.destroy
+      end
     end
     jobs
     #@watched_jobs = @current_user.watches.map{|w| w.job }
@@ -284,6 +284,43 @@ class User < ActiveRecord::Base
     s
   end
   
+  # Parses the textbox list of courses from "CS162,CS61A,EE123"
+  # etc. to an enumerable object courses
+  def handle_courses(course_names)
+    return if self.is_faculty?
+    self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
+    course_array = []
+    course_array = course_names.split(',').uniq if ! course_names.nil?
+    course_array.each do |item|
+      self.courses << Course.find_or_create_by_name(item.upcase.strip)
+    end
+  end
+
+  # Parses the textbox list of categories from "signal processing,robotics"
+  # etc. to an enumerable object categories
+  def handle_categories(category_names)
+    return if self.is_faculty?
+    self.categories = []  # eliminates any previous interests so as to avoid duplicates
+    category_array = []
+    category_array = category_names.split(',').uniq if ! category_names.nil?
+    category_array.each do |cat|
+      self.categories << Category.find_or_create_by_name(cat.downcase.strip)
+    end
+  end
+    
+  # Parses the textbox list of proglangs from "c++,python"
+  # etc. to an enumerable object proglangs
+  def handle_proglangs(proglang_names)
+    return if self.is_faculty?
+    self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
+    proglang_array = []
+    proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
+    proglang_array.each do |pl|
+      self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
+    end
+  end 
+  
+
   protected
     
     # Dynamically assign the value of :email, based on whether this user
@@ -301,40 +338,4 @@ class User < ActiveRecord::Base
               self.name = is_faculty ? faculty_name : student_name
       end
     end
-
-    # Parses the textbox list of courses from "CS162,CS61A,EE123"
-    # etc. to an enumerable object courses
-    def handle_courses
-      return if self.is_faculty?
-      self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
-      course_array = []
-      course_array = course_names.split(',').uniq if ! course_names.nil?
-      course_array.each do |item|
-              self.courses << Course.find_or_create_by_name(item.upcase.strip)
-      end
-    end
-    
-    # Parses the textbox list of categories from "signal processing,robotics"
-    # etc. to an enumerable object categories
-    def handle_categories
-      return if self.is_faculty?
-      self.categories = []  # eliminates any previous interests so as to avoid duplicates
-      category_array = []
-      category_array = category_names.split(',').uniq if ! category_names.nil?
-      category_array.each do |cat|
-              self.categories << Category.find_or_create_by_name(cat.downcase.strip)
-      end
-    end
-    
-    # Parses the textbox list of proglangs from "c++,python"
-    # etc. to an enumerable object proglangs
-    def handle_proglangs
-      return if self.is_faculty?
-      self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
-      proglang_array = []
-      proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
-      proglang_array.each do |pl|
-              self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
-      end
-    end	
 end
