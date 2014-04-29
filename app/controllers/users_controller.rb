@@ -95,6 +95,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.handle_courses(params[:course][:name])
+    @user.handle_proglangs(params[:proglang][:name])
+    @user.handle_categories(params[:category][:name])
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User profile was successfully updated.'
