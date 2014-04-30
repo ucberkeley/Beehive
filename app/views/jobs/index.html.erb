@@ -7,9 +7,7 @@
       <%= form_tag(jobs_search_path, :method => "get") do %>
       <%= text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"%>
     </div>
-    <div class="large-2 small-2 columns">
       <%= submit_tag @query, :class => "button tiny", :value => "Search" %>
-    </div>
     <br/><br /><br/><br />
     <%= link_to "[More Options]", '#', :id => 'more_options', :onclick =>
     "$('#advanced_search').toggle('show')" %>
