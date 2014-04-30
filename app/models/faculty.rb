@@ -8,7 +8,8 @@ class Faculty < ActiveRecord::Base
   #   updated_at    : datetime 
   #   department_id : integer 
   # =======================
-
+  default_scope order('name')
+  
   has_many :sponsorships
   has_many :jobs, :through => :sponsorships
   has_many :reviews

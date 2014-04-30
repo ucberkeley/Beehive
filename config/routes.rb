@@ -48,7 +48,9 @@ ResearchMatch::Application.routes.draw do
   resources :users
   get  '/dashboard' => 'dashboard#index', :as => :dashboard
   get  '/profile'   => 'users#profile', :as => :profile
-
+  
+  # Faculty
+  resources :faculties, only: :show
   # Home
   get  '/' => 'home#index', :as => :home
 

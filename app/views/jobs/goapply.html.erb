@@ -14,17 +14,17 @@
 	  <tr>
 		<td class="job_clear_table_label">Faculty sponsor</td>
 		<td class="job_clear_table_field">
-		    <b>
-		        <% @job.faculties.each do |fac| %> 
-                	<%= fac.name %> 
+		  <b>
+		    <% @job.faculties.each do |fac| %> 
+          <%= fac.name %> 
               	
-              	  <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley <%= @job.department.name %>" target="_blank">
-          		  		<%= image_tag(@job.department.name.downcase + "_icon.gif") %>
-              		</a>
+          <a href="http://www.google.com/search?btnI=I%27m+Feeling+Lucky&ie=UTF-8&oe=UTF-8&q=<%= fac.name %> Berkeley <%= @job.department.name %>" target="_blank">
+          <%= image_tag(@job.department.name.downcase + "_icon.gif") %>
+          </a>
             	    
                 	
-            <% end %> 
-    		</b>
+        <% end %> 
+    	</b>
 		</td>
 	  </tr>
 	  <tr>
@@ -36,20 +36,20 @@
   </table>
   <br />
   <p>
-      <h2>Credentials</h2>
-      <b><%= @current_user.name %></b>, please supply your transcript and resume in PDF format below. 
-      The faculty sponsor of this job will receive your credentials along with your application.
+    <h2>Credentials</h2>
+    <b><%= @current_user.name %></b>, please supply your transcript and resume in PDF format below. 
+    The faculty sponsor of this job will receive your credentials along with your application.
   </p>
   <br />
     
   <table class="job_clear_table">
-  	  <tr>
-		<td class="job_clear_table_label">Unofficial Transcript</td>
-		<td class="job_clear_table_field"><i>N/A</i></td>
+  	<tr>
+		  <td class="job_clear_table_label">Unofficial Transcript</td>
+		  <td class="job_clear_table_field"><i>N/A</i></td>
 	  </tr>
-  	  <tr>
-		<td class="job_clear_table_label">Resume</td>
-		<td class="job_clear_table_field"><i>N/A</i></td>
+  	<tr>
+		  <td class="job_clear_table_label">Resume</td>
+		  <td class="job_clear_table_field"><i>N/A</i></td>
 	  </tr>
   </table>
   

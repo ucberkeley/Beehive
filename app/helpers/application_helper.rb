@@ -32,6 +32,9 @@ module ApplicationHelper
     redirect_to request.referer || path
   end
 
+  def email_regex
+    /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  end
 end
 
 module ActionView
@@ -143,7 +146,7 @@ module CASControllerIncludes
   # Requires a CAS session to be present, and redirects if it isn't.
   # @returns false if redirected because of new user processing, true if user was already signed up
   #
-
+    
     # Require CAS login first
     unless @user_session
       redirect_to login_path
@@ -170,7 +173,7 @@ module CASControllerIncludes
 
       if new_user.save && new_user.errors.empty?
         flash[:notice] = "Welcome to BeeHive! Since this is your first time here, "
-        flash[:notice] << "please verify your email address, #{new_user.name}. We'll send all correspondence to that email address."
+        flash[:notice] << "please make sure you update your email address. We'll send all correspondence to that email address."
         logger.info "First login for #{new_user.login}"
 
         @current_user = User.where(auth_field => auth_value)[0]

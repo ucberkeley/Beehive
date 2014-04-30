@@ -70,7 +70,11 @@ class JobsController < ApplicationController
 
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
-
+    @faculty = Faculty.all
+    # @faculty = Faculty.find_by_sql("SELECT DISTINCT faculties.id, faculties.name FROM 
+    #            faculties INNER JOIN sponsorships ON sponsorships.faculty_id=faculties.id 
+    #            INNER JOIN jobs ON jobs.id=sponsorships.job_id AND (jobs.end_date >= now()
+    #            OR jobs.end_date is NULL) WHERE ORDER BY name ASC")
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
@@ -78,8 +82,8 @@ class JobsController < ApplicationController
     @post_status   = params[:post_status]
 
     respond_to do |format|
-            format.html { render :action => :index }
-            format.xml { render :xml => @jobs }
+      format.html { render :action => :index }
+      format.xml { render :xml => @jobs }
     end
   end
 
@@ -102,13 +106,12 @@ class JobsController < ApplicationController
   # GET /jobs/new
   # GET /jobs/new.xml
   def new
-    @job = Job.new
-    @job.num_positions = 0
-
+    @job = Job.new(num_positions: 0)
+    @faculty = Faculty.all
+    # @faculty = Faculty.where("email != ? OR email != ?", "None", "nil")
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
-
   end
 
   # GET /jobs/1/edit
@@ -116,6 +119,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.mend
 
+    @faculty = Faculty.all
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.sort_by{|u| u.name}
@@ -128,7 +132,7 @@ class JobsController < ApplicationController
 
   def resend_activation_email
     @job = Job.find(params[:id])
-    @job.reset_activation(true)
+    @job.resend_email(true)
     flash[:notice] = 'Thank you. The activation email for this listing has '
     flash[:notice] << 'been re-sent to its faculty sponsors.'
 
@@ -140,50 +144,37 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    params[:job][:user] = @current_user
-
     process_form_params
-
-    params[:job][:active] = false
-    params[:job][:activation_code] = 0
-
-    sponsor = Faculty.find(params[:faculty_id].to_i) rescue nil
+    @faculty = Faculty.all
+    sponsor = Faculty.find(params[:faculty_id]) rescue nil
     @job = Job.new(params[:job])
     @job.update_attribs(params)
-    @job.num_positions ||= 0
-    if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
+    if !params[:add_owners].empty?
       @job.owners << User.find(params[:add_owners])
     end
-    if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
+    if !params[:add_contacts].empty?
       @job.primary_contact_id = params[:add_contacts].to_i
     else
       @job.primary_contact_id = @current_user.id
     end
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
     @job.populate_tag_list
 
     respond_to do |format|
-      if @job.valid?
+      if @job.save
         if sponsor
           @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
           @job.sponsorships << @sponsorship
         end
         
-        @job.active =  true     # TODO: remove this at some point
-        @job.save()
-
-        if false
-          @job.reset_activation(true) # sends the email too
-
-          flash[:notice] = 'Thank you for submitting a listing.  Before this listing can be added to our listings page and be viewed by '
-          flash[:notice] << 'other users, it must be approved by the faculty sponsor.  An e-mail has been dispatched to the faculty '
-          flash[:notice] << 'sponsor with instructions on how to activate this listing.  Once it has been activated, users will be able to browse and respond to the posting.'
-        end
         flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
         @faculty_id = params[:faculty_id]
-        format.html { render :action => "new" }
+        format.html { render 'new' }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end
     end
@@ -216,21 +207,9 @@ class JobsController < ApplicationController
         # If the faculty sponsor changed, require activation again.
         # (require the faculty to confirm again)
         if changed_sponsors
-          @job.reset_activation(true) # sends the email too
-
-          flash[:notice] = 'Since the faculty sponsor(s) for this listing have '
-          flash[:notice] << 'changed, the listing must be approved by the '
-          flash[:notice] << 'new sponsor(s) before it can be added to the '
-          flash[:notice] << 'listings page and viewed by other users. '
-          flash[:notice] << 'An e-mail has been dispatched to the faculty '
-          flash[:notice] << 'sponsor with instructions on how to activate '
-          flash[:notice] << 'this listing. Once it has been activated, users '
-          flash[:notice] << 'will be able to browse and respond to the posting.'
-
-        else
-          flash[:notice] = 'Listing was successfully updated.'
+          @job.resend_email(true) # sends the email too
         end
-        
+        flash[:notice] = 'Listing was successfully updated.'
         if params[:open_ended_end_date] == "true"
           @job.end_date = nil
         end
@@ -272,9 +251,7 @@ class JobsController < ApplicationController
 
   def activate
     # /jobs/activate/job_id?a=xxx
-    @job = Job.find(:first, :conditions => {
-      :activation_code => params[:a], :active => false
-    })
+    @job = Job.find :first, conditions: { activation_code: params[:a] }
 
     unless @job
       flash[:error] = 'Unable to process activation request.'
@@ -284,7 +261,6 @@ class JobsController < ApplicationController
     @job.populate_tag_list
 
     @job.skip_handlers = true
-    @job.active = true
 
     unless @job.save
       flash[:error] = 'Unsuccessful activation. Please contact us if the problem persists.'
@@ -329,7 +305,8 @@ class JobsController < ApplicationController
    watch = Watch.find(:first, :conditions=>{:user_id=> @current_user.id, :job_id => job.id})
 
    respond_to do |format|
-     if watch.destroy
+     if watch
+       watch.destroy
        flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
        format.html { redirect_to(job) }
      else
@@ -349,9 +326,6 @@ class JobsController < ApplicationController
     [:category, :course, :proglang].each do |k|
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
-
-    params[:job][:active] = [Job::Status::Open, Job::Status::Filled].include? params[:job][:status].to_i
-
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
   end
@@ -361,11 +335,13 @@ class JobsController < ApplicationController
   # Returns true if sponsorships changed at all for this update,
   #   and false if they did not.
   def update_sponsorships
-    orig_sponsorships = @job.sponsorships.clone
-    fac = Faculty.exists?(params[:faculty_id]) ? params[:faculty_id] : 0
-    sponsor = Sponsorship.find(:first, :conditions => {:job_id=>@job.id, :faculty_id=>fac} ) || Sponsorship.create(:job_id=>@job.id, :faculty_id=>fac)
-    @job.sponsorships = [sponsor]
-    return orig_sponsorships != @job.sponsorships
+    # Only one sponsor allowed - may change later
+    if params[:faculty_id] != '-1'
+      @job.sponsorships.delete_all
+      @job.sponsorships.create(faculty_id: params[:faculty_id])
+    end
+    return @job.sponsorships
+
   end
 
 ####################

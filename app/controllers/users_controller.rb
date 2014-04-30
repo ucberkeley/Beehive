@@ -95,15 +95,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
-    # If params[:user] is blank? for some reason, instantiate it.
-    params[:user] ||= {}
-
+    @user.handle_courses(params[:course][:name])
+    @user.handle_proglangs(params[:proglang][:name])
+    @user.handle_categories(params[:category][:name])
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        @user.update_attribs(params)
         flash[:notice] = 'User profile was successfully updated.'
-        format.html { redirect_to(edit_user_path, :notice => 'User profile was successfully updated.') }
+        format.html { redirect_to dashboard_path, notice: 'User profile was successfully updated.' }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

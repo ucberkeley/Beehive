@@ -5,7 +5,6 @@ include CASControllerIncludes
 #before_filter :goto_home_unless_logged_in, :except => :destroy
 
   def new
-    puts "HELLO THERE"
     session[:auth_hash] = request.env['omniauth.auth']
 
     # When using OmniAuth, different fields in the Users table can be used for
@@ -54,8 +53,7 @@ include CASControllerIncludes
     @user_session.destroy if @user_session
     @user_session = nil
     @current_user = nil
-    if session[:auth_hash][:provider] == :cas or
-      session[:auth_hash][:provider] == "cas"
+    if session[:auth_hash][:provider].to_sym == :cas 
       self.send(:reset_session)
       session[:auth_hash] = nil
       session[:user_id] = nil

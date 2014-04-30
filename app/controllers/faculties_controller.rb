@@ -1,5 +1,10 @@
 class FacultiesController < ApplicationController
-  before_filter :require_admin
+  before_filter :require_admin, except: :show
+
+  def show
+    @user = Faculty.find_by_id(params[:id])
+    @year = "N/A"
+  end 
 
   def index
     flash[:notice] = "in index"

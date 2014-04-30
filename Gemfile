@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.17' 
 ruby '1.9.3'
+
 # gem 'rails', '~> 3.0.19'
 # 3.0.19 fixes security vulnerability CVE-2013-0156
 # not tested with Rails >= 3.1
@@ -34,6 +35,8 @@ gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
 gem 'omniauth'
 gem 'omniauth-cas'
+gem 'bcrypt'
+gem 'scrypt'
 
 # gem "jquery-rails", "~> 3.1.0"
 # gem 'jquery-ui-rails', "~> 4.2.0"
@@ -53,6 +56,8 @@ end
 group :development do
   gem 'yard'
   gem "mysql2", "~> 0.3.11"
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Testing
