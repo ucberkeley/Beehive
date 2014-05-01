@@ -42,7 +42,7 @@ class JobsController < ApplicationController
     end
 
     # dept. 0 => all
-    h[:post_status]     = params[:post_status]     if params[:post_status]
+    h[:post_status]     = params[:post_status]     if params[:post_status] 
     h[:department] = params[:department] if params[:department].to_i > 0
     h[:faculty]    = params[:faculty]    if params[:faculty].to_i    > 0
     h
@@ -62,7 +62,14 @@ class JobsController < ApplicationController
     query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
-    query_parms[:post_status  ] = params[:post_status] if params[:post_status].present? and params[:post_status]
+    puts "HELLO"
+    puts params[:post_status].present?
+    puts !!params[:post_status]
+    if (params[:post_status].present? and params[:post_status])
+      query_parms[:post_status  ] = params[:post_status]
+    else
+      query_parms[:post_status] = Job::Status::Open
+    end
 
     # will_paginate
     query_parms[:page         ] = params[:page]     || 1
@@ -326,6 +333,7 @@ class JobsController < ApplicationController
     [:category, :course, :proglang].each do |k|
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
+
     # Handle end date
     params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
   end
