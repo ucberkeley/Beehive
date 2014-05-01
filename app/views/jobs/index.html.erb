@@ -39,7 +39,7 @@
         <%= select_tag :post_status,
         options_for_select({
           "Open" => Job::Status::Open,
-          "Filled" => Job::Status::Filled,
+          "Closed" => Job::Status::Filled,
           "All" => nil
         }, @post_status) %>
         <br />
@@ -49,8 +49,6 @@
         <%= label_tag :per_page, "Listings per page" %>
         <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false%>
 
-        <%= label_tag :include_ended, "Include ended", :title => "Include listings with end dates in the past. These positions may not be available anymore." %>
-        <%= check_box_tag :include_ended, '1', params[:include_ended] %>
       </div>
       <% end %>
     </div>
