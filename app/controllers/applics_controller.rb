@@ -117,10 +117,16 @@ class ApplicsController < ApplicationController
         # Makes sure emails are valid
         user_email = @job.user.email
         faculty_emails = @job.faculties.collect(&:email)
-        faculty_emails.select! { |email| email_regex === email}
+        faculty_emails.select! { |email| email_regex.match(mail)}
 
-        if !faculty_emails.empty? || user_email === email_regex
-          JobMailer.deliver_applic_email(@applic, user_email, faculty_emails).deliver
+        if !faculty_emails.empty? || email_regex.match(user_email)
+          if email_regex.match(user_email)
+            JobMailer.deliver_applic_email(@applic, user_email, []).deliver
+          else
+            JobMailer.deliver_applic_email(@applic, nil, faculty_emails).deliver
+          end
+
+
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else
           flash[:error] = "Looks like the job's contacts have invalid emails. 
