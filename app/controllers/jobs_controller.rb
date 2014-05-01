@@ -62,9 +62,6 @@ class JobsController < ApplicationController
     #query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
-    puts "HELLO"
-    puts params[:post_status].present?
-    puts !!params[:post_status]
     if (params[:post_status].present? and params[:post_status])
       query_parms[:post_status  ] = params[:post_status]
     else
