@@ -117,7 +117,7 @@ class ApplicsController < ApplicationController
         # Makes sure emails are valid
         user_email = @job.user.email
         faculty_emails = @job.faculties.collect(&:email)
-        faculty_emails.select! { |email| email_regex.match(mail)}
+        faculty_emails.select! { |email| email_regex.match(email)}
 
         if !faculty_emails.empty? || email_regex.match(user_email)
           if email_regex.match(user_email)
