@@ -48,23 +48,25 @@
 											<%= job.desc %>
 										</span>
 										<% if job.desc.length > 200 %>
-	      							<div id="expand_<%= job.id %>">
-	      								<a onclick='
-	      								$("#job_desc_<%= job.id %>").css("display", "none");
-	      								$("#job_<%= job.id %>").css("display", "inline");
-	      								$("#expand_<%= job.id %>").css("display", "none");
-	      								'>[read more]</a>
-	      							</div>
-	      						<% end %>
-	      						</br>
-	      						Posted: <%= job.created_at.strftime("%m/%d/%Y") %>
-	  							</div>
-	  						<% end %>
+									<div id="expand_<%= job.id %>">
+										<a onclick='
+										$("#job_desc_<%= job.id %>").css("display", "none");
+										$("#job_<%= job.id %>").css("display", "inline");
+										$("#expand_<%= job.id %>").css("display", "none");
+										'>[read more]</a>
+									</div>
+								<% end %>
+								<% if @current_user and @current_user.user_type == User::Types::Admin %>
+								</br>
+								Posted: <%= job.created_at.strftime("%m/%d/%Y") %>
+								<% end %>
+								</div>
+							<% end %>
 								<% if job_tags.empty? %>
-	  							(none)
-	  						<% else %>
-	  							<%= render partial: 'jobs/tag', collection: job.tag_list %>
-	  						<% end %>
+								(none)
+							<% else %>
+								<%= render partial: 'jobs/tag', collection: job.tag_list %>
+							<% end %>
 							</div>
 						<% end %>
 					</tr>
