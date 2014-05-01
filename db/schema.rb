@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140420010933) do
+ActiveRecord::Schema.define(:version => 20140427060609) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -50,12 +50,10 @@ ActiveRecord::Schema.define(:version => 20140420010933) do
   end
 
   create_table "departments", :force => true do |t|
-    t.text     "name",       :null => false
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "departments", ["name"], :name => "departments_name_key", :unique => true
 
   create_table "documents", :force => true do |t|
     t.integer  "user_id"
@@ -77,14 +75,12 @@ ActiveRecord::Schema.define(:version => 20140420010933) do
   end
 
   create_table "faculties", :force => true do |t|
-    t.string   "name",          :null => false
+    t.string   "name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "department_id"
   end
-
-  add_index "faculties", ["name"], :name => "faculties_name_key", :unique => true
 
   create_table "interests", :force => true do |t|
     t.integer  "category_id"
@@ -109,9 +105,6 @@ ActiveRecord::Schema.define(:version => 20140420010933) do
     t.datetime "end_date"
     t.integer  "compensation",        :default => 0
     t.integer  "status",              :default => 0
-    t.integer  "primary_contact_id"
-    t.integer  "project_type"
-    t.boolean  "open"
   end
 
   create_table "owns", :force => true do |t|

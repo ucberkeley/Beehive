@@ -1,3 +1,8 @@
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+
 .yardoc
 .bundle
 cscope.*
@@ -9,7 +14,7 @@ db/*.sqlite3
 files/
 mysql2/
 log/*.log
-tmp/
+tmp/**/*
 *.project
 *.sublime-project
 *.sublime-workspace
