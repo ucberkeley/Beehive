@@ -214,7 +214,7 @@ Sponsored by
 
 
 
-<% if @current_user.present? && ( @current_user.can_post? || @current_user.owned_jobs.include?(@job) ) %>
+<% if can_view_apps(@current_user, @job) %>
 
 <br />
 <h2>Applications</h2>
