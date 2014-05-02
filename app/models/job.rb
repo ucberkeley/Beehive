@@ -46,7 +46,7 @@ class Job < ActiveRecord::Base
 
     All = {
       'Open' => Open,
-      'Filled' => Filled,
+      'Closed' => Filled,
     }
   end
 

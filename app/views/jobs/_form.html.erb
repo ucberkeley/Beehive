@@ -64,15 +64,14 @@
     <tr>
       <div class="ui-widget">
         <td class="job_clear_table_label">
-          <%= f.label :add_contacts, 'Edit or Add Contact' %>
-        </td>
-	
+          <%= f.label :add_contacts, 'Set Contact' %>
+        </td>	
         <td class="job_clear_table_field">
             <%= select_tag :add_contacts,
-                '<option value>Select a Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                '<option value>Select Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
                     :id,
                     :name,
-                    @job.contacter.id
+                    @job.contacter.nil? ? 0 : @job.contacter.id
                 )
              %>
         </td>

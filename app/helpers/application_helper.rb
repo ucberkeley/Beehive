@@ -172,7 +172,7 @@ module CASControllerIncludes
       end
 
       if new_user.save && new_user.errors.empty?
-        flash[:notice] = "Welcome to BeeHive! Since this is your first time here, "
+        flash[:notice] = "Welcome to Beehive! Since this is your first time here, "
         flash[:notice] << "please make sure you update your email address. We'll send all correspondence to that email address."
         logger.info "First login for #{new_user.login}"
 
