@@ -193,6 +193,11 @@ class JobsController < ApplicationController
     changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
     @job.update_attribs(params)
 
+    @faculty = Faculty.all
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.sort_by{|u| u.name}
+
     respond_to do |format|
       if @job.update_attributes(params[:job])
         if params.has_key?(:delete_owners) and params[:delete_owners].to_i >= 0
