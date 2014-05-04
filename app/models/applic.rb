@@ -33,4 +33,8 @@ class Applic < ActiveRecord::Base
 ##    emales
   end
 
+  def unread?
+    return false
+  end
+
 end
