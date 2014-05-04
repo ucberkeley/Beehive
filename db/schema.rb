@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140420010933) do
+ActiveRecord::Schema.define(:version => 20140427060609) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(:version => 20140420010933) do
     t.integer  "status",              :default => 0
     t.integer  "primary_contact_id"
     t.integer  "project_type"
-    t.boolean  "open"
   end
 
   create_table "owns", :force => true do |t|
