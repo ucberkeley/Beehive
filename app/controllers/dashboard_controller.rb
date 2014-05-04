@@ -17,6 +17,7 @@ class DashboardController < ApplicationController
     
     @watched_jobs = @current_user.watched_jobs_list_of_user
     @applied_jobs = @current_user.applied_jobs_list_of_user
+    @received_jobs = @current_user.received_jobs_list_of_user
     
     @your_jobs = Job.find(:all, :conditions => [ "user_id = ?", @current_user.id ])
   end

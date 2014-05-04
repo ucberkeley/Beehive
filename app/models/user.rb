@@ -176,6 +176,17 @@ class User < ActiveRecord::Base
     end
     jobs
   end
+
+  def received_jobs_list_of_user
+    jobs = []
+    self.applics.all.each do |w|
+      this_job = Job.find_by_id(w.job_id)
+      if this_job && w.status == "accepted" then
+        jobs << this_job
+      end
+    end
+    jobs
+  end
   
   def applied_jobs
     jobs = []

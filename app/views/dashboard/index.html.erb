@@ -57,6 +57,15 @@
     <%= render :partial => "jobs/watched_job", :collection => @current_user.applics %>
     <% end %>
     <br/>
+
+    <br/>
+    <h2>Received Positions</h2>
+    <% if @received_jobs.empty? %>
+    You have not been accepted to any research positions.
+    <% else %>
+    <%= render :partial => "jobs/watched_job", :collection => @current_user.applics %>
+    <% end %>
+    <br/>
   </div>
   
 </div>
