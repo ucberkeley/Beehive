@@ -324,7 +324,7 @@ class User < ActiveRecord::Base
   # Parses the textbox list of courses from "CS162,CS61A,EE123"
   # etc. to an enumerable object courses
   def handle_courses(course_names)
-    return if self.is_faculty?
+    return if self.is_faculty? || course_names.nil?
     self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
     course_array = []
     course_array = course_names.split(',').uniq if ! course_names.nil?
@@ -336,7 +336,7 @@ class User < ActiveRecord::Base
   # Parses the textbox list of categories from "signal processing,robotics"
   # etc. to an enumerable object categories
   def handle_categories(category_names)
-    return if self.is_faculty?
+    return if self.is_faculty? || category_names.nil?
     self.categories = []  # eliminates any previous interests so as to avoid duplicates
     category_array = []
     category_array = category_names.split(',').uniq if ! category_names.nil?
@@ -348,7 +348,7 @@ class User < ActiveRecord::Base
   # Parses the textbox list of proglangs from "c++,python"
   # etc. to an enumerable object proglangs
   def handle_proglangs(proglang_names)
-    return if self.is_faculty?
+    return if self.is_faculty? || proglang_names.nil?
     self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
     proglang_array = []
     proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
@@ -372,7 +372,7 @@ class User < ActiveRecord::Base
     # since we want to save a value for :name, not :faculty_name or :student_name.
     def handle_name
       if self.name.nil? || self.name == ""
-              self.name = is_faculty ? faculty_name : student_name
+        self.name = is_faculty ? faculty_name : student_name
       end
     end
 end

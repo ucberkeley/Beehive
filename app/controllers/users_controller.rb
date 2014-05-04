@@ -124,5 +124,4 @@ class UsersController < ApplicationController
             redirect_to :controller => 'dashboard', :action => :index
     end
   end
-
 end

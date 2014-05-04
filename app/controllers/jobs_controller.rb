@@ -62,9 +62,6 @@ class JobsController < ApplicationController
     #query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
-    puts "HELLO"
-    puts params[:post_status].present?
-    puts !!params[:post_status]
     if (params[:post_status].present? and params[:post_status])
       query_parms[:post_status  ] = params[:post_status]
     else
@@ -195,6 +192,11 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
     @job.update_attribs(params)
+
+    @faculty = Faculty.all
+    @current_owners = @job.owners.select{|i| i != @current_user}
+    owners = @job.owners + [@job.user]
+    @owners_list = User.all.sort_by{|u| u.name}
 
     respond_to do |format|
       if @job.update_attributes(params[:job])

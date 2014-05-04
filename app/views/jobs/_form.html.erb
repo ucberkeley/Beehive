@@ -44,15 +44,18 @@
     </td>
   </tr>
     <% if !@current_owners.nil? %>
+
     <tr>
       <div class="ui-widget">
         <td class="job_clear_table_label">
-            <%= f.label :add_owners, 'Add Owners' %>
+          <%= f.label :add_owners, 'Add Owner' %>
         </td>
-	
+  
         <td class="job_clear_table_field">
             <%= select_tag :add_owners,
-                '<option value>Select Additional Owner</option>'.html_safe + options_from_collection_for_select(@owners_list, :id, :name, @job
+              '<option value>Select Owner</option>'.html_safe + options_from_collection_for_select(@owners_list,
+                 :id,
+                 :name
                 )
              %>
         </td>
@@ -61,14 +64,14 @@
     <tr>
       <div class="ui-widget">
         <td class="job_clear_table_label">
-            <%= f.label :add_contacts, 'Set Contact' %>
-        </td>
-	
+          <%= f.label :add_contacts, 'Set Contact' %>
+        </td>	
         <td class="job_clear_table_field">
             <%= select_tag :add_contacts,
                 '<option value>Select Contact</option>'.html_safe + options_from_collection_for_select(@owners_list,
                     :id,
-                    :name
+                    :name,
+                    @job.contacter.nil? ? 0 : @job.contacter.id
                 )
              %>
         </td>

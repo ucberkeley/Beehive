@@ -35,6 +35,13 @@ module ApplicationHelper
   def email_regex
     /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   end
+
+  def can_view_apps(current_user, job)
+    current_user.present? && (job.contacter == current_user || 
+                              job.sponsorships.include?(current_user) ||
+                              job.owners.include?(current_user) ||
+                              job.faculties.include?(current_user))
+  end
 end
 
 module ActionView
@@ -100,12 +107,12 @@ end
 #        would return :red.
 #
 def find_and_choose(find_from=[], choose_from=[], value=nil, default=nil)
-    find_from.each_index do |i|
-        puts "\n\nchecking #{value} == #{find_from[i]}\n"
-        return choose_from[i] if find_from[i] == value || find_from[i].eql?(value)
-        puts "\n\n\n#{value} wasn't #{find_from[i]}\n\n\n"
-    end
-    return default
+  find_from.each_index do |i|
+      puts "\n\nchecking #{value} == #{find_from[i]}\n"
+      return choose_from[i] if find_from[i] == value || find_from[i].eql?(value)
+      puts "\n\n\n#{value} wasn't #{find_from[i]}\n\n\n"
+  end
+  return default
 end
 
 
@@ -172,7 +179,7 @@ module CASControllerIncludes
       end
 
       if new_user.save && new_user.errors.empty?
-        flash[:notice] = "Welcome to BeeHive! Since this is your first time here, "
+        flash[:notice] = "Welcome to Beehive! Since this is your first time here, "
         flash[:notice] << "please make sure you update your email address. We'll send all correspondence to that email address."
         logger.info "First login for #{new_user.login}"
 
@@ -202,6 +209,5 @@ module CASControllerIncludes
     redirect_to :controller => :users, :action => :new
     return false
   end
-
 end
 

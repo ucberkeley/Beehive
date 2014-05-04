@@ -45,7 +45,7 @@ class FacultiesController < ApplicationController
 private
   def require_admin
     unless @current_user and @current_user.user_type == User::Types::Admin
-      redirect_to request.referer || home_path, :notice => "Insufficient priveleges"
+      redirect_to request.referer || home_path, :notice => "Insufficient privileges"
     end
   end
 end
