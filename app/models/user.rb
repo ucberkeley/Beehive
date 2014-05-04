@@ -67,8 +67,9 @@ class User < ActiveRecord::Base
 
   # Name
   validates_presence_of     :name
-  validates_length_of       :name,     :within => 0..100
-  validates_format_of       :name,     :with => /\A[A-Za-z\-_ \.']+\z/
+  validates_length_of       :name,     :within => 0..100  
+  # ignore validation for now
+  # validates_format_of       :name,     :with => /\A[A-Za-z\-_ \.']+\z/
 
   # Email
   # validates_presence_of     :email
@@ -254,7 +255,7 @@ class User < ActiveRecord::Base
       person = self.ldap_person
       case   # Determine role
         # Faculty & staff
-        when (person.employee? and not person.employee_expired? and not ['G','U'].include?(person.berkeleyEduStuUGCode))
+        when (person.employee? and not person.employee_expired?)
         self.user_type = User::Types::Faculty
 
         # Student

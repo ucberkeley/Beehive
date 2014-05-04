@@ -97,7 +97,8 @@ module UCB::LDAP
       # (defalut is <tt>false</tt>).
       #
       def include_test_entries?
-        @include_test_entries ? true : false
+        # @include_test_entries ? true : false
+        true
       end
 
       ##
