@@ -19,14 +19,9 @@ gem 'unicorn'
 # Debugging
 gem 'exception_notification' , '3.0.1'
 
-# Performance optimization
-# Bullet alerts N+1 query problems
-gem "bullet", :group => "development"
-
 # Misc
 gem 'pothoven-attachment_fu'
-gem 'authlogic',
-    :git => 'git://github.com/binarylogic/authlogic.git'
+gem 'authlogic', '3.4.2'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/frameworks/rails/filter']
 
@@ -35,8 +30,7 @@ gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
 gem 'omniauth'
 gem 'omniauth-cas'
-gem 'bcrypt'
-gem 'scrypt'
+gem 'bcrypt' 
 
 # gem "jquery-rails", "~> 3.1.0"
 # gem 'jquery-ui-rails', "~> 4.2.0"
@@ -58,6 +52,7 @@ group :development do
   gem "mysql2", "~> 0.3.11"
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "bullet"
 end
 
 # Testing

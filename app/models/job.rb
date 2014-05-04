@@ -21,7 +21,6 @@ class Job < ActiveRecord::Base
   #   status              : integer 
   #   primary_contact_id  : integer 
   #   project_type        : integer 
-  #   open                : boolean 
   # =======================
 
   include AttribsHelper

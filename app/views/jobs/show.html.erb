@@ -222,7 +222,7 @@ Sponsored by
   <% if @job.applics.empty? -%>
   None yet.
   <% else -%>
-  <% if @job.allow_admin_by?(@current_user) || @current_user.owned_jobs.include?(@job) -%>
+  <% if can_view_apps(@current_user, @job) %>
   <ul>
     <% @job.applics.each do |a| -%>
     <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>
