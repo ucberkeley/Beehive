@@ -218,7 +218,7 @@ class User < ActiveRecord::Base
       person = self.ldap_person
       case   # Determine role
         # Faculty & staff
-        when (person.employee? and not person.employee_expired? and not ['G','U'].include?(person.berkeleyEduStuUGCode))
+        when (person.employee? and not person.employee_expired?)
         self.user_type = User::Types::Faculty
 
         # Student
