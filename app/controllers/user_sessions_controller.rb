@@ -53,13 +53,15 @@ include CASControllerIncludes
     @user_session.destroy if @user_session
     @user_session = nil
     @current_user = nil
-    if session[:auth_hash][:provider].to_sym == :cas 
+    sess = session[:auth_hash]
+    if sess.nil? || !sess[:provider].to_sym == :cas
+      flash[:notice] = "You have already signed out!"
+      redirect_to home_path
+    else
       self.send(:reset_session)
       session[:auth_hash] = nil
       session[:user_id] = nil
       CASClient::Frameworks::Rails::Filter.logout(self)
-    else
-      redirect_to home_path
     end
 =begin
     @user_session.destroy if @user_session
