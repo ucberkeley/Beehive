@@ -82,7 +82,9 @@ class ApplicsController < ApplicationController
   end
 
   def show
-    #@applic = Applic.find(params[:id])
+    @applic = Applic.find(params[:id])
+    @status = @applic.status.nil? ? "Undecided" 
+                                  : @applic.status.capitalize
 
     respond_to do |format|
       format.html # show.html.erb
