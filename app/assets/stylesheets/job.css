@@ -14,7 +14,7 @@
 }
 
 .job_even {
-    /* background: #F0FFD2; */
+    /*background-color: #F0FFD2;*/
 }
 
 .job_padding_wrapper{
@@ -178,14 +178,14 @@ span.tag {
 .job_table {
 	border: 0px;
 	width: 100%;
+  background-color: #f3f6ff;
 }
 
 .job_table_left {
 	width: 50%;
 }
 .job_odd, .job_even {
-	border-bottom: 1px solid #E7E7E7;
-	padding: 10px;
+	padding: 20px 0px 0px 0px;
 	/* border-bottom: 1px solid #abe68b; */
 }
 

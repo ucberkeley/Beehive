@@ -206,12 +206,12 @@ $total-columns: 12 !default;
   @if $include-html-grid-classes {
     .row {
       @include grid-row;
-
+      
       &.collapse {
          > .column,
          > .columns { @include grid-column($collapse:true, $float:false); }
 
-        .row {margin-left:0; margin-right:0;}
+        .row {margin-left:0; margin-right:0;max-width: 80rem;}
       }
 
       .row { @include grid-row($behavior:nest);

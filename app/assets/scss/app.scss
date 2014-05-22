@@ -205,6 +205,7 @@ body > #everything {
 /** Quick Search Bar **/
 
 #quicksearch_form {
+
   margin-top: 5px;
 }
 
@@ -213,9 +214,10 @@ body > #everything {
   border: none;
   border: 1px solid #CCC;
   color: #AAA;
-  width: 150px;
+  width: 100%;
   text-align: left;
   padding: 4px;
+  height: 60px;
 }
 
 #quicksearch_button {
@@ -517,6 +519,15 @@ table {
   display: block;
 }
 
+/**Top Bar**/
+.top-bar-section .has-form {
+  background-color: #2D637F;
+}
+
+.top-bar input {
+  position: auto;
+}
+
 .top-bar-section ul li.active > a {
-  background: #2D637F;
+  background: #f3f6ff;
 }

@@ -157,7 +157,7 @@ select {
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  max-width: 62.5rem;
+  max-width: 80rem;
   *zoom: 1;
 }
 /* line 145, ../bower_components/foundation/scss/foundation/components/_global.scss */
@@ -7361,7 +7361,7 @@ meta.foundation-mq-topbar {
   .top-bar .button {
     font-size: 0.875rem;
     position: relative;
-    top: 7px;
+    /*top: 7px;*/
   }
   /* line 464, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
   .top-bar.expanded {

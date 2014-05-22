@@ -36,7 +36,6 @@ pre {
 h1 {
   padding-top: px;
   color: #003060;
-  text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
   font-family: 'Montserrat', Helvetica, sans-serif;
   text-transform: uppercase;
@@ -45,7 +44,6 @@ h1 {
 
 h2, h3 {
   color: #003060;
-  text-shadow: 0 1px 0 #ddd;
   margin-top: 0px;
   font-family: 'Montserrat', Helvetica, sans-serif;
   text-transform: uppercase;
@@ -160,6 +158,7 @@ body > #everything {
 
 #user-bar-greeting{
   color: #AAA;
+  background-color: #53626F;
 }
 
 .inline-form-container form {
@@ -170,6 +169,7 @@ body > #everything {
 
 #quicksearch_form {
   margin: 0px 5px 0px 5px;
+  background: #53626F;
 }
 
 #quicksearch_query {
@@ -177,9 +177,10 @@ body > #everything {
   border: none;
   border: 1px solid #CCC;
   color: #AAA;
-  width: 150px;
+  width: 100%;
   text-align: left;
   padding: 4px;
+  height: 2.8rem;
 }
 
 #quicksearch_button {
@@ -392,8 +393,12 @@ a:hover {
 }
 
 /** Navbar Links **/
+.top-bar {
+  background-color: #53626F;
+}
+
 .top-bar-section li.active:not(.has-form) a:not(.button) {
-  background: #2D637F;
+  background: #4D576C;
 }
 
 /**Error Formatting**/
@@ -404,8 +409,17 @@ a:hover {
 
 /** Navbar Links **/
 .top-bar-section li.active:not(.has-form) a:not(.button) {
-  background: #2D637F;
+  background: #53626F;
 }
+
+  /**Logout**/
+  .top-bar-section li:not(.has-form) a:not(.button) {
+    background-color: #53626F;
+  }
+
+  .top-bar-section .has-form {
+    background-color: #53626F;
+  }
 
 /*#errorExplanation h2 {
   text-align: left;
