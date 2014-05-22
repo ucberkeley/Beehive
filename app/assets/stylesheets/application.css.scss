@@ -391,10 +391,20 @@ a:hover {
   text-decoration: none;
 }
 
+/** Navbar Links **/
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  background: #2D637F;
+}
+
 /**Error Formatting**/
 
 .fieldWithErrors, #errorExplanation {
   color: red;
+}
+
+/** Navbar Links **/
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  background: #2D637F;
 }
 
 /*#errorExplanation h2 {
