@@ -1,9 +1,7 @@
 <% if not job.nil? %>
-<div class = "row">
-  <div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
-		<div class="job_padding_wrapper">
+	<div class="large-12 small-12 columns">
+  		<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 			<table class="job_table">
-				<tr class="job_table_row">
 					<td class="job_table_left">							    
 						<ul style="float:right">
 							<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) ||@current_user.admin?)%>
@@ -69,9 +67,7 @@
 							<% end %>
 							</div>
 						<% end %>
-					</tr>
 				</table>
 			</div>
 		</div>
-	</div>
 <% end %>

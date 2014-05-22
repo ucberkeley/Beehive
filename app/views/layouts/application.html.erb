@@ -57,49 +57,6 @@
  </head>
  <body>
 
-  <!-- <div id="everything"> -->
-
-  <div id="header">
-   <div class="row">
-    <div class="large-8 columns header_image">
-     <%= link_to "", home_path %>
-   </div>
-
-   <!-- <div class="large-4 columns">
-    <%= render :partial => "users/user_bar" %>
-    <div id="searchbar">
-    <%= render :partial => "users/search_bar" %>
-    
-
-  </div> -->
-
-
-</div>
-</div>
-
-<!-- <div id="header_tabs">
-	<div id="tabs">
-    <ul>
-      <% if @current_user.present? %>
-        <li><%= link_to "Dashboard", dashboard_path %></li>
-        <li><%= link_to "Browse Listings", jobs_path %></li>
-        <li><%= link_to "Post a Listing", new_job_path %></li>
-        <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
-        <li><%= link_to "All Users", users_path %></li>
-      <% else %>
-        <li><%= link_to "Log In", login_path %></li>
-      <% end %>
-
-      <% if @current_user.present? && @current_user.admin? %>
-        <li><%= link_to "Statistics", statistics_path %></li>
-        <li><%= link_to "Admin", admin_path %></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<div id="shadowdown"></div> -->
-
-
 <div class="top-bar" data-topbar>
   <!--Title-->
   <ul class="title-area">
@@ -113,8 +70,12 @@
   <!--Top Bar Section-->
   <section class="top-bar-section">
     <!--Top Bar Left Nav Elements-->
+    
     <ul class="left">
       <% if @current_user.present? %>
+      <li class="has-form">
+      <li class="active">  <%= render :partial => "users/search_bar" %>  </li>
+    </li>
         <li class="active"><%= link_to "Dashboard", dashboard_path %></li>
         <li class="divider"></li>
         <li class="active"><%= link_to "Browse Listings", jobs_path %></li>
@@ -138,9 +99,7 @@
     </ul>
 
       <ul class="right">
-        <li class="has-form">
-          <li class="active">  <%= render :partial => "users/search_bar" %>  </li>
-        </li>
+        
         <li><%= render :partial => "users/user_bar" %></li>
 
 
@@ -156,9 +115,28 @@
 
 
 
+  <div id="header">
+   <div class="row">
+    <div class="large-8 columns">
+     <%= link_to "", home_path %>
+   </div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 <div id="content">
+  <div id="row">
 	<% if !(flash[:error].nil? || flash[:error] == '') %>
 	<div id="flash_error">
     <%= flash[:error] %>
@@ -173,7 +151,7 @@
 
   <%= yield %>
 
-
+</div>
 </div>
 
 <div id="footer">

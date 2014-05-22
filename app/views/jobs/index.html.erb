@@ -2,23 +2,37 @@
 
 <!-- search bar -->
 <div class="row">
-  <div class="large-10 small-12 columns">
-    <div class="large-8 small-10 columns">
+  <h1>Browse</h1>
+  <div class="large-8 small-8 columns">
       <%= form_tag(jobs_search_path, :method => "get") do %>
       <%= text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"%>
-    </div>
-      <%= submit_tag @query, :class => "button tiny", :value => "Search" %>
-    <br/><br /><br/><br />
-    <%= link_to "[More Options]", '#', :id => 'more_options', :onclick =>
-    "$('#advanced_search').toggle('show')" %>
-    <div id="advanced_search" style="display:none">
+  </div>
+  <div class="large-4 small-4 columns">
+    <%= submit_tag @query, :class => "button tiny", :value => "Search" %>
+  </div>
+</div>
+
+
+  <!-- tag cloud -->
+  <% if false # this is broken.. %>
+  <div id="tag_cloud">
+    <%= image_tag 'tag.gif' %> <b>Top Tags:</b><br />
+    <% tag_cloud Job.tag_counts, %w(tag_s tag_m tag_l tag_xl) do |tag, css_class| %>
+    <span class="tag"><%=h link_to tag.name, jobs_path + '?tags=' + tag.name, :class => css_class %></span>
+    <% end %>
+  </div>
+  <% end %>
+
+  <br />
+  <div class="row">
+
+    <div id="advanced_search" class="large-4 small-12 columns">
       <%= label_tag :department, "Department" %>
       <%= select_tag :department, options_for_select([["All Departments",0]]) +
       options_from_collection_for_select(Department.all, "id", "name",
-      @department_id) %>
+      @department_id), { :class => 'medium data-dropdown content' } %>
       <br/>
       <%= label_tag :faculty, "Faculty" %>
-
       <%= select_tag :faculty, options_for_select([["All Faculty",0]]) +
       options_from_collection_for_select(@faculty, "id", "name", @faculty_id) %> 
          <br/>
@@ -49,47 +63,30 @@
 
       </div>
       <% end %>
-    </div>
-  </div>
-
-  <!-- tag cloud -->
-  <% if false # this is broken.. %>
-  <div id="tag_cloud">
-    <%= image_tag 'tag.gif' %> <b>Top Tags:</b><br />
-    <% tag_cloud Job.tag_counts, %w(tag_s tag_m tag_l tag_xl) do |tag, css_class| %>
-    <span class="tag"><%=h link_to tag.name, jobs_path + '?tags=' + tag.name, :class => css_class %></span>
-    <% end %>
-  </div>
-  <% end %>
-
-  <br />
-  <div class="row">
+    
+    
+    <!-- JOBS -->
     <div class="large-8 small-12 columns">
       <% if @jobs.empty? %>
       <!-- no results -->
-      <h3>No matching listings were found! Try a different search.</h3>
-
-
-
+         <h3>No matching listings were found! Try a different search.</h3>
       <% else %> 
       <!-- there are results -->
-      <% if params[:query].nonempty? %>
-      <h3>Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.</h3>
+         <% if params[:query].nonempty? %>
+            <h3>Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.</h3>
+
       <% end %>
     </div>
-  </div>
-  <div id="browse_results_wrapper">
-    <div id="browse_results">
+    <div class="large-8 small-12 columns">
       <%= render partial: "job", collection: @jobs %>
     </div>
-
-    <center>
-      <p>
-        <%= will_paginate @jobs %>
-      </p>
-    <center>
   </div>
 
 
-      <!-- end jobs.empty? -->
-      <% end %>
+
+
+
+
+
+  <!-- end jobs.empty? -->
+  <% end %>
