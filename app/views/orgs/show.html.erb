@@ -10,6 +10,5 @@
   <%= @org.desc %>
 </p>
 
-
-<%= link_to 'Edit', edit_org_path(@org) %> |
+<% if @current_user.present? && (@current_user.admin? || org.members.include?(@current_user))%><%= link_to 'Edit', edit_org_path(@org) %> | <% end %>
 <%= link_to 'Back', orgs_path %>
