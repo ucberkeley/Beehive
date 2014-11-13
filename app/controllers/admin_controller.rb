@@ -101,3 +101,4 @@ class AdminController < ApplicationController
     File.delete(csv_file_handle)
     redirect_to admin_path
   end
+end
