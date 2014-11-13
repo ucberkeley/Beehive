@@ -17,7 +17,7 @@
 							<% end %>
 							<% @current_user.orgs.each do |org| %>
 							  <li>
-									<%= link_to "curate", :controller => :orgs, :action => :curate, :id => org.id, :job_id => job.id %>
+									<%= link_to "curate", curate_job_path(org), :job_id => job.id %>
 							  </li>
 							<% end %>
 							<% if job.users.include?(@current_user) %>
