@@ -1,9 +1,5 @@
 ResearchMatch::Application.routes.draw do
 
-
-  resources :orgs
-
-
   get "contact_us/contact", :as => :contact_us
   post "contact_us/send_email", :as => :feedback_email_link
 
@@ -56,6 +52,9 @@ ResearchMatch::Application.routes.draw do
   resources :faculties, only: :show
   # Home
   get  '/' => 'home#index', :as => :home
+
+  # Orgs
+  resources :orgs
 
   # Statistics
   get '/statistics'      => 'statistics#index', :as => :statistics

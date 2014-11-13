@@ -1,4 +1,4 @@
-class Curations < ActiveRecord::Base
+class Curation < ActiveRecord::Base
 
   # === List of columns ===
   #   id         : integer 
