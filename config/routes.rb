@@ -54,11 +54,8 @@ ResearchMatch::Application.routes.draw do
   get  '/' => 'home#index', :as => :home
 
   # Orgs
-  resources :orgs do
-    member do 
-      get 'curate'
-    end
-  end
+  resources :orgs
+  match '/orgs/:id/curate' => 'orgs#curate', :as => :orgs_curate
 
   # Statistics
   get '/statistics'      => 'statistics#index', :as => :statistics
