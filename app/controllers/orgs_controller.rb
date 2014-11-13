@@ -98,7 +98,7 @@ class OrgsController < ApplicationController
 
   private
   def correct_user_access
-    if (Org.find(params[:id]) == nil || (!@current_user.admin? and !Org.find(params[:id]).members.include(@current_user)))
+    if (Org.find(params[:id]) == nil || (!@current_user.admin? and !Org.find(params[:id]).members.include?(@current_user)))
       flash[:error] = "You don't have permissions to edit or delete that org."
       redirect_to :controller => 'dashboard', :action => :index
     end
