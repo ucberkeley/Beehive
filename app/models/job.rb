@@ -57,6 +57,7 @@ class Job < ActiveRecord::Base
   belongs_to :department
   has_and_belongs_to_many :categories
   has_many :pictures
+  has_many :curations
   has_many :orgs, :through => :curations
   has_one :contacter, :class_name => "User", :foreign_key => "id", :primary_key => 'primary_contact_id'
   has_many :watches

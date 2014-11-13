@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
 
   has_many :jobs,        :dependent => :nullify
   has_many :reviews
+  has_many :memberships
   has_many :orgs, :through => :memberships
   has_one  :picture
   has_one  :resume,      :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy

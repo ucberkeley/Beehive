@@ -9,6 +9,8 @@ class Org < ActiveRecord::Base
   # =======================
 
   attr_accessible :desc, :name
+  has_many :memberships
   has_many :members, :through => :memberships, :source => :user
+  has_many :curations
   has_many :jobs, :through => :curations
 end
