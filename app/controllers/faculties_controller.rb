@@ -41,3 +41,4 @@ class FacultiesController < ApplicationController
 
     redirect_to faculties_path
   end
+end
