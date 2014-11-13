@@ -1,4 +1,4 @@
-class Memberships < ActiveRecord::Base
+class Membership < ActiveRecord::Base
 
   # === List of columns ===
   #   id         : integer 
