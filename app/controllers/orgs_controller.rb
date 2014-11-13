@@ -5,7 +5,7 @@ class OrgsController < ApplicationController
   before_filter :rm_login_required
 
   # Only users in the org can modify it
-  before_filter :correct_user_access, :only => [:edit, :update]
+  before_filter :correct_user_access, :only => [:edit, :update, :curate]
 
   # Only admins can create or delete orgs
   before_filter :require_admin, :only => [:new, :create, :destroy]
@@ -77,6 +77,18 @@ class OrgsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @org.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /orgs/1/curate?job_id=2
+  def curate
+    @org = Org.find(params[:id])
+    job = Org.find(params[:job_id])
+    curate = Curation.new({:org => @org, :user=> @current_user, :job => job})
+    if curate.save
+      flash[:notice] = 'Successfully curated listing..'
+    else
+      flash[:notice] = 'Was not able to curate this listing. Perhaps you\'ve already curated it?'
     end
   end
 
