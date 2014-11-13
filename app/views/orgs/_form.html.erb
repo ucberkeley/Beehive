@@ -1,0 +1,25 @@
+<%= form_for(@org) do |f| %>
+  <% if @org.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@org.errors.count, "error") %> prohibited this org from being saved:</h2>
+
+      <ul>
+      <% @org.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_area :desc %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
