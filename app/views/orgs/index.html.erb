@@ -11,9 +11,8 @@
 
 <% @orgs.each do |org| %>
   <tr>
-    <td><%= org.name %></td>
+    <td><%= link_to org.name, org %></td>
     <td><%= org.desc %></td>
-    <td><%= link_to 'Show', org %></td>
     <% if @current_user.present? && (@current_user.admin? || org.members.include?(@current_user))%>
       <td><%= link_to 'Edit', edit_org_path(org) %></td>
     <% end %>
