@@ -92,5 +92,11 @@ class ApplicationController < ActionController::Base
     @user_session = UserSession.find
     @current_user = @user_session ? @user_session.user : nil
   end
+  
+  def require_admin
+    unless logged_in_as_admin?
+      redirect_to request.referer || home_path, :notice => "Insufficient privileges"
+    end
+  end
 
 end
