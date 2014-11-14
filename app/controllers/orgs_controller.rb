@@ -83,7 +83,7 @@ class OrgsController < ApplicationController
   # GET /orgs/1/curate?job_id=2
   def curate
     @org = Org.find(params[:id])
-    job = Org.find(params[:job_id])
+    job = Job.find(params[:job_id])
     curate = Curation.new({:org => @org, :user=> @current_user, :job => job})
     if curate.save
       flash[:notice] = 'Successfully curated listing..'
