@@ -8,7 +8,7 @@
 <% form_for(@applic, :url=>{:controller=>:jobs, :action=>:apply, :id=>params[:id]} ) do |f| -%>
   <table class="job_clear_table">
 	  <tr>
-		<td class="job_clear_table_label">Job title</td>
+		<td class="job_clear_table_label">Project title</td>
 		<td class="job_clear_table_field"><b><a href="<%=h url_for @job %>" target="_blank"><%= @job.title %></a></b></td>
 	  </tr>
 	  <tr>
@@ -38,7 +38,7 @@
   <p>
     <h2>Credentials</h2>
     <b><%= @current_user.name %></b>, please supply your transcript and resume in PDF format below. 
-    The faculty sponsor of this job will receive your credentials along with your application.
+    The faculty sponsor of this project will receive your credentials along with your application.
   </p>
   <br />
     
