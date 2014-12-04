@@ -21,8 +21,8 @@
   <div class="large-4 columns">
     <center>
 
-    <%= link_to image_tag("dripicons/search.svg", :border=>0, :alt=>"Browse Listings"), :controller => 'jobs'%>
-      <h2><a href="/jobs/search">Browse Listings</a></h2>
+    <%= link_to image_tag("dripicons/search.svg", :border=>0, :alt=>"Browse Projects"), :controller => 'jobs'%>
+      <h2><a href="/jobs/search">Browse Projects</a></h2>
         <%= form_tag(:jobs, :method => "get") do %>
         <%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>".html_safe + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
         <% end %>
@@ -31,9 +31,9 @@
 
     <div class="large-4 columns">
       <center>
-      <%= link_to image_tag("dripicons/document-edit.svg", :border=>0, :alt=>"Post a Job Listing"), :controller => "jobs", :action => 'new'%>
+      <%= link_to image_tag("dripicons/document-edit.svg", :border=>0, :alt=>"Post a Project"), :controller => "jobs", :action => 'new'%>
     
-      <h2><a href="jobs/new">Post a Job Listing</a></h2>
+      <h2><a href="jobs/new">Post a Project</a></h2>
       </center>
     </div>
 
