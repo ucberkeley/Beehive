@@ -250,18 +250,16 @@ class User < ActiveRecord::Base
   # @return [Integer] Inferred user {Types Type}
   #
   def update_user_type(options={})
+    # what the heck is the purpose of this check? please add comment!
     unless options[:stub].blank?   # stub type
       options[:stub] = User::Types::Undergrad unless User::Types::All.include?(options[:stub].to_i)
       self.user_type = options[:stub].to_i
     else  # update via LDAP
       person = self.ldap_person
       case   # Determine role
-        # Faculty & staff
-        when (person.employee? and not person.employee_expired?)
-        self.user_type = User::Types::Faculty
-
         # Student
-        
+        # count student employees as students: do student check before employee check!
+        # why only registered students? should we include non-registered students too?
         when (person.student? and person.student_registered?)
           case person.berkeleyEduStuUGCode
             when 'G'
@@ -269,16 +267,20 @@ class User < ActiveRecord::Base
             when 'U' 
               self.user_type = User::Types::Undergrad
             else
+              #all students should have either G or U, but if not, default to undergrad 
               logger.error "User.update_user_type: Couldn't determine student type for login #{self.login}"
-              # Some people don't have this...
-              #raise StandardError, "berkeleyEduStuUGCode not accessible. Have you authenticated with LDAP?"
               self.user_type = User::Types::Undergrad
-          end # under/grad
+          end
+        # Faculty & staff
+        # can we add an Employee type, to correctly identify non-faculty staff?
+        when (person.employee? and not person.employee_expired?)
+          self.user_type = User::Types::Faculty
         else
-            logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
-            self.user_type = User::Types::Grad
-            #raise StandardError, "couldn't determine user type for login #{self.login}"
-        end # student
+          # Affiliate, Non-registered student, or Expired Employee...
+          # why do we default to Grad? can we add a Guest type instead?
+          logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
+          self.user_type = User::Types::Grad
+        end
     end # stub
 
     self.update_attribute(:user_type, self.user_type) if options[:save] || options[:update]
