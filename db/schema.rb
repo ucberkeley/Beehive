@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140427060609) do
+ActiveRecord::Schema.define(:version => 20141113064850) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(:version => 20140427060609) do
     t.text     "desc"
   end
 
+  create_table "curations", :force => true do |t|
+    t.integer  "job_id"
+    t.integer  "org_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "curations", ["job_id"], :name => "index_curations_on_job_id"
+  add_index "curations", ["org_id"], :name => "index_curations_on_org_id"
+  add_index "curations", ["user_id"], :name => "index_curations_on_user_id"
+
   create_table "departments", :force => true do |t|
     t.text     "name",       :null => false
     t.datetime "created_at"
@@ -77,13 +89,15 @@ ActiveRecord::Schema.define(:version => 20140427060609) do
   end
 
   create_table "faculties", :force => true do |t|
-    t.string   "name",          :null => false
+    t.string   "name",                         :null => false
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "department_id"
+    t.string   "calnetuid",     :limit => nil
   end
 
+  add_index "faculties", ["calnetuid"], :name => "faculties_calnetuid_key", :unique => true
   add_index "faculties", ["name"], :name => "faculties_name_key", :unique => true
 
   create_table "interests", :force => true do |t|
@@ -111,6 +125,23 @@ ActiveRecord::Schema.define(:version => 20140427060609) do
     t.integer  "status",              :default => 0
     t.integer  "primary_contact_id"
     t.integer  "project_type"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "org_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "memberships", ["org_id"], :name => "index_memberships_on_org_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
+
+  create_table "orgs", :force => true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "owns", :force => true do |t|
@@ -177,6 +208,13 @@ ActiveRecord::Schema.define(:version => 20140427060609) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "temp", :id => false, :force => true do |t|
+    t.integer "id",        :null => false
+    t.string  "name",      :null => false
+    t.string  "email",     :null => false
+    t.string  "calnetuid", :null => false
   end
 
   create_table "users", :force => true do |t|

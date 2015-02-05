@@ -253,7 +253,6 @@ DEPENDENCIES
   omniauth-cas
   pg
   pothoven-attachment_fu
-  rails (= 3.2.17)
   rspec-rails
   rubycas-client (~> 2.3.9)
   sass-rails (~> 3.2.4)
