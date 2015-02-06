@@ -1,3 +1,7 @@
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
 .yardoc
 .bundle
 cscope.*
