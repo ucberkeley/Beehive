@@ -17,6 +17,7 @@ tmp/
 *.project
 *.sublime-project
 *.sublime-workspace
+.DS_Store
 
 #ignore database.yml
 config/database.yml
