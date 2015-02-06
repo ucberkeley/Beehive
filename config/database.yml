@@ -1,7 +1,15 @@
+# development:
+#     adapter: postgresql
+#     database: dc8gh7b3pjl8l3
+#     host: localhost
+#     username: jessica
+#     pool: 5
+#     timeout: 5000
+
 development:
     adapter: postgresql
     database: dc8gh7b3pjl8l3
     host: localhost
-    username: jessica
+    username: postgres
     pool: 5
     timeout: 5000

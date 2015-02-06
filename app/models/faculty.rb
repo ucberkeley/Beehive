@@ -7,6 +7,7 @@ class Faculty < ActiveRecord::Base
   #   created_at    : datetime 
   #   updated_at    : datetime 
   #   department_id : integer 
+  #   calnetuid     : string 
   # =======================
 
   default_scope order('name')

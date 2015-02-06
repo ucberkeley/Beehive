@@ -1,0 +1,259 @@
+//colors
+$color_midnight_blue_approx: #003162;
+$white: white;
+$color_bon_jour_approx: #e2e2e2;
+$color_waterloo__approx: #798493;
+$color_orinoco_approx: #f0ffd2;
+$color_polo_blue_approx: #92afc9;
+$black: black;
+$color_zircon_approx: #f3f6ff;
+$color_mine_shaft_approx: #333;
+$color_st_tropaz_approx: #2a6496;
+
+//fonts
+$font_0: tahoma;
+$font_1: arial;
+$font_2: helvetica;
+$font_3: sans-serif;
+
+//urls
+$url_0: url("/images/paid_icon.png");
+$url_1: url("/images/credit_icon.png");
+$url_2: url("../images/dashboard_box_grad_darker.png");
+
+.job_table {
+  border: 0;
+  width: 100%;
+  background-color: $color_zircon_approx;
+  tr.job_table_row {
+    &:hover {
+    }
+    td:hover {
+    }
+  }
+}
+.job_table_left {
+  width: 40%;
+  width: 50%;
+}
+.job_odd {
+  background: none;
+  padding: 20px 0 0;
+}
+.job_even {
+  padding: 20px 0 0;
+}
+.job_padding_wrapper {
+  vertical-align: middle;
+  padding: 3px;
+}
+.job_title {
+  font-size: 14pt;
+  padding-top: 4px;
+  padding-bottom: 0;
+  max-width: 550px;
+  font-weight: bold;
+  font-size: 13pt;
+  color: $color_midnight_blue_approx;
+}
+.job_desc {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  max-width: 550px;
+}
+.job_tags {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  max-width: 550px;
+  a {
+    background: #92AFC9;
+    color: white;
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 2px 0px 2px 0px;
+    font-weight: normal;
+  }
+}
+.job_credit {
+  text-align: center;
+  width: 10%;
+  span.job_numpositions {
+    font-size: 12pt;
+  }
+}
+.icon {
+  width: 2.75em;
+  height: 2.75em;
+  background-size: 100%;
+  display: inline-block;
+  position: relative;
+  &.paid {
+    background-image: $url_0;
+  }
+  &.credit {
+    background-image: $url_1;
+  }
+  &.paid:hover::after {
+    content: "pay";
+  }
+  &.credit:hover::after {
+    content: "credit";
+  }
+}
+#tag_cloud {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.tag_s {
+  font-size: 1.0em;
+}
+.tag_m {
+  font-size: 1.1em;
+}
+.tag_l {
+  font-size: 1.2em;
+}
+.tag_xl {
+  font-size: 1.3em;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+#browse_results_wrapper {
+}
+#browse_results_pagination {
+  text-align: right;
+}
+#browse_results {
+  padding-left: 10px;
+  border-left: 1px solid $color_bon_jour_approx;
+  margin-bottom: 10px;
+}
+#browse_search_bar {
+  text-align: left;
+}
+#more_options {
+  font-size: x-small;
+}
+#browse_header {
+  font-weight: bold;
+  background: $color_waterloo__approx $url_2 repeat-x bottom left;
+  color: $white;
+  width: 100%;
+  height: 47px;
+}
+#browse_header_table {
+  height: 40px;
+  width: 100%;
+}
+#description {
+  margin-left: 15px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  border-left: 1px solid #F0FFD2;
+}
+.browse_header_table {
+  height: 40px;
+  width: 100%;
+  font-weight: bold;
+}
+.job_clear_table {
+  font-family: $font_0, $font_1, $font_2, $font_3;
+  font-size: 12px;
+  color: $color_mine_shaft_approx;
+  border: 0;
+  td {
+    text-align: left;
+    width: auto;
+    padding: 5px;
+    vertical-align: top;
+  }
+}
+.job_clear_table_label {
+  font-weight: bold;
+  width: 150px;
+}
+.job_clear_table_field {
+  width: 350px;
+}
+.ui-combobox {
+  position: relative;
+  display: inline-block;
+}
+.ui-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+  padding: 0;
+  *height: 1.7em;
+  *top: 0.1em;
+}
+.ui-combobox-input {
+  margin: 0;
+  padding: 0.3em;
+}
+.pagination {
+}
+.applic-info {
+  font-size: 10pt;
+}
+.icon:hover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  background-color: $white;
+}
+#job_show_main p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+span.tag {
+  background-color: #92AFC9;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 4px;
+  border: 1px solid #92AFC9;
+  line-height: 2.5;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: $black;
+  padding: 3px;
+  font-size: 10px;
+  &:hover {
+  }
+  a {
+    color: $white;
+  }
+}
+input.wide {
+  width: 300px;
+}
+table.job_attributes td#description {
+  padding-bottom: 15px;
+  padding-top: 5px;
+}
+table.job_attributes td {
+  &.job_attr_title {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    width: 25%;
+  }
+  &.job_attr_value {
+    padding-left: 5px;
+    text-align: left;
+    vertical-align: top;
+    width: 75%;
+  }
+}
+.faculty_title a {
+  color: $color_st_tropaz_approx;
+  font-size: 8pt;
+  font-weight: normal;
+}
