@@ -95,8 +95,9 @@ class JobsController < ApplicationController
   # GET /jobs/1.xml
   def show
     @job = Job.find(params[:id])
+
     # assumes the user only belongs to one org
-    @is_curated = Curation.where(:user_id => @current_user, :job => @job).first
+    @is_curated = Curation.where(:user_id => @current_user, :job_id => @job).first
 
     # update watch time so this job is now 'read'
     if @current_user.present? && (watch=Watch.find(:first, :conditions => {:user_id => @current_user.id, :job_id => @job.id}))

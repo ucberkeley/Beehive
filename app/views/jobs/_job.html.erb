@@ -1,7 +1,7 @@
 <% if not job.nil? %>
   		<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 			<table class="job_table">
-					<td class="job_table_left">							    
+					<td class="job_table_left">
 						<ul style="float:right">
 							<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) ||@current_user.admin?)%>
 							  <li>
@@ -14,7 +14,10 @@
 							<% end %>
 							<% @current_user.orgs.each do |org| %>
 							  <li>
-							    <% if @is_curated %>
+
+								<% if Curation.where(:user_id => @current_user, :job_id => job).first
+									# assumes the user only belongs to one org
+									%>
 								    <%= link_to "uncurate", orgs_uncurate_path(:id => org.id, :job_id => job.id), method: :post %>
 							    <% else %>
 								    <%= link_to "curate", orgs_curate_path(:id => org.id, :job_id => job.id), method: :post %>
