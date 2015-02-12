@@ -126,7 +126,7 @@ class ApplicsController < ApplicationController
       # update an existing application
       @applic.applied = true
       
-      if @applic.save!
+      if @applic.save
         # Makes sure emails are valid
         user_email = @job.user.email
         faculty_emails = @job.faculties.collect(&:email)
@@ -157,7 +157,7 @@ class ApplicsController < ApplicationController
     else
       @applic.applied = false
       
-      if @applic.save!
+      if @applic.save
         flash[:notice] = 'Application saved. You can come back later and complete your application!'
         redirect_to job_path(@job)
       else
