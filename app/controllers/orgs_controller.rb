@@ -24,7 +24,7 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
     @jobs = Job.find(Curation.where(:org_id => params[:id]).pluck(:job_id))
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +45,7 @@ class OrgsController < ApplicationController
 
   # GET /orgs/1/edit
   def edit
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
   end
 
   # POST /orgs
@@ -67,7 +67,7 @@ class OrgsController < ApplicationController
   # PUT /orgs/1
   # PUT /orgs/1.json
   def update
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
 
     respond_to do |format|
       if @org.update_attributes(params[:org])
@@ -82,7 +82,7 @@ class OrgsController < ApplicationController
 
   # GET /orgs/1/curate?job_id=2
   def curate
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
     job = Job.find(params[:job_id])
     curate = Curation.new({:org => @org, :user=> @current_user, :job => job})
     if curate.save
@@ -94,7 +94,7 @@ class OrgsController < ApplicationController
   end
 
   def uncurate
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
     job = Job.find(params[:job_id])
     curate = Curation.where({:org_id => @org, :user_id => @current_user, :job_id => job})
     if curate.destroy_all
@@ -108,7 +108,7 @@ class OrgsController < ApplicationController
   # DELETE /orgs/1
   # DELETE /orgs/1.json
   def destroy
-    @org = Org.find(params[:id])
+    @org = Org.from_param(params[:id])
     @org.destroy
 
     respond_to do |format|
@@ -123,7 +123,7 @@ class OrgsController < ApplicationController
 
   private
   def correct_user_access
-    if (Org.find(params[:id]) == nil || (!@current_user.admin? and !Org.find(params[:id]).members.include?(@current_user)))
+    if (Org.from_param(params[:id]) == nil || (!@current_user.admin? and !Org.from_param(params[:id]).members.include?(@current_user)))
       flash[:error] = "You don't have permissions to edit or delete that org."
       redirect_to :controller => 'dashboard', :action => :index
     end
