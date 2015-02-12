@@ -25,7 +25,7 @@ class OrgsController < ApplicationController
   # GET /orgs/1.json
   def show
     @org = Org.find(params[:id])
-
+    @jobs = Job.find(Curation.where(:org_id => params[:id]).pluck(:job_id))
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @org }
