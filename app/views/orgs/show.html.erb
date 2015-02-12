@@ -1,4 +1,4 @@
-<h2><%= @org.name %></h2>
+<h2><%= @org.name %><% if @current_user.present? && (@current_user.admin? || @org.members.include?(@current_user))%> [<%= link_to 'Edit', edit_org_path(@org) %>]<% end %></h2>
 
 <p>
   <%= @org.desc %>
@@ -22,5 +22,4 @@
   </div>
 </div>
 
-<% if @current_user.present? && (@current_user.admin? || @org.members.include?(@current_user))%><%= link_to 'Edit', edit_org_path(@org) %> | <% end %>
 <%= link_to 'Back', orgs_path %>
