@@ -90,6 +90,19 @@ class OrgsController < ApplicationController
     else
       flash[:notice] = 'Was not able to curate this listing. Perhaps you\'ve already curated it?'
     end
+    redirect_to(:back)
+  end
+
+  def uncurate
+    @org = Org.find(params[:id])
+    job = Job.find(params[:job_id])
+    curate = Curation.where({:org_id => @org, :user_id => @current_user, :job_id => job})
+    if curate.destroy_all
+      flash[:notice] = 'Successfully uncurated listing..'
+    else
+      flash[:notice] = 'Was not able to uncurate this listing. Perhaps you\'ve already curated it?'
+    end
+    redirect_to(:back)
   end
 
   # DELETE /orgs/1

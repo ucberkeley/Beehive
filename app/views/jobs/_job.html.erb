@@ -14,8 +14,13 @@
 							<% end %>
 							<% @current_user.orgs.each do |org| %>
 							  <li>
-									<%= link_to "curate", orgs_curate_path(:id => org.id, :job_id => job.id), method: :post %>
+							    <% if @is_curated %>
+								    <%= link_to "uncurate", orgs_uncurate_path(:id => org.id, :job_id => job.id), method: :post %>
+							    <% else %>
+								    <%= link_to "curate", orgs_curate_path(:id => org.id, :job_id => job.id), method: :post %>
+								<% end %>
 							  </li>
+							  
 							<% end %>
 							<% if job.users.include?(@current_user) %>
 							  <li>

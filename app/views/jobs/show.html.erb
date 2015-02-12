@@ -23,18 +23,25 @@
 
           <%= link_to "[edit]", edit_job_path(@job) %> 
           <%= link_to "[delete]", delete_job_path(@job) %>
-        <% end %>&nbsp;
+          <% @current_user.orgs.each do |org| %>
+            <% if @is_curated %>
+              <%= link_to "[uncurate]", orgs_uncurate_path(:id => org.id, :job_id => @job.id), method: :post %>
+            <% else %>
+              <%= link_to "[curate]", orgs_curate_path(:id => org.id, :job_id => @job.id), method: :post %>
+            <% end %>
+          <% end %>
+        <% end %>&nbsp; 
         <% if !@current_user.nil? && !@current_user.is_faculty %>
           <% if @job.users.include?(@current_user) %>
-            <%= link_to "[unwatch this job]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
+            <%= link_to "[unwatch]", :controller => :jobs, :action => :unwatch, :id => @job.id %>
           <% elsif @job.user != @current_user %>
-            <%= link_to "[watch this job]", :controller => :jobs, :action => :watch, :id => @job.id %>
+            <%= link_to "[watch]", :controller => :jobs, :action => :watch, :id => @job.id %>
           <% end %>
           &nbsp;
           <% if @job.applicants.include?(@current_user) %>
             [applied!]
           <% elsif @job.user != @current_user and @job.status == 0%>
-            <%= link_to "[apply for this job]", new_job_applic_path(@job.id) %>
+            <%= link_to "[apply]", new_job_applic_path(@job.id) %>
           <% end %>
         <% end %>
       </b>
