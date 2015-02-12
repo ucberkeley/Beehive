@@ -25,9 +25,9 @@
           <%= link_to "[delete]", delete_job_path(@job) %>
           <% @current_user.orgs.each do |org| %>
             <% if @is_curated %>
-              <%= link_to "[uncurate]", orgs_uncurate_path(:id => org.id, :job_id => @job.id), method: :post %>
+              <%= link_to "[uncurate]", orgs_uncurate_path(:id => org.abbr, :job_id => @job.id), method: :post %>
             <% else %>
-              <%= link_to "[curate]", orgs_curate_path(:id => org.id, :job_id => @job.id), method: :post %>
+              <%= link_to "[curate]", orgs_curate_path(:id => org.abbr, :job_id => @job.id), method: :post %>
             <% end %>
           <% end %>
         <% end %>&nbsp; 
