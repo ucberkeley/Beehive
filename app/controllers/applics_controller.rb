@@ -27,13 +27,16 @@ class ApplicsController < ApplicationController
   end
 
   def verify_job_unapplied
-    if existing = Applic.find(:first, :conditions =>
+    existing = Applic.find(:first, :conditions =>
       {:user_id => @current_user.id, :job_id => @job.id})
+    if Applic.where({:user_id => @current_user, :job_id => @job.id}).collect(&:applied).first
        flash[:error] = "Whoa, slow down! You've already applied for this job. "
        flash[:error] << "If you'd like to update your application, please "
        flash[:error] << "withdraw your existing one, shown here."
        redirect_to(url_for(existing))
-       return
+       return false
+    else
+      return true
     end
   end
 
@@ -95,27 +98,35 @@ class ApplicsController < ApplicationController
   def new
     #@job = Job.find(params[:job_id])
     
-    if Applic.find(:first, :conditions =>
-        {:user_id => @current_user.id, :job_id => @job.id})
-       flash[:error] = "Whoa, slow down! You've already applied for this job."
-       redirect_to(url_for(@job))
+    if verify_job_unapplied
+      @applic = Applic.where({:user_id => @current_user, :job_id => @job}).first || Applic.new({:user => @current_user, :job => @job})
+    else
+      redirect_to(url_for(@job))
     end
     
-    @applic = Applic.new({:user => @current_user, :job => @job})
+    
   end
 
   # the action for actually applying.
   def create
-    @applic = Applic.new({:user_id => @current_user.id,
-      :job_id => @job.id}.update(params[:applic]))
+    # @applic = Applic.new({:user_id => @current_user.id,
+    #   :job_id => @job.id}.update(params[:applic]))
+    @applic = Applic.where({:user_id => @current_user.id, :job_id => @job.id}).first
+    if @applic
+      @applic.message = params[:applic][:message]
+    else
+      @applic = Applic.new({:user_id => @current_user.id, :job_id => @job.id}.update(params[:applic]))
+    end
     @applic.resume_id = @current_user.resume.id if params[:include_resume] &&
       @current_user.resume.present?
     @applic.transcript_id = @current_user.transcript.id if
       params[:include_transcript] && @current_user.transcript.present?
-
-    respond_to do |format|
-      if @applic.save
-
+    # submit an appliaction
+    if params[:commit] == 'Submit'
+      # update an existing application
+      @applic.applied = true
+      
+      if @applic.save!
         # Makes sure emails are valid
         user_email = @job.user.email
         faculty_emails = @job.faculties.collect(&:email)
@@ -135,13 +146,28 @@ class ApplicsController < ApplicationController
                            Please contact us for further support. 
                            Your application has been submitted."
         end
-        format.html { redirect_to job_path(@job) }
+        redirect_to job_path(@job)
       else
         flash[:error] = "Could not apply to position. Make sure you've " + 
                         "written a message to the faculty sponsor!"
-        format.html { render 'new' }
+        render 'new'
       end
+      
+    # save an application
+    else
+      @applic.applied = false
+      
+      if @applic.save!
+        flash[:notice] = 'Application saved. You can come back later and complete your application!'
+        redirect_to job_path(@job)
+      else
+        flash[:error] = "Could not save application. Make sure you've " + 
+                        "written a message to the faculty sponsor!"
+        render 'new'
+      end
+      
     end
+
   end
   
   # withdraw from an application (destroy the applic)

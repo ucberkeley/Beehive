@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141113064850) do
+ActiveRecord::Schema.define(:version => 20150212104448) do
 
   create_table "applics", :force => true do |t|
     t.integer  "job_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20141113064850) do
     t.integer  "resume_id"
     t.integer  "transcript_id"
     t.string   "status",        :default => "undecided"
+    t.boolean  "applied"
   end
 
   create_table "categories", :force => true do |t|

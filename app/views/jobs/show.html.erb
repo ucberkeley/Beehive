@@ -38,9 +38,9 @@
             <%= link_to "[watch]", :controller => :jobs, :action => :watch, :id => @job.id %>
           <% end %>
           &nbsp;
-          <% if @job.applicants.include?(@current_user) %>
+          <% if Applic.where({:user_id => @current_user, :job_id => @job.id}).collect(&:applied).first %>
             [applied!]
-          <% elsif @job.user != @current_user and @job.status == 0%>
+          <% else %>
             <%= link_to "[apply]", new_job_applic_path(@job.id) %>
           <% end %>
         <% end %>
