@@ -96,6 +96,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
 
+    
     # assumes the user only belongs to one org
     @is_curated = Curation.where(:user_id => @current_user, :job_id => @job).first
 
