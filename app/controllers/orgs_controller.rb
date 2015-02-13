@@ -82,11 +82,11 @@ class OrgsController < ApplicationController
 
   # GET /orgs/1/curate?job_id=2
   def curate
-    @org = Org.from_param(params[:id])
+    org = Org.from_param(params[:id])
     job = Job.find(params[:job_id])
-    curate = Curation.new({:org => @org, :user=> @current_user, :job => job})
+    curate = Curation.new({:org => org, :user=> @current_user, :job => job})
     if curate.save
-      flash[:notice] = 'Successfully curated listing..'
+      flash[:notice] = 'Successfully curated listing.'
     else
       flash[:notice] = 'Was not able to curate this listing. Perhaps you\'ve already curated it?'
     end
@@ -94,11 +94,9 @@ class OrgsController < ApplicationController
   end
 
   def uncurate
-    @org = Org.from_param(params[:id])
-    job = Job.find(params[:job_id])
-    curate = Curation.where({:org_id => @org, :user_id => @current_user, :job_id => job})
+    curate = Curation.where({:org_id => Org.from_param(params[:id]), :job_id => params[:job_id]})
     if curate.destroy_all
-      flash[:notice] = 'Successfully uncurated listing..'
+      flash[:notice] = 'Successfully uncurated listing.'
     else
       flash[:notice] = 'Was not able to uncurate this listing. Perhaps you\'ve already curated it?'
     end
