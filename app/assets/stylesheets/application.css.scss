@@ -49,6 +49,11 @@ h2, h3 {
   font-size:20px;
 }
 
+.nav-offset {
+  height: 90px;
+  width: 100%;
+}
+
 .top-bar {
   position: fixed;
   width: 100%;
@@ -79,10 +84,12 @@ h2, h3 {
         right: 10px;
       }
       .nav-bar-search {
+        position: absolute;
+        right: 220px;
         form {
           input#quicksearch_query {
             box-shadow: none;
-            width: 200px;
+            width: 250px;
             height: 35px;
             margin-top: 12px;
             margin-bottom: 12px;
@@ -90,6 +97,7 @@ h2, h3 {
             font-weight: 100;
             border-radius: 5px;
             padding-left: 10px;
+
           }
           input#quicksearch_query:focus {
             background-color: white;
