@@ -90,7 +90,9 @@ end
 
 group :assets do
   gem 'therubyracer'
-  gem 'sass-rails', "  ~> 3.2.4"
   gem 'coffee-rails', "~> 3.2.2"
   gem 'uglifier'
 end
+
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'sass-rails', '>= 3.2'

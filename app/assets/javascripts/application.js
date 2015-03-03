@@ -1,3 +1,6 @@
+//= require jquery
+//= require bootstrap-sprockets
+
 function setupExternalLinks() {
   $('a').each(function(){
     if( this.host && this.host != location.host )
