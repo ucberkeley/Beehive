@@ -13,7 +13,11 @@
         Join the research team!
       </div>
       <div class="explore-button">
-        <%= link_to "EXPLORE", jobs_path %>
+        <% if @current_user.present? %>
+          <%= link_to "EXPLORE", jobs_path %>
+        <% else %>
+          <%= link_to "EXPLORE", login_path %>
+        <% end %>
       </div>
     </div>
   </div>

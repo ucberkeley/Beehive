@@ -17,8 +17,6 @@
 @import "bootstrap";
 
 html, body{
-  margin: 0 !important;
-  height: 100% !important;
 }
 
 pre {
@@ -87,6 +85,11 @@ footer, .footer {
   a {
     color: white;
   }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
 }
 
 #flash_error, #flash_notice {
