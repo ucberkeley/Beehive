@@ -50,6 +50,11 @@
  </head>
  <body>
 
+<% if current_page?(:controller => 'home', :action => 'index') %>
+  <div id="home-page">
+<% else %>
+  <div id="non-home-page">
+<% end %>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -67,12 +72,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if @current_user.present? %>
-          <li class="nav-bar-text"><%= link_to "Dashboard", dashboard_path %></li>
-          <li class="nav-bar-text"><%= link_to "Browse Listings", jobs_path %></li>
-          <li class="nav-bar-text"><%= link_to "Post a Listing", new_job_path %></li>
+          <li><%= link_to "Dashboard", dashboard_path %></li>
+          <li><%= link_to "Browse", jobs_path %></li>
+          <li><%= link_to "Post", new_job_path %></li>
           <% if @current_user.admin? %>
-            <li class="nav-bar-text"><%= link_to "Statistics", statistics_path %></li>
-            <li class="nav-bar-text"><%= link_to "Admin", admin_path %></li>
+            <li><%= link_to "Statistics", statistics_path %></li>
+            <li><%= link_to "Admin", admin_path %></li>
           <% end %>
         <% end %>
       </ul>
@@ -84,41 +89,33 @@
             <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
           </ul>
         </li>
-        <li><%= link_to 'Log Out', logout_path %></li>
+        <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
       <% else %>
-        <li class="nav-bar-text log-in"><%= link_to "Log In", login_path %></li>
+        <li><%= link_to "Log In", login_path, :class => "login-button"%></li>
       <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+</div>
 
-<div id="content">
-  <div id="row">
-	<% if !(flash[:error].nil? || flash[:error] == '') %>
-	<div id="flash_error">
-    <%= flash[:error] %>
-  </div>
+<div class="row">
+  <% if !(flash[:error].nil? || flash[:error] == '') %>
+    <div id="flash_error">
+      <%= flash[:error] %>
+    </div>
   <% end %>
   <% if !(flash[:notice].nil? || flash[:notice] == '') %>
-  <div id="flash_notice">
-    <%= flash[:notice] %>
-  </div>
+    <div id="flash_notice">
+      <%= flash[:notice] %>
+    </div>
   <% end %>
-  <br />
-
-  <%= yield %>
-
 </div>
-</div>
+
+<%= yield %>
 
 <div id="footer">
-	<div id="footer_inside">
-   <br/>
-   <p>&copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %></p>
-   <br />
- </div>
-</div>
+   &copy; UC Berkeley Beehive | 2009-<%= Time.now.year %> | <%= link_to "Feedback", contact_us_path %>
 </div>
 
 </body>

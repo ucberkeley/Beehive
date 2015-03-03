@@ -1,9 +1,22 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html{
-  background-color: #fff;
-  color: #333;
+html, body{
   height: 100%;
   width: 100%;
 }
@@ -53,12 +66,47 @@ h2, h3 {
 }
 
 .navbar.navbar-default {
+  z-index: 10;
   a.navbar-brand {
-    background: url("header_coe.gif") no-repeat center center;
+    background: url("beehive_logo.png") no-repeat center center;
     background-size: contain;
-    width: 150px;
+    width: 110px;
+    margin-left: 10px;
+    margin-right: 20px;
   }
 }
+
+#home-page {
+  .navbar-default {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    li {
+      a {
+        color: #003366;
+        font-family: sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: small;
+      }
+      a.login-button {
+        background-color: #003366;
+        color: white;
+        padding: 6px 10px 3px 10px;
+        font-size: smaller;
+        margin-top: 10px;
+      }
+    }
+  }
+  nav {
+    background-color: transparent;
+  }
+}
+
 
 
 /**Layout**/
@@ -67,11 +115,6 @@ h2, h3 {
   min-height: 100%;
   position: relative;
   width: 100%;
-}
-
-body > #everything {
-  height: auto;
-  min-height: 100%;
 }
 
 #header {
@@ -205,16 +248,17 @@ span.required_field {
 }
 
 #footer {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  padding-top: 16px;
+  background: #003366;
   width: 100%;
-  height: 100px;
-  border-top: 1px solid #ccc;
-  overflow: hidden;
-}
-
-#footer_inside {
-  text-align: center;
+  color: white;
+  padding-left: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  font-size: small;
 }
 
 #flash_error, #flash_notice {

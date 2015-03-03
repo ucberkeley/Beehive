@@ -1,54 +1,52 @@
 <% content_for :title, "Welcome" %>
-<!-- <div style="line-height:1.62;font-size:150%;width:65%"> -->
-
-<div class= "row">
-  <div class="large-8 columns">
-    <p>
-      Welcome to Beehive, the College of Engineering clearinghouse for research positions, design projects, and even more creative opportunities! We help to match aspiring scholars with original investigations in a range of disciplines.
-    </p> 
+<div id="home">
+  <div class="main-top-background">
+    
+  </div>
+  <div class="main-top">
+    <div>
+      <div class="text-info-large">
+        <span>132</span> research projects are waiting!
+      </div>
+      <div class="text-info-small">
+        Browse projects. Apply in one click.<br>
+        Join the research team!
+      </div>
+      <div class="explore-button">
+        <%= link_to "EXPLORE", jobs_path %>
+      </div>
+    </div>
+  </div>
+  <div class="main-buttom">
+    <div class="col-md-5">
+      <div class="main-icons-text">
+        We've made it so easy to for you to find a perfect project to join.
+      </div>
+      <div class="main-icons">
+        
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="row">
+      <div class="smartwatch">
+        <div class="title">
+          SMARTWATCH
+        </div>
+        <div class="details">
+          Can't find a project you like? <br>
+          We will let you know when there's a new project in your interest.
+        </div>
+      </div>
+      <div class="smartwatch">
+        <div class="title">
+          EAST APPLY
+        </div>
+        <div class="details">
+            You can apply to many projects with your profile. <br>
+            No need to haing to fill out and application each time you apply.
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
-<br><br><br>
-
-
-
-
-<% if session[:user_id].present? %>
-<div class="row">
-  <div class="large-4 columns">
-    <center>
-
-    <%= link_to image_tag("dripicons/search.svg", :border=>0, :alt=>"Browse Projects"), :controller => 'jobs'%>
-      <h2><a href="/jobs/search">Browse Projects</a></h2>
-        <%= form_tag(:jobs, :method => "get") do %>
-        <%= select_tag(:department, "<option disabled>--UC Berkeley--</option><option value='0'>All Departments</option>".html_safe + options_from_collection_for_select(@departments, :id, :name),  { :onchange => "this.form.submit();"}) %>
-        <% end %>
-        </center>
-    </div>
-
-    <div class="large-4 columns">
-      <center>
-      <%= link_to image_tag("dripicons/document-edit.svg", :border=>0, :alt=>"Post a Project"), :controller => "jobs", :action => 'new'%>
-    
-      <h2><a href="jobs/new">Post a Project</a></h2>
-      </center>
-    </div>
-
-  
-</div>
-
-<br><br><br><br><br><br>
-
-
-
-
-<% else %>
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br>
-
-<% end %>

@@ -23,6 +23,10 @@ ResearchMatch::Application.configure do
   # Logging
   config.log_level = :info
 
+  #asset
+  config.assets.compile = true
+  config.serve_static_assets = true
+
   # CAS authentication
   CASClient::Frameworks::Rails::Filter.configure(
     :cas_base_url => "https://auth-test.berkeley.edu/cas/"
