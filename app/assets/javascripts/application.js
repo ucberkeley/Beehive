@@ -1,4 +1,3 @@
-//= require jquery
 //= require bootstrap-sprockets
 
 function setupExternalLinks() {

@@ -50,47 +50,48 @@
  </head>
  <body>
 
-<div class="top-bar" data-topbar>
-  <div class="nav-bar">
-    <ul class="nav-bar-section"> 
-        <a href="/">
-        <li class="beehive-logo">
-        </li>
-        </a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <% if @current_user.present? %>
+          <li class="nav-bar-text"><%= link_to "Dashboard", dashboard_path %></li>
+          <li class="nav-bar-text"><%= link_to "Browse Listings", jobs_path %></li>
+          <li class="nav-bar-text"><%= link_to "Post a Listing", new_job_path %></li>
+          <% if @current_user.admin? %>
+            <li class="nav-bar-text"><%= link_to "Statistics", statistics_path %></li>
+            <li class="nav-bar-text"><%= link_to "Admin", admin_path %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
       <% if @current_user.present? %>
-        <li class="nav-bar-text"><%= link_to "Dashboard", dashboard_path %></li>
-        <li class="nav-bar-text"><%= link_to "Browse Listings", jobs_path %></li>
-        <li class="nav-bar-text"><%= link_to "Post a Listing", new_job_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= @current_user.name %><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
+          </ul>
+        </li>
+        <li><%= link_to 'Log Out', logout_path %></li>
       <% else %>
         <li class="nav-bar-text log-in"><%= link_to "Log In", login_path %></li>
       <% end %>
-
-      <% if @current_user.present? && @current_user.admin? %>
-        <li class="nav-bar-text"><%= link_to "Statistics", statistics_path %></li>
-        <li class="nav-bar-text"><%= link_to "Admin", admin_path %></li>
-        <li class="has-form">
-          <li class="nav-bar-search">
-            <%= render :partial => "users/search_bar" %>  
-          </li>
-        </li>
-        <a href="#" class="user-dropdown-link has-dropdown" data-dropdown="user-dropdown">
-          Shan Huang
-          <span class="arrow-down"></span>
-        </a>
-        <ul id="user-dropdown" class="[tiny small medium large content]f-dropdown" data-dropdown-content style="position: absolute; top: 29px; left: -99999px;">
-          <div class="user-dropdown-list">
-          <li><%= link_to "Edit Profile", edit_user_url(@current_user) %></li>
-          <li><%= link_to 'Log Out', logout_path %></li>
-          </div>
-        </ul>
       </ul>
-      <% end %>
-  </div>
-</div>
-<div class="top-bar-fade">
-</div>
-
-<div class="nav-offset"></div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 <div id="content">
   <div id="row">
@@ -119,9 +120,7 @@
  </div>
 </div>
 </div>
-<!-- </div> -->
 
-<%= javascript_include_tag 'app.js' %>
 </body>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
