@@ -17,8 +17,8 @@
 @import "bootstrap";
 
 html, body{
-  height: 100%;
-  width: 100%;
+  margin: 0 !important;
+  height: 100% !important;
 }
 
 pre {
@@ -35,6 +35,11 @@ pre {
     width: 110px;
     margin-left: 10px;
     margin-right: 20px;
+  }
+  .dropdown.open {
+    .dropdown-toggle {
+      background-color: rgba(255, 255, 255, 0.5) !important; 
+    }
   }
 }
 
@@ -69,9 +74,7 @@ pre {
   }
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
+footer, .footer {
   height: 50px;
   padding-top: 16px;
   background: #003366;
@@ -81,6 +84,9 @@ pre {
   font-weight: 200;
   letter-spacing: 1px;
   font-size: small;
+  a {
+    color: white;
+  }
 }
 
 #flash_error, #flash_notice {
