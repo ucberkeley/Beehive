@@ -17,12 +17,20 @@
 @import "bootstrap";
 
 html, body{
+   margin:0;
+   padding:0;
+   height:100%;
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .navbar.navbar-default {
@@ -85,11 +93,6 @@ footer, .footer {
   a {
     color: white;
   }
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
 }
 
 #flash_error, #flash_notice {
