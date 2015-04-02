@@ -22,6 +22,52 @@ html, body{
    height:100%;
 }
 
+select {
+  font-weight: 18px;
+  width: 100%;
+  height: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  padding-left: 10px;
+  border: none;
+  background-color: #eee;
+  border-radius: 3px;
+  margin: 3px 0px 3px 0px;
+}
+
+.page-title {
+  font-size: 40px;
+  margin: 15px;
+}
+
+input.form-control {
+  outline: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 2px solid #ddd;
+}
+
+input.button {
+  border: none;
+  border-radius: 3px;
+  font-size: 17px;
+  background-color: #eee;
+  padding: 5px 15px 5px 15px;
+}
+
+input.button:hover {
+  background-color: black;
+  color: white;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+
 pre {
   background-color: #eee;
   padding: 10px;
@@ -38,7 +84,7 @@ pre {
   a.navbar-brand {
     background: url("beehive_logo.png") no-repeat center center;
     background-size: contain;
-    width: 110px;
+    width: 120px;
     margin-left: 10px;
     margin-right: 20px;
   }
@@ -64,13 +110,13 @@ pre {
         font-family: sans-serif;
         font-weight: bold;
         text-transform: uppercase;
-        font-size: small;
+        font-size: 15px;
       }
       a.login-button {
         background-color: #003366;
         color: white;
         padding: 6px 10px 3px 10px;
-        font-size: smaller;
+        font-size: 13px;
         margin-top: 10px;
       }
     }

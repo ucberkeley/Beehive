@@ -21,6 +21,15 @@ $url_0: url("/images/paid_icon.png");
 $url_1: url("/images/credit_icon.png");
 $url_2: url("../images/dashboard_box_grad_darker.png");
 
+.filter-dropdown-label {
+  font-size: 18px;
+  margin: 5px 0px 3px 0px;  
+}
+
+#advanced_search {
+  margin-top: -60px;
+}
+
 .job_table {
   border: 0;
   width: 100%;
@@ -33,7 +42,7 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   }
 }
 .job_table_left {
-  width: 40%;
+  padding: 10px 15px;
   width: 50%;
 }
 .job_odd {
@@ -48,32 +57,50 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   padding: 3px;
 }
 .job_title {
-  font-size: 14pt;
-  padding-top: 4px;
-  padding-bottom: 0;
-  max-width: 550px;
-  font-weight: bold;
-  font-size: 13pt;
-  color: $color_midnight_blue_approx;
+  font-weight: normal;
+  font-size: 19px;
+  color: #003162;
 }
 .job_desc {
-  padding-top: 13px;
-  padding-bottom: 13px;
-  max-width: 550px;
+  font-size: 15px;
+  font-weight: normal;
+  margin: 10px 0px;
 }
-.job_tags {
-  margin-top: 3px;
-  margin-bottom: 3px;
-  max-width: 550px;
-  a {
-    background: #92AFC9;
-    color: white;
-    font-size: 12px;
-    padding: 4px;
-    border-radius: 5px;
-    display: inline-block;
-    margin: 2px 0px 2px 0px;
+.read-more {
+  border-radius: 3px;
+  padding: 2px 6px 3px 6px;
+  background-color: #92AFC9;
+  color: white;
+}
+.tags {
+  background-color: #92AFC9;
+  padding: 2px 4px 1px 4px;
+  border-radius: 3px;
+  font-weight: normal;
+  font-size: 13px;
+  color: white;
+  margin: 2px 1px;
+  display: inline-block;
+}
+.posted {
+  margin: 10px 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.job-options {
+  list-style-type: none;
+  li {
     font-weight: normal;
+    background-color: white;
+    text-align: center;
+    padding: 1px 3px;
+    margin: 2px 0px;
+    width: 50px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px #ddd;
+    a {
+      color: #337ab7;
+    }
   }
 }
 .job_credit {

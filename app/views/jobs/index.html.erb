@@ -1,15 +1,18 @@
 <% content_for :title, "Listings" %>
 
+<div class="container">
 <!-- search bar -->
 <div class="row">
-  <h1>Browse</h1>
-  <div class="large-8 small-8 columns">
-      <%= form_tag(jobs_search_path, :method => "get") do %>
-      <%= text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"%>
-  </div>
-  <div class="large-4 small-4 columns">
-    <%= submit_tag @query, :class => "button tiny", :value => "Search" %>
-  </div>
+  <div class="page-title">Browse</div>
+  <div class="search-input">
+    <div class="col-lg-offset-4 col-lg-7 col-sm-offset-4 col-sm-7">
+        <%= form_tag(jobs_search_path, :method => "get") do %>
+        <%= text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"%>
+    </div>
+    <div class="col-lg-1 col-sm-1">
+      <%= submit_tag @query, :class => "button pull-right", :value => "Search" %>
+    </div>
+  </div>  
 </div>
 
 
@@ -26,18 +29,18 @@
   <br />
   <div class="row">
 
-    <div id="advanced_search" class="large-4 small-12 columns">
-      <%= label_tag :department, "Department" %>
+    <div id="advanced_search" class="col-lg-4 col-sm-12">
+      <%= label_tag :department, "Department", class: "filter-dropdown-label" %><br>
       <%= select_tag :department, options_for_select([["All Departments",0]]) +
       options_from_collection_for_select(Department.all, "id", "name",
       @department_id), { :class => 'medium data-dropdown content' } %>
       <br/>
-      <%= label_tag :faculty, "Faculty" %>
+      <%= label_tag :faculty, "Faculty", class: "filter-dropdown-label" %><br>
       <%= select_tag :faculty, options_for_select([["All Faculty",0]]) +
       options_from_collection_for_select(@faculty, "id", "name", @faculty_id) %> 
          <br/>
 
-         <%= label_tag :compensation, "Compensation" %>
+         <%= label_tag :compensation, "Compensation", class: "filter-dropdown-label" %><br>
          <%= select_tag :compensation,
          options_for_select({
           "Don't care" => Job::Compensation::None,
@@ -47,7 +50,7 @@
         }, @compensation) %>
         <br/>
 
-        <%= label_tag :post_status, "Status" %>
+        <%= label_tag :post_status, "Status", class: "filter-dropdown-label" %><br>
         <%= select_tag :post_status,
         options_for_select({
           "Open" => Job::Status::Open,
@@ -58,7 +61,7 @@
         <%# javascript_tag "$('#advanced_search').hide()" %>
         <%= hidden_field_tag :as, params[:as] %>
 
-        <%= label_tag :per_page, "Listings per page" %>
+        <%= label_tag :per_page, "Listings per page", class: "filter-dropdown-label" %><br>
         <%= select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false%>
 
       </div>
@@ -66,7 +69,7 @@
     
     
     <!-- JOBS -->
-    <div class="large-8 small-12 columns">
+    <div class="col-lg-8 col-sm-12">
       <% if @jobs.empty? %>
       <!-- no results -->
          <h3>No matching listings were found! Try a different search.</h3>
@@ -74,10 +77,9 @@
       <!-- there are results -->
          <% if params[:query].nonempty? %>
             <h3>Your search for "<%= params[:query] %>" returned <%= @jobs.length %> results.</h3>
-
       <% end %>
     </div>
-    <div class="large-8 small-12 columns">
+    <div class="col-lg-8 col-sm-12">
       <%= render partial: "job", collection: @jobs %>
     </div>
   </div>
@@ -94,3 +96,4 @@
 
   <!-- end jobs.empty? -->
   <% end %>
+  </div>

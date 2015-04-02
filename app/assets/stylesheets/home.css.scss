@@ -1,7 +1,7 @@
 #home-container {
 	.main-top-background {
-		margin-top: -80px;
-		height: 350px;
+		margin-top: -100px;
+		height: 450px;
 		background: url("engineering.jpg") no-repeat center center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
@@ -18,8 +18,8 @@
 		}
 		.text-info-large {
 			text-align: center;
-			margin-top: 100px;
-			font-size: 2em;
+			margin-top: 70px;
+			font-size: 35px;
 			font-weight: 400;
 			span {
 				font-size: 1.2em;
@@ -27,7 +27,7 @@
 		}
 		.text-info-small {
 			text-align: center;
-			font-size: 1.5em;
+			font-size: 23px;
 			font-weight: 200;		
 		}
 		.explore-button {
