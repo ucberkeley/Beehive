@@ -22,6 +22,10 @@ html, body{
    height:100%;
 }
 
+table {
+  display: table !important;
+}
+
 select {
   font-weight: 18px;
   width: 100%;

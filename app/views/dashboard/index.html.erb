@@ -2,7 +2,7 @@
 <div class="row">
   <h1>Dashboard</h1>
   
-  <div class="large-6 small-12 columns">
+  <div class="large-6 col-sm-12 columns">
     <!-- <div class="dashboard_wrapper_smartmatch"> -->
     <!-- <div class="dashboard_container_smartmatch box_shadow"> -->
     <h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
@@ -24,7 +24,7 @@
     <!-- </div> -->
   </div>
   
-  <div class="large-6 small-12 columns">
+  <div class="large-6 col-sm-12 columns">
     
     <% if @current_user.can_post? || @current_user.owned_jobs.size > 0 -%>
     <h2>Your Postings</h2>
@@ -70,7 +70,7 @@
   
 </div>
 <div class="row">
-  <div class="large-12 small-12 columns">
+  <div class="large-12 col-sm-12 columns">
     <!-- <div class="dashboard_wrapper_long"> -->
     <!-- <div class="dashboard_container_long"> -->
     <h2>Recently Added Projects</h2>

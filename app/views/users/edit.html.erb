@@ -20,9 +20,9 @@
 <div class="row">
   
     <h1>User Profile</h1>
-    <div class="large-10 small-12 columns">
+    <div class="large-10 col-sm-12 columns">
       <h2>The Basics</h2>
-      <div class="large-7 small-12 columns">
+      <div class="large-7 col-sm-12 columns">
         <p>Name: <b><%= @user.name %></b></p>
         <br />
         <p>
@@ -30,7 +30,7 @@
           <%= f.text_field :email %>
         </p>
       </div> <%# Left col %>
-      <div class="large-3 small-12 columns">
+      <div class="large-3 col-sm-12 columns">
         <% utype = @user.user_type %>
         <p>As a<%= 'n' if utype == User::Types::Undergrad %> <b><%= @user.user_type_string(:long=>true).downcase %><%= render 'shared/tooltip', :text => "Your user type was automatically determined. If it's wrong, please let us know!" %></b>, you can:
         <ul>
@@ -59,9 +59,9 @@
 <%- unless @current_user.is_faculty? or @user.admin? -%>
 <!-- courses / interests / proglangs. part of the user form. -->
 <div class="row">
-  <div class="large-8 small-12 columns">
+  <div class="col-lg-8 col-sm-12 columns">
           <h2>Education & Interests</h2>
-          <div class='large-6 small-12 columns'>
+          <div class='large-6 col-sm-12 columns'>
             <p>
             The following information is optional, but will help Beehive find positions better tailored to you.
             </p>
@@ -90,10 +90,10 @@
 <%# TODO CSS this up %>
 <%- unless @current_user.is_faculty? or @user.admin? -%>
 <div class="row">
-  <div class="large-12 small-12 columns">
+  <div class="large-12 col-sm-12 columns">
 
           <h2>At a Glance</h2>
-            <div class="large-9 small-12 columns">
+            <div class="large-9 col-sm-12 columns">
               <p>
               These are the basics that faculty will want to know up-front when you apply.
               </p>
@@ -127,7 +127,7 @@
               <br/><br />
                </div>
 
-              <div class="large-8 columns">
+              <div class="col-lg-8 columns">
                 <p>
                 Available to work over summer?
                 <%= f.check_box :summer %>
@@ -135,7 +135,7 @@
               </div>
             <br/>
 
-              <div class="large-8 columns">
+              <div class="col-lg-8 columns">
                 <p>
                 Why are you interested in Beehive projects?<br/>
                 <%= f.text_area :research_blurb, :rows => 3, :id => 'research-blurb' %>
@@ -144,7 +144,7 @@
               </div>
             <br/>
 
-              <div class="large-8 columns">
+              <div class="col-lg-8 columns">
                 <p>
                 Brief description of past internships or other relevant experience:
                 <%= f.text_area :experience, :rows => 3, :id => 'experience-box' %>
@@ -160,7 +160,7 @@
 
 <% unless @user.is_faculty? or @user.admin? %>
 <div class="row">
-  <div class="large-8 small-12 columns">
+  <div class="col-lg-8 col-sm-12 columns">
           <h2>Attachments</h2>
           <p>
             Please provide a link to any relevant supplementary material, like a r&eacute;sum&eacute; or portfolio.

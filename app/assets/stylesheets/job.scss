@@ -103,6 +103,67 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
     }
   }
 }
+
+.view-job-ul {
+  font-size: 16px;
+  margin: 40px 0;
+  list-style: none;
+  text-align: center;
+  li {
+    margin: 5px 0px;
+  }
+}
+
+.view-job-title {
+  font-weight: normal;
+  font-size: 35px;
+  text-align: center;
+  color: black;
+  margin: 40px;
+}
+
+.view-job-table {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 50px;
+  td {
+    font-weight: normal;
+    color: black;
+  }
+}
+
+.job_tags {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.view-job-options {
+  border-radius: 3px;
+  background-color: #ddd;
+  padding: 3px 6px;
+  width: 80px;
+  display: inline-block;
+  color: white;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.view-job-options.edit {
+  background-color: #f1c40f;
+}
+.view-job-options.delete {
+  background-color: #c0392b;
+}
+.view-job-options.watch {
+  background-color: #3498db;
+}
+.view-job-options.curate {
+  background-color: #bdc3c7;
+}
+.view-job-options.apply {
+  background-color: #2ecc71;
+}
 .job_credit {
   text-align: center;
   width: 10%;
