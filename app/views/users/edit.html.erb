@@ -56,7 +56,7 @@
 </div>
 <br />
 
-<%- unless @current_user.is_faculty? or @user.admin? -%>
+<%- unless @current_user.is_faculty? -%>
 <!-- courses / interests / proglangs. part of the user form. -->
 <div class="row">
   <div class="col-lg-8 col-sm-12 columns">
@@ -88,7 +88,7 @@
 <br />
 
 <%# TODO CSS this up %>
-<%- unless @current_user.is_faculty? or @user.admin? -%>
+<%- unless @current_user.is_faculty? -%>
 <div class="row">
   <div class="large-12 col-sm-12 columns">
 
@@ -158,7 +158,7 @@
 <br/>
 <%- end -%>
 
-<% unless @user.is_faculty? or @user.admin? %>
+<% unless @user.is_faculty? %>
 <div class="row">
   <div class="col-lg-8 col-sm-12 columns">
           <h2>Attachments</h2>
