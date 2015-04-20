@@ -1,3 +1,27 @@
+#home-page {
+	position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.navbar-collapse.collapsing,
+.navbar-collapse.collapse {
+	border: none;
+	background: rgba(255,255,255,0.7);
+}
+.no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+.collasping {
+	-webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
 #home-container {
 	.main-top-background {
 		margin-top: -100px;
