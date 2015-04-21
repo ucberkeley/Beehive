@@ -14,7 +14,7 @@
       </div>
       <div class="explore-button">
         <% if @current_user.present? %>
-          <%= link_to "EXPLORE", jobs_path %>
+          <%= link_to "EXPLORE", dashboard_path %>
         <% else %>
           <%= link_to "EXPLORE", login_path %>
         <% end %>

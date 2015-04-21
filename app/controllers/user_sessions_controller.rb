@@ -39,7 +39,7 @@ include CASControllerIncludes
 
     if login_user!(user)
       session[:user_id] = user.id
-      redirect_to home_path
+      redirect_to dashboard_path
     elsif !first_login(auth_field, auth_value)
       # user's first login; redirect already done for us
       return
