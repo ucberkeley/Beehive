@@ -94,20 +94,19 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @current_user.is_undergrad?
-      @user.handle_courses(params[:course][:name])
-      @user.handle_proglangs(params[:proglang][:name])
-      @user.handle_categories(params[:category][:name])
+    if @current_user.is_undergrad? or @current_user.admin?
+      @current_user.handle_courses(params[:course][:name])
+      @current_user.handle_proglangs(params[:proglang][:name])
+      @current_user.handle_categories(params[:category][:name])
     end
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @current_user.update_attributes(params[:user])
         flash[:notice] = 'User profile was successfully updated.'
         format.html { redirect_to dashboard_path, notice: 'User profile was successfully updated.' }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @current_user.errors, :status => :unprocessable_entity }
       end
     end
   end
