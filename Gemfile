@@ -51,7 +51,7 @@ end
 group :development do
   gem 'yard'
   gem "mysql2", "~> 0.3.11"
-  gem 'better_errors'
+  gem 'better_errors', "1.1.0"
   gem 'binding_of_caller'
   gem "bullet"
 end
