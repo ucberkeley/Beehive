@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   include AttribsHelper
   include CASControllerIncludes
 
-  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name,
-    :auto_complete_for_category_name, :auto_complete_for_proglang_name]
-  auto_complete_for :course, :name
-  auto_complete_for :category, :name
-  auto_complete_for :proglang, :name
+  # skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_course_name,
+  #   :auto_complete_for_category_name, :auto_complete_for_proglang_name]
+  # auto_complete_for :course, :name
+  # auto_complete_for :category, :name
+  # auto_complete_for :proglang, :name
 
   #CalNet / CAS Authentication
   #before_filter CASClient::Frameworks::Rails::Filter

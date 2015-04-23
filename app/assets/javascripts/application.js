@@ -97,9 +97,9 @@ function user_signup_faculty_fields() {
 
 
 /* autocomplete endpoint GET requests */
-function get_categories() {
-    return $.getJSON('/research/categories/json');
-}
+// function get_categories() {
+//     return $.getJSON('/research/categories/json');
+// }
 
 $(document).ready(function(){
   setupExternalLinks();
