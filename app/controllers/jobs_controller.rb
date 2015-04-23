@@ -74,10 +74,6 @@ class JobsController < ApplicationController
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
     @faculty = Faculty.all
-    # @faculty = Faculty.find_by_sql("SELECT DISTINCT faculties.id, faculties.name FROM 
-    #            faculties INNER JOIN sponsorships ON sponsorships.faculty_id=faculties.id 
-    #            INNER JOIN jobs ON jobs.id=sponsorships.job_id AND (jobs.end_date >= now()
-    #            OR jobs.end_date is NULL) WHERE ORDER BY name ASC")
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0

@@ -1,0 +1,19 @@
+<% job = applic.job -%>
+			<tr class="job_<%= cycle('even', 'odd') %>"><!-- ) -->
+				<td><%= link_to job.title, job_path(job) %></td>
+				<td><%= job.user.nil? ? 'None' + (applic.unread? ? '[updated]' : '') : link_to(job.contacter.name, user_path(job.primary_contact_id)) %></td>
+				<td><%= applic.updated_at.strftime('%B %d, %Y') -%></td>
+				<td>
+				<% if !applic.applied -%>
+				<% if job.open? -%>
+				<%= link_to "Incomplete [Edit]", new_job_applic_path(job) %>
+				<% else -%>
+				Incomplete, Closed
+				<% end -%>
+				<% elsif applic.status -%>
+				<%= applic.status.capitalize -%>
+				<% else -%><!-- TODO:add read -->
+				Undecided
+				<% end %>
+				</td>
+			</tr>

@@ -109,8 +109,6 @@ class Job < ActiveRecord::Base
   # The purpose of this is so that in activating a job, these data aren't lost.
   @skip_handlers = false
   attr_accessor :skip_handlers
-  
-  acts_as_taggable
 
   #############
   #  METHODS  #
@@ -234,7 +232,8 @@ class Job < ActiveRecord::Base
   # @option options [Boolean] :included_ended if +false+, don't include jobs with end dates in the past
   # @option options [Integer] :department_id ID of department you want to search, or +0+ for all depts
   # @option options [Integer] :faculty ID of faculty member you want to search, or +0+ for all
-  # @option options [Integer] :compensation a constant from {Compensation}. If {Compensation::Both}, search for {Compensation::Paid paid} OR {Compensation::Credit credit}.
+  # @option options [Integer] :compensation a constant from {Compensation}. If {Compensation::Both},
+  #                             search for {Compensation::Paid paid} OR {Compensation::Credit credit}.
   # @option options [Integer] :limit max. number of results, or +0+ for no limit
   # @option options [Array] :tags tag strings to match (searches only tags and not body, title, etc.)
   # @option options [Array] :order custom sorting conditions, besides @relevance. Conditions concatenated left to right.
@@ -243,27 +242,34 @@ class Job < ActiveRecord::Base
   def self.find_jobs(query=nil, options={})
     query = Job.sanitize_query(query)
     tables = Job.generate_relation_tables
-    relation = Job.generate_relation
-    relation = Job.filter_by_query(query, relation, tables)
-    relation = Job.filter_by_options(options, relation, tables)
-    results = relation.all # make SQL query
+    relation = Job.make_relation
+    relation = Job.filter_by_query(query, relation, tables) if query
+    relation = Job.filter_by_options(options, relation, tables) if options
     page = options[:page] || 1
     per_page = options[:per_page] || 16
-    return results.paginate(:page => page, :per_page => per_page)
+    return relation.paginate(:page => page, :per_page => per_page)
   end
   
+  # @return query for jobs joined with relevant tables
+  def self.make_relation
+    Job.all.includes(:faculties).includes(:department).includes(:tags)
+       .includes(:proglangs).includes(:courses).includes(:categories)
+  end
+  
+  # @return all results with at least one field that matches the search query
   def self.filter_by_query(query, relation, tables)
-    relation = relation.where(tables['jobs'][:title].matches(query)
-                    .or(tables['jobs'][:desc].matches(query))
-                    .or(tables['faculties'][:name].matches(query))
-                    .or(tables['departments'][:name].matches(query))
-                    .or(tables['proglangs'][:name].matches(query))
-                    .or(tables['courses'][:name].matches(query))
-                    .or(tables['categories'][:name].matches(query))
-                    )
-    return relation
+    relation.where(tables['jobs'][:title].matches(query)
+                  .or(tables['jobs'][:desc].matches(query))
+                  .or(tables['faculties'][:name].matches(query))
+                  .or(tables['departments'][:name].matches(query))
+                  .or(tables['proglangs'][:name].matches(query))
+                  .or(tables['courses'][:name].matches(query))
+                  .or(tables['categories'][:name].matches(query))
+                  )
+            .references(:proglangs).references(:courses).references(:categories)
   end
   
+  # @return results filtered by the options
   def self.filter_by_options(options, relation, tables)
     relation = relation.where(tables['jobs'][:end_date].gt(Time.now).or(tables['jobs'][:end_date].eq(nil))) unless options[:include_ended]
     relation = relation.where(tables['departments'][:id].eq(options[:department_id])) if options[:department_id]
@@ -289,15 +295,9 @@ class Job < ActiveRecord::Base
     return relation
   end
   
-  def self.generate_relation
-    relation = Job.select("distinct jobs.*").joins(' LEFT OUTER JOIN "sponsorships" INNER JOIN "faculties" ON "faculties"."id" = "sponsorships"."faculty_id" ON "jobs"."id" = "sponsorships"."job_id"').joins(:department)
-      .includes(:tags).includes(:proglangs)
-      .includes(:courses).includes(:categories)
-    return relation
-  end
-  
+  # Build complex queries with arel tables
   def self.generate_relation_tables
-    tables = {
+    {
       'jobs' => Job.arel_table,
       'faculties' => Faculty.arel_table,
       'departments' => Department.arel_table,
@@ -306,9 +306,9 @@ class Job < ActiveRecord::Base
       'categories' => Category.arel_table,
       'tags' => ActsAsTaggableOn::Tag.arel_table,
     }
-    return tables
   end
   
+  # Processes user input to send to the database
   def self.sanitize_query(query)
     throw "Query must be a string" unless query.nil? || query.is_a?(String)
     query ||= ""
