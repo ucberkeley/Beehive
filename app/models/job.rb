@@ -304,7 +304,7 @@ class Job < ActiveRecord::Base
       'proglangs' => Proglang.arel_table,
       'courses' => Course.arel_table,
       'categories' => Category.arel_table,
-      'tags' => Tag.arel_table,
+      'tags' => ActsAsTaggableOn::Tag.arel_table,
     }
     return tables
   end
