@@ -1,2 +1,4 @@
 database.yml
 ldap.yml
+local_env.yml
+initializers/secret_token.rb

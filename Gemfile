@@ -1,56 +1,52 @@
 source 'http://rubygems.org'
 
-# ruby '1.9.3'
-
-# gem 'rails', '~> 4'
-# 3.0.19 fixes security vulnerability CVE-2013-0156
-# not tested with Rails >= 3.1
-
-# adding pagination
-gem "kaminari", "~> 0.15.1"
-
-# Use unicorn web server
-gem 'unicorn'
-
+ruby '1.9.3'
+gem 'rails', '~> 4'
+gem 'pg'
+# store sessions in db rather than in cookies
+gem 'activerecord-session_store'
+gem 'protected_attributes' # legacy
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# web server
+gem 'unicorn'
+
+# pagination & tagging
+gem "kaminari", "~> 0.15.1"
+gem 'will_paginate', "~> 3.0.pre2"
+gem 'acts-as-taggable-on'
+
 # Debugging
-gem 'exception_notification' , '3.0.1'
+gem 'exception_notification' , '~> 4'
+
+# Auth
+gem 'authlogic'
+gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/frameworks/rails/filter']
+gem 'ucb_ldap', "2.0.0.pre5"
+gem 'omniauth'
+gem 'omniauth-cas'
+gem 'bcrypt'
 
 # Misc
 gem 'pothoven-attachment_fu'
-gem 'authlogic'
-gem 'will_paginate', "~> 3.0.pre2"
-gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/frameworks/rails/filter']
-
-gem 'ucb_ldap'
 gem 'nokogiri'
 gem 'actionmailer-with-request', '~> 0.3'
-gem 'omniauth'
-gem 'omniauth-cas'
-gem 'bcrypt' 
-gem 'acts_as_taggable_on_steroids'
-
-
-# gem "jquery-rails", "~> 3.1.0"
-# gem 'jquery-ui-rails', "~> 4.2.0"
 
 # Deploy with Capistrano
 gem 'capistrano'
 
 # Production-specific
 group :production do
-  gem 'pg'
+  
 end
 
 # Development
 group :development do
   gem 'yard'
-  gem "mysql2", "~> 0.3.11"
   gem 'better_errors', "1.1.0"
   gem 'binding_of_caller'
-  gem "bullet"
+  gem 'bullet'
 end
 
 # Testing
@@ -63,10 +59,15 @@ group :test do
   gem 'simplecov'
 end
 
-################################################################################
+gem 'therubyracer'
+gem 'uglifier'
+gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap_form'
+# gem "jquery-rails", "~> 3.1.0"
+# gem 'jquery-ui-rails', "~> 4.2.0"
 
-# Use unicorn as the web server
-# gem 'unicorn'
+################################################################################
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
@@ -74,7 +75,6 @@ end
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
@@ -84,10 +84,3 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
-
-gem 'therubyracer'
-# gem 'coffee-rails', "~> 3.2.2"
-gem 'uglifier'
-
-gem 'sass-rails', '>= 3.2'
-gem 'bootstrap-sass', '~> 3.3.3'

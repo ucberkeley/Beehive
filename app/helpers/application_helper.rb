@@ -2,8 +2,8 @@
 include JobsHelper
 
 module ApplicationHelper
-  include TagsHelper
-
+  # include TagsHelper
+  
   module NonEmpty
       def nonempty?
           not self.nil? and not self.empty?

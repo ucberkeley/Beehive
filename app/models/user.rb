@@ -61,8 +61,9 @@ class User < ActiveRecord::Base
   has_many :watches,       :dependent => :destroy
   has_many :watched_jobs,  :through => :watches, :source => :job
 
-  has_one  :resume,        :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
-  has_one  :transcript,    :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
+  # TODO re-enable for Rails 4
+  # has_one  :resume,        :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
+  # has_one  :transcript,    :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
   has_many :enrollments,   :dependent => :destroy
   has_many :courses,       :through => :enrollments
   has_many :interests,     :dependent => :destroy

@@ -29,11 +29,6 @@ module ResearchMatch
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # JavaScript files you want as :defaults (application.js is always included).
-    # config.action_view.javascript_expansions[:defaults] = %w(jquery jquery_ujs jquery-ui-1.8.4.custom.min autocomplete_setup)
-    config.action_view.javascript_expansions[:defaults] = %w(jquery-1.8.3 jquery_ujs jquery-ui-1.9.2 autocomplete_setup)
-
-
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

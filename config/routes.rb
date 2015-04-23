@@ -34,14 +34,14 @@ ResearchMatch::Application.routes.draw do
   end # applics
 
   # Documents
-  match '/documents/:id/destroy' => 'documents#destroy', :as => :destroy_document
+  # post '/documents/:id/destroy' => 'documents#destroy', :as => :destroy_document
   resources :documents
 
   # Access control
-  match '/logout' => 'user_sessions#destroy'
+  get '/logout' => 'user_sessions#destroy'
   #match '/login'  => 'user_sessions#new'
-  match '/login'  => redirect('/auth/cas')
-  match '/auth/:provider/callback' => 'user_sessions#new'
+  get '/login'  => redirect('/auth/cas')
+  get '/auth/:provider/callback' => 'user_sessions#new'
 
   # Users
   resources :users
@@ -68,7 +68,7 @@ ResearchMatch::Application.routes.draw do
 
   # Admin
   get '/admin' => 'admin#index', :as => :admin
-  match '/admin/upload' => 'admin#upload', :as => :admin_upload
+  post '/admin/upload' => 'admin#upload', :as => :admin_upload
 
   # get  '/faculties' => 'faculties#index', :as => :faculties
   # put  'faculties/:id' => 'faculties#update', :as => :faculties_update
@@ -77,7 +77,7 @@ ResearchMatch::Application.routes.draw do
 
   root :to => 'home#index'
 
-  match '/test_error(/:code)' => 'application#test_exception_notification'
+  get '/test_error(/:code)' => 'application#test_exception_notification'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
