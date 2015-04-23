@@ -39,9 +39,6 @@ gem 'acts_as_taggable_on_steroids'
 # Deploy with Capistrano
 gem 'capistrano'
 
-# Heroku
-gem 'heroku'
-
 # Production-specific
 group :production do
   gem 'pg'
