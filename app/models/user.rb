@@ -39,33 +39,41 @@ class User < ActiveRecord::Base
     c.validate_login_field = false
   end
 
+  # Simplification of LDAP roles where earlier Types take priority
+  # Default UI: Undergrad apply to research, others post research
   class Types
     Undergrad = 0
     Grad      = 1
     Faculty   = 2
-    Admin     = 3
-    All       = [Undergrad, Grad, Faculty, Admin]
+    Staff     = 3
+    Affiliate = 4
+    Admin     = 5
+    All       = [Undergrad, Grad, Faculty, Staff, Affiliate, Admin]
   end
 
-  has_many :jobs,        :dependent => :nullify
-  has_many :reviews
-  has_many :memberships
-  has_many :orgs, :through => :memberships
-  has_one  :picture
-  has_one  :resume,      :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
-  has_one  :transcript,  :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
-  has_many :reviews
-  has_many :owns
+  has_many :jobs,          :dependent => :nullify
+  has_many :owns,          :dependent => :destroy
+  has_many :owned_jobs,    :through => :owns, :source => :job
+
   has_many :applics
   has_many :applied_jobs,  :through => :applics, :source => :job
-  has_many :owned_jobs,    :through => :owns, :source => :job
+
   has_many :watches,       :dependent => :destroy
+  has_many :watched_jobs,  :through => :watches, :source => :job
+
+  has_one  :resume,        :class_name => 'Document', :conditions => {:document_type => Document::Types::Resume}, :dependent => :destroy
+  has_one  :transcript,    :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}, :dependent => :destroy
   has_many :enrollments,   :dependent => :destroy
   has_many :courses,       :through => :enrollments
   has_many :interests,     :dependent => :destroy
   has_many :categories,    :through => :interests
   has_many :proficiencies, :dependent => :destroy
   has_many :proglangs,     :through => :proficiencies
+
+  has_many :memberships
+  has_many :orgs,          :through => :memberships
+  has_one  :picture
+  has_many :reviews
 
   # Name
   validates_presence_of     :name
@@ -91,7 +99,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of    :year,           :in => (1..4), :allow_nil => true
 
   # Check that user type is valid
-  validates_inclusion_of    :user_type, :in => Types::All, :message => "is invalid"
+  validates_inclusion_of    :user_type, :in => Types::All, :message => 'is invalid'
 
   # before_validation :handle_courses
   # before_validation :handle_categories
@@ -102,133 +110,10 @@ class User < ActiveRecord::Base
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
 
-  # @return [Boolean] true if the user has just been activated.
-  # @deprecated
-  def recently_activated?
-    false 
-  end
-
-  # @return [User] the user corresponding to given login
-  def self.authenticate_by_login(loggin)
-    # Return user corresponding to login, or nil if there isn't one
-    User.find_by_login(loggin)
-  end
-
   # Downcases email address
   def email=(value)
     write_attribute :email, (value && !value.empty? ? value.downcase : self.email)
   end
-  
-  
-  # @param add_spaces [Boolean] use ', ' as separator instead of ','
-  # @return [String] the 'required course' names taken by this User, e.g. "CS61A,CS61B"
-  def course_list_of_user(add_spaces = false)
-  	course_list = ''
-  	courses.each do |c|
-  		course_list << c.name + ','
-  		course_list << ' ' if add_spaces
-  	end
-  	
-  	if add_spaces
-  	  return course_list[0..(course_list.length - 3)].upcase
-	  else
-    	return course_list[0..(course_list.length - 2)].upcase
-  	end
-  end
-
-  # @param add_spaces [Boolean] use ', ' as separator instead of ','
-  # @return [String] the category names taken by this User, e.g. "robotics,signal processing"
-  def category_list_of_user(add_spaces = false)
-  	category_list = ''
-  	categories.each do |cat|
-  		category_list << cat.name + ','
-  		category_list << ' ' if add_spaces
-  	end
-  	
-  	if add_spaces
-  	  return category_list[0..(category_list.length - 3)].downcase
-	  else
-    	return category_list[0..(category_list.length - 2)].downcase
-  	end
-  end
-  
-  # @return [String] the 'desired proglang' names taken by this User, e.g. "java,scheme,c++"
-  def proglang_list_of_user(add_spaces = false)
-  	proglang_list = ''
-  	proglangs.each do |pl|
-  		proglang_list << pl.name.capitalize + ','
-   		proglang_list << ' ' if add_spaces
-  	end
-  	
-  	if add_spaces
-  	  return proglang_list[0..(proglang_list.length - 3)]
-	  else
-    	return proglang_list[0..(proglang_list.length - 2)]
-  	end
-  end
-  
-  def applied_jobs_list_of_user
-    jobs = []
-    self.applics.all.each do |w|
-      this_job = Job.find_by_id(w.job_id)
-      if this_job then
-        jobs << this_job
-      else
-        w.destroy
-      end
-    end
-    jobs
-  end
-
-  def received_jobs_list_of_user
-    jobs = []
-    self.applics.all.each do |w|
-      this_job = Job.find_by_id(w.job_id)
-      if this_job && w.status == "accepted" then
-        jobs << this_job
-      end
-    end
-    jobs
-  end
-  
-  def applied_jobs
-    jobs = []
-    self.applics.all.each do |w|
-      this_job = Job.find_by_id(w.job_id)
-      if this_job then
-        jobs << this_job
-      else
-        w.destroy
-      end
-    end
-    jobs
-  end
-
-  # @return [Array<Job>] this user's watched jobs
-  def watched_jobs_list_of_user
-    jobs = []
-    self.watches.all.each do |w|
-      this_job = Job.find_by_id(w.job_id)
-      if this_job then
-          jobs << this_job
-      else
-          w.destroy
-      end
-    end
-    jobs
-    #@watched_jobs = @current_user.watches.map{|w| w.job }
-  end
-  
-  
-  # is_faculty for backward compatibility
-  def is_faculty
-    self.user_type == User::Types::Faculty
-  end
-  
-  def can_post?
-    [User::Types::Grad, User::Types::Faculty, User::Types::Admin].include? self.user_type
-  end
-
 
   # @return [UCB::LDAP::Person] for this User
   def ldap_person
@@ -241,98 +126,134 @@ class User < ActiveRecord::Base
   end
 
 
-  # Updates this User's role, based on the
-  # LDAP information. Raises an error if the user type can't be determined.
+  # Updates this User's Type based on LDAP information.
+  # Raises an error if the user type can't be determined.
   #
-  # @param options [Hash]
-  # @option options [Boolean] :save Also commit user type to the database (default +false+)
-  # @option options [Boolean] :update Same as +:save+
+  # @param save [Hash] Also commit user type to the database (default +false+)
   # @return [Integer] Inferred user {Types Type}
   #
-  def update_user_type(options={})
-    # what the heck is the purpose of this check? please add comment!
-    unless options[:stub].blank?   # stub type
-      options[:stub] = User::Types::Undergrad unless User::Types::All.include?(options[:stub].to_i)
-      self.user_type = options[:stub].to_i
-    else  # update via LDAP
-      person = self.ldap_person
-      case   # Determine role
-        # Student
-        # count student employees as students: do student check before employee check!
-        # why only registered students? should we include non-registered students too?
-        when (person.student? and person.student_registered?)
-          case person.berkeleyEduStuUGCode
-            when 'G'
-              self.user_type = User::Types::Grad
-            when 'U' 
-              self.user_type = User::Types::Undergrad
-            else
-              #all students should have either G or U, but if not, default to undergrad 
-              logger.error "User.update_user_type: Couldn't determine student type for login #{self.login}"
-              self.user_type = User::Types::Undergrad
-          end
-        # Faculty & staff
-        # can we add an Employee type, to correctly identify non-faculty staff?
-        when (person.employee? and not person.employee_expired?)
-          self.user_type = User::Types::Faculty
-        else
-          # Affiliate, Non-registered student, or Expired Employee...
-          # why do we default to Grad? can we add a Guest type instead?
-          logger.error "User.update_user_type: Couldn't determine user type for login #{self.login}, defaulting to Undergrad"
-          self.user_type = User::Types::Grad
-        end
-    end # stub
-
-    self.update_attribute(:user_type, self.user_type) if options[:save] || options[:update]
+  def update_user_type(save = false)
+    person = self.ldap_person
+    if person.nil?
+      self.user_type = User::Types::Affiliate
+    else
+      self.user_type = case
+                       when person.berkeleyEduStuUGCode == 'G'
+                         User::Types::Grad
+                       when person.student?
+                         User::Types::Undergrad
+                       when person.employee_expired?
+                         User::Types::Affiliate
+                       when person.employee_academic?
+                         User::Types::Faculty
+                       when person.employee?
+                         User::Types::Staff
+                       else
+                         User::Types::Affiliate
+                       end
+    end
+    self.update_attribute(:user_type, self.user_type) if save
     self.user_type
   end
 
-  def is_faculty?
-    user_type == User::Types::Faculty
-  end
-  def is_grad?
-    user_type == User::Types::Grad
-  end
-  def is_undergrad?
-    user_type == User::Types::Undergrad
-  end
-
-  # @return [Boolean] is the user an {Types::Admin Admin}?
   def admin?
     user_type == User::Types::Admin
   end
+  # TODO this needs to be a db field.
+  def apply?
+    user_type == User::Types::Undergrad || user_type == User::Types::Admin
+  end
+  def post?
+    user_type != User::Types::Undergrad || user_type == User::Types::Admin
+  end
 
-  # User type, as a string
-  # TODO: there's probably a better way to do this programmatically
-  def user_type_string(options={})
-    options[:long] ||= false
-    s = ''
-
+  # Readable user type
+  def user_type_string
     case self.user_type
-    when User::Types::Faculty
-      s = 'Faculty'
-      s += ' member' if options[:long]
     when User::Types::Grad
-      s = 'Grad student/postdoc'
+      'Graduate or postdoc'
     when User::Types::Undergrad
-      s = 'Undergrad'
-      s += 'uate' if options[:long]
+      'Undergraduate'
+    when User::Types::Faculty
+      'Faculty'
+    when User::Types::Staff
+      'Staff'
     when User::Types::Admin
-      s = 'Administrator'
+      'Administrator'
+    when User::Types::Affiliate
+      'Affiliate'
     else
-      s = '(undefined)'
+      'Unknown user type'
       logger.warn "Couldn't find user type string for user type #{self.user_type}"
     end
-    s
   end
+
+  # @param add_spaces [Boolean] use ', ' as separator instead of ','
+  # @return [String] the 'required course' names taken by this User, e.g. "CS61A,CS61B"
+  def course_list_of_user(add_spaces = false)
+    course_list = ''
+    courses.each do |c|
+      course_list << c.name + ','
+      course_list << ' ' if add_spaces
+    end
+
+    if add_spaces
+      course_list[0..(course_list.length - 3)].upcase
+    else
+      course_list[0..(course_list.length - 2)].upcase
+    end
+  end
+
+  # @param add_spaces [Boolean] use ', ' as separator instead of ','
+  # @return [String] the category names taken by this User, e.g. "robotics,signal processing"
+  def category_list_of_user(add_spaces = false)
+    category_list = ''
+    categories.each do |cat|
+      category_list << cat.name + ','
+      category_list << ' ' if add_spaces
+    end
+    
+    if add_spaces
+      category_list[0..(category_list.length - 3)].downcase
+    else
+      category_list[0..(category_list.length - 2)].downcase
+    end
+  end
+  
+  # @return [String] the 'desired proglang' names taken by this User, e.g. "java,scheme,c++"
+  def proglang_list_of_user(add_spaces = false)
+    proglang_list = ''
+    proglangs.each do |pl|
+      proglang_list << pl.name.capitalize + ','
+      proglang_list << ' ' if add_spaces
+    end
+    
+    if add_spaces
+      proglang_list[0..(proglang_list.length - 3)]
+    else
+      proglang_list[0..(proglang_list.length - 2)]
+    end
+  end
+
+  # Makes more sense to handle these for each job
+  # def received_jobs_list_of_user
+  #   jobs = []
+  #   self.applics.all.each do |w|
+  #     this_job = Job.find_by_id(w.job_id)
+  #     if this_job && w.status == "accepted" then
+  #       jobs << this_job
+  #     end
+  #   end
+  #   jobs
+  # end
   
   # Parses the textbox list of courses from "CS162,CS61A,EE123"
   # etc. to an enumerable object courses
   def handle_courses(course_names)
-    return if self.is_faculty? || course_names.nil?
+    return if !self.apply? || course_names.nil?
     self.courses = []  # eliminates any previous enrollments so as to avoid duplicates
     course_array = []
-    course_array = course_names.split(',').uniq if ! course_names.nil?
+    course_array = course_names.split(',').uniq if course_names
     course_array.each do |item|
       self.courses << Course.find_or_create_by_name(item.upcase.strip)
     end
@@ -341,10 +262,10 @@ class User < ActiveRecord::Base
   # Parses the textbox list of categories from "signal processing,robotics"
   # etc. to an enumerable object categories
   def handle_categories(category_names)
-    return if self.is_faculty? || category_names.nil?
+    return if !self.apply? || category_names
     self.categories = []  # eliminates any previous interests so as to avoid duplicates
     category_array = []
-    category_array = category_names.split(',').uniq if ! category_names.nil?
+    category_array = category_names.split(',').uniq if category_names
     category_array.each do |cat|
       self.categories << Category.find_or_create_by_name(cat.downcase.strip)
     end
@@ -353,31 +274,49 @@ class User < ActiveRecord::Base
   # Parses the textbox list of proglangs from "c++,python"
   # etc. to an enumerable object proglangs
   def handle_proglangs(proglang_names)
-    return if self.is_faculty? || proglang_names.nil?
+    return if !self.apply? || proglang_names.nil?
     self.proglangs = []  # eliminates any previous proficiencies so as to avoid duplicates
     proglang_array = []
-    proglang_array = proglang_names.split(',').uniq if ! proglang_names.nil?
+    proglang_array = proglang_names.split(',').uniq if proglang_names
     proglang_array.each do |pl|
       self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
     end
   end 
-  
 
+  # @return [Boolean] true if the user has just been activated.
+  # @deprecated
+  def recently_activated?
+    false 
+  end
+
+  # @return [User] the user corresponding to given login
+  # @deprecated
+  def self.authenticate_by_login(loggin)
+    # Return user corresponding to login, or nil if there isn't one
+    User.find_by_login(loggin)
+  end  
+
+  # @deprecated
+  def is_faculty?
+    user_type == User::Types::Faculty
+  end
   protected
     
     # Dynamically assign the value of :email, based on whether this user
     # is marked as faculty or not. This should occur as a before_validation
     # since we want to save a value for :email, not :faculty_email or :student_email.
+    # @deprecated
     def handle_email
-      self.email = (self.is_faculty ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
+      self.email = (self.is_faculty? ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
     end
     
     # Dynamically assign the value of :name, based on whether this user
     # is marked as faculty or not. This should occur as a before_validation
     # since we want to save a value for :name, not :faculty_name or :student_name.
+    # @deprecated
     def handle_name
       if self.name.nil? || self.name == ""
-        self.name = is_faculty ? faculty_name : student_name
+        self.name = is_faculty? ? faculty_name : student_name
       end
     end
 end

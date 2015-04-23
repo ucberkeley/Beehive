@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  include ApplicationHelper
+  include ApplicationHelper # this is still necessary
   include CASControllerIncludes
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
   # Puts a flash[:notice] error message and redirects if condition isn't true.
   # Returns true if redirected.
   #
-  # Usage: return if redirected_because(!user_logged_in, "Not logged in!", "/diaf")
+  # Usage: return if redirect_if(!user_logged_in, "Not logged in!", "/diaf")
   #
-  def redirected_because(condition=true, error_msg="Error!", redirect_url=nil)
-    return false if condition == false or redirect_url.nil?
+  def redirect_if(condition=true, error_msg='Error!', redirect_url=nil)
+    false if condition == false or redirect_url.nil?
     flash[:error] = error_msg
     redirect_to redirect_url unless redirect_url.nil?
-    return true
+    true
   end
 
 
@@ -46,33 +46,27 @@ class ApplicationController < ActionController::Base
 #     FILTERS      #
 ####################
 
-  # Only the user to whom the job belongs is permitted to view the particular
-  # action for this job.
-  def view_ok_for_unactivated_job
-    j = (Job.find(params[:id].present? ? params[:id] : params[:job_id]) rescue nil)
-      # id and job_id because this filter is used by both the JobsController
-      # and the ApplicsController
+  # Used by both ApplicsController and JobsController
+  def job_accessible
+    j = (Job.find(params[:job_id].present? ? params[:job_id] : params[:id]) rescue nil)
     if j == nil
-      flash[:error] = "Sorry, that project isn't active."
-      redirect_to :controller => 'dashboard', :action => :index
+      flash[:error] = 'We couldn\'t find that project.'
+      redirect_to jobs_path
     end
   end
 
-  # Only users other than the user to whom the job belongs is permitted to watch
-  # or apply to the job.
+  # User shouldn't watch or apply to their own job.
   def watch_apply_ok_for_job
-    j = Job.find(params[:id].present? ? params[:id] : params[:job_id])
-      # id and job_id because this filter is used by both the JobsController
-      # and the ApplicsController
-    if (j == nil || @current_user == j.user)
-      flash[:error] = "You cannot watch or apply to your own listing."
+    j = (Job.find(params[:job_id].present? ? params[:job_id] : params[:id]) rescue nil)
+    if j == nil || @current_user == j.user
+      flash[:error] = 'You can\'t watch or apply to your own listing.'
       redirect_to job_path(j)
     end
   end
 
   # Tests exception notification by raising an uncaught exception.
   def test_exception_notification
-    raise NotImplementedError.new("Exceptions aren't implemented yet.")
+    raise NotImplementedError.new('Exceptions aren\'t implemented yet.')
   end
 
   private
@@ -89,7 +83,7 @@ class ApplicationController < ActionController::Base
   
   def require_admin
     unless logged_in_as_admin?
-      redirect_to request.referer || home_path, :notice => "Insufficient privileges"
+      redirect_to request.referer || home_path, :notice => 'Insufficient privileges'
     end
   end
 

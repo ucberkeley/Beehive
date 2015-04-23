@@ -1,15 +1,16 @@
 <% job = your_job %>
+<!-- TODO break into a table, with views, watches, and applications columns -->
 <div id="your_job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
 	<div class="job_padding_wrapper">
-		<table class="job_table">
+		<table class="job_list">
 			<tr>
 				<td class="job_table_left">
 					<div class="job_title">
             <a href="<%= job_path(job) %>"><%= job.title %></a>
-              (watched by <%= job.users.length %> user<%= job.users.length != 1 ? "s" : "" %>) 
+              (watched by <%= pluralize(job.users.length, 'user') %>)
 					<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) || @current_user.admin?) %>
-					  <%= link_to "[edit]", edit_job_path(job) %>
-					  <%= link_to "[delete]", delete_job_path(job) %>
+					  <%= link_to '[edit]', edit_job_path(job) %>
+					  <%= link_to '[delete]', delete_job_path(job) %>
 					<% end %>
 					</div>		
 				</td>

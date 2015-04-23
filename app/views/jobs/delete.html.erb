@@ -14,6 +14,7 @@
 <div class="inline-form-container">
 
   <%= button_to "Delete", {:action => "destroy", :id => @job.id}, :method => :delete, :class => "inline-form-element" %>&nbsp;&nbsp;&nbsp;
+  <!-- TODO Move this on same line -->
   <input type="button" value="Cancel" onclick="location.href='<%= jobs_path %>'" />
 
 </div>

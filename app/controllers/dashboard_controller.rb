@@ -11,14 +11,11 @@ class DashboardController < ApplicationController
   before_filter :rm_login_required
   
   def index
-    @departments = Department.all
-    @recently_added_jobs = Job.find(:all, :conditions => ["status = ?",  0], :order => "created_at DESC", :limit => 5)
-    @relevant_jobs = Job.smartmatches_for(@current_user, 4)
+    # @departments = Department.all
+    # @recently_added_jobs = Job.find(:all, :conditions => ["status = ?",  0], :order => "created_at DESC", :limit => 5)
+    #@relevant_jobs = Job.smartmatches_for(@current_user, 4)
     
-    @watched_jobs = @current_user.watched_jobs_list_of_user
-    @applied_jobs = @current_user.applied_jobs_list_of_user
-    @received_jobs = @current_user.received_jobs_list_of_user
-    
-    @your_jobs = Job.find(:all, :conditions => [ "user_id = ?", @current_user.id ])
+    # @applied_jobs = @current_user.applied_jobs_list_of_user
+    # @received_jobs = @current_user.received_jobs_list_of_user
   end
 end

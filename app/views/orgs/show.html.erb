@@ -1,5 +1,9 @@
-<h2><%= @org.name %><% if @current_user.present? && (@current_user.admin? || @org.members.include?(@current_user))%> [<%= link_to 'Edit', edit_org_path(@org) %>]<% end %></h2>
-
+<h2>
+<%= @org.name %> 
+<% if @current_user.admin? || @org.members.include?(@current_user) -%>
+     <%= link_to '[Edit]', edit_org_path(@org) %>
+     <%=link_to '[Destroy]', @org, method: :delete, confirm: 'Are you sure?' %>
+<% end %></h2>
 <p>
   <%= @org.desc %>
 </p>

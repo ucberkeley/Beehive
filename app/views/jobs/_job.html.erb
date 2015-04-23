@@ -1,44 +1,35 @@
-<% if not job.nil? %>
+  <% actions = job.actions(@current_user) -%>
   		<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
-			<table class="job_table">
+			<table class="job_list">
 					<td class="job_table_left">
-						<ul class="job-options" style="float:right">
-							<% if @current_user.present? && (job.user_id == @current_user.id || job.owners.include?(@current_user) ||@current_user.admin?)%>
+						<ul class="actions action-right">
+              <% if actions.include?('edit') -%>
+                <li><%= link_to 'edit', edit_job_path(job) %></li>
+                <li><%= link_to 'delete', delete_job_path(job) %></li>
+              <% end %>
+							<% job.curations(@current_user).each do |org, curated| %>
 							  <li>
-									<%= link_to "edit", edit_job_path(job) %>
-							  </li>
-							  <li>
-									<%= link_to "delete", :controller=> "jobs", :action =>
-								"delete", :id => job.id %>
-							  </li>
-							<% end %>
-							<% @current_user.orgs.each do |org| %>
-							  <li>
-								<% if Curation.where(:org_id => org, :job_id => job).empty?
-									%>
-									<%= link_to "curate", orgs_curate_path(:id => org.abbr, :job_id => job.id), method: :post %>
-								<% else %>
-									<%= link_to "uncurate", orgs_uncurate_path(:id => org.abbr, :job_id => job.id), method: :post %>
-								<% end %>
-							  </li>
-							  
-							<% end %>
-							<% if job.users.include?(@current_user) %>
-							  <li>
-									<%= link_to "unwatch", unwatch_job_path(job) %>
-							  </li>
-							<% elsif job.user != @current_user %>
-							  <li>
-									<%= link_to "watch", watch_job_path(job) %>
+                  <% if curated -%>
+                    <%= link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
+                                title: org.name, rel: 'tooltip' %>
+                  <% else -%>
+                    <%= link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
+                                title: org.name, rel: 'tooltip' %>
+                  <% end %>
 							  </li>
 							<% end %>
-							<% if job.applicants.include?(@current_user) %>
-								<li> [applied!] </li>
-							<% elsif job.user != @current_user and job.status == 0%>
-							  <li>
-									<%= link_to "apply", new_job_applic_path(job.id) %>
-							  </li>
-							<% end %>
+              <% if actions.include?('watch') -%>
+                <li><%= link_to 'watch', watch_job_path(job) if actions.include?('watch') %></li>
+              <% elsif actions.include?('unwatch') -%>
+                <li><%= link_to 'unwatch', unwatch_job_path(job) if actions.include?('unwatch') %></li>
+              <% end %>
+              <% if actions.include?('apply') -%>
+                <li><%= link_to 'apply', new_job_applic_path(job) %></li>
+              <% elsif actions.include?('applied') -%>
+                <li>applied!</li>
+              <% elsif actions.include?('resume') -%>
+                <li><%= link_to 'resume app', new_job_applic_path(job), class: 'wide' %></li>
+              <% end %>
 						</ul>
 
 						<div class="job_title">
@@ -71,4 +62,3 @@
 						<% end %>
 				</table>
 			</div>
-<% end %>

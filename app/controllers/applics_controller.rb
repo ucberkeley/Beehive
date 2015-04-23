@@ -14,8 +14,7 @@ class ApplicsController < ApplicationController
   before_filter :verify_job_unapplied,    :only => [:new, :create]
     # don't allow multiple applications
 
-  # Ensures that other users can't view your job if your job is not yet active!
-  before_filter :view_ok_for_unactivated_job, :only => [ :new, :create, :index ]
+  before_filter :job_accessible, :only => [ :new, :create, :index ]
 
   # Prohibits a user from applying to his/her own job
   before_filter :watch_apply_ok_for_job, :only => [ :new, :create ]
@@ -42,26 +41,23 @@ class ApplicsController < ApplicationController
 
   def verify_applic_ownership
     a = @applic #Applic.find(params[:id])
-    return if redirected_because(a.nil?, "Couldn't find that application.",
-      jobs_path)
-    return if redirected_because(a.user != @current_user,
-      "Only the original applicant can withdraw an application.",
-      job_path(a.job))
+    return if redirect_if(a.nil?, "Couldn't find that application.", jobs_path)
+    return if redirect_if(a.user != @current_user,
+      'Only the original applicant can withdraw an application.', job_path(a.job))
   end
 
   def verify_applic_admin
     a = @applic #Applic.find(params[:id])
-    return if redirected_because(a.nil?, "Couldn't find that application.",
-      jobs_path)
-    return if redirected_because( (a.user != @current_user) &&
-      !a.job.allow_admin_by?(@current_user) && !a.job.owners.include?(@current_user) && !@current_user.admin?,
-      "You are not authorized to view that application.", job_path(a.job))
+    return if redirect_if(a.nil?, "Couldn't find that application.", jobs_path)
+    return if redirect_if( (a.user != @current_user) &&
+      !a.job.can_admin?(@current_user) && !a.job.owners.include?(@current_user) && !@current_user.admin?,
+      'You are not authorized to view that application.', job_path(a.job))
   end
 
   def verify_job_ownership
     j = @job #Job.find(params[:job_id])
-    return if redirected_because(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirected_because(! j.allow_admin_by?(@current_user) && !j.owners.include?(@current_user) && !@current_user.admin?,
+    return if redirect_if(j.nil?, "Couldn't find that job.", jobs_path)
+    return if redirect_if(! j.can_admin?(@current_user) && !j.owners.include?(@current_user) && !@current_user.admin?,
       "You are not authorized to view the applications for this job.",
       job_path(j))
   end
@@ -69,7 +65,7 @@ class ApplicsController < ApplicationController
   def serve_document(type)
     return unless [:resume, :transcript].include?(type)
     @doc = @applic.send(type)
-    return if redirected_because(@doc.nil?,
+    return if redirect_if(@doc.nil?,
       "There was an error retrieving the requested document.",
       applic_path(@applic))
     send_file @doc.public_filename, :type => @doc.content_type
@@ -86,8 +82,7 @@ class ApplicsController < ApplicationController
 
   def show
     @applic = Applic.find(params[:id])
-    @status = @applic.status.nil? ? "Undecided" 
-                                  : @applic.status.capitalize
+    @status = @applic.status.nil? ? 'Undecided' : @applic.status.capitalize
 
     respond_to do |format|
       format.html # show.html.erb
@@ -97,14 +92,12 @@ class ApplicsController < ApplicationController
 
   def new
     #@job = Job.find(params[:job_id])
-    
     if verify_job_unapplied
       @applic = Applic.where({:user_id => @current_user, :job_id => @job}).first || Applic.new({:user => @current_user, :job => @job})
     else
       redirect_to(url_for(@job))
     end
-    
-    
+
   end
 
   # the action for actually applying.

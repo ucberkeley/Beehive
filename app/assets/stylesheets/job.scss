@@ -30,7 +30,30 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   margin-top: -60px;
 }
 
-.job_table {
+table.job_table {
+  max-width: 1200px;
+}
+
+/*table.job_table {
+  border: 1px black solid;
+  max-width: 1200px;
+
+  th,td {
+    border-right: 1px black solid;
+  }
+  th {
+    background-color: lightgray;
+  }
+  tr.job_odd {
+    background-color: #e4f2f6;
+  }
+
+  th.p_title {
+    min-width: 300px;
+  }
+}*/
+
+.job_list {
   border: 0;
   width: 100%;
   background-color: $color_zircon_approx;
@@ -47,10 +70,10 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
 }
 .job_odd {
   background: none;
-  padding: 20px 0 0;
+  padding: 10px 0 10px;
 }
 .job_even {
-  padding: 20px 0 0;
+  padding: 10px 0 10px;
 }
 .job_padding_wrapper {
   vertical-align: middle;
@@ -87,7 +110,10 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   font-size: 14px;
   font-weight: bold;
 }
-.job-options {
+.action-right {
+  float: right;
+}
+.actions {
   list-style-type: none;
   li {
     font-weight: normal;
@@ -95,23 +121,20 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
     text-align: center;
     padding: 1px 3px;
     margin: 2px 0px;
-    width: 50px;
     border-radius: 3px;
     box-shadow: 1px 1px 1px #ddd;
-    a {
-      color: #337ab7;
-    }
+  }
+  a.wide {
+    width: 100%;
+  }
+  a:not(wide) {
+    width: 60px;
   }
 }
 
-.view-job-ul {
+.view-job {
   font-size: 16px;
-  margin: 40px 0;
-  list-style: none;
   text-align: center;
-  li {
-    margin: 5px 0px;
-  }
 }
 
 .view-job-title {
@@ -135,19 +158,21 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
 .job_tags {
   width: 70%;
   margin-left: 15%;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 40px;
 }
 
 .view-job-options {
   border-radius: 3px;
   background-color: #ddd;
-  padding: 3px 6px;
-  width: 100px;
+  padding: 3px 10px;
   display: inline-block;
   color: white;
   text-transform: uppercase;
   font-weight: normal;
+}
+a.view-job-options:hover {
+  color: black;
 }
 .view-job-options.edit {
   background-color: #f1c40f;
@@ -159,6 +184,9 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   background-color: #3498db;
 }
 .view-job-options.curate {
+  background-color: BlueViolet;
+}
+.view-job-options.uncurate {
   background-color: #bdc3c7;
 }
 .view-job-options.apply {

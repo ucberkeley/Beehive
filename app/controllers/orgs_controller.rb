@@ -24,8 +24,9 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
-    @org = Org.from_param(params[:id])
-    @jobs = Job.find(Curation.where(:org_id => @org.id).pluck(:job_id))
+    @org = Org.from_param(params[:abbr])
+    # @jobs = Job.find(Curation.where(:org_id => @org.id).pluck(:job_id))
+    @jobs = @org.jobs
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @org }
@@ -45,7 +46,7 @@ class OrgsController < ApplicationController
 
   # GET /orgs/1/edit
   def edit
-    @org = Org.from_param(params[:id])
+    @org = Org.from_param(params[:abbr])
   end
 
   # POST /orgs
@@ -67,7 +68,7 @@ class OrgsController < ApplicationController
   # PUT /orgs/1
   # PUT /orgs/1.json
   def update
-    @org = Org.from_param(params[:id])
+    @org = Org.from_param(params[:abbr])
 
     respond_to do |format|
       if @org.update_attributes(params[:org])
@@ -82,9 +83,7 @@ class OrgsController < ApplicationController
 
   # GET /orgs/1/curate?job_id=2
   def curate
-    org = Org.from_param(params[:id])
-    job = Job.find(params[:job_id])
-    curate = Curation.new({:org => org, :user=> @current_user, :job => job})
+    curate = Curation.new({:org => Org.from_param(params[:abbr]), :job_id => params[:job_id], :user=> @current_user})
     if curate.save
       flash[:notice] = 'Successfully curated listing.'
     else
@@ -94,11 +93,11 @@ class OrgsController < ApplicationController
   end
 
   def uncurate
-    curate = Curation.where({:org_id => Org.from_param(params[:id]), :job_id => params[:job_id]})
+    curate = Curation.where({:org_id => Org.from_param(params[:abbr]), :job_id => params[:job_id]})
     if curate.destroy_all
       flash[:notice] = 'Successfully uncurated listing.'
     else
-      flash[:notice] = 'Was not able to uncurate this listing. Perhaps you\'ve already curated it?'
+      flash[:notice] = 'Was not able to uncurate this listing. Perhaps you haven\'t curated it?'
     end
     redirect_to(:back)
   end
@@ -106,7 +105,7 @@ class OrgsController < ApplicationController
   # DELETE /orgs/1
   # DELETE /orgs/1.json
   def destroy
-    @org = Org.from_param(params[:id])
+    @org = Org.from_param(params[:abbr])
     @org.destroy
 
     respond_to do |format|
@@ -121,7 +120,8 @@ class OrgsController < ApplicationController
 
   private
   def correct_user_access
-    if (Org.from_param(params[:id]) == nil || (!@current_user.admin? and !Org.from_param(params[:id]).members.include?(@current_user)))
+    org = Org.from_param(params[:abbr])
+    if (!org || (!@current_user.admin? and !org.members.include?(@current_user)))
       flash[:error] = "You don't have permissions to edit or delete that org."
       redirect_to :controller => 'dashboard', :action => :index
     end

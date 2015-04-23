@@ -1,89 +1,58 @@
-<% content_for :title, "Dashboard" %>
+<% content_for :title, 'Dashboard' %>
 <div class="row">
   <h1>Dashboard</h1>
-  
-  <div class="large-6 col-sm-12 columns">
-    <!-- <div class="dashboard_wrapper_smartmatch"> -->
-    <!-- <div class="dashboard_container_smartmatch box_shadow"> -->
-    <h2><%= image_tag 'clipboard.gif' %> SmartMatch Results</h2>
-    <% if @relevant_jobs.empty? %>
-    <p>
-      Unfortunately, we were unable to match you to any projects.
-    </p> 
-    <p>
-      Most likely, this is caused by a lack of information regarding your coursework and interests.
-      Why don't you fill out your <%= link_to 'profile', :controller=>:users, :action=>:edit, :id => @current_user %> with courses and interests to get started?
-    </p>
-    <% else %>
-    <%= @current_user.name %>, we've automatically matched your interests and skill set to the
-    following <b><%= @relevant_jobs.length %> project<% if @relevant_jobs.length > 1 %>s<% end %>:</b>
-    <br /><br />
-    <% end %>
-    <%= render :partial => "jobs/job", :collection => @relevant_jobs %>
-    <!-- </div> -->
-    <!-- </div> -->
-  </div>
-  
-  <div class="large-6 col-sm-12 columns">
-    
-    <% if @current_user.can_post? || @current_user.owned_jobs.size > 0 -%>
-    <h2>Your Postings</h2>
-    
-    <% if (@your_jobs + @current_user.owned_jobs).empty? %>
-    You have not added any listings. Why not <%= link_to 'post one', :controller => :jobs, :action => :new %>?
-    
-    <% else %>
-    <%= render :partial => "jobs/your_job", :collection => @your_jobs + @current_user.owned_jobs %>
-    <% end %>
-    
-    <% end -%>	
-    <% if !@current_user.is_faculty %>
-    <% if @current_user.can_post? %><br /><% end %>
-    <h2>Your Watched Postings</h2>
-    <!-- //list of postings you're watching -->
-    <% if @watched_jobs.empty? %>
-    You are not watching any postings.
-    <% else %>
-    <%= render :partial => "jobs/watched_job", :collection => @current_user.watches %>
-    <% end %>
-    <br />
-    
-    <% end %>
-    
-    <h2>Applied Positions</h2>
-    <% if @applied_jobs.empty? %>
-    You have not applied to any research positions.
-    <% else %>
-    <%= render :partial => "jobs/watched_job", :collection => @current_user.applics %>
-    <% end %>
-    <br/>
 
-    <br/>
-    <h2>Received Positions</h2>
-    <% if @received_jobs.empty? %>
-    You have not been accepted to any research positions.
-    <% else %>
-    <%= render :partial => "jobs/watched_job", :collection => @current_user.applics %>
-    <% end %>
-    <br/>
+  <% # TODO
+     # - CSS, push footer to bottom
+     # - application status dashboard, received applications dashboard
+  %>
+  
+  <div class="large-6 col-sm-12 columns">
+    <% if @current_user.apply? || !@current_user.applics.empty? %>
+      <h2>Applied Positions</h2>
+      <% if @current_user.applics.empty? %>
+        You have not applied to any research positions.
+      <% else %>
+        <table class="job_table table table-striped table-condensed">
+          <thead><tr>
+            <th class="col-md-4">Title</th>
+            <th class="col-md-2">Sponsor</th>
+            <th class="col-md-2">Application Date</th>
+            <th class="col-md-2">Status</th>
+          </tr></thead>
+          <%= render :partial => 'applics/applic', :collection => @current_user.applics %>
+        </table>
+      <% end -%>
+      <br />
+    <% end %><!--apply-->
+
+    <% if @current_user.post? || !@current_user.jobs.empty? || !@current_user.owned_jobs.empty? -%>
+    <h2>Manage Postings</h2>
+    <% if @current_user.jobs.empty? && @current_user.owned_jobs.empty? -%>
+      You have not posted any projects. <%= link_to 'Post one', :controller => :jobs, :action => :new %> now.
+    <% end -%>
+    <% if !@current_user.jobs.empty? -%>
+    <p>You are the primary contact for these projects:</p>
+    <%= render :partial => 'jobs/your_job', :collection => @current_user.jobs %>
+    <% end -%>
+    <% if !@current_user.owned_jobs.empty? -%>
+    <p>You can administer these projects:</p>
+    <%= render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs %>
+    <% end -%>
+    <% end -%><!--post-->
+
+    <h2>Your Watched Projects</h2>
+    <% if @current_user.watches.empty? -%>
+    You are not watching any projects.
+    <% else -%>
+    <!-- TODO Add an apply button too -->
+    <%= render :partial => 'jobs/watched_job', :collection => @current_user.watches %>
+    <% end -%>
+    <br>
+
   </div>
   
 </div>
-<div class="row">
-  <div class="large-12 col-sm-12 columns">
-    <!-- <div class="dashboard_wrapper_long"> -->
-    <!-- <div class="dashboard_container_long"> -->
-    <h2>Recently Added Projects</h2>
-    
-    <% if @recently_added_jobs.empty? %>
-    No projects were recently added. Please try again later!
-    <% else %>
-    <%= render :partial => "jobs/job", :collection => @recently_added_jobs %>
-    <% end %>
-    
-    
-    <!-- </div> -->
-    <!-- </div> -->
-  </div>
-</div>
-</div>
+<br/>
+<br/>
+<br/>

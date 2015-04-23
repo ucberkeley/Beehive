@@ -123,17 +123,17 @@ end
 module CASControllerIncludes
   def goto_home_unless_logged_in
     #CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
-    redirect_to home_path unless @current_user && @user_session
+    return true if @current_user && @user_session
+    (redirect_to home_path) and false
   end
 
   def login_user!(user)
-    @user_session = UserSession.new(user)
-    return @user_session.save
+    return UserSession.new(user).save
   end
 
   def rm_login_required
     return true if @current_user
-    redirect_to login_path and return false
+    (redirect_to login_path) and false
   end
 
   def first_login(auth_field, auth_value)
@@ -144,8 +144,7 @@ module CASControllerIncludes
     
     # Require CAS login first
     unless @user_session
-      redirect_to login_path
-      return false
+      (redirect_to login_path) and false
     end
 
     # If user doesn't exist, create it. Use current_user
@@ -161,9 +160,11 @@ module CASControllerIncludes
       if session[:auth_hash][:provider].to_sym == :cas
         # When using CAS, the Users table is populated from LDAP
         person = new_user.ldap_person
-        new_user.email = person.email
-        new_user.name = new_user.ldap_person_full_name
-        new_user.update_user_type
+        if person
+          new_user.email = person.email
+          new_user.name = new_user.ldap_person_full_name
+          new_user.update_user_type
+        end
       end
 
       if new_user.save && new_user.errors.empty?
@@ -183,7 +184,7 @@ module CASControllerIncludes
       end
     end
 
-    logger.info("\n\n GOT PAST LOGIN_REQUIRED  \n\n") if Rails.env == 'development'
+    logger.info('LOGIN') if Rails.env == 'development'
     return true
   end
 
@@ -192,10 +193,7 @@ module CASControllerIncludes
   # signup page.
   # Filter passes if auth hash is present, and a user exists.
   def require_signed_up
-    return true if session[:auth_hash].present? and User.exists?(:id => session[:user_id])
-
-    redirect_to :controller => :users, :action => :new
-    return false
+    return true if session[:auth_hash].present? && User.find(session[:user_id])
+    (redirect_to :controller => :users, :action => :new) and false
   end
 end
-

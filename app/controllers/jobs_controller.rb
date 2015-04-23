@@ -24,8 +24,7 @@ class JobsController < ApplicationController
   before_filter :correct_user_access, :only => [ :edit, :update, :resend_activation_email,
                                                   :delete, :destroy ]
 
-  # Ensures that other users can't view your job if your job is not yet active!
-  before_filter :view_ok_for_unactivated_job, :only => [ :show, :apply ]
+  before_filter :job_accessible, :only => [ :show, :apply ]
 
   # Prohibits a user from watching his/her own job
   before_filter :watch_apply_ok_for_job, :only => [ :watch ]
@@ -95,14 +94,12 @@ class JobsController < ApplicationController
   # GET /jobs/1.xml
   def show
     @job = Job.find(params[:id])
-
-    
-    # assumes the user only belongs to one org
-    @is_curated = Curation.where(:user_id => @current_user, :job_id => @job).first
+    @actions = @job.actions(@current_user)
+    @curations = @job.curations(@current_user)
 
     # update watch time so this job is now 'read'
-    if @current_user.present? && (watch=Watch.find(:first, :conditions => {:user_id => @current_user.id, :job_id => @job.id}))
-        watch.mark_read
+    if @current_user.present? && watch=@job.watches.find_by_user_id(@current_user)
+      watch.mark_read
     end
 
     respond_to do |format|
@@ -364,7 +361,8 @@ class JobsController < ApplicationController
 
   private
   def correct_user_access
-    if (Job.find(params[:id]) == nil || (!@current_user.admin? and @current_user != Job.find(params[:id]).user and !Job.find(params[:id]).owners.include(@current_user)))
+    job = Job.find(params[:id])
+    if job == nil || job.can_admin?(@current_user)
       flash[:error] = "You don't have permissions to edit or delete that listing."
       redirect_to :controller => 'dashboard', :action => :index
     end

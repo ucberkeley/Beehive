@@ -9,7 +9,7 @@ class Applic < ActiveRecord::Base
   #   message       : text 
   #   resume_id     : integer 
   #   transcript_id : integer 
-  #   status        : string 
+  #   status        : string   # default "undecided"; also possible "accepted" or nil
   #   applied       : boolean 
   # =======================
 
@@ -19,8 +19,8 @@ class Applic < ActiveRecord::Base
   belongs_to :transcript,  :class_name => 'Document', :conditions => {:document_type => Document::Types::Transcript}
   
   validates_presence_of   :message
-  validates_length_of     :message, :minimum => 1, :too_short => "Please enter a message to the faculty sponsor of this listing." 
-  validates_length_of     :message, :maximum => 65536, :too_long => "Please enter a message to the faculty sponsor of this listing that is shorter than 65536 characters."
+  validates_length_of     :message, :minimum => 1, :too_short => 'Please enter a message to the faculty sponsor of this listing.'
+  validates_length_of     :message, :maximum => 65536, :too_long => 'Please enter a message to the faculty sponsor of this listing that is shorter than 65536 characters.'
 
   # Uniq'd list of emails of all [sponsors, poster] who want to receive notifications for this applic
   def subscriber_emails

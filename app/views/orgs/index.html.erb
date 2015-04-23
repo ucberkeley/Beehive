@@ -1,30 +1,23 @@
-<h1>Organizations</h1>
+<div class="container">
+<h1>Organizations
+<% if @current_user.present? && @current_user.admin? -%>
+<%= link_to '[New]', new_org_path -%>
+<% end -%>
+</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table">
+  <thead><tr>
+    <th class="col-md-3">Name</th>
+    <th class="col-md-7">Desc</th>
+  </tr></thead>
 
 <% @orgs.each do |org| %>
   <tr>
     <td><%= link_to org.name, org %></td>
     <td><%= org.desc %></td>
-    <% if @current_user.present? && (@current_user.admin? || org.members.include?(@current_user))%>
-      <td><%= link_to 'Edit', edit_org_path(org) %></td>
-    <% end %>
-    <% if @current_user.present? && @current_user.admin?%>
-      <td><%= button_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<% if @current_user.present? && @current_user.admin? %>
-  <%= link_to 'New Org', new_org_path %>
-<% end %>
+</div>

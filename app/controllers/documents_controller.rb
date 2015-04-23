@@ -15,7 +15,7 @@ end
 def create
     @document = Document.new(params[:document])
     # TODO: additional verification of correct user?
-    return if redirected_because(params[:document].nil? || params[:document][:user_id].nil? || params[:document][:user_id].to_i != @current_user.id,
+    return if redirect_if(params[:document].nil? || params[:document][:user_id].nil? || params[:document][:user_id].to_i != @current_user.id,
         "Error: Couldn't associate document with your user. Please re-upload.",
         "/dashboard")
 

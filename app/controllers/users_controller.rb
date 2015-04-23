@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @current_user.is_undergrad? or @current_user.admin?
+    if @current_user.apply?
       @current_user.handle_courses(params[:course][:name])
       @current_user.handle_proglangs(params[:proglang][:name])
       @current_user.handle_categories(params[:category][:name])

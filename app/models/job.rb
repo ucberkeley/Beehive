@@ -12,8 +12,8 @@ class Job < ActiveRecord::Base
   #   created_at          : datetime 
   #   updated_at          : datetime 
   #   department_id       : integer 
-  #   activation_code     : integer 
-  #   delta               : boolean 
+  #   activation_code     : integer  # deprecated
+  #   delta               : boolean  # deprecated
   #   earliest_start_date : datetime 
   #   latest_start_date   : datetime 
   #   end_date            : datetime 
@@ -58,22 +58,22 @@ class Job < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :pictures
   has_many :curations
-  has_many :orgs, :through => :curations
-  has_one :contacter, :class_name => "User", :foreign_key => "id", :primary_key => 'primary_contact_id'
+  has_many :orgs,         :through => :curations
+  has_one :contacter,     :class_name => 'User', :foreign_key => 'id', :primary_key => 'primary_contact_id'
   has_many :watches
+  has_many :users,        :through => :watches
   has_many :applics
+  has_many :applicants,   :through => :applics, :source => :user
   has_many :owns
+  has_many :owners,       :through => :owns, :source => :user
   #has_many :applicants, :class_name => 'User', :through => :applics
-  has_many :applicants, :through => :applics, :source => :user
-  has_many :owners, :through => :owns, :source => :user
 
-  has_many :users, :through => :watches
   has_many :sponsorships, :dependent => :destroy
-  has_many :faculties, :through => :sponsorships
-  has_many :coursereqs, :dependent => :destroy
-  has_many :courses, :through => :coursereqs
+  has_many :faculties,    :through => :sponsorships
+  has_many :coursereqs,   :dependent => :destroy
+  has_many :courses,      :through => :coursereqs
   has_many :proglangreqs, :dependent => :destroy
-  has_many :proglangs, :through => :proglangreqs
+  has_many :proglangs,    :through => :proglangreqs
   
   #################
   #  VALIDATIONS  #
@@ -117,30 +117,85 @@ class Job < ActiveRecord::Base
   #############
 
   def project_string
-    if project_type == 1
-      return "Undergraduate Research"
-    end
-    if project_type == 2
-      return "Student Group"
-    end
-    if project_type == 3
-      return "Design Project"
-    end
-    if project_type == 4
-      return "Other"
+    case project_type
+    when 1
+      'Undergraduate Research'
+    when 2
+      'Student Group'
+    when 3
+      'Design Project'
+    when 4
+      ''
+    else
+      ''
     end
   end
 
   def get_all_project_strings
-    return [["Undergraduate Research", 1], ["Student Group", 2], ["Design Project", 3], ["Other", 4]]
+    return [['Undergraduate Research', 1], ['Student Group', 2], ['Design Project', 3], ['Other', 4]]
   end
-  
+
+  def open?
+    status == Job::Status::Open
+  end
   def pay?
     (self.compensation & Compensation::Pay) > 0
   end
-
   def credit?
     (self.compensation & Compensation::Credit) > 0
+  end
+  def owner?(user)
+    self.user == user || owners.include?(user)
+  end
+  def open_ended_end_date
+    end_date.blank?
+  end
+
+  # Returns true if the specified user has admin rights (can view applications,
+  # edit, etc.) for this job.
+  def can_admin?(user)
+    owner?(user) || user.admin?
+  end
+
+  # @return array of actions the user can take, not including curations
+  def actions(user)
+    actions = []
+    if can_admin?(user)
+      actions.push('edit')
+      actions.push('delete')
+    end
+
+    unless owner?(user)
+      applic = applics.find_by_user_id(user) if open?
+      if self.user != user && !applic
+        if users.include?(user)
+          actions.push('unwatch')
+        else
+          actions.push('watch')
+        end
+      end
+
+      if (open? && user.apply?) || applic
+        if !applic
+          actions.push('apply')
+        elsif applic.applied
+          actions.push('applied')
+        else
+          actions.push('resume')
+        end
+      end
+    end
+
+    actions
+  end
+
+  # @return hash{ org => curated }
+  def curations(user)
+    curations = {}
+    (user.admin? ? Org.all : user.orgs).each do |org|
+      curations[org] = orgs.include?(org)
+    end
+    curations
   end
   
   def self.smartmatches_for(my, limit=4) # matches for a user
@@ -163,10 +218,6 @@ class Job < ActiveRecord::Base
     puts "\n\n\n" + qu.inspect+ "\n\n\n"
     puts "\n\n\n" + opts.inspect + "\n\n\n"
     Job.find_jobs(qu, opts)
-  end
-
-  def open_ended_end_date
-    end_date.blank?
   end
   
   # The main search handler.
@@ -352,12 +403,6 @@ class Job < ActiveRecord::Base
       ('paid' if self.pay?)
     ].compact.join(',')
     self.tag_list = tags_string
-  end
-  
-  # Returns true if the specified user has admin rights (can view applications,
-  # edit, etc.) for this job.
-  def allow_admin_by?(u)
-    self.user == u or self.faculties.include?(u)
   end
 
   # Reassigns it an activation code.

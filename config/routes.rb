@@ -55,8 +55,8 @@ ResearchMatch::Application.routes.draw do
 
   # Orgs
   resources :orgs, param: :abbr
-  post 'orgs/:id/curate' => 'orgs#curate', :as => :orgs_curate
-  post 'orgs/:id/uncurate' => 'orgs#uncurate', :as => :orgs_uncurate
+  post '/orgs/:abbr/curate' => 'orgs#curate', :as => :orgs_curate
+  post '/orgs/:abbr/uncurate' => 'orgs#uncurate', :as => :orgs_uncurate
 
   # Statistics
   get '/statistics'      => 'statistics#index', :as => :statistics
