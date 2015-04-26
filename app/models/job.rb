@@ -49,6 +49,8 @@ class Job < ActiveRecord::Base
     }
   end
 
+  acts_as_taggable
+
   ##################
   #  ASSOCIATIONS  #
   ##################
