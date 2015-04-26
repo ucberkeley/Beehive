@@ -13,5 +13,5 @@ else
       :sender_address       => "ResearchMatch Notifier <#{email}>",
       :exception_recipients => email
     }
-  ExceptionNotifier::Notifier.prepend_view_path File.join(Rails.root, 'app', 'views')
+  # ExceptionNotifier::Notifier.prepend_view_path File.join(Rails.root, 'app', 'views')
 end
