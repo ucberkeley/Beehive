@@ -26,7 +26,6 @@ module AttribsHelper
   # update and create. Updates the attribs of the job with the
   # stuff in params. (NOTE: attrib_type is singular, e.g. "category")
   def update_attribs(params)
-    
     # Attribs logic. Gets the attribs from the params and finds or 
     # creates them appropriately.
 
@@ -61,7 +60,7 @@ module AttribsHelper
             end
             
             # Find or create the attrib 
-            the_attrib = attrib_type.to_s.capitalize.constantize.find_or_create_by_name(val)
+            the_attrib = attrib_type.to_s.capitalize.constantize.find_or_create_by(name: val)
             attrib_array << the_attrib unless attrib_array.include?(the_attrib)
           end
         end

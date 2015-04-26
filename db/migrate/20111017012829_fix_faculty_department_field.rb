@@ -10,7 +10,7 @@ class FixFacultyDepartmentField < ActiveRecord::Migration
 
     Faculty.reset_column_information
     depts.each do |f_id, dept_name|
-      Faculty.find(f_id).update_attribute(:department, Department.find_or_create_by_name(dept_name)) || raise("Unable to reset department for faculty ##{f_id}")
+      Faculty.find(f_id).update_attribute(:department, Department.find_or_create_by(name: dept_name)) || raise("Unable to reset department for faculty ##{f_id}")
     end
   end
 

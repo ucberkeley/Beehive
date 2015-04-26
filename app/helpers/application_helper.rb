@@ -24,11 +24,11 @@ module ApplicationHelper
     /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   end
 
-  def can_view_apps(current_user, job)
-    current_user.present? && (job.contacter == current_user || 
-                              job.sponsorships.include?(current_user) ||
-                              job.owners.include?(current_user) ||
-                              job.faculties.include?(current_user))
+  # TODO merge with job.can_admin?
+  # TODO faculties cannot be compared with user
+  def can_view_apps(user, job)
+    user.present? && (job.contacter == user || job.sponsorships.include?(user) ||
+                      job.owners.include?(user) || job.faculties.include?(user))
   end
 end
 

@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   # before_validation :handle_categories
   # before_validation :handle_proglangs
 
-  attr_accessible :email, :units, :free_hours, :research_blurb, :experience, :summer, :url, :year
+  # attr_accessible :email, :units, :free_hours, :research_blurb, :experience, :summer, :url, :year
   attr_reader :course_names; attr_writer :course_names
   attr_reader :proglang_names; attr_writer :proglang_names
   attr_reader :category_names; attr_writer :category_names
@@ -256,7 +256,7 @@ class User < ActiveRecord::Base
     course_array = []
     course_array = course_names.split(',').uniq if course_names
     course_array.each do |item|
-      self.courses << Course.find_or_create_by_name(item.upcase.strip)
+      self.courses << Course.find_or_create_by(name: item.upcase.strip)
     end
   end
 
@@ -268,7 +268,7 @@ class User < ActiveRecord::Base
     category_array = []
     category_array = category_names.split(',').uniq if category_names
     category_array.each do |cat|
-      self.categories << Category.find_or_create_by_name(cat.downcase.strip)
+      self.categories << Category.find_or_create_by(name: cat.downcase.strip)
     end
   end
     
@@ -280,7 +280,7 @@ class User < ActiveRecord::Base
     proglang_array = []
     proglang_array = proglang_names.split(',').uniq if proglang_names
     proglang_array.each do |pl|
-      self.proglangs << Proglang.find_or_create_by_name(pl.downcase.strip)
+      self.proglangs << Proglang.find_or_create_by(name: pl.downcase.strip)
     end
   end 
 

@@ -124,7 +124,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.4.3)
+    mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.0)
     multi_json (1.11.0)
@@ -144,8 +144,6 @@ GEM
       omniauth (~> 1.2.0)
     pg (0.18.1)
     pothoven-attachment_fu (3.2.15)
-    protected_attributes (1.0.9)
-      activemodel (>= 4.0.1, < 5.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -234,7 +232,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.3)
+    unicorn (4.9.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -270,7 +268,6 @@ DEPENDENCIES
   omniauth-cas
   pg
   pothoven-attachment_fu
-  protected_attributes
   rails (~> 4)
   rspec-rails
   rubycas-client (~> 2.3.9)

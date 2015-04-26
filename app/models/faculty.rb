@@ -19,6 +19,6 @@ class Faculty < ActiveRecord::Base
 
   validates_presence_of :name
 
-  attr_accessible :name, :email, :department_id
+  # attr_accessible :name, :email, :department_id
 
 end

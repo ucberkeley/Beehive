@@ -9,7 +9,7 @@ class Org < ActiveRecord::Base
   #   abbr       : string 
   # =======================
 
-  attr_accessible :desc, :name
+  # attr_accessible :desc, :name
   has_many :memberships
   has_many :members, :through => :memberships, :source => :user
   has_many :curations

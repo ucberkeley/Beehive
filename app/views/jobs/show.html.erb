@@ -45,6 +45,8 @@
       </p>
     </div><!-- view-job -->
 
+    <div class="description"><%= simple_format @job.desc %></div>
+
     <!-- Job attributes -->
     <table class="table table-striped view-job-table">
       <tbody>
@@ -58,18 +60,18 @@
       </tr>
       <tr>
         <td>
-          Description:
+          Department:
         </td>
         <td>
-          <%= simple_format @job.desc %>
+          <%= link_to @job.department.name, jobs_search_path(:department => @job.department.id), :class => 'tags' %>
         </td>
       </tr>
       <tr>
         <td>
-          <%= h 'Category'.pluralize_for(@job.categories.length) %>:
+          <%= 'Category'.pluralize_for(@job.categories.length) %>:
         </td>
         <td>
-          <% if ! @job.category_list_of_job.empty? %>
+          <% if !@job.category_list_of_job.empty? %>
             <%=h @job.category_list_of_job(true) %>
           <% else %>
             (none)
@@ -82,7 +84,7 @@
           Required courses:
         </td>
         <td>
-          <% if ! @job.course_list_of_job.empty? %>
+          <% if !@job.course_list_of_job.empty? %>
             <%=h @job.course_list_of_job(true) %>
           <% else %>
             (none)
@@ -95,7 +97,7 @@
           Desired skills:
         </td>
         <td>
-          <% if ! @job.proglang_list_of_job.empty? %>
+          <% if !@job.proglang_list_of_job.empty? %>
             <%=h @job.proglang_list_of_job(true) %>
           <% else %>
             (none)
@@ -107,7 +109,7 @@
           Earliest start date:
         </td>
         <td>
-          <%=h @job.earliest_start_date.strftime("%b %e, %Y") %>
+          <%= @job.earliest_start_date.strftime("%b %e, %Y") %>
         </td>
       </tr>
       <tr>
@@ -115,7 +117,7 @@
           Latest start date (work must start by):
         </td>
         <td>
-          <%=h @job.latest_start_date.strftime("%b %e, %Y") %>
+          <%= @job.latest_start_date.strftime("%b %e, %Y") %>
         </td>
       </tr>
       <tr>
@@ -123,7 +125,7 @@
           Position end date:
         </td>
         <td>
-          <%=h (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
+          <%= (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y")) %>
         </td>
       </tr>
 
@@ -132,7 +134,7 @@
           Form of Compensation:
         </td>
         <td>
-          <%= Job::Compensation::All.key(@job.compensation) || "Unspecified" %>
+          <%= link_to Job::Compensation::All.key(@job.compensation), jobs_search_path(:compensation => @job.compensation), :class => 'tags' %>
         </td>
       </tr>
 
@@ -161,7 +163,6 @@
     </table>
 
     <% if can_view_apps(@current_user, @job) %>
-
 
       <h2>Applications</h2>
       <p>

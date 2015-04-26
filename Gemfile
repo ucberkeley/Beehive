@@ -5,7 +5,6 @@ gem 'rails', '~> 4'
 gem 'pg'
 # store sessions in db rather than in cookies
 gem 'activerecord-session_store'
-gem 'protected_attributes' # legacy
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

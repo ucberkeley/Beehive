@@ -145,10 +145,9 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    process_form_params
-    @faculty = Faculty.all
+    @faculty = Faculty.all # used in form
     sponsor = Faculty.find(params[:faculty_id]) rescue nil
-    @job = Job.new(params[:job])
+    @job = Job.new(job_params)
     @job.update_attribs(params)
     if !params[:add_owners].empty?
       @job.owners << User.find(params[:add_owners])
@@ -161,12 +160,12 @@ class JobsController < ApplicationController
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
-    @job.populate_tag_list
+    @job.tag_list = @job.field_list
 
     respond_to do |format|
       if @job.save
         if sponsor
-          @sponsorship = Sponsorship.find_or_create_by_faculty_id_and_job_id(sponsor.id, @job.id)
+          @sponsorship = Sponsorship.find_or_create_by(faculty_id: sponsor.id, job_id: @job.id)
           @job.sponsorships << @sponsorship
         end
         
@@ -184,8 +183,7 @@ class JobsController < ApplicationController
   # PUT /jobs/1
   # PUT /jobs/1.xml
   def update
-    process_form_params
-
+    job_params
     @job = Job.find(params[:id])
     changed_sponsors = update_sponsorships and false # TODO: remove when :active is resolved
     @job.update_attribs(params)
@@ -208,7 +206,7 @@ class JobsController < ApplicationController
         else
           @job.primary_contact_id = @current_user.id
         end
-        @job.populate_tag_list
+        @job.tag_list = @job.field_list
 
         # If the faculty sponsor changed, require activation again.
         # (require the faculty to confirm again)
@@ -326,15 +324,24 @@ class JobsController < ApplicationController
 
 
   protected
-  # Preprocesses form data for direct input to Job.update
-  def process_form_params
+
+  # Processes form data for Job.update
+  def job_params
+    # TODO FIXME this sets the primary user as whoever is editing, which is quite broken.
+    params[:job][:user_id] = @current_user.id
+    params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
+
     # Handles the text_fields for categories, courses, and programming languages
     [:category, :course, :proglang].each do |k|
       params[:job]["#{k.to_s}_names".to_sym] = params[k][:name]
     end
 
-    # Handle end date
-    params[:job][:end_date] = nil if params[:job].delete(:open_ended_end_date)
+    params[:job] = params.require(:job).permit(:title, :desc, :project_type,
+      :user_id, :department_id, :status, :compensation, :num_positions,
+      :end_date, :earliest_start_date, :latest_start_date,
+      :category_names, :course_names, :proglang_names)
+
+    params[:job]
   end
 
 
@@ -342,7 +349,7 @@ class JobsController < ApplicationController
   # Returns true if sponsorships changed at all for this update,
   #   and false if they did not.
   def update_sponsorships
-    # Only one sponsor allowed - may change later
+    # TODO allow more than one sponsor
     if params[:faculty_id] != '-1'
       @job.sponsorships.delete_all
       @job.sponsorships.create(faculty_id: params[:faculty_id])
@@ -358,7 +365,7 @@ class JobsController < ApplicationController
   private
   def correct_user_access
     job = Job.find(params[:id])
-    if job == nil || job.can_admin?(@current_user)
+    if !job || !job.can_admin?(@current_user)
       flash[:error] = "You don't have permissions to edit or delete that listing."
       redirect_to :controller => 'dashboard', :action => :index
     end

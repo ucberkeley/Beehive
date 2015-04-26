@@ -6,7 +6,7 @@
 				<td>
 				<% if !applic.applied -%>
 				<% if job.open? -%>
-				<%= link_to "Incomplete [Edit]", new_job_applic_path(job) %>
+				<%= link_to "Incomplete [Continue]", new_job_applic_path(job) %>
 				<% else -%>
 				Incomplete, Closed
 				<% end -%>

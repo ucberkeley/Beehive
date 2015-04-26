@@ -57,25 +57,26 @@ class Job < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :department
-  has_and_belongs_to_many :categories
-  has_many :pictures
-  has_many :curations
-  has_many :orgs,         :through => :curations
+  has_many :pictures # unused
   has_one :contacter,     :class_name => 'User', :foreign_key => 'id', :primary_key => 'primary_contact_id'
-  has_many :watches
-  has_many :users,        :through => :watches
-  has_many :applics
-  has_many :applicants,   :through => :applics, :source => :user
   has_many :owns
   has_many :owners,       :through => :owns, :source => :user
-  #has_many :applicants, :class_name => 'User', :through => :applics
-
   has_many :sponsorships, :dependent => :destroy
   has_many :faculties,    :through => :sponsorships
+  has_many :curations
+  has_many :orgs,         :through => :curations
+
   has_many :coursereqs,   :dependent => :destroy
   has_many :courses,      :through => :coursereqs
   has_many :proglangreqs, :dependent => :destroy
   has_many :proglangs,    :through => :proglangreqs
+  has_and_belongs_to_many :categories # TODO deprecate in favor of tags
+
+  has_many :watches
+  has_many :users,        :through => :watches # TODO rename to watchers
+  has_many :applics
+  has_many :applicants,   :through => :applics, :source => :user
+  #has_many :applicants, :class_name => 'User', :through => :applics
   
   #################
   #  VALIDATIONS  #
@@ -124,9 +125,7 @@ class Job < ActiveRecord::Base
       'Student Group'
     when 3
       'Design Project'
-    when 4
-      ''
-    else
+    else # including 4: 'Other'
       ''
     end
   end
@@ -394,17 +393,15 @@ class Job < ActiveRecord::Base
     end
   end
 
-  # Populates tag list
-  def populate_tag_list
-    tags_string = [
-      self.department.name,
+  # Returns a list of relevant fields
+  def field_list
+    [ self.department.name,
       self.category_list_of_job,
       self.course_list_of_job,
       self.proglang_list_of_job,
       ('credit' if self.credit?),
       ('paid' if self.pay?)
-    ].compact.join(',')
-    self.tag_list = tags_string
+    ].compact.reject(&:blank?)
   end
 
   # Reassigns it an activation code.

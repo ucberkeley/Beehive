@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # This script scrapes research listings from the Willow site.
-#
+# Deprecated
 #
 @options = {:listings_page => "jobs.html", :verbose => true}
 
