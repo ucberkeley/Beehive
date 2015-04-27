@@ -279,14 +279,14 @@ class JobsController < ApplicationController
 
   def job_read_more
     job = Job.find(params[:id])
-    render :text=> job.desc
+    render :plain => job.desc
   end
 
   def job_read_less
     job = Job.find(params[:id])
     desc = job.desc.first(100)
     desc = desc << "..." if job.desc.length > 100
-    render :text=>  desc
+    render :plain =>  desc
   end
 
   def watch

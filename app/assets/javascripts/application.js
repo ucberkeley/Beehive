@@ -1,4 +1,5 @@
 //= require bootstrap-sprockets
+//= require jquery
 //= require jquery_ujs
 
 function setupExternalLinks() {

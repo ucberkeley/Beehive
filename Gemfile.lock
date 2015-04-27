@@ -114,6 +114,12 @@ GEM
       activesupport (>= 4.1.0)
     hashie (3.4.1)
     i18n (0.7.0)
+    jquery-rails (4.0.3)
+      rails-dom-testing (~> 1.0)
+      railties (>= 4.2.0)
+      thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.3)
+      railties (>= 3.2.16)
     json (1.8.2)
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
@@ -166,6 +172,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.3)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
@@ -262,6 +273,8 @@ DEPENDENCIES
   cucumber-rails (~> 1.4.2)
   database_cleaner
   exception_notification (~> 4)
+  jquery-rails
+  jquery-ui-rails
   kaminari (~> 0.15.1)
   nokogiri
   omniauth
@@ -269,6 +282,7 @@ DEPENDENCIES
   pg
   pothoven-attachment_fu
   rails (~> 4)
+  rails_12factor
   rspec-rails
   rubycas-client (~> 2.3.9)
   sass-rails (>= 3.2)

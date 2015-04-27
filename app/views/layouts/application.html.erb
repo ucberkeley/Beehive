@@ -9,9 +9,6 @@
   <%= stylesheet_link_tag 'application' %>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-  <%= javascript_include_tag 'jquery_ujs' %>
-  <%= javascript_include_tag 'bower_components/modernizr/modernizr.js' %>
-  <%= javascript_include_tag 'bower_components/fastclick/lib/fastclick.js' %>
   <%= javascript_include_tag "application" %>
 
 
@@ -32,7 +29,6 @@
    <%#= javascript_include_tag "autocomplete_setup.js" %>
    <% end %>
    <% if c == 'jobs' or c == 'dashboard' %>
-   <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
    <%= stylesheet_link_tag 'job' %>
    <%#= javascript_include_tag "autocomplete_owners.js" %>
    <% end %>
@@ -43,7 +39,6 @@
    <%= stylesheet_link_tag 'statistic' %>
    <% end %>
    <% if c == 'admin' %>
-   <%= stylesheet_link_tag 'smoothness/jquery-ui-1.9.2.custom' %>
    <%= stylesheet_link_tag 'job' %>
    <%#= javascript_include_tag "autocomplete_admin.js" %>
    <% end %>

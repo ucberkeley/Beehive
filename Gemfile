@@ -16,10 +16,11 @@ gem "kaminari", "~> 0.15.1"
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'acts-as-taggable-on'
 
-# Debugging
+# Emails
+gem 'actionmailer-with-request', '~> 0.3'
 gem 'exception_notification' , '~> 4'
 
-# Auth
+# Security
 gem 'authlogic'
 gem 'rubycas-client', "~> 2.3.9", :require => ['casclient', 'casclient/frameworks/rails/filter']
 gem 'ucb_ldap', "2.0.0.pre5"
@@ -30,14 +31,13 @@ gem 'bcrypt'
 # Misc
 gem 'pothoven-attachment_fu'
 gem 'nokogiri'
-gem 'actionmailer-with-request', '~> 0.3'
 
 # Deploy with Capistrano
 gem 'capistrano'
 
 # Production-specific
 group :production do
-  
+  gem 'rails_12factor'
 end
 
 # Development
@@ -58,13 +58,14 @@ group :test do
   gem 'simplecov'
 end
 
+# UI
 gem 'therubyracer'
 gem 'uglifier'
 gem 'sass-rails', '>= 3.2'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
-# gem "jquery-rails", "~> 3.1.0"
-# gem 'jquery-ui-rails', "~> 4.2.0"
 
 ################################################################################
 
