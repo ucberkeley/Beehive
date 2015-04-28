@@ -3,11 +3,49 @@
   <h1>Dashboard</h1>
 
   <% # TODO
+     # - separate watched/apps and posted/apps views
      # - CSS, push footer to bottom
      # - application status dashboard, received applications dashboard
   %>
   
   <div class="large-6 col-sm-12 columns">
+  <!-- Posted Positions -->
+    <% if @current_user.post? || !@current_user.jobs.empty? || !@current_user.owned_jobs.empty? -%>
+      <h2>Manage Projects</h2>
+      <% if @current_user.jobs.empty? && @current_user.owned_jobs.empty? -%>
+        You have not posted any projects. <%= link_to 'Post one', :controller => :jobs, :action => :new %> now.
+      <% end -%>
+      <% if !@current_user.jobs.empty? -%>
+      <p>You are the primary contact for these projects:</p>
+      <%= render @current_user.jobs %>
+      <% end -%>
+      <% if !@current_user.owned_jobs.empty? -%>
+      <p>You can administer these projects:</p>
+      <%= render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs %>
+      <% end -%>
+    <% end -%>
+
+  <!-- Applications Received -->
+  <% ownapps = @current_user.jobs.collect(&:applics).flatten -%>
+  <% if @current_user.post? || ownapps -%>
+    <h2>Applications Received</h2>
+    <% if ownapps %>
+      <table class="job_table table table-striped table-condensed">
+        <thead><tr>
+          <th class="col-md-2">Application Date</th>
+          <th class="col-md-4">Project</th>
+          <th class="col-md-2">Applicant</th>
+          <th class="col-md-2">Status</th>
+        </tr></thead>
+        <%= render ownapps, :mine => false %>
+      </table>
+    <% else %>
+      You have not yet received any applications.
+    <% end %>
+    <br/>
+  <% end %>
+
+  <!-- Applied Positions -->
     <% if @current_user.apply? || !@current_user.applics.empty? %>
       <h2>Applied Positions</h2>
       <% if @current_user.applics.empty? %>
@@ -15,40 +53,24 @@
       <% else %>
         <table class="job_table table table-striped table-condensed">
           <thead><tr>
-            <th class="col-md-4">Title</th>
-            <th class="col-md-2">Sponsor</th>
             <th class="col-md-2">Application Date</th>
+            <th class="col-md-4">Project</th>
+            <th class="col-md-2">Sponsor</th>
             <th class="col-md-2">Status</th>
           </tr></thead>
-          <%= render :partial => 'applics/applic', :collection => @current_user.applics %>
+          <%= render @current_user.applics, :mine => true %>
         </table>
       <% end -%>
-      <br />
-    <% end %><!--apply-->
+    <% end %>
 
-    <% if @current_user.post? || !@current_user.jobs.empty? || !@current_user.owned_jobs.empty? -%>
-    <h2>Manage Postings</h2>
-    <% if @current_user.jobs.empty? && @current_user.owned_jobs.empty? -%>
-      You have not posted any projects. <%= link_to 'Post one', :controller => :jobs, :action => :new %> now.
-    <% end -%>
-    <% if !@current_user.jobs.empty? -%>
-    <p>You are the primary contact for these projects:</p>
-    <%= render :partial => 'jobs/your_job', :collection => @current_user.jobs %>
-    <% end -%>
-    <% if !@current_user.owned_jobs.empty? -%>
-    <p>You can administer these projects:</p>
-    <%= render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs %>
-    <% end -%>
-    <% end -%><!--post-->
-
-    <h2>Your Watched Projects</h2>
+  <!-- Watched Positions -->
+    <h2>Watched Projects</h2>
     <% if @current_user.watches.empty? -%>
     You are not watching any projects.
     <% else -%>
     <!-- TODO Add an apply button too -->
-    <%= render :partial => 'jobs/watched_job', :collection => @current_user.watches %>
+    <%= render @current_user.watched_jobs %>
     <% end -%>
-    <br>
 
   </div>
   

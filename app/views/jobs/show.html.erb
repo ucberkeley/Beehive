@@ -16,9 +16,23 @@
           <% end %>
         <% end %>
       </p>
-
-      <%= link_to 'edit', edit_job_path(@job), class: "view-job-options edit" if @actions.include?('edit') %>
-      <%= link_to 'delete', delete_job_path(@job), class: "view-job-options delete" if @actions.include?('delete') %>
+      <% @actions.each do |a| %>
+        <% case a %>
+        <% when 'edit' %>
+          <%= link_to 'edit', edit_job_path(@job), class: "view-job-options edit" %>
+          <%= link_to 'delete', delete_job_path(@job), class: "view-job-options delete" %>
+        <% when 'watch' %>
+          <%= link_to 'watch', {:controller => :jobs, :action => :watch, :id => @job.id}, class: 'view-job-options watch' %>
+        <% when 'unwatch' %>
+          <%= link_to 'unwatch', unwatch_job_path(job), class: "view-job-options watch" %>
+        <% when 'apply' %>
+          <%= link_to 'apply', new_job_applic_path(@job), class: 'view-job-options apply' %>
+        <% when 'applied' %>
+          <p class="view-job-options apply">applied!</p>
+        <% when 'resume' %>
+          <%= link_to 'resume app', new_job_applic_path(@job), class: 'view-job-options apply' %>
+        <% end %>
+      <% end %>
       <% @curations.each do |org, curated| -%>
         <% if curated -%>
           <%= link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => @job.id), method: :post,
@@ -28,15 +42,6 @@
                       class: 'view-job-options curate', title: org.name, rel: 'tooltip' %>
         <% end %>
       <% end %>
-      <%= link_to 'unwatch', unwatch_job_path(job), class: "view-job-options watch" if
-              @actions.include?('unwatch') %>
-      <%= link_to 'watch', {:controller => :jobs, :action => :watch, :id => @job.id},
-                  class: 'view-job-options watch' if @actions.include?('watch') %>
-      <%= link_to 'apply', new_job_applic_path(@job),
-                  class: 'view-job-options apply' if @actions.include?('apply') %>
-      <%= link_to 'resume app', new_job_applic_path(@job),
-                  class: 'view-job-options apply' if @actions.include?('resume') %>
-
       <p>
       <div class="job_tags">
         <%= image_tag 'tag.gif' %> <strong>Tags:</strong>
@@ -163,25 +168,22 @@
     </table>
 
     <% if can_view_apps(@current_user, @job) %>
-
-      <h2>Applications</h2>
+      <h2><%= pluralize @job.applics.length, 'Application' %></h2>
       <p>
-        <% if @job.applics.empty? -%>
-          None yet.
-        <% else -%>
+        <% unless @job.applics.empty? -%>
           <% if can_view_apps(@current_user, @job) %>
-          <ul>
-            <% @job.applics.each do |a| -%>
-              <li><%= link_to a.user.name, :controller => :applics, :action => :show, :id => a.id %></li>
-            <% end -%>
-          </ul>
-        <% else -%>
-          This listing has <strong><%= pluralize @job.applics.length, 'applicant' %></strong> so far.
+          <table class="job_table table table-striped table-condensed">
+            <thead><tr>
+              <th class="col-md-2">Application Date</th>
+              <th class="col-md-4">Project</th><!-- TODO remove, redundant -->
+              <th class="col-md-2">Applicant</th>
+              <th class="col-md-2">Status</th>
+            </tr></thead>
+            <%= render @job.applics, :mine => false %>
+          </table>
         <% end -%>
       <% end -%>
       </p>
-
-
     <% end %>
 
     <%= link_to raw('&#0171; Back to listings'), jobs_path %>

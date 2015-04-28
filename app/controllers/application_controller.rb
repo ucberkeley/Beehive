@@ -28,15 +28,14 @@ class ApplicationController < ActionController::Base
   #   raise if Rails.test?
   # end
 
-  # Puts a flash[:notice] error message and redirects if condition isn't true.
-  # Returns true if redirected.
+  # Redirects with a flash[:notice] if condition is true, and returns true.
   #
   # Usage: return if redirect_if(!user_logged_in, "Not logged in!", "/diaf")
   #
   def redirect_if(condition=true, error_msg='Error!', redirect_url=nil)
-    false if condition == false or redirect_url.nil?
+    return false if !condition || redirect_url.nil?
     flash[:error] = error_msg
-    redirect_to redirect_url unless redirect_url.nil?
+    redirect_to redirect_url
     true
   end
 

@@ -1,64 +1,63 @@
-  <% actions = job.actions(@current_user) -%>
-  		<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
-			<table class="job_list">
-					<td class="job_table_left">
-						<ul class="actions action-right">
-              <% if actions.include?('edit') -%>
-                <li><%= link_to 'edit', edit_job_path(job) %></li>
-                <li><%= link_to 'delete', delete_job_path(job) %></li>
-              <% end %>
-							<% job.curations(@current_user).each do |org, curated| %>
-							  <li>
-                  <% if curated -%>
-                    <%= link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
-                                title: org.name, rel: 'tooltip' %>
-                  <% else -%>
-                    <%= link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
-                                title: org.name, rel: 'tooltip' %>
-                  <% end %>
-							  </li>
-							<% end %>
-              <% if actions.include?('watch') -%>
-                <li><%= link_to 'watch', watch_job_path(job) if actions.include?('watch') %></li>
-              <% elsif actions.include?('unwatch') -%>
-                <li><%= link_to 'unwatch', unwatch_job_path(job) if actions.include?('unwatch') %></li>
-              <% end %>
-              <% if actions.include?('apply') -%>
-                <li><%= link_to 'apply', new_job_applic_path(job) %></li>
-              <% elsif actions.include?('applied') -%>
-                <li>applied!</li>
-              <% elsif actions.include?('resume') -%>
-                <li><%= link_to 'resume app', new_job_applic_path(job), class: 'wide' %></li>
-              <% end %>
-						</ul>
+<% actions = job.actions(@current_user) -%>
+<div id="job<%= job.id %>" class="job_<%= cycle('even', 'odd') %>">
+<table class="job_list">
+	<td class="job_table_left">
+		<ul class="actions action-right">
+		<% actions.each do |a| %>
+			<% case a %>
+			<% when 'edit' %>
+				<li><%= link_to 'edit', edit_job_path(job) %></li>
+				<li><%= link_to 'delete', delete_job_path(job) %></li>
+			<% when 'watch' %>
+				<li><%= link_to 'watch', watch_job_path(job) if actions.include?('watch') %></li>
+			<% when 'unwatch' %>
+				<li><%= link_to 'unwatch', unwatch_job_path(job) if actions.include?('unwatch') %></li>
+			<% when 'apply' %>
+				<li><%= link_to 'apply', new_job_applic_path(job) %></li>
+			<% when 'applied' %>
+				<li>applied!</li>
+			<% when 'resume' %>
+				<li><%= link_to 'resume app', new_job_applic_path(job), class: 'wide' %></li>
+			<% end %>
+		<% end %>
+		<% if controller.controller_name != 'dashboard' %>
+		<% job.curations(@current_user).each do |org, curated| %>
+			<li>
+				<% if curated -%>
+				<%= link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
+						title: org.name, rel: 'tooltip' %>
+				<% else -%>
+				<%= link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => job.id), method: :post,
+						title: org.name, rel: 'tooltip' %>
+				<% end %>
+			</li>
+		<% end %>
+		<% end %>
+		</ul>
 
-						<div class="job_title">
-							<%= link_to job.title, job_path(job)  %>
-						</div>
-						<% job_tags = job.tag_list %>
-						<% if !job_tags.empty? %>
-							<div>
-								<% if controller.controller_name != 'dashboard' %>
-									<div class="job_desc">
-										<span id="job_desc_<%= job.id %>">
-											<%= truncate job.desc, :length => 200, :omission => '...' %>
-										</span> 
-										<span id="job_<%= job.id %>" style="display:none;overflow:hidden;height0px;">
-											<%= job.desc %>
-										</span>
-										<% if job.desc.length > 200 %>
-								<% end %>
-								<% if @current_user and @current_user.user_type == User::Types::Admin %>
-								<div class="posted">Posted: <%= job.created_at.strftime("%m/%d/%Y") %></div>
-								<% end %>
-								</div>
-							<% end %>
-								<% if job_tags.empty? %>
-								(none)
-							<% else %>
-								<%= render partial: 'jobs/tag', collection: job.tag_list %>
-							<% end %>
-							</div>
-						<% end %>
-				</table>
+	<div class="job_title">
+		<%= link_to job.title, job_path(job)%>
+	</div>
+	<% job_tags = job.tag_list %>
+	<div>
+		<% if controller.controller_name != 'dashboard' %>
+			<div class="job_desc">
+				<span id="job_desc_<%= job.id %>">
+					<%= truncate job.desc, :length => 200, :omission => '...' %>
+				</span> 
+				<span id="job_<%= job.id %>" style="display:none;overflow:hidden;height0px;">
+					<%= job.desc %>
+				</span>
+				<% if @current_user and @current_user.user_type == User::Types::Admin %>
+				<div class="posted">Posted: <%= job.created_at.strftime("%m/%d/%Y") %></div>
+				<% end %>
 			</div>
+		<% end %>
+		<% if job_tags.empty? %>
+			(none)
+		<% else %>
+			<%= render partial: 'jobs/tag', collection: job.tag_list %>
+		<% end %>
+	</div>
+</table>
+</div>

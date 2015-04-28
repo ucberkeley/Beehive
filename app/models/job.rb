@@ -159,6 +159,7 @@ class Job < ActiveRecord::Base
   # @return array of actions the user can take, not including curations
   def actions(user)
     actions = []
+
     if can_admin?(user)
       actions.push('edit')
       actions.push('delete')
@@ -393,7 +394,7 @@ class Job < ActiveRecord::Base
     end
   end
 
-  # Returns a list of relevant fields
+  # Returns a list of relevant fields used to generate tags
   def field_list
     [ self.department.name,
       self.category_list_of_job,

@@ -10,8 +10,8 @@ class ApplicsController < ApplicationController
   before_filter :verify_applic_admin,     :only => [:show, :resume, :transcript]
     # applicant, job admin can view applic
   before_filter :verify_job_ownership,    :only => [:index]
-    # only job admin can view applics
-  before_filter :verify_job_unapplied,    :only => [:new, :create]
+    # show applics only if can admin
+  before_filter :verify_job_unapplied,    :only => [:create]
     # don't allow multiple applications
 
   before_filter :job_accessible, :only => [ :new, :create, :index ]
@@ -26,14 +26,13 @@ class ApplicsController < ApplicationController
   end
 
   def verify_job_unapplied
-    existing = Applic.find(:first, :conditions =>
-      {:user_id => @current_user.id, :job_id => @job.id})
-    if Applic.where({:user_id => @current_user, :job_id => @job.id}).collect(&:applied).first
-       flash[:error] = "Whoa, slow down! You've already applied for this job. "
-       flash[:error] << "If you'd like to update your application, please "
-       flash[:error] << "withdraw your existing one, shown here."
-       redirect_to(url_for(existing))
-       return false
+    existing = Applic.where({:user_id => @current_user, :job_id => @job.id, :applied => true}).first
+    if existing
+      flash[:error] = "Whoa, slow down! You've already applied for this job. "
+      flash[:error] << "If you'd like to update your application, please "
+      flash[:error] << "withdraw your existing one first."
+      redirect_to(url_for(existing))
+      return false
     else
       return true
     end
@@ -49,15 +48,14 @@ class ApplicsController < ApplicationController
   def verify_applic_admin
     a = @applic #Applic.find(params[:id])
     return if redirect_if(a.nil?, "Couldn't find that application.", jobs_path)
-    return if redirect_if( (a.user != @current_user) &&
-      !a.job.can_admin?(@current_user) && !a.job.owners.include?(@current_user) && !@current_user.admin?,
+    return if redirect_if(a.user == @current_user || !a.job.can_admin?(@current_user),
       'You are not authorized to view that application.', job_path(a.job))
   end
 
   def verify_job_ownership
     j = @job #Job.find(params[:job_id])
     return if redirect_if(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirect_if(! j.can_admin?(@current_user) && !j.owners.include?(@current_user) && !@current_user.admin?,
+    return if redirect_if(! j.can_admin?(@current_user),
       "You are not authorized to view the applications for this job.",
       job_path(j))
   end
@@ -93,7 +91,7 @@ class ApplicsController < ApplicationController
   def new
     #@job = Job.find(params[:job_id])
     if verify_job_unapplied
-      @applic = Applic.where({:user_id => @current_user, :job_id => @job}).first || Applic.new({:user => @current_user, :job => @job})
+      @applic = Applic.new({:user => @current_user, :job => @job})
     else
       redirect_to(url_for(@job))
     end
@@ -102,8 +100,6 @@ class ApplicsController < ApplicationController
 
   # the action for actually applying.
   def create
-    # @applic = Applic.new({:user_id => @current_user.id,
-    #   :job_id => @job.id}.update(params[:applic]))
     @applic = Applic.where({:user_id => @current_user.id, :job_id => @job.id}).first
     if @applic
       @applic.message = params[:applic][:message]
@@ -114,13 +110,12 @@ class ApplicsController < ApplicationController
       @current_user.resume.present?
     @applic.transcript_id = @current_user.transcript.id if
       params[:include_transcript] && @current_user.transcript.present?
-    # submit an appliaction
+    # submit an application
     if params[:commit] == 'Submit'
       # update an existing application
       @applic.applied = true
-      
       if @applic.save
-        # Makes sure emails are valid
+        # Validate and send emails
         user_email = @job.user.email
         faculty_emails = @job.faculties.collect(&:email)
         faculty_emails.select! { |email| email_regex.match(email)}
@@ -131,7 +126,6 @@ class ApplicsController < ApplicationController
           else
             JobMailer.deliver_applic_email(@applic, nil, faculty_emails).deliver
           end
-
 
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else
@@ -145,9 +139,8 @@ class ApplicsController < ApplicationController
                         "written a message to the faculty sponsor!"
         render 'new'
       end
-      
-    # save an application
-    else
+
+    else # save an application
       @applic.applied = false
       
       if @applic.save
@@ -158,9 +151,7 @@ class ApplicsController < ApplicationController
                         "written a message to the faculty sponsor!"
         render 'new'
       end
-      
     end
-
   end
   
   # withdraw from an application (destroy the applic)

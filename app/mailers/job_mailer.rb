@@ -18,7 +18,7 @@ class JobMailer < ActionMailer::Base
     @job = applic.job
 
     [:resume, :transcript].each do |doctype|
-      if @applic.send(doctype).present?
+      if @applic.respond_to? doctype
        attachments[@applic.user.name + '_' + doctype.to_s + '.' +
          @applic.send(doctype).public_filename.split('.').last] =
          File.read(@applic.send(doctype).public_filename)
