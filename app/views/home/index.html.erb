@@ -6,25 +6,25 @@
   <div class="main-top">
     <div class="main-top-info">
       <div class="text-info-large">
-        <span><%= Job.count %></span> research projects are waiting!
+        <span>Research made simple.
       </div>
       <div class="text-info-small">
-        Browse projects. Apply in one click.<br>
-        Join the research team!
+        Search and filter over 250 projects.<br/>
+        Apply in one click.
       </div>
       <div class="explore-button">
         <% if @current_user.present? %>
-          <%= link_to "EXPLORE", dashboard_path %>
+          <%= link_to "EXPLORE", jobs_path %>
         <% else %>
           <%= link_to "EXPLORE", login_path %>
         <% end %>
       </div>
     </div>
   </div>
-  <div class="row main-buttom">
+  <div class="row main-bottom">
     <div class="col-md-6">
       <div class="main-icons-text">
-        We've made it so easy to for you to find a perfect project to join.
+        We've made it easy to for you to find a perfect project to join.
       </div>
       <div class="main-icons">
         
@@ -34,20 +34,20 @@
       <div class="row">
       <div class="smartmatch">
         <div class="title">
-          SMARTMATCH
+          EASY APPLY
         </div>
         <div class="details">
-          Can't find a project you like? <br>
-          We will let you know when there's a new project in your interest.
+          No need to fill out endless forms. <br/>
+          Write what's relevant, and we'll take care of the rest.
         </div>
       </div>
       <div class="smartmatch">
         <div class="title">
-          EASY APPLY
+          SMARTMATCH
         </div>
         <div class="details">
-            You can apply to many projects with your profile. <br>
-            No need to having to fill out and application each time you apply.
+          Can't find a project you like? <br/>
+          We'll let you know when a new project matches your interests.
         </div>
       </div>
       </div>
