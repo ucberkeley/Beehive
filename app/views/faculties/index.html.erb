@@ -1,24 +1,21 @@
 <h1>Create and Edit Faculty</h1>
-
 <div id="new-faculty">
   <h1>Add faculty</h1>
-  <%= form_for (@new_faculty ||= Faculty.new), :url => @faculties_create_path do |f| -%>
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-    </div>
-    <div class="field">
-      <%= f.label :department %>
-      <%= f.collection_select :department_id, Department.all, :id, :name %>
-    </div>
-    <div class="field submit">
-      <%= f.submit 'Create' %>
-    </div>
-  <%- end -%>
+  <%= form_for (@new_faculty ||= Faculty.new), :url => @faculties_create_path do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :department %>
+    <%= f.collection_select :department_id, Department.all, :id, :name %>
+  </div>
+  <div class="field submit">
+    <%= f.submit 'Create' %>
+  </div>
+  <% end %>
 </div>
-
-

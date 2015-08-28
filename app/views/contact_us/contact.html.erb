@@ -1,8 +1,8 @@
-<%= stylesheet_link_tag 'contactus' %>
 <div class="row">
   <div class="large-10 col-sm-12 columns">
-<h1>Contact Us</h1>
-<%= form_tag(:feedback_email_link, :method => "post") do %>    <tr>
+    <h1>Contact Us</h1>
+    <%= form_tag(:feedback_email_link, :method => "post") do %>
+    <tr>
       <td><%= label_tag(:sender, "Reply To:") %></td>
       <td><%= text_field_tag :sender, @user_email, :size => 25 %></td>
     </tr>
@@ -17,6 +17,6 @@
       <td></td>
       <td><%= submit_tag("Send Message") %></td>
     </tr>
-<% end %>
-</div>
+    <% end %>
+  </div>
 </div>

@@ -1,84 +1,76 @@
 <% content_for :title, 'Dashboard' -%>
 <div class="container">
-  <!-- browse/post controls -->
   <div class="btn-group pull-right hide" data-toggle="buttons" role="group">
     <label class="btn btn-primary <%= 'active' if @current_user.apply? %>" id="browsebtn" data-toggle="tab" data-target="#browse">
-      <input type="radio" autocomplete="off" aria-expanded="true" aria-controls="browse" checked> Browse
+    <input type="radio" autocomplete="off" aria-expanded="true" aria-controls="browse" checked> Browse
     </label>
     <label class="btn btn-primary <%= 'active' unless @current_user.apply? %>" id="postbtn" data-toggle="tab" data-target="#post">
-      <input type="radio" data-toggle="tab" data-target="#post" autocomplete="off" aria-expanded="false" aria-controls="post"> Post
+    <input type="radio" data-toggle="tab" data-target="#post" autocomplete="off" aria-expanded="false" aria-controls="post"> Post
     </label>
   </div>
-
   <h1>Dashboard</h1>
   <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="post">
-  <!-- Applications Received -->
-    <% ownapps = @current_user.jobs.collect(&:applics).flatten -%>
-    <h2>Applications Received</h2>
-    <% if ownapps %>
+    <div role="tabpanel" class="tab-pane active" id="post">
+      <% ownapps = @current_user.jobs.collect(&:applics).flatten -%>
+      <h2>Applications Received</h2>
+      <% if ownapps %>
       <table class="job_table table table-striped table-condensed">
-        <thead><tr>
-          <th class="col-md-2">Application Date</th>
-          <th class="col-md-4">Project</th>
-          <th class="col-md-2">Applicant</th>
-          <th class="col-md-2">Status</th>
-        </tr></thead>
+        <thead>
+          <tr>
+            <th class="col-md-2">Application Date</th>
+            <th class="col-md-4">Project</th>
+            <th class="col-md-2">Applicant</th>
+            <th class="col-md-2">Status</th>
+          </tr>
+        </thead>
         <%= render ownapps, :mine => false %>
       </table>
-    <% else %>
+      <% else %>
       You have not yet received any applications.
-    <% end %>
-
-  <!-- Posted Positions -->
-    <h2>Manage Projects</h2>
-    <% if @current_user.jobs.empty? && @current_user.owned_jobs.empty? -%>
+      <% end %>
+      <h2>Manage Projects</h2>
+      <% if @current_user.jobs.empty? && @current_user.owned_jobs.empty? -%>
       You have not posted any projects. <%= link_to 'Post one', :controller => :jobs, :action => :new %> now.
-    <% end -%>
-    <% if !@current_user.jobs.empty? -%>
-    <p>You are the primary contact for these projects:</p>
-    <%= render @current_user.jobs %>
-    <% end -%>
-    <% if !@current_user.owned_jobs.empty? -%>
-    <p>You can administer these projects:</p>
-    <%= render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs %>
-    <% end -%>
-  <br/>
-  </div><!-- Post -->
-
-  <div role="tabpanel" class="tab-pane active" id="browse">
-  <!-- Applied Positions -->
-    <h2>Your Applications</h2>
-    <% if @current_user.applics.empty? %>
+      <% end -%>
+      <% if !@current_user.jobs.empty? -%>
+      <p>You are the primary contact for these projects:</p>
+      <%= render @current_user.jobs %>
+      <% end -%>
+      <% if !@current_user.owned_jobs.empty? -%>
+      <p>You can administer these projects:</p>
+      <%= render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs %>
+      <% end -%>
+      <br/>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="browse">
+      <h2>Your Applications</h2>
+      <% if @current_user.applics.empty? %>
       You have not applied to any research positions.
-    <% else %>
+      <% else %>
       <table class="job_table table table-striped table-condensed">
-        <thead><tr>
-          <th class="col-md-2">Application Date</th>
-          <th class="col-md-4">Project</th>
-          <th class="col-md-2">Contact</th>
-          <th class="col-md-2">Status</th>
-        </tr></thead>
+        <thead>
+          <tr>
+            <th class="col-md-2">Application Date</th>
+            <th class="col-md-4">Project</th>
+            <th class="col-md-2">Contact</th>
+            <th class="col-md-2">Status</th>
+          </tr>
+        </thead>
         <%= render @current_user.applics, :mine => true %>
       </table>
-    <% end -%>
-
-  <!-- Watched Positions -->
-    <h2>Watched Projects</h2>
-    <% if @current_user.watches.empty? -%>
-    You are not watching any projects.
-    <% else -%>
-    <!-- TODO Add an apply button too -->
-    <%= render @current_user.watched_jobs %>
-    <% end -%>
-  </div><!-- Browse -->
-  </div><!-- .tab-content -->
-</div><!-- .container -->
-
-<!-- Gracefully degrade function if js is disabled. -->
+      <% end -%>
+      <h2>Watched Projects</h2>
+      <% if @current_user.watches.empty? -%>
+      You are not watching any projects.
+      <% else -%>
+      <%= render @current_user.watched_jobs %>
+      <% end -%>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
-$(document).ready(function(){
-  $("#<%= @current_user.apply? ? 'post' : 'browse' %>").removeClass('active');
-  $('.btn-group').removeClass('hide');
-});
+  $(document).ready(function(){
+    $("#<%= @current_user.apply? ? 'post' : 'browse' %>").removeClass('active');
+    $('.btn-group').removeClass('hide');
+  });
 </script>
