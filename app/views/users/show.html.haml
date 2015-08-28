@@ -1,52 +1,53 @@
 - content_for :title, @user.name
-.row
-  %h1= @user.name
-  %h2= @user.user_type_string
+.container.card
+  .row
+    %h1= @user.name
+    %h2= @user.user_type_string
 
-  %dl.dl-horizontal
-    %dt Email
-    %dd
-      = @user.email
+    %dl.dl-horizontal
+      %dt Email
+      %dd
+        = @user.email
 
-    %dt Courses Taken
-    %dd
-      - @user.courses.each do |course|
-        = course.name
-    %dt Interests
-    %dd
-      - @user.categories.each do |category|
-        = category.name
+      %dt Courses Taken
+      %dd
+        - @user.courses.each do |course|
+          = course.name
+      %dt Interests
+      %dd
+        - @user.categories.each do |category|
+          = category.name
 
-    %dt Proficient Languages
-    %dd
-      - @user.proglangs.each do |lang|
-        %dt = lang.name
+      %dt Proficient Languages
+      %dd
+        - @user.proglangs.each do |lang|
+          %dt = lang.name
 
-    %dt Grade Level
-    %dd
-      = @year
+      %dt Grade Level
+      %dd
+        = @year
 
-    %dt Units this semester
-    %dd
-      = @user.units
+      %dt Units this semester
+      %dd
+        = @user.units
 
-    %dt Hours free
-    %dd
-      = @user.free_hours
+      %dt Hours free
+      %dd
+        = @user.free_hours
 
-    %dt Free in the summer
-    %dd
-      = @user.summer
+      %dt Free in the summer
+      %dd
+        = @user.summer
 
-    %dt Research
-    %dd
-      = @user.research_blurb
+      %dt Research
+      %dd
+        = @user.research_blurb
 
-    %dt Previous Experience
-    %dd
-      = @user.experience
+      %dt Previous Experience
+      %dd
+        = @user.experience
 
-    %dt Link to Resume
-    %dd
-      - if @user.url.present?
-        =link_to url_with_protocol(@user.url), url_with_protocol(@user.url)
+      %dt Link to Resume
+      %dd
+        - if @user.url.present?
+          =link_to url_with_protocol(@user.url), url_with_protocol(@user.url)
