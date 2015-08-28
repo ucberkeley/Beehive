@@ -8,6 +8,11 @@ body {
   padding: 70px !important;
 }
 
+input,
+textarea {
+  outline: none;
+}
+
 dt {
   text-transform: capitalize;
 }
