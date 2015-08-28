@@ -1,0 +1,38 @@
+- content_for :title, "Welcome"
+#home-container
+  .main-top-background
+  .main-top
+    .main-top-info
+      .text-info-large
+        %span
+          Research made simple.
+      .text-info-small
+        Search and filter over 250 projects.
+        %br
+        Apply in one click.
+      .explore-button
+        - if @current_user.present?
+          = link_to "EXPLORE", jobs_path
+        - else
+          = link_to "EXPLORE", login_path
+  .row.main-bottom
+    .col-md-6
+      .main-icons-text
+        We've made it easy to for you to find a perfect project to join.
+      .main-icons
+    .col-md-6
+      .row
+        .smartmatch
+          .title
+            EASY APPLY
+          .details
+            No need to fill out endless forms.
+            %br
+            Write what's relevant, and we'll take care of the rest.
+        .smartmatch
+          .title
+            SMARTMATCH
+          .details
+            Can't find a project you like?
+            %br
+            We'll let you know when a new project matches your interests.
