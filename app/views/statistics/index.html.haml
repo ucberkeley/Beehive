@@ -1,0 +1,53 @@
+%h1 Statistics
+%table.statistics-table
+  %tr
+    %td
+      %h2 Users
+  %tr
+    %td Total users
+    %td.stat_value= @total_users
+  %tr
+    %td Active users this month
+    %td.stat_value= @num_active_users_this_month
+  %tr
+    %td Active users within the last month
+    %td.stat_value= @num_active_users_in_last_month
+%table.statistics-table
+  %tr
+    %td
+      %h2 Applications
+  %tr
+    %td Number of applications this month
+    %td.stat_value= @num_applics_this_month
+  %tr
+    %td Number of applications within the last month
+    %td.stat_value= @num_applics_in_last_month
+  %tr
+    %td Number of applications accepted this month
+    %td.stat_value= @num_applics_accepted_this_month
+%table.statistics-table
+  %tr
+    %td
+      %h2 Projects
+  %tr
+    %td Number of active projects
+    %td.stat_value= @total_jobs
+  %tr
+    %td Total watches
+    %td.stat_value= @num_jobs_watched
+  %tr
+    %td Number of new projects within the last month
+    %td.stat_value= @num_new_jobs_in_last_month
+  %tr
+    %td Number of new projects this month
+    %td.stat_value= @num_new_jobs_this_month
+%table.statistics-table
+  %tr
+    %td
+      %h2 Miscellaneous
+  %tr
+    %td Most desired courses
+    %td.stat_value= @most_desired_courses.join(', ')
+  %tr
+    %td Most desired skills
+    %td.stat_value= @most_desired_proglangs.join(', ')

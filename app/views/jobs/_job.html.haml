@@ -41,6 +41,6 @@
               .posted
                 Posted: #{job.created_at.strftime("%m/%d/%Y")}
         - if job_tags.empty?
-          (none)
+
         - else
           = render partial: 'jobs/tag', collection: job.tag_list

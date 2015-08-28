@@ -1,5 +1,5 @@
 <h2>
-<%= @org.name %> 
+<%= @org.name %>
 <% if @current_user.admin? || @org.members.include?(@current_user) -%>
      <%= link_to '[Edit]', edit_org_path(@org) %>
      <%=link_to '[Destroy]', @org, method: :delete, confirm: 'Are you sure?' %>
@@ -15,7 +15,7 @@
      <li>
        <%= link_to member.name, :controller => :users, :action => :show, :id => member.id %>
        <%= !@current_user.nil? && member.name == @current_user.name ? " (you)" : "" %>
-     </li>    
+     </li>
      <% end %>
    </ul>
 </p>
