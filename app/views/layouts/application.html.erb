@@ -102,7 +102,10 @@
     <% end %>
   </div>
 
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
+
 <footer>
     &copy; UC Berkeley Beehive, College of Engineering | 2009-<%= Time.now.year %> | <%= link_to "Contact Us", contact_us_path %>
 </footer>
