@@ -21,7 +21,7 @@ hr {
 .navbar-default.navbar {
   background-color: white !important;
   color: #022d63;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 17px 0px, rgba(0, 0, 0, 0.188235) 0px 6px 20px 0px;
+  box-shadow: rgb(222, 222, 222) 4px 4px 0px 0px;
 }
 
 .navbar .navbar-nav > li > a {
@@ -36,6 +36,8 @@ h1 {
   background-color: white;
   padding: 70px !important;
   margin-bottom: 20px;
+  box-shadow: none !important;
+  box-shadow: rgb(222, 222, 222) 4px 4px 0px 0px !important;
 }
 
 .card-x {

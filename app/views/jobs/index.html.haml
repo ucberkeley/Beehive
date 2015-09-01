@@ -8,14 +8,7 @@
         .col-md-10.job-search-input
           = text_field_tag :query, @query, :placeholder => "Start typing what you want to search...", :class => "form-control"
         .col-md-2
-          = submit_tag @query, :class => "btn btn-info pull-right", :value => "Search"
-  - if false # this is broken..
-    #tag_cloud
-      = image_tag 'tag.gif'
-      %b Top Tags:
-
-      - tag_cloud Job.tag_counts, %w(tag_s tag_m tag_l tag_xl) do |tag, css_class|
-        %span.tag= h link_to tag.name, jobs_path + '?tags=' + tag.name, :class => css_class
+          = submit_tag @query, :class => "btn btn-info pull-right", :id => "do-job-search", :value => "Search"
   .row
     #advanced_search.col-lg-4.col-sm-12
       .card.card-x
