@@ -106,7 +106,7 @@ table.job_table {
   font-size: 13px;
   color: white;
   margin: 2px 1px;
-  display: inline-block;
+  display: inline;
 }
 .posted {
   margin: 10px 0px;
@@ -138,6 +138,8 @@ table.job_table {
 .view-job {
   font-size: 16px;
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .view-job-title {
@@ -145,7 +147,6 @@ table.job_table {
   font-size: 35px;
   text-align: center;
   color: black;
-  margin: 40px;
 }
 
 .view-job-table {
@@ -269,11 +270,6 @@ a.view-job-options:hover {
 #browse_header_table {
   height: 40px;
   width: 100%;
-}
-.description {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 800px;
 }
 #description {
   margin-left: 15px;
