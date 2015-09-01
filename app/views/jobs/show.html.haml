@@ -1,9 +1,10 @@
 - content_for :title, @job.title
 .container
-  .card
-    .row
-      .view-job-title= @job.title
-      .view-job
+  .row
+    .col-md-5
+      %h1 Position Details
+    .col-md-7
+      .view-job-actions.pull-right
         - @actions.each do |a|
           - case a
           - when 'edit'
@@ -24,11 +25,15 @@
             = link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, class: 'btn btn-warning', title: org.name, rel: 'tooltip'
           - else
             = link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, class: 'btn btn-warning', title: org.name, rel: 'tooltip'
-        - if @job.tag_list.present?
-          .job_tags
-            = image_tag 'tag.gif'
-            %strong Tags:
-            = render :partial => "tag", :collection => @job.tag_list
+
+  .card
+    .row
+      .view-job-title= @job.title
+      - if @job.tag_list.present?
+        .job_tags
+          = image_tag 'tag.gif'
+          %strong Tags:
+          = render :partial => "tag", :collection => @job.tag_list
       %dl.dl-horizontal
         %dt Project Type
         %dd
