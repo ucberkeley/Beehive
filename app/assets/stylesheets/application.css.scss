@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap-material-design
+ *= require dataTables/jquery.dataTables
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";

@@ -1,7 +1,7 @@
 - content_for :title, 'Dashboard'
 .container
   .card
-    .btn-group.pull-right.hide{"data-toggle" => "buttons", :role => "group"}
+    .btn-group.pull-right{"data-toggle" => "buttons", :role => "group"}
       %label#browsebtn{:class => "btn btn-primary #{'active' if @current_user.apply?}", "data-target" => "#browse", "data-toggle" => "tab"}
         %input{"aria-controls" => "browse", "aria-expanded" => "true", :autocomplete => "off", :checked => "checked", :type => "radio"}/
         Browse
@@ -12,7 +12,7 @@
     .tab-content
       #post.tab-pane.active{:role => "tabpanel"}
         - ownapps = @current_user.jobs.collect(&:applics).flatten
-        %h2 Applications Received
+        %h3 Applications Received
         - if ownapps.present?
           %table.job_table.table.table-striped.table-condensed
             %thead
@@ -25,7 +25,7 @@
         - else
           You have not yet received any applications.
         %hr
-        %h2 Manage Projects
+        %h3 Manage Projects
         - if @current_user.jobs.empty? && @current_user.owned_jobs.empty?
           You have not posted any projects. #{link_to 'Post one', :controller => :jobs, :action => :new} now.
         - if !@current_user.jobs.empty?
@@ -35,7 +35,7 @@
           %p You can administer these projects:
           = render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs
       #browse.tab-pane.active{:role => "tabpanel"}
-        %h2 Your Applications
+        %h3 Your Applications
         - if @current_user.applics.empty?
           You have not applied to any research positions.
         - else
@@ -48,13 +48,17 @@
                 %th.col-md-2 Status
             = render @current_user.applics, :mine => true
         %hr
-        %h2 Watched Projects
+        %h3 Watched Projects
         - if @current_user.watches.empty?
           You are not watching any projects.
         - else
           = render @current_user.watched_jobs
 :javascript
   $(document).ready(function(){
-    $("##{@current_user.apply? ? 'post' : 'browse'}").removeClass('active');
-    $('.btn-group').removeClass('hide');
+    $('.job_table').each(function(index, elem) {
+      $(elem).DataTable({
+        "searching": false,
+        "paging": false
+      });
+    });
   });
