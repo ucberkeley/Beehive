@@ -18,11 +18,6 @@
           options_from_collection_for_select(Department.all, "id", "name",      |
           @department_id), { :class => 'medium data-dropdown content' }         |
 
-        = label_tag :faculty, "Faculty", class: "filter-dropdown-label"
-
-        = select_tag :faculty, options_for_select([["All Faculty",0]]) +          |
-          options_from_collection_for_select(@faculty, "id", "name", @faculty_id) |
-
         = label_tag :compensation, "Compensation", class: "filter-dropdown-label"
 
         = select_tag :compensation,                   |
@@ -32,15 +27,6 @@
            "Credit"     => Job::Compensation::Credit, |
            "Pay or credit" => Job::Compensation::Both |
           }, @compensation)                           |
-
-        = label_tag :post_status, "Status", class: "filter-dropdown-label"
-
-        = select_tag :post_status,           |
-          options_for_select({               |
-            "Open" => Job::Status::Open,     |
-            "Closed" => Job::Status::Filled, |
-            "All" => nil                     |
-          }, @post_status)                   |
 
         = hidden_field_tag :as, params[:as]
         = label_tag :per_page, "Listings per page", class: "filter-dropdown-label"

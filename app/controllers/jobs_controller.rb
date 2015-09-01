@@ -61,11 +61,6 @@ class JobsController < ApplicationController
     #query_parms[:include_ended] = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:include_ended])
     query_parms[:compensation ] = params[:compensation] if params[:compensation].present?
     query_parms[:tags         ] = params[:tags] if params[:tags].present?
-    if (params[:post_status].present? and params[:post_status])
-      query_parms[:post_status  ] = params[:post_status]
-    else
-      query_parms[:post_status] = Job::Status::Open
-    end
 
     # will_paginate
     query_parms[:page         ] = params[:page]     || 1
@@ -73,12 +68,10 @@ class JobsController < ApplicationController
 
     @query = params[:query] || ''
     @jobs = Job.find_jobs(@query, query_parms)
-    @faculty = Faculty.all
     # Set some view props
     @department_id = params[:department]   ? params[:department].to_i : 0
     @faculty_id    = params[:faculty]      ? params[:faculty].to_i    : 0
     @compensation  = params[:compensation]
-    @post_status   = params[:post_status]
 
     respond_to do |format|
       format.html { render :action => :index }

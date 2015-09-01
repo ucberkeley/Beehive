@@ -3,6 +3,8 @@
 //= require dataTables/jquery.dataTables
 //= require bootstrap
 //= require bootstrap-material-design
+//= require_tree .
+
 function setupExternalLinks() {
   $('a').each(function(){
     if( this.host && this.host != location.host )
