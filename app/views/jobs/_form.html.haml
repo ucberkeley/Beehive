@@ -1,0 +1,83 @@
+%p Fields labeled with an asterisk are required.
+= form_for(@job) do |f|
+  - if @job.errors.any?
+    #error_explanation
+      %h2
+        %span.urgent
+          = pluralize(@job.errors.count, "error")
+          prevented this listing from being submitted:
+      %ul
+        - @job.errors.full_messages.each do |msg|
+          %li= msg
+  %dl.dl-horizontal
+    %dt
+      = f.label :title, 'Listing title'
+    %dd
+      = f.text_field :title, class: "form-control"
+    %dt
+      = f.label :department
+    %dd
+      = f.select :department_id, Department.all.collect {|c| [c.name, c.id]}
+    %dt
+      = f.label :project_type
+    %dd
+      = f.select :project_type, @job.get_all_project_strings
+    %dt
+      = f.label :faculty_sponsor, 'Faculty sponsor'
+    %dd
+      = select_tag :faculty_id, '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(@faculty, :id, :name, @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id))
+    %dt
+      = f.label :desc, 'Listing description'
+    %dd
+      = f.text_area :desc, { rows: 12, class: "form-control" }
+    %dt
+      = f.label :category, 'Categories'
+    %dd
+      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', |
+          :placeholder => "(e.g. signal processing, environmental engineering)"                          |
+    %dt
+      = f.label :course, 'Required courses'
+    %dd
+      = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. CS61A, BioE140L)"
+    %dt
+      = f.label :proglang, 'Desired skill(s)'
+    %dd
+      = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. Python, machine shop)"
+    %dt
+      = f.label :earliest_start_date, 'Earliest start date'
+    %dd
+      = f.date_select :earliest_start_date
+    %dt
+      = f.label :latest_start_date, raw('Latest start date<br />(work must start by)')
+    %dd
+      = f.date_select :latest_start_date
+    %dt
+      = f.label :end_date, 'End date'
+    %dd
+      #enddate
+        - was_open_ended = @job.open_ended_end_date
+        = radio_button_tag 'open_ended_end_date', true, was_open_ended, :onclick => "$('#enddate select').attr('disabled', true); $('#enddate select').val('');"
+        = label_tag 'open_ended_end_date_true', 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);"
+        \ 
+        \#{radio_button_tag 'open_ended_end_date', false, ! was_open_ended, :onclick => "$('#enddate select').attr('disabled', false);"} 
+        \#{label_tag 'open_ended_end_date_false', 'Specified as:', :value => true, :onclick => "$('#enddate select').attr('disabled', true);"} 
+        - date_select_options = {}
+        - date_select_options.update({:default => 1.month.from_now, :start_year => Date.today.year}) unless was_open_ended
+        = f.date_select :end_date, date_select_options, { :disabled => was_open_ended }
+    %dt
+      = f.label :compensation, 'Form of Compensation'
+    %dd
+      = f.select :compensation, options_for_select( Job::Compensation::All, @job.compensation )
+    %dt
+      = f.label :num_positions, 'Available Positions'
+    %dd
+    %dt
+      = f.label :status, 'Listing Status'
+    %dd
+      = f.select :status, options_for_select( Job::Status::All, @job.status )
+  .row
+    - if ['new', 'create'].include?(controller.action_name.downcase)
+      = f.submit 'Post', class: "btn btn-primary"
+    - else
+      = f.submit 'Update', class: "btn btn-info"
+    = link_to "Cancel", jobs_path, class: "btn btn-danger"

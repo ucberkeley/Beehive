@@ -142,14 +142,7 @@ class JobsController < ApplicationController
     sponsor = Faculty.find(params[:faculty_id]) rescue nil
     @job = Job.new(job_params)
     @job.update_attribs(params)
-    if !params[:add_owners].empty?
-      @job.owners << User.find(params[:add_owners])
-    end
-    if !params[:add_contacts].empty?
-      @job.primary_contact_id = params[:add_contacts].to_i
-    else
-      @job.primary_contact_id = @current_user.id
-    end
+    #TODO: new contacts
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
@@ -161,7 +154,6 @@ class JobsController < ApplicationController
           @sponsorship = Sponsorship.find_or_create_by(faculty_id: sponsor.id, job_id: @job.id)
           @job.sponsorships << @sponsorship
         end
-        
         flash[:notice] = 'Thank your for submitting a listing. It should now be available for other people to browse.'
         format.html { redirect_to(@job) }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
@@ -190,14 +182,6 @@ class JobsController < ApplicationController
       if @job.update_attributes(params[:job])
         if params.has_key?(:delete_owners) and params[:delete_owners].to_i >= 0
           @job.owners.delete(User.find(params[:delete_owners]))
-        end
-        if params.has_key?(:add_owners) and params[:add_owners].to_i > 0
-          @job.owners << User.find(params[:add_owners])
-        end
-        if params.has_key?(:add_contacts) and params[:add_contacts].to_i > 0
-          @job.primary_contact_id = params[:add_contacts].to_i
-        else
-          @job.primary_contact_id = @current_user.id
         end
         @job.tag_list = @job.field_list
 
