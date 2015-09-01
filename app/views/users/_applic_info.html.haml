@@ -1,0 +1,41 @@
+.applic-info
+  %dl.dl-horizontal
+    %dt Full Name
+    %dd
+      = user.name
+
+    %dt Email
+    %dd
+      = user.email
+
+    %dt Year
+    %dd
+      = user.year
+
+    %dt Units
+    %dd
+      = user.units
+
+    %dt Hours per Week
+    %dd
+      = user.free_hours
+
+    %dt Summer
+    %dd
+      - if user.summer
+        Available
+      - else
+        Not Available
+
+    %dt Motivation
+    %dd
+      = user.research_blurb
+
+    %dt Experience
+    %dd
+      = user.experience
+
+    %dt Resume Link
+    %dd
+      - if user.url.present?
+        = link_to user.url, user.url

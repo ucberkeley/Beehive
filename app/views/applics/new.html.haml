@@ -5,20 +5,13 @@
       .large-10.col-sm-12.columns
         %h1="Apply for Project - #{@job.title}"
         %p
-          To apply for the following project, please enter a message to send to
-          the faculty #{'sponsor'.pluralize_for @job.faculties.count} and review the
-          info that will be provided.
+          To apply for the following project, please enter a message to send to the faculty #{'sponsor'.pluralize_for @job.faculties.count} and review the info that will be provided.
         = form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f|
           = render(:partial => "jobs/job_snippet", :job => @job )
-          %table.job_clear_table
-            %tr
-              %td
-                %b
-                  Message to faculty #{'sponsor'.pluralize_for @job.faculties.count}
-            %tr
-              %td
-                = f.text_area :message, {:rows=>12, :class => "form-control"}
-          %h2 The Application
+          %strong Message to faculty
+          = f.text_area :message, {:rows=>12, :class => "form-control"}
+          %hr
+          %h2 Application
           %p
             By applying for this listing, you grant the faculty #{'sponsor'.pluralize_for @job.faculties.count}
             (#{@job.faculties.collect(&:name).join(', ')}) access to view #{link_to 'your profile', profile_path, :target => '_blank'} and any information you've entered there.
