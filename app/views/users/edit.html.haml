@@ -1,0 +1,55 @@
+- content_for :title, "User Profile"
+.container
+  .card
+    = form_for @user do |f|
+      - if @user.errors.any?
+        #error_explanation
+          %h2
+            Couldn't save due to #{pluralize(@user.errors.count, "error")}.
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      .row
+        %h1= @user.name
+        .col-sm-12
+          %h2 Basic Information
+          .col-sm-4
+            %p
+              Name: #{@user.name}
+            %p
+              = label_tag :email, 'Email:'
+              = f.text_field :email
+            - if @current_user.apply?
+              %p
+                = label_tag :year, 'Year:'
+                = f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] }, @current_user.year), {}, :id => 'right-label'
+              %p Major:
+              %p
+                = label_tag 'category', 'Interests:'
+                = text_field :category, :name, :value => params[:category][:name], :class => 'extrawide', |
+                  :placeholder => "These help us match relevant projects"                                 |
+              %p
+                = label_tag 'course', 'Courses:'
+                = text_field :course, :name, :value => params[:course][:name], :class => 'extrawide', |
+                  :placeholder => "Relevant courses, separated by commas"                             |
+      - if @current_user.apply?
+        .row
+          .col-lg-12
+            %h2 In Depth
+            .col-sm-6
+              %p
+                %label Hours per Week:
+                = f.text_field :free_hours, :placeholder => '0'
+              %p Skills:
+              %p
+                = text_field :proglang, :name, :value => params[:proglang][:name], :class => 'extrawide', |
+                  :placeholder => "Languages in which you are proficient, separated by commas"            |
+              %p Brief description of relevant experience:
+              %p
+                = f.text_area :experience, :rows => 3, :id => 'experience-box'
+                = render 'shared/charcounter', :linked => 'experience-box', :limit => 255
+              %p Supplement:
+              %p= f.text_field :url, :class => 'external-url', :style => 'width:100%;',                            |
+                  :placeholder => "You can a link to relevant supplementary material, like a resume or portfolio." |
+      %p{:style => "text-align:center;"}
+        = f.submit 'Update'
