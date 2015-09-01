@@ -8,7 +8,6 @@ $(function() {
       'query': $('#query').val()
     }
     var url = '/jobs/search?' + $.param(params)
-    // http://beehive.berkeley.edu/jobs/search?compensation=1&department=1&faculty=481&per_page=32&post_status=1&query=CS
     window.location.replace(url);
   })
 })
