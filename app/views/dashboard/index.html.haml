@@ -1,0 +1,60 @@
+- content_for :title, 'Dashboard'
+.container
+  .card
+    .btn-group.pull-right.hide{"data-toggle" => "buttons", :role => "group"}
+      %label#browsebtn{:class => "btn btn-primary #{'active' if @current_user.apply?}", "data-target" => "#browse", "data-toggle" => "tab"}
+        %input{"aria-controls" => "browse", "aria-expanded" => "true", :autocomplete => "off", :checked => "checked", :type => "radio"}/
+        Browse
+      %label#postbtn{:class => "btn btn-primary #{'active' unless @current_user.apply?}", "data-target" => "#post", "data-toggle" => "tab"}
+        %input{"aria-controls" => "post", "aria-expanded" => "false", :autocomplete => "off", "data-target" => "#post", "data-toggle" => "tab", :type => "radio"}/
+        Post
+    %h1 Dashboard
+    .tab-content
+      #post.tab-pane.active{:role => "tabpanel"}
+        - ownapps = @current_user.jobs.collect(&:applics).flatten
+        %h2 Applications Received
+        - if ownapps.present?
+          %table.job_table.table.table-striped.table-condensed
+            %thead
+              %tr
+                %th.col-md-2 Application Date
+                %th.col-md-4 Project
+                %th.col-md-2 Applicant
+                %th.col-md-2 Status
+            = render ownapps, :mine => false
+        - else
+          You have not yet received any applications.
+        %hr
+        %h2 Manage Projects
+        - if @current_user.jobs.empty? && @current_user.owned_jobs.empty?
+          You have not posted any projects. #{link_to 'Post one', :controller => :jobs, :action => :new} now.
+        - if !@current_user.jobs.empty?
+          %p You are the primary contact for these projects:
+          = render @current_user.jobs
+        - if !@current_user.owned_jobs.empty?
+          %p You can administer these projects:
+          = render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs
+      #browse.tab-pane.active{:role => "tabpanel"}
+        %h2 Your Applications
+        - if @current_user.applics.empty?
+          You have not applied to any research positions.
+        - else
+          %table.job_table.table.table-striped.table-condensed
+            %thead
+              %tr
+                %th.col-md-2 Application Date
+                %th.col-md-4 Project
+                %th.col-md-2 Contact
+                %th.col-md-2 Status
+            = render @current_user.applics, :mine => true
+        %hr
+        %h2 Watched Projects
+        - if @current_user.watches.empty?
+          You are not watching any projects.
+        - else
+          = render @current_user.watched_jobs
+:javascript
+  $(document).ready(function(){
+    $("##{@current_user.apply? ? 'post' : 'browse'}").removeClass('active');
+    $('.btn-group').removeClass('hide');
+  });

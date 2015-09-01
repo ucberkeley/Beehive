@@ -71,6 +71,8 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
 gem 'bootstrap-material-design'
 
+gem 'jquery-datatables-rails', '~> 3.3.0'
+
 ################################################################################
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)

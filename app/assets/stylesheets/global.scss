@@ -6,9 +6,13 @@ body,div,h1,h2,h3,h4,h5,h6,a,li,ul,div,td,th,span {
   font-family: 'Lato', sans-serif !important;
 }
 
+hr {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}
+
 .card {
   background-color: white;
-  box-shadow: rgb(222, 222, 222) 4px 4px 0px 0px;
   padding: 70px !important;
 }
 

@@ -1,130 +1,129 @@
 - content_for :title, @job.title
 .container
-  .row
-    .view-job-title= @job.title
-    .view-job
-      %p
-        %strong= @job.project_string
-      %p
-        Contact:
-        %strong= @job.user.nil? ? 'anonymous' : link_to(@job.contacter.name, :controller => :users, :action => :show, :id => @job.primary_contact_id)
-      %p
-        - if @job.sponsorships.length != 0
-          Sponsored by
-          - @job.sponsorships.each do |i|
-            - if i.faculty
-              = link_to i.faculty.name, faculty_path(i.faculty)
-      - @actions.each do |a|
-        - case a
-        - when 'edit'
-          = link_to 'edit', edit_job_path(@job), class: "view-job-options edit"
-          = link_to 'delete', delete_job_path(@job), class: "view-job-options delete"
-        - when 'watch'
-          = link_to 'watch', {:controller => :jobs, :action => :watch, :id => @job.id}, class: 'view-job-options watch'
-        - when 'unwatch'
-          = link_to 'unwatch', unwatch_job_path(@job), class: "view-job-options watch"
-        - when 'apply'
-          = link_to 'apply', new_job_applic_path(@job), class: 'view-job-options apply'
-        - when 'applied'
-          %p.view-job-options.apply applied!
-        - when 'resume'
-          = link_to 'resume app', new_job_applic_path(@job), class: 'view-job-options apply'
-      - @curations.each do |org, curated|
-        - if curated
-          = link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, |
-            class: 'view-job-options uncurate', title: org.name, rel: 'tooltip'                           |
-        - else
-          = link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, |
-            class: 'view-job-options curate', title: org.name, rel: 'tooltip'                         |
-      %p
-      .job_tags
-        = image_tag 'tag.gif'
-        %strong Tags:
-        = render :partial => "tag", :collection => @job.tag_list
-    / view-job
-    .description= simple_format @job.desc
-    / Job attributes
-    %table.table.table-striped.view-job-table
-      %tbody
-        %tr
-          %td
-            Posted:
-          %td
-            = @job.created_at.strftime("%m/%d/%Y")
-        %tr
-          %td
-            Department:
-          %td
-            = link_to @job.department.name, jobs_search_path(:department => @job.department.id), :class => 'tags'
-        %tr
-          %td
-            = 'Category'.pluralize_for(@job.categories.length)
-            \:
-          %td
-            - if !@job.category_list_of_job.empty?
-              = h @job.category_list_of_job(true)
-            - else
-              (none)
-        %tr
-          %td
-            Required courses:
-          %td
-            - if !@job.course_list_of_job.empty?
-              = h @job.course_list_of_job(true)
-            - else
-              (none)
-        %tr
-          %td
-            Desired skills:
-          %td
-            - if !@job.proglang_list_of_job.empty?
-              = h @job.proglang_list_of_job(true)
-            - else
-              (none)
-        %tr
-          %td
-            Earliest start date:
-          %td
-            = @job.earliest_start_date.strftime("%b %e, %Y")
-        %tr
-          %td
-            Latest start date (work must start by):
-          %td
-            = @job.latest_start_date.strftime("%b %e, %Y")
-        %tr
-          %td
-            Position end date:
-          %td
-            = (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y"))
-        %tr
-          %td
-            Form of Compensation:
-          %td
-            = link_to Job::Compensation::All.key(@job.compensation), jobs_search_path(:compensation => @job.compensation), :class => 'tags'
-        %tr
-          %td
-            Number of positions:
-          %td
-            - if @job.num_positions && @job.num_positions > 0
-              = h @job.num_positions
-            - else
-              Unspecified
-        %tr
-          %td
-            Listing Status:
-          %td
-            = Job::Status::All.key(@job.status)
-    - if can_view_apps(@current_user, @job)
-      %h2= pluralize @job.applics.length, 'Application'
-      %p
-        - unless @job.applics.empty?
-          - if can_view_apps(@current_user, @job)
-            %table.job_table.table.table-striped.table-condensed
-              %thead
-                %tr
-                  %th.col-md-2 Application Date
-                  %th.col-md-4 Project
-                  %th.col-md-2 Applicant
-                  %th.col-md-2 Status
-              = render @job.applics, :mine => false
-    = link_to raw('« Back to listings'), jobs_path
+  .card
+    .row
+      .view-job-title= @job.title
+      .view-job
+        %p
+          %strong= @job.project_string
+        %p
+          Contact:
+          %strong= @job.user.nil? ? 'anonymous' : link_to(@job.contacter.name, :controller => :users, :action => :show, :id => @job.primary_contact_id)
+        %p
+          - if @job.sponsorships.length != 0
+            Sponsored by
+            - @job.sponsorships.each do |i|
+              - if i.faculty
+                = link_to i.faculty.name, faculty_path(i.faculty)
+        - @actions.each do |a|
+          - case a
+          - when 'edit'
+            = link_to 'edit', edit_job_path(@job), class: "btn btn-info"
+            = link_to 'delete', delete_job_path(@job), class: "btn btn-danger"
+          - when 'watch'
+            = link_to 'watch', {:controller => :jobs, :action => :watch, :id => @job.id}, class: 'btn btn-primary'
+          - when 'unwatch'
+            = link_to 'unwatch', unwatch_job_path(@job), class: "btn btn-primary"
+          - when 'apply'
+            = link_to 'apply', new_job_applic_path(@job), class: 'btn btn-success'
+          - when 'applied'
+            %p.btn.btn-success applied
+          - when 'resume'
+            = link_to 'resume app', new_job_applic_path(@job), class: 'btn btn-success'
+        - @curations.each do |org, curated|
+          - if curated
+            = link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, class: 'btn btn-warning', title: org.name, rel: 'tooltip'
+          - else
+            = link_to 'curate', orgs_curate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, class: 'btn btn-warning', title: org.name, rel: 'tooltip'
+        %p
+        .job_tags
+          = image_tag 'tag.gif'
+          %strong Tags:
+          = render :partial => "tag", :collection => @job.tag_list
+      / view-job
+      .description= simple_format @job.desc
+      / Job attributes
+      %table.table.table-striped.view-job-table
+        %tbody
+          %tr
+            %td
+              Posted:
+            %td
+              = @job.created_at.strftime("%m/%d/%Y")
+          %tr
+            %td
+              Department:
+            %td
+              = link_to @job.department.name, jobs_search_path(:department => @job.department.id), :class => 'tags'
+          %tr
+            %td
+              = 'Category'.pluralize_for(@job.categories.length)
+              \:
+            %td
+              - if !@job.category_list_of_job.empty?
+                = h @job.category_list_of_job(true)
+              - else
+                (none)
+          %tr
+            %td
+              Required courses:
+            %td
+              - if !@job.course_list_of_job.empty?
+                = h @job.course_list_of_job(true)
+              - else
+                (none)
+          %tr
+            %td
+              Desired skills:
+            %td
+              - if !@job.proglang_list_of_job.empty?
+                = h @job.proglang_list_of_job(true)
+              - else
+                (none)
+          %tr
+            %td
+              Earliest start date:
+            %td
+              = @job.earliest_start_date.strftime("%b %e, %Y")
+          %tr
+            %td
+              Latest start date (work must start by):
+            %td
+              = @job.latest_start_date.strftime("%b %e, %Y")
+          %tr
+            %td
+              Position end date:
+            %td
+              = (@job.open_ended_end_date ? 'Open-ended' : @job.end_date.strftime("%b %e, %Y"))
+          %tr
+            %td
+              Form of Compensation:
+            %td
+              = link_to Job::Compensation::All.key(@job.compensation), jobs_search_path(:compensation => @job.compensation), :class => 'tags'
+          %tr
+            %td
+              Number of positions:
+            %td
+              - if @job.num_positions && @job.num_positions > 0
+                = h @job.num_positions
+              - else
+                Unspecified
+          %tr
+            %td
+              Listing Status:
+            %td
+              = Job::Status::All.key(@job.status)
+      - if can_view_apps(@current_user, @job)
+        %h2= pluralize @job.applics.length, 'Application'
+        %p
+          - unless @job.applics.empty?
+            - if can_view_apps(@current_user, @job)
+              %table.job_table.table.table-striped.table-condensed
+                %thead
+                  %tr
+                    %th.col-md-2 Application Date
+                    %th.col-md-4 Project
+                    %th.col-md-2 Applicant
+                    %th.col-md-2 Status
+                = render @job.applics, :mine => false
+      = link_to raw('« Back to listings'), jobs_path
