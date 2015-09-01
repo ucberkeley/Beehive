@@ -69,6 +69,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
+gem 'bootstrap-material-design'
 
 ################################################################################
 

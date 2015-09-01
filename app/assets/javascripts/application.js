@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-
+//= require bootstrap-material-design
 function setupExternalLinks() {
   $('a').each(function(){
     if( this.host && this.host != location.host )
