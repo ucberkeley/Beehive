@@ -10,7 +10,7 @@
         Post
     %h1 Dashboard
     .tab-content
-      #post.tab-pane.active{:role => "tabpanel"}
+      #post.tab-pane
         - ownapps = @current_user.jobs.collect(&:applics).flatten
         %h3 Applications Received
         - if ownapps.present?
@@ -34,7 +34,7 @@
         - if !@current_user.owned_jobs.empty?
           %p You can administer these projects:
           = render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs
-      #browse.tab-pane.active{:role => "tabpanel"}
+      #browse.tab-pane.active
         %h3 Your Applications
         - if @current_user.applics.empty?
           You have not applied to any research positions.
