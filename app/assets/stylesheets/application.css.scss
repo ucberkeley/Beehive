@@ -45,32 +45,6 @@ select {
   margin: 15px;
 }
 
-input.form-control {
-  outline: none;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
-  border: 2px solid #ddd;
-}
-
-input.button {
-  border: none;
-  border-radius: 3px;
-  font-size: 17px;
-  background-color: #eee;
-  padding: 5px 15px 5px 15px;
-}
-
-input.button:hover {
-  background-color: black;
-  color: white;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
-
 pre {
   background-color: #eee;
   padding: 10px;

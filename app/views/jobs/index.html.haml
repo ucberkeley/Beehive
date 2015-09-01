@@ -1,13 +1,14 @@
 - content_for :title, "Listings"
 .container
-  .row
-    .page-title Browse Projects
-    .search-input
-      .col-lg-offset-4.col-lg-7.col-sm-offset-4.col-sm-7
-        = form_tag(jobs_search_path, :method => "get") do
-          = text_field_tag :query, @query, :placeholder => "Search", :class => "form-control"
-      .col-lg-1.col-sm-1
-        = submit_tag @query, :class => "button pull-right", :value => "Search"
+  .col-md-12
+    %h1 Browse Projects
+  .col-md-12
+    .card.card-x
+      = form_tag(jobs_search_path, :method => "get") do
+        .col-md-10.job-search-input
+          = text_field_tag :query, @query, :placeholder => "Start typing what you want to search...", :class => "form-control"
+        .col-md-2
+          = submit_tag @query, :class => "btn btn-info pull-right", :value => "Search"
   - if false # this is broken..
     #tag_cloud
       = image_tag 'tag.gif'
@@ -15,52 +16,49 @@
 
       - tag_cloud Job.tag_counts, %w(tag_s tag_m tag_l tag_xl) do |tag, css_class|
         %span.tag= h link_to tag.name, jobs_path + '?tags=' + tag.name, :class => css_class
-
   .row
     #advanced_search.col-lg-4.col-sm-12
-      = label_tag :department, "Department", class: "filter-dropdown-label"
+      .card.card-x
+        = label_tag :department, "Department", class: "filter-dropdown-label"
 
-      = select_tag :department, options_for_select([["All Departments",0]]) + |
-        options_from_collection_for_select(Department.all, "id", "name",      |
-        @department_id), { :class => 'medium data-dropdown content' }         |
+        = select_tag :department, options_for_select([["All Departments",0]]) + |
+          options_from_collection_for_select(Department.all, "id", "name",      |
+          @department_id), { :class => 'medium data-dropdown content' }         |
 
-      = label_tag :faculty, "Faculty", class: "filter-dropdown-label"
+        = label_tag :faculty, "Faculty", class: "filter-dropdown-label"
 
-      = select_tag :faculty, options_for_select([["All Faculty",0]]) +          |
-        options_from_collection_for_select(@faculty, "id", "name", @faculty_id) |
+        = select_tag :faculty, options_for_select([["All Faculty",0]]) +          |
+          options_from_collection_for_select(@faculty, "id", "name", @faculty_id) |
 
-      = label_tag :compensation, "Compensation", class: "filter-dropdown-label"
+        = label_tag :compensation, "Compensation", class: "filter-dropdown-label"
 
-      = select_tag :compensation,                   |
-        options_for_select({                        |
-         "Don't care" => Job::Compensation::None,   |
-         "Pay"        => Job::Compensation::Pay,    |
-         "Credit"     => Job::Compensation::Credit, |
-         "Pay or credit" => Job::Compensation::Both |
-        }, @compensation)                           |
+        = select_tag :compensation,                   |
+          options_for_select({                        |
+           "Don't care" => Job::Compensation::None,   |
+           "Pay"        => Job::Compensation::Pay,    |
+           "Credit"     => Job::Compensation::Credit, |
+           "Pay or credit" => Job::Compensation::Both |
+          }, @compensation)                           |
 
-      = label_tag :post_status, "Status", class: "filter-dropdown-label"
+        = label_tag :post_status, "Status", class: "filter-dropdown-label"
 
-      = select_tag :post_status,           |
-        options_for_select({               |
-          "Open" => Job::Status::Open,     |
-          "Closed" => Job::Status::Filled, |
-          "All" => nil                     |
-        }, @post_status)                   |
+        = select_tag :post_status,           |
+          options_for_select({               |
+            "Open" => Job::Status::Open,     |
+            "Closed" => Job::Status::Filled, |
+            "All" => nil                     |
+          }, @post_status)                   |
 
-      = hidden_field_tag :as, params[:as]
-      = label_tag :per_page, "Listings per page", class: "filter-dropdown-label"
+        = hidden_field_tag :as, params[:as]
+        = label_tag :per_page, "Listings per page", class: "filter-dropdown-label"
 
-      = select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false
+        = select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false
     .col-lg-8.col-sm-12
-      - if @jobs.empty?
-        %h3 No matching listings were found! Try a different search.
-      - else
-        - if params[:query].nonempty?
-          %h3
-            Your search for "#{params[:query]}" returned #{@jobs.length} results.
-    .col-lg-8.col-sm-12
-      = render @jobs
+      .card.card-x
+        - if @jobs.empty?
+          %h3 No matching listings were found! Try a different search.
+        - else
+          = render @jobs
   %center
     %p
       = will_paginate @jobs
