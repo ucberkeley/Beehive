@@ -1,32 +1,31 @@
+# == Schema Information
+#
+# Table name: documents
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  document_type :integer
+#  size          :integer
+#  content_type  :string(255)
+#  filename      :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class Document < ActiveRecord::Base
 
-  # === List of columns ===
-  #   id            : integer 
-  #   user_id       : integer 
-  #   document_type : integer 
-  #   size          : integer 
-  #   content_type  : string 
-  #   filename      : string 
-  #   created_at    : datetime 
-  #   updated_at    : datetime 
-  # =======================
-
   belongs_to :user
-  
   class Types
     Generic    = 0
     Resume     = 1
     Transcript = 2
   end
-  
   has_attachment(:content_type => ['application/pdf', 'application/msword', 'text/plain'],
                  :max_size     => 1.megabyte,
                  :storage      => :file_system,
                  :path_prefix  => 'files')
-                 
   validates_as_attachment
   validates_inclusion_of :document_type, :in => [Types::Generic, Types::Resume, Types::Transcript]
-  
   before_validation :set_document_type
 
   def self.type_string(type)
@@ -53,6 +52,5 @@ class Document < ActiveRecord::Base
                ]
     self.document_type = find_and_choose(values, doctypes, t, Types::Generic)
   end
-  
 end
 

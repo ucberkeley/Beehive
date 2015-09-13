@@ -1,32 +1,34 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  name                :string(255)
+#  login               :string(255)
+#  email               :string(255)
+#  persistence_token   :string(255)      not null
+#  single_access_token :string(255)      not null
+#  perishable_token    :string(255)      not null
+#  login_count         :integer          default(0), not null
+#  failed_login_count  :integer          default(0), not null
+#  last_request_at     :datetime
+#  current_login_at    :datetime
+#  last_login_at       :datetime
+#  current_login_ip    :string(255)
+#  last_login_ip       :string(255)
+#  user_type           :integer          default(0), not null
+#  units               :integer
+#  free_hours          :integer
+#  research_blurb      :text
+#  experience          :string(255)
+#  summer              :boolean
+#  url                 :string(255)
+#  year                :integer
+#
+
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-
-  # === List of columns ===
-  #   id                  : integer 
-  #   name                : string 
-  #   login               : string 
-  #   email               : string 
-  #   persistence_token   : string 
-  #   single_access_token : string 
-  #   perishable_token    : string 
-  #   login_count         : integer 
-  #   failed_login_count  : integer 
-  #   last_request_at     : datetime 
-  #   current_login_at    : datetime 
-  #   last_login_at       : datetime 
-  #   current_login_ip    : string 
-  #   last_login_ip       : string 
-  #   user_type           : integer 
-  #   units               : integer 
-  #   free_hours          : integer 
-  #   research_blurb      : text 
-  #   experience          : string 
-  #   summer              : boolean 
-  #   url                 : string 
-  #   year                : integer 
-  # =======================
-
   include AttribsHelper
 
   # Authlogic

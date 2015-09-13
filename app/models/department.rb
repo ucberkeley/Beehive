@@ -1,11 +1,14 @@
-class Department < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: departments
+#
+#  id         :integer          not null, primary key
+#  name       :text             not null
+#  created_at :datetime
+#  updated_at :datetime
+#
 
-  # === List of columns ===
-  #   id         : integer 
-  #   name       : text 
-  #   created_at : datetime 
-  #   updated_at : datetime 
-  # =======================
+class Department < ActiveRecord::Base
 
   has_many :jobs
   has_many :faculties

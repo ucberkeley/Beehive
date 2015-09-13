@@ -1,27 +1,30 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id                  :integer          not null, primary key
+#  user_id             :integer
+#  title               :string(255)
+#  desc                :text
+#  category_id         :integer
+#  num_positions       :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#  department_id       :integer
+#  activation_code     :integer
+#  delta               :boolean          default(TRUE), not null
+#  earliest_start_date :datetime
+#  latest_start_date   :datetime
+#  end_date            :datetime
+#  compensation        :integer          default(0)
+#  status              :integer          default(0)
+#  primary_contact_id  :integer
+#  project_type        :integer
+#
+
 require 'will_paginate/array'
 
 class Job < ActiveRecord::Base
-
-  # === List of columns ===
-  #   id                  : integer 
-  #   user_id             : integer 
-  #   title               : string 
-  #   desc                : text 
-  #   category_id         : integer 
-  #   num_positions       : integer 
-  #   created_at          : datetime 
-  #   updated_at          : datetime 
-  #   department_id       : integer 
-  #   activation_code     : integer  # deprecated
-  #   delta               : boolean  # deprecated
-  #   earliest_start_date : datetime 
-  #   latest_start_date   : datetime 
-  #   end_date            : datetime 
-  #   compensation        : integer 
-  #   status              : integer 
-  #   primary_contact_id  : integer 
-  #   project_type        : integer 
-  # =======================
 
   include AttribsHelper
 

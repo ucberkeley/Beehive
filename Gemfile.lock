@@ -46,6 +46,9 @@ GEM
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     addressable (2.3.8)
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arel (6.0.0)
     authlogic (3.4.5)
       activerecord (>= 3.2)
@@ -289,6 +292,7 @@ DEPENDENCIES
   actionmailer-with-request (~> 0.3)
   activerecord-session_store
   acts-as-taggable-on
+  annotate
   authlogic
   autotest-rails
   bcrypt

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: owns
+#
+#  id         :integer          not null, primary key
+#  job_id     :integer
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the

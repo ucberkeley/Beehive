@@ -1,14 +1,15 @@
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id         :integer          not null, primary key
+#  org_id     :integer
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Membership < ActiveRecord::Base
-
-  # === List of columns ===
-  #   id         : integer 
-  #   org_id     : integer 
-  #   user_id    : integer 
-  #   created_at : datetime 
-  #   updated_at : datetime 
-  # =======================
-
   belongs_to :org
   belongs_to :user
-  # attr_accessible :title, :body
 end

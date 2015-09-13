@@ -1,13 +1,15 @@
+# == Schema Information
+#
+# Table name: proficiencies
+#
+#  id          :integer          not null, primary key
+#  proglang_id :integer
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Proficiency < ActiveRecord::Base
-
-  # === List of columns ===
-  #   id          : integer 
-  #   proglang_id : integer 
-  #   user_id     : integer 
-  #   created_at  : datetime 
-  #   updated_at  : datetime 
-  # =======================
-
   belongs_to :proglang
   belongs_to :user
 end
