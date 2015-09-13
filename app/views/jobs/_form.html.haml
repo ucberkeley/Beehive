@@ -45,24 +45,15 @@
     %dt
       = f.label :earliest_start_date, 'Earliest start date *'
     %dd
-      = f.date_select :earliest_start_date
+      = f.text_field :earliest_start_date, :class => 'datepicker form-control'
     %dt
       = f.label :latest_start_date, 'Latest start date *'
     %dd
-      = f.date_select :latest_start_date
+      = f.text_field :latest_start_date, :class => 'datepicker form-control'
     %dt
       = f.label :end_date, 'End date *'
     %dd
-      #enddate
-        - was_open_ended = @job.open_ended_end_date
-        = radio_button_tag 'open_ended_end_date', true, was_open_ended, :onclick => "$('#enddate select').attr('disabled', true); $('#enddate select').val('');"
-        = label_tag 'open_ended_end_date_true', 'Open-ended', :value => true, :onclick => "$('#enddate select').attr('disabled', true);"
-        \ 
-        \#{radio_button_tag 'open_ended_end_date', false, ! was_open_ended, :onclick => "$('#enddate select').attr('disabled', false);"} 
-        \#{label_tag 'open_ended_end_date_false', 'Specified as:', :value => true, :onclick => "$('#enddate select').attr('disabled', true);"} 
-        - date_select_options = {}
-        - date_select_options.update({:default => 1.month.from_now, :start_year => Date.today.year}) unless was_open_ended
-        = f.date_select :end_date, date_select_options, { :disabled => was_open_ended }
+      = f.text_field :end_date, :class => 'datepicker form-control'
     %dt
       = f.label :compensation, 'Form of Compensation'
     %dd
