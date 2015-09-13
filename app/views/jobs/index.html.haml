@@ -33,7 +33,7 @@
 
         = select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false
     .col-lg-8.col-sm-12
-      .card.card-x
+      .card.card-x.job-list
         - if @jobs.empty?
           %h3 No matching listings were found! Try a different search.
         - else

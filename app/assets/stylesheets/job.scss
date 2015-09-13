@@ -26,35 +26,21 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   margin: 5px 0px 3px 0px;
 }
 
+.job-list {
+  hr {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
 #advanced_search {
 }
 
 .job-search-input {
   margin-top: 13px;
 }
-
-table.job_table {
-  max-width: 1200px;
-}
-
-/*table.job_table {
-  border: 1px black solid;
-  max-width: 1200px;
-
-  th,td {
-    border-right: 1px black solid;
-  }
-  th {
-    background-color: lightgray;
-  }
-  tr.job_odd {
-    background-color: #e4f2f6;
-  }
-
-  th.p_title {
-    min-width: 300px;
-  }
-}*/
 
 .job_list {
   border: 0;
@@ -69,7 +55,6 @@ table.job_table {
 }
 .job_table_left {
   padding: 10px 15px;
-  width: 50%;
 }
 .job_odd {
   background: none;
@@ -90,7 +75,7 @@ table.job_table {
 .job_desc {
   font-size: 15px;
   font-weight: normal;
-  margin: 10px 0px;
+  margin-top: 10px;
 }
 .read-more {
   border-radius: 3px;
@@ -109,7 +94,7 @@ table.job_table {
   display: inline;
 }
 .posted {
-  margin: 10px 0px;
+  margin-top: 10px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -126,6 +111,7 @@ table.job_table {
     margin: 2px 0px;
     border-radius: 3px;
     box-shadow: 1px 1px 1px #ddd;
+    text-transform: capitalize;
   }
   a.wide {
     width: 100%;
