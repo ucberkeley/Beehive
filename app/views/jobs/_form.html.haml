@@ -1,4 +1,3 @@
-%p Fields labeled with an asterisk are required.
 = form_for(@job) do |f|
   - if @job.errors.any?
     #error_explanation
@@ -11,15 +10,15 @@
           %li= msg
   %dl.dl-horizontal
     %dt
-      = f.label :title, 'Listing title'
+      = f.label :title, 'Listing title *'
     %dd
       = f.text_field :title, class: "form-control"
     %dt
-      = f.label :department
+      = f.label :department, 'Department *'
     %dd
       = f.select :department_id, Department.all.collect {|c| [c.name, c.id]}
     %dt
-      = f.label :project_type
+      = f.label :project_type, 'Project Type *'
     %dd
       = f.select :project_type, @job.get_all_project_strings
     %dt
@@ -27,7 +26,7 @@
     %dd
       = select_tag :faculty_id, '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(@faculty, :id, :name, @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id))
     %dt
-      = f.label :desc, 'Listing description'
+      = f.label :desc, 'Listing description *'
     %dd
       = f.text_area :desc, { rows: 12, class: "form-control" }
     %dt
@@ -44,15 +43,15 @@
     %dd
       = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. Python, machine shop)"
     %dt
-      = f.label :earliest_start_date, 'Earliest start date'
+      = f.label :earliest_start_date, 'Earliest start date *'
     %dd
       = f.date_select :earliest_start_date
     %dt
-      = f.label :latest_start_date, raw('Latest start date<br />(work must start by)')
+      = f.label :latest_start_date, 'Latest start date *'
     %dd
       = f.date_select :latest_start_date
     %dt
-      = f.label :end_date, 'End date'
+      = f.label :end_date, 'End date *'
     %dd
       #enddate
         - was_open_ended = @job.open_ended_end_date
