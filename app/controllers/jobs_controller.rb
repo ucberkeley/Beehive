@@ -140,9 +140,8 @@ class JobsController < ApplicationController
   def create
     @faculty = Faculty.all # used in form
     sponsor = Faculty.find(params[:faculty_id]) rescue nil
-    @job = Job.new(job_params)
-    @job.update_attribs(params)
-    #TODO: new contacts
+    @job = Job.create(job_params)
+    @job.update(primary_contact_id: @current_user.id)
     @current_owners = @job.owners.select{|i| i != @current_user}
     owners = @job.owners + [@job.user]
     @owners_list = User.all.select{|i| !(owners).include?(i)}.sort_by{|u| u.name}
@@ -317,7 +316,9 @@ class JobsController < ApplicationController
       :user_id, :department_id, :status, :compensation, :num_positions,
       :end_date, :earliest_start_date, :latest_start_date,
       :category_names, :course_names, :proglang_names)
-
+    [:earliest_start_date, :latest_start_date, :end_date].each do |attribute|
+      params[:job][attribute] = Date.strptime(params[:job][attribute], "%m/%d/%y")
+    end
     params[:job]
   end
 

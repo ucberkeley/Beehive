@@ -11,7 +11,7 @@ ResearchMatch::Application.routes.draw do
   end
 
   resources :jobs do
-    member do 
+    member do
       get 'activate'
       get 'delete'
       get 'resend_activation_email'
