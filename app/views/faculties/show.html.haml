@@ -1,0 +1,11 @@
+- content_for :title, @user.name
+.container
+  %h1
+    = @user.name
+  .card
+    %dl.dl-horizontal
+      %dt Email
+      %dd
+        = @user.email
+      %dt Role
+      %dd Faculty
