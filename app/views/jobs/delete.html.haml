@@ -1,0 +1,10 @@
+- content_for :title, "Delete Listing"
+.container
+  %h1 Delete Listing
+  .card
+    Are you sure you would like to delete the following listing? This action cannot be undone.
+    = render(:partial => "jobs/job_snippet", :job => @job )
+    .row
+      = link_to "Delete", job_path(@job.id), :method => :delete, class: "btn btn-danger"
+      = link_to "Cancel", jobs_path, class: "btn btn-info"
+    = link_to raw('« Back to listings'), jobs_path
