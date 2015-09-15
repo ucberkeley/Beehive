@@ -48,11 +48,11 @@
                 %th.col-md-2 Status
             = render @current_user.applics, :mine => true
         %hr
-        %h3 Watched Projects
-        - if @current_user.watches.empty?
+        %h3 Watched
+        - if @current_user.watched_jobs.empty?
           You are not watching any projects.
         - else
-          = render @current_user.watched_jobs
+        = render @current_user.watched_jobs
 :javascript
   $(document).ready(function(){
     $('.job_table').each(function(index, elem) {

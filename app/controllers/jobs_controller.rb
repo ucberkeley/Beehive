@@ -41,7 +41,7 @@ class JobsController < ApplicationController
     end
 
     # dept. 0 => all
-    h[:post_status]     = params[:post_status]     if params[:post_status] 
+    h[:post_status]     = params[:post_status]     if params[:post_status]
     h[:department] = params[:department] if params[:department].to_i > 0
     h[:faculty]    = params[:faculty]    if params[:faculty].to_i    > 0
     h
@@ -85,11 +85,6 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @actions = @job.actions(@current_user)
     @curations = @job.curations(@current_user)
-
-    # update watch time so this job is now 'read'
-    if @current_user.present? && watch=@job.watches.find_by_user_id(@current_user)
-      watch.mark_read
-    end
 
     respond_to do |format|
       format.html # show.html.erb
