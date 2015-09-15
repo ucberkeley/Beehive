@@ -1,3 +1,6 @@
+$ucb-blue: #003262;
+$ucb-orange: #fdb515;
+
 body {
   background-color: #f3f3f3 !important;
 }
@@ -42,6 +45,10 @@ h1 {
 
 .card-x {
   padding: 20px !important;
+}
+
+a:hover {
+  color: $ucb-blue !important;
 }
 
 input,

@@ -10,6 +10,9 @@ $color_zircon_approx: #f3f6ff;
 $color_mine_shaft_approx: #333;
 $color_st_tropaz_approx: #2a6496;
 
+$ucb-blue: #003262;
+$ucb-orange: #fdb515;
+
 //fonts
 $font_0: tahoma;
 $font_1: arial;
@@ -76,6 +79,7 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   font-size: 15px;
   font-weight: normal;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .read-more {
   border-radius: 3px;
@@ -84,14 +88,23 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   color: white;
 }
 .tags {
-  background-color: #92AFC9;
-  padding: 2px 4px 1px 4px;
+  background-color: $ucb-orange;
+  padding: 0px 4px;
   border-radius: 3px;
   font-weight: normal;
   font-size: 13px;
   color: white;
   margin: 2px 1px;
-  display: inline;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  &:hover {
+    background-color: $ucb-blue;
+    color: white !important;
+  }
+}
+strong.tags-icon {
+  margin-right: 10px;
 }
 .posted {
   margin-top: 10px;

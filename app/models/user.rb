@@ -166,6 +166,7 @@ class User < ActiveRecord::Base
   def apply?
     user_type == User::Types::Undergrad || user_type == User::Types::Admin
   end
+
   def post?
     user_type != User::Types::Undergrad || user_type == User::Types::Admin
   end

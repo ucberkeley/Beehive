@@ -32,7 +32,7 @@
       - if @job.tag_list.present?
         .job_tags
           = image_tag 'tag.gif'
-          %strong Tags:
+          %strong.tags-icon Tags:
           = render :partial => "tag", :collection => @job.tag_list
       %dl.dl-horizontal
         %dt Project Type

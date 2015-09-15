@@ -178,7 +178,7 @@ class Job < ActiveRecord::Base
         end
       end
 
-      if (open? && !user.apply?) || applic
+      if open? || applic
         if !applic
           actions.push('apply')
         elsif applic.applied

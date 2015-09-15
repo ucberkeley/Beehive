@@ -8,7 +8,8 @@ $(function() {
 });
 
 function adjustHomePageHeight() {
-  if($('body').height() > 700) {
-    $('.main-bottom').height($('body').height() - 450 + 100);
+  console.log($('body').height());
+  if($('body').height() > 600) {
+    $('.main-bottom').height($('body').height() - 350);
   };
 }
