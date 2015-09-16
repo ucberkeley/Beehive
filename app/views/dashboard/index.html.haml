@@ -8,11 +8,11 @@
       %input{"aria-controls" => "post", "aria-expanded" => "false", :autocomplete => "off", "data-target" => "#post", "data-toggle" => "tab", :type => "radio"}/
       Post
   %h1 Dashboard
-  .card
-    .tab-content
-      #post.tab-pane
-        - ownapps = @current_user.jobs.collect(&:applics).flatten
-        %h3 Applications Received
+  .tab-content
+    #post.tab-pane
+      - ownapps = @current_user.jobs.collect(&:applics).flatten
+      .card
+        %h2 Applications Received
         - if ownapps.present?
           %table.job_table.table.table-striped.table-condensed
             %thead
@@ -24,8 +24,8 @@
             = render ownapps, :mine => false
         - else
           You have not yet received any applications.
-        %hr
-        %h3 Manage Projects
+      .card
+        %h2 Manage Projects
         - if @current_user.jobs.empty? && @current_user.owned_jobs.empty?
           You have not posted any projects. #{link_to 'Post one', :controller => :jobs, :action => :new} now.
         - if !@current_user.jobs.empty?
@@ -34,8 +34,9 @@
         - if !@current_user.owned_jobs.empty?
           %p You can administer these projects:
           = render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs
-      #browse.tab-pane.active
-        %h3 Your Applications
+    #browse.tab-pane.active
+      .card
+        %h2 Your Applications
         - if @current_user.applics.empty?
           You have not applied to any research positions.
         - else
@@ -47,8 +48,8 @@
                 %th.col-md-2 Contact
                 %th.col-md-2 Status
             = render @current_user.applics, :mine => true
-        %hr
-        %h3 Watched
+      .card
+        %h2 Watching Jobs
         - if @current_user.watched_jobs.empty?
           You are not watching any projects.
         - else

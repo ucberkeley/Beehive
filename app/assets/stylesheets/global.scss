@@ -9,11 +9,6 @@ body,div,h1,h2,h3,h4,h5,h6,a,li,ul,div,td,th,span {
   font-family: 'Lato', sans-serif !important;
 }
 
-hr {
-  margin-top: 50px !important;
-  margin-bottom: 50px !important;
-}
-
 .center {
   text-align: center;
 }
@@ -35,6 +30,11 @@ h1 {
   margin-bottom: 30px !important;
 }
 
+hr {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
 .card {
   background-color: white;
   padding: 70px !important;
@@ -44,7 +44,7 @@ h1 {
 }
 
 .card-x {
-  padding: 20px !important;
+  padding: 30px !important;
 }
 
 a:hover {

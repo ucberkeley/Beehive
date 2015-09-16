@@ -5,16 +5,13 @@
       = link_to job.title, job_path(job)
     - job_tags = job.tag_list
     %div
-      - if controller.controller_name != 'dashboard'
-        .job_desc
-          %span{:id => "job_desc_#{job.id}"}
-            = truncate job.desc, :length => 200, :omission => '...'
-          %span{:id => "job_#{job.id}", :style => "display:none;overflow:hidden;height0px;"}
-            = job.desc
-          .posted
-            Posted: #{job.created_at.strftime("%m/%d/%Y")}
-      - if job_tags.empty?
-
-      - else
+      .job_desc
+        %span{:id => "job_desc_#{job.id}"}
+          = truncate job.desc, :length => 200, :omission => '...'
+        %span{:id => "job_#{job.id}", :style => "display:none;overflow:hidden;height0px;"}
+          = job.desc
+        .posted
+          Posted: #{job.created_at.strftime("%m/%d/%Y")}
+      - if job_tags.present?
         = render partial: 'jobs/tag', collection: job.tag_list
 %hr
