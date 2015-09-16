@@ -59,9 +59,6 @@
     %dd
       = f.select :compensation, options_for_select( Job::Compensation::All, @job.compensation )
     %dt
-      = f.label :num_positions, 'Available Positions'
-    %dd
-    %dt
       = f.label :status, 'Listing Status'
     %dd
       = f.select :status, options_for_select( Job::Status::All, @job.status )
