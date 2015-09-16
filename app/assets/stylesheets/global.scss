@@ -74,3 +74,27 @@ dd {
     background-color: #1A436B !important;
   }
 }
+
+#flash_error, #flash_notice {
+  color: #D5F5E2;
+  background: #1ABC9C;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+  width: 600px;
+  height: 40px;
+  box-shadow: #16A085 2px 2px 0px 0px !important;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  z-index: 100;
+  -webkit-transition: right 0.5s linear;
+  -moz-transition: right 0.5s linear;
+  -o-transition: right 0.5s linear;
+  transition: right 0.5s linear;
+}
+
+#flash_error {
+  background: #E74C3C;
+  box-shadow: #C0392B 2px 2px 0px 0px !important;
+}

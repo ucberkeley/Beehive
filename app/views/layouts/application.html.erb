@@ -59,18 +59,29 @@
       </nav>
     </div>
 
-  <div class="row">
-    <% if !(flash[:error].nil? || flash[:error] == '') %>
+    <% if flash[:error].present? %>
       <div id="flash_error">
         <%= flash[:error] %>
       </div>
-    <% end %>
-    <% if !(flash[:notice].nil? || flash[:notice] == '') %>
+      <script type="text/javascript">
+        $(function() {
+          setTimeout(function() {
+            $('#flash_error').css('right', '-600px');
+          }, 3000)
+        })
+      </script>
+    <% elsif flash[:notice].present? %>
       <div id="flash_notice">
         <%= flash[:notice] %>
       </div>
+      <script type="text/javascript">
+        $(function() {
+          setTimeout(function() {
+            $('#flash_notice').css('right', '-600px');
+          }, 3000)
+        })
+      </script>
     <% end %>
-  </div>
 
   <%= yield %>
 

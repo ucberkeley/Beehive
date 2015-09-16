@@ -275,21 +275,11 @@ class JobsController < ApplicationController
     end
   end
 
- def unwatch
-   job = Job.find(params[:id])
-   watch = Watch.find(:first, :conditions=>{:user_id=> @current_user.id, :job_id => job.id})
-
-   respond_to do |format|
-     if watch
-       watch.destroy
-       flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
-       format.html { redirect_to(job) }
-     else
-       flash[:notice] = 'Unsuccessful job un-watch. Perhaps you\'re not watching this job yet?'
-       format.html { redirect_to(job) }
-     end
-   end
-
+  def unwatch
+    job = Job.find(params[:id])
+    @current_user.watches.find_by_job_id(job.id).destroy
+    flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
+    redirect_to :back
   end
 
 
