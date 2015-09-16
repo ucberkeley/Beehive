@@ -11,9 +11,8 @@
             = truncate job.desc, :length => 200, :omission => '...'
           %span{:id => "job_#{job.id}", :style => "display:none;overflow:hidden;height0px;"}
             = job.desc
-          - if @current_user and @current_user.user_type == User::Types::Admin
-            .posted
-              Posted: #{job.created_at.strftime("%m/%d/%Y")}
+          .posted
+            Posted: #{job.created_at.strftime("%m/%d/%Y")}
       - if job_tags.empty?
 
       - else
