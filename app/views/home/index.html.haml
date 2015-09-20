@@ -5,13 +5,13 @@
     .main-top-info
       .text-info-large
         %span
-          Research made simple.
+          Research made simple
       .text-info-small
         Search and filter over
         %span= Job.count
-        projects.
+        projects
         %br
-        Apply in one click.
+        Apply in one click
       .btn.btn-cal
         - if @current_user.present?
           = link_to "EXPLORE", jobs_path
