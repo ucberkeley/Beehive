@@ -14,3 +14,9 @@
 .right_col {
   float: right
 }
+
+.container.user-profile {
+  h2 {
+    margin-bottom: 30px;
+  }
+}

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_id(params[:id])
     @year = @user.year.nil? ? "N/A" : "#{@user.year.ordinalize} year"
-  end 
+  end
 
   # Don't render new.rhtml; instead, create the user immediately
   # and redirect to the edit profile page.
