@@ -1,0 +1,26 @@
+- content_for :title, "Application Details"
+.container#applic_show_main
+  %h1= "Application - #{@applic.job.title}"
+  .card
+    %h2 Application Info
+    %dl.dl-horizontal
+      %dt Applicant
+      %dd= link_to @applic.user.name, url_for(@applic.user)
+
+      %dt Status
+      %dd= @status
+
+      %dt Date applied
+      %dd= @applic.created_at.getlocal.pp
+
+      %dt Message
+      %dd= @applic.message
+
+    %h2 Applicant Profile
+    = render 'users/applic_info', :user => @applic.user
+    - if @applic.status != "accepted"
+      = form_tag('/applications/%s' % @applic.id, :method => "post") do
+        = submit_tag "Accept this Applicant", class: "btn btn-primary"
+    - if @applic.status == "accepted"
+      = form_tag('/applications/%s/unaccept' % @applic.id, :method => "post") do
+        = submit_tag "Unhire Accepted Applicant", class: "btn btn-primary"
