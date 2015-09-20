@@ -89,9 +89,8 @@ class ApplicsController < ApplicationController
   end
 
   def new
-    #@job = Job.find(params[:job_id])
     if verify_job_unapplied
-      @applic = Applic.new({:user => @current_user, :job => @job})
+      @applic = Applic.find_or_initialize_by({:user => @current_user, :job => @job})
     else
       redirect_to(url_for(@job))
     end
@@ -129,31 +128,31 @@ class ApplicsController < ApplicationController
 
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else
-          flash[:error] = "Looks like the job's contacts have invalid emails. 
-                           Please contact us for further support. 
+          flash[:error] = "Looks like the job's contacts have invalid emails.
+                           Please contact us for further support.
                            Your application has been submitted."
         end
         redirect_to job_path(@job)
       else
-        flash[:error] = "Could not apply to position. Make sure you've " + 
+        flash[:error] = "Could not apply to position. Make sure you've " +
                         "written a message to the faculty sponsor!"
         render 'new'
       end
 
     else # save an application
       @applic.applied = false
-      
+
       if @applic.save
         flash[:notice] = 'Application saved. You can come back later and complete your application!'
         redirect_to job_path(@job)
       else
-        flash[:error] = "Could not save application. Make sure you've " + 
+        flash[:error] = "Could not save application. Make sure you've " +
                         "written a message to the faculty sponsor!"
         render 'new'
       end
     end
   end
-  
+
   # withdraw from an application (destroy the applic)
   def destroy
     applic = Applic.find(:job_id=>params[:id])

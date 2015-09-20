@@ -9,7 +9,7 @@
         = form_for(@applic, :url=>create_job_applic_path(@applic.job.id, @applic.id), :method => :post ) do |f|
           = render(:partial => "jobs/job_snippet", :job => @job )
           %strong Message to faculty
-          = f.text_area :message, {:rows=>12, :class => "form-control"}
+          = f.text_area :message, :rows=>10, :value => @applic.message, :class => "form-control"
           %hr
           %h2 Application
           %p

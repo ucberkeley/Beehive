@@ -19,7 +19,7 @@
           - when 'applied'
             %p.btn.btn-success applied
           - when 'resume'
-            = link_to 'resume app', new_job_applic_path(@job), class: 'btn btn-success'
+            = link_to 'resume', new_job_applic_path(@job), class: 'btn btn-success'
         - @curations.each do |org, curated|
           - if curated
             = link_to 'uncurate', orgs_uncurate_path(:abbr => org.abbr, :job_id => @job.id), method: :post, class: 'btn btn-warning', title: org.name, rel: 'tooltip'
