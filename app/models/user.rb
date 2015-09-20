@@ -175,9 +175,9 @@ class User < ActiveRecord::Base
   def user_type_string
     case self.user_type
     when User::Types::Grad
-      'Graduate or postdoc'
+      'Graduate Student'
     when User::Types::Undergrad
-      'Undergraduate'
+      'Undergraduate Student'
     when User::Types::Faculty
       'Faculty'
     when User::Types::Staff

@@ -2,8 +2,7 @@
 .container
   .card
     .row
-      %h1= @user.name
-      %h2= @user.user_type_string
+      %h1= "#{@user.name} - #{@user.user_type_string}"
 
       %dl.dl-horizontal
         %dt Email
@@ -38,7 +37,7 @@
 
         %dt Free in the summer
         %dd
-          = @user.summer
+          = @user.summer ? "Yes" : "No"
 
         %dt Research
         %dd
