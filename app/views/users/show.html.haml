@@ -12,7 +12,7 @@
         %dt Courses Taken
         %dd
           - @user.courses.each do |course|
-            = course.name
+            %span.tags.course-tag= course.name
         %dt Interests
         %dd
           - @user.categories.each do |category|
@@ -21,7 +21,7 @@
         %dt Proficient Languages
         %dd
           - @user.proglangs.each do |lang|
-            %dt = lang.name
+            %span.tags.lang-tag= lang.name
 
         %dt Grade Level
         %dd

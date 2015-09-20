@@ -20,3 +20,11 @@
     margin-bottom: 30px;
   }
 }
+
+.course-tag {
+  text-transform: uppercase;
+}
+
+.lang-tag {
+  text-transform: capitalize;
+}

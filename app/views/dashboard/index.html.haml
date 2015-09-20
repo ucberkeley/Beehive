@@ -28,10 +28,9 @@
         %h2 Manage Projects
         - if @current_user.jobs.empty? && @current_user.owned_jobs.empty?
           You have not posted any projects. #{link_to 'Post one', :controller => :jobs, :action => :new} now.
-        - if !@current_user.jobs.empty?
-          %p You are the primary contact for these projects:
+        - if @current_user.jobs.present?
           = render @current_user.jobs
-        - if !@current_user.owned_jobs.empty?
+        - if @current_user.owned_jobs.present?
           %p You can administer these projects:
           = render :partial => 'jobs/your_job', :collection => @current_user.owned_jobs
     #browse.tab-pane.active
