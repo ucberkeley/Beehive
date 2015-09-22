@@ -34,6 +34,7 @@ gem 'bcrypt'
 # Misc
 gem 'pothoven-attachment_fu'
 gem 'nokogiri'
+gem 'email_validator'
 
 # Deploy with Capistrano
 gem 'capistrano'
