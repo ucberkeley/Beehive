@@ -216,14 +216,14 @@ class User < ActiveRecord::Base
       category_list << cat.name + ','
       category_list << ' ' if add_spaces
     end
-    
+
     if add_spaces
       category_list[0..(category_list.length - 3)].downcase
     else
       category_list[0..(category_list.length - 2)].downcase
     end
   end
-  
+
   # @return [String] the 'desired proglang' names taken by this User, e.g. "java,scheme,c++"
   def proglang_list_of_user(add_spaces = false)
     proglang_list = ''
@@ -231,7 +231,7 @@ class User < ActiveRecord::Base
       proglang_list << pl.name.capitalize + ','
       proglang_list << ' ' if add_spaces
     end
-    
+
     if add_spaces
       proglang_list[0..(proglang_list.length - 3)]
     else
@@ -250,7 +250,7 @@ class User < ActiveRecord::Base
   #   end
   #   jobs
   # end
-  
+
   # Parses the textbox list of courses from "CS162,CS61A,EE123"
   # etc. to an enumerable object courses
   def handle_courses(course_names)
@@ -274,7 +274,7 @@ class User < ActiveRecord::Base
       self.categories << Category.find_or_create_by(name: cat.downcase.strip)
     end
   end
-    
+
   # Parses the textbox list of proglangs from "c++,python"
   # etc. to an enumerable object proglangs
   def handle_proglangs(proglang_names)
@@ -283,14 +283,14 @@ class User < ActiveRecord::Base
     proglang_array = []
     proglang_array = proglang_names.split(',').uniq if proglang_names
     proglang_array.each do |pl|
-      self.proglangs << Proglang.find_or_create_by(name: pl.downcase.strip)
+      self.proglangs << Proglang.find_or_create_by(name: pl.upcase.strip)
     end
-  end 
+  end
 
   # @return [Boolean] true if the user has just been activated.
   # @deprecated
   def recently_activated?
-    false 
+    false
   end
 
   # @return [User] the user corresponding to given login
@@ -298,14 +298,14 @@ class User < ActiveRecord::Base
   def self.authenticate_by_login(loggin)
     # Return user corresponding to login, or nil if there isn't one
     User.find_by_login(loggin)
-  end  
+  end
 
   # @deprecated
   def is_faculty?
     user_type == User::Types::Faculty
   end
   protected
-    
+
     # Dynamically assign the value of :email, based on whether this user
     # is marked as faculty or not. This should occur as a before_validation
     # since we want to save a value for :email, not :faculty_email or :student_email.
@@ -313,7 +313,7 @@ class User < ActiveRecord::Base
     def handle_email
       self.email = (self.is_faculty? ? Faculty.find_by_name(self.faculty_name).email : self.student_email)
     end
-    
+
     # Dynamically assign the value of :name, based on whether this user
     # is marked as faculty or not. This should occur as a before_validation
     # since we want to save a value for :name, not :faculty_name or :student_name.

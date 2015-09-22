@@ -100,9 +100,9 @@ class UsersController < ApplicationController
       @current_user.handle_categories(params[:category][:name])
     end
     respond_to do |format|
-      if @current_user.update_attributes(params[:user])
+      if @current_user.update_attributes(user_params)
         flash[:notice] = 'User profile was successfully updated.'
-        format.html { redirect_to dashboard_path, notice: 'User profile was successfully updated.' }
+        format.html { redirect_to edit_user_path, notice: 'User profile was successfully updated.' }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -124,5 +124,9 @@ class UsersController < ApplicationController
       flash[:error] = "You don't have permission to access that."
             redirect_to :controller => 'dashboard', :action => :index
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :year, :free_hours, :experience, :url)
   end
 end
