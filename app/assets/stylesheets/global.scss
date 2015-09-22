@@ -67,9 +67,8 @@ dd {
 
 .btn-cal:not(.btn-link):not(.btn-flat) {
   background-color: #003366 !important;
-  a {
-    color: white !important;
-  }
+  color: white !important;
+  margin-top: 30px;
   &:hover {
     background-color: #1A436B !important;
   }

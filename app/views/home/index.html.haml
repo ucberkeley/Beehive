@@ -12,11 +12,11 @@
         projects
         %br
         Apply in one click
-      .btn.btn-cal
+        .clearfix
         - if @current_user.present?
-          = link_to "EXPLORE", jobs_path
+          = link_to "EXPLORE", jobs_path, class: "btn btn-cal"
         - else
-          = link_to "EXPLORE", login_path
+          = link_to "EXPLORE", login_path, class: "btn btn-cal"
   .row.main-bottom
     .col-md-6
       .main-icons-text
