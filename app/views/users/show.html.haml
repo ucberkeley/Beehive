@@ -1,9 +1,8 @@
 - content_for :title, @user.name
 .container
+  %h1= "#{@user.name} - #{@user.user_type_string}"
   .card
     .row
-      %h1= "#{@user.name} - #{@user.user_type_string}"
-
       %dl.dl-horizontal
         %dt Email
         %dd
