@@ -1,27 +1,27 @@
 - content_for :title, "User Profile"
 .container.user-profile
-  %h1= "#{@user.name}'s Profile"
+  %h1= "#{@current_user.name}'s Profile"
   .card
-    = form_for @user do |f|
-      - if @user.errors.any?
+    = form_for @current_user do |f|
+      - if @current_user.errors.any?
         #error_explanation
           %h2
-            Couldn't save due to #{pluralize(@user.errors.count, "error")}.
+            Couldn't save due to #{pluralize(@current_user.errors.count, "error")}.
           %ul
-            - @user.errors.full_messages.each do |msg|
+            - @current_user.errors.full_messages.each do |msg|
               %li= msg
       .row
         %h2 Basic Information
         %dl.dl-horizontal
           %dt Name
-          %dd= @user.name
+          %dd= @current_user.name
 
-          %dt Email
+          %dt Email*
           %dd= f.text_field :email, class: 'form-control'
 
           - if @current_user.apply?
             %dt Class of
-            %dd= f.select :class_of, options_for_select((Time.now.year - 2)..(Time.now.year + 5), @current_user.class_of), {}, :id => 'right-label'
+            %dd= f.select :class_of, options_for_select((Time.now.year - 2)..(Time.now.year + 5), @current_user.class_of.present? ? @current_user.class_of : Time.now.year), {}, :id => 'right-label'
 
             %dt Interests
             %dd= text_field :category, :name, :value => params[:category][:name], class: 'form-control', :placeholder => "These help us match relevant projects"

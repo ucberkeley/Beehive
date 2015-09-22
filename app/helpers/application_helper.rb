@@ -3,7 +3,7 @@ include JobsHelper
 
 module ApplicationHelper
   # include TagsHelper
-  
+
   module NonEmpty
       def nonempty?
           not self.nil? and not self.empty?
@@ -141,7 +141,7 @@ module CASControllerIncludes
   # Requires a CAS session to be present, and redirects if it isn't.
   # @returns false if redirected because of new user processing, true if user was already signed up
   #
-    
+
     # Require CAS login first
     unless @user_session
       (redirect_to login_path) and false
@@ -174,13 +174,11 @@ module CASControllerIncludes
 
         @current_user = User.where(auth_field => auth_value)[0]
         session[:user_id] = @current_user.id
-        redirect_to edit_user_path(@current_user.id)
-        return false
+        return redirect_to edit_user_path(@current_user.id)
       else
         flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
         flash[:error] += new_user.errors.inspect if Rails.env == 'development'
-        redirect_to home_path
-        return false
+        return redirect_to home_path
       end
     end
 

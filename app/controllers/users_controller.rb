@@ -88,7 +88,6 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = @current_user
     prepare_attribs_in_params(@current_user)
     render :edit
   end
@@ -99,15 +98,12 @@ class UsersController < ApplicationController
       @current_user.handle_proglangs(params[:proglang][:name])
       @current_user.handle_categories(params[:category][:name])
     end
-    respond_to do |format|
-      if @current_user.update_attributes(user_params)
-        flash[:notice] = 'User profile was successfully updated.'
-        format.html { redirect_to edit_user_path, notice: 'User profile was successfully updated.' }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @current_user.errors, :status => :unprocessable_entity }
-      end
+    if @current_user.update_attributes(user_params)
+      flash[:notice] = 'User profile was successfully updated.'
+      redirect_to profile_path
+    else
+      flash[:error] = 'User profile failed to update.'
+      render 'edit'
     end
   end
 

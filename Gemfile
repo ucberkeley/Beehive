@@ -50,6 +50,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'annotate'
+  gem 'byebug'
 end
 
 # Testing
