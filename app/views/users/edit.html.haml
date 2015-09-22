@@ -20,8 +20,8 @@
           %dd= f.text_field :email, class: 'form-control'
 
           - if @current_user.apply?
-            %dt Year
-            %dd= f.select :year, options_for_select( (1..4).collect{|y| [y.ordinalize, y] }, @current_user.year), {}, :id => 'right-label'
+            %dt Class of
+            %dd= f.select :class_of, options_for_select((Time.now.year - 2)..(Time.now.year + 5), @current_user.class_of), {}, :id => 'right-label'
 
             %dt Interests
             %dd= text_field :category, :name, :value => params[:category][:name], class: 'form-control', :placeholder => "These help us match relevant projects"

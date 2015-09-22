@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423195746) do
+ActiveRecord::Schema.define(version: 20150922215339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 20150423195746) do
     t.boolean  "summer"
     t.string   "url",                 limit: 255
     t.integer  "year"
+    t.integer  "class_of"
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
