@@ -1,9 +1,9 @@
 - content_for :title, @job.title
 .container
   .row
-    .col-md-5
+    .col-md-5.no-padding
       %h1 Position Details
-    .col-md-7
+    .col-md-7.no-padding
       .view-job-actions.pull-right
         - @actions.each do |a|
           - case a

@@ -32,8 +32,7 @@
     %dt
       = f.label :category, 'Categories'
     %dd
-      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', |
-          :placeholder => "(e.g. signal processing, environmental engineering)"                          |
+      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. signal processing, environmental engineering)"
     %dt
       = f.label :course, 'Required courses'
     %dd
@@ -45,15 +44,15 @@
     %dt
       = f.label :earliest_start_date, 'Earliest start date *'
     %dd
-      = f.text_field :earliest_start_date, :class => 'datepicker form-control'
+      = f.text_field :earliest_start_date, :class => 'datepicker form-control', value: @job.earliest_start_date.present? ? @job.earliest_start_date.strftime("%Y-%m-%d") : nil
     %dt
       = f.label :latest_start_date, 'Latest start date *'
     %dd
-      = f.text_field :latest_start_date, :class => 'datepicker form-control'
+      = f.text_field :latest_start_date, :class => 'datepicker form-control', value: @job.latest_start_date.present? ? @job.latest_start_date.strftime("%Y-%m-%d") : nil
     %dt
       = f.label :end_date, 'End date *'
     %dd
-      = f.text_field :end_date, :class => 'datepicker form-control'
+      = f.text_field :end_date, :class => 'datepicker form-control', value: @job.end_date.present? ? @job.end_date.strftime("%Y-%m-%d") : nil
     %dt
       = f.label :compensation, 'Form of Compensation'
     %dd

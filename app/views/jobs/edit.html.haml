@@ -1,0 +1,6 @@
+- content_for :title, "Editing Listing"
+.container
+  %h1 Editing Listing
+  .card
+    = render 'form'
+    = link_to raw('« Back to listings'), jobs_path
