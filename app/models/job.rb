@@ -93,8 +93,6 @@ class Job < ActiveRecord::Base
       value.present? && (value < Time.now - 1.hour)
   end
 
-  validates_length_of :title, :within => 10..200
-  validates_length_of :desc, :within => 10..20000
   validates_numericality_of :num_positions, :greater_than_or_equal_to => 0,
     :allow_nil => true
   validate :earliest_start_date_must_be_before_latest

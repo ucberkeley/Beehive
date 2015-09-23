@@ -302,7 +302,7 @@ class JobsController < ApplicationController
       :end_date, :earliest_start_date, :latest_start_date,
       :category_names, :course_names, :proglang_names)
     [:earliest_start_date, :latest_start_date, :end_date].each do |attribute|
-      params[:job][attribute] = Date.strptime(params[:job][attribute], "%m/%d/%y")
+      params[:job][attribute] = Date.parse(params[:job][attribute])
     end
     params[:job]
   end

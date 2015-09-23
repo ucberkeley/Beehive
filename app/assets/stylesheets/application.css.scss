@@ -41,6 +41,12 @@ select {
   margin: 3px 0px 3px 0px;
 }
 
+#advanced_search {
+  select {
+    width: 100%;
+  }
+}
+
 .page-title {
   font-size: 40px;
   margin: 15px;

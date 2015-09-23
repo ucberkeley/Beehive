@@ -1,5 +1,7 @@
 $(function() {
   $('.datepicker').each(function(index, elem) {
-    $(elem).datepicker();
+    $(elem).datepicker({
+      format: 'yyyy-mm-dd',
+    });
   });
 })
