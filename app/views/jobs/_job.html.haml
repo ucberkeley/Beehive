@@ -11,7 +11,7 @@
         %span{:id => "job_#{job.id}", :style => "display:none;overflow:hidden;height0px;"}
           = job.desc
         .posted
-          Posted: #{job.created_at.strftime("%m/%d/%Y")}
+          Last updated at: #{job.updated_at.strftime("%m/%d/%Y")}
       - if job_tags.present?
         = render partial: 'jobs/tag', collection: job.tag_list
 %hr
