@@ -164,13 +164,14 @@ class User < ActiveRecord::Base
   def admin?
     user_type == User::Types::Admin
   end
-  # TODO this needs to be a db field.
+
   def apply?
-    user_type == User::Types::Undergrad || user_type == User::Types::Admin
+    user_type == User::Types::Undergrad || user_type == User::Types::Admin || User::Types::Grad
   end
 
   def post?
-    user_type != User::Types::Undergrad || user_type == User::Types::Admin
+    # user_type != User::Types::Undergrad || user_type == User::Types::Admin
+    true
   end
 
   # Readable user type
