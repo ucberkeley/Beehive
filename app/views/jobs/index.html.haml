@@ -12,26 +12,31 @@
   .row
     #advanced_search.col-lg-4.col-sm-12
       .card.card-x
-        = label_tag :department, "Department", class: "filter-dropdown-label"
+        = form_tag(jobs_search_path, :method => "get") do
+        
+          = label_tag :department, "Department", class: "filter-dropdown-label"
 
-        = select_tag :department, options_for_select([["All Departments",0]]) + |
-          options_from_collection_for_select(Department.all, "id", "name",      |
-          @department_id), { :class => 'medium data-dropdown content' }         |
+          = select_tag :department, options_for_select([["All Departments",0]]) + |
+            options_from_collection_for_select(Department.all, "id", "name",      |
+            @department_id), { :class => 'medium data-dropdown content' }         |
 
-        = label_tag :compensation, "Compensation", class: "filter-dropdown-label"
+          = label_tag :compensation, "Compensation", class: "filter-dropdown-label"
 
-        = select_tag :compensation,                   |
-          options_for_select({                        |
-           "Don't care" => Job::Compensation::None,   |
-           "Pay"        => Job::Compensation::Pay,    |
-           "Credit"     => Job::Compensation::Credit, |
-           "Pay or credit" => Job::Compensation::Both |
-          }, @compensation)                           |
+          = select_tag :compensation,                   |
+            options_for_select({                        |
+             "Don't care" => Job::Compensation::None,   |
+             "Pay"        => Job::Compensation::Pay,    |
+             "Credit"     => Job::Compensation::Credit, |
+             "Pay or credit" => Job::Compensation::Both |
+            }, @compensation)                           |
 
-        = hidden_field_tag :as, params[:as]
-        = label_tag :per_page, "Listings per page", class: "filter-dropdown-label"
+          = hidden_field_tag :as, params[:as]
+          = label_tag :per_page, "Listings per page", class: "filter-dropdown-label"
 
-        = select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false
+          = select_tag :per_page, options_for_select([8,16,32,64,128], params[:per_page].to_i), :multiple=>false
+
+          = submit_tag @query, :class => "btn btn-info pull-right", :id => "do-job-search", :value => "Filter"
+
     .col-lg-8.col-sm-12
       .card.card-x.job-list
         - if @jobs.empty?
