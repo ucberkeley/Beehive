@@ -165,6 +165,7 @@ class ApplicsController < ApplicationController
     job_id = applic.job_id.to_s
     if !applic.nil?
       applic.status = "rejected"
+      applic.save
       flash[:notice] = "Applicants %s was rejected/removed" % applic.user.name
     end
     redirect_to('/jobs/%s' % job_id)

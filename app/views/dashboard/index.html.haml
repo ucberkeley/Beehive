@@ -10,7 +10,15 @@
   %h1 Dashboard
   .tab-content
     #post.tab-pane
-      - ownapps = @current_user.jobs.collect(&:applics).flatten
+
+      - unfilterredownapps = @current_user.jobs.collect(&:applics)
+      - ownapps = Array.new
+
+      - for app in unfilterredownapps do 
+
+        - if app[0][:status]!= 'rejected'
+          - ownapps << app
+      - ownapps.flatten!
 
       .card
         %h2 Applications Received
