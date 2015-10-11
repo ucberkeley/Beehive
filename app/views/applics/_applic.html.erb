@@ -28,4 +28,13 @@
     Undecided
   <% end %>
   </td>
+  <% if !mine -%>
+    <td>
+      
+      <%= link_to 'delete', delete_applic_path(applic, :job_id => applic.job_id), class: "btn btn-danger" -%>
+      
+    </td>
+  <% end -%>
+
+
 </tr>

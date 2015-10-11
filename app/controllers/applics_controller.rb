@@ -9,7 +9,7 @@ class ApplicsController < ApplicationController
     # only applicant can withdraw
   before_filter :verify_applic_admin,     :only => [:show, :resume, :transcript]
     # applicant, job admin can view applic
-  before_filter :verify_job_ownership,    :only => [:index]
+  before_filter :verify_job_ownership,    :only => [:index, :delete]
     # show applics only if can admin
   before_filter :verify_job_unapplied,    :only => [:create]
     # don't allow multiple applications
@@ -53,7 +53,7 @@ class ApplicsController < ApplicationController
   end
 
   def verify_job_ownership
-    j = @job #Job.find(params[:job_id])
+    j = Job.find(params[@applic.job_id])
     return if redirect_if(j.nil?, "Couldn't find that job.", jobs_path)
     return if redirect_if(! j.can_admin?(@current_user),
       "You are not authorized to view the applications for this job.",
@@ -151,6 +151,16 @@ class ApplicsController < ApplicationController
         render 'new'
       end
     end
+  end
+
+  def delete
+    applic = Applic.find_by_id(params[:id])
+    job_id = applic.job_id.to_s
+    if !applic.nil?
+      applic.status = "rejected"
+      flash[:notice] = "Applicants %s was rejected/removed" % applic.user.name
+    end
+    redirect_to('/jobs/%s' % job_id)
   end
 
   # withdraw from an application (destroy the applic)
