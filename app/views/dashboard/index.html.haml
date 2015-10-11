@@ -11,6 +11,7 @@
   .tab-content
     #post.tab-pane
       - ownapps = @current_user.jobs.collect(&:applics).flatten
+
       .card
         %h2 Applications Received
         - if ownapps.present?

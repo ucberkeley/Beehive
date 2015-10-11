@@ -53,11 +53,18 @@ class ApplicsController < ApplicationController
   end
 
   def verify_job_ownership
-    j = Job.find(params[@applic.job_id])
-    return if redirect_if(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirect_if(! j.can_admin?(@current_user),
-      "You are not authorized to view the applications for this job.",
-      job_path(j))
+    j = @job #Job.find(params[:job_id])
+    a = @applic
+    return if redirect_if(j.nil? && a.nil?, "Couldn't find that job.", jobs_path)
+    if !j.nil?
+      return if redirect_if(! j.can_admin?(@current_user),
+        "You are not authorized to view the applications for this job.",
+        job_path(j))
+    else
+      return if redirect_if(! a.job.can_admin?(@current_user),
+        "You are not authorized to view the applications for this job.",
+        job_path(a.job))
+    end
   end
 
   def serve_document(type)
