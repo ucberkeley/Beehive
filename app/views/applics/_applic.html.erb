@@ -1,4 +1,5 @@
 <% job = applic.job -%>
+<% if job!=nil -%>
 <tr class="job_<%= cycle('even', 'odd') %>">
   <td>
     <% if mine -%>
@@ -38,3 +39,4 @@
 
 
 </tr>
+<% end -%>
