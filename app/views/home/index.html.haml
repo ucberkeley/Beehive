@@ -9,9 +9,9 @@
       .text-info-small
         Search and filter over
         %span= Job.count
-        projects
+        exciting projects.
         %br
-        Apply in one click
+        Joining a project has never been easier!
         .clearfix
         - if @current_user.present?
           = link_to "EXPLORE", jobs_path, class: "btn btn-cal"
@@ -20,7 +20,7 @@
   .row.main-bottom
     .col-md-6
       .main-icons-text
-        We've made it easy to for you to find a perfect project to join.
+        We've made it easy for you to find your perfect project.
       .main-icons
     .col-md-6
       .row
