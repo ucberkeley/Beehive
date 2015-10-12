@@ -12,6 +12,7 @@
         %dd
           - @user.courses.each do |course|
             %span.tags.course-tag= course.name
+            
         %dt Interests
         %dd
           - @user.categories.each do |category|
@@ -24,24 +25,25 @@
 
         %dt Class of
         %dd
+          = @user.class_of
 
-        %dt Units this semester
-        %dd
-          = @user.units
+        / %dt Units this semester
+        / %dd
+        /   = @user.units
 
         %dt Hours free
         %dd
           = @user.free_hours
 
-        %dt Free in the summer
-        %dd
-          = @user.summer ? "Yes" : "No"
+        / %dt Free in the summer
+        / %dd
+        /   = @user.summer ? "Yes" : "No"
 
-        %dt Research
-        %dd
-          = @user.research_blurb
+        / %dt Research
+        / %dd
+        /   = @user.research_blurb
 
-        %dt Previous Experience
+        %dt Experience
         %dd
           = @user.experience
 

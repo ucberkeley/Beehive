@@ -10,7 +10,7 @@
           %li= msg
   %dl.dl-horizontal
     %dt
-      = f.label :title, 'Listing title *'
+      = f.label :title, 'Title *'
     %dd
       = f.text_field :title, class: "form-control"
     %dt
@@ -26,7 +26,7 @@
     %dd
       = select_tag :faculty_id, '<option value="-1">Select Sponsor</option>'.html_safe + options_from_collection_for_select(@faculty, :id, :name, @faculty_id || (@job.faculties.first.nil? ? 0 : @job.faculties.first.id))
     %dt
-      = f.label :desc, 'Listing description *'
+      = f.label :desc, 'Description *'
     %dd
       = f.text_area :desc, { rows: 12, class: "form-control" }
     %dt
@@ -34,11 +34,11 @@
     %dd
       = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. signal processing, environmental engineering)"
     %dt
-      = f.label :course, 'Required courses'
+      = f.label :course, 'Relevant courses'
     %dd
       = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. CS61A, BioE140L)"
     %dt
-      = f.label :proglang, 'Desired skill(s)'
+      = f.label :proglang, 'Revelant skills'
     %dd
       = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. Python, machine shop)"
     %dt
@@ -58,7 +58,7 @@
     %dd
       = f.select :compensation, options_for_select( Job::Compensation::All, @job.compensation )
     %dt
-      = f.label :status, 'Listing Status'
+      = f.label :status, 'Status'
     %dd
       = f.select :status, options_for_select( Job::Status::All, @job.status )
   .row
