@@ -116,14 +116,10 @@ class ApplicsController < ApplicationController
       if @applic.save
         # Validate and send emails
         user_email = @job.user.email
-        faculty_emails = @job.faculties.collect(&:email)
-        faculty_emails.select! { |email| email_regex.match(email)}
+        contact_email = @job.contacter.email
 
-        if !faculty_emails.empty? || email_regex.match(user_email)
-          if email_regex.match(user_email)
-            JobMailer.deliver_applic_email(@applic, user_email, []).deliver
-          else
-            JobMailer.deliver_applic_email(@applic, nil, faculty_emails).deliver
+        if !contact_email.empty?
+            JobMailer.deliver_applic_email(@applic, contact_email).deliver
           end
 
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
