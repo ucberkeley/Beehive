@@ -16,8 +16,9 @@
 
       - for app in unfilterredownapps do 
 
-        - if app[0][:status]!= 'rejected'
-          - ownapps << app
+        - if app[0] != nil
+          -if app[0][:status]!= 'not accepted'
+            - ownapps << app
       - ownapps.flatten!
 
       .card
