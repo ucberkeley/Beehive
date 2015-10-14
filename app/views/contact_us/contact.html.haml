@@ -1,18 +1,19 @@
 - content_for :title, 'Contact'
 .container
-  .row
-    .large-10.col-sm-12.columns
+  .card
+    .row
+      /.large-10.col-sm-12.columns
       %h1 Contact Us
       = form_tag(:feedback_email_link, :method => "post") do
         .row
-          %dt= label_tag(:sender, "Reply To:")
-          %dd= text_field_tag :sender, @user_email, :size => 25
-        .row
-          %dt= label_tag(:subject, "Subject:")
-          %dd= text_field_tag :subject, nil, :placeholder => "Enter subject...", :size => 25
-        .row
-          %dt.body= label_tag(:body, "Body:")
-          %dd= text_area_tag :body, nil, :placeholder => "Enter feedback...", :rows => 5
-        .row
-          %dt
-          %dd= submit_tag("Send Message")
+          %dl.dl-horizontal
+            %dt= label_tag(:sender, "Reply To:")
+            %dd= text_field_tag :sender, @user_email, class: 'form-control'
+
+            %dt= label_tag(:subject, "Subject:")
+            %dd= text_field_tag :subject, nil, :placeholder => "Enter subject...", class: 'form-control'
+
+            %dt.body= label_tag(:body, "Body:")
+            %dd= text_area_tag :body, nil, :placeholder => "Enter feedback...", :rows => 10, class: 'form-control'
+
+        = submit_tag "Send Message", class: 'btn btn-primary'
