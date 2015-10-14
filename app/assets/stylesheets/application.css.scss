@@ -73,6 +73,12 @@ pre {
     margin-left: 10px;
     margin-right: 20px;
   }
+  a.navbar-mobile-brand {
+    background: url("beehive_icon.png") no-repeat center center;
+    background-size: contain;
+    width: auto;
+    margin: 0px 5px 0px 20px;
+  }
   .dropdown.open {
     .dropdown-toggle {
       background-color: rgba(255, 255, 255, 0.5) !important; 
@@ -86,8 +92,10 @@ pre {
 }
 
 @media screen and (min-width: 768px) {
-  .navbar-nav .glyphicon {
-    display: none;
+  .navbar-nav {
+   .glyphicon, .navbar-brand {
+      display: none;
+    }
   }
 }
 
@@ -95,10 +103,11 @@ pre {
   .navbar-nav > li > a:not(.glyphicon) {
     display: none;
   }
+  .navbar-nav >  li > .navbar-brand {
+    display: block !important;
+  }
   .navbar.navbar-default a.navbar-brand {
-    background-size: 120px;
-    width: 100%;
-    margin: 0 auto;
+    display: none;
   }
 }
 
