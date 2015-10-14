@@ -89,6 +89,7 @@ class UsersController < ApplicationController
 
   def profile
     prepare_attribs_in_params(@current_user)
+    @all_majors = Major.all.collect(&:name)
     render :edit
   end
 

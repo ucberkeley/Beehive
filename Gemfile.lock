@@ -73,6 +73,8 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootstrap-typeahead-rails (0.10.5.1)
+      railties (>= 3.0)
     bootstrap_form (2.3.0)
     builder (3.2.2)
     bullet (4.14.5)
@@ -308,6 +310,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-material-design
   bootstrap-sass (~> 3.3.3)
+  bootstrap-typeahead-rails
   bootstrap_form
   bullet
   byebug

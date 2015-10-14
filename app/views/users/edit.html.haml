@@ -28,6 +28,24 @@
 
             %dt Courses
             %dd= text_field :course, :name, :value => params[:course][:name], class: 'form-control', :placeholder => "Relevant courses, separated by commas"
+
+            %dt Major
+            %dd= text_field :major, :name, :value => nil, id: 'major_name', class: 'typeahead', placeholder: "Start typing your major..."
+            = hidden_field_tag :major_id, params[:major_id], id: "major_id"
+        = javascript_tag "var all_majors = #{ @all_majors.to_json };"
+        :javascript
+          $(function() {
+            for (var i = 0; i < all_majors.length; i++){
+              all_majors[i].label = all_majors[i].name
+            }
+            $("#major_name").autocomplete({
+              minLength: 3,
+              source: all_majors,
+              select: function(event, ui) {
+                $("#major_id").val(ui.item.id)
+              }
+            });
+          });
       - if @current_user.apply?
         %hr
         .row
