@@ -21,6 +21,8 @@
     - if @applic.status != "accepted"
       = form_tag('/applications/%s' % @applic.id, :method => "post") do
         = submit_tag "Accept this Applicant", class: "btn btn-primary"
+      = form_tag('/applics/applications/%s/delete' % @applic.id, :method => "get") do
+        = submit_tag "Reject this Applicant", class: "btn btn-warning"
     - if @applic.status == "accepted"
       = form_tag('/applications/%s/unaccept' % @applic.id, :method => "post") do
         = submit_tag "Unhire Accepted Applicant", class: "btn btn-primary"

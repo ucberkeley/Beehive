@@ -51,3 +51,8 @@
         %dd
           - if @user.url.present?
             =link_to url_with_protocol(@user.url), url_with_protocol(@user.url)
+
+        %dt All Posted Jobs
+        %dd
+          - if @user.jobs.present?
+            = render @user.jobs
