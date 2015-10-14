@@ -19,6 +19,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+$ucb-blue: #003262;
 
 html, body{
    margin:0;
@@ -77,6 +78,45 @@ pre {
       background-color: rgba(255, 255, 255, 0.5) !important; 
     }
   }
+}
+
+.navbar-nav .glyphicon {
+  color: $ucb-blue;
+  font-family: 'Glyphicons Halflings' !important;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar-nav .glyphicon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-nav > li > a:not(.glyphicon) {
+    display: none;
+  }
+  .navbar.navbar-default a.navbar-brand {
+    background-size: 120px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+// next 4 blocks disable navbar collapsing 
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
 }
 
 #home-page {
@@ -158,4 +198,8 @@ a:hover {
 
 .fieldWithErrors, #errorExplanation {
   color: red;
+}
+
+.navbar-header .icon-bar {
+  background-color: #FFF;
 }
