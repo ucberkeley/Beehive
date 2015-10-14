@@ -1,4 +1,5 @@
 <% job = applic.job -%>
+<% if job!=nil -%>
 <tr class="job_<%= cycle('even', 'odd') %>">
   <td>
     <% if mine -%>
@@ -28,4 +29,14 @@
     Undecided
   <% end %>
   </td>
+  <% if !mine -%>
+    <td>
+      
+      <%= link_to 'delete', delete_applic_path(applic), class: "btn btn-danger" -%>
+      
+    </td>
+  <% end -%>
+
+
 </tr>
+<% end -%>
