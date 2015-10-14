@@ -10,7 +10,7 @@ class JobMailer < ApplicationMailer
          :subject => "Project Listing Confirmation | Berkeley Beehive")
   end
 
-  def deliver_applic_email(applic, user_email, faculty_emails)
+  def deliver_applic_email(applic, contact_email)
     @applic = applic
     @job = applic.job
 
@@ -22,7 +22,7 @@ class JobMailer < ApplicationMailer
       end
     end
 
-    mail(:to => [user_email] | faculty_emails,
+    mail(:to => contact_email,
          :subject => "[Beehive] Project Application")
   end
 end
