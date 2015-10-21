@@ -9,7 +9,7 @@ class ApplicsController < ApplicationController
     # only applicant can withdraw
   before_filter :verify_applic_admin,     :only => [:show, :resume, :transcript]
     # applicant, job admin can view applic
-  before_filter :verify_job_ownership,    :only => [:index]
+  before_filter :verify_job_ownership,    :only => [:index, :delete]
     # show applics only if can admin
   before_filter :verify_job_unapplied,    :only => [:create]
     # don't allow multiple applications
@@ -54,10 +54,17 @@ class ApplicsController < ApplicationController
 
   def verify_job_ownership
     j = @job #Job.find(params[:job_id])
-    return if redirect_if(j.nil?, "Couldn't find that job.", jobs_path)
-    return if redirect_if(! j.can_admin?(@current_user),
-      "You are not authorized to view the applications for this job.",
-      job_path(j))
+    a = @applic
+    return if redirect_if(j.nil? && a.nil?, "Couldn't find that job.", jobs_path)
+    if !j.nil?
+      return if redirect_if(! j.can_admin?(@current_user),
+        "You are not authorized to view the applications for this job.",
+        job_path(j))
+    else
+      return if redirect_if(! a.job.can_admin?(@current_user),
+        "You are not authorized to view the applications for this job.",
+        job_path(a.job))
+    end
   end
 
   def serve_document(type)
@@ -116,14 +123,10 @@ class ApplicsController < ApplicationController
       if @applic.save
         # Validate and send emails
         user_email = @job.user.email
-        faculty_emails = @job.faculties.collect(&:email)
-        faculty_emails.select! { |email| email_regex.match(email)}
+        contact_email = @job.contacter.email
 
-        if !faculty_emails.empty? || email_regex.match(user_email)
-          if email_regex.match(user_email)
-            JobMailer.deliver_applic_email(@applic, user_email, []).deliver
-          else
-            JobMailer.deliver_applic_email(@applic, nil, faculty_emails).deliver
+        if !contact_email.empty?
+            JobMailer.deliver_applic_email(@applic, contact_email).deliver
           end
 
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
@@ -151,6 +154,17 @@ class ApplicsController < ApplicationController
         render 'new'
       end
     end
+  end
+
+  def delete
+    applic = Applic.find_by_id(params[:id])
+    job_id = applic.job_id.to_s
+    if !applic.nil?
+      applic.status = "not accepted"
+      applic.save
+      flash[:notice] = "Applicants %s was rejected/removed" % applic.user.name
+    end
+    redirect_to('/jobs/%s' % job_id)
   end
 
   # withdraw from an application (destroy the applic)
@@ -192,7 +206,7 @@ class ApplicsController < ApplicationController
       applic.destroy
       flash[:notice] = "Accepted hire %s was removed" % applic.user.name
     end
-    redirect_to('/jobs/%s' % job_id)
+    redirect_to job_path(job_id)
   end
 
   def index

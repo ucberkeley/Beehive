@@ -1,0 +1,7 @@
+- content_for :title, "Welcome to Beehive!"
+.container.user-profile
+  %center
+    %h1= "Welcome, #{@user.firstname}!"
+    %h2 Please complete your profile
+    %p We will use this information to recommend the best projects for you. This information will also be submitted when you apply to a research project.
+  = render partial: 'edit'

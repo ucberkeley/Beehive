@@ -121,77 +121,15 @@ end
 
 
 module CASControllerIncludes
+  # TODO why do we need both login filters?
   def goto_home_unless_logged_in
     #CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
     return true if @current_user && @user_session
     (redirect_to home_path) and false
   end
 
-  def login_user!(user)
-    return UserSession.new(user).save
-  end
-
   def rm_login_required
     return true if @current_user
     (redirect_to login_path) and false
-  end
-
-  def first_login(auth_field, auth_value)
-  # Processes a user's first login, which involves creating a new User.
-  # Requires a CAS session to be present, and redirects if it isn't.
-  # @returns false if redirected because of new user processing, true if user was already signed up
-  #
-
-    # Require CAS login first
-    unless @user_session
-      (redirect_to login_path) and false
-    end
-
-    # If user doesn't exist, create it. Use current_user
-    # so as to ensure that redirects work properly; i.e.
-    # so that you are 'logged in' when you go to the Edit Profile
-    # page in this next section here.
-
-    unless User.exists?(auth_field => auth_value)
-      new_user = User.new
-      new_user[auth_field] = auth_value
-
-      # Implement separate auth provider logic here
-      if session[:auth_hash][:provider].to_sym == :cas
-        # When using CAS, the Users table is populated from LDAP
-        person = new_user.ldap_person
-        if person
-          new_user.email = person.email
-          new_user.name = new_user.ldap_person_full_name
-          new_user.update_user_type
-        end
-      end
-
-      if new_user.save && new_user.errors.empty?
-        flash[:notice] = "Welcome to Beehive! Since this is your first time here, "
-        flash[:notice] << "please make sure you update your email address. We'll send all correspondence to that email address."
-        logger.info "First login for #{new_user.login}"
-
-        @current_user = User.where(auth_field => auth_value)[0]
-        session[:user_id] = @current_user.id
-        return redirect_to edit_user_path(@current_user.id)
-      else
-        flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
-        flash[:error] += new_user.errors.inspect if Rails.env == 'development'
-        return redirect_to home_path
-      end
-    end
-
-    logger.info('LOGIN') if Rails.env == 'development'
-    return true
-  end
-
-  # Redirects to signup page if user hasn't registered.
-  # Filter fails if no auth hash is present, or if user was redirected to
-  # signup page.
-  # Filter passes if auth hash is present, and a user exists.
-  def require_signed_up
-    return true if session[:auth_hash].present? && User.find(session[:user_id])
-    (redirect_to :controller => :users, :action => :new) and false
   end
 end
