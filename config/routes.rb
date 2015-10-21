@@ -1,11 +1,5 @@
 ResearchMatch::Application.routes.draw do
 
-  get 'errors/not_found'
-  get 'errors/internal_server_error'
-
-  get "/404" => "errors#not_found"
-  get "/500" => "errors#internal_server_error"
-
   get "contact_us/contact", :as => :contact_us
   post "contact_us/send_email", :as => :feedback_email_link
 
@@ -84,6 +78,9 @@ ResearchMatch::Application.routes.draw do
   root :to => 'home#index'
 
   get '/test_error(/:code)' => 'application#test_exception_notification'
+
+  # Routing for Errors
+  get "*any", via: :all, to: "errors#not_found"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
