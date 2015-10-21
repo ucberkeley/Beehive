@@ -27,6 +27,7 @@ ResearchMatch::Application.routes.draw do
     get  '/jobs/:job_id/applications' => 'applics#index', :as => :list_jobs_applics
     get  '/applications/:id' => 'applics#show', :as => :applic
     get  '/applications/:id/withdraw' => 'applics#destroy', :as => :destroy_applic
+    get  '/applications/:id/delete' => 'applics#delete', :as => :delete_applic
     post '/applications/:applic_id' => 'applics#accept'
     post '/applications/:applic_id/unaccept' => 'applics#unaccept'
     #get  '/applications/:id/resume' => 'applics#resume', :as => :applic_resume

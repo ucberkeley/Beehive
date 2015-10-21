@@ -10,85 +10,61 @@ class UsersController < ApplicationController
 
   #CalNet / CAS Authentication
   #before_filter CASClient::Frameworks::Rails::Filter
-  before_filter :goto_home_unless_logged_in
+  # before_filter :goto_home_unless_logged_in
+  before_filter :ensure_new_user, :only => [:new, :create]
   before_filter :rm_login_required, :except => [:new, :create]
-  #before_filter :setup_cas_user, :except => [:new, :create]
+  before_filter :correct_user_access, :only => [:edit, :update]
+  before_filter :require_admin, :only => [:index, :delete]
 
-  # Ensures that only this user -- and no other users -- can edit his/her profile
-  before_filter :correct_user_access, :only => [ :edit, :update ]
-
-  def show
+  def show # TODO restrict access
     @user = User.find_by_id(params[:id])
-    @year = @user.year.nil? ? "N/A" : "#{@user.year.ordinalize} year"
+    unless @user
+      flash[:error] = 'We couldn\'t find that user.'
+      redirect_to dashboard_path
+    end
   end
 
-  # Don't render new.rhtml; instead, create the user immediately
-  # and redirect to the edit profile page.
+  # Handles new users. Flow from user_sessions#new
   def new
-      # Make sure user isn't already signed up
-      if User.exists?(:id => session[:user_id]) then
-        flash[:warning] = "You're already signed up."
-        redirect_to dashboard_path
-        return
+    @user = User.new(session[:auth_field] => session[:auth_value])
+    if params[:course].nil? # so edit view doesn't complain
+      params[:course] = params[:proglang] = params[:category] = {}
+    end
+
+    if session[:auth_provider].to_sym == :cas
+      unless @user.fill_from_ldap
+        logger.warn "UsersController.new: Failed to find LDAP::Person for uid #{session[:auth_value]}"
       end
-
-      @user = User.new(:login => session[:cas_user].to_s)
-      person = @user.ldap_person
-
-      if person.nil?
-        # TODO: what to do here?
-        logger.warn "UsersController.new: Failed to find LDAP::Person for uid #{session[:cas_user]}"
-        flash[:error] = "A directory error occurred. Please make sure you've authenticated with CalNet and try again."
-        redirect_to '/'
-      end
-
-      @user.name  = @user.ldap_person_full_name
-      @user.email = person.email
-      @user.update_user_type
-
-      # create
-      create
+    end
   end
 
+  # Create account for a new user.
   def create
-    logout_keeping_session!
-
-    # See if this user was already created
-    # TODO: handle this better
-    if User.exists?(:login=>session[:cas_user].to_s) then
-      flash[:error] = "You've already signed up."
-      redirect_to '/'
+    new # set @user
+    if @user.apply?
+      @user.handle_courses(params[:course][:name])
+      @user.handle_proglangs(params[:proglang][:name])
+      @user.handle_categories(params[:category][:name])
     end
+    @user.assign_attributes(user_params)
 
-    @user = User.new(params[:user])
-    @user.login = session[:cas_user]
-    @user.name = @user.ldap_person_full_name
-
-    # For some reason, the email doesn't persist when coming from
-    # the new action. This band-aid works.
-    @user.email ||= @user.ldap_person.email
-
-    @user.update_user_type
-    if @user.save && @user.errors.empty? then
-      flash[:notice] = "Thanks for signing up! You're activated so go ahead and sign in."
-      redirect_to :controller => "jobs", :action => "index"
-
+    if @user.save && @user.errors.empty?
+      flash[:notice] = 'Your profile was successfully updated.'
+      redirect_to jobs_path
     else
-      logger.error "UsersController.create: Failed because #{@user.errors.inspect}"
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact support."
-      # format.html { render :action => 'new' }
-      # redirect_to new_user_path
-      redirect_to :controller => "dashboard", :action => "index"
+      render 'new'
     end
   end
 
+  # Edit any user (only be available to Admin)
   def edit
     @user = User.find(params[:id])
     prepare_attribs_in_params(@user)
   end
 
   def profile
-    prepare_attribs_in_params(@current_user)
+    @user = @current_user
+    prepare_attribs_in_params(@user)
     render :edit
   end
 
@@ -99,10 +75,9 @@ class UsersController < ApplicationController
       @current_user.handle_categories(params[:category][:name])
     end
     if @current_user.update_attributes(user_params)
-      flash[:notice] = 'User profile was successfully updated.'
+      flash[:notice] = 'Your profile was successfully updated.'
       redirect_to profile_path
     else
-      flash[:error] = 'User profile failed to update.'
       render 'edit'
     end
   end
@@ -112,17 +87,25 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def correct_user_access
-    if (User.find_by_id(params[:id]) == nil || @current_user != User.find_by_id(params[:id]))
-      # flash[:error] = "params[:id] is " + params[:id] + "<br />"
-      # flash[:error] = "@current_user is " + @current_user + "<br />"
-      flash[:error] = "You don't have permission to access that."
-            redirect_to :controller => 'dashboard', :action => :index
+    def correct_user_access
+      user_id = User.find_by_id(params[:id])
+      if user_id == nil || (@current_user != user_id && !@current_user.admin?)
+        flash[:error] = "Sorry, you can't access that."
+        redirect_to :controller => 'dashboard', :action => :index
+      end
     end
-  end
 
-  def user_params
-    params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url)
-  end
+    def ensure_new_user
+      if @current_user
+        flash[:warning] = "You're already signed up."
+        redirect_to profile_path
+        return false
+      end
+      return true if session[:auth_value]
+      (redirect_to login_path) and false
+    end
+
+    def user_params
+      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url)
+    end
 end

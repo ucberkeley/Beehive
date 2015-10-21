@@ -10,10 +10,22 @@
   %h1 Dashboard
   .tab-content
     #post.tab-pane
-      - ownapps = @current_user.jobs.collect(&:applics).flatten
+
+      - unfilterredownapps = @current_user.jobs.collect(&:applics)
+
+      - ownapps = Array.new
+      - unless unfilterredownapps.empty?
+        - for app in unfilterredownapps do 
+          - for applic in app do
+            - if applic[:status] != 'not accepted'
+              - ownapps << applic
+
+      - unless ownapps.empty?
+        - ownapps.flatten!
+
       .card
         %h2 Applications Received
-        - if ownapps.present?
+        - unless ownapps.empty?
           %table.job_table.table.table-striped.table-condensed
             %thead
               %tr
@@ -21,6 +33,7 @@
                 %th.col-md-4 Project
                 %th.col-md-2 Applicant
                 %th.col-md-2 Status
+
             = render ownapps, :mine => false
         - else
           You have not yet received any applications.

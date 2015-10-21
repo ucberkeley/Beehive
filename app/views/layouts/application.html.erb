@@ -51,6 +51,7 @@
             <ul class="nav navbar-nav navbar-right">
             <% if @current_user.present? %>
               <li><%= link_to @current_user.name, profile_path %></li>
+              <li><%= link_to 'Support', contact_us_path %></li>
               <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
 
               <li><%= link_to "", profile_path, :class => "glyphicon glyphicon-user" %></li>

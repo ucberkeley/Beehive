@@ -14,20 +14,6 @@ class ApplicationController < ActionController::Base
   #   @exception = e
   #   render 'common/exception', :status => 500
 
-  #   Rails.logger.error "ERROR 500: #{e.inspect}"
-
-  #   request.env["exception_notifier.exception_data"] = {
-  #     :timestamp => Time.now.to_i
-  #   }
-
-  #   begin
-  #     ExceptionNotifier::Notifier.exception_notification(request.env, e).deliver
-  #   rescue => f
-  #     Rails.logger.error "ExceptionNotifier: Failed to deliver because #{f.inspect}"
-  #   end
-  #   raise if Rails.test?
-  # end
-
   # Redirects with a flash[:notice] if condition is true, and returns true.
   #
   # Usage: return if redirect_if(!user_logged_in, "Not logged in!", "/diaf")
@@ -77,12 +63,12 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     @user_session = UserSession.find
-    @current_user = @user_session ? @user_session.user : nil
+    @current_user = @user_session.user if @user_session
   end
   
   def require_admin
     unless logged_in_as_admin?
-      redirect_to request.referer || home_path, :notice => 'Insufficient privileges'
+      redirect_to request.referer || home_path, :notice => "Sorry, you can't access that."
     end
   end
 
