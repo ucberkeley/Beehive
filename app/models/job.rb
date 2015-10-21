@@ -434,13 +434,14 @@ class Job < ActiveRecord::Base
 
   protected
   
+  #delete this?
   def earliest_start_date_must_be_before_latest
-    errors[:earliest_start_date] << "cannot be later than the latest start date" if 
+    errors[:start_date] << "cannot be later than the latest start date" if 
       latest_start_date.present? && earliest_start_date > latest_start_date
   end
 
   def latest_start_date_must_be_before_end_date
-    errors.add(:latest_start_date, "cannot be later than the end date") if
+    errors.add(:apply_by_date, "cannot be later than the end date") if
       latest_start_date.present? && !open_ended_end_date &&
         latest_start_date > end_date
   end
