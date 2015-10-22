@@ -1,9 +1,16 @@
 'use strict';
 
-// Currently only included in user/edit.html.haml
+// Currently only included in user/edit and jobs/_form
 $(function() { 
   // strict autocomplete: exclude entries that are too long or have chars ( ) ; /
   var PURGE_FUZZ = true;
+  // Replacement for default autocomplete filter function to search only from the beginning of the string
+  function filterStartsWith(array, term) {
+    var matcher = new RegExp('^' + $.ui.autocomplete.escapeRegex(term), 'i');
+    return $.grep(array, function (value) {
+      return matcher.test(value.label || value.value || value);
+    });
+  }
 
   function split(val) {
     return val.split(/,\s*/);
@@ -12,22 +19,34 @@ $(function() {
   function extractLast(term) {
     return split(term).pop();
   }
-  function autocomplete_setup(get_url, field_selector, length_limit) {
 
+  /*
+   * @param {string}  get_url - JSON URI
+   * @param {string}  field_selector - jquery selector of input elem to autocomplete
+   * @param {number}  length_limit - limit autocomplete result length to <= this limit
+   * @param {boolean} match_begins - if true, limit autocomplete results to startsWith(term)
+   */
+  function autocomplete_setup(get_url, field_selector, length_limit, match_begins) {
     $.getJSON(get_url, {}, function(data) { 
       $(field_selector).autocomplete({
         minLength: 0,
         maxLength: 6,
         source: function(request, response) {
-          // delegate back to autocomplete, but extract the last term
-          if (PURGE_FUZZ) {
-            var terms = $.ui.autocomplete.filter(data, extractLast(request.term));
-            response(terms.filter(function(item) {
-              return !(item.length > length_limit || item.match(new RegExp('[\(\);\/]')));
-            }));
+          var terms;
+
+          if (match_begins) {
+            terms = filterStartsWith(data, extractLast(request.term));
           } else {
-            response($.ui.autocomplete.filter(data, extractLast(request.term)));
+            terms = $.ui.autocomplete.filter(data, extractLast(request.term));
           }
+
+          if (PURGE_FUZZ) {
+            terms = terms.filter(function(item) {
+              return !(item.length > length_limit || item.match(new RegExp('[();\/]')));
+            });
+          }
+          
+          response(terms.slice(0,12));
         },
         focus: function() {
           // prevent value inserted on focus
@@ -58,8 +77,8 @@ $(function() {
     });
   }
 
-  autocomplete_setup('/courses/json', '#courses-input', 20);
-  autocomplete_setup('/categories/json', '#categories-input', 50);
-  autocomplete_setup('/proglangs/json', '#proglangs-input', 20);
+  autocomplete_setup('/courses/json', '#courses-input', 20, true);
+  autocomplete_setup('/categories/json', '#categories-input', 50, false);
+  autocomplete_setup('/proglangs/json', '#proglangs-input', 20, true);
 });
 

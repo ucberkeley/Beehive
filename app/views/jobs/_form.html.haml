@@ -1,3 +1,4 @@
+= javascript_include_tag 'autocomplete_setup'
 = form_for(@job) do |f|
   - if @job.errors.any?
     #error_explanation
@@ -32,15 +33,15 @@
     %dt
       = f.label :category, 'Categories'
     %dd
-      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. signal processing, environmental engineering)"
+      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :id => 'categories-input', :placeholder => "(e.g. signal processing, environmental engineering)"
     %dt
       = f.label :course, 'Relevant courses'
     %dd
-      = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. CS61A, BioE140L)"
+      = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :id => 'courses-input', :placeholder => "(e.g. CS61A, BioE140L)"
     %dt
       = f.label :proglang, 'Revelant skills'
     %dd
-      = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. Python, machine shop)"
+      = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :id => 'proglangs-input', :placeholder => "(e.g. Python, machine shop)"
     %dt
       = f.label :earliest_start_date, 'Earliest start date *'
     %dd
