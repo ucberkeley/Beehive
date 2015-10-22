@@ -1,4 +1,5 @@
 - content_for :title, "#{@user.firstname}'s Profile"
+= javascript_include_tag 'autocomplete_setup'
 .container.user-profile
   %h1= "#{@user.firstname}'s Profile"
   = render partial: 'edit'

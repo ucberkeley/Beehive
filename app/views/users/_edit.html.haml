@@ -34,11 +34,11 @@
           %dd= f.text_area :experience, :rows => 10, :id => 'experience-box', class: 'form-control', :maxlength => 1000, :size => 1000, :placeholder => "Describe your projects, work experience, or other extracurricular activities."
 
           %dt Courses
-          %dd= text_field :course, :name, :value => params[:course][:name], class: 'form-control', :placeholder => "Relevant courses, separated by commas"
+          %dd= text_field :course, :name, :value => params[:course][:name], class: 'form-control', id: 'courses-input', :placeholder => "Relevant courses, separated by commas"
 
           %dt Skills
-          %dd= text_field :proglang, :name, :value => params[:proglang][:name], class: 'form-control', :placeholder => "Languages in which you are proficient, separated by commas"
+          %dd= text_field :proglang, :name, :value => params[:proglang][:name], class: 'form-control', id: 'proglangs-input', :placeholder => "Languages in which you are proficient, separated by commas"
 
           %dt Interests
-          %dd= text_field :category, :name, :value => params[:category][:name], class: 'form-control', :placeholder => "What areas are you interested in?"
+          %dd= text_field :category, :name, :value => params[:category][:name], class: 'form-control', id: 'categories-input', :placeholder => "What areas are you interested in?"
     = f.submit 'Update', class: 'btn btn-primary'

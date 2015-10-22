@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
     def json
-        cats = Category.find(:all)
+        cats = Category.all
         cats = cats.collect { |cat| cat.name }
 
         respond_to do |format|

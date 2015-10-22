@@ -1,7 +1,7 @@
 class ProglangsController < ApplicationController
 
     def json
-        proglangs = Proglang.find(:all)
+        proglangs = Proglang.all
         proglangs = proglangs.collect { |proglang| proglang.name }
 
         respond_to do |format|

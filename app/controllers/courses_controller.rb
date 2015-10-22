@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
 
     def json
 
-        courses = Course.find(:all)
+        courses = Course.all
         courses = courses.collect { |course| course.name }
 
         respond_to do |format|
