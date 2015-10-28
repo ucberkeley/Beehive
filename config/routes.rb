@@ -80,6 +80,9 @@ ResearchMatch::Application.routes.draw do
 
   get '/test_error(/:code)' => 'application#test_exception_notification'
 
+  # Routing for Errors
+  get "*any", via: :all, to: "errors#not_found"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
