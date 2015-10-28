@@ -1,3 +1,4 @@
+= javascript_include_tag 'autocomplete_setup'
 = form_for(@job) do |f|
   - if @job.errors.any?
     #error_explanation
@@ -32,15 +33,15 @@
     %dt
       = f.label :category, 'Categories'
     %dd
-      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. signal processing, environmental engineering)"
+      = text_field :category, :name, :value => @job.category_list_of_job(true), :class => 'form-control', :id => 'categories-input', :placeholder => "(e.g. signal processing, environmental engineering)"
     %dt
       = f.label :course, 'Relevant courses'
     %dd
-      = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. CS61A, BioE140L)"
+      = text_field :course, :name, :value => @job.course_list_of_job(true), :class => 'form-control', :id => 'courses-input', :placeholder => "(e.g. CS61A, BioE140L)"
     %dt
       = f.label :proglang, 'Revelant skills'
     %dd
-      = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :placeholder => "(e.g. Python, machine shop)"
+      = text_field :proglang, :name, :value => @job.proglang_list_of_job(true), :class => 'form-control', :id => 'proglangs-input', :placeholder => "(e.g. Python, machine shop)"
     %dt
       = f.label :earliest_start_date, 'Start date *'
     %dd
@@ -61,6 +62,26 @@
       = f.label :status, 'Status'
     %dd
       = f.select :status, options_for_select( Job::Status::All, @job.status )
+
+  .row
+    %h2.center Ask a Potential Researcher
+    %p.center 
+      Questions 
+      %b required 
+      to be answered by applicants
+    %dl.dl-horizontal
+      %dt
+        = f.label :question_1, 'Question 1'
+      %dd
+        = f.text_field :question_1, class: "form-control", placeholder: "(e.g. why are you interested in this project?)"
+      %dt
+        = f.label :question_2, 'Question 2'
+      %dd
+        = f.text_field :question_2, class: "form-control", placeholder: "(e.g. what do you want to get out of this experience?)"
+      %dt
+        = f.label :question_3, 'Question 3'
+      %dd
+        = f.text_field :question_3, class: "form-control"
   .row
     - if ['new', 'create'].include?(controller.action_name.downcase)
       = f.submit 'Post', class: "btn btn-primary"

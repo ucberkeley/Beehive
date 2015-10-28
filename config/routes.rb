@@ -63,9 +63,9 @@ ResearchMatch::Application.routes.draw do
   get '/statistics'      => 'statistics#index', :as => :statistics
 
   # Autocomplete routes
-  get '/categories/json' => 'categories#json', :as => :categories_json
-  get '/courses/json' => 'courses#json', :as => :courses_json
-  get '/proglangs/json' => 'proglangs#json', :as => :proglangs_json
+  get '/categories/json' => 'categories#json', :as => :categories_json, :defaults => {format: 'json'}
+  get '/courses/json' => 'courses#json', :as => :courses_json, :defaults => {format: 'json'}
+  get '/proglangs/json' => 'proglangs#json', :as => :proglangs_json, :defaults => {format: 'json'}
 
   # Admin
   get '/admin' => 'admin#index', :as => :admin
@@ -79,6 +79,9 @@ ResearchMatch::Application.routes.draw do
   root :to => 'home#index'
 
   get '/test_error(/:code)' => 'application#test_exception_notification'
+
+  # Routing for Errors
+  get "*any", via: :all, to: "errors#not_found"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
