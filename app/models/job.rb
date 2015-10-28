@@ -341,6 +341,15 @@ class Job < ActiveRecord::Base
     end
     return super
   end
+
+  def self.close_jobs
+    jobs = Job.where('latest_start_date < ?', Time.now)
+
+    jobs.each do |job|
+      job.update_attribute(:status, 1)
+      job.save(validate: false)
+    end
+  end
   
   # Returns a string containing the category names taken by this Job
   # e.g. "robotics,signal processing"
@@ -433,6 +442,8 @@ class Job < ActiveRecord::Base
       end
     end
   end
+
+  
 
   protected
   
