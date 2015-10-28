@@ -24,12 +24,6 @@
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="/"></a>
           </div>
 
@@ -40,9 +34,17 @@
                 <li><%= link_to "Dashboard", dashboard_path %></li>
                 <li><%= link_to "Browse", jobs_path %></li>
                 <li><%= link_to "Post", new_job_path %></li>
+
+                <li><a class="navbar-brand navbar-mobile-brand" href="/"></a></li>
+                <li><%= link_to "", dashboard_path, :class => "glyphicon glyphicon-home" %></li>
+                <li><%= link_to "", jobs_path, :class => "glyphicon glyphicon-search" %></li>
+                <li><%= link_to "", new_job_path, :class => "glyphicon glyphicon-plus" %></li>
                 <% if @current_user.admin? %>
                   <li><%= link_to "Statistics", statistics_path %></li>
                   <li><%= link_to "Admin", admin_path %></li>
+
+                  <li><%= link_to "", statistics_path, :class => "glyphicon glyphicon-stats" %></li>
+                  <li><%= link_to "", admin_path, :class => "glyphicon glyphicon-eye-open" %></li>
                 <% end %>
               <% end %>
             </ul>
@@ -51,8 +53,13 @@
               <li><%= link_to @current_user.name, profile_path %></li>
               <li><%= link_to 'Support', contact_us_path %></li>
               <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
+
+              <li><%= link_to "", profile_path, :class => "glyphicon glyphicon-user" %></li>
+              <li><%= link_to "", contact_us_path, :class => "glyphicon glyphicon-question-sign"%></li>
+              <li><%= link_to "", logout_path, :class => "glyphicon glyphicon-log-out" %></li>
             <% else %>
               <li><%= link_to "Log In", login_path, :class => "login-button"%></li>
+              <li><%= link_to "", login_path, :class => "glyphicon glyphicon-log-in" %></li>
             <% end %>
             </ul>
           </div><!-- /.navbar-collapse -->
