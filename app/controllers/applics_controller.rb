@@ -126,9 +126,7 @@ class ApplicsController < ApplicationController
         contact_email = @job.contacter.email
 
         if !contact_email.empty?
-            JobMailer.deliver_applic_email(@applic, contact_email).deliver
-          # end
-
+          JobMailer.deliver_applic_email(@applic, contact_email).deliver
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else
           flash[:error] = "Looks like the job's contacts have invalid emails.
