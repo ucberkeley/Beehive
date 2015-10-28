@@ -109,9 +109,22 @@ class ApplicsController < ApplicationController
     @applic = Applic.where({:user_id => @current_user.id, :job_id => @job.id}).first
     if @applic
       @applic.message = params[:applic][:message]
+      @applic.answer_1 = params[:applic][:answer_1]
+      @applic.answer_2 = params[:applic][:answer_2]
+      @applic.answer_3 = params[:applic][:answer_3]
     else
       @applic = Applic.new({:user_id => @current_user.id, :job_id => @job.id}.update(params[:applic]))
     end
+
+    if (@job.question_1 != nil && @job.question_1 != "" && (@applic.answer_1 == nil || @applic.answer_1 == "")) ||
+       (@job.question_2 != nil && @job.question_2 != "" && (@applic.answer_2 == nil || @applic.answer_2 == "")) ||
+       (@job.question_3 != nil && @job.question_3 != "" && (@applic.answer_3 == nil || @applic.answer_3 == ""))
+       flash[:error] = "Could not apply to position. Make sure you've " +
+                        "answered faculty questions"
+      render'new'
+      return
+    end
+
     @applic.resume_id = @current_user.resume.id if params[:include_resume] &&
       @current_user.resume.present?
     @applic.transcript_id = @current_user.transcript.id if
