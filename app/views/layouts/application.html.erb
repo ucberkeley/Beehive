@@ -50,13 +50,30 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <% if @current_user.present? %>
-              <li><%= link_to @current_user.name, profile_path %></li>
-              <li><%= link_to 'Support', contact_us_path %></li>
-              <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                  <%= @current_user.name %> 
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Profile', profile_path %></li>
+                  <li><a>Intro</a></li>
+                  <li><%= link_to 'Support', contact_us_path %></li>
+                  <li><a>Team</a></li>
+                  <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
+                </ul>
+              </li>
 
-              <li><%= link_to "", profile_path, :class => "glyphicon glyphicon-user" %></li>
-              <li><%= link_to "", contact_us_path, :class => "glyphicon glyphicon-question-sign"%></li>
-              <li><%= link_to "", logout_path, :class => "glyphicon glyphicon-log-out" %></li>
+              <li><a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                <span class="caret"></span>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Profile', profile_path %></li>
+                  <li><a>Intro</a></li>
+                  <li><%= link_to 'Support', contact_us_path %></li>
+                  <li><a>Team</a></li>
+                  <li><%= link_to 'Log Out', logout_path, :class => "login-button" %></li>
+                </ul>
+              </a></li>
             <% else %>
               <li><%= link_to "Log In", login_path, :class => "login-button"%></li>
               <li><%= link_to "", login_path, :class => "glyphicon glyphicon-log-in" %></li>
