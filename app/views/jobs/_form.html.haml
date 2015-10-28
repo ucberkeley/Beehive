@@ -64,16 +64,19 @@
 
   .row
     %h2.center Ask a Potential Researcher
-    %p.center Questions to be included in the application
+    %p.center 
+      Questions 
+      %b required 
+      to be answered by applicants
     %dl.dl-horizontal
       %dt
         = f.label :question_1, 'Question 1'
       %dd
-        = f.text_field :question_1, class: "form-control"
+        = f.text_field :question_1, class: "form-control", placeholder: "(e.g. why are you interested in this project?)"
       %dt
         = f.label :question_2, 'Question 2'
       %dd
-        = f.text_field :question_2, class: "form-control"
+        = f.text_field :question_2, class: "form-control", placeholder: "(e.g. what do you want to get out of this experience?)"
       %dt
         = f.label :question_3, 'Question 3'
       %dd
