@@ -80,8 +80,6 @@ class UsersController < ApplicationController
     else
       @user = @current_user
       render :edit
-      #1/0
-      #redirect_to :action => :edit
     end
   end
 
