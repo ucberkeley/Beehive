@@ -1,4 +1,5 @@
 - content_for :title, "Application Details"
+- @job = @applic.job
 .container#applic_show_main
   %h1= "Application - #{@applic.job.title}"
   .card
@@ -15,9 +16,24 @@
 
       %dt Message
       %dd= @applic.message
+    
+
 
     %h2 Applicant Profile
     = render 'users/applic_info', :user => @applic.user
+
+    - if (@job.question_1 != nil && @job.question_1 != "") || (@job.question_2 != nil && @job.question_2 != "")|| (@job.question_3 != nil  && @job.question_3 != "")
+      %h2 Faculty Questions 
+      - if @job.question_1 != nil && @job.question_1 != ""
+        %dt #{@job.question_1}
+        %dd= @applic.answer_1 
+      - if @job.question_2 != nil && @job.question_2 != ""
+        %dt #{@job.question_2}
+        %dd= @applic.answer_2
+      - if @job.question_3 != nil && @job.question_3 != ""
+        %dt #{@job.question_3}
+        %dd= @applic.answer_3
+
     - if @applic.status != "accepted"
       = form_tag('/applications/%s' % @applic.id, :method => "post") do
         = submit_tag "Accept this Applicant", class: "btn btn-primary"
@@ -26,3 +42,4 @@
     - if @applic.status == "accepted"
       = form_tag('/applications/%s/unaccept' % @applic.id, :method => "post") do
         = submit_tag "Unhire Accepted Applicant", class: "btn btn-primary"
+
