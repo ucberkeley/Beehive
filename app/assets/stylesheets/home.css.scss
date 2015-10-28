@@ -25,21 +25,22 @@
 #home-container {
   .main-top-background {
     margin-top: -100px;
-    height: 450px;
-    background: url("engineering.jpg") no-repeat center center;
-    -webkit-background-size: cover;
+    height: 900px;
+    background: linear-gradient(to bottom, white 10%, rgba(254, 218, 138, 0.35) 100%), url("engineering2.jpg") no-repeat center center;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
   }
   .main-top {
-    margin-top: -450px;
-    height: 450px;
-    background-color: rgba(255,255,255,0.5);
+    margin-top: -900px;
+    height: 900px;
     width: 100%;
     .main-top-info {
-      text-align: center;
+      text-align: left;
       padding-top: 90px;
+      margin-left: 15%;
+      display: inline-block;
+      width: 35%;
     }
     .text-info-large {
       margin-top: 90px;
@@ -56,22 +57,36 @@
       margin-top: 20px;
       margin-bottom: 20px;
     }
+    .main-icons-container {
+      display: inline-block;
+      width: 35%;
+    }
   }
-
+  .main-icons {
+    background: url("main_icons.png") no-repeat center center;
+    background-size: contain;
+    height: 140px;
+    margin-bottom: 25px;
+  }
   .main-bottom {
-    background-color: white;
+    margin-top: -450px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     .main-icons-text {
       margin: 50px 50px 40px 50px;
       text-align: center;
       font-size: 18px;
       font-weight: 200;
     }
-    .main-icons {
-      background: url("main_icons.png") no-repeat center center;
-      background-size: contain;
-      height: 140px;
-      margin-bottom: 50px;
+    .landing-card {
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+      height: 120px;
+      box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
     }
+  
     .smartmatch {
       margin-top: 50px;
       .title {
