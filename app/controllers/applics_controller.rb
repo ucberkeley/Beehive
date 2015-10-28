@@ -127,7 +127,7 @@ class ApplicsController < ApplicationController
 
         if !contact_email.empty?
             JobMailer.deliver_applic_email(@applic, contact_email).deliver
-          end
+          # end
 
           flash[:notice] = 'Application sent. Time to cross your fingers and wait for a reply!'
         else

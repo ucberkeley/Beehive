@@ -300,7 +300,7 @@ class JobsController < ApplicationController
     params[:job] = params.require(:job).permit(:title, :desc, :project_type,
       :user_id, :department_id, :status, :compensation, :num_positions,
       :end_date, :earliest_start_date, :latest_start_date,
-      :category_names, :course_names, :proglang_names)
+      :category_names, :course_names, :proglang_names, :question_1, :question_2, :question_3)
     [:earliest_start_date, :latest_start_date, :end_date].each do |attribute|
       params[:job][attribute] = Date.parse(params[:job][attribute])
     end
