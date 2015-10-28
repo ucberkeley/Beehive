@@ -109,6 +109,9 @@ pre {
       display: none;
     }
   }
+  .navbar-right .dropdown-menu-mobile {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -122,7 +125,11 @@ pre {
     display: none;
   }
   .navbar-right {
-    // bootstrap dropdown-in-mobile-nav overrides
+    // So that dropdown doesn't linger on screen size change
+    ul:not(.dropdown-menu-mobile) {
+      display: none;
+    }
+    // next blocks override bootstrap dropdown-in-mobile-nav
     li.open > ul > .glyphicon {
       display: none;
     }
