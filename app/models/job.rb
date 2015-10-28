@@ -85,7 +85,8 @@ class Job < ActiveRecord::Base
   #  VALIDATIONS  #
   #################
 
-  validates_presence_of :title, :desc, :department
+  validates_presence_of :title, :department, :project_type, :desc
+  validates_presence_of :earliest_start_date, :latest_start_date, :end_date
 
   # Validates that end dates are no earlier than right now.
   validates_each :end_date do |record, attr, value|
@@ -95,6 +96,7 @@ class Job < ActiveRecord::Base
 
   validates_numericality_of :num_positions, :greater_than_or_equal_to => 0,
     :allow_nil => true
+
   validate :earliest_start_date_must_be_before_latest
   validate :latest_start_date_must_be_before_end_date
 
@@ -436,8 +438,13 @@ class Job < ActiveRecord::Base
   
   #delete this?
   def earliest_start_date_must_be_before_latest
+<<<<<<< HEAD
     errors[:start_date] << "cannot be later than the latest start date" if 
       latest_start_date.present? && earliest_start_date > latest_start_date
+=======
+    errors[:earliest_start_date] << "cannot be later than the latest start date" if 
+      latest_start_date.present? && earliest_start_date.present? && earliest_start_date > latest_start_date
+>>>>>>> master
   end
 
   def latest_start_date_must_be_before_end_date

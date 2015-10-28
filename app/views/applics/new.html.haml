@@ -10,6 +10,21 @@
           = render(:partial => "jobs/job_snippet", :job => @job )
           %strong Message to faculty
           = f.text_area :message, :rows=>10, :value => @applic.message, :class => "form-control"
+          - if (@job.question_1 != nil && @job.question_1 != "") || (@job.question_2 != nil && @job.question_2 != "")|| (@job.question_3 != nil  && @job.question_3 != "")
+            %h2 
+              Faculty Questions
+            %p
+              Please answer the following questions
+            - if @job.question_1 != nil && @job.question_1 != ""
+              %strong #{@job.question_1}
+              = f.text_area :answer_1, :rows=>3, :value => @applic.answer_1, :class => "form-control"
+            - if @job.question_2 != nil && @job.question_2 != ""
+              %strong #{@job.question_2}
+              = f.text_area :answer_2, :rows=>3, :value => @applic.answer_2, :class => "form-control"
+            - if @job.question_3 != nil  && @job.question_3 != ""
+              %strong #{@job.question_3}
+              = f.text_area :answer_3, :rows=>3, :value => @applic.answer_3, :class => "form-control"
+
           %hr
           %h2 Application
           %p
