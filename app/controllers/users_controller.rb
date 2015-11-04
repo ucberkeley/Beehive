@@ -67,6 +67,13 @@ class UsersController < ApplicationController
     prepare_attribs_in_params(@user)
     render :edit
   end
+  def show_applied
+    @user = User.find_by_id(params[:id])
+    unless @user
+      flash[:error] = 'We couldn\'t find that user.'
+      redirect_to dashboard_path
+    end
+  end
 
   def update
     if @current_user.apply?
@@ -86,6 +93,8 @@ class UsersController < ApplicationController
   def index
     @users = User.order(:name).page(params[:page])
   end
+
+
 
   private
     def correct_user_access
@@ -107,6 +116,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url)
+      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url, :research_blurb)
     end
 end

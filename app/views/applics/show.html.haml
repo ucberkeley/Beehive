@@ -6,7 +6,7 @@
     %h2 Application Info
     %dl.dl-horizontal
       %dt Applicant
-      %dd= link_to @applic.user.name, url_for(@applic.user)
+      %dd= @applic.user.name
 
       %dt Status
       %dd= @status

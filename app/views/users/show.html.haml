@@ -4,53 +4,60 @@
   .card
     .row
       %dl.dl-horizontal
-        %dt Email
-        %dd
-          = @user.email
+        / - if @user.user_type == 0
+        / %dt Email
+        / %dd
+        /   = @user.email
 
-        %dt Courses Taken
-        %dd
-          - @user.courses.each do |course|
-            %span.tags.course-tag= course.name
+        / %dt Courses Taken
+        / %dd
+        /   - @user.courses.each do |course|
+        /     %span.tags.course-tag= course.name
             
-        %dt Interests
-        %dd
-          - @user.categories.each do |category|
-            = category.name
-
-        %dt Proficient Languages
-        %dd
-          - @user.proglangs.each do |lang|
-            %span.tags.lang-tag= lang.name
-
-        %dt Class of
-        %dd
-          = @user.class_of
-
-        / %dt Units this semester
+        / %dt Interests
         / %dd
-        /   = @user.units
+        /   - @user.categories.each do |category|
+        /     = category.name
 
-        %dt Hours free
-        %dd
-          = @user.free_hours
-
-        / %dt Free in the summer
+        / %dt Proficient Languages
         / %dd
-        /   = @user.summer ? "Yes" : "No"
+        /   - @user.proglangs.each do |lang|
+        /     %span.tags.lang-tag= lang.name
 
-        / %dt Research
+        / %dt Class of
         / %dd
-        /   = @user.research_blurb
+        /   = @user.class_of
 
-        %dt Experience
-        %dd
-          = @user.experience
+        / / %dt Units this semester
+        / / %dd
+        / /   = @user.units
 
-        %dt Link to Resume
-        %dd
-          - if @user.url.present?
-            =link_to url_with_protocol(@user.url), url_with_protocol(@user.url)
+        / %dt Hours free
+        / %dd
+        /   = @user.free_hours
+
+        / / %dt Free in the summer
+        / / %dd
+        / /   = @user.summer ? "Yes" : "No"
+
+        / / %dt Research
+        / / %dd
+        / /   = @user.research_blurb
+
+        / %dt Experience
+        / %dd
+        /   = @user.experience
+
+        / %dt Link to Resume
+        / %dd
+        /   - if @user.url.present?
+        /     =link_to url_with_protocol(@user.url), url_with_protocol(@user.url)
+
+        / - else 
+        / - if @user.research_blurb != nil && @user.research_blurb != ""
+        %dt Research Description
+        %dd 
+          = @user.research_blurb
 
         %dt All Posted Jobs
         %dd

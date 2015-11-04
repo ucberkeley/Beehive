@@ -27,10 +27,23 @@
       - else
         Not Available
 
-    %dt Motivation
+    / %dt Motivation
+    / %dd
+    /   = user.research_blurb
+    %dt Courses Taken
     %dd
-      = user.research_blurb
+      - user.courses.each do |course|
+        %span.tags.course-tag= course.name
+          
+    %dt Interests
+    %dd
+      - user.categories.each do |category|
+        = category.name
 
+    %dt Proficient Languages
+    %dd
+      - user.proglangs.each do |lang|
+        %span.tags.lang-tag= lang.name
     %dt Experience
     %dd
       = user.experience
