@@ -67,13 +67,6 @@ class UsersController < ApplicationController
     prepare_attribs_in_params(@user)
     render :edit
   end
-  def show_applied
-    @user = User.find_by_id(params[:id])
-    unless @user
-      flash[:error] = 'We couldn\'t find that user.'
-      redirect_to dashboard_path
-    end
-  end
 
   def update
     if @current_user.apply?
