@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'rails', '~> 4'
@@ -36,8 +36,12 @@ gem 'pothoven-attachment_fu'
 gem 'nokogiri'
 gem 'email_validator'
 
+# Support for syck. Syck was removed from the ruby stdlib.
+gem 'syck'
+
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'capistrano-passenger'
 
 # Production-specific
 group :production do
