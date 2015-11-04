@@ -64,7 +64,7 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   color: #003162;
 
   .glyphicon {
-    color: #fdb515;
+    color: darken(#009688, 5%);
     padding: 0px 3px;
     vertical-align: 1px;
     font-size: 14px;
@@ -140,7 +140,6 @@ strong.tags-icon {
   margin-bottom: 50px;
 
   .glyphicon {
-    color: #fdb515;
     padding: 0px 4px;
     font-size: 18px;
     vertical-align: 4px;

@@ -31,7 +31,7 @@
       .view-job-title
         = @job.title
         - if @job.users.include?(@current_user)
-          %span.glyphicon.glyphicon-eye-open{:title => "You are watching this job"}
+          %span.glyphicon.glyphicon-star{:title => "You are watching this job"}
       - if @job.tag_list.present?
         .job_tags
           = image_tag 'tag.gif'
