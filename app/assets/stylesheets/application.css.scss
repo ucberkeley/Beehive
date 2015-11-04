@@ -87,9 +87,11 @@ pre {
   }
 }
 
+.glyphicon {
+  font-family: 'Glyphicons Halflings' !important;
+}
 .navbar-nav .glyphicon {
   color: $ucb-blue;
-  font-family: 'Glyphicons Halflings' !important;
 }
 
 @media screen and (min-width: 768px) {
