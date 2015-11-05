@@ -47,7 +47,7 @@
     %dd
       = f.text_field :earliest_start_date, :class => 'datepicker form-control', value: @job.earliest_start_date.present? ? @job.earliest_start_date.strftime("%Y-%m-%d") : nil
     %dt
-      = f.label :latest_start_date, 'Apply by *'
+      = f.label :latest_start_date, 'Application Deadline*'
     %dd
       = f.text_field :latest_start_date, :class => 'datepicker form-control', value: @job.latest_start_date.present? ? @job.latest_start_date.strftime("%Y-%m-%d") : nil
     %dt
