@@ -57,7 +57,7 @@
               <li><%= link_to "", profile_path, :class => "glyphicon glyphicon-user" %></li>
               <li><%= link_to "", contact_us_path, :class => "glyphicon glyphicon-question-sign"%></li>
               <li><%= link_to "", logout_path, :class => "glyphicon glyphicon-log-out" %></li>
-            <% else %>
+            <% elsif not @user.present?%>
               <li><%= link_to "Log In", login_path, :class => "login-button"%></li>
               <li><%= link_to "", login_path, :class => "glyphicon glyphicon-log-in" %></li>
             <% end %>
