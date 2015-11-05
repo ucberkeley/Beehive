@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def show # TODO restrict access
     @user = User.find_by_id(params[:id])
-    unless @user
+    unless @user && (@user.jobs != nil && @user.jobs.length != 0)
       flash[:error] = 'We couldn\'t find that user.'
       redirect_to dashboard_path
     end
