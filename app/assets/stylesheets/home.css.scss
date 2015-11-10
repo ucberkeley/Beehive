@@ -23,43 +23,66 @@
   transition: none !important;
 }
 #home-container {
+  color: #003366;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
   .main-top-background {
-    margin-top: -100px;
-    height: 900px;
-    background: linear-gradient(to bottom, white 10%, rgba(254, 218, 138, 0.35) 100%), url("engineering2.jpg") no-repeat center center;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    // next 4 lines: pseudo-make image edges be defined
+    height: 103%;
+    width: 103%;
+    margin: -1% -1% -1% -1%;
+    z-index: -1;
+    background: linear-gradient(to bottom, lighten(rgba(254, 218, 138, 0.8), 20%) 0%,
+                                           lighten(rgba(254, 218, 138, 0.35), 20%) 100%), 
+                                           url("engineering2.jpg") no-repeat center center;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
   }
-  .main-top {
-    margin-top: -900px;
-    height: 900px;
-    width: 100%;
-    .main-top-info {
-      text-align: left;
-      padding-top: 90px;
-      margin-left: 15%;
-      display: inline-block;
-      width: 35%;
-    }
-    .text-info-large {
-      margin-top: 90px;
-      margin-bottom: 20px;
-      font-size: 35px;
+  .main-title {
+    margin-top: 18%;
+    text-align: center;
+   .text-info-large {
+      margin-bottom: 40px;
       font-weight: 400;
       span {
-        font-size: 1.2em;
+        font-size: 4em;
       }
+    } 
+  }
+  .main-top {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 800px;
+    -webkit-filter: blur(0px);
+    .main-top-info {
+      text-align: left;
+      float: left;
+      margin-left: 10%;
+      width: 40%;
     }
+    
     .text-info-small {
-      font-size: 23px;
-      font-weight: 200;
+      font-size: 1.6em;
+      font-weight: 400;
       margin-top: 20px;
       margin-bottom: 20px;
+
+      span {
+        font-weight: 600;
+      }
     }
     .main-icons-container {
-      display: inline-block;
-      width: 35%;
+      float: right;
+      width: 40%;
     }
   }
   .main-icons {
@@ -68,42 +91,90 @@
     height: 140px;
     margin-bottom: 25px;
   }
+  .main-btn-container {
+    text-align: center;
+    clear: both;
+
+    .btn-landing {
+      padding: 8px 52px;
+      font-size: 18px;
+      background: darken(#003366, 4%);
+    }
+  }
   .main-bottom {
-    margin-top: -450px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5%;
     width: 80%;
+    max-width: 1000px;
+
+
     .main-icons-text {
       margin: 50px 50px 40px 50px;
       text-align: center;
       font-size: 18px;
       font-weight: 200;
     }
+    .col-landing-card {
+      padding: 0px 8px;
+    }
     .landing-card {
-      background-color: white;
-      border-radius: 5px;
+      // background-color: rgba(255, 255, 255, 0.45);
       padding: 10px;
-      height: 120px;
-      box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
+      height: 200px;
+      max-width: 250px;
+      // box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+      display: block;
+      margin: 0 auto;
     }
   
     .smartmatch {
-      margin-top: 50px;
       .title {
         color: #003366;
-        font-weight: 600;
-        font-size: 18px;
+        font-weight: 800;
+        font-size: 1.3em;
         text-align: center;
       }
       .details {
-        font-weight: 200;
+        color: #003366;
+        font-weight: 400;
         text-align: center;
         margin-top: 10px;
-        font-size: 16px
+        font-size: 1.1em;
       }
     }
     .col-md-7 {
       margin-bottom: 50px;
     }
   }
+  // clearfix didn't work
+  .heightfix {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 150px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .main-title .text-info-large span {
+      font-size: 3em;
+    }
+    .main-top-info .text-info-small {
+      font-size: 1.2em;
+    }
+  }
+  // fix spacing for when floating columns collapse
+  @media screen and (max-width: 991px) {
+    .main-bottom {
+      margin-top: 50px;
+
+      .landing-card {
+        height: 150px;
+      }
+    }
+  }
+
 }
+
