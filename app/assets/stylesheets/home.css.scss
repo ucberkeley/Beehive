@@ -22,29 +22,34 @@
   -o-transition: none !important;
   transition: none !important;
 }
+
 #home-container {
   color: #003366;
   position: absolute;
   width: 100%;
   height: 100%;
 
-  .main-top-background {
+  .main-top-bg-container {
     position: fixed;
     left: 0px;
     top: 0px;
-    // next 4 lines: pseudo-make image edges be defined
-    height: 103%;
-    width: 103%;
-    margin: -1% -1% -1% -1%;
-    z-index: -1;
-    background: linear-gradient(to bottom, lighten(rgba(254, 218, 138, 0.8), 20%) 0%,
-                                           lighten(rgba(254, 218, 138, 0.35), 20%) 100%), 
-                                           url("engineering2.jpg") no-repeat center center;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    -webkit-filter: blur(4px);
-    filter: blur(4px);
+    // pseudo-make image edges be defined
+    height: 100%;
+    width: 100%;
+
+    .main-top-bg {
+      height: 100%;
+      transform: scale(1.1);
+      z-index: -1;
+      background: linear-gradient(to bottom, lighten(rgba(254, 218, 138, 0.8), 20%) 0%,
+                                             lighten(rgba(254, 218, 138, 0.35), 20%) 100%), 
+                                             url("engineering2.jpg") no-repeat center center;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      -webkit-filter: blur(4px);
+      filter: blur(4px);
+    }
   }
   .main-title {
     margin-top: 18%;
