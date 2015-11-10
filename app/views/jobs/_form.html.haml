@@ -62,6 +62,26 @@
       = f.label :status, 'Status'
     %dd
       = f.select :status, options_for_select( Job::Status::All, @job.status )
+
+  .row
+    %h2.center Ask a Potential Researcher
+    %p.center 
+      Questions 
+      %b required 
+      to be answered by applicants
+    %dl.dl-horizontal
+      %dt
+        = f.label :question_1, 'Question 1'
+      %dd
+        = f.text_field :question_1, class: "form-control", placeholder: "(e.g. why are you interested in this project?)"
+      %dt
+        = f.label :question_2, 'Question 2'
+      %dd
+        = f.text_field :question_2, class: "form-control", placeholder: "(e.g. what do you want to get out of this experience?)"
+      %dt
+        = f.label :question_3, 'Question 3'
+      %dd
+        = f.text_field :question_3, class: "form-control"
   .row
     - if ['new', 'create'].include?(controller.action_name.downcase)
       = f.submit 'Post', class: "btn btn-primary"

@@ -52,6 +52,9 @@
         %dt Posted
         %dd
           = @job.created_at.strftime("%m/%d/%Y")
+        %dt Last Updated
+        %dd
+          = @job.updated_at.strftime("%m/%d/%Y")
         %dt Department
         %dd
           = link_to @job.department.name, jobs_search_path(:department => @job.department.id), :class => 'tags'
