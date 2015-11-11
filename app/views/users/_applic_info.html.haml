@@ -3,6 +3,7 @@
     %dt Full Name
     %dd
       = user.name
+      
 
     %dt Email
     %dd
@@ -12,9 +13,9 @@
     %dd
       = user.year
 
-    %dt Units
-    %dd
-      = user.units
+    / %dt Units
+    / %dd
+    /   = user.units
 
     %dt Hours per Week
     %dd
@@ -27,10 +28,24 @@
       - else
         Not Available
 
-    %dt Motivation
-    %dd
-      = user.research_blurb
+    / %dt Motivation
+    / %dd
+    /   = user.research_blurb
 
+    %dt Courses Taken
+    %dd
+      - user.courses.each do |course|
+        %span.tags.course-tag= course.name
+          
+    %dt Interests
+    %dd
+      - user.categories.each do |category|
+        = category.name
+
+    %dt Proficient Languages
+    %dd
+      - user.proglangs.each do |lang|
+        %span.tags.lang-tag= lang.name
     %dt Experience
     %dd
       = user.experience

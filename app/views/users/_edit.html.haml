@@ -17,6 +17,10 @@
         %dt Email*
         %dd= f.text_field :email, class: 'form-control'
 
+        -if !@user.apply? or (@user.jobs != nil && @user.jobs.length != 0)
+          %dt Description
+          %dd= f.text_area :research_blurb, class: 'form-control', :rows => 5, :placeholder => "If you are an investigator, describe your research interest here"
+
         - if @user.apply?
           %dt Class of
           %dd= f.select :class_of, options_for_select((Time.now.year - 3)..(Time.now.year + 4), @user.class_of.present? ? @user.class_of : Time.now.year+3), {}, :id => 'right-label'

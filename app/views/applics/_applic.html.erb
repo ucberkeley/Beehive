@@ -13,7 +13,7 @@
     <% if mine -%>
       <%= job.user.nil? ? 'None' + (applic.unread? ? '[updated]' : '') : link_to(job.contacter.name, user_path(job.primary_contact_id)) %>
     <% else -%>
-      <%= link_to applic.user.name, user_path(applic.user) %>
+      <%= link_to applic.user.name, applic_path(applic) -%>
     <% end %>
   </td>
   <td>
