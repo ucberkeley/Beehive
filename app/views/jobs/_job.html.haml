@@ -3,6 +3,8 @@
   .job_table_left
     .job_title
       = link_to job.title, job_path(job)
+      - if job.users.include?(@current_user)
+        %span.glyphicon.glyphicon-star{:title => "You are watching this job"}
     - job_tags = job.tag_list
     %div
       .job_desc
