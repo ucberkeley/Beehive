@@ -1,9 +1,9 @@
 - content_for :title, @job.title
 .container
   .row
-    .col-md-5.no-padding
+    .col-md-5.col-xs-6.no-padding
       %h1 Position Details
-    .col-md-7.no-padding
+    .col-md-7.col-xs-6.no-padding
       .view-job-actions.pull-right
         - @actions.each do |a|
           - case a
@@ -17,7 +17,15 @@
           - when 'apply'
             = link_to 'apply', new_job_applic_path(@job), class: 'btn btn-success'
           - when 'applied'
-            %p.btn.btn-success applied
+            - if @job.applics.find_by_user_id(@current_user).status == "accepted"
+              %h2
+                .label.label-success Accepted
+            - elsif @job.applics.find_by_user_id(@current_user).status == "not accepted"
+              %h4
+                .label.label-info Not Accepted
+            - else
+              %h3
+                .label.label-success Applied
           - when 'resume'
             = link_to 'resume', new_job_applic_path(@job), class: 'btn btn-success'
         - @curations.each do |org, curated|
