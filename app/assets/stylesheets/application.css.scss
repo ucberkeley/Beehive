@@ -80,7 +80,7 @@ pre {
     width: auto;
     margin: 0px 5px 0px 20px;
   }
-  .dropdown.open {
+  li.open {
     .dropdown-toggle {
       background-color: rgba(255, 255, 255, 0.5) !important; 
     }
@@ -92,11 +92,25 @@ pre {
   font-family: 'Glyphicons Halflings' !important;
 }
 
+.navbar-right {
+  .dropdown-menu, li.open {
+    border-radius: 0;
+    box-shadow: #dedede 3px 2px 2px 1px;
+  }
+  .dropdown-menu > li > a {
+    font-weight: 300;
+    color: rgb(2, 45, 99);
+  }
+}
+
 @media screen and (min-width: 768px) {
   .navbar-nav {
    .glyphicon, .navbar-brand {
       display: none;
     }
+  }
+  .navbar-right .dropdown-menu-mobile {
+    display: none;
   }
 }
 
@@ -109,6 +123,35 @@ pre {
   }
   .navbar.navbar-default a.navbar-brand {
     display: none;
+  }
+  .navbar-right {
+    // So that dropdown doesn't linger on screen size change
+    ul:not(.dropdown-menu-mobile) {
+      display: none;
+    }
+    // Make mobile nav dropdown on top of things, preserve shadow
+    .open .dropdown-menu {
+      position: absolute;
+      margin-left: -92px;
+      box-shadow: #dedede 0px 2px 2px 0px;
+      background-color: white;
+    }
+    // next blocks override bootstrap dropdown-in-mobile-nav
+    li.open > ul > .glyphicon {
+      display: none;
+    }
+    .dropdown-menu li {
+      color: black;
+    }
+    .dropdown-menu li .glyphicon {
+      display: none;
+    }
+    .open a.glyphicon-user {
+      text-align: right;
+    }
+    .open .dropdown-menu {
+      text-align: right;
+    }
   }
 }
 
@@ -147,6 +190,17 @@ pre {
         font-size: 15px;
       }
     }
+    
+  }
+  .navbar-right .dropdown.open {
+    box-shadow: none;
+  }
+  .navbar.navbar-default .dropdown.open .dropdown-toggle {
+    background: rgba(255, 255, 255, 0.65) !important;
+  }
+  .dropdown-menu {
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.65);
   }
   nav {
     background-color: transparent;
