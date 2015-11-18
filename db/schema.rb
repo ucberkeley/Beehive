@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026183101) do
+ActiveRecord::Schema.define(version: 20151118002801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,14 @@ ActiveRecord::Schema.define(version: 20151026183101) do
     t.datetime "updated_at"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
     t.text     "data"
@@ -256,6 +264,7 @@ ActiveRecord::Schema.define(version: 20151026183101) do
     t.string   "url",                 limit: 255
     t.integer  "year"
     t.integer  "class_of"
+    t.string   "major_code"
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree

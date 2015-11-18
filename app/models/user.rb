@@ -129,6 +129,7 @@ class User < ActiveRecord::Base
       if Rails.development?
         self.name = "Susan #{self.login}"
         self.email = "beehive+#{self.login}@berkeley.edu"
+        self.major_code = 'undeclared'
         self.user_type = case self.login
                          when 212388, 232588
                            User::Types::Grad
@@ -145,12 +146,14 @@ class User < ActiveRecord::Base
       else
         self.name = 'Unknown Name'
         self.email = ''
+        self.major = ''
         self.user_type = User::Types::Affiliate
         return false
       end
     end
     self.name = "#{person.firstname} #{person.lastname}".titleize
     self.email = person.email
+    self.major_code = person.berkeleyEduStuMajorName.to_s.downcase
     self.user_type = case
                      when person.berkeleyEduStuUGCode == 'G'
                        User::Types::Grad

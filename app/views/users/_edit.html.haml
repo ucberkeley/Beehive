@@ -14,6 +14,10 @@
         %dt Name
         %dd= @user.name
 
+        - if @user.apply?
+          %dt Major
+          %dd= @user.major_code
+
         %dt Email*
         %dd= f.text_field :email, class: 'form-control'
 
