@@ -2,6 +2,7 @@
 //= require jquery-ui/autocomplete
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require moment
 //= require bootstrap
 //= require bootstrap-material-design
 //= require bootstrap-datepicker

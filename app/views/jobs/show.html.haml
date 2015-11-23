@@ -108,19 +108,18 @@
         %dt Listing Status
         %dd
           = Job::Status::All.key(@job.status)
+
       - if can_view_apps(@current_user, @job)
         - unfilterredownapps = @job.applics
         - ownapps = Array.new
         - unless unfilterredownapps.empty?
           - for app in unfilterredownapps do 
-            - if app[:status]!= 'not accepted'
-              - ownapps << app
+            - ownapps << app
+
         %h2= pluralize ownapps.length, 'Application'
         %p
         - unless ownapps.empty?
-            
           - ownapps.flatten!
-
           %table.job_table.table.table-striped.table-condensed
             %thead
               %tr
