@@ -61,11 +61,17 @@ end
 # Testing
 group :test do
   gem 'autotest-rails'
-  gem 'rspec-rails'
   gem 'cucumber-rails', "~> 1.4.2"
   gem 'capybara'
   gem 'database_cleaner'
   gem 'simplecov'
+end
+
+# Rspec
+group :test, :development do
+  gem 'rspec-rails', '~>3.0'
+  gem 'rspec', '~> 3.3'
+  gem 'factory_girl_rails', "~> 4.0"
 end
 
 # UI
@@ -81,3 +87,4 @@ gem 'bootstrap-material-design'
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
+
