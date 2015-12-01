@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def show # TODO restrict access
     @user = User.find_by_id(params[:id])
-    unless @user
+    unless @user && (@user.jobs != nil && @user.jobs.length != 0)
       flash[:error] = 'We couldn\'t find that user.'
       redirect_to dashboard_path
     end
@@ -87,6 +87,8 @@ class UsersController < ApplicationController
     @users = User.order(:name).page(params[:page])
   end
 
+
+
   private
     def correct_user_access
       user_id = User.find_by_id(params[:id])
@@ -107,6 +109,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url)
+      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url, :research_blurb)
     end
 end

@@ -207,7 +207,7 @@ class ApplicsController < ApplicationController
       applic.save
       flash[:notice] = "Applicant %s was accepted" % applic.user.name
     end
-    redirect_to('/applications/%s' % applic.id)
+    redirect_to('/applics/applications/%s' % applic.id)
   end
 
   def unaccept
