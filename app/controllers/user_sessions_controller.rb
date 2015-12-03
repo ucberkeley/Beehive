@@ -2,7 +2,6 @@ class UserSessionsController < ApplicationController
 include CASControllerIncludes
 
 #before_filter CASClient::Frameworks::Rails::Filter, :except => :destroy
-#before_filter :goto_home_unless_logged_in, :except => :destroy
 
   # Entry point for user login
   def new
@@ -27,7 +26,7 @@ include CASControllerIncludes
     if user.present?
       UserSession.new(user).save
       session[:user_id] = user.id # TODO remove (use only @user_session)
-      redirect_to dashboard_path
+      redirect_to back
     else
       redirect_to new_user_path
     end
