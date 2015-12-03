@@ -29,7 +29,14 @@ $url_2: url("../images/dashboard_box_grad_darker.png");
   margin: 5px 0px 3px 0px;
 }
 
-#advanced_search {
+@media screen and (min-width: 1200px) {
+  #advanced_search {
+    .card.card-x.fix {
+      position: fixed;
+      width: 350px;
+      top: 25px;
+    }
+  }
 }
 
 .job-search-input {

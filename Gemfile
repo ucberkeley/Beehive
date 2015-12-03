@@ -88,7 +88,11 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap-datepicker-rails'
 <<<<<<< HEAD
+<<<<<<< HEAD
 gem 'momentjs-rails'
 =======
 
 >>>>>>> 0a2a4b49d0340c01fa12a90c9d06e53b88bd762d
+=======
+
+>>>>>>> 47382607a0118ce94fe1f5a3550788b50cd8502c

@@ -168,6 +168,7 @@ GEM
     mime-types (2.6.2)
     mini_portile (0.6.2)
 <<<<<<< HEAD
+<<<<<<< HEAD
     minitest (5.6.0)
     momentjs-rails (2.10.6)
       railties (>= 3.1)
@@ -176,6 +177,10 @@ GEM
     minitest (5.8.2)
     multi_json (1.11.2)
 >>>>>>> 0a2a4b49d0340c01fa12a90c9d06e53b88bd762d
+=======
+    minitest (5.8.2)
+    multi_json (1.11.2)
+>>>>>>> 47382607a0118ce94fe1f5a3550788b50cd8502c
     multi_test (0.1.2)
     net-ldap (0.2.2)
     net-scp (1.2.1)
