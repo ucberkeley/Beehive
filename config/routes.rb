@@ -20,6 +20,12 @@ ResearchMatch::Application.routes.draw do
     end
   end
 
+  #Intro
+  get '/intro', :to => 'intro#intro'
+
+  #Team
+  get '/team', :to => 'team#team'
+
   # Applics
   scope :applics do
     get  '/jobs/:job_id/apply' => 'applics#new', :as => :new_job_applic
