@@ -13,14 +13,11 @@
     #post.tab-pane
 
       - unfilterredownapps = @current_user.jobs.collect(&:applics)
-
       - ownapps = Array.new
       - unless unfilterredownapps.empty?
         - for app in unfilterredownapps do 
           - for applic in app do
-            - if applic[:status] != 'not accepted'
-              - ownapps << applic
-
+            - ownapps << applic
       - unless ownapps.empty?
         - ownapps.flatten!
 
@@ -67,12 +64,3 @@
           You are not watching any projects.
         - else
         = render @current_user.watched_jobs
-:javascript
-  $(document).ready(function(){
-    $('.job_table').each(function(index, elem) {
-      $(elem).DataTable({
-        "searching": false,
-        "paging": false
-      });
-    });
-  });
