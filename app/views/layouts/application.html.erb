@@ -9,7 +9,7 @@
   <%= stylesheet_link_tag 'application' %>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700,800' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
 </head>
@@ -51,10 +51,10 @@
             <ul class="nav navbar-nav navbar-right">
             <% if @current_user.present? %>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                <%= link_to profile_path, :class=>"dropdown-toggle disabled", :"data-toggle"=>"dropdown", :"role"=>"button", :"aria-haspopup"=>"true", :"aria-expanded"=>"true" do %>
                   <%= @current_user.name %> 
                   <span class="caret"></span>
-                </a>
+                <% end %>
                 <ul class="dropdown-menu">
                   <li><%= link_to 'Profile', profile_path %></li>
                   <li><a>Intro</a></li>

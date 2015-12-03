@@ -1,13 +1,14 @@
 - content_for :title, 'Dashboard'
-.container
-  .btn-group.pull-right{"data-toggle" => "buttons", :role => "group"}
-    %label#browsebtn{:class => "btn btn-primary #{'active' if @current_user.apply?}", "data-target" => "#browse", "data-toggle" => "tab"}
-      %input{"aria-controls" => "browse", "aria-expanded" => "true", :autocomplete => "off", :checked => "checked", :type => "radio"}/
-      Browse
-    %label#postbtn{:class => "btn btn-primary #{'active' unless @current_user.apply?}", "data-target" => "#post", "data-toggle" => "tab"}
-      %input{"aria-controls" => "post", "aria-expanded" => "false", :autocomplete => "off", "data-target" => "#post", "data-toggle" => "tab", :type => "radio"}/
-      Post
+.container#dashboard
   %h1 Dashboard
+  .tabs-container
+    .btn-group{"data-toggle" => "buttons", :role => "group"}
+      %label#browsebtn{:class => "btn btn-primary #{'active' if @current_user.apply?}", "data-target" => "#browse", "data-toggle" => "tab"}
+        %input{"aria-controls" => "browse", "aria-expanded" => "true", :autocomplete => "off", :checked => "checked", :type => "radio"}/
+        Browse
+      %label#postbtn{:class => "btn btn-primary #{'active' unless @current_user.apply?}", "data-target" => "#post", "data-toggle" => "tab"}
+        %input{"aria-controls" => "post", "aria-expanded" => "false", :autocomplete => "off", "data-target" => "#post", "data-toggle" => "tab", :type => "radio"}/
+        Post
   .tab-content
     #post.tab-pane
 

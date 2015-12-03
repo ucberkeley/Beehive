@@ -1,40 +1,45 @@
 - content_for :title, "Welcome"
 #home-container
-  .main-top-background
+  .main-top-bg-container
+    .main-top-bg
   .main-top
-    .main-top-info
+    .main-title
       .text-info-large
         %span
           Research made simple
+    .main-top-info
       .text-info-small
         Search and filter over
         %span= Job.count
         exciting projects.
-        %br
         Joining a project has never been easier!
-        .clearfix
-        - if @current_user.present?
-          = link_to "EXPLORE", jobs_path, class: "btn btn-cal"
-        - else
-          = link_to "EXPLORE", login_path, class: "btn btn-cal"
-  .row.main-bottom
-    .col-md-6
-      .main-icons-text
-        We've made it easy for you to find your perfect project.
+        
+    %span.main-icons-container
       .main-icons
-    .col-md-6
-      .row
-        .smartmatch
-          .title
-            EASY APPLY
-          .details
-            No need to fill out endless forms.
-            %br
-            Write what's relevant, and we'll take care of the rest.
-        .smartmatch
-          .title
-            SMARTMATCH
-          .details
-            Can't find a project you like?
-            %br
-            We'll let you know when a new project matches your interests.
+  .main-btn-container.clearfix
+    - if @current_user.present?
+      = link_to "EXPLORE", jobs_path, class: "btn btn-cal btn-landing"
+    - else
+      = link_to "EXPLORE", login_path, class: "btn btn-cal btn-landing"
+  .row.main-bottom
+    .col-md-4.col-landing-card
+      .smartmatch.landing-card
+        .title
+          BROWSE
+        .details
+          We've made it easy for you to find your perfect project.
+    .col-md-4.col-landing-card
+      .smartmatch.landing-card
+        .title
+          EASY APPLYING
+        .details
+          No need to fill out endless forms.
+          Write what's relevant, and we'll take care of the rest.
+    .col-md-4.col-landing-card
+      .smartmatch.landing-card
+        .title
+          SMARTMATCH
+        .details
+          Can't find a project you like?
+          We'll let you know when a new project matches your interests.
+  .heightfix

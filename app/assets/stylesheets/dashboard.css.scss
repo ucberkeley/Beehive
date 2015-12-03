@@ -1,0 +1,17 @@
+#dashboard {
+  h1 {
+    margin-bottom: 0px !important;
+  }
+  .tabs-container {
+    text-align: center;
+    margin: 10px 0px;
+
+    label.btn.btn-primary {
+      color: rgba(255, 255, 255, 0.5)
+    }
+    label.btn.btn-primary.active {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9)
+    }
+  }
+}
