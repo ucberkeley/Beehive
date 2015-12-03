@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
       else
         self.name = 'Unknown Name'
         self.email = ''
-        self.major = ''
+        self.major_code = ''
         self.user_type = User::Types::Affiliate
         return false
       end
