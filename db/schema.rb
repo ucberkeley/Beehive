@@ -190,14 +190,6 @@ ActiveRecord::Schema.define(version: 20151118002801) do
     t.datetime "updated_at"
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "body"
-    t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
     t.text     "data"
