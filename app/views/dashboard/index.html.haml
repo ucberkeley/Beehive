@@ -5,10 +5,10 @@
     .btn-group{"data-toggle" => "buttons", :role => "group"}
       %label#browsebtn{:class => "btn btn-primary #{'active' if @current_user.apply?}", "data-target" => "#browse", "data-toggle" => "tab"}
         %input{"aria-controls" => "browse", "aria-expanded" => "true", :autocomplete => "off", :checked => "checked", :type => "radio"}/
-        Browse
+        Saved 
       %label#postbtn{:class => "btn btn-primary #{'active' unless @current_user.apply?}", "data-target" => "#post", "data-toggle" => "tab"}
         %input{"aria-controls" => "post", "aria-expanded" => "false", :autocomplete => "off", "data-target" => "#post", "data-toggle" => "tab", :type => "radio"}/
-        Post
+        Posted
   .tab-content
     #post.tab-pane
 
