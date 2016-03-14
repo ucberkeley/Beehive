@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   #CalNet / CAS Authentication
   #before_filter CASClient::Frameworks::Rails::Filter
-  # before_filter :goto_home_unless_logged_in
   before_filter :ensure_new_user, :only => [:new, :create]
   before_filter :rm_login_required, :except => [:new, :create]
   before_filter :correct_user_access, :only => [:edit, :update]

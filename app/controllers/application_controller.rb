@@ -72,4 +72,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def remember_location
+  session[:back_paths] ||= [dashboard_path]
+    unless session[:back_paths].last == request.fullpath
+      session[:back_paths] << request.fullpath
+    end
+    session[:back_paths] = session[:back_paths][0..2]
+  end
+
+  def back
+    session[:back_paths] ||= [dashboard_path]
+    session[:back_paths].pop || :back
+  end
+
 end

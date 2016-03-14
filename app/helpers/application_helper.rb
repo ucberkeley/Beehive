@@ -121,15 +121,9 @@ end
 
 
 module CASControllerIncludes
-  # TODO why do we need both login filters?
-  def goto_home_unless_logged_in
-    #CASClient::Frameworks::Rails::Filter.filter(self) unless @current_user && @user_session
-    return true if @current_user && @user_session
-    (redirect_to home_path) and false
-  end
-
   def rm_login_required
-    return true if @current_user
+    remember_location
+    return true if @current_user && @user_session
     (redirect_to login_path) and false
   end
 end

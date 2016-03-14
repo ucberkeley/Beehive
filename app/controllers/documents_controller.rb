@@ -4,7 +4,6 @@ include CASControllerIncludes
 
 #CalNet / CAS Authentication
 #before_filter CASClient::Frameworks::Rails::Filter
-before_filter :goto_home_unless_logged_in
 before_filter :rm_login_required
 
 def new
