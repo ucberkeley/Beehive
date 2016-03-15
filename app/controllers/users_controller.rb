@@ -76,6 +76,7 @@ class UsersController < ApplicationController
     end
     if @current_user.update_attributes(user_params)
       flash[:notice] = 'Your profile was successfully updated.'
+
       redirect_to profile_path
     else
       @user = @current_user
@@ -109,6 +110,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :class_of, :free_hours, :experience, :url, :research_blurb)
+      params.require(:user).permit(:email, :major_code ,:class_of, :free_hours, :experience, :url, :research_blurb)
     end
 end
