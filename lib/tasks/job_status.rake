@@ -18,4 +18,15 @@ namespace :job_status do
       end
     end
   end
+
+  desc "Checking How Many Old Jobs..."
+  task :count => :environment do
+    count = 0
+    Job.all.where.not(status: 1).each do |j|
+      if j.latest_start_date < (Date.today - 365)
+        count += 1
+      end
+    end
+    p count
+  end
 end
