@@ -16,7 +16,10 @@
 
         - if @user.apply?
           %dt Major
-          %dd= @user.major_code
+          - if @user.major_code == "" or @user.major_code == nil or @user.major_code == "double"
+            %dd= f.text_field :major_code, class: 'form-control'
+          - else 
+            %dd= @user.major_code
 
         %dt Email*
         %dd= f.text_field :email, class: 'form-control'

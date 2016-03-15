@@ -150,23 +150,24 @@ class User < ActiveRecord::Base
         self.user_type = User::Types::Affiliate
         return false
       end
+    else
+      self.name = "#{person.firstname} #{person.lastname}".titleize
+      self.email = person.email
+      self.major_code = person.berkeleyEduStuMajorName.to_s.downcase
+      self.user_type = case
+                       when person.berkeleyEduStuUGCode == 'G'
+                         User::Types::Grad
+                       when person.student?
+                         User::Types::Undergrad
+                       when person.employee_academic?
+                         User::Types::Faculty
+                       when person.employee?
+                         User::Types::Staff
+                       else
+                         User::Types::Affiliate
+                       end
+      return true
     end
-    self.name = "#{person.firstname} #{person.lastname}".titleize
-    self.email = person.email
-    self.major_code = person.berkeleyEduStuMajorName.to_s.downcase
-    self.user_type = case
-                     when person.berkeleyEduStuUGCode == 'G'
-                       User::Types::Grad
-                     when person.student?
-                       User::Types::Undergrad
-                     when person.employee_academic?
-                       User::Types::Faculty
-                     when person.employee?
-                       User::Types::Staff
-                     else
-                       User::Types::Affiliate
-                     end
-    return true
   end
 
   def admin?
