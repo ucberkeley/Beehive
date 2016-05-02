@@ -12,7 +12,7 @@ namespace :job_status do
             people[poster] = Array.new
           end
           people[poster].push(j)
-          j.update_column(:status, 1)
+          #j.update_column(:status, 1)
         rescue
           puts j.user_id
         end
@@ -20,6 +20,9 @@ namespace :job_status do
     end
     people.each do |k, v|
       # Do Stuff with |User, [Jobs]|
+      v.each do |j|
+        # Do Stuff with |Jobs|
+      end
     end
   end
 
