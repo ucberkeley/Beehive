@@ -1,0 +1,6 @@
+User.all.each do |u|
+    person ||= UCB::LDAP::Person.find_by_uid(u.login)
+    if person != nil
+        u.update(major_code: person.berkeleyedustumajorname.to_s.downcase)
+    end
+end
