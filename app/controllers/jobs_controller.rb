@@ -280,8 +280,15 @@ class JobsController < ApplicationController
     flash[:notice] = 'Job is now unwatched. You can find a list of your watched jobs on the dashboard.'
     redirect_to :back
   end
+  
+  def close_jobs
+    jobs = Job.where('latest_start_date < ?', Time.now)
 
-
+    jobs.each do |job|
+      job.update_attribute(:status, 1)
+      job.save(validate: false)
+    end
+  end
 
   protected
 

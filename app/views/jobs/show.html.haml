@@ -87,10 +87,10 @@
             = h @job.proglang_list_of_job(true)
           - else
             (none)
-        %dt Earliest start date
+        %dt Start date
         %dd
           = @job.earliest_start_date.strftime("%b %e, %Y")
-        %dt Latest start date
+        %dt Application Deadline
         %dd
           = @job.latest_start_date.strftime("%b %e, %Y")
         %dt Position end date
