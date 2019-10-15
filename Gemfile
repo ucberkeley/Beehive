@@ -80,7 +80,7 @@ gem 'uglifier'
 gem 'sass-rails', '>= 3.2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'bootstrap_form'
 gem 'bootstrap-material-design'
 
