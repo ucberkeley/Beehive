@@ -15,7 +15,7 @@ gem "haml-rails", "~> 0.9"
 gem 'unicorn'
 
 # pagination & tagging
-gem "kaminari", "~> 0.15.1"
+gem "kaminari", "~> 1.2.1"
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'acts-as-taggable-on'
 
