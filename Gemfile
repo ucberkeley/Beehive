@@ -51,7 +51,7 @@ end
 # Development
 group :development do
   gem 'yard'
-  gem 'better_errors', "1.1.0"
+  gem 'better_errors', "2.9.1"
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'annotate'
